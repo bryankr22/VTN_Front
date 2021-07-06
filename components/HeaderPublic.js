@@ -106,15 +106,14 @@ export default class HeaderPublic extends Component {
               style={{ display: "contents" }}
             >
               <div style={{ textAlign: "center", margin: "0 auto" }}>
-                <Link to="/">
                   <Image
                     src="/images/VTN_logo_white.png"
                     style={{ height: "auto", width: "55px", margin: "0 auto" }}
+                    layout={'fill'}
                   />
-                </Link>
               </div>
               {this.state.logged === 0 && (
-                <Link id="link-login" to="/login">
+                <Link id="link-login" href="/login">
                   <h6 className="text-native">LOGIN</h6>
                 </Link>
               )}
@@ -151,15 +150,14 @@ export default class HeaderPublic extends Component {
               style={{ display: "contents" }}
             >
               <div style={{ textAlign: "center", margin: "0 auto" }}>
-                <Link to="/">
                   <Image
                     src="/images/VTN_logo_white.png"
                     style={{ height: "auto", width: "70px", margin: "0 auto" }}
+                    layout={'fill'}
                   />
-                </Link>
               </div>
               {this.state.logged === 0 && (
-                <Link id="link-login" to="/login">
+                <Link id="link-login" href="/login">
                   <h6 className="text-native">LOGIN</h6>
                 </Link>
               )}
@@ -202,7 +200,7 @@ export default class HeaderPublic extends Component {
                 style={{ width: "auto", margin: "0 auto" }}
               >
                 <li className="nav-item deleteMobile">
-                  <Link to="/">
+
                     <Image
                       src="/images/VTN_logo_white.png"
                       style={{
@@ -210,21 +208,36 @@ export default class HeaderPublic extends Component {
                         width: "70px",
                         margin: "0 auto",
                       }}
+                      layout={'fill'}
                     />
-                  </Link>
                 </li>
                 <li
                   className="nav-item"
                   data-toggle="collapse"
                   data-target="#navbarSupportedContent"
                 >
-                  <Link
+                  <span
                     className="nav-link"
                     style={{ letterSpacing: 2 }}
-                    to="/"
                   >
                     HOME
                     <Icon name="angle right" size="big" />
+                  </span>
+                </li>
+                <li
+                  className="nav-item"
+                  data-toggle="collapse"
+                  data-target="#navbarSupportedContent"
+                >
+                  <Link
+                    className="nav-link"
+                    style={{ letterSpacing: 2 }}
+                    href="/vehiculos"
+                  >
+                    <>
+                        VEH&Iacute;CULOS
+                        <Icon name="angle right" size="big" />
+                    </>
                   </Link>
                 </li>
                 <li
@@ -235,24 +248,11 @@ export default class HeaderPublic extends Component {
                   <Link
                     className="nav-link"
                     style={{ letterSpacing: 2 }}
-                    to="/vehiculos"
+                    href="/servicios"
                   >
-                    VEH&Iacute;CULOS
-                    <Icon name="angle right" size="big" />
-                  </Link>
-                </li>
-                <li
-                  className="nav-item"
-                  data-toggle="collapse"
-                  data-target="#navbarSupportedContent"
-                >
-                  <Link
-                    className="nav-link"
-                    style={{ letterSpacing: 2 }}
-                    to="/servicios"
-                  >
+                    <>
                     SERVICIOS
-                    <Icon name="angle right" size="big" />
+                    <Icon name="angle right" size="big" /></>
                   </Link>
                 </li>
 
@@ -264,10 +264,11 @@ export default class HeaderPublic extends Component {
                   <Link
                     className="nav-link"
                     style={{ letterSpacing: 2 }}
-                    to="/comunidad/Buscar_/Pagina_1"
+                    href="/comunidad/Buscar_/Pagina_1"
                   >
+                      <>
                     COMUNIDAD
-                    <Icon name="angle right" size="big" />
+                    <Icon name="angle right" size="big" /></>
                   </Link>
                 </li>
 
@@ -279,10 +280,11 @@ export default class HeaderPublic extends Component {
                   <Link
                     className="nav-link"
                     style={{ letterSpacing: 2 }}
-                    to={this.state.logged === 1 ? "/crear-producto": '/login'}
+                    href={this.state.logged === 1 ? "/crear-producto": '/login'}
                   >
+                      <>
                     VENDER
-                    <Icon name="angle right" size="big" />
+                    <Icon name="angle right" size="big" /></>
                   </Link>
                 </li>
 
@@ -319,7 +321,7 @@ export default class HeaderPublic extends Component {
                   {this.state.logged === 0 && (
                     <Link
                       id="link-login"
-                      to="/login"
+                      href="/login"
                       style={{ textDecoration: "none" }}
                     >
                       <h6 className="text-native" style={{ marginTop: 9 }}>

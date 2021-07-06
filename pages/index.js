@@ -542,7 +542,7 @@ export default class Home extends Component {
             <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css" />
             <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
         </Head>
-        {/**<HeaderPublic />**/}
+        <HeaderPublic />
         <div className="row">
         <div
         className="col-md-12"
