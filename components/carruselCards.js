@@ -3,7 +3,7 @@ import ItemsCarousel from "react-items-carousel";
 import { Image, Card, Icon } from "semantic-ui-react";
 
 const carruselCards = (props) => {
-  const [activeItemIndex, setActiveItemIndex] = useState(0);
+  const [ActiveItemIndex, setActiveItemIndex] = useState(0);
   const chevronWidth = props.type === "products" ? 30 : 40;
   let data =
     props.add && props.add === "plus" 
@@ -42,7 +42,7 @@ const carruselCards = (props) => {
     <div style={{ padding: `0 ${chevronWidth}px` }}>
       <ItemsCarousel
         requestToChangeActive={setActiveItemIndex}
-        activeItemIndex={activeItemIndex}
+        activeItemIndex={ActiveItemIndex}
         numberOfCards={props.type === "marcas" ? props.numberCards : cards}
         gutter={20}
         leftChevron={
