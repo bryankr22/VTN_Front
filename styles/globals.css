@@ -63,3 +63,6 @@ a {
     color: black;
     transition: 400ms;
 }
+.ui.card>.image>img, .ui.cards>.card>.image>img {
+    height: auto !important
+}

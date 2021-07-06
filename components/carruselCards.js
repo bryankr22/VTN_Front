@@ -344,13 +344,6 @@ export default (props) => {
                     padding: 10,
                   }}
                 >
-                  <style>
-                    {`
-										.ui.card>.image>img, .ui.cards>.card>.image>img {
-										height: auto !important
-										}
-									`}
-                  </style>
                   <Image
                     src={item.path}
                     wrapped

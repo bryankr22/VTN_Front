@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Dropdown, Input, Icon, Responsive, Button } from "semantic-ui-react";
 import Link from 'next/link';
+import Image from 'next/image';
 const tagOptions = [
   {
     key: "/mis-busquedas",
@@ -106,7 +107,7 @@ export default class HeaderPublic extends Component {
             >
               <div style={{ textAlign: "center", margin: "0 auto" }}>
                 <Link to="/">
-                  <img
+                  <Image
                     src="/images/VTN_logo_white.png"
                     style={{ height: "auto", width: "55px", margin: "0 auto" }}
                   />
@@ -151,7 +152,7 @@ export default class HeaderPublic extends Component {
             >
               <div style={{ textAlign: "center", margin: "0 auto" }}>
                 <Link to="/">
-                  <img
+                  <Image
                     src="/images/VTN_logo_white.png"
                     style={{ height: "auto", width: "70px", margin: "0 auto" }}
                   />
@@ -202,7 +203,7 @@ export default class HeaderPublic extends Component {
               >
                 <li className="nav-item deleteMobile">
                   <Link to="/">
-                    <img
+                    <Image
                       src="/images/VTN_logo_white.png"
                       style={{
                         height: "auto",
