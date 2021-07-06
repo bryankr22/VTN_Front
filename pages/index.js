@@ -1099,8 +1099,8 @@ export default class Home extends Component {
                 </Grid.Column>
               </Grid.Row>
               {this.state.noticias.map((item, index) => (
-                <Grid.Row>
-                  <Grid.Column key={index}>
+                <Grid.Row key={index}>
+                  <Grid.Column>
                     <Header
                       as="h4"
                       textAlign="left"

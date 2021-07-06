@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-export default (props) => (
+const carruselHome = (props) => (
   <Carousel
     infiniteLoop
     showArrows={props.showArrows === false ? props.showArrows : true}
@@ -77,3 +77,5 @@ export default (props) => (
     ))}
   </Carousel>
 );
+carruselHome.displayName = 'carruselHome';
+export default carruselHome;

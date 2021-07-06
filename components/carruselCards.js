@@ -2,7 +2,7 @@ import React, { useState, Fragment } from "react";
 import ItemsCarousel from "react-items-carousel";
 import { Image, Card, Icon } from "semantic-ui-react";
 
-export default (props) => {
+const carruselCards = (props) => {
   const [activeItemIndex, setActiveItemIndex] = useState(0);
   const chevronWidth = props.type === "products" ? 30 : 40;
   let data =
@@ -530,3 +530,5 @@ export default (props) => {
     </div>
   );
 };
+carruselCards.displayName = 'carruselCards';
+export default carruselCards;
