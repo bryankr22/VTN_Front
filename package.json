@@ -9,9 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "next": "11.0.1",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-iframe": "^1.8.0",
+    "react-items-carousel": "^2.8.0",
+    "react-responsive-carousel": "^3.2.19",
+    "semantic-ui-react": "0.87.3"
   },
   "devDependencies": {
     "eslint": "7.30.0",
