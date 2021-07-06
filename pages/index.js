@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import React, { Component } from "react";
 import Link from 'next/link';
+import '../styles/globals.css'
 import {
   Image,
   Divider,
@@ -539,6 +540,7 @@ export default class Home extends Component {
     return (
         <>
         <Head>
+            <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css" />
             <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
         </Head>
         {/**<HeaderPublic />**/}
@@ -547,46 +549,6 @@ export default class Home extends Component {
         className="col-md-12"
         style={{ paddingRight: 0, paddingLeft: 0 }}
         >
-        <style>
-          {`
-                        .image > img {
-                            object-fit: cover;
-						}
-						.ui.selection.dropdown {
-							border: 1px solid rgb(0, 0, 0);
-						}
-						.ui.default.dropdown:not(.button)>.text, .ui.dropdown:not(.button)>.default.text {
-							color: rgb(0, 0, 0);
-							font-family: Montserrat;
-						}
-						.ui.form input:not([type]), .ui.form input[type=date], 
-						.ui.form input[type=datetime-local], .ui.form input[type=email], 
-						.ui.form input[type=file], .ui.form input[type=number], .ui.form input[type=password], 
-						.ui.form input[type=search], .ui.form input[type=tel], .ui.form input[type=text], 
-						.ui.form input[type=time], .ui.form input[type=url] {
-							border: 1px solid rgb(0, 0, 0);
-							font-family: Montserrat;
-						}
-						::placeholder {
-							color: #000 !important;
-							opacity: 1 !important; /* Firefox */
-						}
-						
-						:-ms-input-placeholder { /* Internet Explorer 10-11 */
-							color: #000 !important;
-						}
-						
-						::-ms-input-placeholder { /* Microsoft Edge */
-							color: #000 !important;
-						}
-
-						@media screen and (max-height: 410px) and (orientation: landscape) { 
-							.banner-home {
-								display: none
-							}
-						}
-                    `}
-        </style>
         {/**<Dimmer style={{ position: "fixed" }} active={this.state.dimmer}>
           <Loader>Cargando...</Loader>
         </Dimmer>**/}
@@ -608,21 +570,6 @@ export default class Home extends Component {
         </Responsive>
 
         <Responsive {...Responsive.onlyMobile}>
-          <style>
-            {`
-							.ui.icon.input > input {
-								background-color: transparent;
-								border-bottom: 1px solid black;
-								border-top: none;
-								border-right: none;
-								border-left: none;
-								border-radius: 4px;
-								caret-color: black;
-								color: black;
-								transition: 400ms;
-							}
-						`}
-          </style>
           <Input
             action={{
               icon: "search",
@@ -649,21 +596,6 @@ export default class Home extends Component {
           />
         </Responsive>
         <Responsive {...Responsive.onlyTablet}>
-          <style>
-            {`
-							.ui.icon.input > input {
-								background-color: transparent;
-								border-bottom: 1px solid black;
-								border-top: none;
-								border-right: none;
-								border-left: none;
-								border-radius: 4px;
-								caret-color: black;
-								color: black;
-								transition: 400ms;
-							}
-						`}
-          </style>
           <Input
             action={{
               icon: "search",

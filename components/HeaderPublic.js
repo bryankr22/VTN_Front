@@ -1,9 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Dropdown, Input, Icon, Responsive, Button } from "semantic-ui-react";
 import Link from 'next/link';
-import Error404 from "./Error404";
-
-
 const tagOptions = [
   {
     key: "/mis-busquedas",
