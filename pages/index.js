@@ -539,6 +539,15 @@ export default class Home extends Component {
     return (
         <>
         <Head>
+            <meta name="title" content="VendeTuNave" />
+            <meta name="image" content="https://www.vendetunave.co/images/logo_VTN.png" />
+            <meta name="name" content="VendeTuNave" />
+            <meta name="description" content="Vende tu vehículo completamente gratis en VendeTuNave. Encuentra carros, camionetas, motos, servicios y recomendaciones en un solo sitio." />
+            <meta name="type" content="website" />
+            <meta name="og:image" content="https://www.vendetunave.co/images/logo_VTN.png" />
+            <meta name="og:title" content="VendeTuNave" />
+            <meta name="og:description" content="Vende tu vehículo completamente gratis en VendeTuNave. Encuentra carros, camionetas, motos, servicios y recomendaciones en un solo sitio." />
+            <meta name="og:type" content="website" />
             <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css" />
             <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
         </Head>
