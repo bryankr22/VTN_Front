@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import React, { Component } from "react";
 import Link from 'next/link';
-import '../styles/globals.css'
 import {
   Image,
   Divider,
