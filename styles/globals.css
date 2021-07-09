@@ -34,3 +34,17 @@
         display: none
     }
 }
+
+.image-container {
+    width: 100%;
+}
+.image-container > div{
+    position: unset !important;
+}
+.image-container .imglogo {
+    margin: 0 auto;
+    object-fit: contain;
+    width: 70px !important;
+    position: relative !important;
+    height: unset !important;
+}

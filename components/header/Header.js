@@ -43,6 +43,7 @@ const Header = () => {
             <div style={{ textAlign: "center", margin: "0 auto" }}>
                 <Link href="/">
                 <Image
+                    layout='fill'
                     src="/images/VTN_logo_white.png"
                     style={{ height: "auto", width: "55px", margin: "0 auto" }}
                 />
@@ -59,6 +60,7 @@ const Header = () => {
             <div style={{ textAlign: "center", margin: "0 auto" }}>
                 <Link href="/">
                 <Image
+                    layout='fill'
                     src="/images/VTN_logo_white.png"
                     style={{ height: "auto", width: "70px", margin: "0 auto" }}
                 />
@@ -79,14 +81,15 @@ const Header = () => {
             >
                 <li className="nav-item deleteMobile">
                 <Link href="/">
-                    <Image
-                    src="/images/VTN_logo_white.png"
-                    style={{
-                        height: "auto",
-                        width: "70px",
-                        margin: "0 auto",
-                    }}
-                    />
+                    <div
+                    className={'image-container'}
+                    >
+                        <Image
+                        layout='fill'
+                        className={'imglogo'}
+                        src="/images/VTN_logo_white.png"
+                        />
+                    </div>
                 </Link>
                 </li>
                 <li
