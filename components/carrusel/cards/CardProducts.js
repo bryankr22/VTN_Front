@@ -45,7 +45,7 @@ export default function CardProducts({item}) {
                                 "300x300." +
                                 item.extension
                             }
-                            alt={item.nameImage + "300x300." + item.extension}
+                            alt={item.nameImage + "300x300." + ".webp"}
                             style={{
                                 marginBottom: 0,
                                 height: 150,
