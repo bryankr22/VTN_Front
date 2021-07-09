@@ -42,8 +42,7 @@ export default function CardProducts({item}) {
                             src={
                                 pathS3.replace("vehiculos", "thumbnails") +
                                 item.nameImage +
-                                "300x300." +
-                                item.extension
+                                "300x300." + ".webp"
                             }
                             alt={item.nameImage + "300x300." + ".webp"}
                             style={{
