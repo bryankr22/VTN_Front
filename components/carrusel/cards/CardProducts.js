@@ -13,8 +13,8 @@ export default function CardProducts({item}) {
                         <Image
                             floated="left"
                             size="small"
-                            src={pathS3 + item.nameImage + "." + item.extension}
-                            alt={item.nameImage + "." + item.extension}
+                            src={pathS3 + item.nameImage + ".webp"}
+                            alt={item.nameImage + ".webp"}
                             style={{
                                 marginBottom: 0,
                                 height: 150,
@@ -26,8 +26,8 @@ export default function CardProducts({item}) {
                         <Image
                             floated="left"
                             size="small"
-                            src={pathS3 + item.nameImage + "." + item.extension}
-                            alt={item.nameImage + "." + item.extension}
+                            src={pathS3 + item.nameImage + ".webp"}
+                            alt={item.nameImage + ".webp"}
                             style={{
                                 marginBottom: 0,
                                 height: 150,

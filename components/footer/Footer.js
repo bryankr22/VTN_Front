@@ -83,6 +83,7 @@ const Footer = () => {
                         <Grid.Row>
                             <Grid.Column width={16} style={{ textAlign: 'center' }}>
                                 <Image
+                                    layout='fill'
                                     src="/images/VTN_logo_white.png"
                                     style={{ height: 'auto', width: '70px' }}
                                 />
@@ -100,6 +101,7 @@ const Footer = () => {
                                     rel="noreferrer"
                                 >
                                     <Image
+                                        layout='fill'
                                         src="/images/vtn_call.png"
                                         style={{ height: 'auto', width: '55px' }}
                                     />
