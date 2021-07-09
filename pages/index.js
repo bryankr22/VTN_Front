@@ -12,7 +12,7 @@ import axios from 'axios';
 import { useDispatch } from "react-redux";
 import { updateHome } from '../store/homeSlice';
 import { API_URL, home } from '../helpers/constants';
-export const config = { amp: true }
+//export const config = { amp: true }
 const Home = () => {
     const dispatch = useDispatch();
     const fetchHome = () => {
