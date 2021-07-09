@@ -55,7 +55,7 @@ const Footer = () => {
                                         <a href='https://instagram.com/vendetunave?igshid=112zj0fxgq16g' target='_blank' rel="noreferrer" style={{ textDecoration: 'none' }}>
                                             <Icon size="big" style={{ color: 'white' }} name='instagram' />
                                         </a>
-                                        <a href={footer.urlWpp} target='_blank' style={{ textDecoration: 'none' }}>
+                                        <a href={footer.urlWpp} target='_blank' rel="noreferrer" style={{ textDecoration: 'none' }}>
                                             <Icon size="big" style={{ color: 'white' }} name='whatsapp' />
                                         </a>
                                         <a href='https://m.youtube.com/channel/UCAFCTbFIi9lr7bP0zXULcOg' target='_blank' rel="noreferrer" style={{ textDecoration: 'none' }}>
@@ -97,8 +97,9 @@ const Footer = () => {
                                     }}
                                     href={footer.urlWpp}
                                     target='_blank'
+                                    rel="noreferrer"
                                 >
-                                    <img
+                                    <Image
                                         src="/images/vtn_call.png"
                                         style={{ height: 'auto', width: '55px' }}
                                     />
@@ -140,7 +141,7 @@ const Footer = () => {
                                         <a href='https://instagram.com/vendetunave?igshid=112zj0fxgq16g' target='_blank' rel="noreferrer" style={{ textDecoration: 'none' }}>
                                             <Icon size="big" style={{ color: 'white' }} name='instagram' />
                                         </a>
-                                        <a href={footer.urlWpp} target='_blank' style={{ textDecoration: 'none' }}>
+                                        <a href={footer.urlWpp} target='_blank' rel="noreferrer" style={{ textDecoration: 'none' }}>
                                             <Icon size="big" style={{ color: 'white' }} name='whatsapp' />
                                         </a>
                                         <a href='https://m.youtube.com/channel/UCAFCTbFIi9lr7bP0zXULcOg' target='_blank' rel="noreferrer" style={{ textDecoration: 'none' }}>
@@ -221,7 +222,7 @@ const Footer = () => {
                                         <a href='https://instagram.com/vendetunave?igshid=112zj0fxgq16g' target='_blank' rel="noreferrer" style={{ textDecoration: 'none' }}>
                                             <Icon size="big" style={{ color: 'white' }} name='instagram' />
                                         </a>
-                                        <a href={footer.urlWpp} target='_blank' style={{ textDecoration: 'none' }}>
+                                        <a href={footer.urlWpp} target='_blank' rel="noreferrer" style={{ textDecoration: 'none' }}>
                                             <Icon size="big" style={{ color: 'white' }} name='whatsapp' />
                                         </a>
                                         <a href='https://m.youtube.com/channel/UCAFCTbFIi9lr7bP0zXULcOg' target='_blank' rel="noreferrer" style={{ textDecoration: 'none' }}>
@@ -264,6 +265,7 @@ const Footer = () => {
                                     }}
                                     href={footer.urlWpp}
                                     target='_blank'
+                                    rel="noreferrer"
                                 >
                                     <Image
                                         src="/images/vtn_call.png"

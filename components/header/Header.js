@@ -79,7 +79,7 @@ const Header = () => {
             >
                 <li className="nav-item deleteMobile">
                 <Link href="/">
-                    <img
+                    <Image
                     src="/images/VTN_logo_white.png"
                     style={{
                         height: "auto",
