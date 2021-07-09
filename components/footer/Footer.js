@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Grid, Header, Icon, List, Responsive, Segment, } from 'semantic-ui-react';
 import axios from 'axios';
 import { API_URL, config } from '../../helpers/constants';
+import Image from 'next/image'
 const Footer = () => {
     const [footer, setFooter] = useState({
         config: [],
@@ -51,13 +52,13 @@ const Footer = () => {
                                 />
                                 <List link inverted style={{ marginTop: 5 }}>
                                     <List.Item>
-                                        <a href='https://instagram.com/vendetunave?igshid=112zj0fxgq16g' target='_blank' style={{ textDecoration: 'none' }}>
+                                        <a href='https://instagram.com/vendetunave?igshid=112zj0fxgq16g' target='_blank' rel="noreferrer" style={{ textDecoration: 'none' }}>
                                             <Icon size="big" style={{ color: 'white' }} name='instagram' />
                                         </a>
                                         <a href={footer.urlWpp} target='_blank' style={{ textDecoration: 'none' }}>
                                             <Icon size="big" style={{ color: 'white' }} name='whatsapp' />
                                         </a>
-                                        <a href='https://m.youtube.com/channel/UCAFCTbFIi9lr7bP0zXULcOg' target='_blank' style={{ textDecoration: 'none' }}>
+                                        <a href='https://m.youtube.com/channel/UCAFCTbFIi9lr7bP0zXULcOg' target='_blank' rel="noreferrer" style={{ textDecoration: 'none' }}>
                                             <Icon size="big" style={{ color: 'white' }} name='youtube' />
                                         </a>
                                     </List.Item>
@@ -81,7 +82,7 @@ const Footer = () => {
                         </Grid.Row>
                         <Grid.Row>
                             <Grid.Column width={16} style={{ textAlign: 'center' }}>
-                                <img
+                                <Image
                                     src="/images/VTN_logo_white.png"
                                     style={{ height: 'auto', width: '70px' }}
                                 />
@@ -136,13 +137,13 @@ const Footer = () => {
                                 />
                                 <List link inverted style={{ marginTop: 5 }}>
                                     <List.Item>
-                                        <a href='https://instagram.com/vendetunave?igshid=112zj0fxgq16g' target='_blank' style={{ textDecoration: 'none' }}>
+                                        <a href='https://instagram.com/vendetunave?igshid=112zj0fxgq16g' target='_blank' rel="noreferrer" style={{ textDecoration: 'none' }}>
                                             <Icon size="big" style={{ color: 'white' }} name='instagram' />
                                         </a>
                                         <a href={footer.urlWpp} target='_blank' style={{ textDecoration: 'none' }}>
                                             <Icon size="big" style={{ color: 'white' }} name='whatsapp' />
                                         </a>
-                                        <a href='https://m.youtube.com/channel/UCAFCTbFIi9lr7bP0zXULcOg' target='_blank' style={{ textDecoration: 'none' }}>
+                                        <a href='https://m.youtube.com/channel/UCAFCTbFIi9lr7bP0zXULcOg' target='_blank' rel="noreferrer" style={{ textDecoration: 'none' }}>
                                             <Icon size="big" style={{ color: 'white' }} name='youtube' />
                                         </a>
                                     </List.Item>
@@ -166,7 +167,7 @@ const Footer = () => {
                         </Grid.Row>
                         <Grid.Row>
                             <Grid.Column width={16} style={{ textAlign: 'center' }}>
-                                <img
+                                <Image
                                     src="/images/VTN_logo_white.png"
                                     style={{ height: 'auto', width: '70px' }}
                                 />
@@ -181,8 +182,9 @@ const Footer = () => {
                                     }}
                                     href={footer.urlWpp}
                                     target='_blank'
+                                    rel="noreferrer"
                                 >
-                                    <img
+                                    <Image
                                         src="/images/vtn_call.png"
                                         style={{ height: 'auto', width: '55px' }}
                                     />
@@ -216,13 +218,13 @@ const Footer = () => {
                                 />
                                 <List link inverted style={{ marginTop: 5 }}>
                                     <List.Item>
-                                        <a href='https://instagram.com/vendetunave?igshid=112zj0fxgq16g' target='_blank' style={{ textDecoration: 'none' }}>
+                                        <a href='https://instagram.com/vendetunave?igshid=112zj0fxgq16g' target='_blank' rel="noreferrer" style={{ textDecoration: 'none' }}>
                                             <Icon size="big" style={{ color: 'white' }} name='instagram' />
                                         </a>
                                         <a href={footer.urlWpp} target='_blank' style={{ textDecoration: 'none' }}>
                                             <Icon size="big" style={{ color: 'white' }} name='whatsapp' />
                                         </a>
-                                        <a href='https://m.youtube.com/channel/UCAFCTbFIi9lr7bP0zXULcOg' target='_blank' style={{ textDecoration: 'none' }}>
+                                        <a href='https://m.youtube.com/channel/UCAFCTbFIi9lr7bP0zXULcOg' target='_blank' rel="noreferrer" style={{ textDecoration: 'none' }}>
                                             <Icon size="big" style={{ color: 'white' }} name='youtube' />
                                         </a>
                                     </List.Item>
@@ -246,7 +248,7 @@ const Footer = () => {
                                 </List>
                             </Grid.Column>
                             <Grid.Column width={2}>
-                                <img
+                                <Image
                                     src="/images/VTN_logo_white.png"
                                     style={{ height: 'auto', width: '116px' }}
                                 />
@@ -263,7 +265,7 @@ const Footer = () => {
                                     href={footer.urlWpp}
                                     target='_blank'
                                 >
-                                    <img
+                                    <Image
                                         src="/images/vtn_call.png"
                                         style={{ height: 'auto', width: '55px', position: 'absolute', right: 0 }}
                                     />
