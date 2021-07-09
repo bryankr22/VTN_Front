@@ -9,16 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.6.0",
     "axios": "^0.21.1",
     "bootstrap": "^5.0.2",
+    "mysql2": "^2.2.5",
     "next": "11.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-iframe": "^1.8.0",
     "react-items-carousel": "^2.8.0",
+    "react-redux": "^7.2.4",
     "react-responsive-carousel": "^3.2.19",
+    "react-slick": "^0.28.1",
     "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "0.87.3"
+    "semantic-ui-react": "0.87.3",
+    "sequelize": "^6.6.5"
   },
   "devDependencies": {
     "eslint": "7.30.0",

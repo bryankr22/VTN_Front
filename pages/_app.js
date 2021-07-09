@@ -1,8 +1,12 @@
 import '../styles/globals.css'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'semantic-ui-css/semantic.min.css'
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
-}
+import { Provider } from 'react-redux'
+import store from '../store';
 
+function MyApp({ Component, pageProps }) {
+    return (
+        <Provider store={store}>
+            <Component {...pageProps} />
+        </Provider>
+    );
+}
 export default MyApp
