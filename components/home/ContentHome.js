@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { Header, Form, Container, Input, Responsive } from "semantic-ui-react";
-import Iframe from "react-iframe";
+//import Iframe from "react-iframe";
 
 const ContentHome = () => {
     const [form, setForm] = useState({
@@ -47,7 +47,7 @@ const ContentHome = () => {
     }
     return(
         <div>
-        { form.link_video != '' &&
+        {/**  form.link_video != '' &&
             <Iframe
                 url={form.link_video}
                 width="100%"
@@ -56,7 +56,7 @@ const ContentHome = () => {
                 display="initial"
                 position="relative"
             />
-        }
+        */}
         <Responsive {...Responsive.onlyMobile}>
             <Container
             style={{
