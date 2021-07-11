@@ -13,7 +13,7 @@ const PublicLayout = (props) => {
                 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width" />
                 <title>VendeTuNave - Carros en Venta</title>
                 <link media="all" href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css" />
-                <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" media="print" onload="this.media='all';this.onload=null;"/>
+                <link rel="preload" as="style" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" media="print" onload="this.media='all';this.onload=null;"/>
                 <link media="all" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" /> 
                 <link media="all" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
                 <link href="/css/app.min.css?v=2.11" rel="preload" as="style" media="print" onload="this.media='all';this.onload=null;" />
