@@ -17,9 +17,9 @@ const PublicLayout = (props) => {
                 <link media="all" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" /> 
                 <link media="all" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
                 <link media="all" href="/css/app.min.css?v=2.11" rel="stylesheet" />
-                <script media="all" src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-                <script media="all" src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-                <script media="all" src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+                <script media="all" defer src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+                <script media="all" defer src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+                <script media="all" defer src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
             </Head>
             <div className="container">
                 <Header />

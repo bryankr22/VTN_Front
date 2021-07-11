@@ -42,11 +42,15 @@ const Header = () => {
             >
             <div style={{ textAlign: "center", margin: "0 auto" }}>
                 <Link href="/">
-                <Image
+                <div
+                className={'image-container-tablet'}
+                >
+                    <Image
                     layout='fill'
+                    className={'imglogo'}
                     src="/images/VTN_logo_white.png"
-                    style={{ height: "auto", width: "55px", margin: "0 auto" }}
-                />
+                    />
+                </div>
                 </Link>
             </div>
             <Link id="link-login" href="/login">
@@ -59,11 +63,15 @@ const Header = () => {
             >
             <div style={{ textAlign: "center", margin: "0 auto" }}>
                 <Link href="/">
-                <Image
+                <div
+                className={'image-container'}
+                >
+                    <Image
                     layout='fill'
+                    className={'imglogo'}
                     src="/images/VTN_logo_white.png"
-                    style={{ height: "auto", width: "70px", margin: "0 auto" }}
-                />
+                    />
+                </div>
                 </Link>
             </div>
             <Link id="link-login" href="/login">

@@ -22,7 +22,7 @@ export default function DestacadosHome() {
                     type="products"
                     noFav={true}
                     onClickFav={() => onClickFav()}
-                    numberCards={5}
+                    numberCards={2}
                     data={vehiculos_local}
                 />
                 </Responsive>
@@ -39,7 +39,7 @@ export default function DestacadosHome() {
                     type="products"
                     noFav={true}
                     onClickFav={() => onClickFav()}
-                    numberCards={5}
+                    numberCards={3}
                     data={vehiculos_local}
                 />
                 </Responsive>

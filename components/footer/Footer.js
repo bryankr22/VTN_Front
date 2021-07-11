@@ -82,11 +82,15 @@ const Footer = () => {
                         </Grid.Row>
                         <Grid.Row>
                             <Grid.Column width={16} style={{ textAlign: 'center' }}>
-                                <Image
+                                <div
+                                className={'image-container'}
+                                >
+                                    <Image
                                     layout='fill'
+                                    className={'imglogo'}
                                     src="/images/VTN_logo_white.png"
-                                    style={{ height: 'auto', width: '70px' }}
-                                />
+                                    />
+                                </div>
                             </Grid.Column>
                             <Grid.Column width={4}>
                                 <a
@@ -170,11 +174,15 @@ const Footer = () => {
                         </Grid.Row>
                         <Grid.Row>
                             <Grid.Column width={16} style={{ textAlign: 'center' }}>
-                                <Image
+                                <div
+                                className={'image-container'}
+                                >
+                                    <Image
                                     layout='fill'
+                                    className={'imglogo'}
                                     src="/images/VTN_logo_white.png"
-                                    style={{ height: 'auto', width: '70px' }}
-                                />
+                                    />
+                                </div>
                             </Grid.Column>
                             <Grid.Column width={4}>
                                 <a
@@ -253,11 +261,15 @@ const Footer = () => {
                                 </List>
                             </Grid.Column>
                             <Grid.Column width={2}>
-                                <Image
+                                <div
+                                className={'image-container-footer'}
+                                >
+                                    <Image
                                     layout='fill'
+                                    className={'imglogo'}
                                     src="/images/VTN_logo_white.png"
-                                    style={{ height: 'auto', width: '116px' }}
-                                />
+                                    />
+                                </div>
                             </Grid.Column>
                         </Grid.Row>
                         <Grid.Row>

@@ -2,7 +2,7 @@ import React, {Fragment, useState} from 'react'
 import ItemsCarousel from "react-items-carousel";
 import { Image, Card, Icon } from "semantic-ui-react";
 
-export default function CarruselCategories({ data = [] }) {
+export default function CarruselCategories({ data = [], numberCards }) {
     const [activeItemIndex, setActiveItemIndex] = useState(0);
     const chevronWidth = 40;
     return (
@@ -10,7 +10,7 @@ export default function CarruselCategories({ data = [] }) {
             <ItemsCarousel
             requestToChangeActive={setActiveItemIndex}
             activeItemIndex={activeItemIndex}
-            numberOfCards={5}
+            numberOfCards={numberCards}
             gutter={20}
             leftChevron={<button>{'<'}</button>}
             rightChevron={<button>{'>'}</button>}

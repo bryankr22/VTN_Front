@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Header, Divider } from "semantic-ui-react";
+import { Header, Divider, Responsive } from "semantic-ui-react";
 import CarruselCategories from "../carrusel/CarruselCategories";
 import { useSelector } from "react-redux";
 export default function CategoriasHome() {
@@ -14,9 +14,24 @@ export default function CategoriasHome() {
             >
             categorías de vehículos
             </Header>
+            <Responsive {...Responsive.onlyMobile}>
             <CarruselCategories
+                numberCards={2}
                 data={categories}
             />
+            </Responsive>
+            <Responsive {...Responsive.onlyTablet}>
+                <CarruselCategories
+                numberCards={2}
+                data={categories}
+                />
+            </Responsive>
+            <Responsive {...Responsive.onlyComputer}>
+                <CarruselCategories
+                numberCards={5}
+                data={categories}
+                />
+            </Responsive>
         </div>
     )
 }

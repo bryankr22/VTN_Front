@@ -36,7 +36,9 @@
 }
 
 .image-container {
-    width: 100%;
+    width: 70px;
+    height: auto;
+    margin: 0 auto;
 }
 .image-container > div{
     position: unset !important;
@@ -45,6 +47,35 @@
     margin: 0 auto;
     object-fit: contain;
     width: 70px !important;
+    position: relative !important;
+    height: unset !important;
+}
+.image-container-tablet {
+    width: 55px;
+    height: auto;
+}
+.image-container-tablet > div{
+    position: unset !important;
+}
+.image-container-tablet .imglogo {
+    margin: 0 auto;
+    object-fit: contain;
+    width: 55px !important;
+    position: relative !important;
+    height: unset !important;
+}
+
+.image-container-footer {
+    width: 116px;
+    height: auto;
+}
+.image-container-footer > div{
+    position: unset !important;
+}
+.image-container-footer .imglogo {
+    margin: 0 auto;
+    object-fit: contain;
+    width: 116px !important;
     position: relative !important;
     height: unset !important;
 }
