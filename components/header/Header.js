@@ -109,7 +109,7 @@ const Header = () => {
                     href="/"
                 >
                     <a className="nav-link" style={{ letterSpacing: 2 }}>HOME
-                    </a>
+                    <Icon name="angle right" size="big" /></a>
                 </Link>
                 </li>
                 <li
@@ -122,7 +122,7 @@ const Header = () => {
                     href="/vehiculos"
                 >
                     <a className="nav-link" style={{ letterSpacing: 2 }}>VEH&Iacute;CULOS
-                    </a>
+                    <Icon name="angle right" size="big" /></a>
                 </Link>
                 </li>
                 <li
@@ -135,7 +135,7 @@ const Header = () => {
                     href="/servicios"
                 >
                     <a className="nav-link" style={{ letterSpacing: 2 }}>SERVICIOS
-                    </a>
+                    <Icon name="angle right" size="big" /></a>
                 </Link>
                 </li>
 
@@ -149,7 +149,7 @@ const Header = () => {
                     href="/comunidad/Buscar_/Pagina_1"
                 >
                     <a className="nav-link" style={{ letterSpacing: 2 }}>COMUNIDAD
-                    </a>
+                    <Icon name="angle right" size="big" /></a>
                 </Link>
                 </li>
 
@@ -163,7 +163,7 @@ const Header = () => {
                     href={'/login'}
                 >
                     <a className="nav-link" style={{ letterSpacing: 2 }}>VENDER
-                    </a>
+                    <Icon name="angle right" size="big" /></a>
                 </Link>
                 </li>
 
