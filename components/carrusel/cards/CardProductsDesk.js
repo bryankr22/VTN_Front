@@ -18,7 +18,7 @@ export default function CardProductsDesk({item}) {
         >
         {item.new_image === 0 && (
             <Image
-            priority={true}
+                priority={true}
                 src={pathS3 + item.nameImage + "." + item.extension}
                 alt={item.nameImage + "." + item.extension}
                 style={{
@@ -31,7 +31,7 @@ export default function CardProductsDesk({item}) {
         )}
         {item.new_image === 1 && (
             <Image
-            priority={true}
+                priority={true}
                 src={pathS3 + item.nameImage + "." + item.extension}
                 alt={item.nameImage + "." + item.extension}
                 style={{
@@ -44,7 +44,7 @@ export default function CardProductsDesk({item}) {
         )}
         {item.new_image === 2 && (
             <Image
-            priority={true}
+                priority={true}
                 src={ pathS3.replace("vehiculos", "thumbnails") + item.nameImage + "300x300." + item.extension }
                 alt={item.nameImage + "300x300." + item.extension}
                 style={{

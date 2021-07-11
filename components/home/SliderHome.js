@@ -12,7 +12,6 @@ export default function SliderHome() {
                 <CarruselHome seccion="home" data={banners} />
             )}
             </Responsive>
-
             <Responsive className="banner-home" {...Responsive.onlyMobile}>
             {bannersMobile.length > 0 && (
                 <CarruselHome seccion="home" data={bannersMobile} />
