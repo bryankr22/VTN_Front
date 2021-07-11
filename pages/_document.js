@@ -14,12 +14,15 @@ class MyDocument extends Document {
                 <Head>
                     <meta name="Description" content="VendeTuNave"></meta>
                     <meta name="theme-color" content="#317EFB" />
-                    
                     <link rel="icon" href="/favicon.ico" />
                     <link rel="manifest" href="/manifest.json" />
                     <link href='/favicon-16x16.png' rel='icon' type='image/png' sizes='16x16' />
                     <link href='/favicon-32x32.png' rel='icon' type='image/png' sizes='32x32' />
                     <link rel="apple-touch-icon" href="/apple-touch-icon.png"></link>
+                    <link rel="preload" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" as="style" onload="this.onLoad=null;this.rel='stylesheet'" />
+                    <noscript>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
+                    </noscript>
                 </Head>
                 <body>
                     <Main />
