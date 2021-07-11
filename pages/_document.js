@@ -12,7 +12,7 @@ class MyDocument extends Document {
         return (
             <Html lang={this.props.lang}>
                 <Head>
-                    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
                     <meta name="Description" content="VendeTuNave"></meta>
                     <meta name="theme-color" content="#317EFB" />
                     <link rel="icon" href="/favicon.ico" />
