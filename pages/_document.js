@@ -1,5 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import { getLangFromReq } from '../helpers/fromReq'
+import { getLangFromReq } from '../utils/fromReq'
 
 class MyDocument extends Document {
     static async getInitialProps(ctx) {
@@ -14,7 +14,7 @@ class MyDocument extends Document {
                 <Head>
                     <meta name="Description" content="VendeTuNave"></meta>
                     <meta name="theme-color" content="#317EFB" />
-                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" media="all" />
+
                     <link rel="icon" href="/favicon.ico" />
                     <link rel="manifest" href="/manifest.json" />
                     <link href='/favicon-16x16.png' rel='icon' type='image/png' sizes='16x16' />
