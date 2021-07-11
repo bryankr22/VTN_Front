@@ -21,6 +21,7 @@ export default function CarruselHome(props) {
                 <div key={index} style={{ height: "100%", width: "100%" }}>
                     {props.seccion == "home" && (
                         <Image
+                            priority={true}
                             layout='fill'
                             style={{
                                 objectFit: "cover",
