@@ -11,6 +11,7 @@ export default function CardProducts({item}) {
                 >
                     {item.new_image === 0 && (
                         <Image
+                        priority={true}
                             floated="left"
                             size="small"
                             src={pathS3 + item.nameImage + ".webp"}
@@ -24,6 +25,7 @@ export default function CardProducts({item}) {
                     )}
                     {item.new_image === 1 && (
                         <Image
+                        priority={true}
                             floated="left"
                             size="small"
                             src={pathS3 + item.nameImage + ".webp"}
@@ -37,6 +39,7 @@ export default function CardProducts({item}) {
                     )}
                     {item.new_image === 2 && (
                         <Image
+                        priority={true}
                             floated="left"
                             size="small"
                             src={

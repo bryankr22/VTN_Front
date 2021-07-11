@@ -12,11 +12,14 @@ const PublicLayout = (props) => {
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width" />
                 <title>VendeTuNave - Carros en Venta</title>
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
                 <link media="all" href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css" />
-                <link rel="preload" as="style" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" media="print" onload="this.media='all';this.onload=null;"/>
+                <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet" />
+                <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" media="all" />
                 <link media="all" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" /> 
                 <link media="all" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
-                <link href="/css/app.min.css?v=2.11" rel="preload" as="style" media="print" onload="this.media='all';this.onload=null;" />
+                <link rel="stylesheet" href="/css/app.min.css?v=2.11" media="all" />
                 <script media="all" defer src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
                 <script media="all" defer src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
                 <script media="all" defer src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
