@@ -12,6 +12,7 @@ class MyDocument extends Document {
         return (
             <Html lang={this.props.lang}>
                 <Head>
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                     <meta name="Description" content="VendeTuNave"></meta>
                     <meta name="theme-color" content="#317EFB" />
                     <link rel="icon" href="/favicon.ico" />
@@ -19,10 +20,14 @@ class MyDocument extends Document {
                     <link href='/favicon-16x16.png' rel='icon' type='image/png' sizes='16x16' />
                     <link href='/favicon-32x32.png' rel='icon' type='image/png' sizes='32x32' />
                     <link rel="apple-touch-icon" href="/apple-touch-icon.png"></link>
-                    <link rel="preload" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" as="style" onLoad="this.onLoad=null;this.rel='stylesheet'" />
-                    <noscript>
-                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
-                    </noscript>
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
+                    <link rel="preconnect" href="https://fonts.googleapis.com" />
+                    <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
+                    <link media="all" href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css" />
+                    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet" />
+                    <script media="all" defer src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+                    <script media="all" defer src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+                    <script media="all" defer src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
                 </Head>
                 <body>
                     <Main />
