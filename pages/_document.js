@@ -20,7 +20,6 @@ class MyDocument extends Document {
                     <link href='/favicon-16x16.png' rel='icon' type='image/png' sizes='16x16' />
                     <link href='/favicon-32x32.png' rel='icon' type='image/png' sizes='32x32' />
                     <link rel="apple-touch-icon" href="/apple-touch-icon.png"></link>
-                    <link rel="stylesheet" href="/css/semantic.min.css" />
                     <link rel="preconnect" href="https://fonts.googleapis.com" />
                     <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
                     <link media="all" href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css" />
