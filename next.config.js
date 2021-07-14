@@ -1,6 +1,7 @@
 const withPWA = require('next-pwa');
 const withCss = require("@zeit/next-css");
 const withPurgeCss = require("next-purgecss");
+const runtimeCaching = require('next-pwa/cache')
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = withCss(
@@ -18,13 +19,16 @@ module.exports = withCss(
         ],
     })
 );
-module.exports = withPWA({
-  pwa: {
-    dest: 'public'
-  },
+module.exports = {
   reactStrictMode: false,
   compress: true,
   images: {
     domains: ['vendetunave.s3.amazonaws.com'],
+  }
+}
+module.exports = withPWA({
+  pwa: {
+    dest: 'public',
+    runtimeCaching
   },
 });
