@@ -1,4 +1,5 @@
 import 'semantic-ui-css/components/reset.min.css'
+import 'semantic-ui-css/components/site.min.css'
 import 'semantic-ui-css/components/dropdown.min.css'
 import 'semantic-ui-css/components/input.min.css'
 import 'semantic-ui-css/components/icon.min.css'
