@@ -10,7 +10,7 @@ module.exports = withCss(
             config.optimization.minimizer.push(new OptimizeCSSAssetsPlugin({}));
             return config;
         },
-        purgeCssEnabled: ({ dev, isServer }) => !dev && !isServer, // Only enable PurgeCSS for client-side production builds
+        purgeCssEnabled: ({ dev, isServer }) => (!dev && !isServer),  // Only enable PurgeCSS for client-side production builds
         purgeCssPaths: [
             "pages/**/*",
             "components/**/*",
