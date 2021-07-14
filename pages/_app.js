@@ -1,4 +1,3 @@
-//import 'semantic-ui-css/semantic.min.css'
 import 'semantic-ui-css/components/reset.min.css'
 import 'semantic-ui-css/components/dropdown.min.css'
 import 'semantic-ui-css/components/input.min.css'
@@ -15,7 +14,7 @@ import 'semantic-ui-css/components/card.min.css'
 import 'semantic-ui-css/components/image.min.css'
 import 'semantic-ui-css/components/checkbox.min.css'
 import 'semantic-ui-css/components/transition.min.css'
-//import '../public/css/app.min.css'
+import '../public/css/app.min.css'
 import '../styles/globals.css'
 import { Provider } from 'react-redux'
 import store from '../store';
