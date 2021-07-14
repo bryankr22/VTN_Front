@@ -1,6 +1,7 @@
 const withPWA = require('next-pwa');
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-
+const withCss = require("@zeit/next-css");
+const withPurgeCss = require("next-purgecss");
+module.exports = withCss(withPurgeCss());
 module.exports = withPWA({
   pwa: {
     dest: 'public'
