@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Grid, Header, Icon, List, Responsive, Segment, } from 'semantic-ui-react';
+import { Container, Grid, Header, Icon, List, Responsive, Segment } from 'semantic-ui-react';
 import axios from 'axios';
 import { API_URL, config } from '../../helpers/constants';
 import Image from 'next/image'
