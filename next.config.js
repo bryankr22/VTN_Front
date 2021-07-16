@@ -19,16 +19,14 @@ module.exports = withCss(
         ],
     })
 );
-module.exports = {
-  reactStrictMode: false,
-  compress: true,
-  images: {
-    domains: ['vendetunave.s3.amazonaws.com'],
-  }
-}
 module.exports = withPWA({
   pwa: {
     dest: 'public',
     runtimeCaching
   },
+  reactStrictMode: false,
+  compress: true,
+  images: {
+    domains: ['vendetunave.s3.amazonaws.com'],
+  }
 });
