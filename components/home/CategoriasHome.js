@@ -2,8 +2,8 @@ import React, {useState} from 'react'
 import { Header, Divider, Responsive } from "semantic-ui-react";
 import CarruselCategories from "../carrusel/CarruselCategories";
 import { useSelector } from "react-redux";
-export default function CategoriasHome() {
-    const categories = useSelector(({ home }) => home.categories);
+export default function CategoriasHome({categorias}) {
+    //const categories = useSelector(({ home }) => home.categories);
     return (
         <div>
             <Divider style={{ marginLeft: 20, marginRight: 20 }} />
@@ -17,19 +17,19 @@ export default function CategoriasHome() {
             <Responsive {...Responsive.onlyMobile}>
             <CarruselCategories
                 numberCards={2}
-                data={categories}
+                data={categorias}
             />
             </Responsive>
             <Responsive {...Responsive.onlyTablet}>
                 <CarruselCategories
                 numberCards={2}
-                data={categories}
+                data={categorias}
                 />
             </Responsive>
             <Responsive {...Responsive.onlyComputer}>
                 <CarruselCategories
                 numberCards={5}
-                data={categories}
+                data={categorias}
                 />
             </Responsive>
         </div>

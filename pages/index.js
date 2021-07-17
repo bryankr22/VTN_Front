@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
 import { updateHome } from '../store/homeSlice';
 import { API_URL, home } from '../helpers/constants';
 //export const config = { amp: true }
-const Home = () => {
+const Home = ({ vehiculos, slider, sliderMobile, categorias, marcas, noticias}) => {
     const dispatch = useDispatch();
     const fetchHome = () => {
         axios.get(API_URL + home).then((res) => {
@@ -72,18 +72,38 @@ const Home = () => {
         });
     }
     useEffect(() => {
-        fetchHome();
+        //fetchHome();
     }, [])
     return(
         <PublicLayout>
-            <SliderHome />
+            <SliderHome slider={slider} sliderMobile={sliderMobile}/>
             <FiltersHome />
-            <CategoriasHome />
-            <MarcasHome />
-            <DestacadosHome />
-            <NoticiasHome />
+            <CategoriasHome categorias={categorias}/>
+            <MarcasHome marcas={marcas}/>
+            <DestacadosHome vehiculos={vehiculos}/>
+            <NoticiasHome noticias={noticias}/>
             <ContentHome />
         </PublicLayout>
     );
 }
+export async function getStaticProps() {
+    const res = await axios.get(API_URL + home);
+    const vehiculos = await res.data.vehiculos_promocion;
+    const slider = await res.data.banners;
+    const sliderMobile = await res.data.bannersMobile;
+    const categorias = await res.data.categories;
+    const marcas = await res.data.marcas;
+    const noticias = await res.data.noticias;
+    return {
+        props: {
+            vehiculos,
+            slider,
+            sliderMobile,
+            categorias,
+            marcas,
+            noticias
+        }
+    }
+}
+  
 export default Home;

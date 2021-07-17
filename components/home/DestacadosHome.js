@@ -2,8 +2,8 @@ import React from 'react'
 import { Header, Responsive } from "semantic-ui-react";
 import CarruselDestacados from "../carrusel/CarruselDestacados";
 import { useSelector } from "react-redux";
-export default function DestacadosHome() {
-    const vehiculos_local = useSelector(({ home }) => home.vehiculos_promocion);
+export default function DestacadosHome({vehiculos}) {
+    //const vehiculos_local = useSelector(({ home }) => home.vehiculos_promocion);
     const onClickFav = () => {
 
     }
@@ -23,7 +23,7 @@ export default function DestacadosHome() {
                     noFav={true}
                     onClickFav={() => onClickFav()}
                     numberCards={2}
-                    data={vehiculos_local}
+                    data={vehiculos}
                 />
                 </Responsive>
                 <Responsive {...Responsive.onlyTablet}>
@@ -40,7 +40,7 @@ export default function DestacadosHome() {
                     noFav={true}
                     onClickFav={() => onClickFav()}
                     numberCards={3}
-                    data={vehiculos_local}
+                    data={vehiculos}
                 />
                 </Responsive>
 
@@ -58,7 +58,7 @@ export default function DestacadosHome() {
                     noFav={true}
                     onClickFav={() => onClickFav()}
                     numberCards={5}
-                    data={vehiculos_local}
+                    data={vehiculos}
                 />
                 </Responsive>
         </div>
