@@ -14,8 +14,8 @@ export default function CardProducts({item}) {
                         priority={true}
                             floated="left"
                             size="small"
-                            src={pathS3 + item.nameImage + ".webp"}
-                            alt={item.nameImage + ".webp"}
+                            src={pathS3 + item.nameImage + item.extension}
+                            alt={item.nameImage + item.extension}
                             style={{
                                 marginBottom: 0,
                                 height: 150,
@@ -28,8 +28,8 @@ export default function CardProducts({item}) {
                         priority={true}
                             floated="left"
                             size="small"
-                            src={pathS3 + item.nameImage + ".webp"}
-                            alt={item.nameImage + ".webp"}
+                            src={pathS3 + item.nameImage + item.extension}
+                            alt={item.nameImage + item.extension}
                             style={{
                                 marginBottom: 0,
                                 height: 150,
@@ -45,9 +45,9 @@ export default function CardProducts({item}) {
                             src={
                                 pathS3.replace("vehiculos", "thumbnails") +
                                 item.nameImage +
-                                "300x300." + ".webp"
+                                "300x300." + item.extension
                             }
-                            alt={item.nameImage + "300x300." + ".webp"}
+                            alt={item.nameImage + "300x300." + item.extension}
                             style={{
                                 marginBottom: 0,
                                 height: 150,
