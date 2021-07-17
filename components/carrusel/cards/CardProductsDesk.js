@@ -5,7 +5,7 @@ export default function CardProductsDesk({item}) {
         let parse = url; 
         return parse;
     }
-    const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/150x150/vendetunave/images/vehiculos/";
+    const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x300/vendetunave/images/vehiculos/";
     return (
         <Card
         as="a"

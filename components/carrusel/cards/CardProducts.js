@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image, Card } from "semantic-ui-react";
 export default function CardProducts({item}) {
-    const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/150x150/vendetunave/images/vehiculos/";
+    const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/200x200/vendetunave/images/vehiculos/";
     return (
         <Card as="a" style={{ margin: 5, height: "auto" }}>
             <Card.Content style={{ padding: "0 2px 0 0" }}>
