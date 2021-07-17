@@ -1,16 +1,14 @@
 import React from 'react'
 import PublicLayout from '../layouts/PublicLayout';
 import { Container, Header, Select, Button, Responsive, Grid, Item } from 'semantic-ui-react'
-export default function concesionarios() {
+export default function servicios() {
     return (
         <PublicLayout>
             <div>
             <Container style={{ paddingTop: 25 }} text>
-                <Header as='h2' style={{ textTransform: 'uppercase' }}>Concesionarios</Header>
+                <Header as='h2' style={{ textTransform: 'uppercase' }}>RECOMENDACIONES DE SERVICIOS PARA TU CARRO</Header>
                 <p style={{ textAlign: 'justify' }}>
-                    En esta sección hemos escogido en las principales ciudades
-                    los mejores servicios para tú vehículos como:
-                    mecánica, tunning, latonería y pintura, polarizado, cambios de aceite, performance, porcelanizado, lavado, entre otros.
+                    En esta sección hemos escogido en las principales ciudades los mejores servicios para tú vehículos como: mecánica, tunning, latonería y pintura, polarizado, cambios de aceite, performance, porcelanizado, lavado, entre otros.
                 </p>
                 <style>
                     {`
@@ -19,7 +17,7 @@ export default function concesionarios() {
                         }
                     `}
                 </style>
-                <Grid columns={3}>
+                <Grid columns={2}>
                     <Grid.Row>
                         <Grid.Column>
                             <Select
@@ -33,14 +31,6 @@ export default function concesionarios() {
                             <Select
                                 fluid
                                 placeholder='SELECCIONE SERVICIO'
-                                search
-                                options={[]}
-                            />
-                        </Grid.Column>
-                        <Grid.Column>
-                            <Select
-                                fluid
-                                placeholder='SELECCIONE LA CIUDAD'
                                 search
                                 options={[]}
                             />

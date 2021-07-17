@@ -102,8 +102,6 @@ const Header = () => {
                 </li>
                 <li
                 className="nav-item"
-                data-toggle="collapse"
-                data-target="#navbarSupportedContent"
                 >
                 <Link
                     href="/"
@@ -113,40 +111,86 @@ const Header = () => {
                 </Link>
                 </li>
                 <li
-                className="nav-item"
-                data-toggle="collapse"
-                data-target="#navbarSupportedContent"
+                className="nav-item dropdown"
                 >
-                <Link
-                    
-                    href="/vehiculos"
-                >
-                    <a className="nav-link" style={{ letterSpacing: 2 }}>VEH&Iacute;CULOS
-                    <Icon name="angle right" size="big" /></a>
-                </Link>
+                    <a class="nav-link menuBlack" style={{ letterSpacing: 2 }} href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown">
+                        VEH&Iacute;CULOS
+                    </a>
+                    <div class="dropdown-menu" 
+                    aria-labelledby="navbarDropdownMenuLink"
+                    style={{backgroundColor: '#000', left: 'auto', right: 0, minWidth: 210}}>
+                        <div class="item" href="#" style={{padding: 11}}>
+                            <span>
+                                <Link
+                                href="/vehiculos"
+                                ><a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Carros y Camionetas</a></Link>
+                            </span>
+                        </div>
+                        <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
+                        <div class="item" href="#" style={{padding: 11}}><span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Motos</span></div>
+                        <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
+                        <div class="item" href="#" style={{padding: 11}}><span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Camiones</span></div>
+                        <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
+                        <div class="item" href="#" style={{padding: 11}}><span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Carros de coleccion</span></div>
+                        <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
+                        <div class="item" href="#" style={{padding: 11}}><span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Otros</span></div>
+                        <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
+                        <div class="item" href="#" style={{padding: 11}}><span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Ficha Tecnica</span></div>
+                        <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
+                        <div class="item" href="#" style={{padding: 11}}><span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Comparar</span></div>
+                    </div>
                 </li>
                 <li
-                className="nav-item"
-                data-toggle="collapse"
-                data-target="#navbarSupportedContent"
+                className="nav-item dropdown"
                 >
-                <Link
-                    
-                    href="/servicios"
-                >
-                    <a className="nav-link" style={{ letterSpacing: 2 }}>SERVICIOS
-                    <Icon name="angle right" size="big" /></a>
-                </Link>
+                    <a class="nav-link menuBlack" style={{ letterSpacing: 2 }} href="#" id="navbarDropdownServicios" role="button" data-toggle="dropdown">
+                        SERVICIOS
+                    </a>
+                    <div class="dropdown-menu" 
+                    aria-labelledby="navbarDropdownServicios"
+                    style={{backgroundColor: '#000', left: 'auto', right: 0, minWidth: 210}}>
+                        <div class="item" href="#" style={{padding: 11}}>
+                            <span>
+                                <Link
+                                href="/servicios"
+                                style={{ textDecoration: "none" }}
+                                ><a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Recomendados</a></Link>
+                            </span>
+                        </div>
+                        <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
+                        <div class="item" href="#" style={{padding: 11}}>
+                            <span>
+                                <Link
+                                href="/financiacion"
+                                style={{ textDecoration: "none" }}
+                                ><a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Financiacion</a>
+                                </Link>
+                            </span>
+                        </div>
+                        <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
+                        <div class="item" href="#" style={{padding: 11}}>
+                            <span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>
+                                Accesorios
+                            </span>
+                        </div>
+                        <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
+                        <div class="item" href="#" style={{padding: 11}}>
+                            <span>
+                                <Link
+                                style={{ textDecoration: "none" }}
+                                href="/concesionarios"
+                                ><a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Concesionarios</a>
+                                </Link>
+                            </span>
+                        </div>
+                    </div>
                 </li>
 
                 <li
                 className="nav-item"
-                data-toggle="collapse"
-                data-target="#navbarSupportedContent"
                 >
                 <Link
-                    
-                    href="/comunidad/Buscar_/Pagina_1"
+                    href="/comunidad"
                 >
                     <a className="nav-link" style={{ letterSpacing: 2 }}>COMUNIDAD
                     <Icon name="angle right" size="big" /></a>
@@ -155,8 +199,6 @@ const Header = () => {
 
                 <li
                 className="nav-item"
-                data-toggle="collapse"
-                data-target="#navbarSupportedContent"
                 >
                 <Link
                     
