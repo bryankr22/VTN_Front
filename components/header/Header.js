@@ -113,13 +113,13 @@ const Header = () => {
                 <li
                 className="nav-item dropdown"
                 >
-                    <a class="nav-link menuBlack" style={{ letterSpacing: 2 }} href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown">
+                    <a className="nav-link menuBlack" style={{ letterSpacing: 2 }} href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown">
                         VEH&Iacute;CULOS
                     </a>
-                    <div class="dropdown-menu" 
+                    <div className="dropdown-menu" 
                     aria-labelledby="navbarDropdownMenuLink"
                     style={{backgroundColor: '#000', left: 'auto', right: 0, minWidth: 210}}>
-                        <div class="item" href="#" style={{padding: 11}}>
+                        <div className="item" href="#" style={{padding: 11}}>
                             <span>
                                 <Link
                                 href="/vehiculos"
@@ -127,29 +127,29 @@ const Header = () => {
                             </span>
                         </div>
                         <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
-                        <div class="item" href="#" style={{padding: 11}}><span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Motos</span></div>
+                        <div className="item" href="#" style={{padding: 11}}><span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Motos</span></div>
                         <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
-                        <div class="item" href="#" style={{padding: 11}}><span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Camiones</span></div>
+                        <div className="item" href="#" style={{padding: 11}}><span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Camiones</span></div>
                         <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
-                        <div class="item" href="#" style={{padding: 11}}><span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Carros de coleccion</span></div>
+                        <div className="item" href="#" style={{padding: 11}}><span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Carros de coleccion</span></div>
                         <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
-                        <div class="item" href="#" style={{padding: 11}}><span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Otros</span></div>
+                        <div className="item" href="#" style={{padding: 11}}><span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Otros</span></div>
                         <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
-                        <div class="item" href="#" style={{padding: 11}}><span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Ficha Tecnica</span></div>
+                        <div className="item" href="#" style={{padding: 11}}><span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Ficha Tecnica</span></div>
                         <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
-                        <div class="item" href="#" style={{padding: 11}}><span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Comparar</span></div>
+                        <div className="item" href="#" style={{padding: 11}}><span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Comparar</span></div>
                     </div>
                 </li>
                 <li
                 className="nav-item dropdown"
                 >
-                    <a class="nav-link menuBlack" style={{ letterSpacing: 2 }} href="#" id="navbarDropdownServicios" role="button" data-toggle="dropdown">
+                    <a className="nav-link menuBlack" style={{ letterSpacing: 2 }} href="#" id="navbarDropdownServicios" role="button" data-toggle="dropdown">
                         SERVICIOS
                     </a>
-                    <div class="dropdown-menu" 
+                    <div className="dropdown-menu" 
                     aria-labelledby="navbarDropdownServicios"
                     style={{backgroundColor: '#000', left: 'auto', right: 0, minWidth: 210}}>
-                        <div class="item" href="#" style={{padding: 11}}>
+                        <div className="item" href="#" style={{padding: 11}}>
                             <span>
                                 <Link
                                 href="/servicios"
@@ -158,7 +158,7 @@ const Header = () => {
                             </span>
                         </div>
                         <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
-                        <div class="item" href="#" style={{padding: 11}}>
+                        <div className="item" href="#" style={{padding: 11}}>
                             <span>
                                 <Link
                                 href="/financiacion"
@@ -168,13 +168,13 @@ const Header = () => {
                             </span>
                         </div>
                         <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
-                        <div class="item" href="#" style={{padding: 11}}>
+                        <div className="item" href="#" style={{padding: 11}}>
                             <span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>
                                 Accesorios
                             </span>
                         </div>
                         <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
-                        <div class="item" href="#" style={{padding: 11}}>
+                        <div className="item" href="#" style={{padding: 11}}>
                             <span>
                                 <Link
                                 style={{ textDecoration: "none" }}
