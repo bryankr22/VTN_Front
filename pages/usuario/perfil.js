@@ -61,7 +61,7 @@ export default function perfil() {
                                 bordered
                                 style={{ height: 290, marginBottom: 20 }}
                             />
-                            <input type="file" style={{ marginBottom: 20 }} class="form-control-file" />
+                            <input type="file" style={{ marginBottom: 20 }} className="form-control-file" />
                             <Form>
                                 <Form.Field>
                                     <label>Nombre y Apellido *</label>
@@ -102,7 +102,7 @@ export default function perfil() {
                                 bordered
                                 style={{ height: 290, marginBottom: 20 }}
                             />
-                            <input type="file" style={{ marginBottom: 20 }} class="form-control-file" />
+                            <input type="file" style={{ marginBottom: 20 }} className="form-control-file" />
                             <Form>
                                 <Form.Field>
                                     <label>Nombre y Apellido *</label>
