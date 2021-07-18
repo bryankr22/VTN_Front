@@ -46,6 +46,7 @@ export default function ListadoVehiculos({params, vehiculos}) {
             <Card.Group itemsPerRow={4}>
                 {vehiculos.map((item, index) => (
                 <Card
+                    key={index}
                     as='a'
                     style={{ textDecoration: "none" }}
                 >
