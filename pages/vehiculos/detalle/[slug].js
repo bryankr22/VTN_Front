@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import { useRouter } from 'next/router'
 import PublicLayout from '../../../layouts/PublicLayout';
 import SliderPrincipal from '../../../components/vehiculo/SliderPrincipal';
