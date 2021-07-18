@@ -37,6 +37,10 @@ export default function detalle({data}) {
                 <SliderPrincipal imagenes={data.imagenes}/>
                 <SidebarDetalle vehiculo={data.vehiculo} />
             </Responsive>
+            <Responsive {...Responsive.onlyMobile}>
+                <SliderPrincipal imagenes={data.imagenes}/>
+                <SidebarDetalle vehiculo={data.vehiculo} />
+            </Responsive>
             <Responsive {...Responsive.onlyComputer}>
                 <Grid columns="equal">
                     <Grid.Column width={10} style={{ padding: "30px 10px 15px 30px" }}>
