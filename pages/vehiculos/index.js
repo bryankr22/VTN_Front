@@ -6,8 +6,6 @@ import { Grid, Responsive } from "semantic-ui-react";
 import { useRouter } from 'next/router';
 
 import axios from 'axios';
-//import { API_URL, vehiculos } from '../../helpers/constants';
-
 export default function index({ vehiculos, contadores }) {
     const router = useRouter();
     return (
