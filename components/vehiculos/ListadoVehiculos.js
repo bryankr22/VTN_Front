@@ -9,6 +9,24 @@ export default function ListadoVehiculos({params, vehiculos}) {
         { key: 3, value: 3, text: "Precio más bajo" },
         { key: 4, value: 4, text: "Precio más alto" },
     ];
+    const normalize = (function() {
+        var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
+          to = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc",
+          mapping = {};
+      
+        for (var i = 0, j = from.length; i < j; i++)
+          mapping[from.charAt(i)] = to.charAt(i);
+      
+        return function(str) {
+          var ret = [];
+          for (var i = 0, j = str.length; i < j; i++) {
+            var c = str.charAt(i);
+            if (mapping.hasOwnProperty(str.charAt(i))) ret.push(mapping[c]);
+            else ret.push(c);
+          }
+          return ret.join("");
+        };
+    })();
     return (
         <Grid.Column width={13}>
             <Container fluid style={{ textAlign: "center", margin: 10 }}>
@@ -49,6 +67,20 @@ export default function ListadoVehiculos({params, vehiculos}) {
                     key={index}
                     as='a'
                     style={{ textDecoration: "none" }}
+                    href={
+                        "/vehiculos/detalle/" +
+                        normalize(item.title)
+                          .split(" ")
+                          .join("-")
+                          .split("%")
+                          .join("")
+                          .split("?")
+                          .join("")
+                          .split("/")
+                          .join("") +
+                        "-" +
+                        item.id
+                    }
                 >
                     <Image
                         src={pathS3 + item.nameImage + "." + item.extension}

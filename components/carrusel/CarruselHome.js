@@ -34,8 +34,7 @@ export default function CarruselHome(props) {
                             />
                         )}
                         {props.seccion == "desc" &&
-                            (item.new_image === 1 || item.new_image === 2) &&
-                            hasWebP && (
+                            (item.new_image === 1 || item.new_image === 2) && (
                                 <Image
                                 layout='fill'
                                     id={`image_vehicle_${index}`}
@@ -64,8 +63,7 @@ export default function CarruselHome(props) {
                             />
                         )}
                         {props.seccion == "desc" &&
-                            (item.new_image === 1 || item.new_image === 2) &&
-                            !hasWebP && (
+                            (item.new_image === 1 || item.new_image === 2) && (
                                 <Image
                                 layout='fill'
                                     id={`image_vehicle_${index}`}

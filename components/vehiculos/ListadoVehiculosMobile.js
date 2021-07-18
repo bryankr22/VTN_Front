@@ -2,6 +2,24 @@ import React from 'react'
 import { Image, Card } from "semantic-ui-react";
 export default function ListadoVehiculosMobile({vehiculos}) {
     const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/200x200/vendetunave/images/vehiculos/";
+    const normalize = (function() {
+        var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
+          to = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc",
+          mapping = {};
+      
+        for (var i = 0, j = from.length; i < j; i++)
+          mapping[from.charAt(i)] = to.charAt(i);
+      
+        return function(str) {
+          var ret = [];
+          for (var i = 0, j = str.length; i < j; i++) {
+            var c = str.charAt(i);
+            if (mapping.hasOwnProperty(str.charAt(i))) ret.push(mapping[c]);
+            else ret.push(c);
+          }
+          return ret.join("");
+        };
+    })();
     return (
         <div>
             <Card.Group
@@ -13,6 +31,20 @@ export default function ListadoVehiculosMobile({vehiculos}) {
               <Card
                 key={"vehiculo2" + index}
                 as='a'
+                href={
+                    "/vehiculos/detalle/" +
+                    normalize(item.title)
+                      .split(" ")
+                      .join("-")
+                      .split("%")
+                      .join("")
+                      .split("?")
+                      .join("")
+                      .split("/")
+                      .join("") +
+                    "-" +
+                    item.id
+                }
                 style={{
                   width: "calc(50% - 1em)",
                   marginRight: 6,

@@ -6,10 +6,41 @@ export default function CardProductsDesk({item}) {
         return parse;
     }
     const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x300/vendetunave/images/vehiculos/";
+    const normalize = (function() {
+        var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
+          to = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc",
+          mapping = {};
+      
+        for (var i = 0, j = from.length; i < j; i++)
+          mapping[from.charAt(i)] = to.charAt(i);
+      
+        return function(str) {
+          var ret = [];
+          for (var i = 0, j = str.length; i < j; i++) {
+            var c = str.charAt(i);
+            if (mapping.hasOwnProperty(str.charAt(i))) ret.push(mapping[c]);
+            else ret.push(c);
+          }
+          return ret.join("");
+        };
+    })();
     return (
         <Card
         as="a"
-        href={ "/vehiculo/" + parseUrl(item.url) + "-" + item.id }
+        href={
+            "/vehiculos/detalle/" +
+            normalize(item.title)
+              .split(" ")
+              .join("-")
+              .split("%")
+              .join("")
+              .split("?")
+              .join("")
+              .split("/")
+              .join("") +
+            "-" +
+            item.id
+        }
         style={{
             boxShadow: "none",
             textDecoration: "none",
