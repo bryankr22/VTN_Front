@@ -70,7 +70,9 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                             </List.Header>
                             <List.List style={{ paddingLeft: 15 }}>
                                 {mapping_contador(contadores.ubicacion).map((item, index) => (
-                                    <List.Item as="a">
+                                    <List.Item 
+                                    key={index}
+                                    as="a">
                                         {item.label}
                                     </List.Item>
                                 )
@@ -91,7 +93,9 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                             </List.Header>
                             <List.List style={{ paddingLeft: 15 }}>
                                 {categorias_filter.map((item, index) => (
-                                    <List.Item as="a">
+                                    <List.Item 
+                                    key={index}
+                                    as="a">
                                         {item.text}
                                     </List.Item>
                                 )
@@ -108,7 +112,9 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                             </List.Header>
                             <List.List style={{ paddingLeft: 15 }}>
                                 {mapping_contador(contadores.marcas).map((item, index) => (
-                                    <List.Item as="a">
+                                    <List.Item 
+                                    key={index}
+                                    as="a">
                                         {item.label}
                                     </List.Item>
                                 )
@@ -128,7 +134,9 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                             </List.Header>
                             <List.List style={{ paddingLeft: 15 }}>
                                 {mapping_contador(contadores.combustible).map((item, index) => (
-                                    <List.Item as="a">
+                                    <List.Item 
+                                    key={index}
+                                    as="a">
                                         {item.label}
                                     </List.Item>
                                 )
@@ -145,7 +153,9 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                             </List.Header>
                             <List.List style={{ paddingLeft: 15 }}>
                                 {mapping_contador(contadores.anios).map((item, index) => (
-                                    <List.Item as="a">
+                                    <List.Item 
+                                    key={index}
+                                    as="a">
                                         {item.label}
                                     </List.Item>
                                 )
@@ -187,7 +197,9 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                             </List.Header>
                             <List.List style={{ paddingLeft: 15 }}>
                                 {mapping_contador(contadores.caja).map((item, index) => (
-                                    <List.Item as="a">
+                                    <List.Item 
+                                    key={index}
+                                    as="a">
                                         {item.label}
                                     </List.Item>
                                 )
@@ -217,7 +229,9 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                             </List.Header>
                             <List.List>
                                 {kilometraje_filter.map((item, index) => (
-                                    <List.Item as="a">
+                                    <List.Item 
+                                    key={index}
+                                    as="a">
                                         {item.text}
                                     </List.Item>
                                 )
@@ -269,7 +283,9 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                             </List.Header>
                             <List.List>
                                 {precios_filter.map((item, index) => (
-                                    <List.Item as="a">
+                                    <List.Item 
+                                    key={index}
+                                    as="a">
                                         {item.text}
                                     </List.Item>
                                 )

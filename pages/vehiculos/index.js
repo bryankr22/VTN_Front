@@ -29,7 +29,7 @@ export default function index({ vehiculos, contadores }) {
     )
 }
 export async function getServerSideProps({query}) {
-    const res = await axios.get('http://vendetunave_api.test/api/vehiculos', {
+    const res = await axios.get('https://api.vendetunave.co/api/vehiculos', {
         params: {
             categoria: query.categoria
         }
