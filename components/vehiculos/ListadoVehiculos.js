@@ -1,6 +1,14 @@
 import React, {useState} from 'react'
 import { Image, Container, Input, Card, Select, Grid, Pagination } from "semantic-ui-react";
-export default function ListadoVehiculos() {
+export default function ListadoVehiculos({params, vehiculos}) {
+    const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/200x200/vendetunave/images/vehiculos/";
+    const filter = [
+        { key: 0, value: 0, text: "Más reciente" },
+        { key: 1, value: 1, text: "Nuevo" },
+        { key: 2, value: 2, text: "Usado" },
+        { key: 3, value: 3, text: "Precio más bajo" },
+        { key: 4, value: 4, text: "Precio más alto" },
+    ];
     return (
         <Grid.Column width={13}>
             <Container fluid style={{ textAlign: "center", margin: 10 }}>
@@ -20,6 +28,7 @@ export default function ListadoVehiculos() {
                             fluid
                             placeholder="Ordenar por..."
                             search
+                            options={filter}
                         />
                     </Grid.Column>
                 </Grid>
@@ -33,13 +42,15 @@ export default function ListadoVehiculos() {
             >
                 No encontramos resultados
             </p>**/}
+            {vehiculos.length > 0 && (
             <Card.Group itemsPerRow={4}>
+                {vehiculos.map((item, index) => (
                 <Card
                     as='a'
                     style={{ textDecoration: "none" }}
                 >
                     <Image
-                        src={'https://via.placeholder.com/300'}
+                        src={pathS3 + item.nameImage + "." + item.extension}
                         wrapped
                         ui={false}
                     />
@@ -52,23 +63,24 @@ export default function ListadoVehiculos() {
                                 marginBottom: 7,
                             }}
                         >
-                            DATA
+                            {item.title}
                         </Card.Description>
                         <Card.Header>
-                            $ 000000
-                            COP
+                            $ {new Intl.NumberFormat("de-DE").format(item.precio)} COP
                         </Card.Header>
                         <Card.Description>
-                            0000 -
-                            000000
-                            KM
+                            {item.ano} -{" "}
+                            {new Intl.NumberFormat("de-DE").format(item.kilometraje)} KM
                         </Card.Description>
                         <Card.Description>
-                        DATA-CIUDAD
+                            {(item.labelCiudad).toLowerCase().charAt(0).toUpperCase() + (item.labelCiudad).toLowerCase().slice(1)}
                         </Card.Description>
                     </Card.Content>
                 </Card>
+                )
+                )}
             </Card.Group>
+            )}
             {/**Math.ceil(this.state.resultTotal / 20) > 1 && (
                 <Container fluid style={{ textAlign: "center", margin: 25 }}>
                     <Pagination

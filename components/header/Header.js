@@ -122,18 +122,61 @@ const Header = () => {
                         <div className="item" href="#" style={{padding: 11}}>
                             <span>
                                 <Link
-                                href="/vehiculos"
+                                href={{
+                                    pathname: '/vehiculos',
+                                    query: { categoria: 'carros' },
+                                }}
                                 ><a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Carros y Camionetas</a></Link>
                             </span>
                         </div>
                         <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
-                        <div className="item" href="#" style={{padding: 11}}><span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Motos</span></div>
+                        <div className="item" href="#" style={{padding: 11}}>
+                            <span>
+                                <Link
+                                href={{
+                                    pathname: '/vehiculos',
+                                    query: { categoria: 'motos' },
+                                }}
+                                ><a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Motos</a></Link>
+                            </span>
+                        </div>
                         <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
-                        <div className="item" href="#" style={{padding: 11}}><span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Camiones</span></div>
+                        <div className="item" href="#" style={{padding: 11}}>
+                            <span>
+                                <Link
+                                href={{
+                                    pathname: '/vehiculos',
+                                    query: { categoria: 'camiones' },
+                                }}
+                                ><a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Camiones</a></Link>
+                            </span>
+                        </div>
                         <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
-                        <div className="item" href="#" style={{padding: 11}}><span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Carros de coleccion</span></div>
+                        <div className="item" href="#" style={{padding: 11}}>
+                            <span>
+                                <Link
+                                href={{
+                                    pathname: '/vehiculos',
+                                    query: { categoria: 'carros_coleccion' },
+                                }}
+                                >
+                                    <a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Carros de coleccion</a>
+                                </Link>
+                            </span>
+                        </div>
                         <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
-                        <div className="item" href="#" style={{padding: 11}}><span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Otros</span></div>
+                        <div className="item" href="#" style={{padding: 11}}>
+                            <span>
+                                <Link
+                                href={{
+                                    pathname: '/vehiculos',
+                                    query: { categoria: 'otros' },
+                                }}
+                                >
+                                    <a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Otros</a>
+                                </Link>
+                            </span>
+                        </div>
                         <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
                         <div className="item" href="#" style={{padding: 11}}><span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Ficha Tecnica</span></div>
                         <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
@@ -169,8 +212,15 @@ const Header = () => {
                         </div>
                         <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
                         <div className="item" href="#" style={{padding: 11}}>
-                            <span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>
-                                Accesorios
+                            <span>
+                                <Link
+                                href={{
+                                    pathname: '/vehiculos',
+                                    query: { categoria: 'accesorios' },
+                                }}
+                                >
+                                    <a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Accesorios</a>
+                                </Link>
                             </span>
                         </div>
                         <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
