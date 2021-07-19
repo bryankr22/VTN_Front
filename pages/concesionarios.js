@@ -106,8 +106,8 @@ export default function concesionarios({concesionarios_res}) {
                 </Responsive>**/}
 
                 <Item.Group divided>
-                    {(concesionarios_res).map((item) =>
-                    <Item>
+                    {(concesionarios_res).map((item, index) =>
+                    <Item key={index}>
                         <Item.Image size='small' src={item.image} />
                         <Item.Content>
                             <Item.Header>{item.name}</Item.Header>

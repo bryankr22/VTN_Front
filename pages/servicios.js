@@ -96,8 +96,8 @@ export default function servicios({servicios_res}) {
                 </Responsive>**/}
 
                 <Item.Group divided>
-                    {servicios_res.map((item) => (
-                        <Item>
+                    {servicios_res.map((item, index) => (
+                        <Item key={index}>
                             <Item.Image size='small' src={item.image} />
                             <Item.Content>
                                 <Item.Header>{item.nombre}</Item.Header>
