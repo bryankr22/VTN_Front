@@ -24,8 +24,6 @@ export default function CarruselHome(props) {
                         {props.seccion == "home" && (
                             <Image
                             layout='fill'
-                            objectFit='contain'
-                            objectPosition='center'
                             src={item.url}
                             />
                         )}
