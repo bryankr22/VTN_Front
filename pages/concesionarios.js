@@ -1,7 +1,9 @@
 import React from 'react'
 import PublicLayout from '../layouts/PublicLayout';
 import { Container, Header, Select, Button, Responsive, Grid, Item } from 'semantic-ui-react'
-export default function concesionarios() {
+import axios from 'axios';
+import { API_URL, concesionarios_api } from '../helpers/constants';
+export default function concesionarios({concesionarios_res}) {
     return (
         <PublicLayout>
             <div>
@@ -104,13 +106,14 @@ export default function concesionarios() {
                 </Responsive>**/}
 
                 <Item.Group divided>
+                    {(concesionarios_res).map((item) =>
                     <Item>
-                        <Item.Image size='small' src={'https://via.placeholder.com/150'} />
+                        <Item.Image size='small' src={item.image} />
                         <Item.Content>
-                            <Item.Header>Titulo</Item.Header>
-                            <Item.Meta>DATA1</Item.Meta>
-                            <Item.Meta>DATA1</Item.Meta>
-                            <Item.Meta>Tel: 000 0000 000</Item.Meta>
+                            <Item.Header>{item.name}</Item.Header>
+                            <Item.Meta>{item.description}</Item.Meta>
+                            <Item.Meta>{item.address}</Item.Meta>
+                            <Item.Meta>Tel: {item.phone}</Item.Meta>
                             <Item.Extra style={{ float: 'right', marginTop: '-11%', width: '20%' }}>
                                 <Button
                                 secondary
@@ -121,23 +124,7 @@ export default function concesionarios() {
                             </Item.Extra>
                         </Item.Content>
                     </Item>
-                    <Item>
-                        <Item.Image size='small' src={'https://via.placeholder.com/150'} />
-                        <Item.Content>
-                            <Item.Header>Titulo</Item.Header>
-                            <Item.Meta>DATA1</Item.Meta>
-                            <Item.Meta>DATA1</Item.Meta>
-                            <Item.Meta>Tel: 000 0000 000</Item.Meta>
-                            <Item.Extra style={{ float: 'right', marginTop: '-11%', width: '20%' }}>
-                                <Button
-                                secondary
-                                floated='right'
-                                >
-                                    VER
-                                </Button>
-                            </Item.Extra>
-                        </Item.Content>
-                    </Item>
+                    )}
                 </Item.Group>
                 {/**Math.ceil((this.state.servicesTotal) / 10) > 1 &&
                     <Container fluid style={{ textAlign: 'center', margin: 25 }}>
@@ -159,4 +146,13 @@ export default function concesionarios() {
             </div>
         </PublicLayout>
     )
+}
+export async function getStaticProps() {
+    const res = await axios.get(API_URL + concesionarios_api);
+    const concesionarios_res = await res.data.servicios;
+    return {
+        props: {
+            concesionarios_res
+        }
+    }
 }

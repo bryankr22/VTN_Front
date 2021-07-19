@@ -1,8 +1,10 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import Link from 'next/link';
 import PublicLayout from '../../layouts/PublicLayout';
 import { Container, Header, Grid, Input, Item, Label, Button, Responsive } from 'semantic-ui-react';
-export default function index() {
+import axios from 'axios';
+import { API_URL, comunidad_api } from '../../helpers/constants';
+export default function index({preguntas, tags}) {
     return (
         <PublicLayout>
             <Container style={{ paddingTop: 25 }} text>
@@ -55,7 +57,10 @@ export default function index() {
                     </Grid.Row>
                 </Grid>
                 <Item.Group>
+                    { (preguntas).map((item) =>
                     <Item
+                    key={item.id}
+                    id={'pregunta_' + item.id}
                     style={{
                         paddingTop: '15px',
                         paddingBottom: '15px',
@@ -73,21 +78,38 @@ export default function index() {
                                 color: '#2185d0'
                             }} 
                             className="ui tiny image">
-                            <Header as='h1' style={{ color: '#2185d0' }}>DATA</Header> Respuestas
+                            <Header as='h1' style={{ color: '#2185d0' }}>{item.repuestas}</Header> Respuestas
                         </div>
 
                         <Item.Content>
                             <Item.Header as='a'>
                                 <Link href={'/pregunta'} style={{ color: 'black' }}>
-                                    TITULO
+                                    {item.titulo}
                                 </Link>
                             </Item.Header>
                             <Item.Meta style={{ marginTop: '20px' }}>
-                                <Label as='a' tag>TAG 1</Label>
-                                <Label as='a' tag>TAG 2</Label>
+                                {(tags).map((itemTags) =>
+                                    {
+                                        if(itemTags.pregunta_id == item.id){
+                                            return <Label as='a' tag>{itemTags.tag}</Label>;
+                                        }
+                                    }
+                                )}
+                                <div 
+                                style={{ 
+                                    display: 'inline-block', 
+                                    float: 'right', 
+                                    color: 'black',
+                                    margin: '10px 0'
+                                }}>
+                                    { item.repuestas != 0 &&
+                                        <Fragment>Última respuesta: {item.ult_respuesta}</Fragment>
+                                    }
+                                </div>
                             </Item.Meta>
                         </Item.Content>
                     </Item>
+                    )}
                 </Item.Group>
                 {/**Math.ceil((this.state.questionsTotal) / 10) > 1 &&
                     <Container fluid style={{ textAlign: 'center', margin: 25 }}>
@@ -108,4 +130,15 @@ export default function index() {
             </Container>
         </PublicLayout>
     )
+}
+export async function getStaticProps() {
+    const res = await axios.get(API_URL + comunidad_api);
+    const preguntas = await res.data.preguntas;
+    const tags = await res.data.tags;
+    return {
+        props: {
+            preguntas,
+            tags
+        }
+    }
 }

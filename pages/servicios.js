@@ -1,7 +1,9 @@
 import React from 'react'
 import PublicLayout from '../layouts/PublicLayout';
 import { Container, Header, Select, Button, Responsive, Grid, Item } from 'semantic-ui-react'
-export default function servicios() {
+import axios from 'axios';
+import { API_URL, servicios_api } from '../helpers/constants';
+export default function servicios({servicios_res}) {
     return (
         <PublicLayout>
             <div>
@@ -94,40 +96,27 @@ export default function servicios() {
                 </Responsive>**/}
 
                 <Item.Group divided>
-                    <Item>
-                        <Item.Image size='small' src={'https://via.placeholder.com/150'} />
-                        <Item.Content>
-                            <Item.Header>Titulo</Item.Header>
-                            <Item.Meta>DATA1</Item.Meta>
-                            <Item.Meta>DATA1</Item.Meta>
-                            <Item.Meta>Tel: 000 0000 000</Item.Meta>
-                            <Item.Extra style={{ float: 'right', marginTop: '-11%', width: '20%' }}>
-                                <Button
-                                secondary
-                                floated='right'
-                                >
-                                    VER
-                                </Button>
-                            </Item.Extra>
-                        </Item.Content>
-                    </Item>
-                    <Item>
-                        <Item.Image size='small' src={'https://via.placeholder.com/150'} />
-                        <Item.Content>
-                            <Item.Header>Titulo</Item.Header>
-                            <Item.Meta>DATA1</Item.Meta>
-                            <Item.Meta>DATA1</Item.Meta>
-                            <Item.Meta>Tel: 000 0000 000</Item.Meta>
-                            <Item.Extra style={{ float: 'right', marginTop: '-11%', width: '20%' }}>
-                                <Button
-                                secondary
-                                floated='right'
-                                >
-                                    VER
-                                </Button>
-                            </Item.Extra>
-                        </Item.Content>
-                    </Item>
+                    {servicios_res.map((item) => (
+                        <Item>
+                            <Item.Image size='small' src={item.image} />
+                            <Item.Content>
+                                <Item.Header>{item.nombre}</Item.Header>
+                                <Item.Meta>{item.descripcion}</Item.Meta>
+                                <Item.Meta>{item.direccion}</Item.Meta>
+                                <Item.Meta>{item.telefono}</Item.Meta>
+                                <Item.Meta>{item.servicio}</Item.Meta>
+                                <Item.Extra style={{ float: 'right', marginTop: '-11%', width: '20%' }}>
+                                    <Button
+                                    secondary
+                                    floated='right'
+                                    >
+                                        VER
+                                    </Button>
+                                </Item.Extra>
+                            </Item.Content>
+                        </Item>
+                    )
+                    )}
                 </Item.Group>
                 {/**Math.ceil((this.state.servicesTotal) / 10) > 1 &&
                     <Container fluid style={{ textAlign: 'center', margin: 25 }}>
@@ -149,4 +138,13 @@ export default function servicios() {
             </div>
         </PublicLayout>
     )
+}
+export async function getStaticProps() {
+    const res = await axios.get(API_URL + servicios_api);
+    const servicios_res = await res.data.servicios;
+    return {
+        props: {
+            servicios_res
+        }
+    }
 }
