@@ -52,7 +52,8 @@ export async function getServerSideProps({query}) {
             ano: query.ano,
             estado: query.estado,
             precio: query.precio,
-            kilometraje: query.kilometraje
+            kilometraje: query.kilometraje,
+            orden: query.orden
         }
     });
     const data = await res.data;
