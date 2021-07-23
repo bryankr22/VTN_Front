@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Image, Container, Input, Card, Select, Grid, Pagination } from "semantic-ui-react";
-export default function ListadoVehiculos({params, vehiculos}) {
+
+export default function ListadoVehiculos({params, vehiculos, page, totalRecords}) {
     const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/200x200/vendetunave/images/vehiculos/";
     const filter = [
         { key: 0, value: 0, text: "Más reciente" },
@@ -27,6 +28,26 @@ export default function ListadoVehiculos({params, vehiculos}) {
           return ret.join("");
         };
     })();
+    //useEffect
+    const insertParam = (key, value) => {
+        key = encodeURIComponent(key);
+        value = encodeURIComponent(value);
+        var kvp = document.location.search.substr(1).split('&');
+        let i=0;
+        for(; i<kvp.length; i++){
+            if (kvp[i].startsWith(key + '=')) {
+                let pair = kvp[i].split('=');
+                pair[1] = value;
+                kvp[i] = pair.join('=');
+                break;
+            }
+        }
+        if(i >= kvp.length){
+            kvp[kvp.length] = [key,value].join('=');
+        }
+        let params = kvp.join('&');
+        document.location.search = params;
+    }
     return (
         <Grid.Column width={13}>
             <Container fluid style={{ textAlign: "center", margin: 10 }}>
@@ -114,22 +135,22 @@ export default function ListadoVehiculos({params, vehiculos}) {
                 )}
             </Card.Group>
             )}
-            {/**Math.ceil(this.state.resultTotal / 20) > 1 && (
+            
                 <Container fluid style={{ textAlign: "center", margin: 25 }}>
                     <Pagination
                         pointing
                         secondary
                         boundaryRange={0}
-                        activePage={this.state.activePage}
+                        activePage={parseInt(page)}
                         ellipsisItem={null}
                         firstItem={null}
                         lastItem={null}
                         siblingRange={2}
-                        onPageChange={this.handlePaginationChange}
-                        totalPages={Math.ceil(this.state.resultTotal / 20)}
+                        onPageChange={handlePaginationChange}
+                        totalPages={Math.ceil(totalRecords / 20)}
                     />
                 </Container>
-            )**/}
+            
         </Grid.Column>
     )
 }

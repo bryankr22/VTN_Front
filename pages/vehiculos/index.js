@@ -10,28 +10,30 @@ import { Grid, Responsive } from "semantic-ui-react";
 import { useRouter } from 'next/router';
 
 import axios from 'axios';
-export default function index({ vehiculos, contadores }) {
+export default function index({ data }) {
     const router = useRouter();
     return (
         <PublicLayout>
             <Responsive {...Responsive.onlyMobile}>
-                <SidebarMobile vehiculos={vehiculos} />
-                <ListadoVehiculosMobile vehiculos={vehiculos} />
+                <SidebarMobile vehiculos={data.vehicles} />
+                <ListadoVehiculosMobile vehiculos={data.vehicles} />
             </Responsive>
             <Responsive {...Responsive.onlyTablet}>
-                <SidebarMobile vehiculos={vehiculos} />
-                <ListadoVehiculosMobile vehiculos={vehiculos} />
+                <SidebarMobile vehiculos={data.vehicles} />
+                <ListadoVehiculosMobile vehiculos={data.vehicles} />
             </Responsive>
             <Responsive {...Responsive.onlyComputer}>
                 <Grid style={{ paddingTop: 15 }}>
                     <SidebarVehiculos 
                     params={router.query} 
-                    contadores={contadores}
-                    vehiculos={vehiculos}
+                    contadores={data.contadores}
+                    vehiculos={data.vehicles}
                     />
                     <ListadoVehiculos 
                     params={router.query} 
-                    vehiculos={vehiculos}
+                    vehiculos={data.vehicles}
+                    page={data.page}
+                    totalRecords={data.total_records}
                     />
                 </Grid>
             </Responsive>
@@ -39,17 +41,24 @@ export default function index({ vehiculos, contadores }) {
     )
 }
 export async function getServerSideProps({query}) {
-    const res = await axios.get('https://api.vendetunave.co/api/vehiculos', {
+    const res = await axios.get('http://vendetunave_api.test/api/vehiculos', {
         params: {
-            categoria: query.categoria
+            categoria: query.categoria,
+            page: query.page,
+            ubicacion: query.ubicacion,
+            marca: query.marca,
+            combustible: query.combustible,
+            modelo: query.modelo,
+            ano: query.ano,
+            estado: query.estado,
+            precio: query.precio,
+            kilometraje: query.kilometraje
         }
     });
-    const vehiculos = await res.data.vehicles;
-    const contadores = await res.data.contadores;
+    const data = await res.data;
     return {
         props: {
-            vehiculos,
-            contadores
+            data
         },
     }
 }

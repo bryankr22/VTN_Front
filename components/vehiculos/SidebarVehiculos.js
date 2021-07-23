@@ -26,7 +26,9 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                 qty: index
             }
         });
-        return mapItems;
+        var size = 5;
+        var sliceItems = mapItems.slice(0, size)
+        return sliceItems;
     }
     const kilometraje_filter = [
         { text: "De 0 a 5.000" },
@@ -49,6 +51,25 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
         { text: "MOTOS", slug: 'motos' },
         { text: "OTROS", slug: 'otros' },
     ];
+    const insertParam = (key, value) => {
+        key = encodeURIComponent(key);
+        value = encodeURIComponent(value);
+        var kvp = document.location.search.substr(1).split('&');
+        let i=0;
+        for(; i<kvp.length; i++){
+            if (kvp[i].startsWith(key + '=')) {
+                let pair = kvp[i].split('=');
+                pair[1] = value;
+                kvp[i] = pair.join('=');
+                break;
+            }
+        }
+        if(i >= kvp.length){
+            kvp[kvp.length] = [key,value].join('=');
+        }
+        let params = kvp.join('&');
+        document.location.search = params;
+    }
     return (
         <Grid.Column style={{ paddingLeft: "3%" }} width={3}>
             <Header style={{ margin: 0 }} as="h3">
@@ -61,8 +82,8 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                 <ActiveTagsVehiculos tags={params}/>
             </Container>
             <Container style={{ padding: "20px 20px" }}>
+                { !params.ubicacion && ( 
                 <List link>
-                   
                     <List.Item>
                         <List.Content>
                             <List.Header>
@@ -72,7 +93,8 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                                 {mapping_contador(contadores.ubicacion).map((item, index) => (
                                     <List.Item 
                                     key={index}
-                                    as="a">
+                                    as="a"
+                                    onClick={() => insertParam('ubicacion', item.label) }>
                                         {item.label}
                                     </List.Item>
                                 )
@@ -84,7 +106,8 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                         </List.Content>
                     </List.Item>
                 </List>
-
+                )}
+                { !params.categoria && ( 
                 <List link>
                     <List.Item>
                         <List.Content>
@@ -104,6 +127,8 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                         </List.Content>
                     </List.Item>
                 </List>
+                )}
+                { !params.marca && ( 
                 <List link>
                     <List.Item>
                         <List.Content>
@@ -114,7 +139,8 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                                 {mapping_contador(contadores.marcas).map((item, index) => (
                                     <List.Item 
                                     key={index}
-                                    as="a">
+                                    as="a"
+                                    onClick={() => insertParam('marca', item.label) }>
                                         {item.label}
                                     </List.Item>
                                 )
@@ -126,6 +152,8 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                         </List.Content>
                     </List.Item>
                 </List>
+                )}
+                { !params.motor && (
                 <List link>
                     <List.Item>
                         <List.Content>
@@ -136,7 +164,8 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                                 {mapping_contador(contadores.combustible).map((item, index) => (
                                     <List.Item 
                                     key={index}
-                                    as="a">
+                                    as="a"
+                                    onClick={() => insertParam('combustible', item.label) }>
                                         {item.label}
                                     </List.Item>
                                 )
@@ -145,6 +174,8 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                         </List.Content>
                     </List.Item>
                 </List>
+                )}
+                { !params.modelo && (
                 <List link>
                     <List.Item>
                         <List.Content>
@@ -155,7 +186,8 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                                 {mapping_contador(contadores.anios).map((item, index) => (
                                     <List.Item 
                                     key={index}
-                                    as="a">
+                                    as="a"
+                                    onClick={() => insertParam('ano', item.label) }>
                                         {item.label}
                                     </List.Item>
                                 )
@@ -167,7 +199,8 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                         </List.Content>
                     </List.Item>
                 </List>
-
+                )}
+                { !params.estado && (
                 <List link>
                     <List.Item>
                         <List.Content>
@@ -177,11 +210,13 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                             <List.List style={{ paddingLeft: 15 }}>
                                 <List.Item
                                     as="a"
+                                    onClick={() => insertParam('estado', 'Nuevo') }
                                 >
                                     Nuevo
                                 </List.Item>
                                 <List.Item
                                     as="a"
+                                    onClick={() => insertParam('estado', 'Usado') }
                                 >
                                     Usado
                                 </List.Item>
@@ -189,6 +224,8 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                         </List.Content>
                     </List.Item>
                 </List>
+                )}
+                { !params.transmision && (
                 <List link>
                     <List.Item>
                         <List.Content>
@@ -199,7 +236,8 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                                 {mapping_contador(contadores.caja).map((item, index) => (
                                     <List.Item 
                                     key={index}
-                                    as="a">
+                                    as="a"
+                                    onClick={() => insertParam('transmision', item.label) }>
                                         {item.label}
                                     </List.Item>
                                 )
@@ -208,6 +246,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                         </List.Content>
                     </List.Item>
                 </List>
+                )}
                 <Checkbox
                     name="promocion"
                     label="Promoción"
@@ -220,7 +259,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                     name="blindaje"
                     label="Blindaje"
                 />
-
+                { !params.kilometraje && (<>
                 <List link style={{ marginBottom: 0 }}>
                     <List.Item style={{ marginBottom: 0 }}>
                         <List.Content>
@@ -275,6 +314,8 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                         />
                     </Grid.Column>
                 </Grid>
+                </>)}
+                { !params.precio && (<>
                 <List link style={{ marginBottom: 0 }}>
                     <List.Item style={{ marginBottom: 0 }}>
                         <List.Content>
@@ -329,6 +370,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                         />
                     </Grid.Column>
                 </Grid>
+                </>)}
             </Container>
         </Grid.Column>
     )
