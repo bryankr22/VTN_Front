@@ -34,14 +34,14 @@ export default function detalle({ data }) {
                     <Breadcrumb.Section 
                     link 
                     href={"/vehiculos/"}>{data.vehiculo.modeloLabel}</Breadcrumb.Section>
-
-                    {/**<Responsive {...Responsive.onlyComputer} style={{ display: 'inline' }}>
+                    <Responsive {...Responsive.onlyComputer} style={{ display: "inline", marginLeft: 'auto' }}>
                         <div style={{ display: 'inline-block', float: 'right', marginRight: 40, fontSize: 18, color: '#5c5c5c' }}>
-                        <Icon name="eye" style={{ marginRight: 5 }} />
-                        <p style={{ display: 'inline' }}>{new Intl.NumberFormat("de-DE").format(data.vehiculo.views)}</p>
+                            <Icon name="eye" style={{ marginRight: 5 }} />
+                            <p style={{ display: 'inline' }}>{new Intl.NumberFormat("de-DE").format(data.vehiculo.views)}</p>
                         </div>
-                    </Responsive>**/}
+                    </Responsive>
                 </Breadcrumb>
+                
             </div>
             <Responsive minWidth={100} maxWidth={320}>
                 <SliderPrincipal imagenes={data.imagenes} />

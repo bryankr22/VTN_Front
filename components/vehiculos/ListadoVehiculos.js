@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { Image, Container, Input, Card, Select, Grid, Pagination } from "semantic-ui-react";
 
 export default function ListadoVehiculos({params, vehiculos, page, totalRecords}) {
-    const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/200x200/vendetunave/images/vehiculos/";
+    const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x300/vendetunave/images/vehiculos/";
     const filter = [
         { key: 0, value: 0, text: "Más reciente" },
         { key: 1, value: 1, text: "Nuevo" },
