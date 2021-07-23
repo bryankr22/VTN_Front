@@ -1,9 +1,11 @@
 import React from 'react'
 import PublicLayout from '../layouts/PublicLayout';
-import { Container, Header, Select, Button, Responsive, Grid, Item } from 'semantic-ui-react'
+import ListaServicios from '../components/servicios/ListaServicios';
+import { Container, Header, Select, Button, Responsive, Grid, Item, Segment, Pagination } from 'semantic-ui-react'
 import axios from 'axios';
 import { API_URL, servicios_api } from '../helpers/constants';
 export default function servicios({servicios_res}) {
+    
     return (
         <PublicLayout>
             <div>
@@ -19,54 +21,27 @@ export default function servicios({servicios_res}) {
                         }
                     `}
                 </style>
-                <Grid columns={2}>
-                    <Grid.Row>
-                        <Grid.Column>
-                            <Select
-                                fluid
-                                placeholder='SELECCIONE LA CIUDAD'
-                                search
-                                options={[]}
-                            />
-                        </Grid.Column>
-                        <Grid.Column>
-                            <Select
-                                fluid
-                                placeholder='SELECCIONE SERVICIO'
-                                search
-                                options={[]}
-                            />
-                        </Grid.Column>
-                    </Grid.Row>
-                </Grid>
-                {/**<Responsive {...Responsive.onlyComputer}>
-                    
-                </Responsive>
-                <Responsive {...Responsive.onlyMobile}>
-                    <Grid columns={1}>
-                        <Grid.Row>
-                            <Grid.Column style={{ marginBottom: 15 }}>
+                <Responsive {...Responsive.onlyComputer}>
+                    <div className="ui two column grid" style={{ marginBottom: 15 }}>
+                        <div className="row">
+                            <div className="column">
                                 <Select
                                     fluid
                                     placeholder='SELECCIONE LA CIUDAD'
                                     search
+                                    options={[]}
                                 />
-                            </Grid.Column>
-                            <Grid.Column style={{ marginBottom: 15 }}>
+                            </div>
+                            <div className="column">
                                 <Select
                                     fluid
-                                    placeholder='SELECCIONE UN SERVICIO'
+                                    placeholder='SELECCIONE SERVICIO'
                                     search
+                                    options={[]}
                                 />
-                            </Grid.Column>
-                            <Grid.Column>
-                                <Select
-                                    fluid
-                                    search
-                                />
-                            </Grid.Column>
-                        </Grid.Row>
-                    </Grid>
+                            </div>
+                        </div>
+                    </div>
                 </Responsive>
                 <Responsive {...Responsive.onlyTablet}>
                     <Grid columns={1}>
@@ -85,55 +60,41 @@ export default function servicios({servicios_res}) {
                                     search
                                 />
                             </Grid.Column>
-                            <Grid.Column>
+                        </Grid.Row>
+                    </Grid>
+                </Responsive>
+                <Responsive {...Responsive.onlyMobile}>
+                    <Grid columns={1}>
+                        <Grid.Row>
+                            <Grid.Column style={{ marginBottom: 15 }}>
                                 <Select
                                     fluid
+                                    placeholder='SELECCIONE LA CIUDAD'
+                                    search
+                                />
+                            </Grid.Column>
+                            <Grid.Column style={{ marginBottom: 15 }}>
+                                <Select
+                                    fluid
+                                    placeholder='SELECCIONE UN SERVICIO'
                                     search
                                 />
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>
-                </Responsive>**/}
-
-                <Item.Group divided>
-                    {servicios_res.map((item, index) => (
-                        <Item key={index}>
-                            <Item.Image size='small' src={item.image} />
-                            <Item.Content>
-                                <Item.Header>{item.nombre}</Item.Header>
-                                <Item.Meta>{item.descripcion}</Item.Meta>
-                                <Item.Meta>{item.direccion}</Item.Meta>
-                                <Item.Meta>{item.telefono}</Item.Meta>
-                                <Item.Meta>{item.servicio}</Item.Meta>
-                                <Item.Extra style={{ float: 'right', marginTop: '-11%', width: '20%' }}>
-                                    <Button
-                                    secondary
-                                    floated='right'
-                                    >
-                                        VER
-                                    </Button>
-                                </Item.Extra>
-                            </Item.Content>
-                        </Item>
-                    )
-                    )}
-                </Item.Group>
-                {/**Math.ceil((this.state.servicesTotal) / 10) > 1 &&
-                    <Container fluid style={{ textAlign: 'center', margin: 25 }}>
-                        <Pagination
-                            pointing
-                            secondary
-                            boundaryRange={0}
-                            activePage={this.state.activePage}
-                            ellipsisItem={null}
-                            firstItem={null}
-                            lastItem={null}
-                            siblingRange={2}
-                            onPageChange={this.handlePaginationChange}
-                            totalPages={Math.ceil((this.state.servicesTotal) / 10)}
-                        />
-                    </Container>
-                **/}
+                </Responsive>
+                <Responsive {...Responsive.onlyComputer}>
+                    <ListaServicios 
+                    servicios_res={servicios_res}/>
+                </Responsive>
+                <Responsive {...Responsive.onlyTablet}>
+                    <ListaServicios 
+                    servicios_res={servicios_res}/>
+                </Responsive>
+                <Responsive {...Responsive.onlyMobile}>
+                    <ListaServicios 
+                    servicios_res={servicios_res}/>
+                </Responsive>
             </Container>
             </div>
         </PublicLayout>
