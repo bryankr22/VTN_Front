@@ -1,7 +1,28 @@
 import React from 'react'
 import { Container, Header, Select, Button, Responsive, Grid, Item, Segment, Pagination } from 'semantic-ui-react'
-export default function ListaServicios({servicios_res}) {
-    const handlePaginationChange = () => {}
+export default function ListaServicios({servicios_res, pagina, total}) {
+    const insertParam = (key, value) => {
+        key = encodeURIComponent(key);
+        value = encodeURIComponent(value);
+        var kvp = document.location.search.substr(1).split('&');
+        let i=0;
+        for(; i<kvp.length; i++){
+            if (kvp[i].startsWith(key + '=')) {
+                let pair = kvp[i].split('=');
+                pair[1] = value;
+                kvp[i] = pair.join('=');
+                break;
+            }
+        }
+        if(i >= kvp.length){
+            kvp[kvp.length] = [key,value].join('=');
+        }
+        let params = kvp.join('&');
+        document.location.search = params;
+    }
+    const handlePaginationChange = (e, { activePage }) => {
+        insertParam('page', activePage);
+    }
     return (
         <div>
             <Item.Group divided>
@@ -27,22 +48,23 @@ export default function ListaServicios({servicios_res}) {
                     </Item>
                 )}
             </Item.Group>
-            {/**Math.ceil((this.state.servicesTotal) / 10) > 1 &&    
-            **/}
-            <Container fluid style={{ textAlign: 'center', margin: 25 }}>
-                <Pagination
-                    pointing
-                    secondary
-                    boundaryRange={0}
-                    activePage={1}
-                    ellipsisItem={null}
-                    firstItem={null}
-                    lastItem={null}
-                    siblingRange={2}
-                    onPageChange={handlePaginationChange}
-                    totalPages={5}
-                />
-            </Container>
+            {Math.ceil((total) / 10) > 1 && 
+                <Container fluid style={{ textAlign: 'center', margin: 25 }}>
+                    <Pagination
+                        pointing
+                        secondary
+                        boundaryRange={0}
+                        activePage={pagina}
+                        ellipsisItem={null}
+                        firstItem={null}
+                        lastItem={null}
+                        siblingRange={2}
+                        onPageChange={handlePaginationChange}
+                        totalPages={Math.ceil(total / 20)}
+                    />
+                </Container>   
+            }
+            
         </div>
     )
 }
