@@ -28,6 +28,7 @@ export default function ListadoVehiculos({params, vehiculos, page, totalRecords}
           return ret.join("");
         };
     })();
+    const handlePaginationChange = () => {}
     //useEffect
     return (
         <Grid.Column width={13}>
