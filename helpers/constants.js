@@ -1,6 +1,5 @@
 export const API_URL = 'https://api.vendetunave.co/api';
-export const AUTH_URL = 'http://vendetunave_api.test/auth';
-//export const AUTH_URL = 'https://api.vendetunave.co/auth';
+export const AUTH_URL = 'https://api.vendetunave.co/auth';
 export const home = '/home';
 export const config = '/config';
 export const vehiculos = '/vehiculos';
