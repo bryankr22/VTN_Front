@@ -1,6 +1,7 @@
 import React from 'react'
 import PublicLayout from '../../layouts/PublicLayout';
 import { Header, Container } from "semantic-ui-react";
+import { authInitialProps } from '../../helpers/auth';
 export default function crear_producto() {
     return (
         <PublicLayout>
@@ -10,6 +11,4 @@ export default function crear_producto() {
         </PublicLayout>
     )
 }
-import { authInitialProps } from '../../helpers/auth';
-
-crear_pregunta.getInitialProps = authInitialProps()
+crear_producto.getInitialProps = authInitialProps()

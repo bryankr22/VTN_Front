@@ -21,7 +21,9 @@ export default function MenuUsuarioMobile() {
                 <Dropdown.Divider />
             </Fragment>
             <Fragment>
-                <Dropdown.Item>Perfil</Dropdown.Item>
+                <Dropdown.Item
+                
+                >Perfil</Dropdown.Item>
                 <Dropdown.Divider />
             </Fragment>
             <Fragment>
