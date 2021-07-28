@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import PublicLayout from '../layouts/PublicLayout';
-import { Divider, Grid, Input, Segment, Button, Checkbox, Form, Header, Responsive} from "semantic-ui-react";
+import { Divider, Grid, Input, Segment, Button, Checkbox, Form, Header, Responsive, Dimmer, Loader} from "semantic-ui-react";
 import { useCookies } from 'react-cookie';
 
 import axios from 'axios';
@@ -11,21 +11,33 @@ import jwt from 'jsonwebtoken';
 export default function login() {
     const [cookies, setCookie] = useCookies(['vtn_token']);
     const [login, setLogin] = useState({
-        email: '9ortizcamilo@gmail.com',
-        password: '123456'
+        email: '',
+        password: ''
     })
+    const [loading, setLoading] = useState(false);
     const sendLogin = () => {
+        setLoading(true);
         const {email, password} = login;
         axios.post(AUTH_URL + login_api, { email, password }).then((res) => {
-            console.log(">>>>>>", res.data);
-            //
             const token = jwt.sign(res.data, 'vendetunave2021');
             setCookie('vtn_token', token, { path: '/', maxAge: 3600 });
+            setLoading(false);
+        }).catch(error => {
+            
+            setLoading(false);
         });
     }
-
+    const updateForm = (field, value) => {
+        setLogin({
+            ...login,
+            [field] : value
+        })
+    }
     return (
         <PublicLayout>
+        <Dimmer style={{ position: "fixed" }} active={loading}>
+            <Loader>Cargando...</Loader>
+        </Dimmer>        
         <Responsive {...Responsive.onlyComputer}>
           <Segment style={{ marginTop: 40, marginBottom: 70 }}>
             <Grid
@@ -40,6 +52,8 @@ export default function login() {
                     <label>Correo electrónico</label>
                     <input
                       placeholder="Correo electrónico"
+                      value={login.email} 
+                      onChange={(e) => updateForm('email', e.target.value) }
                     />
                   </Form.Field>
                   <Form.Field>
@@ -47,6 +61,8 @@ export default function login() {
                     <input
                       type="password"
                       placeholder="Contraseña"
+                      value={login.password} 
+                      onChange={(e) => updateForm('password', e.target.value) }
                     />
                   </Form.Field>
                   <Form.Field>

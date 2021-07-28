@@ -18,6 +18,10 @@ import 'semantic-ui-css/components/checkbox.min.css'
 import 'semantic-ui-css/components/transition.min.css'
 import 'semantic-ui-css/components/label.min.css'
 import 'semantic-ui-css/components/menu.min.css'
+
+import 'semantic-ui-css/components/dimmer.min.css'
+import 'semantic-ui-css/components/loader.min.css'
+
 import '../public/css/app.min.css'
 import '../styles/globals.css'
 
