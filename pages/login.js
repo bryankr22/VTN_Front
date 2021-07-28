@@ -1,15 +1,12 @@
 import React, {useState} from 'react'
 import PublicLayout from '../layouts/PublicLayout';
 import { Divider, Grid, Input, Segment, Button, Checkbox, Form, Header, Responsive, Dimmer, Loader} from "semantic-ui-react";
-import { useCookies } from 'react-cookie';
-
 import axios from 'axios';
+import { useCookies } from "react-cookie"
 import { AUTH_URL, login_api } from '../helpers/constants';
-
 import jwt from 'jsonwebtoken';
-
-export default function login() {
-    const [cookies, setCookie] = useCookies(['vtn_token']);
+export default function login(props) {
+    const [cookie, setCookie] = useCookies(["vtn_token"])
     const [login, setLogin] = useState({
         email: '',
         password: ''
@@ -20,10 +17,14 @@ export default function login() {
         const {email, password} = login;
         axios.post(AUTH_URL + login_api, { email, password }).then((res) => {
             const token = jwt.sign(res.data, 'vendetunave2021');
-            setCookie('vtn_token', token, { path: '/', maxAge: 3600 });
+            setCookie('vtn_token', token, {
+                path: "/",
+                maxAge: 3600,
+                sameSite: true
+            });
+            //console.log(">>>>", res.data);
             setLoading(false);
         }).catch(error => {
-            
             setLoading(false);
         });
     }
@@ -34,7 +35,7 @@ export default function login() {
         })
     }
     return (
-        <PublicLayout>
+        <PublicLayout {...props}>
         <Dimmer style={{ position: "fixed" }} active={loading}>
             <Loader>Cargando...</Loader>
         </Dimmer>        

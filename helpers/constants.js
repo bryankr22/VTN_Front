@@ -8,3 +8,10 @@ export const concesionarios_api = '/concesionarios';
 export const comunidad_api = '/comunidad';
 export const login_api = '/login';
 
+export const perfil_api = '/profile/';
+export const publicaciones_api = '/publicaciones/';
+export const favoritos_api = '/favoritos/';
+export const busquedas_api = '/busquedas/';
+
+
+

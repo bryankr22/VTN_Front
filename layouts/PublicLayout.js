@@ -11,7 +11,7 @@ const PublicLayout = (props) => {
                 <title>VendeTuNave - Carros en Venta</title>
             </Head>
             <div className="container">
-                <Header />
+                <Header {...props} />
                 <div className="row">
                     <div
                     className="col-md-12"

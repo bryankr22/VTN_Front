@@ -4,14 +4,14 @@ import Link from 'next/link'
 import Image from 'next/image'
 import MenuMobile from './MenuMobile'
 import MenuUsuario from './MenuUsuario'
+import { useCookies } from "react-cookie"
+import MenuUsuarioMobile from './MenuUsuarioMobile';
 
-import { useCookies } from 'react-cookie';
-
-const Header = () => {
+const Header = (props) => {
     const [cookies, setCookie] = useCookies(['vtn_token']);
     const [query, setQuery] = useState("");
+    const cookieLocal = false;
     const handleSearch = () => {
-        //console.log("click")
         if ( document.getElementById("dropSearchInput").classList.contains("visible") ) {
             document.getElementById("dropSearchInput").classList.remove("visible");
         } else {
@@ -68,14 +68,18 @@ const Header = () => {
                 </a>
             </Link>
             : 
-            <Link id="link-login" href="/login">
-                <a
-                style={{
-                    cursor: 'pointer'
-                }}>
-                    <h6 className="text-native">MI CUENTA</h6>
-                </a>
-            </Link>}
+            <Dropdown
+                text="MI CUENTA"
+                floating
+                direction="left"
+                labeled
+                button
+                style={{ marginTop: "-9px", color: "white" }}
+            >
+                <Dropdown.Menu>
+                    <MenuUsuarioMobile />
+                </Dropdown.Menu>
+            </Dropdown>}
             <MenuMobile />
             </Responsive>
             <Responsive {...Responsive.onlyTablet}
@@ -104,14 +108,18 @@ const Header = () => {
                 </a>
             </Link>
             : 
-            <Link id="link-login" href="/login">
-                <a
-                style={{
-                    cursor: 'pointer'
-                }}>
-                    <h6 className="text-native">MI CUENTA</h6>
-                </a>
-            </Link>}
+            <Dropdown
+                text="MI CUENTA"
+                floating
+                direction="left"
+                labeled
+                button
+                style={{ marginTop: "-9px", color: "white" }}
+            >
+                <Dropdown.Menu>
+                    <MenuUsuarioMobile />
+                </Dropdown.Menu>
+            </Dropdown>}
             <MenuMobile />
             </Responsive>
             <Responsive {...Responsive.onlyComputer} style={{ display: "contents" }}>
