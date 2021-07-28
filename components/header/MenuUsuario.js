@@ -1,7 +1,14 @@
 import React from 'react'
 import Link from 'next/link'
-
+import { useRouter } from 'next/router'
+import { useCookies } from "react-cookie"
 export default function MenuUsuario() {
+    const router = useRouter();
+    const [cookies, setCookie, removeCookie] = useCookies(['vtn_token']);
+    const CloseSession = () => {
+        removeCookie('vtn_token', {});
+        router.push('/');
+    }
     return (
         <>
             <a 
@@ -65,7 +72,11 @@ export default function MenuUsuario() {
                     </span>
                 </div>
                 <div style={{borderTop: '1px solid rgba(34,36,38,.1)', margin:'.5em 0'}}></div>
-                <div className="item" href="#" style={{padding: '5px 15px'}}>
+                <div 
+                onClick={() => CloseSession()}
+                className="item" 
+                href="javascript:void(0)" 
+                style={{padding: '5px 15px'}}>
                     <span>
                         <a style={{ color: '#000000de', fontSize: '1rem', fontWeight: 400 }}>Cerrar Sesion</a>
                     </span>

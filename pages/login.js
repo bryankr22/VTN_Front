@@ -5,7 +5,9 @@ import axios from 'axios';
 import { useCookies } from "react-cookie"
 import { AUTH_URL, login_api } from '../helpers/constants';
 import jwt from 'jsonwebtoken';
+import { useRouter } from 'next/router'
 export default function login(props) {
+    const router = useRouter();
     const [cookie, setCookie] = useCookies(["vtn_token"])
     const [login, setLogin] = useState({
         email: '',
@@ -22,6 +24,7 @@ export default function login(props) {
                 maxAge: 3600,
                 sameSite: true
             });
+            router.push('/usuario/perfil');
             //console.log(">>>>", res.data);
             setLoading(false);
         }).catch(error => {
