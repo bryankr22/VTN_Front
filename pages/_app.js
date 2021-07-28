@@ -20,14 +20,19 @@ import 'semantic-ui-css/components/label.min.css'
 import 'semantic-ui-css/components/menu.min.css'
 import '../public/css/app.min.css'
 import '../styles/globals.css'
-import { Provider } from 'react-redux'
+
+import { Provider as ProviderRedux} from 'react-redux'
 import store from '../store';
+
+import { CookiesProvider } from 'react-cookie';
 
 function MyApp({ Component, pageProps }) {
     return (
-        <Provider store={store}>
-            <Component {...pageProps} />
-        </Provider>
+        <CookiesProvider>
+            <ProviderRedux store={store}>
+                <Component {...pageProps} />
+            </ProviderRedux>
+        </CookiesProvider>
     );
 }
 export default MyApp

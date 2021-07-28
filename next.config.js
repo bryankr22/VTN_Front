@@ -3,13 +3,18 @@ const withCss = require("@zeit/next-css");
 const withPurgeCss = require("next-purgecss");
 const runtimeCaching = require('next-pwa/cache')
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-
 module.exports = withCss(
     withPurgeCss({
-        webpack(config, options) {
+        webpack(config, { isServer }) {
+            /**if (!isServer) {
+                config.node = {
+                    fs: 'empty'
+                }
+            }**/
             config.optimization.minimizer = [];
             config.optimization.minimizer.push(new OptimizeCSSAssetsPlugin({}));
             return config;
+
         },
         purgeCssEnabled: ({ dev, isServer }) => (!dev && !isServer),  // Only enable PurgeCSS for client-side production builds
         purgeCssPaths: [
@@ -20,13 +25,13 @@ module.exports = withCss(
     })
 );
 module.exports = withPWA({
-  pwa: {
-    dest: 'public',
-    runtimeCaching
-  },
-  reactStrictMode: false,
-  compress: true,
-  images: {
-    domains: ['vendetunave.s3.amazonaws.com'],
-  }
+    pwa: {
+        dest: 'public',
+        runtimeCaching
+    },
+    reactStrictMode: false,
+    compress: true,
+    images: {
+        domains: ['vendetunave.s3.amazonaws.com'],
+    }
 });

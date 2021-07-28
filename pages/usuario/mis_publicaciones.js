@@ -1,9 +1,9 @@
 import React from 'react'
-import AdminLayout from '../../layouts/AdminLayout';
+import PublicLayout from '../../layouts/PublicLayout';
 export default function mis_publicaciones() {
     return (
-        <AdminLayout>
-            <h1>Mis publicaciones</h1>
-        </AdminLayout>
+        <PublicLayout>
+            
+        </PublicLayout>
     )
 }

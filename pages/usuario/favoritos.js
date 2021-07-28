@@ -1,6 +1,6 @@
 import React from 'react'
 import PublicLayout from '../../layouts/PublicLayout';
-export default function crear_pregunta() {
+export default function favoritos() {
     return (
         <PublicLayout>
             

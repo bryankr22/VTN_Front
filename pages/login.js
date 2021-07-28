@@ -1,7 +1,29 @@
-import React from 'react'
+import React, {useState} from 'react'
 import PublicLayout from '../layouts/PublicLayout';
 import { Divider, Grid, Input, Segment, Button, Checkbox, Form, Header, Responsive} from "semantic-ui-react";
+import { useCookies } from 'react-cookie';
+
+import axios from 'axios';
+import { AUTH_URL, login_api } from '../helpers/constants';
+
+import jwt from 'jsonwebtoken';
+
 export default function login() {
+    const [cookies, setCookie] = useCookies(['vtn_token']);
+    const [login, setLogin] = useState({
+        email: '9ortizcamilo@gmail.com',
+        password: '123456'
+    })
+    const sendLogin = () => {
+        const {email, password} = login;
+        axios.post(AUTH_URL + login_api, { email, password }).then((res) => {
+            console.log(">>>>>>", res.data);
+            //
+            const token = jwt.sign(res.data, 'vendetunave2021');
+            setCookie('vtn_token', token, { path: '/', maxAge: 3600 });
+        });
+    }
+
     return (
         <PublicLayout>
         <Responsive {...Responsive.onlyComputer}>
@@ -12,12 +34,11 @@ export default function login() {
               style={{ paddingLeft: 100, paddingRight: 100 }}
             >
               <Grid.Column className="column-login">
-                <Form>
+                <Form onSubmit={ () => sendLogin() }>
                   <Form.Field>
                     <Header as="h2">INICIAR SESIÓN</Header>
                     <label>Correo electrónico</label>
                     <input
-                      
                       placeholder="Correo electrónico"
                     />
                   </Form.Field>
@@ -25,7 +46,6 @@ export default function login() {
                     <label>Contraseña</label>
                     <input
                       type="password"
-                      
                       placeholder="Contraseña"
                     />
                   </Form.Field>
@@ -34,9 +54,11 @@ export default function login() {
                       ¿Olvidaste la contraseña?
                     </Header>
                   </Form.Field>
-                  <Button  secondary>
+                  <Form.Button 
+                  content='Submit'
+                  secondary>
                     INICIAR SESIÓN
-                  </Button>
+                  </Form.Button>
                 </Form>
               </Grid.Column>
               <Grid.Column className="column-login">
@@ -70,7 +92,6 @@ export default function login() {
                   </Form.Field>
                   <Form.Field>
                     <Checkbox
-                      
                       label="Subscribirse al newsletter"
                     />
                   </Form.Field>

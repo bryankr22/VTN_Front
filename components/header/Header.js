@@ -3,7 +3,12 @@ import { Dropdown, Input, Icon, Responsive, Button } from "semantic-ui-react";
 import Link from 'next/link'
 import Image from 'next/image'
 import MenuMobile from './MenuMobile'
+import MenuUsuario from './MenuUsuario'
+
+import { useCookies } from 'react-cookie';
+
 const Header = () => {
+    const [cookies, setCookie] = useCookies(['vtn_token']);
     const [query, setQuery] = useState("");
     const handleSearch = () => {
         //console.log("click")
@@ -53,13 +58,24 @@ const Header = () => {
                 </div>
                 </Link>
             </div>
+            {!cookies.vtn_token ?
             <Link id="link-login" href="/login">
-                <a style={{
+                <a
+                style={{
                     cursor: 'pointer'
                 }}>
                     <h6 className="text-native">LOGIN</h6>
                 </a>
             </Link>
+            : 
+            <Link id="link-login" href="/login">
+                <a
+                style={{
+                    cursor: 'pointer'
+                }}>
+                    <h6 className="text-native">MI CUENTA</h6>
+                </a>
+            </Link>}
             <MenuMobile />
             </Responsive>
             <Responsive {...Responsive.onlyTablet}
@@ -78,6 +94,7 @@ const Header = () => {
                 </div>
                 </Link>
             </div>
+            {!cookies.vtn_token ?
             <Link id="link-login" href="/login">
                 <a
                 style={{
@@ -86,6 +103,15 @@ const Header = () => {
                     <h6 className="text-native">LOGIN</h6>
                 </a>
             </Link>
+            : 
+            <Link id="link-login" href="/login">
+                <a
+                style={{
+                    cursor: 'pointer'
+                }}>
+                    <h6 className="text-native">MI CUENTA</h6>
+                </a>
+            </Link>}
             <MenuMobile />
             </Responsive>
             <Responsive {...Responsive.onlyComputer} style={{ display: "contents" }}>
@@ -296,17 +322,23 @@ const Header = () => {
                     </Dropdown.Menu>
                 </Dropdown>
                 </li>
+                {!cookies.vtn_token ?
                 <li className="nav-item deleteMobile" style={{ width: 250 }}>
-                <Link
-                id="link-login"
-                href="/login"
-                style={{ textDecoration: "none" }}
-                >
-                <h6 className="text-native" style={{ marginTop: 9 }} >
-                    LOGIN
-                </h6>
-                </Link>
+                    <Link
+                    id="link-login"
+                    href="/login"
+                    style={{ textDecoration: "none" }}
+                    >
+                    <h6 className="text-native" style={{ marginTop: 9 }} >
+                        LOGIN
+                    </h6>
+                    </Link>
                 </li>
+                : 
+                <li className="nav-item dropdown">
+                    <MenuUsuario />
+                </li>
+                }
             </ul>
             </div>
             </Responsive>

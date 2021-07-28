@@ -80,7 +80,8 @@ export default function ListadoVehiculos({params, vehiculos, page, totalRecords}
                     </Grid.Column>
                 </Grid>
             </Container>
-            {/**<p
+            {vehiculos.length === 0 && (
+            <p
                 style={{
                     textAlign: "center",
                     marginTop: "25%",
@@ -88,7 +89,8 @@ export default function ListadoVehiculos({params, vehiculos, page, totalRecords}
                 }}
             >
                 No encontramos resultados
-            </p>**/}
+            </p>
+            )}
             {vehiculos.length > 0 && (
             <Card.Group itemsPerRow={4}>
                 {vehiculos.map((item, index) => (
@@ -143,7 +145,7 @@ export default function ListadoVehiculos({params, vehiculos, page, totalRecords}
                 )}
             </Card.Group>
             )}
-            
+            {Math.ceil(totalRecords / 20) > 1 && (
                 <Container fluid style={{ textAlign: "center", margin: 25 }}>
                     <Pagination
                         pointing
@@ -158,7 +160,7 @@ export default function ListadoVehiculos({params, vehiculos, page, totalRecords}
                         totalPages={Math.ceil(totalRecords / 20)}
                     />
                 </Container>
-            
+            )}
         </Grid.Column>
     )
 }

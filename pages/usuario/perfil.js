@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Header, Form, Select, Button, Label, Item, Image, Grid, Segment, Responsive, Input, Dimmer, Loader } from 'semantic-ui-react'
+import { Container, Header, Form, Button, Image, Grid, Responsive, Input } from 'semantic-ui-react'
 import AdminLayout from '../../layouts/AdminLayout';
 export default function perfil() {
     return (
