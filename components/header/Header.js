@@ -347,7 +347,7 @@ const Header = (props) => {
                     href="/login"
                     style={{ textDecoration: "none" }}
                     >
-                    <h6 className="text-native" style={{ marginTop: 9 }} >
+                    <h6 className="text-native" style={{ marginTop: 9, cursor: 'pointer' }} >
                         LOGIN
                     </h6>
                     </Link>

@@ -76,7 +76,7 @@ export default function MenuUsuario() {
                 onClick={() => CloseSession()}
                 className="item" 
                 href="javascript:void(0)" 
-                style={{padding: '5px 15px'}}>
+                style={{padding: '5px 15px', cursor: 'pointer'}}>
                     <span>
                         <a style={{ color: '#000000de', fontSize: '1rem', fontWeight: 400 }}>Cerrar Sesion</a>
                     </span>
