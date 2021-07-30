@@ -46,8 +46,8 @@ export default function mis_busquedas() {
                         </Table.Header>
                         </Responsive>
                         <Table.Body>
-                        {busqueda.busquedas.map((item) => (
-                            <Table.Row>
+                        {busqueda.busquedas.map((item, index) => (
+                            <Table.Row key={index}>
                             <Table.Cell style={{ verticalAlign: "inherit" }}>
                                 <Header
                                 as="h4"
