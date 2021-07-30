@@ -21,6 +21,7 @@ import 'semantic-ui-css/components/menu.min.css'
 
 import 'semantic-ui-css/components/dimmer.min.css'
 import 'semantic-ui-css/components/loader.min.css'
+import 'semantic-ui-css/components/message.min.css'
 
 import '../public/css/app.min.css'
 import '../styles/globals.css'

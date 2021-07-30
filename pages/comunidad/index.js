@@ -83,7 +83,7 @@ export default function index({preguntas, tags}) {
 
                         <Item.Content>
                             <Item.Header as='a'>
-                                <Link href={'/pregunta'} style={{ color: 'black' }}>
+                                <Link href={'/comunidad/detalle/'+ (item.titulo.split(' ').join('-')).split('?').join('') + '-' + item.id} style={{ color: 'black' }}>
                                     {item.titulo}
                                 </Link>
                             </Item.Header>

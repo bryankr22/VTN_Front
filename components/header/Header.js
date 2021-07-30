@@ -221,9 +221,23 @@ const Header = (props) => {
                             </span>
                         </div>
                         <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
-                        <div className="item" href="#" style={{padding: 11}}><span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Ficha Tecnica</span></div>
+                        <div className="item" href="#" style={{padding: 11}}>
+                            <span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>
+                                <Link
+                                href="/ficha-tecnica"
+                                >
+                                    <a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Ficha Tecnica</a>
+                                </Link>
+                            </span>
+                        </div>
                         <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
-                        <div className="item" href="#" style={{padding: 11}}><span style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Comparar</span></div>
+                        <div className="item" href="#" style={{padding: 11}}>
+                            <Link
+                            href="/comparar"
+                            >
+                                <a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Comparar</a>
+                            </Link>
+                        </div>
                     </div>
                 </li>
                 <li
@@ -257,10 +271,7 @@ const Header = (props) => {
                         <div className="item" href="#" style={{padding: 11}}>
                             <span>
                                 <Link
-                                href={{
-                                    pathname: '/vehiculos',
-                                    query: { categoria: 'accesorios' },
-                                }}
+                                href="/accesorios"
                                 >
                                     <a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Accesorios</a>
                                 </Link>

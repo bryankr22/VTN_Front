@@ -1,7 +1,8 @@
 import React from 'react'
-import PublicLayout from '../../layouts/PublicLayout';
+import PublicLayout from '../../../layouts/PublicLayout';
 import { Container, Header, Form, Button, Label, Item, TextArea, Responsive, Comment } from 'semantic-ui-react'
-export default function detalle() {
+import axios from 'axios';
+export default function detalle({ data }) {
     return (
         <PublicLayout>
             <Container style={{ paddingTop: 25 }} text>
@@ -72,4 +73,14 @@ export default function detalle() {
             </Container>
         </PublicLayout>
     )
+}
+export async function getServerSideProps({ params }) {
+    //const res = await axios.get('https://api.vendetunave.co/api/pregunta/' + params.slug);
+    //const data = await res.data;
+    //const imagenes = await res.data.imagenes;
+    return {
+        props: {
+            //data
+        },
+    }
 }

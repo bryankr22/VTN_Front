@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import PublicLayout from '../layouts/PublicLayout';
-import { Divider, Grid, Input, Segment, Button, Checkbox, Form, Header, Responsive, Dimmer, Loader} from "semantic-ui-react";
+import { Divider, Grid, Input, Segment, Button, Checkbox, Form, Header, Responsive, Dimmer, Loader, Message} from "semantic-ui-react";
 import axios from 'axios';
 import { useCookies } from "react-cookie"
 import { AUTH_URL, login_api } from '../helpers/constants';
@@ -14,6 +14,7 @@ export default function login(props) {
         password: ''
     })
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
     const sendLogin = () => {
         setLoading(true);
         const {email, password} = login;
@@ -28,6 +29,7 @@ export default function login(props) {
             //console.log(">>>>", res.data);
             setLoading(false);
         }).catch(error => {
+            setError(true);
             setLoading(false);
         });
     }
@@ -50,7 +52,12 @@ export default function login(props) {
               style={{ paddingLeft: 100, paddingRight: 100 }}
             >
               <Grid.Column className="column-login">
-                <Form onSubmit={ () => sendLogin() }>
+                <Form onSubmit={ () => sendLogin() } error={error}>
+                    <Message
+                    error
+                    header='Error Login'
+                    content='Credenciales incorrectas, intentelo de nuevo.'
+                    />
                   <Form.Field>
                     <Header as="h2">INICIAR SESIÓN</Header>
                     <label>Correo electrónico</label>
@@ -128,7 +135,12 @@ export default function login(props) {
 
         <Responsive {...Responsive.onlyMobile}>
           <Segment style={{ marginTop: 20 }} basic textAlign="center">
-            <Form onSubmit={ () => sendLogin() }>
+            <Form onSubmit={ () => sendLogin() } error={error}>
+            <Message
+                    error
+                    header='Error Login'
+                    content='Credenciales incorrectas, intentelo de nuevo.'
+                    />
               <Form.Field>
                 <Header as="h2">INICIAR SESIÓN</Header>
                 <label>Correo electrónico</label>
@@ -203,7 +215,12 @@ export default function login(props) {
         </Responsive>
         <Responsive {...Responsive.onlyTablet}>
           <Segment style={{ marginTop: 20 }} basic textAlign="center">
-            <Form onSubmit={ () => sendLogin() }>
+            <Form onSubmit={ () => sendLogin() } error={error}>
+            <Message
+                    error
+                    header='Error Login'
+                    content='Credenciales incorrectas, intentelo de nuevo.'
+                    />
               <Form.Field>
                 <Header as="h2">INICIAR SESIÓN</Header>
                 <label>Correo electrónico</label>
