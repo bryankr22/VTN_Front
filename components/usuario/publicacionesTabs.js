@@ -1,4 +1,5 @@
-import { Container, Header, Table, Button, Image, Responsive, Tab } from 'semantic-ui-react'
+import React, {Fragment} from 'react';
+import { Container, Header, Table, Button, Image, Responsive, Tab, Pagination } from 'semantic-ui-react'
 export const panes = (vehicles, resultTotalV, accesorios, resultTotalA) => { 
 return [
     {
@@ -24,8 +25,8 @@ return [
                   </Table.Header>
                 </Responsive>
                 <Table.Body>
-                  {vehicles.map((item) => (
-                    <Table.Row>
+                  {vehicles.map((item, index) => (
+                    <Table.Row key={index}>
                       <Table.Cell>
                         <Responsive
                           {...Responsive.onlyComputer}
@@ -185,8 +186,8 @@ return [
                   </Table.Header>
                 </Responsive>
                 <Table.Body>
-                  {accesorios.map((item) => (
-                    <Table.Row>
+                  {accesorios.map((item, index) => (
+                    <Table.Row key={index}>
                       <Table.Cell>
                         <Responsive
                           {...Responsive.onlyComputer}

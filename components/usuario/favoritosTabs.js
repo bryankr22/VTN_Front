@@ -1,4 +1,5 @@
-import { Container, Header, Table, Button, Image, Responsive, Dimmer, Loader, Tab } from 'semantic-ui-react'
+import React, {Fragment} from 'react';
+import { Container, Header, Table, Button, Image, Responsive, Dimmer, Loader, Tab, Pagination } from 'semantic-ui-react'
 export const panes = (favoritos, resultTotalV, accesorios, resultTotalA) => {
     return [
     {
@@ -18,8 +19,8 @@ export const panes = (favoritos, resultTotalV, accesorios, resultTotalA) => {
                                 </Table.Header>
                             </Responsive>
                             <Table.Body>
-                                {(favoritos).map((item) =>
-                                    <Table.Row>
+                                {(favoritos).map((item, index) =>
+                                    <Table.Row key={index}>
                                         <Table.Cell style={{ verticalAlign: 'inherit' }}>
                                             <Header as='h4' image style={{ margin: 0, width: '85%' }}>
                                                 <Image src={this.state.pathS3 + item.nameImage + '.' + item.extension} rounded size='massive' />
@@ -103,8 +104,8 @@ export const panes = (favoritos, resultTotalV, accesorios, resultTotalA) => {
                                 </Table.Header>
                             </Responsive>
                             <Table.Body>
-                                {accesorios.map((item) => (
-                                    <Table.Row>
+                                {accesorios.map((item, index) => (
+                                    <Table.Row key={index}>
                                         <Table.Cell style={{ verticalAlign: 'inherit' }}>
                                             <Header as='h4' image style={{ margin: 0, width: '85%' }}>
                                                 <Image src={this.state.pathS3Acc + item.name + '.' + item.ext} rounded size='massive' />
