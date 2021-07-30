@@ -10,7 +10,6 @@ import MenuUsuarioMobile from './MenuUsuarioMobile';
 const Header = (props) => {
     const [cookies, setCookie] = useCookies(['vtn_token']);
     const [query, setQuery] = useState("");
-    const cookieLocal = false;
     const handleSearch = () => {
         if ( document.getElementById("dropSearchInput").classList.contains("visible") ) {
             document.getElementById("dropSearchInput").classList.remove("visible");
@@ -294,9 +293,9 @@ const Header = (props) => {
                 <li
                 className="nav-item"
                 >
+                
                 <Link
-                    
-                    href={'/login'}
+                    href={!cookies.vtn_token ? '/login' : '/usuario/crear_producto'}
                 >
                     <a className="nav-link" style={{ letterSpacing: 2 }}>VENDER
                     <Icon name="angle right" size="big" /></a>

@@ -2,7 +2,9 @@ import React from 'react'
 import { Dropdown, Input, Icon, Button } from "semantic-ui-react";
 import Link from 'next/link'
 import Image from 'next/image'
+import { useCookies } from "react-cookie"
 export default function MenuMobile() {
+    const [cookies, setCookie] = useCookies(['vtn_token']);
     return (
         <div
             className="collapse navbar-collapse"
@@ -164,8 +166,7 @@ export default function MenuMobile() {
                 className="nav-item"
                 >
                 <Link
-                    
-                    href={'/login'}
+                    href={!cookies.vtn_token ? '/login' : '/usuario/crear_producto'}
                 >
                     <a className="nav-link" style={{ letterSpacing: 2, textAlign: 'left', fontSize: 16 }}>VENDER
                     </a>

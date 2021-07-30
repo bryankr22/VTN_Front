@@ -128,21 +128,23 @@ export default function login(props) {
 
         <Responsive {...Responsive.onlyMobile}>
           <Segment style={{ marginTop: 20 }} basic textAlign="center">
-            <Form>
+            <Form onSubmit={ () => sendLogin() }>
               <Form.Field>
                 <Header as="h2">INICIAR SESIÓN</Header>
                 <label>Correo electrónico</label>
                 <input
-                  
-                  placeholder="Correo electrónico"
+                    placeholder="Correo electrónico"
+                    value={login.email} 
+                    onChange={(e) => updateForm('email', e.target.value) }
                 />
               </Form.Field>
               <Form.Field>
                 <label>Contraseña</label>
                 <input
-                  type="password"
-                  
-                  placeholder="Contraseña"
+                    type="password"
+                    placeholder="Contraseña"
+                    value={login.password} 
+                    onChange={(e) => updateForm('password', e.target.value) }
                 />
               </Form.Field>
               <Form.Field>
@@ -150,7 +152,9 @@ export default function login(props) {
                   ¿Olvidaste la contraseña?
                 </Header>
               </Form.Field>
-              <Button secondary>
+              <Button 
+              content='submit'
+              secondary>
                 INICIAR SESIÓN
               </Button>
             </Form>
@@ -199,29 +203,33 @@ export default function login(props) {
         </Responsive>
         <Responsive {...Responsive.onlyTablet}>
           <Segment style={{ marginTop: 20 }} basic textAlign="center">
-            <Form>
+            <Form onSubmit={ () => sendLogin() }>
               <Form.Field>
                 <Header as="h2">INICIAR SESIÓN</Header>
                 <label>Correo electrónico</label>
                 <input
-                  
-                  placeholder="Correo electrónico"
-                />
+                      placeholder="Correo electrónico"
+                      value={login.email} 
+                      onChange={(e) => updateForm('email', e.target.value) }
+                    />
               </Form.Field>
               <Form.Field>
                 <label>Contraseña</label>
                 <input
-                  type="password"
-                  
-                  placeholder="Contraseña"
-                />
+                      type="password"
+                      placeholder="Contraseña"
+                      value={login.password} 
+                      onChange={(e) => updateForm('password', e.target.value) }
+                    />
               </Form.Field>
               <Form.Field>
                 <Header style={{ fontSize: 14 }} href="/restablecer" as="a">
                   ¿Olvidaste la contraseña?
                 </Header>
               </Form.Field>
-              <Button  secondary>
+              <Button  
+              content='submit'
+              secondary>
                 INICIAR SESIÓN
               </Button>
             </Form>

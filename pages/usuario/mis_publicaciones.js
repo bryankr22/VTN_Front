@@ -1,13 +1,22 @@
-import React from 'react'
+import React, {useState} from 'react'
 import PublicLayout from '../../layouts/PublicLayout';
-import { Header, Container } from "semantic-ui-react";
+import { Header, Container, Tab } from "semantic-ui-react";
 import { authInitialProps } from '../../helpers/auth';
+import { panes } from '../../components/usuario/publicacionesTabs';
 export default function mis_publicaciones() {
+    const [activeIndex, setActiveIndex] = useState(0);
+    const handleTabChange = (e, {activeIndex}) => {
+        setActiveIndex(activeIndex);
+    };
     return (
         <PublicLayout>
             <Container style={{ paddingTop: 25 }} text>
                 <Header as="h2">MIS PUBLICACIONES</Header>
-                <Header as="h4">Aún no cuentas con publicaciones.</Header>
+                <Tab
+                    panes={panes([], 0, [], 0)}
+                    activeIndex={activeIndex}
+                    onTabChange={handleTabChange}
+                />
             </Container>
         </PublicLayout>
     )
