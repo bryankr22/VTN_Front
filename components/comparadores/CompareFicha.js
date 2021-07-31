@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Container, Header, Grid, Image, Button, Divider } from 'semantic-ui-react';
+import React, { useEffect, useState, Fragment } from 'react'
+import { Container, Header, Grid, Image, Button, Divider, Icon } from 'semantic-ui-react';
 
 export default function CompareFicha({ vehiclesCompare }) {
     const [listado, setListado] = useState([]);
