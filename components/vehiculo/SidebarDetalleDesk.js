@@ -1,6 +1,6 @@
 import React from 'react'
 import { Grid, Header, Container, Icon, Button, Form } from "semantic-ui-react";
-export default function SidebarDetalleDesk({ vehiculo, diasPublicado }) {
+export default function SidebarDetalleDesk({ vehiculo, diasPublicado, accesorio }) {
     return (
         <Grid.Column style={{ padding: "30px 10px 15px 30px" }}>
             <Header as="h1" textAlign="left">
@@ -65,22 +65,26 @@ export default function SidebarDetalleDesk({ vehiculo, diasPublicado }) {
                 Teléfono:{" "}
                 <b style={{ fontSize: 20 }}>{vehiculo.contacto}</b>
             </Header>
-            <br />
-            <Button
-                as='a'
-                color="green"
-                fluid
-                href={"https://api.whatsapp.com/send?phone=57" + vehiculo.contacto + "&text=Hola,%20estoy%20interesado.&source=vendetunave.co&data="}
-                target='_blank'
-                style={{ borderRadius: 20 }}
-            >
-                WhatsApp
-            </Button>
-            <br />
-            <Button 
-            fluid  
-            primary 
-            style={{ borderRadius: 20 }}>Comparar</Button>
+            {accesorio ?? (
+            <>
+                <br />
+                <Button
+                    as='a'
+                    color="green"
+                    fluid
+                    href={"https://api.whatsapp.com/send?phone=57" + vehiculo.contacto + "&text=Hola,%20estoy%20interesado.&source=vendetunave.co&data="}
+                    target='_blank'
+                    style={{ borderRadius: 20 }}
+                >
+                    WhatsApp
+                </Button>
+                <br />
+                <Button 
+                fluid  
+                primary 
+                style={{ borderRadius: 20 }}>Comparar</Button>
+            </>
+            )}
             <Container
             style={{ marginTop: 30, background: "gray", padding: 25 }}
             >

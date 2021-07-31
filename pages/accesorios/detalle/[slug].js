@@ -4,7 +4,7 @@ import PublicLayout from '../../../layouts/PublicLayout';
 import SliderPrincipal from '../../../components/vehiculo/SliderPrincipal';
 import SidebarDetalle from '../../../components/vehiculo/SidebarDetalle';
 import SidebarDetalleDesk from '../../../components/vehiculo/SidebarDetalleDesk';
-import TableCaracteristicasDesk from '../../../components/vehiculo/TableCaracteristicasDesk';
+import TableCaracteristicasAccDesk from '../../../components/vehiculo/TableCaracteristicasAccDesk';
 import CarruselHome from '../../../components/carrusel/CarruselHome';
 import axios from 'axios';
 import { Responsive, Icon, Breadcrumb, Grid, Header, Container } from "semantic-ui-react";
@@ -12,37 +12,6 @@ import { Responsive, Icon, Breadcrumb, Grid, Header, Container } from "semantic-
 export default function detalle({ data }) {
     return (
         <PublicLayout>
-            <div style={{ margin: 10, padding: '15px 15px 5px 15px', display: 'flex', alignItems: 'center' }}>
-                <Breadcrumb style={{ background: 'transparent', padding: 15, position: 'absolute', zIndex: 1000, width: '100%' }}>
-                    <Breadcrumb.Section 
-                    link 
-                    href={"/vehiculos/"}>{data.vehiculo.tipoLabel}</Breadcrumb.Section>
-                    <Breadcrumb.Divider icon='right angle' />
-
-                    {data.vehiculo.tipoMotoLabel &&
-                        <Fragment>
-                            <Breadcrumb.Section 
-                            link 
-                            href={"/vehiculos/"}>{data.vehiculo.tipoMotoLabel}</Breadcrumb.Section>
-                            <Breadcrumb.Divider icon='right angle' />
-                        </Fragment>
-                    }
-                    <Breadcrumb.Section 
-                    link 
-                    href={"/vehiculos/"}>{data.vehiculo.marcaLabel}</Breadcrumb.Section>
-                    <Breadcrumb.Divider icon='right angle' />
-                    <Breadcrumb.Section 
-                    link 
-                    href={"/vehiculos/"}>{data.vehiculo.modeloLabel}</Breadcrumb.Section>
-                    <Responsive {...Responsive.onlyComputer} style={{ display: "inline", marginLeft: 'auto' }}>
-                        <div style={{ display: 'inline-block', float: 'right', marginRight: 40, fontSize: 18, color: '#5c5c5c' }}>
-                            <Icon name="eye" style={{ marginRight: 5 }} />
-                            <p style={{ display: 'inline' }}>{new Intl.NumberFormat("de-DE").format(data.vehiculo.views)}</p>
-                        </div>
-                    </Responsive>
-                </Breadcrumb>
-                
-            </div>
             <Responsive minWidth={100} maxWidth={320}>
                 <SliderPrincipal imagenes={data.imagenes} />
                 <SidebarDetalle vehiculo={data.vehiculo} />
@@ -84,7 +53,7 @@ export default function detalle({ data }) {
                             <Header as="h5" style={{ marginTop: 20 }}>
                                 CARACTERÍSTICAS
                             </Header>
-                            <TableCaracteristicasDesk vehiculo={data.vehiculo} />
+                            <TableCaracteristicasAccDesk vehiculo={data.vehiculo} />
                         </Grid.Row>
                         <Grid.Row>
                             <Grid.Column>
@@ -136,7 +105,7 @@ export default function detalle({ data }) {
                             <Header as="h5" style={{ marginTop: 20 }}>
                                 CARACTERÍSTICAS
                             </Header>
-                            <TableCaracteristicasDesk vehiculo={data.vehiculo} />
+                            <TableCaracteristicasAccDesk vehiculo={data.vehiculo} />
                         </Grid.Row>
                         <Grid.Row>
                             <Grid.Column>
@@ -163,7 +132,7 @@ export default function detalle({ data }) {
                         <Header as="h5" style={{ marginTop: 20 }}>
                             CARACTERÍSTICAS
                         </Header>
-                        <TableCaracteristicasDesk vehiculo={data.vehiculo} />
+                        <TableCaracteristicasAccDesk vehiculo={data.vehiculo} />
                         <hr />
                         <Header as="h5" icon>
                             DESCRIPCIÓN
@@ -172,6 +141,7 @@ export default function detalle({ data }) {
                         <hr />
                     </Grid.Column>
                     <SidebarDetalleDesk
+                        accesorio={true}
                         diasPublicado={data.diasPublicado}
                         vehiculo={data.vehiculo} />
                 </Grid>
@@ -179,9 +149,12 @@ export default function detalle({ data }) {
         </PublicLayout>
     )
 }
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({ params, statusCode }) {
     const res = await axios.get('https://api.vendetunave.co/api/accesorio/' + params.slug);
     const data = await res.data;
+    /**if(!data.status){
+        statusCode = 404;
+    }**/
     return {
         props: {
             data

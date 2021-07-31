@@ -41,6 +41,7 @@ export default function index({ data }) {
     )
 }
 export async function getServerSideProps({query}) {
+    
     const res = await axios.get('https://api.vendetunave.co/api/accesorios', {
         params: {
             page: query.page,
