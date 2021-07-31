@@ -11,6 +11,7 @@ export const servicios_api = '/servicios';
 export const concesionarios_api = '/concesionarios';
 export const comunidad_api = '/comunidad';
 export const login_api = '/login';
+export const register_api = '/register';
 
 export const perfil_api = '/profile/';
 export const publicaciones_api = '/publicaciones/';

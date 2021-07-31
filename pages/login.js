@@ -3,7 +3,7 @@ import PublicLayout from '../layouts/PublicLayout';
 import { Divider, Grid, Input, Segment, Button, Checkbox, Form, Header, Responsive, Dimmer, Loader, Message} from "semantic-ui-react";
 import axios from 'axios';
 import { useCookies } from "react-cookie"
-import { AUTH_URL, login_api } from '../helpers/constants';
+import { AUTH_URL, login_api, register_api } from '../helpers/constants';
 import jwt from 'jsonwebtoken';
 import { useRouter } from 'next/router'
 export default function login(props) {
@@ -13,8 +13,16 @@ export default function login(props) {
         email: '',
         password: ''
     })
+    const [register, setRegister] = useState({
+        email: '',
+        password: '',
+        nombre: '',
+        remember: false
+    })
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
+    const [errorRegister, setErrorRegister] = useState(false);
+    
     const sendLogin = () => {
         setLoading(true);
         const {email, password} = login;
@@ -33,9 +41,32 @@ export default function login(props) {
             setLoading(false);
         });
     }
+    const sendRegister = () => {
+        setLoading(true);
+        axios.post(AUTH_URL + register_api, { ...register }).then((res) => {
+            /**const token = jwt.sign(res.data, 'vendetunave2021');
+            setCookie('vtn_token', token, {
+                path: "/",
+                maxAge: 3600,
+                sameSite: true
+            });**/
+            //router.push('/usuario/perfil');
+            //console.log(">>>>", res.data);
+            setLoading(false);
+        }).catch(error => {
+            setErrorRegister(true);
+            setLoading(false);
+        });
+    }
     const updateForm = (field, value) => {
         setLogin({
             ...login,
+            [field] : value
+        })
+    }
+    const updateRegistro = (field, value) => {
+        setRegister({
+            ...register,
             [field] : value
         })
     }
@@ -89,14 +120,20 @@ export default function login(props) {
                 </Form>
               </Grid.Column>
               <Grid.Column className="column-login">
-                <Form>
+                <Form onSubmit={ () => sendRegister() } error={errorRegister}>
+                    <Message
+                    error
+                    header='Error Registro'
+                    content='El correo ya existe o Falta algun dato, intentelo de nuevo.'
+                    />
                   <Form.Field>
                     <Header as="h2">REGISTRARSE</Header>
                     <label>Nombre</label>
                     <Input
                       name="nombre_register"
                       placeholder="Nombre"
-                      
+                      value={register.nombre} 
+                      onChange={(e) => updateRegistro('nombre', e.target.value) }
                     />
                   </Form.Field>
                   <Form.Field>
@@ -104,7 +141,8 @@ export default function login(props) {
                     <Input
                       name="email_register"
                       placeholder="Correo electrónico"
-                      
+                      value={register.email} 
+                      onChange={(e) => updateRegistro('email', e.target.value) }
                       id="email_register"
                     />
                   </Form.Field>
@@ -114,12 +152,15 @@ export default function login(props) {
                       name="pass_register"
                       type="password"
                       placeholder="Contraseña"
-                      
+                      value={register.password} 
+                      onChange={(e) => updateRegistro('password', e.target.value) }
                     />
                   </Form.Field>
                   <Form.Field>
                     <Checkbox
                       label="Subscribirse al newsletter"
+                      value={register.remember} 
+                      onChange={(e) => updateRegistro('remember', !register.remember) }
                     />
                   </Form.Field>
                   <Button secondary>
