@@ -1,5 +1,25 @@
 import React, {Fragment} from 'react';
 import { Container, Header, Table, Button, Image, Responsive, Dimmer, Loader, Tab, Pagination } from 'semantic-ui-react'
+const pathS3_favoritos = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x300/vendetunave/images/vehiculos/";
+const pathS3_fichas = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x300/vendetunave/images/ficha-tecnica/";
+const normalize = (function() {
+    var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
+      to = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc",
+      mapping = {};
+  
+    for (var i = 0, j = from.length; i < j; i++)
+      mapping[from.charAt(i)] = to.charAt(i);
+  
+    return function(str) {
+      var ret = [];
+      for (var i = 0, j = str.length; i < j; i++) {
+        var c = str.charAt(i);
+        if (mapping.hasOwnProperty(str.charAt(i))) ret.push(mapping[c]);
+        else ret.push(c);
+      }
+      return ret.join("");
+    };
+})();
 export const panes = (favoritos, resultTotalV, accesorios, resultTotalA) => {
     return [
     {
@@ -23,7 +43,7 @@ export const panes = (favoritos, resultTotalV, accesorios, resultTotalA) => {
                                     <Table.Row key={index}>
                                         <Table.Cell style={{ verticalAlign: 'inherit' }}>
                                             <Header as='h4' image style={{ margin: 0, width: '85%' }}>
-                                                <Image src={this.state.pathS3 + item.nameImage + '.' + item.extension} rounded size='massive' />
+                                                <Image src={pathS3_favoritos + item.nameImage + '.' + item.extension} rounded size='massive' />
                                                 <Header.Content style={{ width: '70%', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
                                                     {(item.title.substr(0, 22))}
                                                     <Header.Subheader style={{ fontSize: 10 }}>{item.labelCiudad}</Header.Subheader>
@@ -108,7 +128,7 @@ export const panes = (favoritos, resultTotalV, accesorios, resultTotalA) => {
                                     <Table.Row key={index}>
                                         <Table.Cell style={{ verticalAlign: 'inherit' }}>
                                             <Header as='h4' image style={{ margin: 0, width: '85%' }}>
-                                                <Image src={this.state.pathS3Acc + item.name + '.' + item.ext} rounded size='massive' />
+                                                <Image src={pathS3_fichas + item.name + '.' + item.ext} rounded size='massive' />
                                                 <Header.Content style={{ width: '70%', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
                                                     {(item.title.substr(0, 22))}
                                                     <Header.Subheader style={{ fontSize: 10 }}>{item.year}</Header.Subheader>

@@ -1,5 +1,25 @@
 import React, {Fragment} from 'react';
 import { Container, Header, Table, Button, Image, Responsive, Tab, Pagination } from 'semantic-ui-react'
+const pathS3_vehiculos = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x300/vendetunave/images/vehiculos/";
+const pathS3_acc = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x300/vendetunave/images/accesorios/";
+const normalize = (function() {
+    var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
+      to = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc",
+      mapping = {};
+  
+    for (var i = 0, j = from.length; i < j; i++)
+      mapping[from.charAt(i)] = to.charAt(i);
+  
+    return function(str) {
+      var ret = [];
+      for (var i = 0, j = str.length; i < j; i++) {
+        var c = str.charAt(i);
+        if (mapping.hasOwnProperty(str.charAt(i))) ret.push(mapping[c]);
+        else ret.push(c);
+      }
+      return ret.join("");
+    };
+})();
 export const panes = (vehicles, resultTotalV, accesorios, resultTotalA) => { 
 return [
     {
@@ -48,7 +68,7 @@ return [
                         >
                           <Image
                             src={
-                              this.state.pathS3 +
+                            pathS3_vehiculos +
                               item.nameImage +
                               "." +
                               item.extension
@@ -209,7 +229,7 @@ return [
                         >
                           <Image
                             src={
-                              this.state.pathS3Acc +
+                              pathS3_acc +
                               item.nameImage +
                               "." +
                               item.extension
