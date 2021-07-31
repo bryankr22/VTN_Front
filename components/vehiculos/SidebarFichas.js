@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { Container, Input, List, Modal, Grid, Checkbox, Header, Button, Label, Icon } from "semantic-ui-react";
 import ActiveTagsVehiculos from './ActiveTagsVehiculos';
 export default function SidebarFichas({ params, contadores, vehiculos }) {
-    //console.log(">>>>", contadores);
+    console.log(">>>>", contadores);
     const title_page = (slug) => {
         switch (slug) {
             case 'motos':
@@ -69,14 +69,23 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
         }
         let params = kvp.join('&');
         document.location.search = params;
-    }
+    };
+    const tipos_vehList = [
+        { id: 'Carro', nombre: 'Carro' },
+        { id: 'Camioneta', nombre: 'Camioneta' },
+        { id: 'SUV', nombre: 'SUV' },
+        { id: 'Deportivo', nombre: 'Deportivo' },
+        { id: 'Convertible', nombre: 'Convertible' },
+        { id: 'Pick-Up', nombre: 'Pick-Up' }
+    ];
+
     return (
         <Grid.Column style={{ paddingLeft: "3%" }} width={3}>
             <Header style={{ margin: 0 }} as="h3">
                 {title_page(params.categoria)}
             </Header>
             <Header style={{ marginTop: 15 }} as="h3">
-               { vehiculos.length } resultados
+               { contadores.total_records } resultados
             </Header>
             <Container>
                 <ActiveTagsVehiculos tags={params}/>
@@ -94,6 +103,106 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
                         </List.Content>
                     </List.Item>
                 </List>
+                { !params.tipo && ( 
+                <List link>
+                    <List.Item>
+                        <List.Content>
+                            <List.Header>
+                                <Header as="h5">Tipo de vehiculo</Header>
+                            </List.Header>
+                            <List.List style={{ paddingLeft: 15 }}>
+                                {tipos_vehList.map((item, index) => (
+                                    <List.Item 
+                                    key={index}
+                                    as="a"
+                                    onClick={() => insertParam('tipo', item.id) }>
+                                        {item.nombre}
+                                    </List.Item>
+                                )
+                                )}
+                                <List.Item as="a">
+                                    Ver Todos
+                                </List.Item>
+                            </List.List>
+                        </List.Content>
+                    </List.Item>
+                </List>
+                )}
+                { !params.marca && ( 
+                <List link>
+                    <List.Item>
+                        <List.Content>
+                            <List.Header>
+                                <Header as="h5">Marca</Header>
+                            </List.Header>
+                            <List.List style={{ paddingLeft: 15 }}>
+                                {mapping_contador(contadores.marca).map((item, index) => (
+                                    <List.Item 
+                                    key={index}
+                                    as="a"
+                                    onClick={() => insertParam('marca', item.label) }>
+                                        {item.label}
+                                    </List.Item>
+                                )
+                                )}
+                                <List.Item as="a">
+                                    Ver Todos
+                                </List.Item>
+                            </List.List>
+                        </List.Content>
+                    </List.Item>
+                </List>
+                )}
+                { !params.combustible && ( 
+                <List link>
+                    <List.Item>
+                        <List.Content>
+                            <List.Header>
+                                <Header as="h5">Tipo de Motor</Header>
+                            </List.Header>
+                            <List.List style={{ paddingLeft: 15 }}>
+                                {mapping_contador(contadores.combustible).map((item, index) => (
+                                    <List.Item 
+                                    key={index}
+                                    as="a"
+                                    onClick={() => insertParam('combustible', item.label) }>
+                                        {item.label}
+                                    </List.Item>
+                                )
+                                )}
+                                <List.Item as="a">
+                                    Ver Todos
+                                </List.Item>
+                            </List.List>
+                        </List.Content>
+                    </List.Item>
+                </List>
+                )}
+                { !params.caja && ( 
+                <List link>
+                    <List.Item>
+                        <List.Content>
+                            <List.Header>
+                                <Header as="h5">Transmision</Header>
+                            </List.Header>
+                            <List.List style={{ paddingLeft: 15 }}>
+                                {mapping_contador(contadores.caja).map((item, index) => (
+                                    <List.Item 
+                                    key={index}
+                                    as="a"
+                                    onClick={() => insertParam('caja', item.label) }>
+                                        {item.label}
+                                    </List.Item>
+                                )
+                                )}
+                                <List.Item as="a">
+                                    Ver Todos
+                                </List.Item>
+                            </List.List>
+                        </List.Content>
+                    </List.Item>
+                </List>
+                )}
                 { !params.kilometraje && (<>
                 <List link style={{ marginBottom: 0 }}>
                     <List.Item style={{ marginBottom: 0 }}>

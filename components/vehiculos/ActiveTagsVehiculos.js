@@ -21,6 +21,15 @@ export default function ActiveTagsVehiculos({tags}) {
                 />
             </Label>
             : null}
+            { tags.tipo ? 
+            <Label as="a" style={{ marginBottom: 5 }}>
+                {tags.tipo}
+                <Icon
+                    name="delete"
+                    onClick={() => console.log("Eliminar") }
+                />
+            </Label>
+            : null}
             { tags.marca ? 
             <Label as="a" style={{ marginBottom: 5 }}>
                 {tags.marca}

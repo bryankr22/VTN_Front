@@ -42,7 +42,81 @@ export default function SidebarAccesorios({ params, contadores, vehiculos }) {
                 <ActiveTagsVehiculos tags={params}/>
             </Container>
             <Container style={{ padding: "20px 20px" }}>
-                
+                { !params.tipo && ( 
+                <List link>
+                    <List.Item>
+                        <List.Content>
+                            <List.Header>
+                                <Header as="h5">Categoria</Header>
+                            </List.Header>
+                            <List.List style={{ paddingLeft: 15 }}>
+                                {mapping_contador(contadores.tipo).map((item, index) => (
+                                    <List.Item 
+                                    key={index}
+                                    as="a"
+                                    onClick={() => insertParam('tipo', item.label) }>
+                                        {item.label}
+                                    </List.Item>
+                                )
+                                )}
+                                <List.Item as="a">
+                                    Ver Todos
+                                </List.Item>
+                            </List.List>
+                        </List.Content>
+                    </List.Item>
+                </List>
+                )}
+                { !params.ubicacion && ( 
+                <List link>
+                    <List.Item>
+                        <List.Content>
+                            <List.Header>
+                                <Header as="h5">Ubicacion</Header>
+                            </List.Header>
+                            <List.List style={{ paddingLeft: 15 }}>
+                                {mapping_contador(contadores.ciudad).map((item, index) => (
+                                    <List.Item 
+                                    key={index}
+                                    as="a"
+                                    onClick={() => insertParam('ubicacion', item.label) }>
+                                        {item.label}
+                                    </List.Item>
+                                )
+                                )}
+                                <List.Item as="a">
+                                    Ver Todos
+                                </List.Item>
+                            </List.List>
+                        </List.Content>
+                    </List.Item>
+                </List>
+                )}
+                { !params.estado && ( 
+                <List link>
+                    <List.Item>
+                        <List.Content>
+                            <List.Header>
+                                <Header as="h5">Estado</Header>
+                            </List.Header>
+                            <List.List style={{ paddingLeft: 15 }}>
+                                {mapping_contador(contadores.estado).map((item, index) => (
+                                    <List.Item 
+                                    key={index}
+                                    as="a"
+                                    onClick={() => insertParam('estado', item.label) }>
+                                        {item.label}
+                                    </List.Item>
+                                )
+                                )}
+                                <List.Item as="a">
+                                    Ver Todos
+                                </List.Item>
+                            </List.List>
+                        </List.Content>
+                    </List.Item>
+                </List>
+                )}
             </Container>
         </Grid.Column>
     )
