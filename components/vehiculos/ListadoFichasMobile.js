@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, Card, Grid, Header } from "semantic-ui-react";
+import { Image, Card, Grid, Header, Button } from "semantic-ui-react";
 export default function ListadoFichasMobile({vehiculos}) {
     const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/200x200/vendetunave/images/ficha-tecnica/";
     const normalize = (function() {
