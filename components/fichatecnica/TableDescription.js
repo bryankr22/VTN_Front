@@ -5,7 +5,7 @@ export default function TableDescription({data}) {
     return (
         <Grid columns="equal">
             <Grid.Column width={16} style={{ padding: "30px 10px 15px 30px" }}>
-                <Header as="h3" style={{ marginTop: 20 }}>
+                <Header as="h3" style={{ marginTop: 20, textAlign: 'left' }}>
                     CARACTERÍSTICAS
                 </Header>
                 <Grid divided="vertically">

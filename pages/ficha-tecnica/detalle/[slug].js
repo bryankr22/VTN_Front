@@ -86,7 +86,7 @@ export default function detalle({ data }) {
                     <Responsive {...Responsive.onlyTablet}>
                         <TableDescription data={data} />
                     </Responsive>
-                    <Responsive {...Responsive.onlyComputer}>
+                    <Responsive {...Responsive.onlyComputer} style={{display: 'content'}}>
                         <TableDescription data={data} />
                     </Responsive>
                     <div style={{ margin: '20px auto', textAlign: 'center' }}>
