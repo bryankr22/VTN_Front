@@ -180,9 +180,8 @@ export default function detalle({ data }) {
     )
 }
 export async function getServerSideProps({ params }) {
-    const res = await axios.get('https://api.vendetunave.co/api/vehiculo/' + params.slug);
+    const res = await axios.get('https://api.vendetunave.co/api/accesorio/' + params.slug);
     const data = await res.data;
-    //const imagenes = await res.data.imagenes;
     return {
         props: {
             data

@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import PublicLayout from '../../layouts/PublicLayout';
-import SidebarVehiculos from '../../components/vehiculos/SidebarVehiculos';
-import ListadoVehiculos from '../../components/vehiculos/ListadoVehiculos';
+import SidebarAccesorios from '../../components/vehiculos/SidebarAccesorios';
+import ListadoAccesorios from '../../components/vehiculos/ListadoAccesorios';
 
 import SidebarMobile from '../../components/vehiculos/SidebarMobile';
-import ListadoVehiculosMobile from '../../components/vehiculos/ListadoVehiculosMobile';
+import ListadoAccesoriosMobile from '../../components/vehiculos/ListadoAccesoriosMobile';
 
 import { Grid, Responsive } from "semantic-ui-react";
 import { useRouter } from 'next/router';
@@ -16,20 +16,20 @@ export default function index({ data }) {
         <PublicLayout>
             <Responsive {...Responsive.onlyMobile}>
                 <SidebarMobile vehiculos={data.vehicles} />
-                <ListadoVehiculosMobile vehiculos={data.vehicles} />
+                <ListadoAccesoriosMobile vehiculos={data.vehicles} />
             </Responsive>
             <Responsive {...Responsive.onlyTablet}>
                 <SidebarMobile vehiculos={data.vehicles} />
-                <ListadoVehiculosMobile vehiculos={data.vehicles} />
+                <ListadoAccesoriosMobile vehiculos={data.vehicles} />
             </Responsive>
             <Responsive {...Responsive.onlyComputer}>
                 <Grid style={{ paddingTop: 15 }}>
-                    <SidebarVehiculos 
+                    <SidebarAccesorios 
                     params={router.query} 
                     contadores={data.contadores}
                     vehiculos={data.vehicles}
                     />
-                    <ListadoVehiculos 
+                    <ListadoAccesorios 
                     params={router.query} 
                     vehiculos={data.vehicles}
                     page={data.page}
@@ -41,16 +41,9 @@ export default function index({ data }) {
     )
 }
 export async function getServerSideProps({query}) {
-    const res = await axios.get('https://api.vendetunave.co/api/vehiculos', {
+    const res = await axios.get('https://api.vendetunave.co/api/accesorios', {
         params: {
-            categoria: query.categoria,
             page: query.page,
-            ubicacion: query.ubicacion,
-            marca: query.marca,
-            combustible: query.combustible,
-            modelo: query.modelo,
-            ano: query.ano,
-            estado: query.estado,
             precio: query.precio,
             kilometraje: query.kilometraje,
             orden: query.orden
