@@ -29,6 +29,7 @@ export default function ListadoFichasMobile({vehiculos}) {
           >
             {vehiculos.map((item, index) => (
               <Card
+              key={"vehiculo2" + index}
               as="a"
               href={ "/ficha-tecnica/detalle/" + normalize(item.title) .split(" ") .join("-") .split("%") .join("") .split("?") .join("") .split("/") .join("") + "-" + item.id }
               style={{ width: '100%', boxShadow: '0 4px 2px -4px grey', margin: 3 }}>
