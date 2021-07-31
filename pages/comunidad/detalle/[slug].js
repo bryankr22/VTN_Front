@@ -17,8 +17,10 @@ export default function detalle({ data }) {
                 </p>
 
                 <div style={{ paddingBottom: '30px' }}>
-                    {(data.tags).map((itemTag) =>
-                        <Label as='a' tag>{itemTag.tag}</Label>
+                    {(data.tags).map((itemTag, index) =>
+                        <Label 
+                        key={index}
+                        as='a' tag>{itemTag.tag}</Label>
                     )}
                 </div>
 
@@ -30,8 +32,8 @@ export default function detalle({ data }) {
                 **/}
                 <Responsive {...Responsive.onlyComputer}>
                     <Item.Group divided>
-                        {(data.respuestas).map((item) =>
-                            <Item>
+                        {(data.respuestas).map((item, index) =>
+                            <Item key={index}>
                                 <Responsive {...Responsive.onlyComputer} style={{ marginRight: 20 }}>
                                     <Item.Image size='tiny' src={(item.image == 0) ? userImagePre : pathS3 + item.image} />
                                 </Responsive>
@@ -52,8 +54,8 @@ export default function detalle({ data }) {
                 
                 <Responsive {...Responsive.onlyMobile}>
                     <Comment.Group style={{ marginTop: 45 }}>
-                        {(data.respuestas).map((item) =>
-                            <Comment>
+                        {(data.respuestas).map((item, index) =>
+                            <Comment key={index}>
                                 <Comment.Avatar src={(item.image == 0) ? userImagePre : pathS3 + item.image} />
                                 <Comment.Content>
                                     <Comment.Author as='a'>{item.nombre}</Comment.Author>
@@ -68,8 +70,8 @@ export default function detalle({ data }) {
                 </Responsive>
                 <Responsive {...Responsive.onlyTablet}>
                     <Comment.Group style={{ marginTop: 45 }}>
-                        {(data.respuestas).map((item) =>
-                            <Comment>
+                        {(data.respuestas).map((item, index) =>
+                            <Comment key={index}>
                                 <Comment.Avatar src={(item.image == 0) ? userImagePre : pathS3 + item.image} />
                                 <Comment.Content>
                                     <Comment.Author as='a'>{item.nombre}</Comment.Author>
