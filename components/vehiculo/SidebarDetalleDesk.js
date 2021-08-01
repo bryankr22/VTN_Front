@@ -1,6 +1,9 @@
 import React from 'react'
 import { Grid, Header, Container, Icon, Button, Form } from "semantic-ui-react";
+import { useCookies } from "react-cookie"
 export default function SidebarDetalleDesk({ vehiculo, diasPublicado, accesorio }) {
+    const [cookies, setCookie] = useCookies(['vtn_token']);
+    const vehiculoFav = [];
     return (
         <Grid.Column style={{ padding: "30px 10px 15px 30px" }}>
             <Header as="h1" textAlign="left">
@@ -17,6 +20,14 @@ export default function SidebarDetalleDesk({ vehiculo, diasPublicado, accesorio 
                         vehiculo.precio
                     )}{" "}
                     COP
+                    {cookies.vtn_token && (
+                        <Icon
+                            id={"icon-fav-" + vehiculo.id}
+                            name={ vehiculoFav.length > 0 ? "heart" : "heart outline" }
+                            color="blue"
+                            style={{ marginLeft: 80 }}
+                        />
+                    )}
                 </Header.Content>
             </Header>
             <Header as="h6" style={{ marginTop: 8 }}>

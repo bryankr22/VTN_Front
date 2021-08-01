@@ -1,6 +1,9 @@
 import React from 'react'
 import { Grid, Header, Icon, Container, Form, Button, Modal } from "semantic-ui-react";
+import { useCookies } from "react-cookie"
 export default function SidebarDetalle({ vehiculo }) {
+    const [cookies, setCookie] = useCookies(['vtn_token']);
+    const vehiculoFav = [];
     return (
         <Container style={{ marginTop: 20 }}>
             <Header as="h6" disabled>
@@ -65,6 +68,20 @@ export default function SidebarDetalle({ vehiculo }) {
                     )}
                 </Grid.Row>
             </Grid>
+            {cookies.vtn_token && (
+                <Header
+                    as="h4"
+                    textAlign="center"
+                    style={{ marginTop: 8, marginBottom: 30 }}
+                >
+                    <Icon
+                    id={"icon-fav-" + vehiculo.id}
+                    name={ vehiculoFav.length > 0 ? "heart" : "heart outline" }
+                    color="blue"
+                    />
+                    Agregar a favoritos
+                </Header>
+            )}
             <Container
                 fluid
                 style={{ margin: "0 !important", textAlign: "center" }}
