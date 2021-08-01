@@ -5,8 +5,9 @@ import TableDescription from '../../../components/fichatecnica/TableDescription'
 import CarruselHome from '../../../components/carrusel/CarruselHome';
 import axios from 'axios';
 import { Responsive, Icon, Breadcrumb, Grid, Header, Container, Button } from "semantic-ui-react";
-
+import { useCookies } from "react-cookie"
 export default function detalle({ data }) {
+    const [cookies, setCookie] = useCookies(['vtn_token']);
     return (
         <PublicLayout>
             <div style={{ display: 'inline-block', float: 'right', marginRight: 40, fontSize: 18, color: '#5c5c5c', marginBottom: 10 }}>
@@ -89,11 +90,13 @@ export default function detalle({ data }) {
                     <Responsive {...Responsive.onlyComputer} style={{display: 'content'}}>
                         <TableDescription data={data} />
                     </Responsive>
-                    <div style={{ margin: '20px auto', textAlign: 'center' }}>
-                        <Button 
-                        onClick={(e) => { e.preventDefault(); }} 
-                        primary style={{ borderRadius: 20, padding: '11px 40px' }}>Agregar a favoritos</Button>
-                    </div>
+                    {cookies.vtn_token &&
+                        <div style={{ margin: '20px auto', textAlign: 'center' }}>
+                            <Button 
+                            onClick={(e) => { e.preventDefault(); }} 
+                            primary style={{ borderRadius: 20, padding: '11px 40px' }}>Agregar a favoritos</Button>
+                        </div>
+                    }
                     <div style={{ margin: '20px auto', textAlign: 'center' }}>
                         <Button 
                         onClick={(e) => { e.preventDefault(); }} 
