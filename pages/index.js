@@ -13,71 +13,11 @@ import { useDispatch } from "react-redux";
 import { updateHome } from '../store/homeSlice';
 import { API_URL, home } from '../helpers/constants';
 
-const Home = ({ vehiculos, slider, sliderMobile, categorias, marcas, noticias}) => {
-    const dispatch = useDispatch();
-    const fetchHome = () => {
-        axios.get(API_URL + home).then((res) => {
-            let optionsCategories = [];
-            res.data.categories.forEach(function (item) {
-                optionsCategories.push({
-                    key: item.nombre .split(" ") .join("-") .split("?") .join("") + "_" + item.id,
-                    value: item.nombre .split(" ") .join("-") .split("?") .join("") + "_" + item.id,
-                    text: item.nombre,
-                });
-            });
-            let optionsAnios = [{ key: "", value: "", text: "Años" }];
-            res.data.anios.forEach(function (item) {
-                optionsAnios.push({ key: item.ano, value: item.ano, text: item.ano });
-            });
-            let optionsAniosDesde = [{ key: "", value: "", text: "Desde" }];
-            res.data.anios.forEach(function (item) {
-                optionsAniosDesde.push({
-                    key: item.ano,
-                    value: item.ano,
-                    text: item.ano,
-                });
-            });
-            let optionsAniosHasta = [{ key: "", value: "", text: "Hasta" }];
-            res.data.anios.forEach(function (item) {
-                optionsAniosHasta.push({
-                    key: item.ano,
-                    value: item.ano,
-                    text: item.ano,
-                });
-            });
-            let optionsMarcas = [{ key: "", value: "", text: "Marca" }];
-            res.data.marcasFil.forEach(function (item) {
-                optionsMarcas.push({
-                    key: item.nombre .split(" ") .join("-") .split("?") .join("") + "_" + item.id,
-                    value: item.nombre .split(" ") .join("-") .split("?") .join("") + "_" + item.id,
-                    text: item.nombre,
-                });
-            });
-            dispatch(updateHome({
-                optionsMarcas,
-                categories: res.data.categories,
-                vehiculos_promocion: res.data.vehiculos_promocion,
-                banners: res.data.banners,
-                bannersMobile: res.data.bannersMobile,
-                marcas: res.data.marcas,
-                noticias: res.data.noticias,
-                link_video: res.data.config.link_video,
-                optionsCategories,
-                optionsAnios,
-                optionsAniosDesde,
-                optionsAniosHasta,
-            }));
-        }).catch((error) => {
-            return false;
-        });
-    }
-    useEffect(() => {
-        //fetchHome();
-    }, [])
+const Home = ({ vehiculos, slider, sliderMobile, categorias, marcas, noticias, filters}) => {
     return(
         <PublicLayout>
             <SliderHome slider={slider} sliderMobile={sliderMobile}/>
-            <FiltersHome />
+            <FiltersHome options={filters}/>
             <CategoriasHome categorias={categorias}/>
             <MarcasHome marcas={marcas}/>
             <DestacadosHome vehiculos={vehiculos}/>
@@ -94,6 +34,49 @@ export async function getStaticProps() {
     const categorias = await res.data.categories;
     const marcas = await res.data.marcas;
     const noticias = await res.data.noticias;
+    let optionsCategories = [];
+    await res.data.categories.forEach(function (item) {
+        optionsCategories.push({
+            key: item.nombre .split(" ") .join("-") .split("?") .join("") + "_" + item.id,
+            value: item.nombre .split(" ") .join("-") .split("?") .join("") + "_" + item.id,
+            text: item.nombre,
+        });
+    });
+    let optionsAnios = [{ key: "", value: "", text: "Años" }];
+    await res.data.anios.forEach(function (item) {
+        optionsAnios.push({ key: item.ano, value: item.ano, text: item.ano });
+    });
+    let optionsAniosDesde = [{ key: "", value: "", text: "Desde" }];
+    await res.data.anios.forEach(function (item) {
+        optionsAniosDesde.push({
+            key: item.ano,
+            value: item.ano,
+            text: item.ano,
+        });
+    });
+    let optionsAniosHasta = [{ key: "", value: "", text: "Hasta" }];
+    await res.data.anios.forEach(function (item) {
+        optionsAniosHasta.push({
+            key: item.ano,
+            value: item.ano,
+            text: item.ano,
+        });
+    });
+    let optionsMarcas = [{ key: "", value: "", text: "Marca" }];
+    await res.data.marcasFil.forEach(function (item) {
+        optionsMarcas.push({
+            key: item.nombre .split(" ") .join("-") .split("?") .join("") + "_" + item.id,
+            value: item.nombre .split(" ") .join("-") .split("?") .join("") + "_" + item.id,
+            text: item.nombre,
+        });
+    });
+    const filters = {
+        optionsCategories,
+        optionsAnios,
+        optionsAniosDesde,
+        optionsAniosHasta,
+        optionsMarcas,
+    }
     return {
         props: {
             vehiculos,
@@ -101,7 +84,8 @@ export async function getStaticProps() {
             sliderMobile,
             categorias,
             marcas,
-            noticias
+            noticias,
+            filters
         }
     }
 }

@@ -22,7 +22,7 @@ export default function CarruselCategories({ data = [], numberCards }) {
                         <Fragment key={index}>
                             <Card
                             as="a"
-                            href={`/vehiculos/#/Marca/Modelo/Estilo/Ubicacion/Ciudad/Anio/Combustible/Blindaje_0/Transmision/Estado/Desde_0-Hasta_0/Desde_0-Hasta_0/Pagina_1/Promo_0/Permu_0/Buscar_/Orden_0`}
+                            href={`/vehiculos?categoria=`+item.nombre}
                             style={{
                                 margin: 5,
                                 boxShadow: "none",

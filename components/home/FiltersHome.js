@@ -1,15 +1,49 @@
 import React, {useState} from 'react'
 import { Header, Form, Container, Button, Input, Select, Responsive } from "semantic-ui-react";
-export default function FiltersHome() {
+export default function FiltersHome({options}) {
+    //console.log(">>>>>", options);
+    const FilterPricing = [
+        { key: 0, text: "Precio", value: 0 },
+        { key: 1, text: "Hasta $10.000.000", value: 1 },
+        { key: 2, text: "$10.000.000 a $20.000.000", value: 2 },
+        { key: 3, text: "$20.000.000 a $35.000.000", value: 3 },
+        { key: 4, text: "$35.000.000 a $50.000.000", value: 4 },
+        { key: 5, text: "$50.000.000 a $100.000.000", value: 5 },
+        { key: 6, text: "$100.000.000 a $125.000.000", value: 6 },
+        { key: 7, text: "$125.000.000 a $150.000.000", value: 7 },
+        { key: 8, text: "$150.000.000 a $175.000.000", value: 8 },
+        { key: 9, text: "$175.000.000 a $200.000.000", value: 9 },
+        { key: 10, text: "$200.000.000 a $250.000.000", value: 10 },
+        { key: 11, text: "$250.000.000 a $300.000.000", value: 11 },
+        { key: 12, text: "$300.000.000 a $350.000.000", value: 12 },
+        { key: 13, text: "$350.000.000 a $400.000.000", value: 13 },
+        { key: 14, text: "Más de $400.000.000", value: 14 },
+    ];
     const [filters, setFilters] = useState({
-        optionsCategories: [],
-        selectCategory: "",
-        optionsMarcas: [],
-        optionsModelos: [],
-        optionsPrice: [],
-        optionsAniosDesde: [],
-        optionsAniosHasta: []
+        category: '',
+        marca: '',
+        modelo: '',
+        precio: '',
+        anioDesde: '',
+        anioHasta: ''
     })
+    const changeFilter = (input, value) => {
+        setFilters({
+            ...filters,
+            [input]: value
+        })
+    }
+    const onClickFilter = () => {
+        var newUrl = new URL(window.location.protocol+"//"+window.location.hostname+":"+window.location.port+"/vehiculos");
+        newUrl.searchParams.append('categoria', filters.category);
+        newUrl.searchParams.append('marca', filters.marca);
+        newUrl.searchParams.append('modelo', filters.modelo);
+        newUrl.searchParams.append('precio', filters.precio);
+        newUrl.searchParams.append('anioDesde', filters.anioDesde);
+        newUrl.searchParams.append('anioHasta', filters.anioHasta);
+        window.location.href = newUrl.href;
+        //console.log(">>>>>newurl", newUrl);
+    }
     return (
         <div>
             <Container
@@ -24,8 +58,8 @@ export default function FiltersHome() {
                         <Form.Field>
                             <Select
                                 search
-                                options={filters.optionsCategories}
-                                defaultValue={filters.selectCategory}
+                                options={options.optionsCategories}
+                                defaultValue={options.selectCategory}
                                 
                                 placeholder="Tipo"
                                 style={{ borderRadius: 18 }}
@@ -38,7 +72,7 @@ export default function FiltersHome() {
                             <Input type="text" action>
                                 <Select
                                     search
-                                    options={filters.optionsMarcas}
+                                    options={options.optionsMarcas}
                                     
                                     fluid
                                     placeholder="Marca"
@@ -53,7 +87,7 @@ export default function FiltersHome() {
                                 <Select
                                     search
                                     id="combo-input-derecha"
-                                    options={filters.optionsModelos}
+                                    options={options.optionsModelos}
                                     
                                     fluid
                                     placeholder="Modelo"
@@ -70,8 +104,7 @@ export default function FiltersHome() {
                             </label>
                             <Select
                                 search
-                                options={filters.optionsPrice}
-                                
+                                options={FilterPricing}
                                 fluid
                                 placeholder="Precio"
                                 style={{ borderRadius: 18, marginTop: 10 }}
@@ -82,7 +115,7 @@ export default function FiltersHome() {
                             <Input type="text" action>
                                 <Select
                                     search
-                                    options={filters.optionsAniosDesde}
+                                    options={options.optionsAniosDesde}
                                     
                                     fluid
                                     placeholder="Desde"
@@ -91,7 +124,7 @@ export default function FiltersHome() {
                                 <Select
                                     search
                                     id="combo-input-derecha"
-                                    options={filters.optionsAniosHasta}
+                                    options={options.optionsAniosHasta}
                                     
                                     fluid
                                     placeholder="Hasta"
@@ -113,7 +146,9 @@ export default function FiltersHome() {
                                 />
                             </Form.Group>
                         </Form.Field>
-                        <Button  color="blue" type="submit">
+                        <Button  
+                        onClick={()=> onClickFilter()}
+                        color="blue" type="submit">
                             BUSCAR VEHÍCULO
                         </Button>
                     </Form>
@@ -123,8 +158,8 @@ export default function FiltersHome() {
                         <Form.Field>
                             <Select
                                 search
-                                options={filters.optionsCategories}
-                                defaultValue={filters.selectCategory}
+                                options={options.optionsCategories}
+                                defaultValue={options.selectCategory}
                                 placeholder="Tipo"
                                 style={{ borderRadius: 18 }}
                             />
@@ -136,7 +171,7 @@ export default function FiltersHome() {
                             <Input type="text" action>
                                 <Select
                                     search
-                                    options={filters.optionsMarcas}
+                                    options={options.optionsMarcas}
                                     
                                     fluid
                                     placeholder="Marca"
@@ -151,7 +186,7 @@ export default function FiltersHome() {
                                 <Select
                                     search
                                     id="combo-input-derecha"
-                                    options={filters.optionsModelos}
+                                    options={options.optionsModelos}
                                     
                                     fluid
                                     placeholder="Modelo"
@@ -168,7 +203,7 @@ export default function FiltersHome() {
                             </label>
                             <Select
                                 search
-                                options={filters.optionsPrice}
+                                options={FilterPricing}
                                 
                                 fluid
                                 placeholder="Precio"
@@ -180,7 +215,7 @@ export default function FiltersHome() {
                             <Input type="text" action>
                                 <Select
                                     search
-                                    options={filters.optionsAniosDesde}
+                                    options={options.optionsAniosDesde}
                                     
                                     fluid
                                     placeholder="Desde"
@@ -189,7 +224,7 @@ export default function FiltersHome() {
                                 <Select
                                     search
                                     id="combo-input-derecha"
-                                    options={filters.optionsAniosHasta}
+                                    options={options.optionsAniosHasta}
                                     
                                     fluid
                                     placeholder="Hasta"
@@ -211,7 +246,9 @@ export default function FiltersHome() {
                                 />
                             </Form.Group>
                         </Form.Field>
-                        <Button  color="blue" type="submit">
+                        <Button  
+                        onClick={()=> onClickFilter()}
+                        color="blue" type="submit">
                             BUSCAR VEHÍCULO
                         </Button>
                     </Form>
@@ -225,8 +262,8 @@ export default function FiltersHome() {
                                 </label>
                                 <Select
                                     search
-                                    options={filters.optionsCategories}
-                                    defaultValue={filters.selectCategory}
+                                    options={options.optionsCategories}
+                                    defaultValue={options.selectCategory}
                                     
                                     placeholder="Tipo"
                                     style={{ borderRadius: 18 }}
@@ -239,7 +276,7 @@ export default function FiltersHome() {
                                 <Input type="text" action>
                                     <Select
                                         search
-                                        options={filters.optionsMarcas}
+                                        options={options.optionsMarcas}
                                         
                                         fluid
                                         placeholder="Marca"
@@ -248,7 +285,7 @@ export default function FiltersHome() {
                                     <Select
                                         search
                                         id="combo-input-derecha"
-                                        options={filters.optionsModelos}
+                                        options={options.optionsModelos}
                                         
                                         fluid
                                         placeholder="Modelo"
@@ -264,7 +301,7 @@ export default function FiltersHome() {
                                 </label>
                                 <Select
                                     search
-                                    options={filters.optionsPrice}
+                                    options={FilterPricing}
                                     
                                     fluid
                                     placeholder="Precio"
@@ -278,7 +315,7 @@ export default function FiltersHome() {
                                 <Input type="text" action>
                                     <Select
                                         search
-                                        options={filters.optionsAniosDesde}
+                                        options={options.optionsAniosDesde}
                                         
                                         fluid
                                         placeholder="Desde"
@@ -287,7 +324,7 @@ export default function FiltersHome() {
                                     <Select
                                         search
                                         id="combo-input-derecha"
-                                        options={filters.optionsAniosHasta}
+                                        options={options.optionsAniosHasta}
                                         
                                         fluid
                                         placeholder="Hasta"
@@ -310,7 +347,9 @@ export default function FiltersHome() {
                                 />
                             </Form.Group>
                         </Form.Field>
-                        <Button  color="blue" style={{ textTransform: "uppercase" }}>
+                        <Button  
+                        onClick={()=> onClickFilter()}
+                        color="blue" style={{ textTransform: "uppercase" }}>
                             buscar vehículo
                         </Button>
                     </Form>

@@ -22,13 +22,7 @@ export default function CarruselMarcas({ data = [], numberCards }) {
                         <Fragment key={index}>
                             <Card
                             as="a"
-                            href={
-                                "/vehiculos/Carros-y-camionetas_1/" +
-                                item.nombre +
-                                "_" +
-                                item.id +
-                                "/Modelo/Estilo/Ubicacion/Ciudad/Anio/Combustible/Blindaje_0/Transmision/Estado/Desde_0-Hasta_0/Desde_0-Hasta_0/Pagina_1/Promo_0/Permu_0/Buscar_/Orden_0"
-                            }
+                            href={`/vehiculos?marca=`+item.nombre}
                             style={{
                                 textAlign: "center",
                                 boxShadow: "none",
