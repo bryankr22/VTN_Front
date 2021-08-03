@@ -37,9 +37,9 @@ export async function getStaticProps() {
     let optionsCategories = [];
     await res.data.categories.forEach(function (item) {
         optionsCategories.push({
-            key: item.nombre .split(" ") .join("-") .split("?") .join("") + "_" + item.id,
-            value: item.nombre .split(" ") .join("-") .split("?") .join("") + "_" + item.id,
-            text: item.nombre,
+            key: item.id,
+            value: item.slug,
+            text: item.nombre
         });
     });
     let optionsAnios = [{ key: "", value: "", text: "Años" }];
@@ -65,8 +65,8 @@ export async function getStaticProps() {
     let optionsMarcas = [{ key: "", value: "", text: "Marca" }];
     await res.data.marcasFil.forEach(function (item) {
         optionsMarcas.push({
-            key: item.nombre .split(" ") .join("-") .split("?") .join("") + "_" + item.id,
-            value: item.nombre .split(" ") .join("-") .split("?") .join("") + "_" + item.id,
+            key: item.id,
+            value: item.nombre,
             text: item.nombre,
         });
     });
