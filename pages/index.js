@@ -1,7 +1,8 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 
-import PublicLayout from '../layouts/PublicLayout';
+//import PublicLayout from '../layouts/PublicLayout';
+const PublicLayout = dynamic(() => import('../layouts/PublicLayout'));
 const ContentHome = dynamic(() => import('../components/home/ContentHome'));
 const NoticiasHome = dynamic(() => import('../components/home/NoticiasHome'));
 const MarcasHome = dynamic(() => import('../components/home/MarcasHome'));
