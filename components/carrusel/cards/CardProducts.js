@@ -42,6 +42,7 @@ export default function CardProducts({item}) {
                 >
                     {item.new_image === 0 && (
                         <Image
+                        className="lazyload"
                         priority={true}
                             floated="left"
                             size="small"
