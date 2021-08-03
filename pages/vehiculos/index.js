@@ -26,7 +26,7 @@ export default function index({ data }) {
                 <Grid style={{ paddingTop: 15 }}>
                     <SidebarVehiculos 
                     params={router.query} 
-                    contadores={data.contadores}
+                    contadores={{...data.contadores, total_records: data.total_records}}
                     vehiculos={data.vehicles}
                     />
                     <ListadoVehiculos 

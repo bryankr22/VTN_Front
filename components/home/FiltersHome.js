@@ -60,7 +60,7 @@ export default function FiltersHome({options}) {
                                 search
                                 options={options.optionsCategories}
                                 defaultValue={options.selectCategory}
-                                
+                                onChange={() => changeFilter('category', e.target.value)}
                                 placeholder="Tipo"
                                 style={{ borderRadius: 18 }}
                             />

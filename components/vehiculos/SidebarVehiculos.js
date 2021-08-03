@@ -76,7 +76,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                 {title_page(params.categoria)}
             </Header>
             <Header style={{ marginTop: 15 }} as="h3">
-               { vehiculos.length } resultados
+               { contadores.total_records } resultados
             </Header>
             <Container>
                 <ActiveTagsVehiculos tags={params}/>
