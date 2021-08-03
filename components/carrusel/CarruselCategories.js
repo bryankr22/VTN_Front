@@ -5,6 +5,20 @@ import { Image, Card, Icon } from "semantic-ui-react";
 export default function CarruselCategories({ data = [], numberCards }) {
     const [activeItemIndex, setActiveItemIndex] = useState(0);
     const chevronWidth = 40;
+    const returnLink = (nombre) => {
+        switch (nombre) {
+            case 'Carros y camionetas':
+                return `/vehiculos?categoria=carros`;
+            case 'Camiones':
+                return `/vehiculos?categoria=camiones`;
+            case 'Carros de colecciÃ³n':
+                return `/vehiculos?categoria=carros_coleccion`;
+            case 'Motos':
+                return `/vehiculos?categoria=motos`;
+            case 'Otros':
+                return `/vehiculos?categoria=otros`;
+        }
+    }
     return (
         <div style={{ padding: `0 ${chevronWidth}px` }}>
             <ItemsCarousel
@@ -22,7 +36,7 @@ export default function CarruselCategories({ data = [], numberCards }) {
                         <Fragment key={index}>
                             <Card
                             as="a"
-                            href={`/vehiculos?categoria=`+item.nombre}
+                            href={returnLink(item.nombre)}
                             style={{
                                 margin: 5,
                                 boxShadow: "none",
