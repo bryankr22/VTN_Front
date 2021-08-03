@@ -1,14 +1,24 @@
 import React, {useEffect} from 'react';
-import PublicLayout from '../layouts/PublicLayout';
-import ContentHome from '../components/home/ContentHome';
-import NoticiasHome from '../components/home/NoticiasHome';
-import MarcasHome from '../components/home/MarcasHome';
-import CategoriasHome from '../components/home/CategoriasHome';
-import FiltersHome from '../components/home/FiltersHome';
-import SliderHome from '../components/home/SliderHome';
-import DestacadosHome from '../components/home/DestacadosHome';
-import axios from 'axios';
+import dynamic from 'next/dynamic';
 
+import PublicLayout from '../layouts/PublicLayout';
+const ContentHome = dynamic(() => import('../components/home/ContentHome'));
+const NoticiasHome = dynamic(() => import('../components/home/NoticiasHome'));
+const MarcasHome = dynamic(() => import('../components/home/MarcasHome'));
+const CategoriasHome = dynamic(() => import('../components/home/CategoriasHome'));
+const FiltersHome = dynamic(() => import('../components/home/FiltersHome'));
+const SliderHome = dynamic(() => import('../components/home/SliderHome'));
+const DestacadosHome = dynamic(() => import('../components/home/DestacadosHome'));
+
+//import ContentHome from '../components/home/ContentHome';
+//import NoticiasHome from '../components/home/NoticiasHome';
+//import MarcasHome from '../components/home/MarcasHome';
+//import CategoriasHome from '../components/home/CategoriasHome';
+//import FiltersHome from '../components/home/FiltersHome';
+//import SliderHome from '../components/home/SliderHome';
+//import DestacadosHome from '../components/home/DestacadosHome';
+
+import axios from 'axios';
 import { useDispatch } from "react-redux";
 import { updateHome } from '../store/homeSlice';
 import { API_URL, home } from '../helpers/constants';
