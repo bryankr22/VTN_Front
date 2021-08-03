@@ -77,7 +77,7 @@ export default function FiltersHome({options}) {
                                 <Select
                                     search
                                     options={options.optionsMarcas}
-                                    onChange={(e) => changeFilter('marca', e.target.value)}
+                                    onChange={(e, { value }) => changeFilter('marca', value)}
                                     fluid
                                     placeholder="Marca"
                                     style={{
@@ -92,7 +92,7 @@ export default function FiltersHome({options}) {
                                     search
                                     id="combo-input-derecha"
                                     options={options.optionsModelos}
-                                    onChange={(e) => changeFilter('modelo', e.target.value)}
+                                    onChange={(e, { value }) => changeFilter('modelo', value)}
                                     fluid
                                     placeholder="Modelo"
                                     style={{
@@ -109,7 +109,7 @@ export default function FiltersHome({options}) {
                             <Select
                                 search
                                 options={FilterPricing}
-                                onChange={(e) => changeFilter('precio', e.target.value)}
+                                onChange={(e, { value }) => changeFilter('precio', value)}
                                 fluid
                                 placeholder="Precio"
                                 style={{ borderRadius: 18, marginTop: 10 }}
@@ -121,7 +121,7 @@ export default function FiltersHome({options}) {
                                 <Select
                                     search
                                     options={options.optionsAniosDesde}
-                                    onChange={(e) => changeFilter('anioDesde', e.target.value)}
+                                    onChange={(e, { value }) => changeFilter('anioDesde', value)}
                                     fluid
                                     placeholder="Desde"
                                     style={{ borderRadius: 18, marginRight: 10 }}
@@ -130,7 +130,7 @@ export default function FiltersHome({options}) {
                                     search
                                     id="combo-input-derecha"
                                     options={options.optionsAniosHasta}
-                                    onChange={(e) => changeFilter('anioHasta', e.target.value)}
+                                    onChange={(e, { value }) => changeFilter('anioHasta', value)}
                                     fluid
                                     placeholder="Hasta"
                                     style={{ borderRadius: 18 }}
@@ -180,7 +180,7 @@ export default function FiltersHome({options}) {
                                 <Select
                                     search
                                     options={options.optionsMarcas}
-                                    onChange={(e) => changeFilter('marca', e.target.value)}
+                                    onChange={(e, { value }) => changeFilter('marca', value)}
                                     fluid
                                     placeholder="Marca"
                                     style={{
@@ -195,7 +195,7 @@ export default function FiltersHome({options}) {
                                     search
                                     id="combo-input-derecha"
                                     options={options.optionsModelos}
-                                    onChange={(e) => changeFilter('modelo', e.target.value)}
+                                    onChange={(e, { value }) => changeFilter('modelo', value)}
                                     fluid
                                     placeholder="Modelo"
                                     style={{
@@ -212,7 +212,7 @@ export default function FiltersHome({options}) {
                             <Select
                                 search
                                 options={FilterPricing}
-                                onChange={(e) => changeFilter('precio', e.target.value)}
+                                onChange={(e, { value }) => changeFilter('precio', value)}
                                 fluid
                                 placeholder="Precio"
                                 style={{ borderRadius: 18, marginTop: 10 }}
@@ -224,7 +224,7 @@ export default function FiltersHome({options}) {
                                 <Select
                                     search
                                     options={options.optionsAniosDesde}
-                                    onChange={(e) => changeFilter('anioDesde', e.target.value)}
+                                    onChange={(e, { value }) => changeFilter('anioDesde', value)}
                                     fluid
                                     placeholder="Desde"
                                     style={{ borderRadius: 18, marginRight: 10 }}
@@ -233,7 +233,7 @@ export default function FiltersHome({options}) {
                                     search
                                     id="combo-input-derecha"
                                     options={options.optionsAniosHasta}
-                                    onChange={(e) => changeFilter('anioHasta', e.target.value)}
+                                    onChange={(e, { value }) => changeFilter('anioHasta', value)}
                                     fluid
                                     placeholder="Hasta"
                                     style={{ borderRadius: 18 }}
@@ -287,7 +287,7 @@ export default function FiltersHome({options}) {
                                     <Select
                                         search
                                         options={options.optionsMarcas}
-                                        onChange={(e) => changeFilter('marca', e.target.value)}
+                                        onChange={(e, { value }) => changeFilter('marca', value)}
                                         fluid
                                         placeholder="Marca"
                                         style={{ borderRadius: 18, marginRight: 10 }}
@@ -296,7 +296,7 @@ export default function FiltersHome({options}) {
                                         search
                                         id="combo-input-derecha"
                                         options={options.optionsModelos}
-                                        onChange={(e) => changeFilter('modelo', e.target.value)}
+                                        onChange={(e, { value }) => changeFilter('modelo', value)}
                                         fluid
                                         placeholder="Modelo"
                                         style={{ borderRadius: 18 }}
@@ -312,7 +312,7 @@ export default function FiltersHome({options}) {
                                 <Select
                                     search
                                     options={FilterPricing}
-                                    onChange={(e) => changeFilter('precio', e.target.value)}
+                                    onChange={(e, { value }) => changeFilter('precio', value)}
                                     fluid
                                     placeholder="Precio"
                                     style={{ borderRadius: 18 }}
@@ -326,7 +326,7 @@ export default function FiltersHome({options}) {
                                     <Select
                                         search
                                         options={options.optionsAniosDesde}
-                                        onChange={(e) => changeFilter('anioDesde', e.target.value)}
+                                        onChange={(e, { value }) => changeFilter('anioDesde', value)}
                                         fluid
                                         placeholder="Desde"
                                         style={{ borderRadius: 18, marginRight: 10 }}
@@ -335,7 +335,7 @@ export default function FiltersHome({options}) {
                                         search
                                         id="combo-input-derecha"
                                         options={options.optionsAniosHasta}
-                                        onChange={(e) => changeFilter('anioHasta', e.target.value)}
+                                        onChange={(e, { value }) => changeFilter('anioHasta', value)}
                                         fluid
                                         placeholder="Hasta"
                                         style={{ borderRadius: 18 }}
