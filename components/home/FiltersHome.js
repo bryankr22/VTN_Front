@@ -20,7 +20,7 @@ export default function FiltersHome({options}) {
         { key: 14, text: "Más de $400.000.000", value: 14 },
     ];
     const [filters, setFilters] = useState({
-        category: '',
+        category: 'carros',
         marca: '',
         modelo: '',
         precio: '',
@@ -63,7 +63,7 @@ export default function FiltersHome({options}) {
                             <Select
                                 search
                                 options={options.optionsCategories}
-                                defaultValue={options.selectCategory}
+                                defaultValue={filters.category}
                                 onChange={(e, { value }) => changeFilter('category', value)}
                                 placeholder="Tipo"
                                 style={{ borderRadius: 18 }}
