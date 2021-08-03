@@ -1,10 +1,7 @@
 import React, {Fragment, useState} from 'react'
 import ItemsCarousel from "react-items-carousel";
-import { Image, Card, Icon } from "semantic-ui-react";
-
 import CardProducts from './cards/CardProducts';
 import CardProductsDesk from './cards/CardProductsDesk';
-
 export default function CarruselDestacados(props) {
     const [activeItemIndex3, setActiveItemIndex3] = useState(0);
     const chevronWidth = 40;

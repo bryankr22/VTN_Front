@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import { Header, Form, Container, Button, Input, Select, Responsive } from "semantic-ui-react";
 export default function FiltersHome({options}) {
-    //console.log(">>>>>", options);
     const FilterPricing = [
         { key: 0, text: "Precio", value: 0 },
         { key: 1, text: "Hasta $10.000.000", value: 1 },
@@ -46,7 +45,6 @@ export default function FiltersHome({options}) {
         newUrl.searchParams.append('permuta', filters.permuta);
         newUrl.searchParams.append('promocion', filters.promocion);
         window.location.href = newUrl.href;
-        //console.log(">>>>>newurl", newUrl);
     }
     return (
         <div>

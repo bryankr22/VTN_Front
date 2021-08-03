@@ -1,12 +1,8 @@
 import React from 'react'
 import { Header, Responsive } from "semantic-ui-react";
 import CarruselDestacados from "../carrusel/CarruselDestacados";
-import { useSelector } from "react-redux";
 export default function DestacadosHome({vehiculos}) {
-    //const vehiculos_local = useSelector(({ home }) => home.vehiculos_promocion);
-    const onClickFav = () => {
-
-    }
+    const onClickFav = () => { }
     return (
         <div>
             <Responsive {...Responsive.onlyMobile}>

@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Header, Container, Grid, Button, Responsive } from "semantic-ui-react";
-import { useSelector } from "react-redux";
 const NoticiasHome = ({noticias}) => {
-    //const noticias = useSelector(({ home }) => home.noticias);
     return (
         <div>
             <Container

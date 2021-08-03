@@ -1,7 +1,6 @@
 import React, {Fragment, useState} from 'react'
 import ItemsCarousel from "react-items-carousel";
 import { Image, Card } from "semantic-ui-react";
-
 export default function CarruselMarcas({ data = [], numberCards }) {
     const [activeItemIndex2, setActiveItemIndex2] = useState(0);
     const chevronWidth = 40;

@@ -1,9 +1,7 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { Header, Responsive } from "semantic-ui-react";
 import CarruselMarcas from "../carrusel/CarruselMarcas";
-import { useSelector } from "react-redux";
 export default function MarcasHome({marcas}) {
-    //const marcas = useSelector(({ home }) => home.marcas);
     return (
         <div
             style={{

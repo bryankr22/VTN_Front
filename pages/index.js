@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import dynamic from 'next/dynamic';
 
 import PublicLayout from '../layouts/PublicLayout';
@@ -19,8 +19,6 @@ const DestacadosHome = dynamic(() => import('../components/home/DestacadosHome')
 //import DestacadosHome from '../components/home/DestacadosHome';
 
 import axios from 'axios';
-import { useDispatch } from "react-redux";
-import { updateHome } from '../store/homeSlice';
 import { API_URL, home } from '../helpers/constants';
 
 const Home = ({ vehiculos, slider, sliderMobile, categorias, marcas, noticias, filters}) => {

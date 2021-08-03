@@ -1,9 +1,7 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { Header, Divider, Responsive } from "semantic-ui-react";
 import CarruselCategories from "../carrusel/CarruselCategories";
-import { useSelector } from "react-redux";
 export default function CategoriasHome({categorias}) {
-    //const categories = useSelector(({ home }) => home.categories);
     return (
         <div>
             <Divider style={{ marginLeft: 20, marginRight: 20 }} />

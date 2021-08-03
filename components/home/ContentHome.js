@@ -26,10 +26,6 @@ const ContentHome = () => {
             alert("nombre mayor o igual a 3 caracteres");
             return;
         }
-        //Global loader
-        /**this.setState({
-            dimmer: true,
-        });**/
         let data = {
             nombreNewsletter,
             emailNewsletter,
