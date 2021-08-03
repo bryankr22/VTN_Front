@@ -64,7 +64,7 @@ export default function FiltersHome({options}) {
                                 search
                                 options={options.optionsCategories}
                                 defaultValue={options.selectCategory}
-                                onChange={(e) => changeFilter('category', e.target.value)}
+                                onChange={(e, { value }) => changeFilter('category', value)}
                                 placeholder="Tipo"
                                 style={{ borderRadius: 18 }}
                             />
@@ -168,7 +168,7 @@ export default function FiltersHome({options}) {
                                 options={options.optionsCategories}
                                 defaultValue={options.selectCategory}
                                 placeholder="Tipo"
-                                onChange={(e) => changeFilter('category', e.target.value)}
+                                onChange={(e, { value }) => changeFilter('category', value)}
                                 style={{ borderRadius: 18 }}
                             />
                         </Form.Field>
@@ -274,7 +274,7 @@ export default function FiltersHome({options}) {
                                     search
                                     options={options.optionsCategories}
                                     defaultValue={options.selectCategory}
-                                    onChange={(e) => changeFilter('category', e.target.value)}
+                                    onChange={(e, { value }) => changeFilter('category', value)}
                                     placeholder="Tipo"
                                     style={{ borderRadius: 18 }}
                                 />
