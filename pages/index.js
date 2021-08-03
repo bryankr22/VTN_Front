@@ -2,13 +2,13 @@ import React, {useEffect} from 'react';
 import dynamic from 'next/dynamic';
 
 import PublicLayout from '../layouts/PublicLayout';
-const ContentHome = dynamic(() => import('../components/home/ContentHome'));
-const NoticiasHome = dynamic(() => import('../components/home/NoticiasHome'));
-const MarcasHome = dynamic(() => import('../components/home/MarcasHome'));
-const CategoriasHome = dynamic(() => import('../components/home/CategoriasHome'));
-const FiltersHome = dynamic(() => import('../components/home/FiltersHome'));
-const SliderHome = dynamic(() => import('../components/home/SliderHome'));
-const DestacadosHome = dynamic(() => import('../components/home/DestacadosHome'));
+const ContentHome = dynamic(() => import('../components/home/ContentHome'),{ ssr: false });
+const NoticiasHome = dynamic(() => import('../components/home/NoticiasHome'),{ ssr: false });
+const MarcasHome = dynamic(() => import('../components/home/MarcasHome'),{ ssr: false });
+const CategoriasHome = dynamic(() => import('../components/home/CategoriasHome'),{ ssr: false });
+const FiltersHome = dynamic(() => import('../components/home/FiltersHome'),{ ssr: false });
+const SliderHome = dynamic(() => import('../components/home/SliderHome'),{ ssr: false });
+const DestacadosHome = dynamic(() => import('../components/home/DestacadosHome'),{ ssr: false });
 
 //import ContentHome from '../components/home/ContentHome';
 //import NoticiasHome from '../components/home/NoticiasHome';
