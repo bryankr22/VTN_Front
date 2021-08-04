@@ -1,15 +1,14 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 
-//import PublicLayout from '../layouts/PublicLayout';
-const PublicLayout = dynamic(() => import('../layouts/PublicLayout'));
-/**const ContentHome = dynamic(() => import('../components/home/ContentHome'));
+import PublicLayout from '../layouts/PublicLayout';
+const ContentHome = dynamic(() => import('../components/home/ContentHome'));
 const NoticiasHome = dynamic(() => import('../components/home/NoticiasHome'));
 const MarcasHome = dynamic(() => import('../components/home/MarcasHome'));
 const CategoriasHome = dynamic(() => import('../components/home/CategoriasHome'));
 const FiltersHome = dynamic(() => import('../components/home/FiltersHome'));
-const SliderHome = dynamic(() => import('../components/home/SliderHome'));
-const DestacadosHome = dynamic(() => import('../components/home/DestacadosHome'));**/
+const SliderHome = dynamic(() => import('../components/home/SliderHome'), { ssr: false });
+const DestacadosHome = dynamic(() => import('../components/home/DestacadosHome'), { ssr: false });
 
 //import ContentHome from '../components/home/ContentHome';
 //import NoticiasHome from '../components/home/NoticiasHome';
@@ -25,13 +24,13 @@ import { API_URL, home } from '../helpers/constants';
 const Home = ({ vehiculos, slider, sliderMobile, categorias, marcas, noticias, filters}) => {
     return(
         <PublicLayout>
-            {/**<SliderHome slider={slider} sliderMobile={sliderMobile}/>
+            <SliderHome slider={slider} sliderMobile={sliderMobile}/>
             <FiltersHome options={filters}/>
             <CategoriasHome categorias={categorias}/>
             <MarcasHome marcas={marcas}/>
             <DestacadosHome vehiculos={vehiculos}/>
             <NoticiasHome noticias={noticias}/>
-            <ContentHome />**/}
+            <ContentHome />
         </PublicLayout>
     );
 }
