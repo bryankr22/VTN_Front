@@ -15,7 +15,7 @@ class HeadCustom extends Head {
             <link
             key={file}
             nonce={this.props.nonce}
-            rel="stylesheet"
+            rel="preload" as="style"
             href={`${assetPrefix}/_next/${encodeURI(file)}`}
             crossOrigin={this.props.crossOrigin || process.crossOrigin }
             />

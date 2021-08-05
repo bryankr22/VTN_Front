@@ -1,7 +1,7 @@
 import React from 'react';
-import loadable from '@loadable/component'
+import loadable from '@loadable/component';
 
-import PublicLayout from '../layouts/PublicLayout';
+const PublicLayout = loadable(() => import('../layouts/PublicLayout'));
 const ContentHome = loadable(() => import('../components/home/ContentHome'));
 const NoticiasHome = loadable(() => import('../components/home/NoticiasHome'));
 const MarcasHome = loadable(() => import('../components/home/MarcasHome'));
@@ -10,6 +10,7 @@ const FiltersHome = loadable(() => import('../components/home/FiltersHome'));
 const SliderHome = loadable(() => import('../components/home/SliderHome'));
 const DestacadosHome = loadable(() => import('../components/home/DestacadosHome'));
 
+//import PublicLayout from '../layouts/PublicLayout';
 //import ContentHome from '../components/home/ContentHome';
 //import NoticiasHome from '../components/home/NoticiasHome';
 //import MarcasHome from '../components/home/MarcasHome';
