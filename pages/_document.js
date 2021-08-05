@@ -2,6 +2,7 @@ import Document, { Html, Head, Main } from 'next/document'
 import { getLangFromReq } from '../helpers/fromReq'
 import NextScriptCustom from '../components/head/NextScriptCustom';
 import HeadCustom from '../components/head/HeadCustom';
+import Script from 'next/script'
 
 class MyDocument extends Document {
     static async getInitialProps(ctx) {
@@ -26,10 +27,10 @@ class MyDocument extends Document {
                     <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
                     <link media="all" href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css" />
                     <link media="all" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet" type="text/css" />
-                    <script media="all" defer src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-                    <script media="all" defer src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-                    <script media="all" defer src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
-                    <script media="all" defer src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
+                    <Script media="all" defer src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></Script>
+                    <Script media="all" defer src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></Script>
+                    <Script media="all" defer src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></Script>
+                    <Script media="all" defer src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></Script>
                 </HeadCustom>
                 <body>
                     <Main />

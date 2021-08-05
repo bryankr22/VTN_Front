@@ -5,6 +5,7 @@
 import React from 'react';
 import { compact, flatten } from 'lodash';
 import { NextScript } from 'next/document';
+import Script from 'next/script'
 
 class NextScriptCustom extends NextScript {
     render() {
@@ -60,10 +61,10 @@ class NextScriptCustom extends NextScript {
         return (
             <>
                 {initialLoadScripts.map(({ props }) => (
-                    <script key={props.id} {...props} src={props.src} />
+                    <Script key={props.id} {...props} src={props.src} />
                 ))}
 
-                <script id="__NEXT_SCRIPT_CUSTOM" defer dangerouslySetInnerHTML={{ __html: jsContent }} />
+                <Script id="__NEXT_SCRIPT_CUSTOM" defer dangerouslySetInnerHTML={{ __html: jsContent }} />
             </>
         );
     }
