@@ -1,5 +1,7 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Document, { Html, Head, Main } from 'next/document'
 import { getLangFromReq } from '../helpers/fromReq'
+import NextScriptCustom from '../components/head/NextScriptCustom';
+import HeadCustom from '../components/head/HeadCustom';
 
 class MyDocument extends Document {
     static async getInitialProps(ctx) {
@@ -11,7 +13,7 @@ class MyDocument extends Document {
     render() {
         return (
             <Html lang={this.props.lang}>
-                <Head>
+                <HeadCustom>
                     <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
                     <meta name="Description" content="VendeTuNave"></meta>
                     <meta name="theme-color" content="#317EFB" />
@@ -28,10 +30,10 @@ class MyDocument extends Document {
                     <script media="all" defer src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
                     <script media="all" defer src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
                     <script media="all" defer src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
-                </Head>
+                </HeadCustom>
                 <body>
                     <Main />
-                    <NextScript />
+                    <NextScriptCustom />
                 </body>
             </Html>
         )

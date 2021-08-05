@@ -24,8 +24,8 @@
 //import 'semantic-ui-css/components/loader.min.css'
 //import 'semantic-ui-css/components/message.min.css'
 
-//import '../public/css/app.min.css'
-//import '../styles/globals.css'
+import '../public/css/app.min.css'
+import '../styles/globals.css'
 
 import { Provider as ProviderRedux} from 'react-redux'
 import store from '../store';
