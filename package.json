@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@loadable/component": "^5.15.0",
     "@reduxjs/toolkit": "^1.6.0",
     "axios": "^0.21.1",
     "bootstrap": "^5.0.2",
