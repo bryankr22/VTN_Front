@@ -42,6 +42,8 @@ export default function CardProducts({item}) {
                 >
                     {item.new_image === 0 && (
                         <Image
+                        quality={50}
+                        loading='lazy'
                         className="lazyload"
                         priority={true}
                             floated="left"
@@ -57,6 +59,8 @@ export default function CardProducts({item}) {
                     )}
                     {item.new_image === 1 && (
                         <Image
+                        quality={50}
+                        loading='lazy'
                         className="lazyload"
                         priority={true}
                             floated="left"
@@ -72,6 +76,8 @@ export default function CardProducts({item}) {
                     )}
                     {item.new_image === 2 && (
                         <Image
+                        quality={50}
+                        loading='lazy'
                         className="lazyload"
                         priority={true}
                             floated="left"

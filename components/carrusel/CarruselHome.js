@@ -23,12 +23,16 @@ export default function CarruselHome(props) {
                         {props.seccion == "home" && (
                             <Image
                             layout='fill'
+                            quality={50}
+                            loading='lazy'
                             src={item.url}
                             />
                         )}
                         {props.seccion == "desc" && (
                             <img
                             key={index}
+                            quality={50}
+                            loading='lazy'
                             style={{
                                 objectFit: "cover",
                                 width: "100%",
