@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css'
 import '../public/css/app.min.css'
 import '../styles/globals.css'
 
