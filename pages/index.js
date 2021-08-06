@@ -1,14 +1,14 @@
 import React from 'react';
-import loadable from '@loadable/component';
+import dynamic from 'next/dynamic'
 
-const PublicLayout = loadable(() => import('../layouts/PublicLayout'));
-const ContentHome = loadable(() => import('../components/home/ContentHome'));
-const NoticiasHome = loadable(() => import('../components/home/NoticiasHome'));
-const MarcasHome = loadable(() => import('../components/home/MarcasHome'));
-const CategoriasHome = loadable(() => import('../components/home/CategoriasHome'));
-const FiltersHome = loadable(() => import('../components/home/FiltersHome'));
-const SliderHome = loadable(() => import('../components/home/SliderHome'));
-const DestacadosHome = loadable(() => import('../components/home/DestacadosHome'));
+const PublicLayout = dynamic(() => import('../layouts/PublicLayout'));
+const ContentHome = dynamic(() => import('../components/home/ContentHome'));
+const NoticiasHome = dynamic(() => import('../components/home/NoticiasHome'));
+const MarcasHome = dynamic(() => import('../components/home/MarcasHome'));
+const CategoriasHome = dynamic(() => import('../components/home/CategoriasHome'));
+const FiltersHome = dynamic(() => import('../components/home/FiltersHome'));
+const SliderHome = dynamic(() => import('../components/home/SliderHome'));
+const DestacadosHome = dynamic(() => import('../components/home/DestacadosHome'));
 
 //import PublicLayout from '../layouts/PublicLayout';
 //import ContentHome from '../components/home/ContentHome';

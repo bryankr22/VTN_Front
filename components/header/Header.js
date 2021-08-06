@@ -3,11 +3,11 @@ import { Dropdown, Input, Icon, Responsive, Button } from "semantic-ui-react";
 import Link from 'next/link'
 import Image from 'next/image'
 import { useCookies } from "react-cookie"
-import loadable from '@loadable/component';
+import dynamic from 'next/dynamic'
 
-const MenuMobile = loadable(() => import('./MenuMobile'));
-const MenuUsuario = loadable(() => import('./MenuUsuario'));
-const MenuUsuarioMobile = loadable(() => import('./MenuUsuarioMobile'));
+const MenuMobile = dynamic(() => import('./MenuMobile'));
+const MenuUsuario = dynamic(() => import('./MenuUsuario'));
+const MenuUsuarioMobile = dynamic(() => import('./MenuUsuarioMobile'));
 
 //import MenuMobile from './MenuMobile'
 //import MenuUsuario from './MenuUsuario'

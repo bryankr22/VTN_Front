@@ -1,3 +1,6 @@
+@import '~bootstrap/scss/nav';
+@import '~bootstrap/scss/navbar';
+
 .image > img {
     object-fit: cover;
 }
