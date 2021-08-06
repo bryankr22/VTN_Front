@@ -56,6 +56,8 @@ const Header = (props) => {
                 className={'image-container-tablet'}
                 >
                     <Image
+                    quality={50}
+                    loading='lazy'
                     layout='fill'
                     className={'imglogo'}
                     src="/images/VTN_logo_white.png"
@@ -96,6 +98,8 @@ const Header = (props) => {
                 className={'image-container'}
                 >
                     <Image
+                    quality={50}
+                    loading='lazy'
                     layout='fill'
                     className={'imglogo'}
                     src="/images/VTN_logo_white.png"
@@ -142,6 +146,8 @@ const Header = (props) => {
                     className={'image-container'}
                     >
                         <Image
+                        quality={50}
+                        loading='lazy'
                         layout='fill'
                         className={'imglogo'}
                         src="/images/VTN_logo_white.png"
