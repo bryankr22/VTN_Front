@@ -1,6 +1,6 @@
 import Document, { Html, Main, Head, NextScript } from 'next/document'
 import { getLangFromReq } from '../helpers/fromReq'
-//import NextScriptCustom from '../components/head/NextScriptCustom';
+import NextScriptCustom from '../components/head/NextScriptCustom';
 //import HeadCustom from '../components/head/HeadCustom';
 import Script from 'next/script'
 
@@ -34,7 +34,7 @@ class MyDocument extends Document {
                 </Head>
                 <body>
                     <Main />
-                    <NextScript />
+                    <NextScriptCustom />
                 </body>
             </Html>
         )
