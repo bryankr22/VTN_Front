@@ -2,10 +2,16 @@ import React, {useState} from 'react';
 import { Dropdown, Input, Icon, Responsive, Button } from "semantic-ui-react";
 import Link from 'next/link'
 import Image from 'next/image'
-import MenuMobile from './MenuMobile'
-import MenuUsuario from './MenuUsuario'
 import { useCookies } from "react-cookie"
-import MenuUsuarioMobile from './MenuUsuarioMobile';
+import loadable from '@loadable/component';
+
+const MenuMobile = loadable(() => import('./MenuMobile'));
+const MenuUsuario = loadable(() => import('./MenuUsuario'));
+const MenuUsuarioMobile = loadable(() => import('./MenuUsuarioMobile'));
+
+//import MenuMobile from './MenuMobile'
+//import MenuUsuario from './MenuUsuario'
+//import MenuUsuarioMobile from './MenuUsuarioMobile';
 
 const Header = (props) => {
     const [cookies, setCookie] = useCookies(['vtn_token']);

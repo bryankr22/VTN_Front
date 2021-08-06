@@ -24,14 +24,15 @@ module.exports = withCss(
         ],
     })
 );
-module.exports = withPWA({
-    pwa: {
-        dest: 'public',
-        runtimeCaching
-    },
+
+module.exports = {
     reactStrictMode: false,
     compress: true,
     images: {
         domains: ['vendetunave.s3.amazonaws.com'],
-    }
-});
+    },
+}
+/**const withBundleAnalyzer = require("@next/bundle-analyzer")({
+    enabled: process.env.ANALYZE === "true",
+});  
+module.exports = withBundleAnalyzer({});**/
