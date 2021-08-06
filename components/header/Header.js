@@ -60,7 +60,7 @@ const Header = (props) => {
                     loading='lazy'
                     layout='fill'
                     className={'imglogo'}
-                    src="/images/VTN_logo_white.png"
+                    src="/images/VTN_logo_white_mobile.png"
                     />
                 </div>
                 </Link>
@@ -102,7 +102,7 @@ const Header = (props) => {
                     loading='lazy'
                     layout='fill'
                     className={'imglogo'}
-                    src="/images/VTN_logo_white.png"
+                    src="/images/VTN_logo_white_mobile.png"
                     />
                 </div>
                 </Link>
