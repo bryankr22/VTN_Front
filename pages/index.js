@@ -7,8 +7,8 @@ const NoticiasHome = dynamic(() => import('../components/home/NoticiasHome'));
 const MarcasHome = dynamic(() => import('../components/home/MarcasHome'));
 const CategoriasHome = dynamic(() => import('../components/home/CategoriasHome'));
 const FiltersHome = dynamic(() => import('../components/home/FiltersHome'));
-const SliderHome = dynamic(() => import('../components/home/SliderHome'));
-const DestacadosHome = dynamic(() => import('../components/home/DestacadosHome'));
+const SliderHome = dynamic(() => import('../components/home/SliderHome'), {ssr: false});
+const DestacadosHome = dynamic(() => import('../components/home/DestacadosHome'), {ssr: false});
 
 //import PublicLayout from '../layouts/PublicLayout';
 //import ContentHome from '../components/home/ContentHome';
