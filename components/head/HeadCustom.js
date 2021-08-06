@@ -6,28 +6,20 @@ import React from 'react';
 import { Head } from 'next/document';
 
 class HeadCustom extends Head {
-    getCssLinks() {
-        const { assetPrefix, files } = this.context;
-        const cssFiles = files && files.length ? files.filter(f => /\.css$/.test(f)) : [];
-        const cssLinkElements = [];
-        cssFiles.forEach((file) => {
-            cssLinkElements.push(
-            <link
-            key={file}
-            nonce={this.props.nonce}
-            rel="preload" as="style"
-            href={`${assetPrefix}/_next/${encodeURI(file)}`}
-            crossOrigin={this.props.crossOrigin || process.crossOrigin }
-            />
+    getCssLinks(files) {
+        const { assetPrefix, devOnlyCacheBusterQueryString, } = this.context;
+        const normalScripts = files.allFiles.filter((file) => file.endsWith('.css'));
+        return [...normalScripts].map((file) => {
+            return (
+                <link
+                key={file}
+                src={`${assetPrefix}/_next/${encodeURI( file )}${devOnlyCacheBusterQueryString}`}
+                nonce={this.props.nonce}
+                rel='preload'
+                as='style'
+                />
             );
         });
-        return cssLinkElements.length === 0 ? null : cssLinkElements;
-    }
-    getPreloadMainLinks() {
-        return [];
-    }
-    getPreloadDynamicChunks() {
-        return [];
     }
 }
 export default HeadCustom;
