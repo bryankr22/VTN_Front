@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import dynamic from 'next/dynamic'
 
-const PublicLayout = dynamic(() => import('../layouts/PublicLayout'));
+const PublicLayout = dynamic(() => import('../../layouts/PublicLayout'));
 const SidebarFichas = dynamic(() => import('../../components/vehiculos/SidebarFichas'));
 const ListadoFichas = dynamic(() => import('../../components/vehiculos/ListadoFichas'));
 const SidebarMobile = dynamic(() => import('../../components/vehiculos/SidebarMobile'));
