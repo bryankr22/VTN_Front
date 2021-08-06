@@ -52,11 +52,13 @@ export default function CarruselCategories({ data = [], numberCards }) {
                                 `}
                             </style>
                             <Image
+                                quality={50}
+                                loading='lazy'
                                 src={item.path}
                                 alt={item.path.replace("https://vendetunave.s3.amazonaws.com/vendetunave/images/categorias/", "" )}
                                 wrapped
                                 ui={false}
-                                className="image-card-home"
+                                className="image-card-home lazyload"
                                 style={{
                                     background: "white",
                                     width: "40%",

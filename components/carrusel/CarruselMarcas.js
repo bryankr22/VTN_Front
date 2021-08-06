@@ -29,6 +29,9 @@ export default function CarruselMarcas({ data = [], numberCards }) {
                             }}
                         >
                             <Image
+                                quality={50}
+                                loading='lazy'
+                                className="lazyload"
                                 src={item.url}
                                 alt={item.url.replace("https://vendetunave.s3.amazonaws.com/vendetunave/images/marcas/", "" )}
                                 style={{
