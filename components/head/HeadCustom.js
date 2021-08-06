@@ -15,8 +15,9 @@ class HeadCustom extends Head {
                 key={file}
                 src={`${assetPrefix}/_next/${encodeURI( file )}${devOnlyCacheBusterQueryString}`}
                 nonce={this.props.nonce}
-                rel='preload'
-                as='style'
+                rel="stylesheet" 
+                type="text/css"
+                media="all"
                 />
             );
         });
