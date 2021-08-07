@@ -14,7 +14,7 @@ class MyDocument extends Document {
     render() {
         return (
             <Html lang={this.props.lang}>
-                <HeadCustom>
+                <Head>
                     <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
                     <meta name="Description" content="VendeTuNave"></meta>
                     <meta name="theme-color" content="#317EFB" />
@@ -31,7 +31,7 @@ class MyDocument extends Document {
                     <Script strategy="lazyOnload" media="all" defer src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></Script>
                     <Script strategy="lazyOnload" media="all" defer src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></Script>
                     <Script strategy="lazyOnload" media="all" defer src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></Script>
-                </HeadCustom>
+                </Head>
                 <body>
                     <Main />
                     <NextScriptCustom />
