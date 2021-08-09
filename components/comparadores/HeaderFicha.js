@@ -19,7 +19,7 @@ export default function HeaderFicha() {
                     <Grid.Column width={16} style={{ marginBottom: 10 }}>
                         <Card.Group itemsPerRow={3}>
                             {compareList.map((item, index) => (
-                                <Card style={{ width: 'auto', marginLeft: 15 }}>
+                                <Card key={index} style={{ width: 'auto', marginLeft: 15 }}>
                                     <Card.Content>
                                         <Button
                                             style={{
