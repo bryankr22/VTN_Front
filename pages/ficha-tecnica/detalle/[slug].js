@@ -6,8 +6,25 @@ import CarruselHome from '../../../components/carrusel/CarruselHome';
 import axios from 'axios';
 import { Responsive, Icon, Breadcrumb, Grid, Header, Container, Button } from "semantic-ui-react";
 import { useCookies } from "react-cookie"
+
+import { useSelector, useDispatch } from 'react-redux';
+import { addFicha } from '../../../store/comparadorSlice';
 export default function detalle({ data }) {
+    const dispatch = useDispatch();
+    const compareList = useSelector(({ comparador }) => comparador.fichas);
     const [cookies, setCookie] = useCookies(['vtn_token']);
+    const isOnStorage = (item) => {
+        return compareList.some((element) => element.id === item.id);
+    }
+    const addComparar = (item) => {
+        if(compareList.length < 3){
+            dispatch(addFicha(item))
+        }else{
+            //setCompare('0');
+        }
+        window.location.href = '/ficha-tecnica';
+        return;
+    }
     return (
         <PublicLayout>
             <div style={{ display: 'inline-block', float: 'right', marginRight: 40, fontSize: 18, color: '#5c5c5c', marginBottom: 10 }}>
@@ -97,11 +114,13 @@ export default function detalle({ data }) {
                             primary style={{ borderRadius: 20, padding: '11px 40px' }}>Agregar a favoritos</Button>
                         </div>
                     }
-                    <div style={{ margin: '20px auto', textAlign: 'center' }}>
-                        <Button 
-                        onClick={(e) => { e.preventDefault(); }} 
-                        primary style={{ borderRadius: 20, padding: '11px 40px' }}>Comparar</Button>
-                    </div>
+                    { compareList.length < 3 && !isOnStorage(data.vehicle) &&
+                        <div style={{ margin: '20px auto', textAlign: 'center' }}>
+                            <Button 
+                            onClick={(e) => { e.preventDefault();addComparar(data.vehicle) }} 
+                            primary style={{ borderRadius: 20, padding: '11px 40px' }}>Comparar</Button>
+                        </div> 
+                    }
                 </div>
             )}
 

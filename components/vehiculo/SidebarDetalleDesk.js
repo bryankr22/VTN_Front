@@ -1,9 +1,25 @@
 import React from 'react'
 import { Grid, Header, Container, Icon, Button, Form } from "semantic-ui-react";
 import { useCookies } from "react-cookie"
+import { useSelector, useDispatch } from 'react-redux';
+import { addVehiculo } from '../../store/comparadorSlice';
 export default function SidebarDetalleDesk({ vehiculo, diasPublicado, accesorio }) {
+    const dispatch = useDispatch()
     const [cookies, setCookie] = useCookies(['vtn_token']);
+    const compareList = useSelector(({ comparador }) => comparador.vehiculos);
     const vehiculoFav = [];
+    const isOnStorage = (item) => {
+        return compareList.some((element) => element.id === item.id);
+    }
+    const addComparar = (item) => {
+        if(compareList.length < 3){
+            dispatch(addVehiculo(item))
+        }else{
+            //setCompare('0');
+        }
+        window.location.href = '/vehiculos';
+        return;
+    }
     return (
         <Grid.Column style={{ padding: "30px 10px 15px 30px" }}>
             <Header as="h1" textAlign="left">
@@ -90,10 +106,13 @@ export default function SidebarDetalleDesk({ vehiculo, diasPublicado, accesorio 
                     WhatsApp
                 </Button>
                 <br />
-                <Button 
-                fluid  
-                primary 
-                style={{ borderRadius: 20 }}>Comparar</Button>
+                { compareList.length < 3 && !isOnStorage(vehiculo) &&
+                    <Button
+                    onClick={() => addComparar(vehiculo)}
+                    fluid  
+                    primary 
+                    style={{ borderRadius: 20 }}>Comparar</Button> 
+                }
             </>
             )}
             <Container
