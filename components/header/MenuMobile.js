@@ -41,7 +41,9 @@ export default function MenuMobile() {
                                     pathname: '/vehiculos',
                                     query: { categoria: 'carros' },
                                 }}
-                                ><a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Carros y Camionetas</a></Link>
+                                ><a 
+                                onClick={() => localStorage.setItem("compareVehiculos", "0")}
+                                style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Carros y Camionetas</a></Link>
                             </span>
                         </div>
                         <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
@@ -52,7 +54,9 @@ export default function MenuMobile() {
                                     pathname: '/vehiculos',
                                     query: { categoria: 'motos' },
                                 }}
-                                ><a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Motos</a></Link>
+                                ><a 
+                                onClick={() => localStorage.setItem("compareVehiculos", "0")}
+                                style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Motos</a></Link>
                             </span>
                         </div>
                         <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
@@ -63,7 +67,9 @@ export default function MenuMobile() {
                                     pathname: '/vehiculos',
                                     query: { categoria: 'camiones' },
                                 }}
-                                ><a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Camiones</a></Link>
+                                ><a
+                                onClick={() => localStorage.setItem("compareVehiculos", "0")} 
+                                style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Camiones</a></Link>
                             </span>
                         </div>
                         <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
@@ -75,7 +81,9 @@ export default function MenuMobile() {
                                     query: { categoria: 'carros_coleccion' },
                                 }}
                                 >
-                                    <a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Carros de coleccion</a>
+                                    <a 
+                                    onClick={() => localStorage.setItem("compareVehiculos", "0")}
+                                    style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Carros de coleccion</a>
                                 </Link>
                             </span>
                         </div>
@@ -88,7 +96,9 @@ export default function MenuMobile() {
                                     query: { categoria: 'otros' },
                                 }}
                                 >
-                                    <a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Otros</a>
+                                    <a 
+                                    onClick={() => localStorage.setItem("compareVehiculos", "0")}
+                                    style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Otros</a>
                                 </Link>
                             </span>
                         </div>
@@ -97,7 +107,9 @@ export default function MenuMobile() {
                             <Link
                             href="/ficha-tecnica"
                             >
-                                <a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Ficha Tecnica</a>
+                                <a 
+                                onClick={() => localStorage.setItem("compareFichatecnica", "0")}
+                                style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Ficha Tecnica</a>
                             </Link>
                         </div>
                         <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>

@@ -1,7 +1,13 @@
 import React, {useState, useEffect} from 'react'
-import { Image, Container, Input, Card, Select, Grid, Pagination } from "semantic-ui-react";
-
+import { Image, Container, Input, Card, Select, Grid, Pagination, Button } from "semantic-ui-react";
+import { useLocalStorage } from '../../helpers/hooks/useLocalStorage';
+import HeaderVehiculo from '../../components/comparadores/HeaderVehiculo';
+import { useSelector, useDispatch } from 'react-redux';
+import { addVehiculo } from '../../store/comparadorSlice';
 export default function ListadoVehiculos({params, vehiculos, page, totalRecords}) {
+    const compareList = useSelector(({ comparador }) => comparador.vehiculos);
+    const dispatch = useDispatch();
+    const [compare, setCompare] = useLocalStorage("compareVehiculos", '0');
     const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x300/vendetunave/images/vehiculos/";
     const filter = [
         { key: 0, value: 0, text: "Más reciente" },
@@ -53,6 +59,17 @@ export default function ListadoVehiculos({params, vehiculos, page, totalRecords}
     const handleChangeFilter = (e, { value }) => {
         insertParam('orden', value);
     }
+    const isOnStorage = (item) => {
+        return compareList.some((element) => element.id === item.id);
+    }
+    const addComparar = (item) => {
+        if(compareList.length < 3){
+            dispatch(addVehiculo(item))
+        }else{
+            setCompare('0');
+        }
+        return;
+    }
     //useEffect
     return (
         <Grid.Column width={13}>
@@ -80,6 +97,7 @@ export default function ListadoVehiculos({params, vehiculos, page, totalRecords}
                     </Grid.Column>
                 </Grid>
             </Container>
+            <HeaderVehiculo />
             {vehiculos.length === 0 && (
             <p
                 style={{
@@ -138,6 +156,10 @@ export default function ListadoVehiculos({params, vehiculos, page, totalRecords}
                         </Card.Description>
                         <Card.Description>
                             {(item.labelCiudad).toLowerCase().charAt(0).toUpperCase() + (item.labelCiudad).toLowerCase().slice(1)}
+                            { compare === 1 && compareList.length < 3 && !isOnStorage(item) &&
+                                <Button onClick={(e) => { e.preventDefault();addComparar(item)}} 
+                                primary floated='right' compact style={{ fontSize: 13 }}>Comparar</Button>   
+                            }
                         </Card.Description>
                     </Card.Content>
                 </Card>

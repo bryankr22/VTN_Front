@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import dynamic from 'next/dynamic'
-
-const PublicLayout = dynamic(() => import('../../layouts/PublicLayout'));
-const SidebarFichas = dynamic(() => import('../../components/vehiculos/SidebarFichas'));
-const ListadoFichas = dynamic(() => import('../../components/vehiculos/ListadoFichas'));
-const SidebarMobile = dynamic(() => import('../../components/vehiculos/SidebarMobile'));
-const ListadoFichasMobile = dynamic(() => import('../../components/vehiculos/ListadoFichasMobile'));
+import PublicLayout from '../../layouts/PublicLayout';
+import SidebarFichas from '../../components/vehiculos/SidebarFichas';
+import ListadoFichas from '../../components/vehiculos/ListadoFichas';
+import SidebarMobile from '../../components/vehiculos/SidebarMobile';
+import ListadoFichasMobile from '../../components/vehiculos/ListadoFichasMobile';
 
 import { Grid, Responsive } from "semantic-ui-react";
 import { useRouter } from 'next/router';

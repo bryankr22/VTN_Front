@@ -1,20 +1,29 @@
-import React, { useEffect, useState, Fragment } from 'react'
-import { Container, Header, Grid, Image, Button, Divider, Icon } from 'semantic-ui-react';
-
-export default function CompareFicha({ vehiclesCompare }) {
-    const [listado, setListado] = useState([]);
+import React, { Fragment } from 'react'
+import { Header, Grid, Image, Button, Divider, Icon } from 'semantic-ui-react';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeFicha } from '../../store/comparadorSlice';
+export default function CompareFicha() {
+    const dispatch = useDispatch();
     const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x300/vendetunave/images/ficha-tecnica/";
-    useEffect(() => {
-        if (vehiclesCompare.length == 0) {
-            setListado([{ id: 0 }, { id: 0 }, { id: 0 }]);
-        } else {
-            setListado(vehiclesCompare)
+    const parseListings = (storageList) => {
+        var newListado = [{ id: 0 }, { id: 0 }, { id: 0 }];
+        if(storageList.length > 0){
+            for (let i = 0; i < newListado.length; i++) {
+                if(storageList[i]){
+                    newListado[i] = storageList[i];
+                }
+            }
         }
-    }, [])
+        return newListado;
+    }
+    const compareList = useSelector(({ comparador }) => parseListings(comparador.fichas));
+    const removeFichaClick = (index) => {
+        dispatch(removeFicha(index));
+    }
     return (
         <Grid columns={3} divided id="grid-compare">
             <Grid.Row style={{ textAlign: 'left' }}>
-                {listado.map((vehicle, index) => {
+                {compareList.map((vehicle, index) => {
                     if (vehicle.id !== 0) {
                         return (
                             <Grid.Column
@@ -24,6 +33,7 @@ export default function CompareFicha({ vehiclesCompare }) {
                                     primary
                                     floated='right'
                                     style={{ marginBottom: 10 }}
+                                    onClick={() => removeFichaClick(index)}
                                 >
                                     Remover
                                 </Button>
@@ -483,12 +493,12 @@ export default function CompareFicha({ vehiclesCompare }) {
                                 key={index}
                             >
                                 <Button as="a"
-                                    onClick={() => localStorage.setItem("historyVehicles", "1")}
-                                    href="/vehiculos"
+                                    onClick={() => localStorage.setItem("compareFichatecnica", "1")}
+                                    href="/ficha-tecnica"
                                     floated='right' style={{ marginBottom: 10 }}>Agregar</Button>
                                 <Image
                                     centered
-                                    onClick={() => { localStorage.setItem("historyVehicles", "1"); location.href = '/vehiculos' }}
+                                    onClick={() => { localStorage.setItem("compareFichatecnica", "1"); location.href = '/ficha-tecnica' }}
                                     style={{ height: 200, objectFit: 'cover', width: '100%', cursor: 'pointer' }}
                                     src='/images/plus-compare.png'
                                 />

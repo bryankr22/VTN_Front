@@ -3,15 +3,9 @@ import { Dropdown, Input, Icon, Responsive, Button } from "semantic-ui-react";
 import Link from 'next/link'
 import Image from 'next/image'
 import { useCookies } from "react-cookie"
-import dynamic from 'next/dynamic'
-
-const MenuMobile = dynamic(() => import('./MenuMobile'));
-const MenuUsuario = dynamic(() => import('./MenuUsuario'));
-const MenuUsuarioMobile = dynamic(() => import('./MenuUsuarioMobile'));
-
-//import MenuMobile from './MenuMobile'
-//import MenuUsuario from './MenuUsuario'
-//import MenuUsuarioMobile from './MenuUsuarioMobile';
+import MenuMobile from './MenuMobile'
+import MenuUsuario from './MenuUsuario'
+import MenuUsuarioMobile from './MenuUsuarioMobile';
 
 const Header = (props) => {
     const [cookies, setCookie] = useCookies(['vtn_token']);
@@ -181,7 +175,9 @@ const Header = (props) => {
                                     pathname: '/vehiculos',
                                     query: { categoria: 'carros' },
                                 }}
-                                ><a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Carros y Camionetas</a></Link>
+                                ><a 
+                                onClick={() => localStorage.setItem("compareVehiculos", "0")}
+                                style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Carros y Camionetas</a></Link>
                             </span>
                         </div>
                         <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
@@ -192,7 +188,9 @@ const Header = (props) => {
                                     pathname: '/vehiculos',
                                     query: { categoria: 'motos' },
                                 }}
-                                ><a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Motos</a></Link>
+                                ><a 
+                                onClick={() => localStorage.setItem("compareVehiculos", "0")}
+                                style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Motos</a></Link>
                             </span>
                         </div>
                         <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
@@ -203,7 +201,9 @@ const Header = (props) => {
                                     pathname: '/vehiculos',
                                     query: { categoria: 'camiones' },
                                 }}
-                                ><a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Camiones</a></Link>
+                                ><a 
+                                onClick={() => localStorage.setItem("compareVehiculos", "0")}
+                                style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Camiones</a></Link>
                             </span>
                         </div>
                         <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
@@ -215,7 +215,9 @@ const Header = (props) => {
                                     query: { categoria: 'carros_coleccion' },
                                 }}
                                 >
-                                    <a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Carros de coleccion</a>
+                                    <a 
+                                    onClick={() => localStorage.setItem("compareVehiculos", "0")}
+                                    style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Carros de coleccion</a>
                                 </Link>
                             </span>
                         </div>
@@ -228,7 +230,9 @@ const Header = (props) => {
                                     query: { categoria: 'otros' },
                                 }}
                                 >
-                                    <a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Otros</a>
+                                    <a 
+                                    onClick={() => localStorage.setItem("compareVehiculos", "0")}
+                                    style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Otros</a>
                                 </Link>
                             </span>
                         </div>
@@ -238,7 +242,9 @@ const Header = (props) => {
                                 <Link
                                 href="/ficha-tecnica"
                                 >
-                                    <a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Ficha Tecnica</a>
+                                    <a 
+                                    onClick={() => localStorage.setItem("compareFichatecnica", "0")}
+                                    style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Ficha Tecnica</a>
                                 </Link>
                             </span>
                         </div>

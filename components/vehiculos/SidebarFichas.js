@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { Container, Input, List, Modal, Grid, Checkbox, Header, Button, Label, Icon } from "semantic-ui-react";
 import ActiveTagsVehiculos from './ActiveTagsVehiculos';
 export default function SidebarFichas({ params, contadores, vehiculos }) {
-    console.log(">>>>", contadores);
+    //console.log(">>>>", contadores);
     const title_page = (slug) => {
         switch (slug) {
             case 'motos':

@@ -2,7 +2,15 @@ import React from 'react'
 import PublicLayout from '../layouts/PublicLayout'
 import { Container, Header, Responsive, Segment, Button } from 'semantic-ui-react';
 import CompareVehiculo from '../components/comparadores/CompareVehiculo'
+import { useSelector, useDispatch } from 'react-redux';
+import { restartVehiculo } from '../store/comparadorSlice';
 export default function comparar_vehiculos() {
+    const dispatch = useDispatch();
+    const cleanSelector = () => {
+        dispatch(restartVehiculo());
+        localStorage.setItem("compareVehiculos", "1")
+        window.location.href = '/vehiculos';
+    }
     return (
         <PublicLayout>
             <Container style={{ paddingTop: 25, paddingLeft: 20, paddingRight: 20 }} fluid>
@@ -23,7 +31,9 @@ export default function comparar_vehiculos() {
                 <Segment vertical style={{ textAlign: 'center' }}>
                     <Button style={{ marginTop: 15 }} primary>Descargar PDF</Button>
                     <br />
-                    <Button style={{ marginTop: 15 }} >Comparar más versiones</Button>
+                    <Button 
+                    onClick={()=> cleanSelector()}
+                    style={{ marginTop: 15 }} >Comparar más versiones</Button>
                 </Segment>
             </Container>
         </PublicLayout>

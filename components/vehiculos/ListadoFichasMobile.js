@@ -198,9 +198,10 @@ export default function ListadoFichasMobile({vehiculos}) {
                                               </p>
                                           </Grid.Column>
                                           <Grid.Column>
-                                              <Button 
-                                              onClick={(e) => { e.preventDefault(); }} 
-                                              primary floated='left' compact style={{ fontSize: 13 }}>Comparar</Button>
+                                            { localStorage.getItem('compareFichatecnica') === '1' &&
+                                                <Button onClick={(e) => { e.preventDefault(); }} 
+                                                primary floated='left' compact style={{ fontSize: 13 }}>Comparar</Button>   
+                                            }
                                           </Grid.Column>
                                       </Grid.Row>
                                   </Grid>

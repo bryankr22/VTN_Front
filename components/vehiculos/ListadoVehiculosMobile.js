@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, Card } from "semantic-ui-react";
+import { Image, Card, Button } from "semantic-ui-react";
 export default function ListadoVehiculosMobile({vehiculos}) {
     const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/200x200/vendetunave/images/vehiculos/";
     const normalize = (function() {
@@ -77,6 +77,10 @@ export default function ListadoVehiculosMobile({vehiculos}) {
                   </Card.Description>
                   <Card.Description>
                     {(item.labelCiudad).toLowerCase().charAt(0).toUpperCase() + (item.labelCiudad).toLowerCase().slice(1)}
+                    { localStorage.getItem('compareVehiculos') === '1' &&
+                        <Button onClick={(e) => { e.preventDefault(); }} 
+                        primary floated='right' compact style={{ fontSize: 13 }}>Comparar</Button>   
+                    }
                   </Card.Description>
                 </Card.Content>
               </Card>
