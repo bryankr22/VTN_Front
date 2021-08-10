@@ -24,7 +24,7 @@ export default function FiltersHome({options}) {
     ];
     const [filters, setFilters] = useState({
         category: 'carros',
-        marca: '',
+        marca_id: '',
         modelo: '',
         modelos: [],
         precio: '',
@@ -38,20 +38,29 @@ export default function FiltersHome({options}) {
             ...filters,
             [input]: value
         })
-        if(input === 'marca'){
-            onChangeMarca(value);
-        }
+        /**if(input === 'marca_id'){
+            
+        }**/
     }
     const onClickFilter = () => {
         var newUrl = new URL(window.location.protocol+"//"+window.location.hostname+":"+window.location.port+"/vehiculos");
         newUrl.searchParams.append('categoria', filters.category);
-        //newUrl.searchParams.append('marca', filters.marca);
-        newUrl.searchParams.append('modelo', filters.modelo);
+        console.log(">>>>>",filters.marca_id);
+        var marcaObj = options.optionsMarcas.find(element => element.value === filters.marca_id);
+        newUrl.searchParams.append('marca', marcaObj.text);
+        console.log(">>>>>",marcaObj);
+        var modeloObj = filters.modelos.find(element => element.value === filters.modelo);
+        newUrl.searchParams.append('modelo', modeloObj.text);
         newUrl.searchParams.append('precio', filters.precio);
         newUrl.searchParams.append('anio', filters.anioDesde+':'+filters.anioHasta);
-        newUrl.searchParams.append('permuta', filters.permuta);
-        newUrl.searchParams.append('promocion', filters.promocion);
-        window.location.href = newUrl.href;
+        if(filters.permuta){
+            newUrl.searchParams.append('permuta', filters.permuta);
+        }
+        if(filters.promocion){
+            newUrl.searchParams.append('promocion', filters.promocion);
+        }
+        console.log(">>>>>>>", newUrl.href)
+        //window.location.href = newUrl.href;
     }
     const onChangeMarca = async (value) => {
         const res = await axios.get(API_URL + get_modelos + value);
@@ -97,7 +106,7 @@ export default function FiltersHome({options}) {
                                 <Select
                                     search
                                     options={options.optionsMarcas}
-                                    onChange={(e, { value }) => changeFilter('marca', value)}
+                                    onChange={(e, { value }) => changeFilter('marca_id', value)}
                                     fluid
                                     placeholder="Marca"
                                     style={{
@@ -200,7 +209,7 @@ export default function FiltersHome({options}) {
                                 <Select
                                     search
                                     options={options.optionsMarcas}
-                                    onChange={(e, { value }) => changeFilter('marca', value)}
+                                    onChange={(e, { value }) => changeFilter('marca_id', value)}
                                     fluid
                                     placeholder="Marca"
                                     style={{
@@ -307,7 +316,7 @@ export default function FiltersHome({options}) {
                                     <Select
                                         search
                                         options={options.optionsMarcas}
-                                        onChange={(e, { value }) => changeFilter('marca', value)}
+                                        onChange={(e, { value }) => {changeFilter('marca_id', value); onChangeMarca(value)}}
                                         fluid
                                         placeholder="Marca"
                                         style={{ borderRadius: 18, marginRight: 10 }}

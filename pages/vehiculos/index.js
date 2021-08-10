@@ -72,7 +72,7 @@ export async function getServerSideProps({query}) {
             page: query.page,
             ubicacion: query.ubicacion,
             marca: query.marca,
-            combustible: query.combustible,
+            motor: query.combustible,
             modelo: query.modelo,
             ano: query.ano,
             estado: query.estado,
