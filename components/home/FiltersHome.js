@@ -1,5 +1,9 @@
 import React, {useState} from 'react'
 import { Header, Form, Container, Button, Input, Select, Responsive } from "semantic-ui-react";
+
+import axios from 'axios';
+import { API_URL, get_modelos } from '../../helpers/constants';
+
 export default function FiltersHome({options}) {
     const FilterPricing = [
         { key: 0, text: "Precio", value: 0 },
@@ -22,6 +26,7 @@ export default function FiltersHome({options}) {
         category: 'carros',
         marca: '',
         modelo: '',
+        modelos: [],
         precio: '',
         anioDesde: '',
         anioHasta: '',
@@ -33,18 +38,35 @@ export default function FiltersHome({options}) {
             ...filters,
             [input]: value
         })
+        if(input === 'marca'){
+            onChangeMarca(value);
+        }
     }
     const onClickFilter = () => {
         var newUrl = new URL(window.location.protocol+"//"+window.location.hostname+":"+window.location.port+"/vehiculos");
         newUrl.searchParams.append('categoria', filters.category);
-        newUrl.searchParams.append('marca', filters.marca);
+        //newUrl.searchParams.append('marca', filters.marca);
         newUrl.searchParams.append('modelo', filters.modelo);
         newUrl.searchParams.append('precio', filters.precio);
-        newUrl.searchParams.append('anioDesde', filters.anioDesde);
-        newUrl.searchParams.append('anioHasta', filters.anioHasta);
+        newUrl.searchParams.append('anio', filters.anioDesde+':'+filters.anioHasta);
         newUrl.searchParams.append('permuta', filters.permuta);
         newUrl.searchParams.append('promocion', filters.promocion);
         window.location.href = newUrl.href;
+    }
+    const onChangeMarca = async (value) => {
+        const res = await axios.get(API_URL + get_modelos + value);
+        let optionsModelos = [{ key: "", value: "", text: "Modelo" }];
+        await res.data.modelos.forEach(function (item) {
+            optionsModelos.push({
+                key: item.id,
+                value: item.id,
+                text: item.nombre,
+            });
+        });
+        setFilters({
+            ...filters,
+            modelos: optionsModelos
+        })
     }
     return (
         <div>
@@ -89,7 +111,7 @@ export default function FiltersHome({options}) {
                                 <Select
                                     search
                                     id="combo-input-derecha"
-                                    options={options.optionsModelos}
+                                    options={filters.modelos}
                                     onChange={(e, { value }) => changeFilter('modelo', value)}
                                     fluid
                                     placeholder="Modelo"
@@ -192,7 +214,7 @@ export default function FiltersHome({options}) {
                                 <Select
                                     search
                                     id="combo-input-derecha"
-                                    options={options.optionsModelos}
+                                    options={filters.modelos}
                                     onChange={(e, { value }) => changeFilter('modelo', value)}
                                     fluid
                                     placeholder="Modelo"
@@ -271,7 +293,7 @@ export default function FiltersHome({options}) {
                                 <Select
                                     search
                                     options={options.optionsCategories}
-                                    defaultValue={options.selectCategory}
+                                    defaultValue={filters.category}
                                     onChange={(e, { value }) => changeFilter('category', value)}
                                     placeholder="Tipo"
                                     style={{ borderRadius: 18 }}
@@ -293,7 +315,7 @@ export default function FiltersHome({options}) {
                                     <Select
                                         search
                                         id="combo-input-derecha"
-                                        options={options.optionsModelos}
+                                        options={filters.modelos}
                                         onChange={(e, { value }) => changeFilter('modelo', value)}
                                         fluid
                                         placeholder="Modelo"

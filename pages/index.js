@@ -64,7 +64,7 @@ export async function getStaticProps() {
     await res.data.marcasFil.forEach(function (item) {
         optionsMarcas.push({
             key: item.id,
-            value: item.nombre,
+            value: item.id,
             text: item.nombre,
         });
     });

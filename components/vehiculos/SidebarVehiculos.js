@@ -2,7 +2,12 @@ import React, {useState} from 'react'
 import { Container, Input, List, Modal, Grid, Checkbox, Header, Button, Label, Icon } from "semantic-ui-react";
 import ActiveTagsVehiculos from './ActiveTagsVehiculos';
 export default function SidebarVehiculos({ params, contadores, vehiculos }) {
-    console.log(">>>>", contadores);
+    const [filters, setFilters] = useState({
+        min_precio: 0,
+        max_precio: 0,
+        min_km: 0,
+        max_km: 0
+    })
     const title_page = (slug) => {
         switch (slug) {
             case 'motos':
@@ -31,18 +36,18 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
         return sliceItems;
     }
     const kilometraje_filter = [
-        { text: "De 0 a 5.000" },
-        { text: "De 5.000 a 10.000" },
-        { text: "De 10.000 a 20.000" },
-        { text: "De 20.000 a 30.000" },
-        { text: "De 30.000 a 45.000" },
+        { text: "De 0 a 5.000", slug: '0:5000' },
+        { text: "De 5.000 a 10.000", slug: '5000:10000' },
+        { text: "De 10.000 a 20.000", slug: '10000:20000' },
+        { text: "De 20.000 a 30.000", slug: '20000:30000' },
+        { text: "De 30.000 a 45.000", slug: '30000:45000' },
     ];
     const precios_filter = [
-        { text: "Hasta $10.000.000" },
-        { text: "$10.000.000 a $20.000.000" },
-        { text: "$20.000.000 a $35.000.000" },
-        { text: "$35.000.000 a $50.000.000" },
-        { text: "$50.000.000 a $100.000.000" },
+        { text: "Hasta $10.000.000", slug: '0:10000000' },
+        { text: "$10.000.000 a $20.000.000", slug: '10000000:20000000' },
+        { text: "$20.000.000 a $35.000.000", slug: '20000000:35000000' },
+        { text: "$35.000.000 a $50.000.000", slug: '35000000:50000000' },
+        { text: "$50.000.000 a $100.000.000", slug: '50000000:100000000' },
     ];
     const categorias_filter = [
         { text: "CARROS Y CAMIONETAS", slug: 'carros' },
@@ -69,6 +74,18 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
         }
         let params = kvp.join('&');
         document.location.search = params;
+    }
+    const setInputVal = (input, value) => {
+        setFilters({
+            ...filters,
+            [input]: value
+        })
+    }
+    const setKilometraje = () => {
+        insertParam('kilometraje', filters.min_km+':'+filters.max_km);
+    }
+    const setPrice = () => {
+        insertParam('precio', filters.min_precio+':'+filters.max_precio);
     }
     return (
         <Grid.Column style={{ paddingLeft: "3%" }} width={3}>
@@ -250,14 +267,20 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                 <Checkbox
                     name="promocion"
                     label="Promoción"
+                    defaultValue={false}
+                    onChange={({value}) => insertParam('promocion', !value) }
                 />
                 <Checkbox
                     name="permuta"
                     label="Permuta"
+                    defaultValue={false}
+                    onChange={({value}) => insertParam('permuta', !value) }
                 />
                 <Checkbox
                     name="blindaje"
                     label="Blindaje"
+                    defaultValue={false}
+                    onChange={({value}) => insertParam('blindaje', !value) }
                 />
                 { !params.kilometraje && (<>
                 <List link style={{ marginBottom: 0 }}>
@@ -270,7 +293,8 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                                 {kilometraje_filter.map((item, index) => (
                                     <List.Item 
                                     key={index}
-                                    as="a">
+                                    as="a"
+                                    onClick={() => insertParam('kilometraje', item.slug) }>
                                         {item.text}
                                     </List.Item>
                                 )
@@ -290,7 +314,9 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                         <Input
                             type="number"
                             fluid
+                            defaultValue={0}
                             placeholder="Mínimo"
+                            onChange={({value}) => setInputVal('min_km', value)}
                         />
                     </Grid.Column>
                     <Grid.Column
@@ -303,7 +329,9 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                         <Input
                             type="number"
                             fluid
+                            defaultValue={0}
                             placeholder="Máximo"
+                            onChange={({value}) => setInputVal('max_km', value)}
                         />
                     </Grid.Column>
                     <Grid.Column width={3}>
@@ -311,6 +339,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                             style={{ marginLeft: 6 }}
                             circular
                             icon="angle right"
+                            onClick={()=> setKilometraje()}
                         />
                     </Grid.Column>
                 </Grid>
@@ -326,7 +355,8 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                                 {precios_filter.map((item, index) => (
                                     <List.Item 
                                     key={index}
-                                    as="a">
+                                    as="a"
+                                    onClick={() => insertParam('precio', item.slug) }>
                                         {item.text}
                                     </List.Item>
                                 )
@@ -346,7 +376,9 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                         <Input
                             type="number"
                             fluid
+                            defaultValue={0}
                             placeholder="Mínimo"
+                            onChange={({value}) => setInputVal('min_precio', value)}
                         />
                     </Grid.Column>
                     <Grid.Column
@@ -359,7 +391,9 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                         <Input
                             type="number"
                             fluid
+                            defaultValue={0}
                             placeholder="Máximo"
+                            onChange={({value}) => setInputVal('max_precio', value)}
                         />
                     </Grid.Column>
                     <Grid.Column width={3}>
@@ -367,6 +401,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                             style={{ marginLeft: 6 }}
                             circular
                             icon="angle right"
+                            onClick={()=> setPrice()}
                         />
                     </Grid.Column>
                 </Grid>

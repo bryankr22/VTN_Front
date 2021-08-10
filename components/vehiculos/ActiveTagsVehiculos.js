@@ -1,14 +1,46 @@
 import React from 'react'
 import { Container, Input, List, Modal, Grid, Checkbox, Header, Button, Label, Icon } from "semantic-ui-react";
 export default function ActiveTagsVehiculos({tags}) {
+    const removeFilter = (param) => {
+        var params = new URLSearchParams(window.location.search);
+        params.delete(param);
+        window.location.href = `${window.location.pathname}?${params}`;
+    }
     return (
         <div>
+            { tags.permuta ? 
+            <Label as="a" style={{ marginBottom: 5 }}>
+                {'Permuta'}
+                <Icon
+                    name="delete"
+                    onClick={() => removeFilter('permuta') }
+                />
+            </Label>
+            : null}
+            { tags.blindaje ? 
+            <Label as="a" style={{ marginBottom: 5 }}>
+                {'Blindaje'}
+                <Icon
+                    name="delete"
+                    onClick={() => removeFilter('blindaje') }
+                />
+            </Label>
+            : null}
+            { tags.promocion ? 
+            <Label as="a" style={{ marginBottom: 5 }}>
+                {'Promocion'}
+                <Icon
+                    name="delete"
+                    onClick={() => removeFilter('promocion') }
+                />
+            </Label>
+            : null}
             { tags.categoria ? 
             <Label as="a" style={{ marginBottom: 5 }}>
                 {tags.categoria}
                 <Icon
                     name="delete"
-                    onClick={() => console.log("Eliminar") }
+                    onClick={() => removeFilter('categoria') }
                 />
             </Label>
             : null}
@@ -17,7 +49,7 @@ export default function ActiveTagsVehiculos({tags}) {
                 {tags.ubicacion}
                 <Icon
                     name="delete"
-                    onClick={() => console.log("Eliminar") }
+                    onClick={() => removeFilter('ubicacion') }
                 />
             </Label>
             : null}
@@ -26,7 +58,7 @@ export default function ActiveTagsVehiculos({tags}) {
                 {tags.tipo}
                 <Icon
                     name="delete"
-                    onClick={() => console.log("Eliminar") }
+                    onClick={() => removeFilter('tipo') }
                 />
             </Label>
             : null}
@@ -35,7 +67,7 @@ export default function ActiveTagsVehiculos({tags}) {
                 {tags.marca}
                 <Icon
                     name="delete"
-                    onClick={() => console.log("Eliminar") }
+                    onClick={() => removeFilter('marca') }
                 />
             </Label>
             : null}
@@ -44,7 +76,7 @@ export default function ActiveTagsVehiculos({tags}) {
                 {tags.motor}
                 <Icon
                     name="delete"
-                    onClick={() => console.log("Eliminar") }
+                    onClick={() => removeFilter('motor') }
                 />
             </Label>
             : null}
@@ -53,7 +85,7 @@ export default function ActiveTagsVehiculos({tags}) {
                 {tags.modelo}
                 <Icon
                     name="delete"
-                    onClick={() => console.log("Eliminar") }
+                    onClick={() => removeFilter('modelo') }
                 />
             </Label>
             : null}
@@ -62,7 +94,7 @@ export default function ActiveTagsVehiculos({tags}) {
                 {tags.estado}
                 <Icon
                     name="delete"
-                    onClick={() => console.log("Eliminar") }
+                    onClick={() => removeFilter('estado') }
                 />
             </Label>
             : null}
@@ -71,7 +103,7 @@ export default function ActiveTagsVehiculos({tags}) {
                 {tags.transmision}
                 <Icon
                     name="delete"
-                    onClick={() => console.log("Eliminar") }
+                    onClick={() => removeFilter('transmision') }
                 />
             </Label>
             : null}
@@ -80,7 +112,7 @@ export default function ActiveTagsVehiculos({tags}) {
                 {tags.kilometraje}
                 <Icon
                     name="delete"
-                    onClick={() => console.log("Eliminar") }
+                    onClick={() => removeFilter('kilometraje') }
                 />
             </Label>
             : null}
@@ -89,7 +121,7 @@ export default function ActiveTagsVehiculos({tags}) {
                 {tags.precio}
                 <Icon
                     name="delete"
-                    onClick={() => console.log("Eliminar") }
+                    onClick={() => removeFilter('precio') }
                 />
             </Label>
             : null}
