@@ -17,6 +17,15 @@ export default function ActiveTagsVehiculos({tags}) {
                 />
             </Label>
             : null}
+            { tags.combustible ? 
+            <Label as="a" style={{ marginBottom: 5 }}>
+                {tags.combustible}
+                <Icon
+                    name="delete"
+                    onClick={() => removeFilter('combustible') }
+                />
+            </Label>
+            : null}
             { tags.blindaje ? 
             <Label as="a" style={{ marginBottom: 5 }}>
                 {'Blindaje'}
