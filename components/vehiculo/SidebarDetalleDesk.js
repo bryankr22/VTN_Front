@@ -3,7 +3,7 @@ import { Grid, Header, Container, Icon, Button, Form } from "semantic-ui-react";
 import { useCookies } from "react-cookie"
 import { useSelector, useDispatch } from 'react-redux';
 import { addVehiculo } from '../../store/comparadorSlice';
-export default function SidebarDetalleDesk({ vehiculo, diasPublicado, accesorio }) {
+export default function SidebarDetalleDesk({ imagenPrincipal, vehiculo, diasPublicado, accesorio }) {
     const dispatch = useDispatch()
     const [cookies, setCookie] = useCookies(['vtn_token']);
     const compareList = useSelector(({ comparador }) => comparador.vehiculos);
@@ -12,6 +12,7 @@ export default function SidebarDetalleDesk({ vehiculo, diasPublicado, accesorio 
         return compareList.some((element) => element.id === item.id);
     }
     const addComparar = (item) => {
+        //console.log(">>>>>", item);
         if(compareList.length < 3){
             dispatch(addVehiculo(item))
         }else{
