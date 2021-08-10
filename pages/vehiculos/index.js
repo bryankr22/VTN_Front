@@ -78,7 +78,10 @@ export async function getServerSideProps({query}) {
             estado: query.estado,
             precio: query.precio,
             kilometraje: query.kilometraje,
-            orden: query.orden
+            orden: query.orden,
+            promocion: query.promocion,
+            permuta: query.permuta,
+            blindaje: query.blindaje
         }
     });
     const data = await res.data;
