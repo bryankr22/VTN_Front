@@ -71,6 +71,15 @@ export default function ActiveTagsVehiculos({tags}) {
                 />
             </Label>
             : null}
+            { tags.anio ? 
+            <Label as="a" style={{ marginBottom: 5 }}>
+                {tags.anio}
+                <Icon
+                    name="delete"
+                    onClick={() => removeFilter('anio') }
+                />
+            </Label>
+            : null}
             { tags.marca ? 
             <Label as="a" style={{ marginBottom: 5 }}>
                 {tags.marca}
