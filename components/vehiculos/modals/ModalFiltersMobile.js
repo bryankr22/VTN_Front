@@ -1,42 +1,134 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Container, List, Modal, Grid, Header, Icon, Accordion } from "semantic-ui-react";
 export default function ModalFiltersMobile({showModal, onClose, filtros}) {
     const mapping_contador = (contador) => {
         var mapItems = Object.keys(contador).map((item, index) => {
             return {
                 label: item,
+                slug: item,
                 qty: index
             }
         });
         var size = 5;
         var sliceItems = mapItems.slice(0, size)
+        sliceItems.push({
+            label: 'Ver Todos',
+            slug: '',
+            qty: 0
+        })
         return sliceItems;
     }
-    const filtrosLocal = [
-        {
-            text: "Ubicacion",
-            open: false,
-            values: mapping_contador(filtros.ubicacion)
-        },
-        {
-            text: "Marcas",
-            open: false,
-            values: mapping_contador(filtros.marcas)
-        },
-        {
-            text: "Año",
-            open: false,
-            values: mapping_contador(filtros.anios)
-        },
-        {
-            text: "Tipo de motor",
-            open: false,
-            values: mapping_contador(filtros.combustible)
-        }
+    const kilometraje_filter = [
+        { label: "De 0 a 5.000", slug: '0:5000' },
+        { label: "De 5.000 a 10.000", slug: '5000:10000' },
+        { label: "De 10.000 a 20.000", slug: '10000:20000' },
+        { label: "De 20.000 a 30.000", slug: '20000:30000' },
+        { label: "De 30.000 a 45.000", slug: '30000:45000' },
     ];
+    const precios_filter = [
+        { label: "Hasta $10.000.000", slug: '0:10000000' },
+        { label: "$10.000.000 a $20.000.000", slug: '10000000:20000000' },
+        { label: "$20.000.000 a $35.000.000", slug: '20000000:35000000' },
+        { label: "$35.000.000 a $50.000.000", slug: '35000000:50000000' },
+        { label: "$50.000.000 a $100.000.000", slug: '50000000:100000000' },
+    ];
+    const categorias_filter = [
+        { label: "CARROS Y CAMIONETAS", slug: 'carros' },
+        { label: "CAMIONES", slug: 'camiones' },
+        { label: "CARROS DE COLECCION", slug: 'carros_coleccion' },
+        { label: "MOTOS", slug: 'motos' },
+        { label: "OTROS", slug: 'otros' },
+    ];
+    const [filtrosLocal, setFiltrosLocal] = useState(
+        [
+            {
+                text: "Categorias",
+                open: false,
+                values: categorias_filter,
+                slug: 'categoria'
+            },
+            {
+                text: "Ubicacion",
+                open: false,
+                values: mapping_contador(filtros.ubicacion),
+                slug: 'ubicacion'
+            },
+            {
+                text: "Marcas",
+                open: false,
+                values: mapping_contador(filtros.marcas),
+                slug: 'marca'
+            },
+            {
+                text: "Año",
+                open: false,
+                values: mapping_contador(filtros.anios),
+                slug: 'ano'
+            },
+            {
+                text: "Tipo de motor",
+                open: false,
+                values: mapping_contador(filtros.combustible),
+                slug: 'motor'
+            },
+            {
+                text: "Transmision",
+                open: false,
+                values: mapping_contador(filtros.caja),
+                slug: 'transmision'
+            },
+            {
+                text: "Estado",
+                open: false,
+                slug: 'estado',
+                values: [
+                    {
+                        label: "Nuevo",
+                        slug: "Nuevo"
+                    },
+                    {
+                        label: "Usado",
+                        slug: "Usado"
+                    }
+                ]
+            },
+            {
+                text: "Precio",
+                slug: 'precio',
+                open: false,
+                values: precios_filter
+            },
+            {
+                text: "Kilometraje",
+                slug: 'kilometraje',
+                open: false,
+                values: kilometraje_filter
+            }
+        ]
+    )
     const activeDropDown = (index) => {
-        var val_drop = filtrosLocal[index].open;
-        filtrosLocal[index] = !val_drop;
+        var openDrop = filtrosLocal[index].open;
+        filtrosLocal[index].open = !openDrop;
+        setFiltrosLocal([...filtrosLocal]);
+    }
+    const insertParam = (key, value) => {
+        key = encodeURIComponent(key);
+        value = encodeURIComponent(value);
+        var kvp = document.location.search.substr(1).split('&');
+        let i=0;
+        for(; i<kvp.length; i++){
+            if (kvp[i].startsWith(key + '=')) {
+                let pair = kvp[i].split('=');
+                pair[1] = value;
+                kvp[i] = pair.join('=');
+                break;
+            }
+        }
+        if(i >= kvp.length){
+            kvp[kvp.length] = [key,value].join('=');
+        }
+        let params = kvp.join('&');
+        document.location.search = params;
     }
     return (
         <Modal
@@ -87,7 +179,7 @@ export default function ModalFiltersMobile({showModal, onClose, filtros}) {
                                                             borderBottom: "1px solid #cccccc",
                                                             color: "#2185d0",
                                                         }}
-                                                        
+                                                        onClick={()=> insertParam(item.slug, itemSecond.slug)}
                                                     >
                                                         {itemSecond.label}
                                                     </List.Item>
