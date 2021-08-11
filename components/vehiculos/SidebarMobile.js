@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
-import { Input, Header, Button } from "semantic-ui-react";
+import { Input, Header, Button, Container } from "semantic-ui-react";
+import ActiveTagsVehiculos from './ActiveTagsVehiculos';
 import ModalFiltersMobile from './modals/ModalFiltersMobile';
 import ModalOrderMobile from './modals/ModalOrderMobile';
 export default function SidebarMobile({ params, contadores, vehiculos }) {
@@ -58,6 +59,9 @@ export default function SidebarMobile({ params, contadores, vehiculos }) {
             onClose={() => setModalOrder(!modalOrder)}
             />
             </Header>  
+            <Container style={{ marginBottom: 10 }}>
+                <ActiveTagsVehiculos tags={params}/>
+            </Container>
         </div>
     )
 }

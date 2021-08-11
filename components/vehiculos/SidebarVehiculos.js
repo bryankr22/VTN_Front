@@ -146,6 +146,31 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                     </List.Item>
                 </List>
                 )}
+                { !params.modelo && ( 
+                <List link>
+                    <List.Item>
+                        <List.Content>
+                            <List.Header>
+                                <Header as="h5">Modelos</Header>
+                            </List.Header>
+                            <List.List style={{ paddingLeft: 15 }}>
+                                {mapping_contador(contadores.modelos).map((item, index) => (
+                                    <List.Item 
+                                    key={index}
+                                    as="a"
+                                    onClick={() => insertParam('modelo', item.label) }>
+                                        {item.label}
+                                    </List.Item>
+                                )
+                                )}
+                                <List.Item as="a">
+                                    Ver Todos
+                                </List.Item>
+                            </List.List>
+                        </List.Content>
+                    </List.Item>
+                </List>
+                )}
                 { !params.marca && ( 
                 <List link>
                     <List.Item>
@@ -193,7 +218,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                     </List.Item>
                 </List>
                 )}
-                { !params.ano || !params.anio && (
+                { !params.ano && (
                 <List link>
                     <List.Item>
                         <List.Content>
