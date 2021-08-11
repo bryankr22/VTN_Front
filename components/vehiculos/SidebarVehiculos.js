@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { Container, Input, List, Modal, Grid, Checkbox, Header, Button, Label, Icon } from "semantic-ui-react";
 import ActiveTagsVehiculos from './ActiveTagsVehiculos';
 import ModalFiltersDesk from './modals/ModalFiltersDesk';
+import * as R from 'ramda'
 export default function SidebarVehiculos({ params, contadores, vehiculos }) {
     const [filters, setFilters] = useState({
         min_precio: 0,
@@ -34,6 +35,19 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
         });
         var size = 5;
         var sliceItems = mapItems.slice(0, size)
+        return sliceItems;
+    }
+    const mapping_anios = (contador) => {
+        var mapItems = Object.keys(contador).map((item, index) => {
+            return {
+                label: parseInt(item),
+                qty: index
+            }
+        });
+        var byLabel = R.descend(R.prop('label'));
+        var aniosByLabel = R.sort(byLabel, mapItems);
+        var size = 5;
+        var sliceItems = aniosByLabel.slice(0, size);
         return sliceItems;
     }
     const kilometraje_filter = [
@@ -100,7 +114,13 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                 qty: index
             }
         });
-        setListadoModal(mapItems);
+        if(titulo === 'Año'){
+            var byLabel = R.descend(R.prop('label'));
+            var aniosByLabel = R.sort(byLabel, mapItems);
+            setListadoModal(aniosByLabel);
+        }else{
+            setListadoModal(mapItems);
+        }
         setModalAll(true);
     }
     return (
@@ -163,33 +183,6 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                     </List.Item>
                 </List>
                 )}
-                { params.marca && !params.modelo && ( 
-                <List link>
-                    <List.Item>
-                        <List.Content>
-                            <List.Header>
-                                <Header as="h5">Modelos</Header>
-                            </List.Header>
-                            <List.List style={{ paddingLeft: 15 }}>
-                                {mapping_contador(contadores.modelos).map((item, index) => (
-                                    <List.Item 
-                                    key={index}
-                                    as="a"
-                                    onClick={() => insertParam('modelo', item.label) }>
-                                        {item.label}
-                                    </List.Item>
-                                )
-                                )}
-                                <List.Item 
-                                as="a"
-                                onClick={() => openModal('Modelos', contadores.modelos)}>
-                                    Ver Todos
-                                </List.Item>
-                            </List.List>
-                        </List.Content>
-                    </List.Item>
-                </List>
-                )}
                 { !params.marca && ( 
                 <List link>
                     <List.Item>
@@ -210,6 +203,33 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                                 <List.Item 
                                 as="a"
                                 onClick={() => openModal('Marcas', contadores.marcas)}>
+                                    Ver Todos
+                                </List.Item>
+                            </List.List>
+                        </List.Content>
+                    </List.Item>
+                </List>
+                )}
+                { params.marca && !params.modelo && ( 
+                <List link>
+                    <List.Item>
+                        <List.Content>
+                            <List.Header>
+                                <Header as="h5">Modelos</Header>
+                            </List.Header>
+                            <List.List style={{ paddingLeft: 15 }}>
+                                {mapping_contador(contadores.modelos).map((item, index) => (
+                                    <List.Item 
+                                    key={index}
+                                    as="a"
+                                    onClick={() => insertParam('modelo', item.label) }>
+                                        {item.label}
+                                    </List.Item>
+                                )
+                                )}
+                                <List.Item 
+                                as="a"
+                                onClick={() => openModal('Modelos', contadores.modelos)}>
                                     Ver Todos
                                 </List.Item>
                             </List.List>
@@ -247,7 +267,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                                 <Header as="h5">Año</Header>
                             </List.Header>
                             <List.List style={{ paddingLeft: 15 }}>
-                                {mapping_contador(contadores.anios).map((item, index) => (
+                                {mapping_anios(contadores.anios).map((item, index) => (
                                     <List.Item 
                                     key={index}
                                     as="a"
