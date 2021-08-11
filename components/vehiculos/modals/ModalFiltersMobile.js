@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
-import { Container, List, Modal, Grid, Header, Icon, Accordion } from "semantic-ui-react";
+import { Container, List, Modal, Grid, Header, Icon, Accordion, Input, Button } from "semantic-ui-react";
+import * as R from 'ramda'
 export default function ModalFiltersMobile({showModal, onClose, filtros}) {
     const mapping_contador = (contador) => {
         var mapItems = Object.keys(contador).map((item, index) => {
@@ -16,6 +17,19 @@ export default function ModalFiltersMobile({showModal, onClose, filtros}) {
             slug: '',
             qty: 0
         })
+        return sliceItems;
+    }
+    const mapping_anios = (contador) => {
+        var mapItems = Object.keys(contador).map((item, index) => {
+            return {
+                label: parseInt(item),
+                qty: index
+            }
+        });
+        var byLabel = R.descend(R.prop('label'));
+        var aniosByLabel = R.sort(byLabel, mapItems);
+        var size = 5;
+        var sliceItems = aniosByLabel.slice(0, size);
         return sliceItems;
     }
     const kilometraje_filter = [
@@ -62,7 +76,7 @@ export default function ModalFiltersMobile({showModal, onClose, filtros}) {
             {
                 text: "Año",
                 open: false,
-                values: mapping_contador(filtros.anios),
+                values: mapping_anios(filtros.anios),
                 slug: 'ano'
             },
             {
@@ -96,19 +110,27 @@ export default function ModalFiltersMobile({showModal, onClose, filtros}) {
                 text: "Precio",
                 slug: 'precio',
                 open: false,
-                values: precios_filter
+                values: precios_filter,
+                minimo: 0,
+                maximo: 0
             },
             {
                 text: "Kilometraje",
                 slug: 'kilometraje',
                 open: false,
-                values: kilometraje_filter
+                values: kilometraje_filter,
+                minimo: 0,
+                maximo: 0
             }
         ]
     )
     const activeDropDown = (index) => {
         var openDrop = filtrosLocal[index].open;
         filtrosLocal[index].open = !openDrop;
+        setFiltrosLocal([...filtrosLocal]);
+    }
+    const changeInputFiltro = (value, index, input) => {
+        filtrosLocal[index][input] = value;
         setFiltrosLocal([...filtrosLocal]);
     }
     const insertParam = (key, value) => {
@@ -188,6 +210,46 @@ export default function ModalFiltersMobile({showModal, onClose, filtros}) {
                                             </List.Content>
                                         </List.Item>
                                     </List>
+                                    {item.slug === 'precio' || item.slug === 'kilometraje' ?
+                                    <Grid id="grid-range-price" style={{ marginBottom: 8 }}>
+                                        <Grid.Column width={6}>
+                                            <Input
+                                            type="number"
+                                            fluid
+                                            value={item.minimo}
+                                            onChange={(e, { value }) => changeInputFiltro(value, index, 'minimo')}
+                                            placeholder="Mínimo"
+                                            />
+                                        </Grid.Column>
+                                        <Grid.Column
+                                            width={1}
+                                            style={{
+                                            textAlign: "center",
+                                            marginTop: 3,
+                                            fontSize: 16,
+                                            }}
+                                        >
+                                            -
+                                        </Grid.Column>
+                                        <Grid.Column width={6}>
+                                            <Input
+                                            type="number"
+                                            fluid
+                                            placeholder="Máximo"
+                                            value={item.maximo}
+                                            onChange={(e, { value }) => changeInputFiltro(value, index, 'maximo')}
+                                            />
+                                        </Grid.Column>
+                                        <Grid.Column width={3}>
+                                            <Button
+                                            onClick={()=> insertParam(item.slug, item.minimo+':'+item.maximo)}
+                                            style={{ marginLeft: 6 }}
+                                            circular
+                                            icon="angle right"
+                                            />
+                                        </Grid.Column>
+                                    </Grid>
+                                    : null}
                                 </Grid.Column>
                             </Accordion.Content>
                         </Accordion>
