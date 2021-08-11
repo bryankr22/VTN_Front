@@ -1,18 +1,22 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Input, Header, Button } from "semantic-ui-react";
-export default function SidebarMobile({vehiculos}) {
+import ModalFiltersMobile from './modals/ModalFiltersMobile';
+import ModalOrderMobile from './modals/ModalOrderMobile';
+export default function SidebarMobile({ params, contadores, vehiculos }) {
+    const [modalOrder, setModalOrder] = useState(false);
+    const [modalFilter, setModalFilter] = useState(false);
     return (
         <div>
             <Input
             action={{
-              icon: "search",
-              style: {
+                icon: "search",
+                style: {
                 background: "transparent",
                 color: "black",
                 borderBottom: "1px solid black",
                 height: 47,
-                paddingTop: 10,
-              },
+                    paddingTop: 10,
+                },
             }}
             fluid
             id="search-responsive"
@@ -20,7 +24,7 @@ export default function SidebarMobile({vehiculos}) {
             placeholder="¿Qué estas buscando?"
           />
           <Header style={{ margin: 10 }} as="h3">
-            {vehiculos.length} resultados
+            { contadores.total_records } resultados
             <Button
               style={{
                 border: "1px solid #2185d0",
@@ -28,9 +32,14 @@ export default function SidebarMobile({vehiculos}) {
               }}
               floated="right"
               color="blue"
+              onClick={() => setModalFilter(true)}
             >
               FILTRAR
             </Button>
+            <ModalFiltersMobile 
+            filtros={contadores}
+            showModal={modalFilter}
+            onClose={() => setModalFilter(!modalFilter)}/>
             <Button
               style={{
                 border: "1px solid",
@@ -40,9 +49,14 @@ export default function SidebarMobile({vehiculos}) {
               }}
               floated="right"
               color="blue"
+              onClick={() => setModalOrder(true)}
             >
               Ordenar
             </Button>
+            <ModalOrderMobile 
+            showModal={modalOrder}
+            onClose={() => setModalOrder(!modalOrder)}
+            />
             </Header>  
         </div>
     )
