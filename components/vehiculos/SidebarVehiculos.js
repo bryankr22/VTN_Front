@@ -193,7 +193,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                     </List.Item>
                 </List>
                 )}
-                { !params.ano && (
+                { !params.ano || !params.anio && (
                 <List link>
                     <List.Item>
                         <List.Content>

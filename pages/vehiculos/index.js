@@ -75,6 +75,7 @@ export async function getServerSideProps({query}) {
             motor: query.combustible,
             modelo: query.modelo,
             ano: query.ano,
+            anio: query.anio,
             estado: query.estado,
             precio: query.precio,
             kilometraje: query.kilometraje,
