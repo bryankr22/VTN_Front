@@ -53,7 +53,9 @@ export default function ModalFiltersMobile({showModal, onClose, filtros}) {
                     style={{ paddingTop: 0, paddingBottom: 0 }}
                     >
                     {filtrosLocal.map((item, index) => (
-                        <Accordion style={{ width: "100%", marginBottom: 15 }}>
+                        <Accordion 
+                        key={index}
+                        style={{ width: "100%", marginBottom: 15 }}>
                             <Accordion.Title
                             style={{
                                 width: "100%",
@@ -78,7 +80,7 @@ export default function ModalFiltersMobile({showModal, onClose, filtros}) {
                                                 <List.List style={{ paddingLeft: 15 }}>
                                                     {item.values.map((itemSecond, indexSecond) => ( 
                                                     <List.Item
-                                                        key={"ubi1" + indexSecond}
+                                                        key={item.text + indexSecond}
                                                         as="a"
                                                         style={{
                                                             padding: "7px 0px",
