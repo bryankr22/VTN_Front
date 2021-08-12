@@ -61,7 +61,7 @@ export default function FiltersHome({options}) {
             newUrl.searchParams.append('precio', filters.precio);
         }
         if(filters.anioDesde){
-            newUrl.searchParams.append('anio', filters.anioHasta+':'+filters.anioDesde);
+            newUrl.searchParams.append('anio', filters.anioDesde+':'+filters.anioHasta);
         }
         if(filters.permuta){
             newUrl.searchParams.append('permuta', filters.permuta);

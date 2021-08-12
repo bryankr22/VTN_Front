@@ -38,6 +38,7 @@ export default function SidebarMobile({ params, contadores, vehiculos }) {
               FILTRAR
             </Button>
             <ModalFiltersMobile 
+            params={params}
             filtros={contadores}
             showModal={modalFilter}
             onClose={() => setModalFilter(!modalFilter)}/>
