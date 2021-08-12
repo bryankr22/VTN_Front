@@ -23,6 +23,7 @@ export default function ModalFiltersMobile({showModal, onClose, filtros}) {
         var mapItems = Object.keys(contador).map((item, index) => {
             return {
                 label: parseInt(item),
+                slug: parseInt(item),
                 qty: index
             }
         });
@@ -83,7 +84,7 @@ export default function ModalFiltersMobile({showModal, onClose, filtros}) {
                 text: "Tipo de motor",
                 open: false,
                 values: mapping_contador(filtros.combustible),
-                slug: 'motor'
+                slug: 'combustible'
             },
             {
                 text: "Transmision",
