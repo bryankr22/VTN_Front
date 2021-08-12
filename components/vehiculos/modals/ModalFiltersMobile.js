@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import { Container, List, Modal, Grid, Header, Icon, Accordion, Input, Button, Checkbox } from "semantic-ui-react";
 import * as R from 'ramda'
+import OpcionesComponent from './OpcionesComponent';
+import MarcaModeloComponent from './MarcaModeloComponent';
 export default function ModalFiltersMobile({showModal, onClose, filtros, params}) {
     const mapping_contador = (contador) => {
         var mapItems = Object.keys(contador).map((item, index) => {
@@ -54,58 +56,55 @@ export default function ModalFiltersMobile({showModal, onClose, filtros, params}
         { label: "MOTOS", slug: 'motos' },
         { label: "OTROS", slug: 'otros' },
     ];
-    const [marcasList, setMarcasList] = useState({
-        text: "Marcas",
-        open: false,
-        values: mapping_contador(filtros.marcas),
-        slug: 'marca'
-    });
-    const [opcionesList, setOpcionesList] = useState({
-        text: "Opciones",
-        open: false
-    });
-    const [modelosList, setModelosList] = useState({
-        text: "Modelos",
-        open: false,
-        values: mapping_contador(filtros.modelos),
-        slug: 'modelo'
-    });
+    
     const [filtrosLocal, setFiltrosLocal] = useState(
         [
-            {
-                text: "Categorias",
-                open: false,
-                values: categorias_filter,
-                slug: 'categoria'
-            },
             {
                 text: "Ubicacion",
                 open: false,
                 values: mapping_contador(filtros.ubicacion),
-                slug: 'ubicacion'
+                slug: 'ubicacion',
+                component: false
             },
+            {
+                text: "Categorias",
+                open: false,
+                values: categorias_filter,
+                slug: 'categoria',
+                component: false
+            },
+            {
+                text: "Marcas",
+                component: true,
+                render: <MarcaModeloComponent filtros={filtros} params={params} />
+            },
+            //Marcas
             {
                 text: "Año",
                 open: false,
                 values: mapping_anios(filtros.anios),
-                slug: 'ano'
+                slug: 'ano',
+                component: false
             },
             {
                 text: "Tipo de motor",
                 open: false,
                 values: mapping_contador(filtros.combustible),
-                slug: 'combustible'
+                slug: 'combustible',
+                component: false
             },
             {
                 text: "Transmision",
                 open: false,
                 values: mapping_contador(filtros.caja),
-                slug: 'transmision'
+                slug: 'transmision',
+                component: false
             },
             {
                 text: "Estado",
                 open: false,
                 slug: 'estado',
+                component: false,
                 values: [
                     {
                         label: "Nuevo",
@@ -118,9 +117,16 @@ export default function ModalFiltersMobile({showModal, onClose, filtros, params}
                 ]
             },
             {
+                text: "Opciones",
+                component: true,
+                render: <OpcionesComponent params={params} />
+            },
+            //Opciones
+            {
                 text: "Precio",
                 slug: 'precio',
                 open: false,
+                component: false,
                 values: precios_filter,
                 minimo: 0,
                 maximo: 0
@@ -129,27 +135,13 @@ export default function ModalFiltersMobile({showModal, onClose, filtros, params}
                 text: "Kilometraje",
                 slug: 'kilometraje',
                 open: false,
+                components: false,
                 values: kilometraje_filter,
                 minimo: 0,
                 maximo: 0
             }
         ]
     )
-    const activeMarcas = () => {
-        var openDrop = marcasList.open;
-        marcasList.open = !openDrop;
-        setMarcasList({...marcasList});
-    }
-    const activeModelos = () => {
-        var openDrop = modelosList.open;
-        modelosList.open = !openDrop;
-        setModelosList({...modelosList});
-    }
-    const activeOpciones = () => {
-        var openDrop = opcionesList.open;
-        opcionesList.open = !openDrop;
-        setOpcionesList({...opcionesList});
-    }
     const activeDropDown = (index) => {
         var openDrop = filtrosLocal[index].open;
         filtrosLocal[index].open = !openDrop;
@@ -192,147 +184,8 @@ export default function ModalFiltersMobile({showModal, onClose, filtros, params}
                     columns={1}
                     style={{ paddingTop: 0, paddingBottom: 0 }}
                     >
-                    {!params.marca && (    
-                    <Accordion 
-                    style={{ width: "100%", marginBottom: 15 }}>
-                        <Accordion.Title
-                        style={{
-                            width: "100%",
-                            border: "1px solid black",
-                            padding: "10px 20px",
-                            borderRadius: 20,
-                        }}
-                        active={marcasList.open}
-                        index={0}
-                        onClick={() => activeMarcas()}
-                        >
-                        <Header as="h5">
-                            {marcasList.text}
-                            <Icon name="dropdown" style={{ float: "right" }} />
-                        </Header>
-                        </Accordion.Title>
-                        <Accordion.Content active={marcasList.open}>
-                            <Grid.Column>
-                                <List link>
-                                    <List.Item>
-                                        <List.Content>
-                                            <List.List style={{ paddingLeft: 15 }}>
-                                                {marcasList.values.map((itemSecond, indexSecond) => ( 
-                                                <List.Item
-                                                    key={marcasList.text + indexSecond}
-                                                    as="a"
-                                                    style={{
-                                                        padding: "7px 0px",
-                                                        borderBottom: "1px solid #cccccc",
-                                                        color: "#2185d0",
-                                                    }}
-                                                    onClick={()=> insertParam(marcasList.slug, itemSecond.slug)}
-                                                >
-                                                    {itemSecond.label}
-                                                </List.Item>
-                                                ))}
-                                            </List.List>
-                                        </List.Content>
-                                    </List.Item>
-                                </List>
-                            </Grid.Column>
-                        </Accordion.Content>
-                    </Accordion>
-                    )}
-                    { params.marca && !params.modelo && (    
-                    <Accordion 
-                    style={{ width: "100%", marginBottom: 15 }}>
-                        <Accordion.Title
-                        style={{
-                            width: "100%",
-                            border: "1px solid black",
-                            padding: "10px 20px",
-                            borderRadius: 20,
-                        }}
-                        active={modelosList.open}
-                        index={0}
-                        onClick={() => activeModelos()}
-                        >
-                        <Header as="h5">
-                            {modelosList.text}
-                            <Icon name="dropdown" style={{ float: "right" }} />
-                        </Header>
-                        </Accordion.Title>
-                        <Accordion.Content active={modelosList.open}>
-                            <Grid.Column>
-                                <List link>
-                                    <List.Item>
-                                        <List.Content>
-                                            <List.List style={{ paddingLeft: 15 }}>
-                                                {modelosList.values.map((itemSecond, indexSecond) => ( 
-                                                <List.Item
-                                                    key={modelosList.text + indexSecond}
-                                                    as="a"
-                                                    style={{
-                                                        padding: "7px 0px",
-                                                        borderBottom: "1px solid #cccccc",
-                                                        color: "#2185d0",
-                                                    }}
-                                                    onClick={()=> insertParam(modelosList.slug, itemSecond.slug)}
-                                                >
-                                                    {itemSecond.label}
-                                                </List.Item>
-                                                ))}
-                                            </List.List>
-                                        </List.Content>
-                                    </List.Item>
-                                </List>
-                            </Grid.Column>
-                        </Accordion.Content>
-                    </Accordion>
-                    )}
-                    <Accordion 
-                    style={{ width: "100%", marginBottom: 15 }}>
-                        <Accordion.Title
-                        style={{
-                            width: "100%",
-                            border: "1px solid black",
-                            padding: "10px 20px",
-                            borderRadius: 20,
-                        }}
-                        active={opcionesList.open}
-                        index={0}
-                        onClick={() => activeOpciones()}
-                        >
-                        <Header as="h5">
-                            {opcionesList.text}
-                            <Icon name="dropdown" style={{ float: "right" }} />
-                        </Header>
-                        </Accordion.Title>
-                        <Accordion.Content active={opcionesList.open}>
-                            <Grid.Column>
-                                <Checkbox
-                                style={{ paddingLeft: 15 }}
-                                name="promocion"
-                                label="Promoción"
-                                defaultValue={params.promocion}
-                                onChange={(e, {value}) => insertParam('promocion', !value) }
-                                />
-                                <br />
-                                <Checkbox
-                                style={{ paddingLeft: 15 }}
-                                name="permuta"
-                                label="Permuta"
-                                defaultValue={params.permuta}
-                                onChange={(e, {value}) => insertParam('permuta', !value) }
-                                />
-                                <br />
-                                <Checkbox
-                                style={{ paddingLeft: 15 }}
-                                name="blindaje"
-                                label="Blindaje"
-                                defaultValue={params.blindaje}
-                                onChange={(e, {value}) => insertParam('blindaje', !value) }
-                                />
-                            </Grid.Column>
-                        </Accordion.Content>
-                    </Accordion>
-                    {filtrosLocal.map((item, index) => (
+                    {filtrosLocal.map((item, index) => 
+                        item.component ? item.render : (
                         <Accordion 
                         key={index}
                         style={{ width: "100%", marginBottom: 15 }}>
