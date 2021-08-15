@@ -11,7 +11,7 @@ export default function CarruselCategories({ data = [], numberCards }) {
                 return `/vehiculos?categoria=carros`;
             case 'Camiones':
                 return `/vehiculos?categoria=camiones`;
-            case 'Carros de coleccion':
+            case 'Carros de colección':
                 return `/vehiculos?categoria=carros_coleccion`;
             case 'Motos':
                 return `/vehiculos?categoria=motos`;
