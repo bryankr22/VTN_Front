@@ -1,6 +1,13 @@
 import React from 'react'
 import { Image, Card, Grid, Header, Button } from "semantic-ui-react";
+import { useLocalStorage } from '../../helpers/hooks/useLocalStorage';
+import { useSelector, useDispatch } from 'react-redux';
+import { addFicha } from '../../store/comparadorSlice';
+import HeaderFicha from '../../components/comparadores/HeaderFicha';
 export default function ListadoFichasMobile({vehiculos}) {
+    const compareList = useSelector(({ comparador }) => comparador.fichas);
+    const dispatch = useDispatch();
+    const [compare, setCompare] = useLocalStorage("compareFichatecnica", '0');
     const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/120x120/vendetunave/images/ficha-tecnica/";
     const normalize = (function() {
         var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
@@ -20,8 +27,44 @@ export default function ListadoFichasMobile({vehiculos}) {
           return ret.join("");
         };
     })();
+    const isOnStorage = (item) => {
+        return compareList.some((element) => element.id === item.id);
+    }
+    const addComparar = (item) => {
+        if(compareList.length < 3){
+            dispatch(addFicha(item))
+        }else{
+            setCompare('0');
+        }
+        return;
+    }
     return (
         <div>
+            <style>
+              {`
+                a:hover {
+                text-decoration: none !important;
+                }
+
+                .image-ficha > img {
+                    width: 120px !important;
+                    height: 120px !important;
+                }
+              `}
+            </style>
+            <HeaderFicha />
+            {vehiculos.length === 0 && (
+            <p
+                style={{
+                    textAlign: "center",
+                    margin: "25px 0",
+                    fontSize: 24,
+                }}
+            >
+                No encontramos resultados
+            </p>
+            )}
+            {vehiculos.length > 0 && (
             <Card.Group
             itemsPerRow={2}
             left="true"
@@ -35,15 +78,15 @@ export default function ListadoFichasMobile({vehiculos}) {
               style={{ width: '100%', boxShadow: '0 4px 2px -4px grey', margin: 3 }}>
                   <Card.Content style={{ paddingBottom: 20 }}>
                       <Image
-                          style={{ marginRight: 10 }}
-                          className="image-ficha"
-                          floated='left'
-                          size='small'
-                          src={pathS3 + item.nameImage + "." + item.extension}
-                          wrapped
-                          ui={false}
-                      />
-                      <Card.Content>
+                        style={{ marginRight: 10 }}
+                        className="image-ficha"
+                        floated='left'
+                        size='small'
+                        src={pathS3 + item.nameImage + "." + item.extension}
+                        wrapped
+                        ui={false}
+                    />
+                    <Card.Content>
                           <Card.Header as='a' style={{ marginBottom: 10, marginTop: 10, fontSize: 14, color: 'black', fontWeight: 'bold' }}>{item.title}</Card.Header>
                           <Grid.Row>
                               <Grid.Column>
@@ -198,8 +241,8 @@ export default function ListadoFichasMobile({vehiculos}) {
                                               </p>
                                           </Grid.Column>
                                           <Grid.Column>
-                                            { localStorage.getItem('compareFichatecnica') === '1' &&
-                                                <Button onClick={(e) => { e.preventDefault(); }} 
+                                          { compare === 1 && compareList.length < 3 && !isOnStorage(item) &&
+                                                <Button onClick={(e) => { e.preventDefault(); addComparar(item) }} 
                                                 primary floated='left' compact style={{ fontSize: 13 }}>Comparar</Button>   
                                             }
                                           </Grid.Column>
@@ -212,19 +255,7 @@ export default function ListadoFichasMobile({vehiculos}) {
                 </Card>
             ))}
           </Card.Group>
-          
-          {/**this.state.vehicles.length === 0 && this.state.dimmer == false && (
-            <p
-              style={{
-                textAlign: "center",
-                margin: "25px 0",
-                fontSize: 24,
-              }}
-            >
-              No encontramos resultados
-            </p>
-        )**/}
-
+          )}
           {/**Math.ceil(this.state.resultTotal / 20) > 1 && (
             <Container fluid style={{ textAlign: "center", margin: 25 }}>
               <Pagination
