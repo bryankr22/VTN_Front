@@ -283,6 +283,7 @@ export default function CompareVehiculoMobile() {
                     } else {
                         return (
                             <Grid.Column 
+                            style={{ width: 220 }}
                             key={index}
                             >
                                 <Button as="a" 
