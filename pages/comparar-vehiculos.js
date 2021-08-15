@@ -6,7 +6,7 @@ import CompareVehiculoMobile from '../components/comparadores/CompareVehiculoMob
 import { useSelector, useDispatch } from 'react-redux';
 import { restartVehiculo } from '../store/comparadorSlice';
 
-import { API_URL, download_pdf } from '../helpers/constants';
+import { API_URL, download_vehiculo } from '../helpers/constants';
 import axios from 'axios';
 export default function comparar_vehiculos() {
     const dispatch = useDispatch();
@@ -21,7 +21,7 @@ export default function comparar_vehiculos() {
         compareList.forEach(elemt => {
             data.push(elemt.id);
         });
-        axios.post(API_URL + download_pdf, { data }, {
+        axios.post(API_URL + download_vehiculo, { data }, {
             headers: {
                 'Accept': 'application/pdf',
             },
@@ -56,9 +56,11 @@ export default function comparar_vehiculos() {
                     <CompareVehiculo vehiclesCompare={[]} />
                 </Responsive>
                 <Segment vertical style={{ textAlign: 'center' }}>
-                    <Button 
-                    onClick={()=> downloadAction() }
-                    style={{ marginTop: 15 }} primary>Descargar PDF</Button>
+                    { compareList.length > 0 ?
+                        <Button 
+                        onClick={()=> downloadAction() }
+                        style={{ marginTop: 15 }} primary>Descargar PDF</Button>
+                    : null}
                     <br />
                     <Button 
                     onClick={()=> cleanSelector()}

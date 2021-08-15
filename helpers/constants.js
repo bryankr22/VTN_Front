@@ -14,7 +14,9 @@ export const comunidad_api = '/comunidad';
 export const get_modelos = '/modelos/';
 export const login_api = '/login';
 export const register_api = '/register';
-export const download_pdf = '/comparar_pdf';
+
+export const download_ficha = '/comparar_ficha_pdf';
+export const download_vehiculo = '/comparar_vehiculo_pdf';
 
 export const perfil_api = '/profile/';
 export const publicaciones_api = '/publicaciones/';
