@@ -2,6 +2,7 @@ import React from 'react'
 import PublicLayout from '../layouts/PublicLayout'
 import { Container, Header, Responsive, Segment, Button } from 'semantic-ui-react';
 import CompareVehiculo from '../components/comparadores/CompareVehiculo'
+import CompareVehiculoMobile from '../components/comparadores/CompareVehiculoMobile'
 import { useSelector, useDispatch } from 'react-redux';
 import { restartVehiculo } from '../store/comparadorSlice';
 export default function comparar_vehiculos() {
@@ -17,12 +18,12 @@ export default function comparar_vehiculos() {
                 <Header as='h1'>Resultados de comparación</Header>
                 <Responsive {...Responsive.onlyMobile}>
                     <Container style={{ paddingLeft: 0, paddingRight: 0, overflowX: 'auto', overflowY: 'hidden' }} fluid>
-                        <CompareVehiculo vehiclesCompare={[]} />
+                        <CompareVehiculoMobile vehiclesCompare={[]} />
                     </Container>
                 </Responsive>
                 <Responsive {...Responsive.onlyTablet}>
                     <Container style={{ paddingLeft: 0, paddingRight: 0 }} fluid>
-                        <CompareVehiculo vehiclesCompare={[]} />
+                        <CompareVehiculoMobile vehiclesCompare={[]} />
                     </Container>
                 </Responsive>
                 <Responsive {...Responsive.onlyComputer}>

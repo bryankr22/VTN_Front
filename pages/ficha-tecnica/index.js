@@ -14,11 +14,19 @@ export default function index({ data }) {
     return (
         <PublicLayout>
             <Responsive {...Responsive.onlyMobile}>
-                <SidebarMobile vehiculos={data.vehicles} />
+                <SidebarMobile
+                isFicha 
+                params={router.query} 
+                contadores={{...data.contadores, total_records: data.total_records}}
+                vehiculos={data.vehicles} />
                 <ListadoFichasMobile vehiculos={data.vehicles} />
             </Responsive>
             <Responsive {...Responsive.onlyTablet}>
-                <SidebarMobile vehiculos={data.vehicles} />
+                <SidebarMobile 
+                isFicha
+                params={router.query} 
+                contadores={{...data.contadores, total_records: data.total_records}}
+                vehiculos={data.vehicles} />
                 <ListadoFichasMobile vehiculos={data.vehicles} />
             </Responsive>
             <Responsive {...Responsive.onlyComputer}>
