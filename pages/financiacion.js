@@ -21,7 +21,7 @@ export default function financiacion() {
     return (
         <PublicLayout>
             <Container style={{ paddingTop: 25 }} text>
-                    <Header as='h2'>FINANCIACIÓN</Header>
+                    <Header as='h2'>FINANCIACIÓN DE TU VEHICULO</Header>
                     <p style={{ textAlign: 'justify' }}>
                         Para acceder a nuestros recomendados en financiación de vehículos, se requiere diligenciar el siguiente formulario.
                         Posteriormente, un asesor te contactará para resolver todas las inquietudes y colaborarte en el proceso.
