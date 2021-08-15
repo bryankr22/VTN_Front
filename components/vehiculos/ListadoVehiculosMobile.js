@@ -1,6 +1,13 @@
 import React from 'react'
 import { Image, Card, Button, Container, Pagination } from "semantic-ui-react";
+import HeaderVehiculo from '../../components/comparadores/HeaderVehiculo';
+import { useLocalStorage } from '../../helpers/hooks/useLocalStorage';
+import { useSelector, useDispatch } from 'react-redux';
+import { addVehiculo } from '../../store/comparadorSlice';
 export default function ListadoVehiculosMobile({ params, vehiculos, page, totalRecords }) {
+    const compareList = useSelector(({ comparador }) => comparador.vehiculos);
+    const dispatch = useDispatch();
+    const [compare, setCompare] = useLocalStorage("compareVehiculos", '0');
     const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/200x200/vendetunave/images/vehiculos/";
     const normalize = (function () {
         var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
@@ -42,8 +49,23 @@ export default function ListadoVehiculosMobile({ params, vehiculos, page, totalR
     const handlePaginationChange = (e, { activePage }) => {
         insertParam('page', activePage);
     }
+    const isOnStorage = (item) => {
+        return compareList.some((element) => element.id === item.id);
+    }
+    const addComparar = (item) => {
+        //console.log(">>>>", item);
+        if(compareList.length < 3){
+            dispatch(addVehiculo(item))
+        }else{
+            setCompare('0');
+        }
+        return;
+    }
     return (
         <div>
+            <Container>
+                <HeaderVehiculo />
+            </Container>
             {vehiculos.length === 0 && (
             <p
                 style={{
@@ -98,9 +120,10 @@ export default function ListadoVehiculosMobile({ params, vehiculos, page, totalR
                             </Card.Description>
                             <Card.Description>
                                 {(item.labelCiudad).toLowerCase().charAt(0).toUpperCase() + (item.labelCiudad).toLowerCase().slice(1)}
-                                {localStorage.getItem('compareVehiculos') === '1' &&
-                                    <Button onClick={(e) => { e.preventDefault(); }}
-                                        primary floated='right' compact style={{ fontSize: 13 }}>Comparar</Button>
+                                { compare === 1 && compareList.length < 3 && !isOnStorage(item) &&
+                                <Button 
+                                onClick={(e) => { e.preventDefault();addComparar(item)}} 
+                                primary floated='right' compact style={{ fontSize: 13 }}>Comparar</Button>   
                                 }
                             </Card.Description>
                         </Card.Content>

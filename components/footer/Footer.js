@@ -104,8 +104,7 @@ const Footer = () => {
                                     target='_blank'
                                     rel="noreferrer"
                                 >
-                                    <Image
-                                        layout='fill'
+                                    <img
                                         src="/images/vtn_call.png"
                                         style={{ height: 'auto', width: '55px' }}
                                     />

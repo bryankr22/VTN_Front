@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image, Card, Grid, Header, Button } from "semantic-ui-react";
 export default function ListadoFichasMobile({vehiculos}) {
-    const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/200x200/vendetunave/images/ficha-tecnica/";
+    const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/120x120/vendetunave/images/ficha-tecnica/";
     const normalize = (function() {
         var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
           to = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc",
