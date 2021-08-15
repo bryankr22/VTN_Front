@@ -6,6 +6,7 @@ import { useCookies } from "react-cookie"
 import MenuMobile from './MenuMobile'
 import MenuUsuario from './MenuUsuario'
 import MenuUsuarioMobile from './MenuUsuarioMobile';
+import { insert } from 'ramda';
 
 const Header = (props) => {
     const [cookies, setCookie] = useCookies(['vtn_token']);
@@ -17,11 +18,15 @@ const Header = (props) => {
             document.getElementById("dropSearchInput").classList.add("visible");
         }
     };
-    const handleKeyDown = () => {
-        
+    const handleKeyDown = (e) => {
+        if (e.keyCode === 13) {
+            handleSubmit();
+        }      
     };
     const handleSubmit = () => {
-
+        var url = new URL("/vehiculos");
+        url.searchParams.append('q', query);
+        window.location.search = url;
     };
     return (
         <div
@@ -344,8 +349,8 @@ const Header = (props) => {
                 <Dropdown id="dropSearch" floating direction="left">
                     <Dropdown.Menu id="dropSearchInput">
                     <Input
-                        onChange={(e) => setQuery({ search: e.target.value }) }
-                        onKeyDown={() => handleKeyDown}
+                        onChange={(e, {value}) => setQuery(value) }
+                        onKeyDown={(e) => handleKeyDown(e)}
                         placeholder="Buscar..."
                     />
                     <Button

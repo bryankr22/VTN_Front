@@ -1,9 +1,26 @@
 import React from 'react'
 import { Grid, Header, Icon, Container, Form, Button, Modal } from "semantic-ui-react";
 import { useCookies } from "react-cookie"
+import { useSelector, useDispatch } from 'react-redux';
+import { addVehiculo } from '../../store/comparadorSlice';
 export default function SidebarDetalle({ vehiculo }) {
+    const dispatch = useDispatch()
     const [cookies, setCookie] = useCookies(['vtn_token']);
     const vehiculoFav = [];
+    const compareList = useSelector(({ comparador }) => comparador.vehiculos);
+    const isOnStorage = (item) => {
+        return compareList.some((element) => element.id === item.id);
+    }
+    const addComparar = (item) => {
+        //console.log(">>>>>", item);
+        if(compareList.length < 3){
+            dispatch(addVehiculo(item))
+        }else{
+            //setCompare('0');
+        }
+        window.location.href = '/vehiculos';
+        return;
+    }
     return (
         <Container style={{ marginTop: 20 }}>
             <Header as="h6" disabled>
@@ -145,7 +162,13 @@ export default function SidebarDetalle({ vehiculo }) {
                     WhatsApp
                 </Button>
                 <br />
-                <Button fluid primary style={{ borderRadius: 20 }}>Comparar</Button>
+                { compareList.length < 3 && !isOnStorage(vehiculo) &&
+                    <Button
+                    onClick={() => addComparar(vehiculo)}
+                    fluid  
+                    primary 
+                    style={{ borderRadius: 20 }}>Comparar</Button> 
+                }
             </Container>
         </Container>
     )

@@ -18,7 +18,7 @@ export default function DestacadosHome({vehiculos}) {
                     type="products"
                     noFav={true}
                     onClickFav={() => onClickFav()}
-                    numberCards={2}
+                    numberCards={1}
                     data={vehiculos}
                 />
                 </Responsive>
