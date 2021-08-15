@@ -14,6 +14,7 @@ export default function ListaConcesionarios({concesionarios_res}) {
                         <Item.Meta>Tel: {item.phone}</Item.Meta>
                         <Item.Extra style={{ float: 'right', marginTop: '-11%', width: '20%' }}>
                             <Button
+                            onClick={() => { window.open(`http://maps.google.com/maps?q=${item.latitude},${item.longitude}`, '_blank') }}
                             secondary
                             floated='right'
                             >

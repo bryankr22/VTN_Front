@@ -2,6 +2,22 @@ import React from 'react';
 import PublicLayout from '../layouts/PublicLayout';
 import { Container, Header, Form, Select, Button, Input, Dimmer, Loader } from 'semantic-ui-react'
 export default function financiacion() {
+    const optionsCuotas = [
+        { key: '12', text: '12', value: '12' },
+        { key: '24', text: '24', value: '24' },
+        { key: '36', text: '36', value: '36' },
+        { key: '48', text: '48', value: '48' },
+        { key: '72', text: '72', value: '72' },
+    ]
+    const optionsDataCredito = [
+        { key: 'SI', text: 'SI', value: '1' },
+        { key: 'NO', text: 'NO', value: '0' },
+    ]
+    const optionsRangos = [
+        { key: '1', text: '1.600.000 - 2.500.000', value: '1' },
+        { key: '2', text: '2.500.000 - 5.000.000', value: '2' },
+        { key: '3', text: '5.000.000 en adelante', value: '3' },
+    ]
     return (
         <PublicLayout>
             <Container style={{ paddingTop: 25 }} text>
@@ -50,21 +66,23 @@ export default function financiacion() {
                             id="field-cuotas"
                             control={Select}
                             label='Selecciona el número de cuotas en las que quieres pagarlo'
-                            placeholder='Seleccione número de cuotas'  
+                            options={optionsCuotas}
+                            placeholder='Seleccione número de cuotas'
                         />
                         <Form.Field
                             id="field-datacredito"
                             control={Select}
                             label='¿Está reportado en Datacrédito?'
+                            options={optionsDataCredito}
                             placeholder='Seleccione...'
                         />
                         <Form.Field
                             id="field-salario"
                             control={Select}
                             label='Indique el rango salaríal al que pertenece'
+                            options={optionsRangos}
                             placeholder='Seleccione...'
                         />
-
                         <div style={{ marginBottom: '25px', fontWeight: 'bold', }}>
                             NOTA: Si usted gana menos de 2 salarios mínimos no podemos procesar
                             su solicitud de financiación.
