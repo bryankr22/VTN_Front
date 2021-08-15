@@ -7,7 +7,7 @@ export default function ActiveTagsVehiculos({tags}) {
         window.location.href = `${window.location.pathname}?${params}`;
     }
     return (
-        <div>
+        <>
             { tags.permuta ? 
             <Label as="a" style={{ marginBottom: 5 }}>
                 {'Permuta'}
@@ -152,6 +152,6 @@ export default function ActiveTagsVehiculos({tags}) {
                 />
             </Label>
             : null}
-        </div>
+        </>
     )
 }

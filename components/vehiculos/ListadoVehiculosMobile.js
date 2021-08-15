@@ -62,10 +62,8 @@ export default function ListadoVehiculosMobile({ params, vehiculos, page, totalR
         return;
     }
     return (
-        <div>
-            <Container>
-                <HeaderVehiculo />
-            </Container>
+        <>
+            <HeaderVehiculo />
             {vehiculos.length === 0 && (
             <p
                 style={{
@@ -147,6 +145,6 @@ export default function ListadoVehiculosMobile({ params, vehiculos, page, totalR
                     />
                 </Container>
             )}
-        </div>
+        </>
     )
 }

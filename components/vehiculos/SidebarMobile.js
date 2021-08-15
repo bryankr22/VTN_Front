@@ -7,7 +7,7 @@ export default function SidebarMobile({ params, contadores, vehiculos, isFicha }
     const [modalOrder, setModalOrder] = useState(false);
     const [modalFilter, setModalFilter] = useState(false);
     return (
-        <div>
+        <>
             <Input
             action={{
                 icon: "search",
@@ -65,6 +65,6 @@ export default function SidebarMobile({ params, contadores, vehiculos, isFicha }
             <Container style={{ marginBottom: 10 }}>
                 <ActiveTagsVehiculos tags={params}/>
             </Container>
-        </div>
+        </>
     )
 }
