@@ -5,12 +5,38 @@ import CompareVehiculo from '../components/comparadores/CompareVehiculo'
 import CompareVehiculoMobile from '../components/comparadores/CompareVehiculoMobile'
 import { useSelector, useDispatch } from 'react-redux';
 import { restartVehiculo } from '../store/comparadorSlice';
+
+import { API_URL, download_pdf } from '../helpers/constants';
+import axios from 'axios';
 export default function comparar_vehiculos() {
     const dispatch = useDispatch();
     const cleanSelector = () => {
         dispatch(restartVehiculo());
         localStorage.setItem("compareVehiculos", "1")
         window.location.href = '/vehiculos';
+    }
+    const compareList = useSelector(({ comparador }) => comparador.vehiculos);
+    const downloadAction = () => {
+        var data = [];
+        compareList.forEach(elemt => {
+            data.push(elemt.id);
+        });
+        axios.post(API_URL + download_pdf, { data }, {
+            headers: {
+                'Accept': 'application/pdf',
+            },
+            responseType: 'blob',
+        }).then(res => {
+            const url = window.URL.createObjectURL(new Blob([res.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            let f = new Date();
+            link.setAttribute('download', `VendeTuNave_${f.getDate() + "-" + (f.getMonth() + 1) + "-" + f.getFullYear()}.pdf`);
+            document.body.appendChild(link);
+            link.click();
+        }).catch(error => {
+            console.log(error)
+        })
     }
     return (
         <PublicLayout>
@@ -30,7 +56,9 @@ export default function comparar_vehiculos() {
                     <CompareVehiculo vehiclesCompare={[]} />
                 </Responsive>
                 <Segment vertical style={{ textAlign: 'center' }}>
-                    <Button style={{ marginTop: 15 }} primary>Descargar PDF</Button>
+                    <Button 
+                    onClick={()=> downloadAction() }
+                    style={{ marginTop: 15 }} primary>Descargar PDF</Button>
                     <br />
                     <Button 
                     onClick={()=> cleanSelector()}

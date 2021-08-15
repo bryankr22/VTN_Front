@@ -1,4 +1,5 @@
 export const API_URL = 'https://api.vendetunave.co/api';
+//export const API_URL = 'http://vendetunave_api.test/api';
 export const AUTH_URL = 'https://api.vendetunave.co/auth';
 export const home = '/home';
 export const config = '/config';
@@ -13,6 +14,7 @@ export const comunidad_api = '/comunidad';
 export const get_modelos = '/modelos/';
 export const login_api = '/login';
 export const register_api = '/register';
+export const download_pdf = '/comparar_pdf';
 
 export const perfil_api = '/profile/';
 export const publicaciones_api = '/publicaciones/';
