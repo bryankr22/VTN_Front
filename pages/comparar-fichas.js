@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import PublicLayout from '../layouts/PublicLayout'
 import { Container, Header, Responsive, Segment, Button } from 'semantic-ui-react';
 import CompareFicha from '../components/comparadores/CompareFicha'
+import CompareFichaMobile from '../components/comparadores/CompareFichaMobile'
 import { useSelector, useDispatch } from 'react-redux';
 import { restartFicha } from '../store/comparadorSlice';
 export default function comparar_fichas() {
@@ -17,12 +18,12 @@ export default function comparar_fichas() {
                 <Header as='h1'>Resultados de comparación</Header>
                 <Responsive {...Responsive.onlyMobile}>
                     <Container style={{ paddingLeft: 0, paddingRight: 0, overflowX: 'auto', overflowY: 'hidden' }} fluid>
-                        <CompareFicha />
+                        <CompareFichaMobile />
                     </Container>
                 </Responsive>
                 <Responsive {...Responsive.onlyTablet}>
                     <Container style={{ paddingLeft: 0, paddingRight: 0 }} fluid>
-                        <CompareFicha />
+                        <CompareFichaMobile />
                     </Container>
                 </Responsive>
                 <Responsive {...Responsive.onlyComputer}>

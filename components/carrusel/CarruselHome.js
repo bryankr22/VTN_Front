@@ -33,7 +33,7 @@ export default function CarruselHome(props) {
                             quality={50}
                             loading='lazy'
                             style={{
-                                objectFit: "cover",
+                                objectFit: "contain",
                                 width: "100%",
                                 height: "100%",
                                 objectPosition: "center",

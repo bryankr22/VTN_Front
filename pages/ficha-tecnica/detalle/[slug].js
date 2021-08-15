@@ -27,6 +27,54 @@ export default function detalle({ data }) {
     }
     return (
         <PublicLayout>
+            <style>
+            {`
+                .image > img {
+                    object-fit: cover;
+                }
+                .thumb > img {
+                    height: 80px !important;
+                }
+                .carousel .thumbs-wrapper {
+                    margin-left: 0 !important;
+                    margin: 5px 20px 5px 0 !important;
+                }
+                .carousel .thumbs {
+                    z-index: 1000;
+                    padding: 0 !important;
+                    margin: 0;
+                }
+                .carousel .thumb {
+                    width: 100px !important;
+                    margin-right: 0 !important;
+                    padding: 0 !important;
+                }
+                #cont-inf {
+                    margin-left: -1em !important;
+                    margin-right: 0em !important;
+                }
+                .carousel .slider-wrapper.axis-horizontal .slider {
+                    height: 100% !important;
+                }
+            
+                .carousel .slide {
+                    background: #fff;
+                    height: 100%;
+                }
+                .carousel.carousel-slider .control-arrow {
+                    z-index: 1000;
+                }
+
+                .carousel .control-dots {
+                    z-index: 1000;
+                }
+
+                .dimmer .carousel .slide {
+                    background: transparent !important;
+                    height: 100%;
+                }
+            `}
+            </style>
             <div style={{ display: 'inline-block', float: 'right', marginRight: 40, fontSize: 18, color: '#5c5c5c', marginBottom: 10 }}>
                 <Icon name="eye" style={{ marginRight: 5 }} />
                 <p style={{ display: 'inline' }}>{new Intl.NumberFormat("de-DE").format(data.views)}</p>

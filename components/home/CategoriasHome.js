@@ -14,7 +14,7 @@ export default function CategoriasHome({categorias}) {
             </Header>
             <Responsive {...Responsive.onlyMobile}>
             <CarruselCategories
-                numberCards={2}
+                numberCards={1}
                 data={categorias}
             />
             </Responsive>
