@@ -4,16 +4,16 @@ import SecondSection from './SecondSection'
 import ThirdSection from './ThirdSection'
 import { Form, Responsive, Button } from "semantic-ui-react";
 
-export default function VehiculoContainer() {
+export default function VehiculoContainer({data}) {
     return (
         <Form>
             <Responsive {...Responsive.onlyComputer}>
-                <FirstSection />
+                <FirstSection data={data}/>
                 <Form.Field style={{ marginTop: 20 }}>
                     <label>Agrega una o más fotos (Mínimo 5 fotos)*</label>
                     <SecondSection />
                 </Form.Field>
-                <ThirdSection />
+                <ThirdSection data={data} />
                 <Button
                 style={{ marginBottom: 10 }}
                 color="blue"
@@ -32,13 +32,13 @@ export default function VehiculoContainer() {
                 </a>
             </Responsive>
             <Responsive {...Responsive.onlyMobile}>
-                <FirstSection />
+                <FirstSection data={data} />
                 <Form.Field style={{ marginTop: 20 }}>
                     <label>Agrega una o más fotos (Mínimo 5 fotos)*</label>
                 </Form.Field>
             </Responsive>
             <Responsive {...Responsive.onlyTablet}>
-                <FirstSection />
+                <FirstSection data={data} />
                 <Form.Field style={{ marginTop: 20 }}>
                     <label>Agrega una o más fotos (Mínimo 5 fotos)*</label>
                 </Form.Field>

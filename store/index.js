@@ -6,10 +6,12 @@ import { persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
 import homeSlice from './homeSlice';
 import comparadorSlice from './comparadorSlice';
+import authSlice from './authSlice';
 
 const reducers = combineReducers({
     home: homeSlice,
-    comparador: comparadorSlice
+    comparador: comparadorSlice,
+    auth: authSlice
 });
 const persistConfig = {
     key: 'root',
@@ -21,5 +23,4 @@ const store = configureStore({
     devTools: process.env.NODE_ENV !== 'production',
     middleware: [thunk],
 });
-
 export default store;

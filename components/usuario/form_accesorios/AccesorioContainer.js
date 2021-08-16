@@ -2,7 +2,7 @@ import React from 'react'
 import { Form, Responsive, Button, Select } from "semantic-ui-react";
 import FotosContainer from './FotosContainer';
 import FormContainer from './FormContainer';
-export default function AccesorioContainer() {
+export default function AccesorioContainer({data}) {
     return (
         <Form>
             <Responsive {...Responsive.onlyComputer}>
@@ -10,7 +10,7 @@ export default function AccesorioContainer() {
                     <label>CATEGORÍAS</label>
                     <Select
                         name="categoriaAccesorio"
-                        options={[]}
+                        options={data.tipoAccesorio}
                         placeholder="Tipo de producto"
                     />
                 </Form.Field>
@@ -18,7 +18,7 @@ export default function AccesorioContainer() {
                     <label>Agrega una o más fotos (Máximo 5 fotos)*</label>
                     <FotosContainer />
                 </Form.Field>
-                <FormContainer />
+                <FormContainer data={data} />
                 <Button
                 style={{ marginBottom: 10 }}
                 color="blue"

@@ -1,7 +1,7 @@
 import { Container, Header, Table, Button, Image, Responsive, Dimmer, Loader, Tab } from 'semantic-ui-react'
 import VehiculoContainer from './form_vehiculo/VehiculoContainer';
 import AccesorioContainer from './form_accesorios/AccesorioContainer';
-export const panes = () => {
+export const panes = (data) => {
     return [
         {
             menuItem: "VEHÍCULOS",
@@ -14,7 +14,7 @@ export const panes = () => {
                         pasará a revisión por parte del soporte técnico, y publicado en
                         un periodo máximo de 24 horas.
                     </p>
-                    <VehiculoContainer />
+                    <VehiculoContainer data={data} />
                 </Tab.Pane>
             ),
         },
@@ -29,7 +29,7 @@ export const panes = () => {
                         pasará a revisión por parte del soporte técnico, y publicado en
                         un periodo máximo de 24 horas.
                     </p>
-                    <AccesorioContainer />
+                    <AccesorioContainer data={data} />
                 </Tab.Pane>
             ),
         },

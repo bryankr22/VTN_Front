@@ -3,10 +3,14 @@ import { Dropdown } from "semantic-ui-react";
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useCookies } from "react-cookie"
+import { useDispatch } from 'react-redux';
+import { updateToken } from '../../store/authSlice';
 export default function MenuUsuarioMobile() {
     const router = useRouter();
+    const dispatch = useDispatch();
     const [cookies, setCookie, removeCookie] = useCookies(['vtn_token']);
     const CloseSession = () => {
+        dispatch(updateToken(null));
         removeCookie('vtn_token', {});
         router.push('/');
     }

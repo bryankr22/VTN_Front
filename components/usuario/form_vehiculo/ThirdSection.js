@@ -1,7 +1,16 @@
 import React from 'react'
 import { Form, Input, Select, Checkbox, Dropdown, } from "semantic-ui-react";
   
-export default function ThirdSection({estado_vehiculo}) {
+export default function ThirdSection({estado_vehiculo , data}) {
+    const optionsCondicion = [
+        { key: "Nuevo", value: "Nuevo", text: "Nuevo" },
+        { key: "Usado", value: "Usado", text: "Usado" },
+    ];
+
+    const optionsBlindado = [
+        { key: 2, value: 2, text: "NO" },
+        { key: 1, value: 1, text: "SI" },
+    ];
     return (
         <>
             <Form.Field>
@@ -32,7 +41,7 @@ export default function ThirdSection({estado_vehiculo}) {
                 <label>CONDICIÓN *</label>
                 <Select
                     name="estado_vehiculo"
-                    options={[]}
+                    options={optionsCondicion}
                     placeholder="Condición"
                 />
             </Form.Field>
@@ -46,7 +55,7 @@ export default function ThirdSection({estado_vehiculo}) {
                     />
                     <Select
                         name="tipo_precio_vehiculo"
-                        options={[]}
+                        options={data.tipoPrecio}
                         placeholder="Tipo precio"
                     />
                 </Input>
@@ -95,7 +104,7 @@ export default function ThirdSection({estado_vehiculo}) {
                 <Select
                     name="combustible_vehiculo"
                     search
-                    options={[]}
+                    options={data.combustibles}
                     placeholder="Selecciona combustible"
                 />
             </Form.Field>
@@ -106,7 +115,7 @@ export default function ThirdSection({estado_vehiculo}) {
                     fluid
                     search
                     selection
-                    options={[]}
+                    options={data.colores}
                     placeholder="Selecciona color"
                 />
             </Form.Field>
@@ -115,7 +124,7 @@ export default function ThirdSection({estado_vehiculo}) {
                 <Select
                     name="transmision_vehiculo"
                     search
-                    options={[]}
+                    options={data.transmision}
                     placeholder="Selecciona transmisión"
                 />
             </Form.Field>
@@ -123,7 +132,7 @@ export default function ThirdSection({estado_vehiculo}) {
                 <label>BLINDADO *</label>
                 <Select
                     name="blindado_vehiculo"
-                    options={[]}
+                    options={optionsBlindado}
                     placeholder="Selecciona blindaje"
                 />
             </Form.Field>
@@ -146,7 +155,7 @@ export default function ThirdSection({estado_vehiculo}) {
                     <Select
                         search
                         name="departamento_vehiculo"
-                        options={[]}
+                        options={data.departamentos}
                         fluid
                         placeholder="DEPARTAMENTO"
                     />

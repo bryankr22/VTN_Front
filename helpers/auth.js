@@ -15,3 +15,7 @@ export const authInitialProps = () => ({ req, res }) => {
         auth: auth.vtn_token 
     }
 }
+export const validateAuth = ({ req, res }) => {
+    const auth = parseCookies(req);
+    return auth;
+}

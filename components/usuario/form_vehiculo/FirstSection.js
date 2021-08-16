@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Form, Input, Select } from "semantic-ui-react";
 
-export default function FirstSection({tipo_vehiculo}) {
+export default function FirstSection({tipo_vehiculo, data}) {
     return (
         <Form.Field>
             <label>CATEGORÍAS *</label>
@@ -9,7 +9,7 @@ export default function FirstSection({tipo_vehiculo}) {
                 <Select
                     name="tipo_vehiculo"
                     search
-                    options={[]}
+                    options={data.categories}
                     fluid
                     placeholder="Tipo"
                 />
@@ -18,7 +18,7 @@ export default function FirstSection({tipo_vehiculo}) {
                         <Select
                             name="marca_vehiculo"
                             search
-                            options={[]}
+                            options={data.marcas}
                             fluid
                             placeholder="Marca"
                         />
@@ -28,14 +28,14 @@ export default function FirstSection({tipo_vehiculo}) {
                             <Select
                                 name="tipo_moto_select"
                                 search
-                                options={[]}
+                                options={data.tipoMotos}
                                 fluid
                                 placeholder="Tipo Moto"
                             />
                             <Select
                                 name="marca_vehiculo"
                                 search
-                                options={[]}
+                                options={data.marcas}
                                 fluid
                                 placeholder="Marca"
                             />

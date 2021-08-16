@@ -7,7 +7,7 @@ import MenuMobile from './MenuMobile'
 import MenuUsuario from './MenuUsuario'
 import MenuUsuarioMobile from './MenuUsuarioMobile';
 import { insert } from 'ramda';
-
+import { useSelector } from 'react-redux';
 const Header = (props) => {
     const [cookies, setCookie] = useCookies(['vtn_token']);
     const [query, setQuery] = useState("");

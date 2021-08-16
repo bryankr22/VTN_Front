@@ -1,7 +1,11 @@
 import React from 'react'
 import { Form, Input, Select, } from "semantic-ui-react";
   
-export default function FormContainer() {
+export default function FormContainer({data}) {
+    const optionsCondicion = [
+        { key: "Nuevo", value: "Nuevo", text: "Nuevo" },
+        { key: "Usado", value: "Usado", text: "Usado" },
+    ];
     return (
         <>
           <Form.Field>
@@ -24,7 +28,7 @@ export default function FormContainer() {
                 <label>CONDICIÓN</label>
                 <Select
                 name="condicionAcc"
-                options={[]}
+                options={optionsCondicion}
                 />
             </Form.Field>
             <Form.Field>
@@ -37,7 +41,7 @@ export default function FormContainer() {
                     />
                     <Select
                     name="tipoPrecioAcc"
-                    options={[]}
+                    options={data.tipoPrecio}
                     placeholder="Tipo precio"
                     />
                 </Input>
@@ -47,7 +51,7 @@ export default function FormContainer() {
                 <Input type="text" action>
                     <Select
                     search
-                    options={[]}
+                    options={data.departamentos}
                     fluid
                     placeholder="DEPARTAMENTO"
                     />
