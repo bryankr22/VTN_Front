@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import PublicLayout from '../layouts/PublicLayout'
-import { Container, Header, Responsive, Segment, Button } from 'semantic-ui-react';
+import { Container, Header, Responsive, Segment, Button, Dimmer, Loader } from 'semantic-ui-react';
 import CompareFicha from '../components/comparadores/CompareFicha'
 import CompareFichaMobile from '../components/comparadores/CompareFichaMobile'
 import { useSelector, useDispatch } from 'react-redux';
@@ -8,6 +8,7 @@ import { restartFicha } from '../store/comparadorSlice';
 import { API_URL, download_ficha } from '../helpers/constants';
 import axios from 'axios';
 export default function comparar_fichas() {
+    const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
     const compareList = useSelector(({ comparador }) => comparador.fichas);
     const cleanSelector = () => {
@@ -16,6 +17,7 @@ export default function comparar_fichas() {
         window.location.href = '/ficha-tecnica';
     }
     const downloadAction = () => {
+        setLoading(true);
         var data = [];
         compareList.forEach(elemt => {
             data.push(elemt.id);
@@ -26,6 +28,7 @@ export default function comparar_fichas() {
             },
             responseType: 'blob',
         }).then(res => {
+            setLoading(false);
             const url = window.URL.createObjectURL(new Blob([res.data]));
             const link = document.createElement('a');
             link.href = url;
@@ -39,6 +42,9 @@ export default function comparar_fichas() {
     }
     return (
         <PublicLayout>
+            <Dimmer style={{ position: "fixed" }} active={loading}>
+                <Loader>Descargando...</Loader>
+            </Dimmer>    
             <Container style={{ paddingTop: 25, paddingLeft: 20, paddingRight: 20 }} fluid>
                 <Header as='h1'>Resultados de comparación</Header>
                 <Responsive {...Responsive.onlyMobile}>

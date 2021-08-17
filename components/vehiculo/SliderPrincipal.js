@@ -1,7 +1,7 @@
 import React from 'react'
 import CarruselHome from '../carrusel/CarruselHome';
 import { Dimmer } from "semantic-ui-react";
-  
+
 export default function SliderPrincipal({ imagenes }) {
     return (
         <div>

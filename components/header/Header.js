@@ -8,7 +8,9 @@ import MenuUsuario from './MenuUsuario'
 import MenuUsuarioMobile from './MenuUsuarioMobile';
 import { insert } from 'ramda';
 import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router'
 const Header = (props) => {
+    const router = useRouter();
     const [cookies, setCookie] = useCookies(['vtn_token']);
     const [query, setQuery] = useState("");
     const handleSearch = () => {
@@ -24,9 +26,7 @@ const Header = (props) => {
         }      
     };
     const handleSubmit = () => {
-        var url = new URL("/vehiculos");
-        url.searchParams.append('q', query);
-        window.location.search = url;
+        router.push('/vehiculos?q='+query)
     };
     return (
         <div
@@ -355,7 +355,7 @@ const Header = (props) => {
                     />
                     <Button
                         color="black"
-                        onClick={() => handleSubmit}
+                        onClick={() => handleSubmit()}
                         style={{ paddingRight: 10 }}
                     >
                         <Icon style={{ opacity: 1 }} name="search" />

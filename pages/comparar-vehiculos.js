@@ -1,6 +1,6 @@
 import React from 'react'
 import PublicLayout from '../layouts/PublicLayout'
-import { Container, Header, Responsive, Segment, Button } from 'semantic-ui-react';
+import { Container, Header, Responsive, Segment, Button, Dimmer, Loader } from 'semantic-ui-react';
 import CompareVehiculo from '../components/comparadores/CompareVehiculo'
 import CompareVehiculoMobile from '../components/comparadores/CompareVehiculoMobile'
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,6 +9,7 @@ import { restartVehiculo } from '../store/comparadorSlice';
 import { API_URL, download_vehiculo } from '../helpers/constants';
 import axios from 'axios';
 export default function comparar_vehiculos() {
+    const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
     const cleanSelector = () => {
         dispatch(restartVehiculo());
@@ -17,6 +18,7 @@ export default function comparar_vehiculos() {
     }
     const compareList = useSelector(({ comparador }) => comparador.vehiculos);
     const downloadAction = () => {
+        setLoading(true);
         var data = [];
         compareList.forEach(elemt => {
             data.push(elemt.id);
@@ -27,6 +29,7 @@ export default function comparar_vehiculos() {
             },
             responseType: 'blob',
         }).then(res => {
+            setLoading(false);
             const url = window.URL.createObjectURL(new Blob([res.data]));
             const link = document.createElement('a');
             link.href = url;
@@ -40,6 +43,9 @@ export default function comparar_vehiculos() {
     }
     return (
         <PublicLayout>
+            <Dimmer style={{ position: "fixed" }} active={loading}>
+                <Loader>Descargando...</Loader>
+            </Dimmer>    
             <Container style={{ paddingTop: 25, paddingLeft: 20, paddingRight: 20 }} fluid>
                 <Header as='h1'>Resultados de comparación</Header>
                 <Responsive {...Responsive.onlyMobile}>
