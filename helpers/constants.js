@@ -22,6 +22,7 @@ export const perfil_api = '/profile/';
 export const publicaciones_api = '/publicaciones/';
 export const favoritos_api = '/favoritos/';
 export const busquedas_api = '/busquedas/';
+export const comment_api = '/comment'
 
 
 
