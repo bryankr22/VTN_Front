@@ -1,13 +1,15 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Grid, Header, Icon, Container, Form, Button, Modal } from "semantic-ui-react";
 import { useCookies } from "react-cookie"
 import { useSelector, useDispatch } from 'react-redux';
 import { addVehiculo } from '../../store/comparadorSlice';
+import ModalContacto from './ModalContacto';
 export default function SidebarDetalle({ vehiculo }) {
     const dispatch = useDispatch()
     const [cookies, setCookie] = useCookies(['vtn_token']);
     const vehiculoFav = [];
     const compareList = useSelector(({ comparador }) => comparador.vehiculos);
+    const [modalContacto, setModalContacto] = useState(false);
     const isOnStorage = (item) => {
         return compareList.some((element) => element.id === item.id);
     }
@@ -110,34 +112,14 @@ export default function SidebarDetalle({ vehiculo }) {
                                 color="blue"
                                 fluid
                                 style={{ borderRadius: 20, height: 64 }}
+                                onClick={() => setModalContacto(true)}
                             >
                                 Contactar al vendedor
                             </Button>
-                            <Modal
-                                closeIcon
-                            >
-                                <Modal.Content>
-                                    <Header as="h5">CONTACTA AL VENDEDOR</Header>
-                                    <Form>
-                                        <Form.Input
-                                            fluid
-                                            label="* Teléfono contacto"
-                                            placeholder="Comprador"
-                                        />
-                                        <Form.TextArea
-                                            label="* Mensaje"
-                                        />
-                                        <Form.Checkbox
-                                            label="Aceptar los TyC"
-                                        />
-                                        <Form.Button
-                                            color="blue"
-                                        >
-                                            ENVIAR MENSAJE
-                                        </Form.Button>
-                                    </Form>
-                                </Modal.Content>
-                            </Modal>
+                            <ModalContacto 
+                            showModal={modalContacto}
+                            onClose={() => setModalContacto(!modalContacto)}
+                            />
                         </Grid.Column>
                         <Grid.Column>
                             <Button
