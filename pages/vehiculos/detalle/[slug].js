@@ -6,12 +6,65 @@ import SidebarDetalle from '../../../components/vehiculo/SidebarDetalle';
 import SidebarDetalleDesk from '../../../components/vehiculo/SidebarDetalleDesk';
 import TableCaracteristicasDesk from '../../../components/vehiculo/TableCaracteristicasDesk';
 import CarruselHome from '../../../components/carrusel/CarruselHome';
+import CarruselRelacionados from '../../../components/carrusel/CarruselRelacionados';
 import axios from 'axios';
 import { Responsive, Icon, Breadcrumb, Grid, Header, Container } from "semantic-ui-react";
 
 export default function detalle({ data }) {
     return (
         <PublicLayout>
+            <style>
+            {`
+                .image > img {
+                    object-fit: cover;
+                }
+                .slider-wrapper {
+                    height: 65vh !important;
+                }
+                .thumb > img {
+                    height: 80px !important;
+                }
+                .carousel .thumbs-wrapper {
+                    margin-left: 0 !important;
+                    margin: 5px 20px 5px 0 !important;
+                }
+                .carousel .thumbs {
+                    z-index: 1000;
+                    padding: 0 !important;
+                    margin: 0;
+                }
+                .carousel .thumb {
+                    width: 100px !important;
+                    margin-right: 0 !important;
+                    padding: 0 !important;
+                }
+                #cont-inf {
+                    margin-left: -1em !important;
+                    margin-right: 0em !important;
+                }
+                .carousel .slider-wrapper.axis-horizontal .slider {
+                    height: 100% !important;
+                }
+            
+                .carousel .slide {
+                    background: #fff;
+                    height: 100%;
+                }
+                .carousel.carousel-slider .control-arrow {
+                    z-index: 1000;
+                }
+
+                .carousel .control-dots {
+                    z-index: 1000;
+                }
+
+                .dimmer .carousel .slide {
+                    background: transparent !important;
+                    height: 100%;
+                }
+            `}
+            </style>
+
             <div style={{ margin: 10, padding: '15px 15px 5px 15px', display: 'flex', alignItems: 'center' }}>
                 <Breadcrumb style={{ background: 'transparent', padding: 15, position: 'absolute', zIndex: 1000, width: '100%' }}>
                     <Breadcrumb.Section 
@@ -97,6 +150,18 @@ export default function detalle({ data }) {
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>
+                    {data.vehiculosRelacionados.length > 0 && (
+                    <Container fluid id="cont-inf">
+                        <Header as="h4" style={{ marginTop: 20, marginLeft: 15 }}>
+                            PRODUCTOS RELACIONADOS
+                        </Header>
+                        <CarruselRelacionados 
+                            type='products'
+                            data={data.vehiculosRelacionados}
+                            numberCards={1}
+                        />
+                    </Container>
+                    )}
                 </Container>
             </Responsive>
             <Responsive {...Responsive.onlyMobile}>
@@ -149,6 +214,18 @@ export default function detalle({ data }) {
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>
+                    {data.vehiculosRelacionados.length > 0 && (
+                    <Container fluid id="cont-inf">
+                        <Header as="h4" style={{ marginTop: 20, marginLeft: 15 }}>
+                            PRODUCTOS RELACIONADOS
+                        </Header>
+                        <CarruselRelacionados 
+                            type='products'
+                            data={data.vehiculosRelacionados}
+                            numberCards={1}
+                        />
+                    </Container>
+                    )}
                 </Container>
             </Responsive>
             <Responsive {...Responsive.onlyComputer}>
@@ -175,6 +252,18 @@ export default function detalle({ data }) {
                         diasPublicado={data.diasPublicado}
                         vehiculo={data.vehiculo} />
                 </Grid>
+                {data.vehiculosRelacionados.length > 0 && (
+                <Container fluid id="cont-inf">
+                    <Header as="h4" style={{ marginTop: 20, marginLeft: 15 }}>
+                        PRODUCTOS RELACIONADOS
+                    </Header>
+                    <CarruselRelacionados 
+                        type='products'
+                        data={data.vehiculosRelacionados}
+                        numberCards={4}
+                    />
+                </Container>
+                )}
             </Responsive>
         </PublicLayout>
     )
