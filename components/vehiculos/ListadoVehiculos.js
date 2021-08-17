@@ -4,6 +4,7 @@ import { useLocalStorage } from '../../helpers/hooks/useLocalStorage';
 import HeaderVehiculo from '../../components/comparadores/HeaderVehiculo';
 import { useSelector, useDispatch } from 'react-redux';
 import { addVehiculo } from '../../store/comparadorSlice';
+import { useRouter } from 'next/router'
 export default function ListadoVehiculos({params, vehiculos, page, totalRecords}) {
     const compareList = useSelector(({ comparador }) => comparador.vehiculos);
     const dispatch = useDispatch();
@@ -71,6 +72,11 @@ export default function ListadoVehiculos({params, vehiculos, page, totalRecords}
         }
         return;
     }
+    const router = useRouter();
+    const [query, setQuery] = useState("");
+    const handleSubmit = () => {
+        router.push('/vehiculos?q='+query)
+    };
     //useEffect
     return (
         <Grid.Column width={13}>
@@ -79,9 +85,11 @@ export default function ListadoVehiculos({params, vehiculos, page, totalRecords}
                     <Grid.Column width={12}>
                         <Input
                             style={{ width: "100%" }}
+                            onChange={(e, {value})=> setQuery(value)}
+                            defaultValue={params.q}
                             action={{
                                 icon: "search",
-                                onClick: () => this.filterChange(0),
+                                onClick: () => handleSubmit(),
                             }}
                             placeholder="Buscar..."
                         />
