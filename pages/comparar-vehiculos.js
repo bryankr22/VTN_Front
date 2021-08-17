@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import PublicLayout from '../layouts/PublicLayout'
 import { Container, Header, Responsive, Segment, Button, Dimmer, Loader } from 'semantic-ui-react';
 import CompareVehiculo from '../components/comparadores/CompareVehiculo'

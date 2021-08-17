@@ -144,6 +144,7 @@ export default function SidebarDetalle({ vehiculo }) {
                                 color="blue"
                                 fluid
                                 as="a"
+                                href={"tel:" + vehiculo.contacto}
                                 style={{ borderRadius: 20, height: 64, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                             >
                                 Llamar
@@ -158,6 +159,7 @@ export default function SidebarDetalle({ vehiculo }) {
                     fluid
                     target='_blank'
                     style={{ borderRadius: 20 }}
+                    href={"https://api.whatsapp.com/send?phone=57" + vehiculo.contacto + "&text=Hola,%20estoy%20interesado.&source=vendetunave.co&data="}
                 >
                     WhatsApp
                 </Button>
