@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import PublicLayout from '../../../layouts/PublicLayout';
 import TableDescription from '../../../components/fichatecnica/TableDescription';
 import CarruselHome from '../../../components/carrusel/CarruselHome';
+import CarruselRelacionados from '../../../components/carrusel/CarruselRelacionados';
 import axios from 'axios';
 import { Responsive, Icon, Breadcrumb, Grid, Header, Container, Button } from "semantic-ui-react";
 import { useCookies } from "react-cookie"
@@ -169,6 +170,18 @@ export default function detalle({ data }) {
                             primary style={{ borderRadius: 20, padding: '11px 40px' }}>Comparar</Button>
                         </div> 
                     }
+                    {data.vehiculosRelacionados.length > 0 && (
+                    <Container fluid id="cont-inf">
+                        <Header as="h4" style={{ marginTop: 20, marginLeft: 15 }}>
+                            PRODUCTOS RELACIONADOS
+                        </Header>
+                        <CarruselRelacionados 
+                            type='products'
+                            data={data.vehiculosRelacionados}
+                            numberCards={1}
+                        />
+                    </Container>
+                    )}
                 </div>
             )}
 
