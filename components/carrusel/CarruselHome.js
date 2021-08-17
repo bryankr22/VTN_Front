@@ -30,6 +30,8 @@ export default function CarruselHome(props) {
                         )}
                         {props.seccion == "desc" && (
                             <img
+                            id={`image_vehicle_${index}`}
+                            data-zoom-image={item.url + item.extension}
                             key={index}
                             quality={50}
                             loading='lazy'

@@ -22,6 +22,7 @@ class MyDocument extends Document {
                     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/ez-plus-extended@1.0.2/src/jquery.ez-plus.min.js"></script>
                 </Head>
                 <body>
                     <Main />

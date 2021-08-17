@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import PublicLayout from '../../../layouts/PublicLayout';
 import SliderPrincipal from '../../../components/vehiculo/SliderPrincipal';
@@ -9,8 +9,73 @@ import CarruselHome from '../../../components/carrusel/CarruselHome';
 import CarruselRelacionados from '../../../components/carrusel/CarruselRelacionados';
 import axios from 'axios';
 import { Responsive, Icon, Breadcrumb, Grid, Header, Container } from "semantic-ui-react";
-
 export default function detalle({ data }) {
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            $('.thumbs > .thumb > img').removeAttr("id");
+            $('#image_vehicle_4').removeAttr("id");
+            $('#image_vehicle_0').ezPlus({
+                scrollZoom: true,
+                zoomWindowWidth: 500,
+                zoomWindowHeight: 500
+            });
+            $('#image_vehicle_1').ezPlus({
+                scrollZoom: true,
+                zoomWindowWidth: 500,
+                zoomWindowHeight: 500
+            });
+            $('#image_vehicle_2').ezPlus({
+                scrollZoom: true,
+                zoomWindowWidth: 500,
+                zoomWindowHeight: 500
+            });
+            $('#image_vehicle_3').ezPlus({
+                scrollZoom: true,
+                zoomWindowWidth: 500,
+                zoomWindowHeight: 500
+            });
+            $('#image_vehicle_4').ezPlus({
+                scrollZoom: true,
+                zoomWindowWidth: 500,
+                zoomWindowHeight: 500
+            });
+            setTimeout(function() {
+                let primerElemento = document.getElementById('image_vehicle_0').getAttribute('data-zoom-image').replace('https://vendetunave.s3.amazonaws.com/vendetunave/images/vehiculos/', '').replace('.', '-')
+                $('.zoomContainer').css("display", 'none');
+                $('#' + primerElemento).css("display", 'block');
+            }, 4000);
+
+            const observer = new MutationObserver((mutationList) => {
+                mutationList.forEach((mutation) => {
+                    if (mutation.addedNodes.length) {
+                        console.log('Añadido', mutation.addedNodes[0]);
+                    }
+                    if (mutation.removedNodes.length) {
+                        console.log('Eliminado', mutation.removedNodes[0]);
+                    }
+
+                    let slideParent = document.getElementsByClassName('slide selected')[0];
+                    let divSlide = slideParent.firstElementChild;
+                    let imageElement = divSlide.firstElementChild;
+
+                    let atributo = ((imageElement.getAttribute('data-zoom-image')).replace('https://vendetunave.s3.amazonaws.com/vendetunave/images/vehiculos/', '')).replace('.', '-');
+                    $('.zoomContainer').css("display", 'none');
+                    $('#' + atributo).css("display", 'block');
+                })
+            });
+            const equipos = document.querySelector('ul.slider');
+            // Opcions para el observer
+            const observerOptions = {
+                attributes: true,
+                childList: true,
+                subtree: true,
+                characterData: false,
+                attributeOldValue: false,
+                characterDataOldValue: false
+            };
+            observer.observe(equipos, observerOptions);
+        }
+    }, [])
     return (
         <PublicLayout>
             <style>
