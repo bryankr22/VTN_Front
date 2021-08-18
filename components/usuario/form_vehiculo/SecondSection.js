@@ -74,6 +74,7 @@ export default function SecondSection() {
                 <Grid.Column className="columDrop">
                     {inputsList_one.map((item, index) =>  
                         <ImageUpload 
+                        key={item.index}
                         principal={item.principal}
                         index={item.index}
                         />
@@ -82,6 +83,7 @@ export default function SecondSection() {
                 <Grid.Column className="columDrop">
                     {inputsList_two.map((item, index) =>  
                         <ImageUpload 
+                        key={item.index}
                         principal={item.principal}
                         index={item.index}
                         />
@@ -90,6 +92,7 @@ export default function SecondSection() {
                 <Grid.Column className="columDrop">
                     {inputsList_three.map((item, index) =>  
                         <ImageUpload 
+                        key={item.index}
                         principal={item.principal}
                         index={item.index}
                         />
