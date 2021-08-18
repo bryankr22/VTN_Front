@@ -7,11 +7,13 @@ import thunk from 'redux-thunk';
 import homeSlice from './homeSlice';
 import comparadorSlice from './comparadorSlice';
 import authSlice from './authSlice';
+import productoSlice from './productoSlice';
 
 const reducers = combineReducers({
     home: homeSlice,
     comparador: comparadorSlice,
-    auth: authSlice
+    auth: authSlice,
+    producto: productoSlice
 });
 const persistConfig = {
     key: 'root',

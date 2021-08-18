@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, {useState} from 'react'
 import { Input, Header, Button, Container } from "semantic-ui-react";
 import ActiveTagsVehiculos from './ActiveTagsVehiculos';
@@ -6,6 +7,16 @@ import ModalOrderMobile from './modals/ModalOrderMobile';
 export default function SidebarMobile({ params, contadores, vehiculos, isFicha }) {
     const [modalOrder, setModalOrder] = useState(false);
     const [modalFilter, setModalFilter] = useState(false);
+    const [query, setQuery] = useState("");
+    const router = useRouter();
+    const handleKeyDown = (e) => {
+        if (e.keyCode === 13) {
+            handleSubmit();
+        }      
+    };
+    const handleSubmit = () => {
+        router.push('/vehiculos?q='+query)
+    };
     return (
         <>
             <Input
@@ -19,7 +30,10 @@ export default function SidebarMobile({ params, contadores, vehiculos, isFicha }
                     paddingTop: 10,
                 },
             }}
+            onChange={(e, {value}) => setQuery(value) }
+            onKeyDown={(e) => handleKeyDown(e)}
             fluid
+            value={params.q}
             id="search-responsive"
             style={{ margin: "10px 20px 0 20px" }}
             placeholder="¿Qué estas buscando?"
