@@ -12,7 +12,7 @@ import { Responsive, Icon, Breadcrumb, Grid, Header, Container } from "semantic-
 export default function detalle({ data }) {
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            $('.thumbs > .thumb > img').removeAttr("id");
+            /**$('.thumbs > .thumb > img').removeAttr("id");
             $('#image_vehicle_4').removeAttr("id");
             $('#image_vehicle_0').ezPlus({
                 scrollZoom: true,
@@ -73,7 +73,7 @@ export default function detalle({ data }) {
                 attributeOldValue: false,
                 characterDataOldValue: false
             };
-            observer.observe(equipos, observerOptions);
+            observer.observe(equipos, observerOptions);**/
         }
     }, [])
     return (

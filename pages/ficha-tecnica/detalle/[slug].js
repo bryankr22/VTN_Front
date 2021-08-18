@@ -1,17 +1,21 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import { useRouter } from 'next/router'
 import PublicLayout from '../../../layouts/PublicLayout';
 import TableDescription from '../../../components/fichatecnica/TableDescription';
 import CarruselHome from '../../../components/carrusel/CarruselHome';
 import CarruselRelacionados from '../../../components/carrusel/CarruselRelacionados';
 import axios from 'axios';
-import { Responsive, Icon, Breadcrumb, Grid, Header, Container, Button } from "semantic-ui-react";
+import { Responsive, Icon, Breadcrumb, Grid, Header, Container, Button, Dimmer, Loader } from "semantic-ui-react";
 import { useCookies } from "react-cookie"
 
 import { useSelector, useDispatch } from 'react-redux';
 import { addFicha } from '../../../store/comparadorSlice';
+import { AUTH_URL, favoritos_add } from '../../../helpers/constants';
+import jwt from 'jsonwebtoken';
 export default function detalle({ data }) {
+    const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
+    const router = useRouter();
     const compareList = useSelector(({ comparador }) => comparador.fichas);
     const [cookies, setCookie] = useCookies(['vtn_token']);
     const isOnStorage = (item) => {
@@ -26,8 +30,28 @@ export default function detalle({ data }) {
         window.location.href = '/ficha-tecnica';
         return;
     }
+    const addFavoritos = () => {
+        setLoading(true);
+        const cookie = cookies.vtn_token;
+        const decoded = jwt.verify(cookie, 'vendetunave2021');
+        const config = {
+            headers: { Authorization: `Bearer ${decoded.token_server.access_token}` }
+        };
+        const user_id = decoded.user.id;
+        const dataSend = {
+            idUser: user_id,
+            idVehicle: data.vehicle.id
+        };
+        axios.post(AUTH_URL + favoritos_add, dataSend, config).then((res) => {
+            setLoading(false);
+            router.push('/usuario/favoritos');
+        })
+    }
     return (
         <PublicLayout>
+            <Dimmer style={{ position: "fixed" }} active={loading}>
+                <Loader>Agregando a favoritos...</Loader>
+            </Dimmer>  
             <style>
             {`
                 .image > img {
@@ -159,8 +183,9 @@ export default function detalle({ data }) {
                     {cookies.vtn_token &&
                         <div style={{ margin: '20px auto', textAlign: 'center' }}>
                             <Button 
-                            onClick={(e) => { e.preventDefault(); }} 
-                            primary style={{ borderRadius: 20, padding: '11px 40px' }}>Agregar a favoritos</Button>
+                            onClick={(e) => { addFavoritos(); }} 
+                            primary 
+                            style={{ borderRadius: 20, padding: '11px 40px' }}>Agregar a favoritos</Button>
                         </div>
                     }
                     { compareList.length < 3 && !isOnStorage(data.vehicle) &&

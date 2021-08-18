@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
-import { Header, Form, Container, Input, Responsive } from "semantic-ui-react";
+import { Header, Form, Container, Input, Responsive, Message } from "semantic-ui-react";
 import Iframe from "react-iframe";
+
+import axios from 'axios';
+import { API_URL, newsletter_api } from '../../helpers/constants';
 
 const ContentHome = () => {
     const [form, setForm] = useState({
@@ -8,6 +11,10 @@ const ContentHome = () => {
         emailNewsletter: "",
         disabledNews: true,
         link_video: "https://www.youtube.com/embed/Z97oTgtn_VU"
+    });
+    const [response, setResponse] = useState({
+        mensaje: "",
+        show: false
     });
     const setValueForm = (object) => {
         setForm({...form, ...object});
@@ -19,22 +26,26 @@ const ContentHome = () => {
         const { nombreNewsletter, emailNewsletter } = form;
         const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (emailNewsletter === "" || reg.test(emailNewsletter) !== true) {
-            alert("Correo invalido");
+            //alert("Correo invalido");
             return;
         }
         if (nombreNewsletter.length < 3) {
-            alert("nombre mayor o igual a 3 caracteres");
+            //alert("nombre mayor o igual a 3 caracteres");
             return;
         }
         let data = {
             nombreNewsletter,
             emailNewsletter,
         };
-        axios.post("api/home/newsletter", data).then((res) => {
+        axios.post(API_URL + newsletter_api, data).then((res) => {
             if (res.data.state) {
                 setForm({...form, 
                     emailNewsletter: "",
                     nombreNewsletter: ""
+                });
+                setResponse({...response, 
+                    mensaje: res.data.message,
+                    show: true
                 });
             }
         }).catch((error) => {
@@ -60,6 +71,14 @@ const ContentHome = () => {
                 paddingBottom: 40,
             }}
             >
+            {response.show ?
+                <Message
+                success
+                onDismiss={()=> setResponse({...response, show: false })}
+                header='Completado'
+                content={response.mensaje}
+                />
+            : null}
             <Header as="h1" style={{ fontSize: "1.4rem" }} textAlign="left">
                 REGISTRARSE AL NEWSLETTER
             </Header>
@@ -110,6 +129,14 @@ const ContentHome = () => {
                 paddingBottom: 40,
             }}
             >
+            {response.show ?
+                <Message
+                success
+                onDismiss={()=> setResponse({...response, show: false })}
+                header='Completado'
+                content={response.mensaje}
+                />
+            : null}
             <Header as="h1" style={{ fontSize: "1.4rem" }} textAlign="left">
                 REGISTRARSE AL NEWSLETTER
             </Header>
@@ -168,6 +195,14 @@ const ContentHome = () => {
                 paddingRight: 230,
             }}
             >
+            {response.show ?
+                <Message
+                success
+                onDismiss={()=> setResponse({...response, show: false })}
+                header='Completado'
+                content={response.mensaje}
+                />
+            : null}
             <Header as="h1" style={{ fontSize: "1.4rem" }}>
                 REGISTRARSE AL NEWSLETTER
             </Header>

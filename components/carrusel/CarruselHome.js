@@ -1,7 +1,7 @@
 import React from 'react'
 import { Carousel } from "react-responsive-carousel";
 import Image from 'next/image'
-import ReactImageZoom from 'react-image-zoom';
+//import ReactImageZoom from 'react-image-zoom';
 export default function CarruselHome(props) {
     return (
         <div>
@@ -30,11 +30,10 @@ export default function CarruselHome(props) {
                         )}
                         {props.seccion == "desc" && (
                             <img
-                            id={`image_vehicle_${index}`}
+                            id={'image_vehicle_'+index}
                             data-zoom-image={item.url + item.extension}
+                            data-image={item.url + item.extension}
                             key={index}
-                            quality={50}
-                            loading='lazy'
                             style={{
                                 objectFit: "contain",
                                 width: "100%",
