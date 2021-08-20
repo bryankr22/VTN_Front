@@ -131,7 +131,7 @@ export default function index({preguntas, tags}) {
         </PublicLayout>
     )
 }
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const res = await axios.get(API_URL + comunidad_api);
     const preguntas = await res.data.preguntas;
     const tags = await res.data.tags;

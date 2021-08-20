@@ -77,6 +77,9 @@ export default function ListadoVehiculos({params, vehiculos, page, totalRecords}
     const handleSubmit = () => {
         router.push('/vehiculos?q='+query)
     };
+    useEffect(() => {
+        setQuery(params.q)
+    }, [])
     //useEffect
     return (
         <Grid.Column width={13}>
@@ -86,7 +89,7 @@ export default function ListadoVehiculos({params, vehiculos, page, totalRecords}
                         <Input
                             style={{ width: "100%" }}
                             onChange={(e, {value})=> setQuery(value)}
-                            defaultValue={params.q}
+                            defaultValue={query}
                             action={{
                                 icon: "search",
                                 onClick: () => handleSubmit(),
