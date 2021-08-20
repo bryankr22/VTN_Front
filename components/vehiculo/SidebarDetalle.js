@@ -1,11 +1,18 @@
 import React, {useState} from 'react'
-import { Grid, Header, Icon, Container, Form, Button, Modal } from "semantic-ui-react";
+import { Grid, Header, Icon, Container, Form, Button, Modal, Dimmer, Loader } from "semantic-ui-react";
 import { useCookies } from "react-cookie"
 import { useSelector, useDispatch } from 'react-redux';
 import { addVehiculo } from '../../store/comparadorSlice';
 import ModalContacto from './ModalContacto';
-export default function SidebarDetalle({ vehiculo }) {
+
+import axios from 'axios';
+import { AUTH_URL, favoritos_add_vehiculo } from '../../helpers/constants';
+import jwt from 'jsonwebtoken';
+import { useRouter } from 'next/router'
+
+export default function SidebarDetalle({ vehiculo, vehicleFav }) {
     const dispatch = useDispatch()
+    const router = useRouter()
     const [cookies, setCookie] = useCookies(['vtn_token']);
     const vehiculoFav = [];
     const compareList = useSelector(({ comparador }) => comparador.vehiculos);
@@ -23,8 +30,30 @@ export default function SidebarDetalle({ vehiculo }) {
         window.location.href = '/vehiculos';
         return;
     }
+    const [loading, setLoading] = useState(false);
+    const addFavoritos = () => {
+        setLoading(true);
+        const cookie = cookies.vtn_token;
+        const decoded = jwt.verify(cookie, 'vendetunave2021');
+        const config = {
+            headers: { Authorization: `Bearer ${decoded.token_server.access_token}` }
+        };
+        const user_id = decoded.user.id;
+        const dataSend = {
+            idUser: user_id,
+            idVehicle: vehiculo.id,
+            state: true
+        };
+        axios.post(AUTH_URL + favoritos_add_vehiculo, dataSend, config).then((res) => {
+            setLoading(false);
+            router.push('/usuario/favoritos');
+        })
+    }
     return (
         <Container style={{ marginTop: 20 }}>
+            <Dimmer style={{ position: "fixed" }} active={loading}>
+                <Loader>Agregando a favoritos...</Loader>
+            </Dimmer>
             <Header as="h6" disabled>
                 <div style={{ display: 'inline-block', width: '50%' }}>
                     {vehiculo.ano} - {" " + new Intl.NumberFormat("de-DE").format(vehiculo.kilometraje)}{" "}Km
@@ -91,11 +120,12 @@ export default function SidebarDetalle({ vehiculo }) {
                 <Header
                     as="h4"
                     textAlign="center"
+                    onClick={() => addFavoritos()}
                     style={{ marginTop: 8, marginBottom: 30 }}
                 >
                     <Icon
                     id={"icon-fav-" + vehiculo.id}
-                    name={ vehiculoFav.length > 0 ? "heart" : "heart outline" }
+                    name={ vehicleFav.length > 0 ? "heart" : "heart outline" }
                     color="blue"
                     />
                     Agregar a favoritos

@@ -25,6 +25,7 @@ export const busquedas_api = '/busquedas/';
 export const comment_api = '/comment';
 export const newsletter_api = '/newsletter';
 export const favoritos_add = '/favoritos';
+export const favoritos_add_vehiculo = '/favoritos_vehiculo';
 
 
 

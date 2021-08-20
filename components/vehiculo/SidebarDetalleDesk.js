@@ -1,13 +1,19 @@
-import React from 'react'
-import { Grid, Header, Container, Icon, Button, Form } from "semantic-ui-react";
+import React, {useState} from 'react'
+import { Grid, Header, Container, Icon, Button, Form, Dimmer, Loader } from "semantic-ui-react";
 import { useCookies } from "react-cookie"
 import { useSelector, useDispatch } from 'react-redux';
 import { addVehiculo } from '../../store/comparadorSlice';
-export default function SidebarDetalleDesk({ imagenPrincipal, vehiculo, diasPublicado, accesorio }) {
+
+import axios from 'axios';
+import { AUTH_URL, favoritos_add_vehiculo } from '../../helpers/constants';
+import jwt from 'jsonwebtoken';
+import { useRouter } from 'next/router'
+
+export default function SidebarDetalleDesk({ imagenPrincipal, vehiculo, vehicleFav, diasPublicado, accesorio }) {
     const dispatch = useDispatch()
+    const router = useRouter();
     const [cookies, setCookie] = useCookies(['vtn_token']);
     const compareList = useSelector(({ comparador }) => comparador.vehiculos);
-    const vehiculoFav = [];
     const isOnStorage = (item) => {
         return compareList.some((element) => element.id === item.id);
     }
@@ -21,8 +27,30 @@ export default function SidebarDetalleDesk({ imagenPrincipal, vehiculo, diasPubl
         window.location.href = '/vehiculos';
         return;
     }
+    const [loading, setLoading] = useState(false);
+    const addFavoritos = () => {
+        setLoading(true);
+        const cookie = cookies.vtn_token;
+        const decoded = jwt.verify(cookie, 'vendetunave2021');
+        const config = {
+            headers: { Authorization: `Bearer ${decoded.token_server.access_token}` }
+        };
+        const user_id = decoded.user.id;
+        const dataSend = {
+            idUser: user_id,
+            idVehicle: vehiculo.id,
+            state: true
+        };
+        axios.post(AUTH_URL + favoritos_add_vehiculo, dataSend, config).then((res) => {
+            setLoading(false);
+            router.push('/usuario/favoritos');
+        })
+    }
     return (
         <Grid.Column style={{ padding: "30px 10px 15px 30px" }}>
+            <Dimmer style={{ position: "fixed" }} active={loading}>
+                <Loader>Agregando a favoritos...</Loader>
+            </Dimmer>  
             <Header as="h1" textAlign="left">
                 {vehiculo.title}
             </Header>
@@ -40,9 +68,11 @@ export default function SidebarDetalleDesk({ imagenPrincipal, vehiculo, diasPubl
                     {cookies.vtn_token && (
                         <Icon
                             id={"icon-fav-" + vehiculo.id}
-                            name={ vehiculoFav.length > 0 ? "heart" : "heart outline" }
+                            name={ vehicleFav.length > 0 ? "heart" : "heart outline" }
                             color="blue"
                             style={{ marginLeft: 80 }}
+                            onClick={() => addFavoritos() }
+
                         />
                     )}
                 </Header.Content>

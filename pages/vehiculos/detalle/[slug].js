@@ -7,9 +7,12 @@ import SidebarDetalleDesk from '../../../components/vehiculo/SidebarDetalleDesk'
 import TableCaracteristicasDesk from '../../../components/vehiculo/TableCaracteristicasDesk';
 import CarruselHome from '../../../components/carrusel/CarruselHome';
 import CarruselRelacionados from '../../../components/carrusel/CarruselRelacionados';
+import { validateAuth } from '../../../helpers/auth';
+import jwt from 'jsonwebtoken';
 import axios from 'axios';
 import { Responsive, Icon, Breadcrumb, Grid, Header, Container } from "semantic-ui-react";
 export default function detalle({ data }) {
+    console.log(">>>>", data)
     useEffect(() => {
         if (typeof window !== 'undefined') {
             /**$('.thumbs > .thumb > img').removeAttr("id");
@@ -163,12 +166,16 @@ export default function detalle({ data }) {
             </div>
             <Responsive minWidth={100} maxWidth={320}>
                 <SliderPrincipal imagenes={data.imagenes} />
-                <SidebarDetalle vehiculo={data.vehiculo} />
+                <SidebarDetalle 
+                vehicleFav={data.vehicleFav}
+                vehiculo={data.vehiculo} />
             </Responsive>
             <Responsive {...Responsive.onlyTablet}>
                 <Container style={{ marginTop: 20 }}>
                     <SliderPrincipal imagenes={data.imagenes} />
-                    <SidebarDetalle vehiculo={data.vehiculo} />
+                    <SidebarDetalle 
+                    vehicleFav={data.vehicleFav}
+                    vehiculo={data.vehiculo} />
                     <Grid columns={1} divided="vertically">
                         <Grid.Row style={{ marginTop: 30 }}>
                             <Grid.Column>
@@ -232,7 +239,9 @@ export default function detalle({ data }) {
             <Responsive {...Responsive.onlyMobile}>
                 <Container style={{ marginTop: 20 }}>
                     <SliderPrincipal imagenes={data.imagenes} />
-                    <SidebarDetalle vehiculo={data.vehiculo} />
+                    <SidebarDetalle 
+                    vehicleFav={data.vehicleFav}
+                    vehiculo={data.vehiculo} />
                     <Grid columns={1} divided="vertically">
                         <Grid.Row style={{ marginTop: 30 }}>
                             <Grid.Column>
@@ -315,6 +324,7 @@ export default function detalle({ data }) {
                     </Grid.Column>
                     <SidebarDetalleDesk
                         diasPublicado={data.diasPublicado}
+                        vehicleFav={data.vehicleFav}
                         vehiculo={data.vehiculo} />
                 </Grid>
                 {data.vehiculosRelacionados.length > 0 && (
@@ -333,10 +343,17 @@ export default function detalle({ data }) {
         </PublicLayout>
     )
 }
-export async function getServerSideProps({ params }) {
-    const res = await axios.get('https://api.vendetunave.co/api/vehiculo/' + params.slug);
+export async function getServerSideProps(context) {
+    const auth = validateAuth(context);
+    var config = {};
+    if(auth.vtn_token){
+        const decoded = jwt.verify(auth.vtn_token, 'vendetunave2021');
+        config = {
+            headers: { Authorization: `Bearer ${decoded.token_server.access_token}` }
+        };
+    }
+    const res = await axios.get('https://api.vendetunave.co/api/vehiculo/' + context.params.slug, config);
     const data = await res.data;
-    //const imagenes = await res.data.imagenes;
     return {
         props: {
             data
