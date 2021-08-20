@@ -15,7 +15,11 @@ export default function SidebarMobile({ params, contadores, vehiculos, isFicha }
         }      
     };
     const handleSubmit = () => {
-        router.push('/vehiculos?q='+query)
+        if(!isFicha){
+            router.push('/vehiculos?q='+query)
+        }else{
+            router.push('/ficha-tecnica?q='+query)
+        }
     };
     return (
         <>
@@ -33,7 +37,7 @@ export default function SidebarMobile({ params, contadores, vehiculos, isFicha }
             onChange={(e, {value}) => setQuery(value) }
             onKeyDown={(e) => handleKeyDown(e)}
             fluid
-            value={params.q}
+            value={query}
             id="search-responsive"
             style={{ margin: "10px 20px 0 20px" }}
             placeholder="¿Qué estas buscando?"
