@@ -365,3 +365,14 @@
 .carousel:hover .slide .legend {
   opacity: 1;
 }
+
+.search-input > input {
+  border: 1px solid black !important;
+  border-top: none !important;
+  border-left: none !important;
+}
+
+.search-input > input::placeholder {
+  text-align: center;
+  letter-spacing: 3px;
+}
