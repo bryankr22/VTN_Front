@@ -20,7 +20,7 @@ const normalize = (function() {
       return ret.join("");
     };
 })();
-export const panes = (favoritos, resultTotalV, accesorios, resultTotalA) => {
+export const panes = (favoritos, resultTotalV, accesorios, resultTotalA, removeFicha, removeVehicle) => {
     return [
     {
         menuItem: "VEHÍCULOS",
@@ -71,7 +71,7 @@ export const panes = (favoritos, resultTotalV, accesorios, resultTotalA) => {
                                                 "-" +
                                                 item.vehiculo_id
                                             } style={{ textTransform: 'uppercase' }} fluid>contactar vendedor</Button>
-                                            <Button fluid onClick={() => this.removeFav(item.vehiculo_id)} style={{ marginTop: 7, textTransform: 'uppercase' }}>eliminar de favoritos</Button>
+                                            <Button fluid onClick={() => removeFicha(item.vehiculo_id)} style={{ marginTop: 7, textTransform: 'uppercase' }}>eliminar de favoritos</Button>
                                         </Table.Cell>
                                     </Table.Row>
                                 )}
@@ -163,7 +163,7 @@ export const panes = (favoritos, resultTotalV, accesorios, resultTotalA) => {
                                             } style={{ textTransform: 'uppercase' }} fluid>ver ficha técnica</Button>
                                             <Button 
                                             fluid 
-                                            onClick={() => console.log() } 
+                                            onClick={() => removeVehicle(item.datasheet_id) } 
                                             style={{ marginTop: 7, textTransform: 'uppercase' }}>eliminar de favoritos</Button>
                                         </Table.Cell>
                                     </Table.Row>

@@ -28,5 +28,9 @@ export const newsletter_api = '/newsletter';
 export const favoritos_add = '/favoritos';
 export const favoritos_add_vehiculo = '/favoritos_vehiculo';
 
+export const favoritos_remove_vehiculo = '/remove_favorito_vehiculo';
+export const favoritos_remove_ficha = '/remove_favorito_ficha';
+export const perfil_update = '/profile_update';
+
 
 

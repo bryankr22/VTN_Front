@@ -4,7 +4,7 @@ import { authInitialProps } from '../../helpers/auth';
 import { Container, Header, Table, Button, Image, Responsive, Dimmer, Loader, Tab } from 'semantic-ui-react'
 import { panes } from '../../components/usuario/favoritosTabs';
 
-import { AUTH_URL, favoritos_api } from '../../helpers/constants';
+import { AUTH_URL, favoritos_api, favoritos_remove_vehiculo, favoritos_remove_ficha } from '../../helpers/constants';
 import { useCookies } from "react-cookie"
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
@@ -30,12 +30,42 @@ export default function favoritos() {
             setFavoritos({...favoritos, ...res.data});
         })
     }, [])
+    const eliminarVehiculo = (vehicle_id) => {
+        const cookie = cookies.vtn_token;
+        const decoded = jwt.verify(cookie, 'vendetunave2021');
+        const user_id = decoded.user.id;
+        const config = {
+            headers: { Authorization: `Bearer ${decoded.token_server.access_token}` }
+        };
+        const data = { user_id, vehicle_id }; 
+        axios.post(AUTH_URL + favoritos_remove_vehiculo, data, config).then((res) => {
+            location.reload();
+        })
+        .catch((error) => {
+            //console.log(error);
+        });
+    }
+    const eliminarFicha = (ficha_id) => {
+        const cookie = cookies.vtn_token;
+        const decoded = jwt.verify(cookie, 'vendetunave2021');
+        const user_id = decoded.user.id;
+        const config = {
+            headers: { Authorization: `Bearer ${decoded.token_server.access_token}` }
+        };
+        const data = { user_id, ficha_id }; 
+        axios.post(AUTH_URL + favoritos_remove_ficha, data, config).then((res) => {
+            location.reload();
+        })
+        .catch((error) => {
+            //console.log(error);
+        });
+    }
     return (
         <PublicLayout>
             <Container style={{ paddingTop: 25 }} text>
                 <Header as="h2" style={{ textTransform: 'uppercase' }}>Favoritos</Header>
                 <Tab
-                    panes={panes(favoritos.vehiculos, 0, favoritos.fichas_tecnicas, 0)}
+                    panes={panes(favoritos.vehiculos, 0, favoritos.fichas_tecnicas, 0, eliminarVehiculo, eliminarFicha)}
                     activeIndex={activeIndex}
                     onTabChange={handleTabChange}
                 />
