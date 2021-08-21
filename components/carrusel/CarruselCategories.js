@@ -26,8 +26,8 @@ export default function CarruselCategories({ data = [], numberCards }) {
             activeItemIndex={activeItemIndex}
             numberOfCards={numberCards}
             gutter={20}
-            leftChevron={<button>{'<'}</button>}
-            rightChevron={<button>{'>'}</button>}
+            leftChevron={<button><i className="angle left big icon" /></button>}
+            rightChevron={<button><i className="angle right big icon" /></button>}
             outsideChevron
             chevronWidth={chevronWidth}
             >
