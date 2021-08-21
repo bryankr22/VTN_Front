@@ -3,6 +3,7 @@ import { Container, List, Modal, Grid, Header, Icon, Accordion, Input, Button, C
 import * as R from 'ramda'
 import OpcionesComponent from './OpcionesComponent';
 import MarcaModeloComponent from './MarcaModeloComponent';
+import TiposComponent from './TiposComponent';
 export default function ModalFiltersMobile({showModal, onClose, filtros, params}) {
     const mapping_contador = (contador) => {
         var mapItems = Object.keys(contador).map((item, index) => {
@@ -75,10 +76,8 @@ export default function ModalFiltersMobile({showModal, onClose, filtros, params}
             },
             {
                 text: "Tipos",
-                open: false,
-                values: mapping_contador(filtros.tipo),
-                slug: 'tipo',
-                component: false
+                component: true,
+                render: <TiposComponent filtros={filtros} params={params} />
             },
             {
                 text: "Marcas",
