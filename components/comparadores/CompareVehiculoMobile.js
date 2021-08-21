@@ -97,7 +97,7 @@ export default function CompareVehiculoMobile() {
                                     color: 'gray'
                                 }}
                                 >
-                                    {vehicle.ciudadLabel}
+                                    {vehicle.labelCiudad}
                                 </p>
 
                                 { index === 0 &&
@@ -114,7 +114,7 @@ export default function CompareVehiculoMobile() {
                                     color: 'gray'
                                 }}
                                 >
-                                    {vehicle.marcaLabel}
+                                    {vehicle.marca}
                                 </p>
 
                                 { index === 0 &&
@@ -147,7 +147,7 @@ export default function CompareVehiculoMobile() {
                                     color: 'gray'
                                 }}
                                 >
-                                    {vehicle.modeloLabel}
+                                    {vehicle.modelo}
                                 </p>
                                 { index === 0 &&
                                     <Header as='h3'>Estado</Header>
@@ -227,7 +227,7 @@ export default function CompareVehiculoMobile() {
                                     color: 'gray'
                                 }}
                                 >
-                                    {vehicle.transmisionLabel}
+                                    {vehicle.transmision}
                                 </p>
                                 { index === 0 &&
                                     <Header as='h3'>Blindaje</Header>
