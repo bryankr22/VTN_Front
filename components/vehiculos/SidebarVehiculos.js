@@ -183,6 +183,33 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                     </List.Item>
                 </List>
                 )}
+                { !params.tipo && params.categoria === 'motos' && ( 
+                <List link>
+                    <List.Item>
+                        <List.Content>
+                            <List.Header>
+                                <Header as="h5">Tipos</Header>
+                            </List.Header>
+                            <List.List style={{ paddingLeft: 15 }}>
+                                {mapping_contador(contadores.tipo).map((item, index) => (
+                                    <List.Item 
+                                    key={index}
+                                    as="a"
+                                    onClick={() => insertParam('tipo', item.label) }>
+                                        {item.label}
+                                    </List.Item>
+                                )
+                                )}
+                                <List.Item 
+                                as="a"
+                                onClick={() => openModal('Tipos', contadores.tipo)}>
+                                    Ver Todos
+                                </List.Item>
+                            </List.List>
+                        </List.Content>
+                    </List.Item>
+                </List>
+                )}
                 { !params.marca && ( 
                 <List link>
                     <List.Item>

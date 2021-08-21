@@ -3,8 +3,37 @@ import PublicLayout from '../layouts/PublicLayout';
 import ListaConcesionarios from '../components/servicios/ListaConcesionarios';
 import { Container, Header, Select, Button, Responsive, Grid, Item } from 'semantic-ui-react'
 import axios from 'axios';
-import { API_URL, concesionarios_api } from '../helpers/constants';
-export default function concesionarios({concesionarios_res}) {
+//import { API_URL, concesionarios_api } from '../helpers/constants';
+import { useRouter } from 'next/router';
+export default function concesionarios({params, data, tiposServices, ciudades}) {
+    const router = useRouter();
+    const tipoVehiculo = [
+        { key: 0, value: 0, text: 'TODOS LOS TIPOS' }, 
+        { key: 1, value: 'NUEVO', text: 'NUEVO' }, 
+        { key: 2, value: 'USADO', text: 'USADO' }
+    ];
+    const insertParam = (key, value) => {
+        key = encodeURIComponent(key);
+        value = encodeURIComponent(value);
+        var kvp = document.location.search.substr(1).split('&');
+        let i=0;
+        for(; i<kvp.length; i++){
+            if (kvp[i].startsWith(key + '=')) {
+                let pair = kvp[i].split('=');
+                pair[1] = value;
+                kvp[i] = pair.join('=');
+                break;
+            }
+        }
+        if(i >= kvp.length){
+            kvp[kvp.length] = [key,value].join('=');
+        }
+        let params = kvp.join('&');
+        document.location.search = params;
+    }
+    const onChangeFilter = (input, value) => {
+        insertParam(input, value);
+    }
     return (
         <PublicLayout>
             <div>
@@ -27,26 +56,29 @@ export default function concesionarios({concesionarios_res}) {
                         <Grid.Row>
                             <Grid.Column>
                                 <Select
+                                    onChange={(e, {value}) => onChangeFilter('ciudad', value)}
                                     fluid
-                                    placeholder='SELECCIONE LA CIUDAD'
                                     search
-                                    options={[]}
+                                    options={ciudades}
+                                    defaultValue={ciudades[0].value}
                                 />
                             </Grid.Column>
                             <Grid.Column>
                                 <Select
                                     fluid
-                                    placeholder='SELECCIONE SERVICIO'
                                     search
-                                    options={[]}
+                                    options={tipoVehiculo}
+                                    onChange={(e, {value}) => onChangeFilter('tipo', value)}
+                                    defaultValue={tipoVehiculo[0].value}
                                 />
                             </Grid.Column>
                             <Grid.Column>
                                 <Select
                                     fluid
-                                    placeholder='SELECCIONE LA CIUDAD'
                                     search
-                                    options={[]}
+                                    options={tiposServices}
+                                    onChange={(e, {value}) => onChangeFilter('marca', value)}
+                                    defaultValue={tiposServices[0].value}
                                 />
                             </Grid.Column>
                         </Grid.Row>
@@ -58,21 +90,28 @@ export default function concesionarios({concesionarios_res}) {
                             <Grid.Column style={{ marginBottom: 15 }}>
                                 <Select
                                     fluid
-                                    placeholder='SELECCIONE LA CIUDAD'
                                     search
+                                    options={ciudades}
+                                    onChange={(e, {value}) => onChangeFilter('ciudad', value)}
+                                    defaultValue={router.params?.ciudad && 0}
                                 />
                             </Grid.Column>
                             <Grid.Column style={{ marginBottom: 15 }}>
                                 <Select
                                     fluid
-                                    placeholder='SELECCIONE UN SERVICIO'
                                     search
+                                    options={tipoVehiculo}
+                                    onChange={(e, {value}) => onChangeFilter('tipo', value)}
+                                    defaultValue={router.params?.tipo && 0}
                                 />
                             </Grid.Column>
                             <Grid.Column style={{ marginBottom: 15 }}>
                                 <Select
                                     fluid
                                     search
+                                    options={tiposServices}
+                                    onChange={(e, {value}) => onChangeFilter('marca', value)}
+                                    defaultValue={router.params?.marca && 0}
                                 />
                             </Grid.Column>
                         </Grid.Row>
@@ -84,21 +123,28 @@ export default function concesionarios({concesionarios_res}) {
                             <Grid.Column style={{ marginBottom: 15 }}>
                                 <Select
                                     fluid
-                                    placeholder='SELECCIONE LA CIUDAD'
                                     search
+                                    options={ciudades}
+                                    onChange={(e, {value}) => onChangeFilter('ciudad', value)}
+                                    defaultValue={router.params?.ciudad && 0}
                                 />
                             </Grid.Column>
                             <Grid.Column style={{ marginBottom: 15 }}>
                                 <Select
                                     fluid
-                                    placeholder='SELECCIONE UN SERVICIO'
                                     search
+                                    options={tipoVehiculo}
+                                    onChange={(e, {value}) => onChangeFilter('tipo', value)}
+                                    defaultValue={router.params?.tipo && 0}
                                 />
                             </Grid.Column>
                             <Grid.Column style={{ marginBottom: 15 }}>
                                 <Select
                                     fluid
                                     search
+                                    options={tiposServices}
+                                    onChange={(e, {value}) => onChangeFilter('marca', value)}
+                                    defaultValue={router.params?.marca && 0}
                                 />
                             </Grid.Column>
                         </Grid.Row>
@@ -107,27 +153,43 @@ export default function concesionarios({concesionarios_res}) {
 
                 <Responsive {...Responsive.onlyComputer}>
                     <ListaConcesionarios 
-                    concesionarios_res={concesionarios_res}/>
+                    concesionarios_res={data.servicios}/>
                 </Responsive>
                 <Responsive {...Responsive.onlyTablet}>
                     <ListaConcesionarios 
-                    concesionarios_res={concesionarios_res}/>
+                    concesionarios_res={data.servicios}/>
                 </Responsive>
                 <Responsive {...Responsive.onlyMobile}>
                     <ListaConcesionarios 
-                    concesionarios_res={concesionarios_res}/>
+                    concesionarios_res={data.servicios}/>
                 </Responsive>
             </Container>
             </div>
         </PublicLayout>
     )
 }
-export async function getStaticProps() {
-    const res = await axios.get(API_URL + concesionarios_api);
-    const concesionarios_res = await res.data.servicios;
+export async function getServerSideProps({query}) {
+    const res = await axios.get('https://api.vendetunave.co/api/concesionarios', {
+        params: {
+            ciudad: query.ciudad,
+            tipo: query.tipo,
+            marca: query.marca
+        }
+    });
+    const data = await res.data;
+    const tiposServices = [{ key: 0, value: 0, text: 'TODAS LAS MARCAS' }];
+    const ciudades = [{ key: 0, value: 0, text: 'TODAS LAS CIUDADES' }];
+    (data.tiposServicios).map((item) => {
+        tiposServices.push({ key: item.id, value: item.nombre, text: item.nombre })
+    });
+    (data.ciudades).map((item) => {
+        ciudades.push({ key: item.id, value: item.nombre, text: item.nombre })
+    });
     return {
         props: {
-            concesionarios_res
+            data,
+            tiposServices,
+            ciudades
         }
     }
 }

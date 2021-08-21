@@ -74,6 +74,13 @@ export default function ModalFiltersMobile({showModal, onClose, filtros, params}
                 component: false
             },
             {
+                text: "Tipos",
+                open: false,
+                values: mapping_contador(filtros.tipo),
+                slug: 'tipo',
+                component: false
+            },
+            {
                 text: "Marcas",
                 component: true,
                 render: <MarcaModeloComponent filtros={filtros} params={params} />

@@ -115,6 +115,7 @@ export async function getServerSideProps({query}) {
             marca: query.marca,
             motor: query.combustible,
             modelo: query.modelo,
+            tipo: query.tipo,
             ano: query.ano,
             anio: query.anio,
             estado: query.estado,

@@ -74,6 +74,11 @@ export default function ListadoVehiculos({params, vehiculos, page, totalRecords}
     }
     const router = useRouter();
     const [query, setQuery] = useState("");
+    const handleKeyDown = (e) => {
+        if (e.keyCode === 13) {
+            handleSubmit();
+        }      
+    };
     const handleSubmit = () => {
         router.push('/vehiculos?q='+query)
     };
@@ -90,6 +95,7 @@ export default function ListadoVehiculos({params, vehiculos, page, totalRecords}
                             style={{ width: "100%" }}
                             onChange={(e, {value})=> setQuery(value)}
                             defaultValue={query}
+                            onKeyDown={(e) => handleKeyDown(e)}
                             action={{
                                 icon: "search",
                                 onClick: () => handleSubmit(),
