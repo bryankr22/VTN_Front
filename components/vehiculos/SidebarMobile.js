@@ -27,11 +27,11 @@ export default function SidebarMobile({ params, contadores, vehiculos, isFicha }
             action={{
                 icon: "search",
                 style: {
-                background: "transparent",
-                color: "black",
-                borderBottom: "1px solid black",
-                height: 47,
-                    paddingTop: 10,
+                  background: "transparent",
+                  color: "black",
+                  borderBottom: "1px solid black",
+                  height: 47,
+                  paddingTop: 10,
                 },
             }}
             onChange={(e, {value}) => setQuery(value) }
@@ -40,6 +40,7 @@ export default function SidebarMobile({ params, contadores, vehiculos, isFicha }
             value={query}
             id="search-responsive"
             style={{ margin: "10px 20px 0 20px" }}
+            className="search-input"
             placeholder="¿Qué estas buscando?"
           />
           <Header style={{ margin: 10 }} as="h3">
