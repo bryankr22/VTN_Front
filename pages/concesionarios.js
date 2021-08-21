@@ -60,7 +60,7 @@ export default function concesionarios({params, data, tiposServices, ciudades}) 
                                     fluid
                                     search
                                     options={ciudades}
-                                    defaultValue={ciudades[0].value}
+                                    defaultValue={router.query.ciudad ? router.query.ciudad : ciudades[0].value}
                                 />
                             </Grid.Column>
                             <Grid.Column>
@@ -69,7 +69,7 @@ export default function concesionarios({params, data, tiposServices, ciudades}) 
                                     search
                                     options={tipoVehiculo}
                                     onChange={(e, {value}) => onChangeFilter('tipo', value)}
-                                    defaultValue={tipoVehiculo[0].value}
+                                    defaultValue={router.query.tipo ? router.query.tipo : tipoVehiculo[0].value}
                                 />
                             </Grid.Column>
                             <Grid.Column>
@@ -78,7 +78,7 @@ export default function concesionarios({params, data, tiposServices, ciudades}) 
                                     search
                                     options={tiposServices}
                                     onChange={(e, {value}) => onChangeFilter('marca', value)}
-                                    defaultValue={tiposServices[0].value}
+                                    defaultValue={router.query.marca ? router.query.marca : tiposServices[0].value}
                                 />
                             </Grid.Column>
                         </Grid.Row>
@@ -93,7 +93,7 @@ export default function concesionarios({params, data, tiposServices, ciudades}) 
                                     search
                                     options={ciudades}
                                     onChange={(e, {value}) => onChangeFilter('ciudad', value)}
-                                    defaultValue={ciudades[0].value}
+                                    defaultValue={router.query.ciudad ? router.query.ciudad : ciudades[0].value}
                                 />
                             </Grid.Column>
                             <Grid.Column style={{ marginBottom: 15 }}>
@@ -102,7 +102,7 @@ export default function concesionarios({params, data, tiposServices, ciudades}) 
                                     search
                                     options={tipoVehiculo}
                                     onChange={(e, {value}) => onChangeFilter('tipo', value)}
-                                    defaultValue={tipoVehiculo[0].value}
+                                    defaultValue={router.query.tipo ? router.query.tipo : tipoVehiculo[0].value}
                                 />
                             </Grid.Column>
                             <Grid.Column style={{ marginBottom: 15 }}>
@@ -111,7 +111,7 @@ export default function concesionarios({params, data, tiposServices, ciudades}) 
                                     search
                                     options={tiposServices}
                                     onChange={(e, {value}) => onChangeFilter('marca', value)}
-                                    defaultValue={tiposServices[0].value}
+                                    defaultValue={router.query.marca ? router.query.marca : tiposServices[0].value}
                                 />
                             </Grid.Column>
                         </Grid.Row>
@@ -126,7 +126,7 @@ export default function concesionarios({params, data, tiposServices, ciudades}) 
                                     search
                                     options={ciudades}
                                     onChange={(e, {value}) => onChangeFilter('ciudad', value)}
-                                    defaultValue={ciudades[0].value}
+                                    defaultValue={router.query.ciudad ? router.query.ciudad : ciudades[0].value}
                                 />
                             </Grid.Column>
                             <Grid.Column style={{ marginBottom: 15 }}>
@@ -135,7 +135,7 @@ export default function concesionarios({params, data, tiposServices, ciudades}) 
                                     search
                                     options={tipoVehiculo}
                                     onChange={(e, {value}) => onChangeFilter('tipo', value)}
-                                    defaultValue={tipoVehiculo[0].value}
+                                    defaultValue={router.query.tipo ? router.query.tipo : tipoVehiculo[0].value}
                                 />
                             </Grid.Column>
                             <Grid.Column style={{ marginBottom: 15 }}>
@@ -144,7 +144,7 @@ export default function concesionarios({params, data, tiposServices, ciudades}) 
                                     search
                                     options={tiposServices}
                                     onChange={(e, {value}) => onChangeFilter('marca', value)}
-                                    defaultValue={tiposServices[0].value}
+                                    defaultValue={router.query.marca ? router.query.marca : tiposServices[0].value}
                                 />
                             </Grid.Column>
                         </Grid.Row>
