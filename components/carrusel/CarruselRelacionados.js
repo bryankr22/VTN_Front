@@ -12,8 +12,8 @@ export default function CarruselRelacionados(props) {
             activeItemIndex={activeItemIndex3}
             numberOfCards={props.numberCards}
             gutter={20}
-            leftChevron={<button>{'<'}</button>}
-            rightChevron={<button>{'>'}</button>}
+            leftChevron={<button><i className="angle left big icon" /></button>}
+            rightChevron={<button><i className="angle right big icon" /></button>}
             outsideChevron
             chevronWidth={chevronWidth}
             >
