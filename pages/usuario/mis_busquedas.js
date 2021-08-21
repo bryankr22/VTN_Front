@@ -1,9 +1,9 @@
 import React, {useState, useEffect, Fragment} from 'react'
 import PublicLayout from '../../layouts/PublicLayout';
-import { Header, Container, Table, Button, Image, Responsive, Pagination } from "semantic-ui-react";
+import { Header, Container, Table, Button, Image, Responsive, Pagination, Dimmer, Loader } from "semantic-ui-react";
 import { authInitialProps } from '../../helpers/auth';
 
-import { AUTH_URL, busquedas_api } from '../../helpers/constants';
+import { AUTH_URL, busquedas_api, busquedas_remove } from '../../helpers/constants';
 import { useCookies } from "react-cookie"
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
@@ -14,6 +14,24 @@ export default function mis_busquedas() {
         busquedasTotal: 0,
         page: 0
     })
+    const normalize = (function() {
+        var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
+          to = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc",
+          mapping = {};
+      
+        for (var i = 0, j = from.length; i < j; i++)
+          mapping[from.charAt(i)] = to.charAt(i);
+      
+        return function(str) {
+          var ret = [];
+          for (var i = 0, j = str.length; i < j; i++) {
+            var c = str.charAt(i);
+            if (mapping.hasOwnProperty(str.charAt(i))) ret.push(mapping[c]);
+            else ret.push(c);
+          }
+          return ret.join("");
+        };
+    })();
     const pathS3 = "https://vendetunave.s3.amazonaws.com/vendetunave/images/vehiculos/";
     useEffect(() => {
         const cookie = cookies.vtn_token;
@@ -26,8 +44,29 @@ export default function mis_busquedas() {
             setBusqueda({...busqueda, ...res.data});
         })
     }, [])
+    const [loading, setLoading] = useState(false);
+    const removeSearch = (vehicle_id) => {
+        setLoading(true);
+        const cookie = cookies.vtn_token;
+        const decoded = jwt.verify(cookie, 'vendetunave2021');
+        const user_id = decoded.user.id;
+        const config = {
+            headers: { Authorization: `Bearer ${decoded.token_server.access_token}` }
+        };
+        const data = { user_id, vehicle_id }; 
+        axios.post(AUTH_URL + busquedas_remove, data, config).then((res) => {
+            setLoading(false);
+            location.reload();
+        })
+        .catch((error) => {
+            //console.log(error);
+        });
+    }
     return (
         <PublicLayout>
+            <Dimmer style={{ position: "fixed" }} active={loading}>
+                <Loader>Eliminando...</Loader>
+            </Dimmer>   
             <Container style={{ paddingTop: 25 }} text>
                 <Header as="h2">MIS BÚSQUEDAS</Header>
                 {busqueda.busquedas.length > 0 && (
@@ -86,12 +125,12 @@ export default function mis_busquedas() {
                                 </Responsive>
                             </Table.Cell>
                             <Table.Cell>
-                                <Button href="" fluid>
-                                CONTACTAR VENDEDOR
+                                <Button href={ "/vehiculos/detalle/" + normalize(item.title).split(" ").join("-").split("%").join("").split("?").join("").split("/").join("") + "-" + item.vehiculo_id } fluid>
+                                    CONTACTAR VENDEDOR
                                 </Button>
                                 <Button
                                 fluid
-                                onClick={() => this.removeSearch(item.id)}
+                                onClick={() => removeSearch(item.vehiculo_id)}
                                 style={{ marginTop: 7 }}
                                 >
                                 ELIMINAR BÚSQUEDA

@@ -59,7 +59,7 @@ export const panes = (favoritos, resultTotalV, accesorios, resultTotalA) => {
                                             </Responsive>
                                         </Table.Cell>
                                         <Table.Cell>
-                                            <Button href={'/vehiculo/' + normalize(item.title)
+                                            <Button href={'/vehiculos/detalle/' + normalize(item.title)
                                                 .split(" ")
                                                 .join("-")
                                                 .split("%")
@@ -149,7 +149,7 @@ export const panes = (favoritos, resultTotalV, accesorios, resultTotalA) => {
                                             </Responsive>
                                         </Table.Cell>
                                         <Table.Cell>
-                                            <Button href={'/ficha-tecnica/' + normalize(item.title)
+                                            <Button href={'/ficha-tecnica/detalle/' + normalize(item.title)
                                                 .split(" ")
                                                 .join("-")
                                                 .split("%")
