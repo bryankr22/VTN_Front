@@ -50,6 +50,10 @@ export default function ListadoFichasMobile({vehiculos}) {
                     width: 120px !important;
                     height: 120px !important;
                 }
+                .ui.grid>.column:not(.row), .ui.grid>.row>.column {
+                    padding-left: 1rem !important;
+                    padding-right: 1rem !important;
+                }
               `}
             </style>
             <HeaderFicha />
