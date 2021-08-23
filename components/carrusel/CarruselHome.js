@@ -16,6 +16,8 @@ export default function CarruselHome(props) {
                 transitionTime={1000}
                 emulateTouch
                 autoPlay={props.autoPlay === false ? props.autoPlay : true}
+                renderArrowNext={(click) => <button className="control-arrow control-next" onClick={click}><i className="angle right icon" /></button>}
+                renderArrowPrev={(click) => <button className="control-arrow control-prev" onClick={click}><i className="angle left icon" /></button>}
                 interval={8000}
             >
                 {props.data.map((item, index) => (
