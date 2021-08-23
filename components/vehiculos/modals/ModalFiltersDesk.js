@@ -1,6 +1,14 @@
-import React from 'react'
+import React, {Children} from 'react'
 import { List, Modal } from "semantic-ui-react";
+
+/**
+ * @param {{
+ *  listado: {label: string, qty: number}[][]
+ * }} param0 
+ * @returns 
+ */
 export default function ModalFiltersDesk({showModal, onClose, titulo, listado = []}) {
+    console.log(listado);
     const insertParam = (key, value) => {
         key = encodeURIComponent(key);
         value = encodeURIComponent(value);
@@ -32,7 +40,23 @@ export default function ModalFiltersDesk({showModal, onClose, titulo, listado = 
         >
             <Modal.Header>{titulo}</Modal.Header>
             <Modal.Content>
-                <List link>
+                {
+                    listado.map((child, index) => (
+                        <div key={index}>
+                            {child.map(item => 
+                                <List.Item
+                                    key={item.label}
+                                    as="a"
+                                    style={{ marginBottom: 10 }}
+                                    onClick={() => handleChangeFilter(item)}
+                                >
+                                    {item.label}
+                                </List.Item>
+                            )}
+                        </div>
+                    ))
+                }
+                {/* <List link>
                     {(listado).map((item, index) => (
                         <List.Item
                         key={index}
@@ -44,7 +68,7 @@ export default function ModalFiltersDesk({showModal, onClose, titulo, listado = 
                         </List.Item>
                         )
                     )}
-                </List>
+                </List> */}
             </Modal.Content>
         </Modal>
     )
