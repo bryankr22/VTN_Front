@@ -8,7 +8,6 @@ import { List, Modal } from "semantic-ui-react";
  * @returns 
  */
 export default function ModalFiltersDesk({showModal, onClose, titulo, listado = []}) {
-    console.log(listado);
     const insertParam = (key, value) => {
         key = encodeURIComponent(key);
         value = encodeURIComponent(value);
@@ -39,36 +38,26 @@ export default function ModalFiltersDesk({showModal, onClose, titulo, listado = 
         closeIcon
         >
             <Modal.Header>{titulo}</Modal.Header>
-            <Modal.Content>
+            <Modal.Content scrolling>
                 {
                     listado.map((child, index) => (
                         <div key={index}>
-                            {child.map(item => 
-                                <List.Item
-                                    key={item.label}
-                                    as="a"
-                                    style={{ marginBottom: 10 }}
-                                    onClick={() => handleChangeFilter(item)}
-                                >
-                                    {item.label}
-                                </List.Item>
-                            )}
+                            <List horizontal link>
+                                {child.map?.(item => 
+                                    <List.Item
+                                        key={item.label}
+                                        as="a"
+                                        style={{ marginBottom: 10 }}
+                                        onClick={() => handleChangeFilter(item)}
+                                    >
+                                        {item.label}
+                                    </List.Item>
+                                )}
+                            </List>
+                            <hr></hr>
                         </div>
                     ))
                 }
-                {/* <List link>
-                    {(listado).map((item, index) => (
-                        <List.Item
-                        key={index}
-                        as="a"
-                        style={{ marginBottom: 10 }}
-                        onClick={() => handleChangeFilter(item)}
-                        >
-                        {item.label}
-                        </List.Item>
-                        )
-                    )}
-                </List> */}
             </Modal.Content>
         </Modal>
     )
