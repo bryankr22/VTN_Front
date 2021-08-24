@@ -3,6 +3,7 @@ import { Container, Input, List, Modal, Grid, Checkbox, Header, Button, Label, I
 import ActiveTagsVehiculos from './ActiveTagsVehiculos';
 import ModalFiltersDesk from './modals/ModalFiltersDesk';
 import * as R from 'ramda'
+import { groupByAlphabet, groupByDecade } from '../../helpers/dataStructure';
 export default function SidebarVehiculos({ params, contadores, vehiculos }) {
     const [filters, setFilters] = useState({
         min_precio: 0,
@@ -117,9 +118,9 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
         if(titulo === 'Año'){
             var byLabel = R.descend(R.prop('label'));
             var aniosByLabel = R.sort(byLabel, mapItems);
-            setListadoModal(aniosByLabel);
+            setListadoModal(groupByDecade(aniosByLabel));
         }else{
-            setListadoModal(mapItems);
+            setListadoModal(groupByAlphabet(mapItems));
         }
         setModalAll(true);
     }
@@ -210,7 +211,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                     </List.Item>
                 </List>
                 )}
-                { !params.marca && params.modelo && ( 
+                { !params.marca && ( 
                 <List link>
                     <List.Item>
                         <List.Content>

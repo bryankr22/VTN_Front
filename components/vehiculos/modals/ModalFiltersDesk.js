@@ -1,5 +1,12 @@
-import React from 'react'
+import React, {Children} from 'react'
 import { List, Modal } from "semantic-ui-react";
+
+/**
+ * @param {{
+ *  listado: {label: string, qty: number}[][]
+ * }} param0 
+ * @returns 
+ */
 export default function ModalFiltersDesk({showModal, onClose, titulo, listado = []}) {
     const insertParam = (key, value) => {
         key = encodeURIComponent(key);
@@ -31,20 +38,26 @@ export default function ModalFiltersDesk({showModal, onClose, titulo, listado = 
         closeIcon
         >
             <Modal.Header>{titulo}</Modal.Header>
-            <Modal.Content>
-                <List link>
-                    {(listado).map((item, index) => (
-                        <List.Item
-                        key={index}
-                        as="a"
-                        style={{ marginBottom: 10 }}
-                        onClick={() => handleChangeFilter(item)}
-                        >
-                        {item.label}
-                        </List.Item>
-                        )
-                    )}
-                </List>
+            <Modal.Content scrolling>
+                {
+                    listado.map((child, index) => (
+                        <div key={index}>
+                            <List horizontal link>
+                                {child.map?.(item => 
+                                    <List.Item
+                                        key={item.label}
+                                        as="a"
+                                        style={{ marginBottom: 10 }}
+                                        onClick={() => handleChangeFilter(item)}
+                                    >
+                                        {item.label}
+                                    </List.Item>
+                                )}
+                            </List>
+                            <hr></hr>
+                        </div>
+                    ))
+                }
             </Modal.Content>
         </Modal>
     )
