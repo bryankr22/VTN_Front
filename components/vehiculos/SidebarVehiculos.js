@@ -213,7 +213,6 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                     </List.Item>
                 </List>
                 )}
-                { !params.marca && ( 
                 <List link>
                     <List.Item>
                         <List.Content>
@@ -239,7 +238,6 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                         </List.Content>
                     </List.Item>
                 </List>
-                )}
                 { params.marca && !params.modelo && ( 
                 <List link>
                     <List.Item>
