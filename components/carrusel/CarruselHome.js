@@ -1,7 +1,7 @@
 import React from 'react'
 import { Carousel } from "react-responsive-carousel";
 import Image from 'next/image'
-//import ReactImageZoom from 'react-image-zoom';
+
 export default function CarruselHome(props) {
     return (
         <div>
