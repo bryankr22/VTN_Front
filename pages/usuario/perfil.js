@@ -51,7 +51,7 @@ export default function perfil() {
         };
         const {imagePredeter, status, ...data} = usuario;
         axios.post(AUTH_URL + perfil_update, {...data, user_id}, config).then((res) => {
-            location.reload();
+            // location.reload();
             setLoading(false);
         }).catch(error => {
             setLoading(false);
