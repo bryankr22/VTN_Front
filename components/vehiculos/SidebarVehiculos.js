@@ -106,9 +106,11 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
     }
     const [modalAll, setModalAll] = useState(false);
     const [tituloModal, setTituloModal] = useState('');
+    const [paramModal, setParamModal] = useState('');
     const [listadoModal, setListadoModal] = useState([]);
-    const openModal = (titulo, listado) => {
+    const openModal = (titulo, listado, param) => {
         setTituloModal(titulo);
+        setParamModal(param);
         var mapItems = Object.keys(listado).map((item, index) => {
             return {
                 label: item,
@@ -155,7 +157,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                                 )}
                                 <List.Item 
                                 as="a"
-                                onClick={() => openModal('Ubicaciones', contadores.ubicacion)}>
+                                onClick={() => openModal('Ubicaciones', contadores.ubicacion, 'ubicacion')}>
                                     Ver Todos
                                 </List.Item>
                             </List.List>
@@ -203,7 +205,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                                 )}
                                 <List.Item 
                                 as="a"
-                                onClick={() => openModal('Tipos', contadores.tipo)}>
+                                onClick={() => openModal('Tipos', contadores.tipo, 'tipo')}>
                                     Ver Todos
                                 </List.Item>
                             </List.List>
@@ -230,7 +232,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                                 )}
                                 <List.Item 
                                 as="a"
-                                onClick={() => openModal('Marcas', contadores.marcas)}>
+                                onClick={() => openModal('Marcas', contadores.marcas, 'marca')}>
                                     Ver Todos
                                 </List.Item>
                             </List.List>
@@ -257,7 +259,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                                 )}
                                 <List.Item 
                                 as="a"
-                                onClick={() => openModal('Modelos', contadores.modelos)}>
+                                onClick={() => openModal('Modelos', contadores.modelos, 'modelos')}>
                                     Ver Todos
                                 </List.Item>
                             </List.List>
@@ -306,7 +308,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                                 )}
                                 <List.Item 
                                 as="a"
-                                onClick={() => openModal('Año', contadores.anios)}
+                                onClick={() => openModal('Año', contadores.anios, 'ano')}
                                 >
                                     Ver Todos
                                 </List.Item>
@@ -496,7 +498,8 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
             <ModalFiltersDesk
             showModal={modalAll} 
             onClose={() => setModalAll(!modalAll)} 
-            titulo={tituloModal} 
+            titulo={tituloModal}
+            param={paramModal}
             listado={listadoModal} />
         </Grid.Column>
     )
