@@ -6,6 +6,12 @@ export default function ActiveTagsVehiculos({tags}) {
         params.delete(param);
         window.location.href = `${window.location.pathname}?${params}`;
     }
+    const handleCategoryName = (category) => {
+        if(category === 'carros') {
+            return 'Carros y Camionetas';
+        }
+        return category;
+    }
     return (
         <>
             { tags.permuta ? 
@@ -46,7 +52,7 @@ export default function ActiveTagsVehiculos({tags}) {
             : null}
             { tags.categoria ? 
             <Label as="a" style={{ marginBottom: 5 }}>
-                {tags.categoria}
+                {handleCategoryName(tags.categoria)}
                 <Icon
                     name="delete"
                     onClick={() => removeFilter('categoria') }
