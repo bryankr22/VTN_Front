@@ -8,6 +8,7 @@ import {
   Button,
   Input,
   Dimmer,
+  Message,
 } from "semantic-ui-react";
 import Loader from "../components/Loader";
 
@@ -35,9 +36,21 @@ const optionsRangos = [
   { key: "3", text: "5.000.000 en adelante", value: "3" },
 ];
 
+function parseLocaleNumber(stringNumber, locale) {
+    var thousandSeparator = Intl.NumberFormat(locale).format(11111).replace(/\p{Number}/gu, '');
+    var decimalSeparator = Intl.NumberFormat(locale).format(1.1).replace(/\p{Number}/gu, '');
+
+    return parseFloat(stringNumber
+        .replace(new RegExp('\\' + thousandSeparator, 'g'), '')
+        .replace(new RegExp('\\' + decimalSeparator), '.')
+    );
+}
+
 export default function financiacion() {
   const [selectValues, setSelectValues] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState();
+  const [statusMsg, setStatusMsg] = useState(true);
   const handleValues =
     (param) =>
     (e, { value }) => {
@@ -65,8 +78,12 @@ export default function financiacion() {
     const selectKeysLen = Object.keys(selectValues).length;
 
     if (selectKeysLen < 3) {
-      return alert("Debes llenar todo el formulario para continuar");
+       setStatusMsg(false)
+       setMessage("Debes llenar todo el formulario para continuar");
+       return
     }
+
+    setMessage(undefined);
 
     const form = {
       apellido: apellido.value,
@@ -83,16 +100,38 @@ export default function financiacion() {
       .post(`${API_URL}/financiacion`, form)
       .then((result) => {
         if (result.data.status) {
-          alert("Datos enviados exitosamente");
+          setStatusMsg(true);
+          setMessage("Datos enviados exitosamente");
           setIsLoading(false);
           e.target?.reset?.()
+          setSelectValues({
+            cuotas: '',
+            datacredito: '',
+            salario: ''
+          })
+          setSelectValues({})
         }
       })
       .catch(() => {
-        alert("Ha ocurrido un problema, intenta mas tarde");
+        setMessage("Ha ocurrido un problema, intenta mas tarde");
+        setStatusMsg(false);
         setIsLoading(false);
       });
   };
+
+  const handleChangeCurrency = (e) => {
+    let dollarUSLocale = Intl.NumberFormat('en-US');
+    const value = parseLocaleNumber(e.target.value, dollarUSLocale)
+    let valueFormat = dollarUSLocale.format(value)
+
+    if(valueFormat === 'NaN') {
+        const chars = e.target.value.split('');
+        e.target.value = chars.slice(0, chars.length - 1);
+        return
+    }
+
+    e.target.value = valueFormat
+}
 
   return (
     <PublicLayout>
@@ -108,6 +147,7 @@ export default function financiacion() {
           tratamiento de los datos suministrados en nuestro portal, con el
           compromiso de ser utilizados únicamente para este fin.
         </p>
+        {!!message && <Message error={!statusMsg} success={statusMsg} content={message} />}
 
         <Form onSubmit={handleSubmit}>
           <Form.Field>
@@ -143,11 +183,11 @@ export default function financiacion() {
           </Form.Field>
           <Form.Field>
             <label>¿Cuánto cuesta el carro que quieres?</label>
-            <Input name="cuanto_cuesta" type="number" required />
+            <Input name="cuanto_cuesta" type="text" required onChange={handleChangeCurrency} />
           </Form.Field>
           <Form.Field>
             <label>¿Cuánto dinero tienes para la cuota inicial?</label>
-            <Input name="cuota_inicial" type="number" required />
+            <Input name="cuota_inicial" type="text" required onChange={handleChangeCurrency}/>
           </Form.Field>
           <Form.Select
             label="Selecciona el número de cuotas en las que quieres pagarlo"
@@ -155,6 +195,7 @@ export default function financiacion() {
             placeholder="Seleccione número de cuotas"
             name="cuotas"
             onChange={handleValues("cuotas")}
+            value={selectValues?.cuotas}
             required
           />
           <Form.Select
@@ -163,6 +204,7 @@ export default function financiacion() {
             placeholder="Seleccione..."
             options={optionsDataCredito}
             onChange={handleValues("datacredito")}
+            value={selectValues?.datacredito}
             required
           />
           <Form.Select
@@ -171,6 +213,7 @@ export default function financiacion() {
             options={optionsRangos}
             placeholder="Seleccione..."
             onChange={handleValues("salario")}
+            value={selectValues?.salario}
             required
           />
           <div style={{ marginBottom: "25px", fontWeight: "bold" }}>
