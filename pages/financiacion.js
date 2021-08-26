@@ -110,6 +110,7 @@ export default function financiacion() {
             salario: ''
           })
           setSelectValues({})
+          window.scrollTo({ top: 0, behavior: 'smooth' })
         }
       })
       .catch(() => {
