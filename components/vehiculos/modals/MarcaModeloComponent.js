@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Grid, Header, Icon, Accordion, List } from "semantic-ui-react";
+import { groupByAlphabet, groupByDecade } from '../../../helpers/dataStructure';
+import ModalFiltersDesk from "./ModalFiltersDesk";
+
 export default function MarcaModeloComponent({ filtros, params }) {
   const insertParam = (key, value) => {
     key = encodeURIComponent(key);
@@ -59,6 +62,30 @@ export default function MarcaModeloComponent({ filtros, params }) {
     modelosList.open = !openDrop;
     setModelosList({ ...modelosList });
   };
+
+  const [modalAll, setModalAll] = useState(false);
+  const [tituloModal, setTituloModal] = useState("");
+  const [paramModal, setParamModal] = useState("");
+  const [listadoModal, setListadoModal] = useState([]);
+  const openModal = (titulo, listado, param) => {
+    setTituloModal(titulo);
+    setParamModal(param);
+    var mapItems = Object.keys(listado).map((item, index) => {
+      return {
+        label: item,
+        qty: index,
+      };
+    });
+    if (titulo === "Año") {
+      var byLabel = R.descend(R.prop("label"));
+      var aniosByLabel = R.sort(byLabel, mapItems);
+      setListadoModal(groupByDecade(aniosByLabel));
+    } else {
+      setListadoModal(groupByAlphabet(mapItems));
+    }
+    setModalAll(true);
+  };
+
   return (
     <>
       <Accordion style={{ width: "100%", marginBottom: 15 }}>
@@ -93,9 +120,19 @@ export default function MarcaModeloComponent({ filtros, params }) {
                           borderBottom: "1px solid #cccccc",
                           color: "#2185d0",
                         }}
-                        onClick={() =>
-                          insertParam(marcasList.slug, itemSecond.slug)
-                        }
+                        onClick={() => {
+                          if (itemSecond.slug !== "") {
+                            return insertParam(
+                              marcasList.slug,
+                              itemSecond.slug
+                            );
+                          }
+                          openModal(
+                            marcasList.text,
+                            filtros.marcas,
+                            'marca'
+                          );
+                        }}
                       >
                         {itemSecond.label}
                       </List.Item>
@@ -140,9 +177,19 @@ export default function MarcaModeloComponent({ filtros, params }) {
                             borderBottom: "1px solid #cccccc",
                             color: "#2185d0",
                           }}
-                          onClick={() =>
-                            insertParam(modelosList.slug, itemSecond.slug)
-                          }
+                          onClick={() => {
+                            if (itemSecond.slug !== "") {
+                              return insertParam(
+                                modelosList.slug,
+                                itemSecond.slug
+                              );
+                            }
+                            openModal(
+                              modelosList.text,
+                              filtros.modelos,
+                              'modelo'
+                            );
+                          }}
                         >
                           {itemSecond.label}
                         </List.Item>
@@ -154,6 +201,15 @@ export default function MarcaModeloComponent({ filtros, params }) {
             </Grid.Column>
           </Accordion.Content>
         </Accordion>
+      )}
+      {modalAll && (
+        <ModalFiltersDesk
+          showModal={modalAll}
+          onClose={() => setModalAll(!modalAll)}
+          titulo={tituloModal}
+          param={paramModal}
+          listado={listadoModal}
+        />
       )}
     </>
   );
