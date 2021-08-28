@@ -33,7 +33,7 @@ export default function login(props) {
                 maxAge: 3600,
                 sameSite: true
             });
-            router.push('/usuario/perfil');
+            router.push('/');
             //console.log(">>>>", res.data);
             setLoading(false);
         }).catch(error => {
