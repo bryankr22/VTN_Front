@@ -1,0 +1,5 @@
+.image img {
+  object-fit: contain !important;
+  object-position: center !important;
+  height: 100%;
+}
