@@ -4,6 +4,7 @@ import { Input, Header, Button, Container } from "semantic-ui-react";
 import ActiveTagsVehiculos from './ActiveTagsVehiculos';
 import ModalFiltersMobile from './modals/ModalFiltersMobile';
 import ModalOrderMobile from './modals/ModalOrderMobile';
+import ModalTechCardFilter from './modals/ModalTechCardFilter';
 export default function SidebarMobile({ params, contadores, vehiculos, isFicha }) {
     const [modalOrder, setModalOrder] = useState(false);
     const [modalFilter, setModalFilter] = useState(false);
@@ -62,7 +63,12 @@ export default function SidebarMobile({ params, contadores, vehiculos, isFicha }
                 filtros={contadores}
                 showModal={modalFilter}
                 onClose={() => setModalFilter(!modalFilter)}/>
-            : null}
+            : <ModalTechCardFilter 
+                params={params}
+                filtros={contadores}
+                showModal={modalFilter}
+                onClose={() => setModalFilter(!modalFilter)}
+            />}
             <Button
               style={{
                 border: "1px solid",

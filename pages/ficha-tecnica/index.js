@@ -50,11 +50,7 @@ export default function index({ data }) {
 export async function getServerSideProps({query}) {
     const res = await axios.get('https://api.vendetunave.co/api/fichas_tecnicas', {
         params: {
-            page: query.page,
-            precio: query.precio,
-            kilometraje: query.kilometraje,
-            orden: query.orden,
-            q: query.q
+            ...query
         }
     });
     const data = await res.data;
