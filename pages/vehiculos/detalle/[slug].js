@@ -66,6 +66,9 @@ export default function detalle({ data }) {
                 .ui.grid{
                     margin: unset !important;
                 }
+                .slider-wrapper, .slide {
+                    height: calc(55vh - 75px) !important;
+                }
             `}
             </style>
 
