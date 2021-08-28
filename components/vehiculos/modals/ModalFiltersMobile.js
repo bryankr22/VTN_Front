@@ -102,6 +102,7 @@ export default function ModalFiltersMobile({
       open: false,
       values: categorias_filter,
       slug: "categoria",
+      reset: true,
       component: false,
     },
     {
@@ -186,7 +187,7 @@ export default function ModalFiltersMobile({
     filtrosLocal[index][input] = value;
     setFiltrosLocal([...filtrosLocal]);
   };
-  const insertParam = (key, value) => {
+  const insertParam = (key, value, reset) => {
     key = encodeURIComponent(key);
     value = encodeURIComponent(value);
     var kvp = document.location.search.substr(1).split("&");
@@ -203,14 +204,20 @@ export default function ModalFiltersMobile({
       kvp[kvp.length] = [key, value].join("=");
     }
     let params = kvp.join("&");
-    //document.location.search = params;
+
+    if(reset) {
+      params = `${key}=${value}`
+    }
+
+    document.location.search = params;
   };
 
   const [modalAll, setModalAll] = useState(false);
   const [tituloModal, setTituloModal] = useState("");
   const [paramModal, setParamModal] = useState("");
   const [listadoModal, setListadoModal] = useState([]);
-  const openModal = (titulo, listado, param) => {
+  const [resetModal, setResetModal] = useState(false);
+  const openModal = (titulo, listado, param, reset) => {
     setTituloModal(titulo);
     setParamModal(param);
     var mapItems = Object.keys(listado).map((item, index) => {
@@ -227,6 +234,7 @@ export default function ModalFiltersMobile({
       setListadoModal(groupByAlphabet(mapItems));
     }
     setModalAll(true);
+    setResetModal(reset);
   };
 
   return (
@@ -281,14 +289,16 @@ export default function ModalFiltersMobile({
                                           if (itemSecond.slug != "") {
                                             return insertParam(
                                               item.slug,
-                                              itemSecond.slug
+                                              itemSecond.slug,
+                                              item.reset
                                             );
                                           }
                                           let {slug} = item;
                                           openModal(
                                             item.text,
                                             filtros[getSlug(slug)],
-                                            slug
+                                            slug,
+                                            item.reset
                                           );
                                         }}
                                       >
@@ -370,6 +380,7 @@ export default function ModalFiltersMobile({
           titulo={tituloModal}
           param={paramModal}
           listado={listadoModal}
+          resetOnClick={resetModal}
         />
       )}
     </>
