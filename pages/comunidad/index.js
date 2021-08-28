@@ -37,25 +37,79 @@ export default function index({preguntas, tags}) {
                 </Responsive>
                 <Responsive {...Responsive.onlyComputer}>
                 </Responsive>**/}
-                <Grid columns={2}>
-                    <Grid.Row>
-                        <Grid.Column>
-                            <Input 
-                            style={{ width: '100%' }} 
-                            action={{ icon: 'search', onClick: () => console.log("") }}
-                            placeholder='Buscar...' />
-                        </Grid.Column>
-                        <Grid.Column>
-                            <Button color='blue' floated='right'>
-                                <Link href={'/crear-pregunta'}>
-                                    <a style={{ textDecoration: 'none', color: 'white' }}>
-                                        PREGUNTALE A LA COMUNIDAD
-                                    </a>
-                                </Link>
-                            </Button>
-                        </Grid.Column>
-                    </Grid.Row>
-                </Grid>
+                <Responsive {...Responsive.onlyMobile}>
+                    <Grid columns={1}>
+                        <Grid.Row>
+                            <Grid.Column>
+                                <Button color='blue' fluid className="mt-2">
+                                    <Link href={'/crear-pregunta'}>
+                                        <a style={{ textDecoration: 'none', color: 'white' }}>
+                                            PREGUNTALE A LA COMUNIDAD
+                                        </a>
+                                    </Link>
+                                </Button>
+                            </Grid.Column>
+                            <Grid.Column>
+                                <span className="text-center d-block mt-4 mb-4">
+                                    &oacute; busca lo que necesites aquí:
+                                </span>
+                            </Grid.Column>
+                            <Grid.Column>
+                                <Input 
+                                style={{ width: '100%' }} 
+                                action={{ icon: 'search', onClick: () => console.log("") }}
+                                placeholder='Buscar...' />
+                            </Grid.Column>
+                        </Grid.Row>
+                    </Grid>
+                </Responsive>
+                <Responsive {...Responsive.onlyTablet}>
+                    <Grid columns={1}>
+                        <Grid.Row>
+                            <Grid.Column>
+                                <Button color='blue' fluid>
+                                    <Link href={'/crear-pregunta'}>
+                                        <a style={{ textDecoration: 'none', color: 'white' }}>
+                                            PREGUNTALE A LA COMUNIDAD
+                                        </a>
+                                    </Link>
+                                </Button>
+                            </Grid.Column>
+                            <Grid.Column>
+                                <span className="text-center d-block mt-4 mb-4">
+                                    &oacute; busca lo que necesites aquí:
+                                </span>
+                            </Grid.Column>
+                            <Grid.Column>
+                                <Input
+                                style={{ width: '100%' }} 
+                                action={{ icon: 'search', onClick: () => console.log("") }}
+                                placeholder='Buscar...' />
+                            </Grid.Column>
+                        </Grid.Row>
+                    </Grid>
+                </Responsive>
+                <Responsive {...Responsive.onlyComputer}>
+                    <Grid columns={2}>
+                        <Grid.Row>
+                            <Grid.Column>
+                                <Input 
+                                style={{ width: '100%' }} 
+                                action={{ icon: 'search', onClick: () => console.log("") }}
+                                placeholder='Buscar...' />
+                            </Grid.Column>
+                            <Grid.Column>
+                                <Button color='blue' floated='right'>
+                                    <Link href={'/crear-pregunta'}>
+                                        <a style={{ textDecoration: 'none', color: 'white' }}>
+                                            PREGUNTALE A LA COMUNIDAD
+                                        </a>
+                                    </Link>
+                                </Button>
+                            </Grid.Column>
+                        </Grid.Row>
+                    </Grid>
+                </Responsive>
                 <Item.Group>
                     { (preguntas).map((item) =>
                     <Item
@@ -98,7 +152,7 @@ export default function index({preguntas, tags}) {
                                 <div 
                                 style={{ 
                                     display: 'inline-block', 
-                                    float: 'right', 
+                                    cssFloat: 'right', 
                                     color: 'black',
                                     margin: '10px 0'
                                 }}>

@@ -394,6 +394,9 @@
   padding: 10px;
 }
 
+.full-height{
+  height: 100%;
+}
 
 .bg-black {
   background-color: #000;

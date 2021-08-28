@@ -30,11 +30,11 @@ export default function CarruselHome(props) {
         {props.data.map((item, index) => (
           <div key={index} style={{ height: "100%", width: "100%" }}>
             {props.seccion == "home" && (
-              <div className="d-flex ">
+              <div className="d-flex full-height">
                 <img
                   src={item.url}
                   style={{
-                    objectFit: "cover",
+                    objectFit: "fill",
                     width: "100%",
                     height: "100%",
                     objectPosition: "center center",
