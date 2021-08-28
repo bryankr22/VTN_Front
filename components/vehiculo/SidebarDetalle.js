@@ -52,6 +52,13 @@ export default function SidebarDetalle({ vehiculo, vehicleFav }) {
     }
     return (
         <Container style={{ marginTop: 20 }}>
+            <style>
+                {`
+                    .ui.grid>[class*="two column"].row>.column {
+                        padding: 5px !important;
+                    }
+                `}
+            </style>
             <Dimmer style={{ position: "fixed" }} active={loading}>
                 <Loader>Agregando a favoritos...</Loader>
             </Dimmer>
@@ -171,7 +178,7 @@ export default function SidebarDetalle({ vehiculo, vehicleFav }) {
                     color="green"
                     fluid
                     target='_blank'
-                    style={{ borderRadius: 20 }}
+                    style={{ borderRadius: 20, marginTop: 20 }}
                     href={"https://api.whatsapp.com/send?phone=57" + vehiculo.contacto + "&text=Hola,%20estoy%20interesado.&source=vendetunave.co&data="}
                 >
                     WhatsApp
