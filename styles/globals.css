@@ -2,11 +2,10 @@
   object-fit: cover;
 }
 .ui.selection.dropdown {
-  border: 1px solid rgb(0, 0, 0);
+
 }
 .ui.default.dropdown:not(.button) > .text,
 .ui.dropdown:not(.button) > .default.text {
-  color: rgb(0, 0, 0);
   font-family: Montserrat;
 }
 .ui.form input:not([type]),
@@ -21,11 +20,9 @@
 .ui.form input[type="text"],
 .ui.form input[type="time"],
 .ui.form input[type="url"] {
-  border: 1px solid rgb(0, 0, 0);
   font-family: Montserrat;
 }
 ::placeholder {
-  color: #000 !important;
   opacity: 1 !important; /* Firefox */
 }
 

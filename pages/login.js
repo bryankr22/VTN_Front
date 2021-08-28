@@ -71,10 +71,18 @@ export default function login(props) {
         })
     }
     return (
-        <PublicLayout {...props}>
+      <PublicLayout {...props}>
+        <style>
+          {`
+          .field input {
+            border: 1px solid rgba(34,36,38,.15);
+          }
+
+          `}
+        </style>
         <Dimmer style={{ position: "fixed" }} active={loading}>
-            <Loader>Cargando...</Loader>
-        </Dimmer>        
+          <Loader>Cargando...</Loader>
+        </Dimmer>
         <Responsive {...Responsive.onlyComputer}>
           <Segment style={{ marginTop: 40, marginBottom: 70 }}>
             <Grid
@@ -83,19 +91,19 @@ export default function login(props) {
               style={{ paddingLeft: 100, paddingRight: 100 }}
             >
               <Grid.Column className="column-login">
-                <Form onSubmit={ () => sendLogin() } error={error}>
-                    <Message
+                <Form onSubmit={() => sendLogin()} error={error}>
+                  <Message
                     error
-                    header='Error Login'
-                    content='Credenciales incorrectas, intentelo de nuevo.'
-                    />
+                    header="Error Login"
+                    content="Credenciales incorrectas, intentelo de nuevo."
+                  />
                   <Form.Field>
                     <Header as="h2">INICIAR SESIÓN</Header>
                     <label>Correo electrónico</label>
                     <input
                       placeholder="Correo electrónico"
-                      value={login.email} 
-                      onChange={(e) => updateForm('email', e.target.value) }
+                      value={login.email}
+                      onChange={(e) => updateForm("email", e.target.value)}
                     />
                   </Form.Field>
                   <Form.Field>
@@ -103,8 +111,8 @@ export default function login(props) {
                     <input
                       type="password"
                       placeholder="Contraseña"
-                      value={login.password} 
-                      onChange={(e) => updateForm('password', e.target.value) }
+                      value={login.password}
+                      onChange={(e) => updateForm("password", e.target.value)}
                     />
                   </Form.Field>
                   <Form.Field>
@@ -112,28 +120,26 @@ export default function login(props) {
                       ¿Olvidaste la contraseña?
                     </Header>
                   </Form.Field>
-                  <Form.Button 
-                  content='Submit'
-                  secondary>
+                  <Form.Button content="Submit" secondary>
                     INICIAR SESIÓN
                   </Form.Button>
                 </Form>
               </Grid.Column>
               <Grid.Column className="column-login">
-                <Form onSubmit={ () => sendRegister() } error={errorRegister}>
-                    <Message
+                <Form onSubmit={() => sendRegister()} error={errorRegister}>
+                  <Message
                     error
-                    header='Error Registro'
-                    content='El correo ya existe o Falta algun dato, intentelo de nuevo.'
-                    />
+                    header="Error Registro"
+                    content="El correo ya existe o Falta algun dato, intentelo de nuevo."
+                  />
                   <Form.Field>
                     <Header as="h2">REGISTRARSE</Header>
                     <label>Nombre</label>
                     <Input
                       name="nombre_register"
                       placeholder="Nombre"
-                      value={register.nombre} 
-                      onChange={(e) => updateRegistro('nombre', e.target.value) }
+                      value={register.nombre}
+                      onChange={(e) => updateRegistro("nombre", e.target.value)}
                     />
                   </Form.Field>
                   <Form.Field>
@@ -141,8 +147,8 @@ export default function login(props) {
                     <Input
                       name="email_register"
                       placeholder="Correo electrónico"
-                      value={register.email} 
-                      onChange={(e) => updateRegistro('email', e.target.value) }
+                      value={register.email}
+                      onChange={(e) => updateRegistro("email", e.target.value)}
                       id="email_register"
                     />
                   </Form.Field>
@@ -152,20 +158,22 @@ export default function login(props) {
                       name="pass_register"
                       type="password"
                       placeholder="Contraseña"
-                      value={register.password} 
-                      onChange={(e) => updateRegistro('password', e.target.value) }
+                      value={register.password}
+                      onChange={(e) =>
+                        updateRegistro("password", e.target.value)
+                      }
                     />
                   </Form.Field>
                   <Form.Field>
                     <Checkbox
                       label="Subscribirse al newsletter"
-                      value={register.remember} 
-                      onChange={(e) => updateRegistro('remember', !register.remember) }
+                      value={register.remember}
+                      onChange={(e) =>
+                        updateRegistro("remember", !register.remember)
+                      }
                     />
                   </Form.Field>
-                  <Button secondary>
-                    REGISTRARSE
-                  </Button>
+                  <Button secondary>REGISTRARSE</Button>
                 </Form>
               </Grid.Column>
             </Grid>
@@ -176,28 +184,28 @@ export default function login(props) {
 
         <Responsive {...Responsive.onlyMobile}>
           <Segment style={{ marginTop: 20 }} basic textAlign="center">
-            <Form onSubmit={ () => sendLogin() } error={error}>
-            <Message
-                    error
-                    header='Error Login'
-                    content='Credenciales incorrectas, intentelo de nuevo.'
-                    />
+            <Form onSubmit={() => sendLogin()} error={error}>
+              <Message
+                error
+                header="Error Login"
+                content="Credenciales incorrectas, intentelo de nuevo."
+              />
               <Form.Field>
                 <Header as="h2">INICIAR SESIÓN</Header>
                 <label>Correo electrónico</label>
                 <input
-                    placeholder="Correo electrónico"
-                    value={login.email} 
-                    onChange={(e) => updateForm('email', e.target.value) }
+                  placeholder="Correo electrónico"
+                  value={login.email}
+                  onChange={(e) => updateForm("email", e.target.value)}
                 />
               </Form.Field>
               <Form.Field>
                 <label>Contraseña</label>
                 <input
-                    type="password"
-                    placeholder="Contraseña"
-                    value={login.password} 
-                    onChange={(e) => updateForm('password', e.target.value) }
+                  type="password"
+                  placeholder="Contraseña"
+                  value={login.password}
+                  onChange={(e) => updateForm("password", e.target.value)}
                 />
               </Form.Field>
               <Form.Field>
@@ -205,9 +213,7 @@ export default function login(props) {
                   ¿Olvidaste la contraseña?
                 </Header>
               </Form.Field>
-              <Button 
-              content='submit'
-              secondary>
+              <Button content="submit" secondary>
                 INICIAR SESIÓN
               </Button>
             </Form>
@@ -218,18 +224,13 @@ export default function login(props) {
               <Form.Field>
                 <Header as="h2">REGISTRARSE</Header>
                 <label>Nombre</label>
-                <Input
-                  name="nombre_register"
-                  placeholder="Nombre"
-                  
-                />
+                <Input name="nombre_register" placeholder="Nombre" />
               </Form.Field>
               <Form.Field>
                 <label>Correo electrónico</label>
                 <Input
                   name="email_register"
                   placeholder="Correo electrónico"
-                 
                   id="email_register"
                 />
               </Form.Field>
@@ -239,55 +240,47 @@ export default function login(props) {
                   name="pass_register"
                   type="password"
                   placeholder="Contraseña"
-                  
                 />
               </Form.Field>
               <Form.Field>
-                <Checkbox
-                  
-                  label="Subscribirse al newsletter"
-                />
+                <Checkbox label="Subscribirse al newsletter" />
               </Form.Field>
-              <Button  secondary>
-                REGISTRARSE
-              </Button>
+              <Button secondary>REGISTRARSE</Button>
             </Form>
           </Segment>
         </Responsive>
         <Responsive {...Responsive.onlyTablet}>
           <Segment style={{ marginTop: 20 }} basic textAlign="center">
-            <Form onSubmit={ () => sendLogin() } error={error}>
-            <Message
-                    error
-                    header='Error Login'
-                    content='Credenciales incorrectas, intentelo de nuevo.'
-                    />
+            <Form onSubmit={() => sendLogin()} error={error}>
+              <Message
+                error
+                header="Error Login"
+                content="Credenciales incorrectas, intentelo de nuevo."
+              />
               <Form.Field>
                 <Header as="h2">INICIAR SESIÓN</Header>
                 <label>Correo electrónico</label>
                 <input
-                      placeholder="Correo electrónico"
-                      value={login.email} 
-                      onChange={(e) => updateForm('email', e.target.value) }
-                    />
+                  placeholder="Correo electrónico"
+                  value={login.email}
+                  onChange={(e) => updateForm("email", e.target.value)}
+                />
               </Form.Field>
               <Form.Field>
                 <label>Contraseña</label>
                 <input
-                      type="password"
-                      placeholder="Contraseña"
-                      value={login.password} 
-                      onChange={(e) => updateForm('password', e.target.value) }
-                    />
+                  type="password"
+                  placeholder="Contraseña"
+                  value={login.password}
+                  onChange={(e) => updateForm("password", e.target.value)}
+                />
               </Form.Field>
               <Form.Field>
                 <Header style={{ fontSize: 14 }} href="/restablecer" as="a">
                   ¿Olvidaste la contraseña?
                 </Header>
               </Form.Field>
-              <Button  
-              content='submit'
-              secondary>
+              <Button content="submit" secondary>
                 INICIAR SESIÓN
               </Button>
             </Form>
@@ -298,18 +291,13 @@ export default function login(props) {
               <Form.Field>
                 <Header as="h2">REGISTRARSE</Header>
                 <label>Nombre</label>
-                <Input
-                  name="nombre_register"
-                  placeholder="Nombre"
-                  
-                />
+                <Input name="nombre_register" placeholder="Nombre" />
               </Form.Field>
               <Form.Field>
                 <label>Correo electrónico</label>
                 <Input
                   name="email_register"
                   placeholder="Correo electrónico"
-                  
                   id="email_register"
                 />
               </Form.Field>
@@ -319,21 +307,15 @@ export default function login(props) {
                   name="pass_register"
                   type="password"
                   placeholder="Contraseña"
-                  
                 />
               </Form.Field>
               <Form.Field>
-                <Checkbox
-                  
-                  label="Subscribirse al newsletter"
-                />
+                <Checkbox label="Subscribirse al newsletter" />
               </Form.Field>
-              <Button secondary>
-                REGISTRARSE
-              </Button>
+              <Button secondary>REGISTRARSE</Button>
             </Form>
           </Segment>
         </Responsive>
-        </PublicLayout>
-    )
+      </PublicLayout>
+    );
 }
