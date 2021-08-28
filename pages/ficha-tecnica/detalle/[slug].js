@@ -27,6 +27,7 @@ export default function detalle({ data }) {
         }else{
             //setCompare('0');
         }
+        localStorage.setItem("compareFichatecnica", "1")
         window.location.href = '/ficha-tecnica';
         return;
     }
