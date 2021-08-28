@@ -63,6 +63,9 @@ export default function detalle({ data }) {
                     background: transparent !important;
                     height: 100%;
                 }
+                .ui.grid{
+                    margin: unset !important;
+                }
             `}
             </style>
 
@@ -97,12 +100,7 @@ export default function detalle({ data }) {
                 </Breadcrumb>
                 
             </div>
-            <Responsive minWidth={100} maxWidth={320}>
-                <SliderPrincipal imagenes={data.imagenes} />
-                <SidebarDetalle 
-                vehicleFav={data.vehicleFav}
-                vehiculo={data.vehiculo} />
-            </Responsive>
+
             <Responsive {...Responsive.onlyTablet}>
                 <Container style={{ marginTop: 20 }}>
                     <SliderPrincipal imagenes={data.imagenes} />
