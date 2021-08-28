@@ -85,6 +85,12 @@ export default function ListadoVehiculos({params, vehiculos, page, totalRecords}
     useEffect(() => {
         setQuery(params.q)
     }, [])
+
+    useEffect(() => {
+        if(compareList.length <= 0) {
+            setCompare('0')
+        }
+    }, [compareList])
     //useEffect
     return (
         <Grid.Column width={13}>

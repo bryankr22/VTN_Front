@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Image, Card, Grid, Header, Button } from "semantic-ui-react";
 import { useLocalStorage } from '../../helpers/hooks/useLocalStorage';
 import { useSelector, useDispatch } from 'react-redux';
@@ -38,6 +38,11 @@ export default function ListadoFichasMobile({vehiculos}) {
         }
         return;
     }
+    useEffect(() => {
+        if(compareList.length <= 0) {
+            setCompare('0')
+        }
+    }, [compareList])
     return (
         <div>
             <style>
