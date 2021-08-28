@@ -1,17 +1,18 @@
-import { useRouter } from 'next/router';
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
 import { Input, Responsive } from "semantic-ui-react";
 import CarruselHome from "../carrusel/CarruselHome";
 export default function SliderHome({ slider, sliderMobile }) {
-    const router = useRouter();
-    const handleKeyDown = (e) => {
-        if (e.keyCode === 13) {
-            handleSubmit(e.target.value);
-        }      
-    };
-    const handleSubmit = (query) => {
-        router.push(`/vehiculos?q=${query}`)
-    };
+  const router = useRouter();
+  const [query, setQuery] = useState("");
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      handleSubmit();
+    }
+  };
+  const handleSubmit = () => {
+    router.push(`/vehiculos?q=${query}`);
+  };
   return (
     <div>
       <Responsive className="banner-home" {...Responsive.onlyComputer}>
@@ -32,7 +33,9 @@ export default function SliderHome({ slider, sliderMobile }) {
                     height: 47,
                     paddingTop: 10,
                   },
+                  onClick: () => handleSubmit(),
                 }}
+                onChange={(e, { value }) => setQuery(value)}
                 onKeyDown={(e) => handleKeyDown(e)}
                 fluid
                 id="search-responsive"
@@ -58,6 +61,7 @@ export default function SliderHome({ slider, sliderMobile }) {
                   height: 47,
                   paddingTop: 10,
                 },
+                onClick: () => handleSubmit(),
               }}
               onChange={(e, { value }) => setQuery(value)}
               onKeyDown={(e) => handleKeyDown(e)}

@@ -34,6 +34,7 @@ export default function SidebarMobile({ params, contadores, vehiculos, isFicha }
                   height: 47,
                   paddingTop: 10,
                 },
+                onClick: () => handleSubmit()
             }}
             onChange={(e, {value}) => setQuery(value) }
             onKeyDown={(e) => handleKeyDown(e)}
