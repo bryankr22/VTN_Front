@@ -63,6 +63,9 @@ export default function detalle({ data }) {
                     background: transparent !important;
                     height: 100%;
                 }
+                .slider-wrapper, .slide {
+                    height: calc(55vh - 75px) !important;
+                }
             `}
             </style>
 
