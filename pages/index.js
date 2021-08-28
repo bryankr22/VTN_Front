@@ -15,6 +15,7 @@ const Home = ({ vehiculos, slider, sliderMobile, categorias, marcas, noticias, f
     return(
         <PublicLayout>
             <SliderHome slider={slider} sliderMobile={sliderMobile}/>
+            
             <FiltersHome options={filters}/>
             <CategoriasHome categorias={categorias}/>
             <MarcasHome marcas={marcas}/>

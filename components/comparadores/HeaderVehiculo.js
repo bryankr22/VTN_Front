@@ -13,7 +13,7 @@ export default function HeaderVehiculo() {
     return (
         <>
             <Container style={{ marginBottom: 10 }}>
-              <p>.</p>
+              <p>&nbsp;</p>
             </Container>           
             {vehiculosList.length > 0 &&
             <Container fluid 

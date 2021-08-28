@@ -373,3 +373,28 @@
   text-align: center;
   letter-spacing: 3px;
 }
+
+.search-input-alt > input {
+  border: 1px solid white !important;
+  border-top: none !important;
+  border-left: none !important;
+  background-color: #000 !important;
+  color:white !important;
+}
+
+.search-input-alt > input::placeholder {
+  text-align: center;
+  letter-spacing: 3px;
+  color: white !important;
+}
+
+.search-input-alt {
+  background-color: black;
+  margin: 0 !important;
+  padding: 10px;
+}
+
+
+.bg-black {
+  background-color: #000;
+}
