@@ -95,7 +95,7 @@ export default function detalle({ data }) {
                     link 
                     href={"/vehiculos/"}>{data.vehiculo.modeloLabel}</Breadcrumb.Section>
                     <Responsive {...Responsive.onlyComputer} style={{ display: "inline", marginLeft: 'auto' }}>
-                        <div style={{ display: 'inline-block', float: 'right', marginRight: 40, fontSize: 18, color: '#5c5c5c' }}>
+                        <div style={{ display: 'inline-block', cssFloat: 'right', marginRight: 40, fontSize: 18, color: '#5c5c5c' }}>
                             <Icon name="eye" style={{ marginRight: 5 }} />
                             <p style={{ display: 'inline' }}>{new Intl.NumberFormat("de-DE").format(data.vehiculo.views)}</p>
                         </div>
@@ -112,7 +112,7 @@ export default function detalle({ data }) {
                     vehiculo={data.vehiculo} />
                     <Grid columns={1} divided="vertically">
                         <Grid.Row style={{ marginTop: 30 }}>
-                            <Grid.Column>
+                            <div className="p-3">
                                 <Grid>
                                     <Grid.Row columns={2} style={{ paddingBottom: 8 }}>
                                         <Grid.Column>
@@ -137,23 +137,23 @@ export default function detalle({ data }) {
                                         </Grid.Column>
                                     </Grid.Row>
                                 </Grid>
-                            </Grid.Column>
+                            </div>
                         </Grid.Row>
-                        <Grid.Row>
+                        <Grid.Row className="p-3">
                             <Header as="h5" style={{ marginTop: 20 }}>
                                 CARACTERÍSTICAS
                             </Header>
                             <TableCaracteristicasDesk vehiculo={data.vehiculo} />
                         </Grid.Row>
                         <Grid.Row>
-                            <Grid.Column>
+                            <div className="p-3">
                                 <Header as="h5" icon>
                                     DESCRIPCIÓN
                                 </Header>
                                 <p style={{ fontSize: 14 }}>
                                     {data.vehiculo.descripcion}
                                 </p>
-                            </Grid.Column>
+                            </div>
                         </Grid.Row>
                     </Grid>
                     {data.vehiculosRelacionados.length > 0 && (
@@ -178,7 +178,7 @@ export default function detalle({ data }) {
                     vehiculo={data.vehiculo} />
                     <Grid columns={1} divided="vertically">
                         <Grid.Row style={{ marginTop: 30 }}>
-                            <Grid.Column>
+                            <div className="p-3">
                                 <Grid>
                                     <Grid.Row columns={2} style={{ paddingBottom: 8 }}>
                                         <Grid.Column>
@@ -203,23 +203,23 @@ export default function detalle({ data }) {
                                         </Grid.Column>
                                     </Grid.Row>
                                 </Grid>
-                            </Grid.Column>
+                            </div>
                         </Grid.Row>
-                        <Grid.Row>
+                        <Grid.Row className="p-3">
                             <Header as="h5" style={{ marginTop: 20 }}>
                                 CARACTERÍSTICAS
                             </Header>
                             <TableCaracteristicasDesk vehiculo={data.vehiculo} />
                         </Grid.Row>
                         <Grid.Row>
-                            <Grid.Column>
+                            <div className="p-3">
                                 <Header as="h5" icon>
                                     DESCRIPCIÓN
                                 </Header>
                                 <p style={{ fontSize: 14 }}>
                                     {data.vehiculo.descripcion}
                                 </p>
-                            </Grid.Column>
+                            </div>
                         </Grid.Row>
                     </Grid>
                     {data.vehiculosRelacionados.length > 0 && (
