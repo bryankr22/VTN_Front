@@ -24,6 +24,7 @@ export default function SidebarDetalleDesk({ imagenPrincipal, vehiculo, vehicleF
         }else{
             //setCompare('0');
         }
+        localStorage.setItem('compareVehiculos', '1')
         window.location.href = '/vehiculos';
         return;
     }

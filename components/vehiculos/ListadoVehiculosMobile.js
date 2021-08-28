@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Image, Card, Button, Container, Pagination } from "semantic-ui-react";
 import HeaderVehiculo from '../../components/comparadores/HeaderVehiculo';
 import { useLocalStorage } from '../../helpers/hooks/useLocalStorage';
@@ -61,6 +61,12 @@ export default function ListadoVehiculosMobile({ params, vehiculos, page, totalR
         }
         return;
     }
+
+    useEffect(() => {
+        if(compareList.length <= 0) {
+            setCompare('0')
+        }
+    }, [compareList])
     return (
         <>
             <HeaderVehiculo />
