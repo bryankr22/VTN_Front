@@ -72,7 +72,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
         { text: "MOTOS", slug: 'motos' },
         { text: "OTROS", slug: 'otros' },
     ];
-    const insertParam = (key, value) => {
+    const insertParam = (key, value, reset) => {
         key = encodeURIComponent(key);
         value = encodeURIComponent(value);
         var kvp = document.location.search.substr(1).split('&');
@@ -89,6 +89,9 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
             kvp[kvp.length] = [key,value].join('=');
         }
         let params = kvp.join('&');
+        if (reset) {
+          params = `${key}=${value}`;
+        }
         document.location.search = params;
     }
     const setInputVal = (input, value) => {
@@ -176,7 +179,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                                 {categorias_filter.map((item, index) => (
                                     <List.Item 
                                     key={index}
-                                    as="a">
+                                    as="a" onClick={() => insertParam('categoria', item.slug, true)}>
                                         {item.text}
                                     </List.Item>
                                 )
