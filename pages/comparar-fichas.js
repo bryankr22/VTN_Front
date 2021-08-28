@@ -12,9 +12,11 @@ export default function comparar_fichas() {
     const dispatch = useDispatch();
     const compareList = useSelector(({ comparador }) => comparador.fichas);
     const cleanSelector = () => {
-        dispatch(restartFicha());
-        localStorage.setItem("compareFichatecnica", "1")
-        window.location.href = '/ficha-tecnica';
+        if(confirm('¿Estas seguro?, se quitaran todos los vehículos que estas comparando actualmente.')) {
+            dispatch(restartFicha());
+            localStorage.setItem("compareFichatecnica", "1")
+            window.location.href = '/ficha-tecnica';
+        }
     }
     const downloadAction = () => {
         setLoading(true);
