@@ -102,7 +102,6 @@ export default function financiacion() {
         if (result.data.status) {
           setStatusMsg(true);
           setMessage("Datos enviados exitosamente");
-          setIsLoading(false);
           e.target?.reset?.()
           setSelectValues({
             cuotas: '',
@@ -112,6 +111,7 @@ export default function financiacion() {
           setSelectValues({})
           window.scrollTo({ top: 0, behavior: 'smooth' })
         }
+        setIsLoading(false);
       })
       .catch(() => {
         setMessage("Ha ocurrido un problema, intenta mas tarde");
@@ -221,7 +221,7 @@ export default function financiacion() {
             NOTA: Si usted gana menos de 2 salarios mínimos no podemos procesar
             su solicitud de financiación.
           </div>
-          <Button color="blue">ENVIAR</Button>
+          <Button color="blue" type="submit">ENVIAR</Button>
         </Form>
       </Container>
       <Loader isLoading={isLoading} />
