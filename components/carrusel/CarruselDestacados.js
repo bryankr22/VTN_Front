@@ -19,14 +19,14 @@ export default function CarruselDestacados(props) {
             >
             {props.data.map((item, index) => {
                     return (
-                        <Fragment key={index}>
-                            {props.type === "products" && (
+                        <div key={index} style={{padding: 10, display: 'flex', justifyContent: 'center' }}>
+                            {props.type.endsWith('tablet') && (
                                 <CardProducts {...props} item={item} />
                             )}
-                            {props.type === "products-desktop" && (
+                            {props.type.endsWith('desktop') || props.type === "products" && (
                                 <CardProductsDesk {...props} item={item} />
                             )}
-                        </Fragment>
+                        </div>
                     );
                 })}
             </ItemsCarousel>

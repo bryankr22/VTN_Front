@@ -32,10 +32,10 @@ export default function DestacadosHome({vehiculos}) {
                 </Header>
                 <CarruselDestacados
                     add="plus"
-                    type="products"
+                    type="products-tablet"
                     noFav={true}
                     onClickFav={() => onClickFav()}
-                    numberCards={3}
+                    numberCards={2}
                     data={vehiculos}
                 />
                 </Responsive>
