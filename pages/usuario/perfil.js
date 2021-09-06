@@ -54,17 +54,33 @@ export default function perfil() {
       setUsuario({ ...usuario, ...res.data });
     });
   }, []);
+
+  const handleChangeFile = (e) => {
+    if (e.target?.files?.length > 0) {
+      setUsuario({ ...usuario, file: e.target.files[0], cambiarImage: 1 });
+      return;
+    }
+    setUsuario({ ...usuario, cambiarImage: 0, file: undefined });
+  };
   const updateProfile = () => {
     setLoading(true);
     const cookie = cookies.vtn_token;
     const decoded = jwt.verify(cookie, "vendetunave2021");
     const user_id = decoded.user.id;
     const config = {
-      headers: { Authorization: `Bearer ${decoded.token_server.access_token}` },
+      headers: { 
+        Authorization: `Bearer ${decoded.token_server.access_token}`,  
+        'Content-Type': 'multipart/form-data'
+      },
     };
     const { imagePredeter, status, ...data } = usuario;
+    const form = new FormData();
+
+    Object.keys(data).forEach(key => form.append(key, data[key]))
+    form.append('user_id', user_id);
+
     axios
-      .post(AUTH_URL + perfil_update, { ...data, user_id }, config)
+      .post(AUTH_URL + perfil_update, form, config)
       .then((res) => {
         // location.reload();
         setAlert({
@@ -114,7 +130,7 @@ export default function perfil() {
                 bordered
                 style={{ height: 210, marginBottom: 20 }}
               />
-              <input type="file" className="form-control-file" />
+              <input type="file" className="form-control-file" onChange={handleChangeFile} />
             </Grid.Column>
             <Grid.Column width={10}>
               <Form>
@@ -199,6 +215,7 @@ export default function perfil() {
                 type="file"
                 style={{ marginBottom: 20 }}
                 className="form-control-file"
+                onChange={handleChangeFile}
               />
               <Form>
                 <Form.Field>
@@ -281,6 +298,7 @@ export default function perfil() {
                 type="file"
                 style={{ marginBottom: 20 }}
                 className="form-control-file"
+                onChange={handleChangeFile}
               />
               <Form>
                 <Form.Field>
