@@ -12,6 +12,7 @@ import jwt from 'jsonwebtoken';
 import axios from 'axios';
 import { Responsive, Icon, Breadcrumb, Grid, Header, Container } from "semantic-ui-react";
 export default function detalle({ data }) {
+
     return (
         <PublicLayout>
             <style>
