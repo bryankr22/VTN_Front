@@ -12,6 +12,7 @@ import jwt from 'jsonwebtoken';
 import axios from 'axios';
 import { Responsive, Icon, Breadcrumb, Grid, Header, Container } from "semantic-ui-react";
 export default function detalle({ data }) {
+
     return (
         <PublicLayout>
             <style>
@@ -171,6 +172,72 @@ export default function detalle({ data }) {
                 </Container>
             </Responsive>
             <Responsive {...Responsive.onlyMobile}>
+                <Container style={{ marginTop: 20 }}>
+                    <SliderPrincipal imagenes={data.imagenes} />
+                    <SidebarDetalle 
+                    vehicleFav={data.vehicleFav}
+                    vehiculo={data.vehiculo} />
+                    <Grid columns={1} divided="vertically">
+                        <Grid.Row style={{ marginTop: 30 }}>
+                            <div className="p-3">
+                                <Grid>
+                                    <Grid.Row columns={2} style={{ paddingBottom: 8 }}>
+                                        <Grid.Column>
+                                            <Header as="h5">
+                                                Publicado hace:
+                                                {" " + data.diasPublicado} días
+                                            </Header>
+                                        </Grid.Column>
+                                        <Grid.Column>
+                                            <Header as="h5">
+                                                {" " + data.vehiculo.ciudadLabel},
+                                                {" " + data.vehiculo.departamentoLabel}
+                                            </Header>
+                                        </Grid.Column>
+                                    </Grid.Row>
+                                    <Grid.Row columns={2} style={{ paddingBottom: 8 }}>
+                                        <Grid.Column>
+                                            <Header as="h5">
+                                                Teléfono:
+                                                {" " + data.vehiculo.contacto}
+                                            </Header>
+                                        </Grid.Column>
+                                    </Grid.Row>
+                                </Grid>
+                            </div>
+                        </Grid.Row>
+                        <Grid.Row className="p-3">
+                            <Header as="h5" style={{ marginTop: 20 }}>
+                                CARACTERÍSTICAS
+                            </Header>
+                            <TableCaracteristicasDesk vehiculo={data.vehiculo} />
+                        </Grid.Row>
+                        <Grid.Row>
+                            <div className="p-3">
+                                <Header as="h5" icon>
+                                    DESCRIPCIÓN
+                                </Header>
+                                <p style={{ fontSize: 14 }}>
+                                    {data.vehiculo.descripcion}
+                                </p>
+                            </div>
+                        </Grid.Row>
+                    </Grid>
+                    {data.vehiculosRelacionados.length > 0 && (
+                    <Container fluid id="cont-inf">
+                        <Header as="h4" style={{ marginTop: 20, marginLeft: 15 }}>
+                            PRODUCTOS RELACIONADOS
+                        </Header>
+                        <CarruselRelacionados 
+                            type='products'
+                            data={data.vehiculosRelacionados}
+                            numberCards={1}
+                        />
+                    </Container>
+                    )}
+                </Container>
+            </Responsive>
+            <Responsive maxWidth={319}>
                 <Container style={{ marginTop: 20 }}>
                     <SliderPrincipal imagenes={data.imagenes} />
                     <SidebarDetalle 
