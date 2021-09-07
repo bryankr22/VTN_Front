@@ -27,6 +27,10 @@ export default function CarruselHome(props) {
   //   }
   // }, [page]);
 
+  console.log(
+ router.asPath.includes('vehiculos/detalle')
+  );
+
   return (
     <div>
       <Carousel
@@ -40,7 +44,7 @@ export default function CarruselHome(props) {
         transitionTime={1000}
         emulateTouch
         onChange={setPage}
-        autoPlay={props.autoPlay === false ? props.autoPlay : true}
+        autoPlay={(props.autoPlay === false ? props.autoPlay : true) && !router.asPath.includes('vehiculos/detalle')}
         renderArrowNext={(click) => (
           <button className="control-arrow control-next" onClick={click}>
             <i className="angle right icon" />
