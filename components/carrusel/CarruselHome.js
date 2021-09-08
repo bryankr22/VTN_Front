@@ -26,6 +26,10 @@ export default function CarruselHome(props) {
   //   }
   // }, [page]);
 
+  console.log(
+ router.asPath.includes('vehiculos/detalle')
+  );
+
   return (
     <div>
       <Carousel
@@ -38,6 +42,7 @@ export default function CarruselHome(props) {
         showStatus={false}
         transitionTime={1000}
         onChange={setPage}
+        swipeable={false}
         autoPlay={(props.autoPlay === false ? props.autoPlay : true) && !router.asPath.includes('vehiculos/detalle')}
         renderArrowNext={(click) => (
           <button className="control-arrow control-next" onClick={click}>
