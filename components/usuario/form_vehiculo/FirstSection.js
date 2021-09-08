@@ -1,7 +1,10 @@
 import React, { Component, Fragment, useState } from 'react'
+import axios from 'axios';
 import { Form, Input, Select } from "semantic-ui-react";
 import { useDispatch, useSelector } from 'react-redux';
 import { updateVehiculo } from '../../../store/productoSlice';
+import { API_URL } from '../../../helpers/constants';
+
 export default function FirstSection({tipo_vehiculo, data}) {
     const dispatch = useDispatch();
     const vehiculoRedux = useSelector(({ producto }) => producto.vehiculo);
@@ -9,7 +12,7 @@ export default function FirstSection({tipo_vehiculo, data}) {
     const [modelos, setModelos] = useState([])
     const changeTipoVehiculo = (value) => {
         if(value !== 5){
-            axios.get().then((res) => {
+            axios.get(`${API_URL}/marcas/${value}`).then((res) => {
                 let optionsMarcas = [
                     { key: "", value: 0, text: "Seleccione marca..." },
                 ];
@@ -26,7 +29,7 @@ export default function FirstSection({tipo_vehiculo, data}) {
         dispatch(updateVehiculo({input: 'tipo_vehiculo', value}))
     }
     const changeMarca = (value) => {
-        axios.get().then((res) => {
+        axios.get(`${API_URL}/modelos/${value}`).then((res) => {
             let optionsModelos = [
                 { key: "", value: 0, text: "Seleccione modelo..." },
             ];
@@ -54,7 +57,7 @@ export default function FirstSection({tipo_vehiculo, data}) {
                     onChange={(e, {value}) => changeTipoVehiculo(value)}
                 />
                 <Fragment>
-                    {vehiculoRedux.tipo_vehiculo != 5 && (
+                    {vehiculoRedux?.tipo_vehiculo != 5 && (
                         <Select
                             name="marca_vehiculo"
                             search
@@ -64,7 +67,7 @@ export default function FirstSection({tipo_vehiculo, data}) {
                             onChange={(e, {value}) => changeMarca(value)}
                         />
                     )}
-                    {vehiculoRedux.tipo_vehiculo == 5 && (
+                    {vehiculoRedux?.tipo_vehiculo == 5 && (
                         <Fragment>
                             <Select
                                 name="tipo_moto_select"
@@ -84,7 +87,7 @@ export default function FirstSection({tipo_vehiculo, data}) {
                             />
                         </Fragment>
                     )}
-                    {vehiculoRedux.marca != 0 && (
+                    {vehiculoRedux?.marca != 0 && (
                     <Select
                         name="modelo_vehiculo"
                         search

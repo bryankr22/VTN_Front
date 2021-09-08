@@ -66,7 +66,7 @@ export default function SidebarDetalleDesk({ imagenPrincipal, vehiculo, vehicleF
                         vehiculo.precio
                     )}{" "}
                     COP
-                    {cookies.vtn_token && (
+                    {cookies.vtn_token && vehicleFav && (
                         <Icon
                             id={"icon-fav-" + vehiculo.id}
                             name={ vehicleFav.length > 0 ? "heart" : "heart outline" }

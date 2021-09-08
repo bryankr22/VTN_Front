@@ -88,7 +88,7 @@ export default function ImageUpload({ principal, index }) {
                                 maxHeight: 80,
                             },
                         }}
-                        inputContent={index}
+                        inputContent={index + 1}
                     />
                 </Segment>
             }
