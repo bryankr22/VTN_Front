@@ -23,7 +23,7 @@ export default function CarruselDestacados(props) {
                             {props.type.endsWith('tablet') && (
                                 <CardProducts {...props} item={item} />
                             )}
-                            {props.type.endsWith('desktop') || props.type === "products" && (
+                            {(props.type.endsWith('desktop') || props.type === "products") && (
                                 <CardProductsDesk {...props} item={item} />
                             )}
                         </div>
