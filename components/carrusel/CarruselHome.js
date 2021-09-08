@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import { useRouter } from "next/router";
-import Zoom from "react-medium-image-zoom";
-import "react-medium-image-zoom/dist/styles.css";
+import PrismaZoom from 'react-prismazoom'
 
 export default function CarruselHome(props) {
   const [page, setPage] = useState(0);
@@ -42,8 +41,8 @@ export default function CarruselHome(props) {
         }
         showStatus={false}
         transitionTime={1000}
-        emulateTouch
         onChange={setPage}
+        swipeable={false}
         autoPlay={(props.autoPlay === false ? props.autoPlay : true) && !router.asPath.includes('vehiculos/detalle')}
         renderArrowNext={(click) => (
           <button className="control-arrow control-next" onClick={click}>
@@ -73,8 +72,8 @@ export default function CarruselHome(props) {
               </div>
             )}
             {props.seccion == "desc" && (
-              <Zoom
-                wrapStyle={{
+              <PrismaZoom
+                style={{
                   objectFit: "contain",
                   width: "100%",
                   height: "100%",
@@ -99,7 +98,7 @@ export default function CarruselHome(props) {
                   hideCloseButton
                   hideHint
                 />
-              </Zoom>
+              </PrismaZoom>
             )}
           </div>
         ))}

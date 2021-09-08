@@ -46,6 +46,7 @@
     "@zeit/next-css": "^1.0.1",
     "eslint": "7.30.0",
     "eslint-config-next": "11.0.1",
-    "next-purgecss": "^4.0.0"
+    "next-purgecss": "^4.0.0",
+    "react-prismazoom": "^2.0.3"
   }
 }
