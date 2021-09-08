@@ -1,7 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
+import axios from 'axios';
 import { Form, Input, Select, Checkbox, Dropdown, } from "semantic-ui-react";
-  
-export default function ThirdSection({estado_vehiculo , data}) {
+import { useDispatch, useSelector } from 'react-redux';
+
+import { updateVehiculo } from '../../../store/productoSlice';
+import { API_URL } from '../../../helpers/constants';
+
+export default function ThirdSection({ estado_vehiculo, data }) {
+    const dispatch = useDispatch();
+    const [cities, setCities] = useState([]);
+    const [stateVehicle, setStateVehicle] = useState('Nuevo');
+    const [checkPromotion, setCheckPromotion] = useState(false);
+    const [chechPermuta, setChechPermuta] = useState(false);
+    const [checkFinanciacion, setCheckFinanciacion] = useState(false);
+
     const optionsCondicion = [
         { key: "Nuevo", value: "Nuevo", text: "Nuevo" },
         { key: "Usado", value: "Usado", text: "Usado" },
@@ -11,6 +23,29 @@ export default function ThirdSection({estado_vehiculo , data}) {
         { key: 2, value: 2, text: "NO" },
         { key: 1, value: 1, text: "SI" },
     ];
+
+    const changeDeparment = (value) => {
+        axios.get(`${API_URL}/ciudades/${value}`).then((res) => {
+            let optionsCities = [
+                { key: "", value: 0, text: "Seleccione municipio..." },
+            ];
+            res.data.ciudades.forEach(function (item) {
+                optionsCities.push({
+                    key: item.id,
+                    value: item.id,
+                    text: item.nombre,
+                });
+            });
+            setCities(optionsCities);
+        });
+        dispatch(updateVehiculo({ input: 'departamento_vehiculo', value }))
+    }
+
+    const changeState = (value) => {
+        setStateVehicle(value)
+        dispatch(updateVehiculo({ input: 'estado_vehiculo', value }))
+    }
+
     return (
         <>
             <Form.Field>
@@ -19,6 +54,7 @@ export default function ThirdSection({estado_vehiculo , data}) {
                     name="titulo_vehiculo"
                     fluid
                     placeholder="Ej: Mazda 3 Gran Touring LX 2017"
+                    onChange={(e, { value }) => dispatch(updateVehiculo({ input: 'titulo_vehiculo', value }))}
                 />
             </Form.Field>
             <Form.Field>
@@ -27,6 +63,7 @@ export default function ThirdSection({estado_vehiculo , data}) {
                     name="descripcion_vehiculo"
                     fluid
                     placeholder="Descripción"
+                    onChange={(e, { value }) => dispatch(updateVehiculo({ input: 'descripcion_vehiculo', value }))}
                 ></Form.TextArea>
             </Form.Field>
             <Form.Field>
@@ -35,6 +72,7 @@ export default function ThirdSection({estado_vehiculo , data}) {
                     name="contacto_vehiculo"
                     type="text"
                     placeholder="Número de contacto"
+                    onChange={(e, { value }) => dispatch(updateVehiculo({ input: 'contacto_vehiculo', value }))}
                 />
             </Form.Field>
             <Form.Field>
@@ -43,6 +81,7 @@ export default function ThirdSection({estado_vehiculo , data}) {
                     name="estado_vehiculo"
                     options={optionsCondicion}
                     placeholder="Condición"
+                    onChange={(e, { value }) => changeState(value)}
                 />
             </Form.Field>
             <Form.Field style={{ marginBottom: 10 }}>
@@ -52,11 +91,13 @@ export default function ThirdSection({estado_vehiculo , data}) {
                         name="precio_vehiculo"
                         type="text"
                         placeholder="$"
+                        onChange={(e, { value }) => dispatch(updateVehiculo({ input: 'precio_vehiculo', value }))}
                     />
                     <Select
                         name="tipo_precio_vehiculo"
                         options={data.tipoPrecio}
                         placeholder="Tipo precio"
+                        onChange={(e, { value }) => dispatch(updateVehiculo({ input: 'tipo_precio_vehiculo', value }))}
                     />
                 </Input>
             </Form.Field>
@@ -66,15 +107,31 @@ export default function ThirdSection({estado_vehiculo , data}) {
                     name="promocion"
                     label="Promoción"
                     style={{ marginRight: 15 }}
+                    onChange={() => {
+                        const value = !checkPromotion;
+                        setCheckPromotion(value);
+                        dispatch(updateVehiculo({ input: 'promocion', value }));
+
+                    }}
                 />
                 <Checkbox
                     name="permuta"
                     label="Acepta Permuta"
                     style={{ marginRight: 15 }}
+                    onChange={() => { 
+                        const value = !chechPermuta;
+                        setChechPermuta(!value); 
+                        dispatch(updateVehiculo({ input: 'permuta', value }));
+                    }}
                 />
                 <Checkbox
                     name="financiacion"
                     label="Financiación"
+                    onChange={() => { 
+                        const value = !checkFinanciacion;
+                        setCheckFinanciacion(value); 
+                        dispatch(updateVehiculo({ input: 'financiacion', value }));
+                    }}
                 />
                 <p style={{ color: "#828282" }}>
                     Si marcas que el carro está en promoción, pasará por la
@@ -89,6 +146,7 @@ export default function ThirdSection({estado_vehiculo , data}) {
                     name="kilometraje_vehiculo"
                     type="text"
                     placeholder="Km"
+                    onChange={(e, { value }) => dispatch(updateVehiculo({ input: 'kilometraje_vehiculo', value }))}
                 />
             </Form.Field>
             <Form.Field>
@@ -97,6 +155,7 @@ export default function ThirdSection({estado_vehiculo , data}) {
                     name="cilindraje_vehiculo"
                     type="text"
                     placeholder="Cilindraje"
+                    onChange={(e, { value }) => dispatch(updateVehiculo({ input: 'cilindraje_vehiculo', value }))}
                 />
             </Form.Field>
             <Form.Field>
@@ -106,6 +165,7 @@ export default function ThirdSection({estado_vehiculo , data}) {
                     search
                     options={data.combustibles}
                     placeholder="Selecciona combustible"
+                    onChange={(e, { value }) => dispatch(updateVehiculo({ input: 'combustible_vehiculo', value }))}
                 />
             </Form.Field>
             <Form.Field>
@@ -117,6 +177,7 @@ export default function ThirdSection({estado_vehiculo , data}) {
                     selection
                     options={data.colores}
                     placeholder="Selecciona color"
+                    onChange={(e, { value }) => dispatch(updateVehiculo({ input: 'color_vehiculo', value }))}
                 />
             </Form.Field>
             <Form.Field>
@@ -126,6 +187,7 @@ export default function ThirdSection({estado_vehiculo , data}) {
                     search
                     options={data.transmision}
                     placeholder="Selecciona transmisión"
+                    onChange={(e, { value }) => dispatch(updateVehiculo({ input: 'transmision_vehiculo', value }))}
                 />
             </Form.Field>
             <Form.Field>
@@ -134,18 +196,19 @@ export default function ThirdSection({estado_vehiculo , data}) {
                     name="blindado_vehiculo"
                     options={optionsBlindado}
                     placeholder="Selecciona blindaje"
+                    onChange={(e, { value }) => dispatch(updateVehiculo({ input: 'blindado_vehiculo', value }))}
                 />
             </Form.Field>
-            {estado_vehiculo !== "Nuevo" && (
+            {stateVehicle !== "Nuevo" && (
                 <Form.Field>
                     <label>ÚLTIMO DÍGITO DE LA PLACA *</label>
                     <Input
                         name="placa_vehiculo"
-                        disabled={true}
                         max={9}
                         min={0}
                         placeholder="Placa"
                         id="placa_vehiculo"
+                        onChange={(e, { value }) => dispatch(updateVehiculo({ input: 'placa_vehiculo', value }))}
                     />
                 </Form.Field>
             )}
@@ -158,13 +221,15 @@ export default function ThirdSection({estado_vehiculo , data}) {
                         options={data.departamentos}
                         fluid
                         placeholder="DEPARTAMENTO"
+                        onChange={(e, { value }) => changeDeparment(value)}
                     />
                     <Select
                         search
                         name="ciudad_vehiculo"
-                        options={[]}
+                        options={cities}
                         fluid
                         placeholder="MUNICIPIO"
+                        onChange={(e, { value }) => dispatch(updateVehiculo({ input: 'ciudad_vehiculo', value }))}
                     />
                 </Input>
             </Form.Field>

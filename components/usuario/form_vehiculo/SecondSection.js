@@ -5,7 +5,25 @@ export default function SecondSection() {
     const inputsList_one = [
         {
             principal: true,
+            index: 0
+        },
+        {
+            principal: false,
+            index: 5
+        },
+        {
+            principal: false,
+            index: 8
+        }
+    ];
+    const inputsList_two = [
+        {
+            principal: false,
             index: 1
+        },
+        {
+            principal: false,
+            index: 3
         },
         {
             principal: false,
@@ -16,7 +34,7 @@ export default function SecondSection() {
             index: 9
         }
     ];
-    const inputsList_two = [
+    const inputsList_three = [
         {
             principal: false,
             index: 2
@@ -28,24 +46,6 @@ export default function SecondSection() {
         {
             principal: false,
             index: 7
-        },
-        {
-            principal: false,
-            index: 10
-        }
-    ];
-    const inputsList_three = [
-        {
-            principal: false,
-            index: 3
-        },
-        {
-            principal: false,
-            index: 5
-        },
-        {
-            principal: false,
-            index: 8
         }
     ];
     return (
