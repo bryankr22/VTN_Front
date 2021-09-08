@@ -106,7 +106,6 @@ export default function MarcaModeloComponent({ filtros, params }) {
           </Header>
         </Accordion.Title>
         <Accordion.Content active={marcasList.open}>
-          <Grid.Column>
             <List link>
               <List.Item>
                 <List.Content>
@@ -118,7 +117,7 @@ export default function MarcaModeloComponent({ filtros, params }) {
                         style={{
                           padding: "7px 0px",
                           borderBottom: "1px solid #cccccc",
-                          color: "#2185d0",
+                          color: params.marca === itemSecond.slug ? "#2185d0": undefined,
                         }}
                         onClick={() => {
                           if (itemSecond.slug !== "") {
@@ -141,10 +140,9 @@ export default function MarcaModeloComponent({ filtros, params }) {
                 </List.Content>
               </List.Item>
             </List>
-          </Grid.Column>
         </Accordion.Content>
       </Accordion>
-      {params.marca && !params.modelo && (
+      {params.marca && (
         <Accordion style={{ width: "100%", marginBottom: 15 }}>
           <Accordion.Title
             style={{
@@ -175,7 +173,7 @@ export default function MarcaModeloComponent({ filtros, params }) {
                           style={{
                             padding: "7px 0px",
                             borderBottom: "1px solid #cccccc",
-                            color: "#2185d0",
+                            color: params.modelo === itemSecond.slug ? "#2185d0": undefined,
                           }}
                           onClick={() => {
                             if (itemSecond.slug !== "") {

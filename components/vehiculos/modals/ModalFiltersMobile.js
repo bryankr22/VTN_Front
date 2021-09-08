@@ -28,10 +28,10 @@ export default function ModalFiltersMobile({
   filtros,
   params,
 }) {
-  const mapping_contador = (contador, canWatchAll = true) => {
+  const mapping_contador = (contador, canWatchAll = true, {lower} = {}) => {
     var mapItems = Object.keys(contador).map((item, index) => {
       return {
-        label: item,
+        label: lower ? item?.toLowerCase?.() : item,
         slug: item,
         qty: index,
       };
@@ -82,18 +82,18 @@ export default function ModalFiltersMobile({
     { label: "$50.000.000 a $100.000.000", slug: "50000000:100000000" },
   ];
   const categorias_filter = [
-    { label: "CARROS Y CAMIONETAS", slug: "carros" },
-    { label: "CAMIONES", slug: "camiones" },
-    { label: "CARROS DE COLECCION", slug: "carros_coleccion" },
-    { label: "MOTOS", slug: "motos" },
-    { label: "OTROS", slug: "otros" },
+    { label: "Carros y camionetas", slug: "carros" },
+    { label: "Camiones", slug: "camiones" },
+    { label: "Carros de coleccion", slug: "carros_coleccion" },
+    { label: "Motos", slug: "motos" },
+    { label: "Otros", slug: "otros" },
   ];
 
   const [filtrosLocal, setFiltrosLocal] = useState([
     {
       text: "Ubicacion",
       open: false,
-      values: mapping_contador(filtros.ubicacion),
+      values: mapping_contador(filtros.ubicacion, false, {lower: true}),
       slug: "ubicacion",
       component: false,
     },
@@ -270,8 +270,7 @@ export default function ModalFiltersMobile({
                         </Header>
                       </Accordion.Title>
                       <Accordion.Content active={item.open}>
-                        <Grid.Column>
-                          <List>
+                          <List link>
                             <List.Item>
                               <List.Content>
                                 <List.List style={{ paddingLeft: 15 }}>
@@ -283,7 +282,8 @@ export default function ModalFiltersMobile({
                                         style={{
                                           padding: "7px 0px",
                                           borderBottom: "1px solid #cccccc",
-                                          color: "#2185d0",
+                                          textTransform: 'capitalize',
+                                          color: params[item.slug] == itemSecond.slug ?  "#2185d0" : undefined,
                                         }}
                                         onClick={() => {
                                           if (itemSecond.slug != "") {
@@ -363,7 +363,7 @@ export default function ModalFiltersMobile({
                               </Grid.Column>
                             </Grid>
                           ) : null}
-                        </Grid.Column>
+
                       </Accordion.Content>
                     </Accordion>
                   )

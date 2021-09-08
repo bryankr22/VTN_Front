@@ -66,11 +66,11 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
         { text: "$50.000.000 a $100.000.000", slug: '50000000:100000000' },
     ];
     const categorias_filter = [
-        { text: "CARROS Y CAMIONETAS", slug: 'carros' },
-        { text: "CAMIONES", slug: 'camiones' },
-        { text: "CARROS DE COLECCION", slug: 'carros_coleccion' },
-        { text: "MOTOS", slug: 'motos' },
-        { text: "OTROS", slug: 'otros' },
+        { text: "Carros y camionetas", slug: 'carros' },
+        { text: "Camiones", slug: 'camiones' },
+        { text: "Carros de coleccion", slug: 'carros_coleccion' },
+        { text: "Motos", slug: 'motos' },
+        { text: "Otros", slug: 'otros' },
     ];
     const insertParam = (key, value, reset) => {
         key = encodeURIComponent(key);
@@ -141,7 +141,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                 <ActiveTagsVehiculos tags={params}/>
             </Container>
             <Container style={{ padding: "20px 20px" }}>
-                { !params.ubicacion && ( 
+
                 <List link>
                     <List.Item>
                         <List.Content>
@@ -153,8 +153,9 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                                     <List.Item 
                                     key={index}
                                     as="a"
+                                    style={{textTransform: 'capitalize', color: params.ubicacion === item.label ? "#2185d0" : undefined}}
                                     onClick={() => insertParam('ubicacion', item.label) }>
-                                        {item.label}
+                                        {item.label?.toLowerCase()}
                                     </List.Item>
                                 )
                                 )}
@@ -167,8 +168,6 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                         </List.Content>
                     </List.Item>
                 </List>
-                )}
-                { !params.categoria && ( 
                 <List link>
                     <List.Item>
                         <List.Content>
@@ -179,6 +178,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                                 {categorias_filter.map((item, index) => (
                                     <List.Item 
                                     key={index}
+                                    style={{textTransform: 'capitalize', color: params.categoria === item.slug ? "#2185d0" : undefined}}
                                     as="a" onClick={() => insertParam('categoria', item.slug, true)}>
                                         {item.text}
                                     </List.Item>
@@ -188,7 +188,6 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                         </List.Content>
                     </List.Item>
                 </List>
-                )}
                 { !params.tipo && params.categoria === 'motos' && ( 
                 <List link>
                     <List.Item>
@@ -201,6 +200,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                                     <List.Item 
                                     key={index}
                                     as="a"
+                                    style={{textTransform: 'capitalize', color: params.tipo === item.label ? "#2185d0" : undefined}}
                                     onClick={() => insertParam('tipo', item.label) }>
                                         {item.label}
                                     </List.Item>
@@ -227,6 +227,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                                     <List.Item 
                                     key={index}
                                     as="a"
+                                    style={{textTransform: 'capitalize', color: params.marca === item.label ? "#2185d0" : undefined}}
                                     onClick={() => insertParam('marca', item.label) }>
                                         {item.label}
                                     </List.Item>
@@ -241,7 +242,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                         </List.Content>
                     </List.Item>
                 </List>
-                { params.marca && !params.modelo && ( 
+                { params.marca && ( 
                 <List link>
                     <List.Item>
                         <List.Content>
@@ -253,6 +254,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                                     <List.Item 
                                     key={index}
                                     as="a"
+                                    style={{textTransform: 'capitalize', color: params.modelo === item.label ? "#2185d0" : undefined}}
                                     onClick={() => insertParam('modelo', item.label) }>
                                         {item.label}
                                     </List.Item>
@@ -268,7 +270,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                     </List.Item>
                 </List>
                 )}
-                { !params.combustible && (
+
                 <List link>
                     <List.Item>
                         <List.Content>
@@ -280,6 +282,8 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                                     <List.Item 
                                     key={index}
                                     as="a"
+                                    style={{textTransform: 'capitalize', color: params.combustible === item.label ? "#2185d0" : undefined}}
+
                                     onClick={() => insertParam('combustible', item.label) }>
                                         {item.label}
                                     </List.Item>
@@ -289,8 +293,8 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                         </List.Content>
                     </List.Item>
                 </List>
-                )}
-                { !params.ano && (
+
+
                 <List link>
                     <List.Item>
                         <List.Content>
@@ -302,6 +306,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                                     <List.Item 
                                     key={index}
                                     as="a"
+                                    style={{textTransform: 'capitalize', color: params.ano == item.label ? "#2185d0" : undefined}}
                                     onClick={() => insertParam('ano', item.label) }>
                                         {item.label}
                                     </List.Item>
@@ -317,8 +322,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                         </List.Content>
                     </List.Item>
                 </List>
-                )}
-                { !params.estado && (
+
                 <List link>
                     <List.Item>
                         <List.Content>
@@ -328,12 +332,14 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                             <List.List style={{ paddingLeft: 15 }}>
                                 <List.Item
                                     as="a"
+                                    style={{textTransform: 'capitalize', color: params.estado === 'Nuevo' ? "#2185d0" : undefined}}
                                     onClick={() => insertParam('estado', 'Nuevo') }
                                 >
                                     Nuevo
                                 </List.Item>
                                 <List.Item
                                     as="a"
+                                    style={{textTransform: 'capitalize', color: params.estado === 'Usado' ? "#2185d0" : undefined}}
                                     onClick={() => insertParam('estado', 'Usado') }
                                 >
                                     Usado
@@ -342,8 +348,6 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                         </List.Content>
                     </List.Item>
                 </List>
-                )}
-                { !params.transmision && (
                 <List link>
                     <List.Item>
                         <List.Content>
@@ -355,6 +359,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                                     <List.Item 
                                     key={index}
                                     as="a"
+                                    style={{textTransform: 'capitalize', color: params.transmision == item.label ? "#2185d0" : undefined}}
                                     onClick={() => insertParam('transmision', item.label) }>
                                         {item.label}
                                     </List.Item>
@@ -364,7 +369,6 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                         </List.Content>
                     </List.Item>
                 </List>
-                )}
                 <Checkbox
                     name="promocion"
                     label="Promoción"
@@ -383,7 +387,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                     defaultValue={params.blindaje}
                     onChange={({value}) => insertParam('blindaje', !value) }
                 />
-                { !params.kilometraje && (<>
+                <>
                 <List link style={{ marginBottom: 0 }}>
                     <List.Item style={{ marginBottom: 0 }}>
                         <List.Content>
@@ -395,6 +399,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                                     <List.Item 
                                     key={index}
                                     as="a"
+                                    style={{textTransform: 'capitalize', color: params.kilometraje == item.slug ? "#2185d0" : undefined}}
                                     onClick={() => insertParam('kilometraje', item.slug) }>
                                         {item.text}
                                     </List.Item>
@@ -438,8 +443,8 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                         />
                     </Grid.Column>
                 </Grid>
-                </>)}
-                { !params.precio && (<>
+                </>
+                <>
                 <List link style={{ marginBottom: 0 }}>
                     <List.Item style={{ marginBottom: 0 }}>
                         <List.Content>
@@ -451,6 +456,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                                     <List.Item 
                                     key={index}
                                     as="a"
+                                    style={{textTransform: 'capitalize', color: params.precio == item.slug ? "#2185d0" : undefined}}
                                     onClick={() => insertParam('precio', item.slug) }>
                                         {item.text}
                                     </List.Item>
@@ -494,7 +500,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                         />
                     </Grid.Column>
                 </Grid>
-                </>)}
+                </>
             </Container>
             <ModalFiltersDesk
             showModal={modalAll} 
