@@ -20,6 +20,7 @@ export default function CompareFicha() {
     const removeFichaClick = (index) => {
         dispatch(removeFicha(index));
     }
+    console.log(compareList);
     return (
         <Grid columns={3} divided id="grid-compare">
             <Grid.Row style={{ textAlign: 'left' }}>
@@ -119,7 +120,7 @@ export default function CompareFicha() {
                                         color: 'gray'
                                     }}
                                 >
-                                    {vehicle.marca}
+                                    {vehicle.marca || vehicle.marcaLabel}
                                 </p>
 
                                 {index === 0 &&
@@ -155,7 +156,7 @@ export default function CompareFicha() {
                                         color: 'gray'
                                     }}
                                 >
-                                    {vehicle.modelo}
+                                    {vehicle.modelo || vehicle.modeloLabel}
                                 </p>
 
                                 {index === 0 &&

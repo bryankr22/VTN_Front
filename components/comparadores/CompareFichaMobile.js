@@ -120,7 +120,7 @@ export default function CompareFicha() {
                                         color: 'gray'
                                     }}
                                 >
-                                    {vehicle.marca}
+                                    {vehicle.marca || vehicle.marcaLabel}
                                 </p>
 
                                 {index === 0 &&
@@ -156,7 +156,7 @@ export default function CompareFicha() {
                                         color: 'gray'
                                     }}
                                 >
-                                    {vehicle.modelo}
+                                    {vehicle.modelo || vehicle.modeloLabel}
                                 </p>
 
                                 {index === 0 &&
