@@ -96,7 +96,7 @@ export default function CompareVehiculo() {
                                     color: 'gray'
                                 }}
                                 >
-                                    {vehicle.labelCiudad}
+                                    {vehicle.labelCiudad || vehicle.ciudadLabel} 
                                 </p>
 
                                 { index === 0 &&
@@ -113,7 +113,7 @@ export default function CompareVehiculo() {
                                     color: 'gray'
                                 }}
                                 >
-                                    {vehicle.marca}
+                                    {vehicle.marca || vehicle.marcaLabel}
                                 </p>
 
                                 { index === 0 &&
@@ -146,7 +146,7 @@ export default function CompareVehiculo() {
                                     color: 'gray'
                                 }}
                                 >
-                                    {vehicle.modelo}
+                                    {vehicle.modelo || vehicle.modeloLabel}
                                 </p>
                                 { index === 0 &&
                                     <Header as='h3'>Estado</Header>
@@ -281,275 +281,300 @@ export default function CompareVehiculo() {
                         )
                     } else {
                         return (
-                            <Grid.Column 
-                            key={index}
+                          <Grid.Column key={index}>
+                            <Button
+                              as="a"
+                              onClick={() =>
+                                localStorage.setItem("compareVehiculos", "1")
+                              }
+                              href="/vehiculos"
+                              floated="right"
+                              style={{ marginBottom: 10 }}
                             >
-                                <Button as="a" 
-                                onClick={() => localStorage.setItem("compareVehiculos", "1")} 
-                                href="/vehiculos" 
-                                floated='right' style={{ marginBottom: 10 }}>Agregar</Button>
-                                <Image
-                                    centered
-                                    onClick={() => { localStorage.setItem("compareVehiculos", "1"); location.href = '/vehiculos' }}
-                                    style={{ height: 200, objectFit: 'cover', width: '100%', cursor: 'pointer' }}
-                                    src='/images/plus-compare.png'
-                                />
-                                { index === 0 &&
-                                    <Header as='h2'>Características</Header>
-                                }
-                                { index !== 0 &&
-                                    <Header as='h2' style={{ color: 'transparent' }}>.</Header>
-                                }
-                                { index === 0 &&
-                                    <Header as='h3'>Nombre</Header>
-                                }
-                                { index !== 0 &&
-                                    <Header as='h3' style={{ color: 'transparent' }}>.</Header>
-                                }
-                                <p
-                                style={{
-                                    fontWeight: 700,
-                                    fontSize: 14,
-                                    marginLeft: 15,
-                                    color: 'transparent'
-                                }}
-                                >
-                                    .
-                                </p>
-                                { index === 0 &&
-                                    <Header as='h3'>Precio</Header>
-                                }
-                                { index !== 0 &&
-                                    <Header as='h3' style={{ color: 'transparent' }}>.</Header>
-                                }
-                                <p
-                                style={{
-                                    fontWeight: 700,
-                                    fontSize: 14,
-                                    marginLeft: 15,
-                                    color: 'transparent'
-                                }}
-                                >
-                                    .
-                                </p>
-                                { index === 0 &&
-                                    <Header as='h3'>Ubicación</Header>
-                                }
-                                { index !== 0 &&
-                                    <Header as='h3' style={{ color: 'transparent' }}>.</Header>
-                                }
-                                <p
-                                    style={{
-                                        fontWeight: 700,
-                                        fontSize: 14,
-                                        marginLeft: 15,
-                                        color: 'transparent'
-                                    }}
-                                >
-                                    .
+                              Agregar
+                            </Button>
+                            <Image
+                              centered
+                              onClick={() => {
+                                localStorage.setItem("compareVehiculos", "1");
+                                location.href = "/vehiculos";
+                              }}
+                              style={{
+                                height: 200,
+                                objectFit: "cover",
+                                width: "100%",
+                                cursor: "pointer",
+                              }}
+                              src="/images/plus-compare.png"
+                            />
+                            {index === 0 && (
+                              <Header as="h2">Características</Header>
+                            )}
+                            {index !== 0 && (
+                              <Header as="h2" style={{ color: "transparent" }}>
+                                .
+                              </Header>
+                            )}
+                            {index === 0 && <Header as="h3">Nombre</Header>}
+                            {index !== 0 && (
+                              <Header as="h3" style={{ color: "transparent" }}>
+                                .
+                              </Header>
+                            )}
+                            <p
+                              style={{
+                                fontWeight: 700,
+                                fontSize: 14,
+                                marginLeft: 15,
+                                color: "transparent",
+                              }}
+                            >
+                              .
+                            </p>
+                            {index === 0 && <Header as="h3">Precio</Header>}
+                            {index !== 0 && (
+                              <Header as="h3" style={{ color: "transparent" }}>
+                                .
+                              </Header>
+                            )}
+                            <p
+                              style={{
+                                fontWeight: 700,
+                                fontSize: 14,
+                                marginLeft: 15,
+                                color: "transparent",
+                              }}
+                            >
+                              .
+                            </p>
+                            {index === 0 && <Header as="h3">Ubicación</Header>}
+                            {index !== 0 && (
+                              <Header as="h3" style={{ color: "transparent" }}>
+                                .
+                              </Header>
+                            )}
+                            <p
+                              style={{
+                                fontWeight: 700,
+                                fontSize: 14,
+                                marginLeft: 15,
+                                color: "transparent",
+                              }}
+                            >
+                              .
                             </p>
 
-                                { index === 0 &&
-                                    <Header as='h3'>Marca</Header>
-                                }
-                                { index !== 0 &&
-                                    <Header as='h3' style={{ color: 'transparent' }}>.</Header>
-                                }
+                            {index === 0 && <Header as="h3">Marca</Header>}
+                            {index !== 0 && (
+                              <Header as="h3" style={{ color: "transparent" }}>
+                                .
+                              </Header>
+                            )}
 
-                                <p
-                                    style={{
-                                        fontWeight: 700,
-                                        fontSize: 14,
-                                        marginLeft: 15,
-                                        color: 'transparent'
-                                    }}
-                                >
-                                    .
+                            <p
+                              style={{
+                                fontWeight: 700,
+                                fontSize: 14,
+                                marginLeft: 15,
+                                color: "transparent",
+                              }}
+                            >
+                              .
                             </p>
 
-                                { index === 0 &&
-                                    <Header as='h3'>Año</Header>
-                                }
-                                { index !== 0 &&
-                                    <Header as='h3' style={{ color: 'transparent' }}>.</Header>
-                                }
+                            {index === 0 && <Header as="h3">Año</Header>}
+                            {index !== 0 && (
+                              <Header as="h3" style={{ color: "transparent" }}>
+                                .
+                              </Header>
+                            )}
 
-                                <p
-                                    style={{
-                                        fontWeight: 700,
-                                        fontSize: 14,
-                                        marginLeft: 15,
-                                        color: 'transparent'
-                                    }}
-                                >
-                                    .
+                            <p
+                              style={{
+                                fontWeight: 700,
+                                fontSize: 14,
+                                marginLeft: 15,
+                                color: "transparent",
+                              }}
+                            >
+                              .
                             </p>
 
-                                { index === 0 &&
-                                    <Header as='h3'>Modelo</Header>
-                                }
-                                { index !== 0 &&
-                                    <Header as='h3' style={{ color: 'transparent' }}>.</Header>
-                                }
+                            {index === 0 && <Header as="h3">Modelo1</Header>}
+                            {index !== 0 && (
+                              <Header as="h3" style={{ color: "transparent" }}>
+                                .
+                              </Header>
+                            )}
 
-                                <p
-                                    style={{
-                                        fontWeight: 700,
-                                        fontSize: 14,
-                                        marginLeft: 15,
-                                        color: 'transparent'
-                                    }}
-                                >
-                                    .
+                            <p
+                              style={{
+                                fontWeight: 700,
+                                fontSize: 14,
+                                marginLeft: 15,
+                                color: "gray",
+                              }}
+                            >
+                              {vehicle.modelo}
                             </p>
 
-                                { index === 0 &&
-                                    <Header as='h3'>Estado</Header>
-                                }
-                                { index !== 0 &&
-                                    <Header as='h3' style={{ color: 'transparent' }}>.</Header>
-                                }
+                            {index === 0 && <Header as="h3">Estado</Header>}
+                            {index !== 0 && (
+                              <Header as="h3" style={{ color: "transparent" }}>
+                                .
+                              </Header>
+                            )}
 
-                                <p
-                                    style={{
-                                        fontWeight: 700,
-                                        fontSize: 14,
-                                        marginLeft: 15,
-                                        color: 'transparent'
-                                    }}
-                                >
-                                    .
+                            <p
+                              style={{
+                                fontWeight: 700,
+                                fontSize: 14,
+                                marginLeft: 15,
+                                color: "transparent",
+                              }}
+                            >
+                              .
                             </p>
 
-                                { index === 0 &&
-                                    <Header as='h3'>Tipo de precio</Header>
-                                }
-                                { index !== 0 &&
-                                    <Header as='h3' style={{ color: 'transparent' }}>.</Header>
-                                }
+                            {index === 0 && (
+                              <Header as="h3">Tipo de precio</Header>
+                            )}
+                            {index !== 0 && (
+                              <Header as="h3" style={{ color: "transparent" }}>
+                                .
+                              </Header>
+                            )}
 
-                                <p
-                                    style={{
-                                        fontWeight: 700,
-                                        fontSize: 14,
-                                        marginLeft: 15,
-                                        color: 'transparent'
-                                    }}
-                                >
-                                    .
+                            <p
+                              style={{
+                                fontWeight: 700,
+                                fontSize: 14,
+                                marginLeft: 15,
+                                color: "transparent",
+                              }}
+                            >
+                              .
                             </p>
 
-                                { index === 0 &&
-                                    <Header as='h3'>Cilindraje</Header>
-                                }
-                                { index !== 0 &&
-                                    <Header as='h3' style={{ color: 'transparent' }}>.</Header>
-                                }
+                            {index === 0 && <Header as="h3">Cilindraje</Header>}
+                            {index !== 0 && (
+                              <Header as="h3" style={{ color: "transparent" }}>
+                                .
+                              </Header>
+                            )}
 
-                                <p
-                                    style={{
-                                        fontWeight: 700,
-                                        fontSize: 14,
-                                        marginLeft: 15,
-                                        color: 'transparent'
-                                    }}
-                                >
-                                    .
+                            <p
+                              style={{
+                                fontWeight: 700,
+                                fontSize: 14,
+                                marginLeft: 15,
+                                color: "transparent",
+                              }}
+                            >
+                              .
                             </p>
 
-                                { index === 0 &&
-                                    <Header as='h3'>Kilometraje</Header>
-                                }
-                                { index !== 0 &&
-                                    <Header as='h3' style={{ color: 'transparent' }}>.</Header>
-                                }
+                            {index === 0 && (
+                              <Header as="h3">Kilometraje</Header>
+                            )}
+                            {index !== 0 && (
+                              <Header as="h3" style={{ color: "transparent" }}>
+                                .
+                              </Header>
+                            )}
 
-                                <p
-                                    style={{
-                                        fontWeight: 700,
-                                        fontSize: 14,
-                                        marginLeft: 15,
-                                        color: 'transparent'
-                                    }}
-                                >
-                                    .
+                            <p
+                              style={{
+                                fontWeight: 700,
+                                fontSize: 14,
+                                marginLeft: 15,
+                                color: "transparent",
+                              }}
+                            >
+                              .
                             </p>
 
-                                { index === 0 &&
-                                    <Header as='h3'>Transmisión</Header>
-                                }
-                                { index !== 0 &&
-                                    <Header as='h3' style={{ color: 'transparent' }}>.</Header>
-                                }
+                            {index === 0 && (
+                              <Header as="h3">Transmisión</Header>
+                            )}
+                            {index !== 0 && (
+                              <Header as="h3" style={{ color: "transparent" }}>
+                                .
+                              </Header>
+                            )}
 
-                                <p
-                                    style={{
-                                        fontWeight: 700,
-                                        fontSize: 14,
-                                        marginLeft: 15,
-                                        color: 'transparent'
-                                    }}
-                                >
-                                    .
+                            <p
+                              style={{
+                                fontWeight: 700,
+                                fontSize: 14,
+                                marginLeft: 15,
+                                color: "transparent",
+                              }}
+                            >
+                              .
                             </p>
 
-                                { index === 0 &&
-                                    <Header as='h3'>Blindaje</Header>
-                                }
-                                { index !== 0 &&
-                                    <Header as='h3' style={{ color: 'transparent' }}>.</Header>
-                                }
+                            {index === 0 && <Header as="h3">Blindaje</Header>}
+                            {index !== 0 && (
+                              <Header as="h3" style={{ color: "transparent" }}>
+                                .
+                              </Header>
+                            )}
 
-                                <p
-                                    style={{
-                                        fontWeight: 700,
-                                        fontSize: 14,
-                                        marginLeft: 15,
-                                        color: 'transparent'
-                                    }}
-                                >
-                                    .
+                            <p
+                              style={{
+                                fontWeight: 700,
+                                fontSize: 14,
+                                marginLeft: 15,
+                                color: "transparent",
+                              }}
+                            >
+                              .
                             </p>
 
-                                { index === 0 &&
-                                    <Header as='h3'>Último dígito Placa</Header>
-                                }
-                                { index !== 0 &&
-                                    <Header as='h3' style={{ color: 'transparent' }}>.</Header>
-                                }
+                            {index === 0 && (
+                              <Header as="h3">Último dígito Placa</Header>
+                            )}
+                            {index !== 0 && (
+                              <Header as="h3" style={{ color: "transparent" }}>
+                                .
+                              </Header>
+                            )}
 
-                                <p
-                                    style={{
-                                        fontWeight: 700,
-                                        fontSize: 14,
-                                        marginLeft: 15,
-                                        color: 'transparent'
-                                    }}
-                                >
-                                    .
+                            <p
+                              style={{
+                                fontWeight: 700,
+                                fontSize: 14,
+                                marginLeft: 15,
+                                color: "transparent",
+                              }}
+                            >
+                              .
                             </p>
 
-                                <Divider />
+                            <Divider />
 
-                                { index === 0 &&
-                                    <Header as='h2'>Descripción</Header>
-                                }
-                                { index !== 0 &&
-                                    <Header as='h2' style={{ color: 'transparent' }}>.</Header>
-                                }
+                            {index === 0 && (
+                              <Header as="h2">Descripción</Header>
+                            )}
+                            {index !== 0 && (
+                              <Header as="h2" style={{ color: "transparent" }}>
+                                .
+                              </Header>
+                            )}
 
-                                <p
-                                    style={{
-                                        fontWeight: 700,
-                                        fontSize: 14,
-                                        marginLeft: 15,
-                                        color: 'transparent'
-                                    }}
-                                >
-                                    .
+                            <p
+                              style={{
+                                fontWeight: 700,
+                                fontSize: 14,
+                                marginLeft: 15,
+                                color: "transparent",
+                              }}
+                            >
+                              .
                             </p>
-                            </Grid.Column>
-                        )
+                          </Grid.Column>
+                        );
                     }
                 })}
             </Grid.Row>

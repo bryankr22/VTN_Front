@@ -13,7 +13,7 @@ export default function HeaderFicha() {
     return (
         <>
             <Container style={{ marginBottom: 10 }}>
-              <p>.</p>
+              <p>&nbsp;</p>
             </Container>
             {compareList.length > 0 &&
             <Container fluid 
