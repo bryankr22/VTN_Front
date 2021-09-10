@@ -146,7 +146,7 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
             </List.Item>
           </List>
         )}
-        {!params.marca && (
+        {!params.marca && !params.modelo && (
           <List link>
             <List.Item>
               <List.Content>
@@ -168,6 +168,38 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
                       as="a"
                       onClick={() =>
                         openModal("Marcas", contadores.marca, "marca")
+                      }
+                    >
+                      Ver Todos
+                    </List.Item>
+                  )}
+                </List.List>
+              </List.Content>
+            </List.Item>
+          </List>
+        )}
+        {!params.modelo && (
+          <List link>
+            <List.Item>
+              <List.Content>
+                <List.Header>
+                  <Header as="h5">Modelo</Header>
+                </List.Header>
+                <List.List style={{ paddingLeft: 15 }}>
+                  {mapping_contador(contadores.modelo).map((item, index) => (
+                    <List.Item
+                      key={index}
+                      as="a"
+                      onClick={() => insertParam("modelo", item.label)}
+                    >
+                      {item.label}
+                    </List.Item>
+                  ))}
+                  {handleRenderModal(contadores.modelo) && (
+                    <List.Item
+                      as="a"
+                      onClick={() =>
+                        openModal("Modelo", contadores.modelo, "modelo")
                       }
                     >
                       Ver Todos
@@ -217,7 +249,7 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
             </List.Item>
           </List>
         )}
-        {!params.caja && (
+        {!params.transmision && (
           <List link>
             <List.Item>
               <List.Content>
@@ -225,11 +257,11 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
                   <Header as="h5">Transmision</Header>
                 </List.Header>
                 <List.List style={{ paddingLeft: 15 }}>
-                  {mapping_contador(contadores.caja).map((item, index) => (
+                  {mapping_contador(contadores.transmision).map((item, index) => (
                     <List.Item
                       key={index}
                       as="a"
-                      onClick={() => insertParam("caja", item.label)}
+                      onClick={() => insertParam("transmision", item.label)}
                     >
                       {item.label}
                     </List.Item>

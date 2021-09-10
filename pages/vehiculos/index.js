@@ -107,7 +107,7 @@ export default function index({ data }) {
     )
 }
 export async function getServerSideProps({query}) {
-    const res = await axios.get('https://api.vendetunave.co/api/vehiculos', {
+    const res = await axios.get(`${API_URL}/vehiculos`, {
         params: {
             categoria: query.categoria,
             page: query.page,
