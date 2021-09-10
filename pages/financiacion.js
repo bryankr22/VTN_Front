@@ -4,13 +4,12 @@ import {
   Container,
   Header,
   Form,
-  Select,
   Button,
   Input,
-  Dimmer,
   Message,
 } from "semantic-ui-react";
 import Loader from "../components/Loader";
+import * as Format from './../helpers/format';
 
 import PublicLayout from "../layouts/PublicLayout";
 import axios from "axios";
@@ -36,15 +35,6 @@ const optionsRangos = [
   { key: "3", text: "5.000.000 en adelante", value: "3" },
 ];
 
-function parseLocaleNumber(stringNumber, locale) {
-    var thousandSeparator = Intl.NumberFormat(locale).format(11111).replace(/\p{Number}/gu, '');
-    var decimalSeparator = Intl.NumberFormat(locale).format(1.1).replace(/\p{Number}/gu, '');
-
-    return parseFloat(stringNumber
-        .replace(new RegExp('\\' + thousandSeparator, 'g'), '')
-        .replace(new RegExp('\\' + decimalSeparator), '.')
-    );
-}
 
 export default function financiacion() {
   const [selectValues, setSelectValues] = useState({});
@@ -78,9 +68,9 @@ export default function financiacion() {
     const selectKeysLen = Object.keys(selectValues).length;
 
     if (selectKeysLen < 3) {
-       setStatusMsg(false)
-       setMessage("Debes llenar todo el formulario para continuar");
-       return
+      setStatusMsg(false);
+      setMessage("Debes llenar todo el formulario para continuar");
+      return;
     }
 
     setMessage(undefined);
@@ -102,14 +92,14 @@ export default function financiacion() {
         if (result.data.status) {
           setStatusMsg(true);
           setMessage("Datos enviados exitosamente");
-          e.target?.reset?.()
+          e.target?.reset?.();
           setSelectValues({
-            cuotas: '',
-            datacredito: '',
-            salario: ''
-          })
-          setSelectValues({})
-          window.scrollTo({ top: 0, behavior: 'smooth' })
+            cuotas: "",
+            datacredito: "",
+            salario: "",
+          });
+          setSelectValues({});
+          window.scrollTo({ top: 0, behavior: "smooth" });
         }
         setIsLoading(false);
       })
@@ -119,20 +109,6 @@ export default function financiacion() {
         setIsLoading(false);
       });
   };
-
-  const handleChangeCurrency = (e) => {
-    let dollarUSLocale = Intl.NumberFormat('en-US');
-    const value = parseLocaleNumber(e.target.value, dollarUSLocale)
-    let valueFormat = dollarUSLocale.format(value)
-
-    if(valueFormat === 'NaN') {
-        const chars = e.target.value.split('');
-        e.target.value = chars.slice(0, chars.length - 1);
-        return
-    }
-
-    e.target.value = valueFormat
-}
 
   return (
     <PublicLayout>
@@ -148,7 +124,9 @@ export default function financiacion() {
           tratamiento de los datos suministrados en nuestro portal, con el
           compromiso de ser utilizados únicamente para este fin.
         </p>
-        {!!message && <Message error={!statusMsg} success={statusMsg} content={message} />}
+        {!!message && (
+          <Message error={!statusMsg} success={statusMsg} content={message} />
+        )}
 
         <Form onSubmit={handleSubmit}>
           <Form.Field>
@@ -184,11 +162,21 @@ export default function financiacion() {
           </Form.Field>
           <Form.Field>
             <label>¿Cuánto cuesta el carro que quieres?</label>
-            <Input name="cuanto_cuesta" type="text" required onChange={handleChangeCurrency} />
+            <Input
+              name="cuanto_cuesta"
+              type="text"
+              required
+              onChange={Format.toCurrency}
+            />
           </Form.Field>
           <Form.Field>
             <label>¿Cuánto dinero tienes para la cuota inicial?</label>
-            <Input name="cuota_inicial" type="text" required onChange={handleChangeCurrency}/>
+            <Input
+              name="cuota_inicial"
+              type="text"
+              required
+              onChange={Format.toCurrency}
+            />
           </Form.Field>
           <Form.Select
             label="Selecciona el número de cuotas en las que quieres pagarlo"
@@ -221,7 +209,9 @@ export default function financiacion() {
             NOTA: Si usted gana menos de 2 salarios mínimos no podemos procesar
             su solicitud de financiación.
           </div>
-          <Button color="blue" type="submit">ENVIAR</Button>
+          <Button color="blue" type="submit">
+            ENVIAR
+          </Button>
         </Form>
       </Container>
       <Loader isLoading={isLoading} />

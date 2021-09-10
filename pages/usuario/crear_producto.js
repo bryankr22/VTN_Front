@@ -1,6 +1,6 @@
 import React from 'react'
 import PublicLayout from '../../layouts/PublicLayout';
-import { Header, Container, Tab } from "semantic-ui-react";
+import { Container, Tab } from "semantic-ui-react";
 import { validateAuth } from '../../helpers/auth';
 import { panes } from '../../components/usuario/productoTabs';
 import axios from 'axios';

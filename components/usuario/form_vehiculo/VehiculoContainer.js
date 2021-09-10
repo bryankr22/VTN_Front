@@ -12,8 +12,8 @@ import { clearForm } from '../../../store/productoSlice';
 import { AUTH_URL } from "../../../helpers/constants";
 
 export default function VehiculoContainer({ data }) {
-    const dispacth = useDispatch();
-    const [cookies, setCookie] = useCookies(["vtn_token"]);
+    const dispatch = useDispatch();
+    const [cookies] = useCookies(["vtn_token"]);
     const [loading, setLoading] = useState(false);
     const [alert, setAlert] = useState({});
     const vehiculoRedux = useSelector(({ producto }) => producto.vehiculo);
@@ -137,7 +137,7 @@ export default function VehiculoContainer({ data }) {
 
             axios
                 .post(`${AUTH_URL}/vehicle_insert`, data, config)
-                .then((res) => {
+                .then(() => {
                     setAlert({
                         message: "Vehículo creado correctamente",
                         error: false,
@@ -150,7 +150,7 @@ export default function VehiculoContainer({ data }) {
                         location.replace("/usuario/mis_publicaciones");
                     }, 2000);
                 })
-                .catch((error) => {
+                .catch(() => {
                     setLoading(false);
                     setAlert({
                         message: "Ha ocurrido un error, intenta más tarde",
@@ -171,7 +171,7 @@ export default function VehiculoContainer({ data }) {
     };
 
     useEffect(() => {
-        dispacth(clearForm());
+        dispatch(clearForm());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
