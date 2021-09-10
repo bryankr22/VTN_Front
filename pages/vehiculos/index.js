@@ -10,6 +10,7 @@ import { Grid, Responsive } from "semantic-ui-react";
 import { useRouter } from 'next/router';
 
 import axios from 'axios';
+import { API_URL } from '../../helpers/constants';
 export default function index({ data }) {
     const router = useRouter();
     return (
@@ -107,7 +108,7 @@ export default function index({ data }) {
     )
 }
 export async function getServerSideProps({query}) {
-    const res = await axios.get('https://api.vendetunave.co/api/vehiculos', {
+    const res = await axios.get(`${API_URL}/vehiculos`, {
         params: {
             categoria: query.categoria,
             page: query.page,
