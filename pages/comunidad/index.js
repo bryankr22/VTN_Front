@@ -1,10 +1,46 @@
-import React, {Fragment} from 'react'
+import React, {Fragment, useState} from 'react'
 import Link from 'next/link';
 import PublicLayout from '../../layouts/PublicLayout';
-import { Container, Header, Grid, Input, Item, Label, Button, Responsive } from 'semantic-ui-react';
+import { Container, Header, Grid, Input, Item, Label, Button, Responsive, Pagination } from 'semantic-ui-react';
 import axios from 'axios';
 import { API_URL, comunidad_api } from '../../helpers/constants';
-export default function index({preguntas, tags}) {
+export default function index({q, page, preguntas, tags, total_records}) {
+    const [query, setQuery] = useState(q);
+
+    const insertParam = (key, value) => {
+        key = encodeURIComponent(key);
+        value = encodeURIComponent(value);
+        var kvp = document.location.search.substr(1).split('&');
+        let i=0;
+        for(; i<kvp.length; i++){
+            if (kvp[i].startsWith(key + '=')) {
+                let pair = kvp[i].split('=');
+                pair[1] = value;
+                kvp[i] = pair.join('=');
+                break;
+            }
+        }
+        if(i >= kvp.length){
+            kvp[kvp.length] = [key,value].join('=');
+        }
+        let params = kvp.join('&');
+        if (key === 'q') params = params.replace(`page=${page}`, "page=1")
+        document.location.search = params;
+    }
+    const handlePaginationChange = (e, { activePage }) => {
+        insertParam('page', activePage);
+    }
+
+    const handleKeyDown = (e) => {
+        if (e.keyCode === 13) {
+            handleSearch();
+        }      
+    };
+
+    const handleSearch = () => {
+        insertParam('q', query);
+    }
+
     return (
         <PublicLayout>
             <Container style={{ paddingTop: 25 }} text>
@@ -57,7 +93,10 @@ export default function index({preguntas, tags}) {
                             <Grid.Column>
                                 <Input 
                                 style={{ width: '100%' }} 
-                                action={{ icon: 'search', onClick: () => console.log("") }}
+                                onChange={(e, {value})=> setQuery(value)}
+                                onKeyDown={(e) => handleKeyDown(e)}
+                                action={{ icon: 'search', onClick: () => handleSearch() }}
+                                value={query}
                                 placeholder='Buscar...' />
                             </Grid.Column>
                         </Grid.Row>
@@ -83,7 +122,10 @@ export default function index({preguntas, tags}) {
                             <Grid.Column>
                                 <Input
                                 style={{ width: '100%' }} 
-                                action={{ icon: 'search', onClick: () => console.log("") }}
+                                onChange={(e, {value})=> setQuery(value)}
+                                onKeyDown={(e) => handleKeyDown(e)}
+                                action={{ icon: 'search', onClick: () => handleSearch() }}
+                                value={query}
                                 placeholder='Buscar...' />
                             </Grid.Column>
                         </Grid.Row>
@@ -95,7 +137,10 @@ export default function index({preguntas, tags}) {
                             <Grid.Column>
                                 <Input 
                                 style={{ width: '100%' }} 
-                                action={{ icon: 'search', onClick: () => console.log("") }}
+                                onChange={(e, {value})=> setQuery(value)}
+                                onKeyDown={(e) => handleKeyDown(e)}
+                                action={{ icon: 'search', onClick: () => handleSearch() }}
+                                value={query}
                                 placeholder='Buscar...' />
                             </Grid.Column>
                             <Grid.Column>
@@ -165,34 +210,44 @@ export default function index({preguntas, tags}) {
                     </Item>
                     )}
                 </Item.Group>
-                {/**Math.ceil((this.state.questionsTotal) / 10) > 1 &&
+                {Math.ceil((total_records) / 10) > 1 &&
                     <Container fluid style={{ textAlign: 'center', margin: 25 }}>
                         <Pagination
                             pointing
                             secondary
                             boundaryRange={0}
-                            activePage={this.state.activePage}
+                            activePage={parseInt(page)}
                             ellipsisItem={null}
                             firstItem={null}
                             lastItem={null}
                             siblingRange={2}
-                            onPageChange={this.handlePaginationChange}
-                            totalPages={Math.ceil((this.state.questionsTotal) / 10)}
+                            onPageChange={handlePaginationChange}
+                            totalPages={Math.ceil((total_records) / 10)}
                         />
                     </Container>
-                **/}
+                }
             </Container>
         </PublicLayout>
     )
 }
-export async function getServerSideProps() {
-    const res = await axios.get(API_URL + comunidad_api);
+export async function getServerSideProps({query}) {
+    const res = await axios.get(API_URL + comunidad_api, {
+        params: {
+            ...query
+        }
+    });
+    const q = await res.data.q;
+    const page = await res.data.page;
     const preguntas = await res.data.preguntas;
     const tags = await res.data.tags;
+    const total_records = await res.data.total_records;
     return {
         props: {
+            q,
+            page,
             preguntas,
-            tags
+            tags,
+            total_records
         }
     }
 }
