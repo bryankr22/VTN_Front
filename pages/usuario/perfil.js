@@ -45,6 +45,7 @@ export default function perfil() {
   const [password, setPassword] = useState({
     old_password: "",
     new_password: "",
+    confirm_password: "",
   });
   const options_sex = [
     { key: 1, text: "Masculino", value: 1 },
@@ -75,6 +76,15 @@ export default function perfil() {
     setUsuario({ ...usuario, cambiarImage: 0, file: undefined, newImage: undefined });
   };
   const updateProfile = () => {
+    if (password.confirm_password !== password.new_password) {
+      setAlert({
+        message: "Nueva contraseña y confirmar contraseña no coinciden",
+        error: true,
+        success: false,
+      });
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
     setLoading(true);
     const cookie = cookies.vtn_token;
     const decoded = jwt.verify(cookie, "vendetunave2021");
@@ -86,19 +96,25 @@ export default function perfil() {
       },
     };
     const { imagePredeter, status, ...data } = usuario;
+    const dataForm = {
+      ...data,
+      ...password
+    }
     const form = new FormData();
 
-    Object.keys(data).forEach(key => form.append(key, data[key]))
+    Object.keys(dataForm).forEach(key => form.append(key, dataForm[key]))
     form.append('user_id', user_id);
+    console.log(dataForm)
 
     axios
       .post(AUTH_URL + perfil_update, form, config)
-      .then((res) => {
+      .then(({ data }) => {
         // location.reload();
+        const { message, state } = data;
         setAlert({
-          message: "Datos actualizados correctamente",
-          error: false,
-          success: true,
+          message: message,
+          error: !state,
+          success: state,
         });
         window.scrollTo({ top: 0, behavior: "smooth" });
         setLoading(false);
@@ -400,7 +416,13 @@ export default function perfil() {
             <label>
               Nueva contraseña (déjala en blanco para que no haya cambios)
             </label>
-            <Input type="password" name="passNew" />
+            <Input 
+              type="password" 
+              name="passNew"
+              onChange={(e, { value }) =>
+                setPassword({ ...password, new_password: value })
+              }
+            />
           </Form.Field>
           <Form.Field>
             <label>Confirmar nueva contraseña</label>
@@ -408,7 +430,7 @@ export default function perfil() {
               type="password"
               name="confirmPassNew"
               onChange={(e, { value }) =>
-                setPassword({ ...password, new_password: value })
+                setPassword({ ...password, confirm_password: value })
               }
             />
           </Form.Field>
