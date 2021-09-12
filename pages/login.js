@@ -23,9 +23,8 @@ export default function login(props) {
     const [error, setError] = useState(false);
     const [errorRegister, setErrorRegister] = useState(false);
     
-    const sendLogin = () => {
+    const sendLogin = (register = false, email = login.email, password = login.password) => {
         setLoading(true);
-        const {email, password} = login;
         axios.post(AUTH_URL + login_api, { email, password }).then((res) => {
             const token = jwt.sign(res.data, 'vendetunave2021');
             setCookie('vtn_token', token, {
@@ -33,7 +32,7 @@ export default function login(props) {
                 maxAge: 3600,
                 sameSite: true
             });
-            router.push('/');
+            router.push(register ? '/usuario/perfil' : '/');
             //console.log(">>>>", res.data);
             setLoading(false);
         }).catch(error => {
@@ -43,16 +42,9 @@ export default function login(props) {
     }
     const sendRegister = () => {
         setLoading(true);
+
         axios.post(AUTH_URL + register_api, { ...register }).then((res) => {
-            /**const token = jwt.sign(res.data, 'vendetunave2021');
-            setCookie('vtn_token', token, {
-                path: "/",
-                maxAge: 3600,
-                sameSite: true
-            });**/
-            //router.push('/usuario/perfil');
-            //console.log(">>>>", res.data);
-            setLoading(false);
+            sendLogin(true, register.email, register.password);
         }).catch(error => {
             setErrorRegister(true);
             setLoading(false);
