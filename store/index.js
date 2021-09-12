@@ -8,12 +8,14 @@ import homeSlice from './homeSlice';
 import comparadorSlice from './comparadorSlice';
 import authSlice from './authSlice';
 import productoSlice from './productoSlice';
+import accesorioSlice from './accesorioSlice';
 
 const reducers = combineReducers({
     home: homeSlice,
     comparador: comparadorSlice,
     auth: authSlice,
-    producto: productoSlice
+    producto: productoSlice,
+    accesorio: accesorioSlice
 });
 const persistConfig = {
     key: 'root',
