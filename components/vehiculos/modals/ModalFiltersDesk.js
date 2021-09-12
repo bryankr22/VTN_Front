@@ -1,4 +1,4 @@
-import React, {Children} from 'react'
+import React from 'react'
 import { List, Modal } from "semantic-ui-react";
 
 /**

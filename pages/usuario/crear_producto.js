@@ -5,10 +5,11 @@ import { validateAuth } from '../../helpers/auth';
 import { panes } from '../../components/usuario/productoTabs';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
+
 export default function crear_producto({ data }) {
     return (
         <PublicLayout>
-            <Container style={{ paddingTop: 25 }} text>
+            <Container style={{ paddingTop: 25 }} text id="crear-producto">
                 <Tab panes={panes(data)} />
             </Container>
         </PublicLayout>

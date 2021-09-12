@@ -10,7 +10,7 @@ function parseLocaleNumber(stringNumber, locale) {
 }
 
 export const toCurrency = (e) => {
-  let dollarUSLocale = Intl.NumberFormat("en-US");
+  let dollarUSLocale = Intl.NumberFormat("es-ES");
   const value = parseLocaleNumber(e.target.value, dollarUSLocale);
   let valueFormat = dollarUSLocale.format(value);
 

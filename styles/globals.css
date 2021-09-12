@@ -401,3 +401,5 @@
 .bg-black {
   background-color: #000;
 }
+
+@import url('./CrearProducto.css');

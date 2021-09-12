@@ -49,6 +49,7 @@ export default function AccesorioContainer({data}) {
                     <label>Agrega una o más fotos (Máximo 5 fotos)*</label>
                     <FotosContainer />
                 </Form.Field>
+                <FormContainer data={data} />
                 <Button
                 style={{ marginBottom: 10 }}
                 color="blue"
@@ -79,6 +80,8 @@ export default function AccesorioContainer({data}) {
                     <label>Agrega una o más fotos (Máximo 5 fotos)*</label>
                     <FotosContainer />
                 </Form.Field>
+                <FormContainer data={data} />
+
                 <Button
                 style={{ marginBottom: 10 }}
                 color="blue"
