@@ -3,13 +3,9 @@ import {
   Container,
   Input,
   List,
-  Modal,
   Grid,
-  Checkbox,
   Header,
   Button,
-  Label,
-  Icon,
 } from "semantic-ui-react";
 import { groupByAlphabet, groupByDecade } from "../../helpers/dataStructure";
 import ActiveTagsVehiculos from "./ActiveTagsVehiculos";
@@ -124,7 +120,6 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
         <ActiveTagsVehiculos tags={params} />
       </Container>
       <Container>
-        {!params.tipo && (
           <List link>
             <List.Item>
               <List.Content>
@@ -137,6 +132,9 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
                       key={index}
                       as="a"
                       onClick={() => insertParam("tipo", item.id)}
+                      style={{
+                        color: params.tipo == item.id && '#2185d0'
+                      }}
                     >
                       {item.nombre}
                     </List.Item>
@@ -145,8 +143,6 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
               </List.Content>
             </List.Item>
           </List>
-        )}
-        {!params.marca && !params.modelo && (
           <List link>
             <List.Item>
               <List.Content>
@@ -159,6 +155,9 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
                       key={index}
                       as="a"
                       onClick={() => insertParam("marca", item.label)}
+                      style={{
+                        color: params.marca == item.label && '#2185d0'
+                      }}
                     >
                       {item.label}
                     </List.Item>
@@ -177,8 +176,7 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
               </List.Content>
             </List.Item>
           </List>
-        )}
-        {!params.modelo && (
+
           <List link>
             <List.Item>
               <List.Content>
@@ -191,6 +189,9 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
                       key={index}
                       as="a"
                       onClick={() => insertParam("modelo", item.label)}
+                      style={{
+                        color: params.modelo == item.label && '#2185d0'
+                      }}
                     >
                       {item.label}
                     </List.Item>
@@ -209,8 +210,7 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
               </List.Content>
             </List.Item>
           </List>
-        )}
-        {!params.combustible && (
+
           <List link>
             <List.Item>
               <List.Content>
@@ -224,6 +224,9 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
                         key={index}
                         as="a"
                         onClick={() => insertParam("combustible", item.label)}
+                        style={{
+                          color: params.combustible == item.label && '#2185d0'
+                        }}
                       >
                         {item.label}
                       </List.Item>
@@ -248,8 +251,6 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
               </List.Content>
             </List.Item>
           </List>
-        )}
-        {!params.transmision && (
           <List link>
             <List.Item>
               <List.Content>
@@ -262,6 +263,9 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
                       key={index}
                       as="a"
                       onClick={() => insertParam("transmision", item.label)}
+                      style={{
+                        color: params.transmision == item. label && '#2185d0'
+                      }}
                     >
                       {item.label}
                     </List.Item>
@@ -270,8 +274,6 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
               </List.Content>
             </List.Item>
           </List>
-        )}
-        {!params.precio && (
           <>
             <List link style={{ marginBottom: 0 }}>
               <List.Item style={{ marginBottom: 0 }}>
@@ -285,6 +287,9 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
                         key={index}
                         as="a"
                         onClick={() => insertParam("precio", item.slug)}
+                        style={{
+                        color: params.precio == item.slug && '#2185d0'
+                      }}
                       >
                         {item.label}
                       </List.Item>
@@ -305,7 +310,6 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
               </div>
             </div>
           </>
-        )}
       </Container>
       {modalAll && (
         <ModalFiltersDesk
