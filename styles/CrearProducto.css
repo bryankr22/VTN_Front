@@ -1,0 +1,13 @@
+div[name="tipo_precio_vehiculo"].ui.selection.dropdown {
+  min-width: max-content !important;
+}
+
+@media screen and (max-width: 360px) {
+  div[name="tipo_precio_vehiculo"].ui.selection.dropdown {
+    min-width: unset !important;
+  }
+
+  .dzu-inputLabel {
+    font-size: 100% !important;
+  }
+}

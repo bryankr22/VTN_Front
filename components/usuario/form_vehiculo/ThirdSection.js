@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { updateVehiculo } from '../../../store/productoSlice';
 import { API_URL } from '../../../helpers/constants';
+import { toCurrency } from '../../../helpers/format';
 
 export default function ThirdSection({ estado_vehiculo, data }) {
     const dispatch = useDispatch();
@@ -70,7 +71,8 @@ export default function ThirdSection({ estado_vehiculo, data }) {
                 <label>CONTACTO *</label>
                 <Form.Input
                     name="contacto_vehiculo"
-                    type="text"
+                    type="number"
+                    min="0"
                     placeholder="Número de contacto"
                     onChange={(e, { value }) => dispatch(updateVehiculo({ input: 'contacto_vehiculo', value }))}
                 />
@@ -91,7 +93,10 @@ export default function ThirdSection({ estado_vehiculo, data }) {
                         name="precio_vehiculo"
                         type="text"
                         placeholder="$"
-                        onChange={(e, { value }) => dispatch(updateVehiculo({ input: 'precio_vehiculo', value }))}
+                        onChange={(e, { value }) => {
+                            value = toCurrency(e)
+                            dispatch(updateVehiculo({ input: 'precio_vehiculo', value }))
+                        }}
                     />
                     <Select
                         name="tipo_precio_vehiculo"
@@ -144,7 +149,8 @@ export default function ThirdSection({ estado_vehiculo, data }) {
                 <label>KILOMETRAJE *</label>
                 <Input
                     name="kilometraje_vehiculo"
-                    type="text"
+                    type="number"
+                    min="0"
                     placeholder="Km"
                     onChange={(e, { value }) => dispatch(updateVehiculo({ input: 'kilometraje_vehiculo', value }))}
                 />
@@ -153,7 +159,8 @@ export default function ThirdSection({ estado_vehiculo, data }) {
                 <label>CILINDRAJE *</label>
                 <Input
                     name="cilindraje_vehiculo"
-                    type="text"
+                    type="number"
+                    min="0"
                     placeholder="Cilindraje"
                     onChange={(e, { value }) => dispatch(updateVehiculo({ input: 'cilindraje_vehiculo', value }))}
                 />

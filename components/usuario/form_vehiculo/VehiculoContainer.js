@@ -12,8 +12,8 @@ import { clearForm } from '../../../store/productoSlice';
 import { AUTH_URL } from "../../../helpers/constants";
 
 export default function VehiculoContainer({ data }) {
-    const dispacth = useDispatch();
-    const [cookies, setCookie] = useCookies(["vtn_token"]);
+    const dispatch = useDispatch();
+    const [cookies] = useCookies(["vtn_token"]);
     const [loading, setLoading] = useState(false);
     const [alert, setAlert] = useState({});
     const vehiculoRedux = useSelector(({ producto }) => producto.vehiculo);
@@ -137,7 +137,7 @@ export default function VehiculoContainer({ data }) {
 
             axios
                 .post(`${AUTH_URL}/vehicle_insert`, data, config)
-                .then((res) => {
+                .then(() => {
                     setAlert({
                         message: "Vehículo creado correctamente",
                         error: false,
@@ -150,7 +150,7 @@ export default function VehiculoContainer({ data }) {
                         location.replace("/usuario/mis_publicaciones");
                     }, 2000);
                 })
-                .catch((error) => {
+                .catch(() => {
                     setLoading(false);
                     setAlert({
                         message: "Ha ocurrido un error, intenta más tarde",
@@ -171,7 +171,7 @@ export default function VehiculoContainer({ data }) {
     };
 
     useEffect(() => {
-        dispacth(clearForm());
+        dispatch(clearForm());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -216,13 +216,51 @@ export default function VehiculoContainer({ data }) {
                 <FirstSection data={data} />
                 <Form.Field style={{ marginTop: 20 }}>
                     <label>Agrega una o más fotos (Mínimo 5 fotos)*</label>
+                    <SecondSection />
                 </Form.Field>
+                <ThirdSection data={data} />
+                <Button
+                    style={{ marginBottom: 10 }}
+                    color="blue"
+                    type="submit"
+                    onClick={publicVehicle}
+                >
+                    PUBLICAR
+                </Button>
+                <br />
+                <a
+                    href="/terminos-y-condiciones"
+                    target="_blank"
+                    style={{ color: "#828282" }}
+                >
+                    Al publicar un aviso, admites y aceptas los Términos y
+                    Condiciones de VENDETUNAVE.CO
+                </a>
             </Responsive>
             <Responsive {...Responsive.onlyTablet}>
                 <FirstSection data={data} />
                 <Form.Field style={{ marginTop: 20 }}>
                     <label>Agrega una o más fotos (Mínimo 5 fotos)*</label>
+                    <SecondSection />
                 </Form.Field>
+                <ThirdSection data={data} />
+                <Button
+                    style={{ marginBottom: 10 }}
+                    color="blue"
+                    type="submit"
+                    onClick={publicVehicle}
+                >
+                    PUBLICAR
+                </Button>
+                <br />
+                <a
+                    href="/terminos-y-condiciones"
+                    target="_blank"
+                    style={{ color: "#828282" }}
+                >
+                    Al publicar un aviso, admites y aceptas los Términos y
+                    Condiciones de VENDETUNAVE.CO
+                </a>
             </Responsive>
         </Form>
     )
