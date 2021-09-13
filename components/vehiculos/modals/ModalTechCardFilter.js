@@ -34,7 +34,7 @@ export default function ModalTechCardFilter({
   filtros,
   params,
 }) {
-  const mapping_contador = (contador, canWatchAll = true) => {
+  const mapping_contador = (contador = {}, canWatchAll = true) => {
     var mapItems = Object.keys(contador).map((item, index) => {
       return {
         label: item,
@@ -84,7 +84,7 @@ export default function ModalTechCardFilter({
     {
       text: "Transmisión",
       open: false,
-      values: mapping_contador(filtros.caja, false),
+      values: mapping_contador(filtros.transmision, false),
       slug: "transmision",
       component: false,
     },
@@ -185,10 +185,10 @@ export default function ModalTechCardFilter({
                       </Accordion.Title>
                       <Accordion.Content active={item.open}>
                         <Grid.Column>
-                          <List>
+                          <List link>
                             <List.Item>
                               <List.Content>
-                                <List.List style={{ paddingLeft: 15 }}>
+                                <List.List style={{ paddingLeft: 15 }} link>
                                   {item.values.map(
                                     (itemSecond, indexSecond) => (
                                       <List.Item
@@ -197,7 +197,7 @@ export default function ModalTechCardFilter({
                                         style={{
                                           padding: "7px 0px",
                                           borderBottom: "1px solid #cccccc",
-                                          color: "#2185d0",
+                                          color: itemSecond?.slug === params[item.slug] ? "#2185d0" : undefined,
                                         }}
                                         onClick={() => {
                                           console.log(itemSecond, item)
