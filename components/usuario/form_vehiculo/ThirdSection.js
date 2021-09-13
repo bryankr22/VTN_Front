@@ -149,20 +149,25 @@ export default function ThirdSection({ estado_vehiculo, data }) {
                 <label>KILOMETRAJE *</label>
                 <Input
                     name="kilometraje_vehiculo"
-                    type="number"
                     min="0"
                     placeholder="Km"
-                    onChange={(e, { value }) => dispatch(updateVehiculo({ input: 'kilometraje_vehiculo', value }))}
+                    onChange={(e, { value }) => {
+                        value = toCurrency(e)
+                        console.log(value)
+                        dispatch(updateVehiculo({ input: 'kilometraje_vehiculo', value }))
+                    }}
                 />
             </Form.Field>
             <Form.Field>
                 <label>CILINDRAJE *</label>
                 <Input
                     name="cilindraje_vehiculo"
-                    type="number"
                     min="0"
                     placeholder="Cilindraje"
-                    onChange={(e, { value }) => dispatch(updateVehiculo({ input: 'cilindraje_vehiculo', value }))}
+                    onChange={(e, { value }) => {
+                        value = toCurrency(e)
+                        dispatch(updateVehiculo({ input: 'cilindraje_vehiculo', value }))
+                    }}
                 />
             </Form.Field>
             <Form.Field>
