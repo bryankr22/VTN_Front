@@ -23,9 +23,8 @@ export default function login(props) {
     const [error, setError] = useState(false);
     const [errorRegister, setErrorRegister] = useState(false);
     
-    const sendLogin = () => {
+    const sendLogin = (register = false, email = login.email, password = login.password) => {
         setLoading(true);
-        const {email, password} = login;
         axios.post(AUTH_URL + login_api, { email, password }).then((res) => {
             const token = jwt.sign(res.data, 'vendetunave2021');
             setCookie('vtn_token', token, {
@@ -33,7 +32,7 @@ export default function login(props) {
                 maxAge: 3600,
                 sameSite: true
             });
-            router.push('/');
+            router.push(register ? '/usuario/perfil' : '/');
             //console.log(">>>>", res.data);
             setLoading(false);
         }).catch(error => {
@@ -43,16 +42,9 @@ export default function login(props) {
     }
     const sendRegister = () => {
         setLoading(true);
+
         axios.post(AUTH_URL + register_api, { ...register }).then((res) => {
-            /**const token = jwt.sign(res.data, 'vendetunave2021');
-            setCookie('vtn_token', token, {
-                path: "/",
-                maxAge: 3600,
-                sameSite: true
-            });**/
-            //router.push('/usuario/perfil');
-            //console.log(">>>>", res.data);
-            setLoading(false);
+            sendLogin(true, register.email, register.password);
         }).catch(error => {
             setErrorRegister(true);
             setLoading(false);
@@ -220,11 +212,20 @@ export default function login(props) {
 
             <Divider horizontal>Ó</Divider>
 
-            <Form>
+            <Form onSubmit={() => sendRegister()} error={errorRegister}>
+              <Message
+                error
+                header="Error Registro"
+                content="El correo ya existe o Falta algun dato, intentelo de nuevo."
+              />
               <Form.Field>
                 <Header as="h2">REGISTRARSE</Header>
                 <label>Nombre</label>
-                <Input name="nombre_register" placeholder="Nombre" />
+                <Input 
+                  name="nombre_register" 
+                  placeholder="Nombre" 
+                  onChange={(e) => updateRegistro("nombre", e.target.value)}  
+                />
               </Form.Field>
               <Form.Field>
                 <label>Correo electrónico</label>
@@ -232,6 +233,8 @@ export default function login(props) {
                   name="email_register"
                   placeholder="Correo electrónico"
                   id="email_register"
+                  onChange={(e) => updateRegistro("email", e.target.value)}
+                  
                 />
               </Form.Field>
               <Form.Field>
@@ -240,10 +243,18 @@ export default function login(props) {
                   name="pass_register"
                   type="password"
                   placeholder="Contraseña"
+                  onChange={(e) =>
+                    updateRegistro("password", e.target.value)
+                  }
                 />
               </Form.Field>
               <Form.Field>
-                <Checkbox label="Subscribirse al newsletter" />
+                <Checkbox 
+                  label="Subscribirse al newsletter" 
+                  onChange={(e) =>
+                    updateRegistro("remember", !register.remember)
+                  }  
+                />
               </Form.Field>
               <Button secondary>REGISTRARSE</Button>
             </Form>
@@ -287,11 +298,21 @@ export default function login(props) {
 
             <Divider horizontal>Ó</Divider>
 
-            <Form>
+            <Form onSubmit={() => sendRegister()} error={errorRegister}>
+              <Message
+                error
+                header="Error Registro"
+                content="El correo ya existe o Falta algun dato, intentelo de nuevo."
+              />
+              
               <Form.Field>
                 <Header as="h2">REGISTRARSE</Header>
                 <label>Nombre</label>
-                <Input name="nombre_register" placeholder="Nombre" />
+                <Input 
+                  name="nombre_register" 
+                  placeholder="Nombre" 
+                  onChange={(e) => updateRegistro("nombre", e.target.value)}  
+                />
               </Form.Field>
               <Form.Field>
                 <label>Correo electrónico</label>
@@ -299,6 +320,7 @@ export default function login(props) {
                   name="email_register"
                   placeholder="Correo electrónico"
                   id="email_register"
+                  onChange={(e) => updateRegistro("email", e.target.value)}
                 />
               </Form.Field>
               <Form.Field>
@@ -307,10 +329,18 @@ export default function login(props) {
                   name="pass_register"
                   type="password"
                   placeholder="Contraseña"
+                  onChange={(e) =>
+                    updateRegistro("password", e.target.value)
+                  }
                 />
               </Form.Field>
               <Form.Field>
-                <Checkbox label="Subscribirse al newsletter" />
+                <Checkbox 
+                  label="Subscribirse al newsletter" 
+                  onChange={(e) =>
+                    updateRegistro("remember", !register.remember)
+                  }
+                />
               </Form.Field>
               <Button secondary>REGISTRARSE</Button>
             </Form>
