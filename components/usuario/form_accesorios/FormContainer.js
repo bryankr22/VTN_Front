@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import { updateAccesorio } from '../../../store/accesorioSlice';
 import { API_URL } from '../../../helpers/constants';
+import { toCurrency } from '../../../helpers/format';
 
 export default function FormContainer({ data }) {
   const dispatch = useDispatch();
@@ -66,7 +67,10 @@ export default function FormContainer({ data }) {
             name="precio_acc"
             type="text"
             placeholder="$"
-            onChange={(e, { value }) => dispatch(updateAccesorio({ input: 'precio', value }))}
+            onChange={(e, { value }) => {
+              value = toCurrency(e)
+              dispatch(updateAccesorio({ input: 'precio', value }))
+            }}
           />
           <Select
             name="tipoPrecioAcc"

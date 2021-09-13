@@ -1,9 +1,11 @@
-div[name="tipo_precio_vehiculo"].ui.selection.dropdown {
+div[name="tipo_precio_vehiculo"].ui.selection.dropdown,
+div[name="tipoPrecioAcc"].ui.selection.dropdown {
   min-width: max-content !important;
 }
 
 @media screen and (max-width: 360px) {
-  div[name="tipo_precio_vehiculo"].ui.selection.dropdown {
+  div[name="tipo_precio_vehiculo"].ui.selection.dropdown,
+  div[name="tipoPrecioAcc"].ui.selection.dropdown {
     min-width: unset !important;
   }
 
