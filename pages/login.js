@@ -304,6 +304,7 @@ export default function login(props) {
                 header="Error Registro"
                 content="El correo ya existe o Falta algun dato, intentelo de nuevo."
               />
+              
               <Form.Field>
                 <Header as="h2">REGISTRARSE</Header>
                 <label>Nombre</label>
