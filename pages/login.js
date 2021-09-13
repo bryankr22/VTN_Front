@@ -212,11 +212,20 @@ export default function login(props) {
 
             <Divider horizontal>Ó</Divider>
 
-            <Form>
+            <Form onSubmit={() => sendRegister()} error={errorRegister}>
+              <Message
+                error
+                header="Error Registro"
+                content="El correo ya existe o Falta algun dato, intentelo de nuevo."
+              />
               <Form.Field>
                 <Header as="h2">REGISTRARSE</Header>
                 <label>Nombre</label>
-                <Input name="nombre_register" placeholder="Nombre" />
+                <Input 
+                  name="nombre_register" 
+                  placeholder="Nombre" 
+                  onChange={(e) => updateRegistro("nombre", e.target.value)}  
+                />
               </Form.Field>
               <Form.Field>
                 <label>Correo electrónico</label>
@@ -224,6 +233,8 @@ export default function login(props) {
                   name="email_register"
                   placeholder="Correo electrónico"
                   id="email_register"
+                  onChange={(e) => updateRegistro("email", e.target.value)}
+                  
                 />
               </Form.Field>
               <Form.Field>
@@ -232,10 +243,18 @@ export default function login(props) {
                   name="pass_register"
                   type="password"
                   placeholder="Contraseña"
+                  onChange={(e) =>
+                    updateRegistro("password", e.target.value)
+                  }
                 />
               </Form.Field>
               <Form.Field>
-                <Checkbox label="Subscribirse al newsletter" />
+                <Checkbox 
+                  label="Subscribirse al newsletter" 
+                  onChange={(e) =>
+                    updateRegistro("remember", !register.remember)
+                  }  
+                />
               </Form.Field>
               <Button secondary>REGISTRARSE</Button>
             </Form>
@@ -279,11 +298,20 @@ export default function login(props) {
 
             <Divider horizontal>Ó</Divider>
 
-            <Form>
+            <Form onSubmit={() => sendRegister()} error={errorRegister}>
+              <Message
+                error
+                header="Error Registro"
+                content="El correo ya existe o Falta algun dato, intentelo de nuevo."
+              />
               <Form.Field>
                 <Header as="h2">REGISTRARSE</Header>
                 <label>Nombre</label>
-                <Input name="nombre_register" placeholder="Nombre" />
+                <Input 
+                  name="nombre_register" 
+                  placeholder="Nombre" 
+                  onChange={(e) => updateRegistro("nombre", e.target.value)}  
+                />
               </Form.Field>
               <Form.Field>
                 <label>Correo electrónico</label>
@@ -291,6 +319,7 @@ export default function login(props) {
                   name="email_register"
                   placeholder="Correo electrónico"
                   id="email_register"
+                  onChange={(e) => updateRegistro("email", e.target.value)}
                 />
               </Form.Field>
               <Form.Field>
@@ -299,10 +328,18 @@ export default function login(props) {
                   name="pass_register"
                   type="password"
                   placeholder="Contraseña"
+                  onChange={(e) =>
+                    updateRegistro("password", e.target.value)
+                  }
                 />
               </Form.Field>
               <Form.Field>
-                <Checkbox label="Subscribirse al newsletter" />
+                <Checkbox 
+                  label="Subscribirse al newsletter" 
+                  onChange={(e) =>
+                    updateRegistro("remember", !register.remember)
+                  }
+                />
               </Form.Field>
               <Button secondary>REGISTRARSE</Button>
             </Form>
