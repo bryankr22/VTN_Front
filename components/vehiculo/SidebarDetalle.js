@@ -28,7 +28,8 @@ export default function SidebarDetalle({ vehiculo, vehicleFav }) {
             //setCompare('0');
         }
         window.location.href = '/vehiculos';
-        localStorage.setItem('compareVehiculos', '1')
+        localStorage.setItem("compareVehiculos", "1");
+        localStorage.setItem("isComparing", "1");
         return;
     }
     const [loading, setLoading] = useState(false);

@@ -25,6 +25,7 @@ export default function comparar_vehiculos() {
     if (confirm(message)) {
       dispatch(restartVehiculo());
       localStorage.setItem("compareVehiculos", "1");
+      localStorage.setItem("isComparing", "1");
       window.location.href = "/vehiculos";
     }
   };
