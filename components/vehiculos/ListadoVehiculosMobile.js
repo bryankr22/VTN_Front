@@ -8,6 +8,7 @@ export default function ListadoVehiculosMobile({ params, vehiculos, page, totalR
     const compareList = useSelector(({ comparador }) => comparador.vehiculos);
     const dispatch = useDispatch();
     const [compare, setCompare] = useLocalStorage("compareVehiculos", '0');
+    const [isComparing, setIsComparing] = useLocalStorage("isComparing", '0');
     const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/200x200/vendetunave/images/vehiculos/";
     const normalize = (function () {
         var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
@@ -56,14 +57,14 @@ export default function ListadoVehiculosMobile({ params, vehiculos, page, totalR
         //console.log(">>>>", item);
         if(compareList.length < 3){
             dispatch(addVehiculo(item))
+            setIsComparing('0')
         }else{
             setCompare('0');
         }
         return;
     }
-
     useEffect(() => {
-        if(compareList.length <= 0) {
+        if(compareList.length <= 0 && isComparing == '0') {
             setCompare('0')
         }
     }, [compareList])

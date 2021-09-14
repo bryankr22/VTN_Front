@@ -9,6 +9,7 @@ export default function ListadoFichas({params, vehiculos, page, totalRecords}) {
     const compareList = useSelector(({ comparador }) => comparador.fichas);
     const dispatch = useDispatch();
     const [compare, setCompare] = useLocalStorage("compareFichatecnica", '0');
+    const [isComparing, setIsComparing] = useLocalStorage("isComparing", '0');
     const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x300/vendetunave/images/ficha-tecnica/";
     const filter = [
         { key: 0, value: 0, text: "Más reciente" },
@@ -66,6 +67,7 @@ export default function ListadoFichas({params, vehiculos, page, totalRecords}) {
     const addComparar = (item) => {
         if(compareList.length < 3){
             dispatch(addFicha(item))
+            setIsComparing('0')
         }else{
             setCompare('0');
         }
@@ -86,9 +88,9 @@ export default function ListadoFichas({params, vehiculos, page, totalRecords}) {
     }, [])
 
     useEffect(() => {
-      if(compareList.length <= 0) {
-          setCompare('0')
-      }
+      if(compareList.length <= 0 && isComparing == '0') {
+        setCompare('0')
+    }
   }, [compareList])
     //useEffect
     return (
