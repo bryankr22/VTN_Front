@@ -4,25 +4,38 @@ import { groupByAlphabet, groupByDecade } from '../../../helpers/dataStructure';
 import ModalFiltersDesk from "./ModalFiltersDesk";
 
 export default function MarcaModeloComponent({ filtros, params }) {
-  const insertParam = (key, value) => {
-    key = encodeURIComponent(key);
-    value = encodeURIComponent(value);
-    var kvp = document.location.search.substr(1).split("&");
-    let i = 0;
-    for (; i < kvp.length; i++) {
-      if (kvp[i].startsWith(key + "=")) {
-        let pair = kvp[i].split("=");
-        pair[1] = value;
-        kvp[i] = pair.join("=");
-        break;
-      }
+  const insertParam = (key, value, reset, persist) => {
+    var kvp = document.location.search.substr(1).split('&');
+    let i=0;
+    for(; i<kvp.length; i++){
+        if (kvp[i].startsWith(key + '=')) {
+            let pair = kvp[i].split('=');
+            pair[1] = value;
+            kvp[i] = pair.join('=');
+            break;
+        }
     }
-    if (i >= kvp.length) {
-      kvp[kvp.length] = [key, value].join("=");
+    if(i >= kvp.length){
+        kvp[kvp.length] = [key,value].join('=');
     }
-    let params = kvp.join("&");
+    let params = kvp.join('&');
+    if (reset) {
+        if(persist) {
+            const url = new URL(location.href);
+            const newUrl = new URL('http://test.com');
+            url.searchParams.forEach((nValue, nKey) => {
+                if(persist.includes(nKey)) {
+                    newUrl.searchParams.append(nKey, nValue)
+                }
+            });
+            newUrl.searchParams.append(key, value);
+            params = newUrl.search
+        } else {
+            params = `${key}=${value}`;
+        }
+    }
     document.location.search = params;
-  };
+}
   const mapping_contador = (contador) => {
     var mapItems = Object.keys(contador).map((item, index) => {
       return {
@@ -67,9 +80,11 @@ export default function MarcaModeloComponent({ filtros, params }) {
   const [tituloModal, setTituloModal] = useState("");
   const [paramModal, setParamModal] = useState("");
   const [listadoModal, setListadoModal] = useState([]);
-  const openModal = (titulo, listado, param) => {
+  const [modalAction, setModalAction] = useState();
+  const openModal = (titulo, listado, param, action) => {
     setTituloModal(titulo);
     setParamModal(param);
+    setModalAction(prev => action)
     var mapItems = Object.keys(listado).map((item, index) => {
       return {
         label: item,
@@ -123,13 +138,21 @@ export default function MarcaModeloComponent({ filtros, params }) {
                           if (itemSecond.slug !== "") {
                             return insertParam(
                               marcasList.slug,
-                              itemSecond.slug
+                              itemSecond.slug,
+                              true,
+                              ['categoria']
                             );
                           }
                           openModal(
                             marcasList.text,
                             filtros.marcas,
-                            'marca'
+                            'marca',
+                            (label) => insertParam(
+                              marcasList.slug,
+                              label,
+                              true,
+                              ['categoria']
+                            )
                           );
                         }}
                       >
@@ -207,6 +230,7 @@ export default function MarcaModeloComponent({ filtros, params }) {
           titulo={tituloModal}
           param={paramModal}
           listado={listadoModal}
+          modalAction={modalAction}
         />
       )}
     </>

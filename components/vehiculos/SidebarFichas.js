@@ -53,9 +53,7 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
     { label: "$35.000.000 a $50.000.000", slug: "35000000:50000000" },
     { label: "$50.000.000 a $100.000.000", slug: "50000000:100000000" },
   ];
-  const insertParam = (key, value) => {
-    key = encodeURIComponent(key);
-    value = encodeURIComponent(value);
+  const insertParam = (key, value, reset, persist) => {
     var kvp = document.location.search.substr(1).split("&");
     let i = 0;
     for (; i < kvp.length; i++) {
@@ -70,6 +68,21 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
       kvp[kvp.length] = [key, value].join("=");
     }
     let params = kvp.join("&");
+    if (reset) {
+      if (persist) {
+        const url = new URL(location.href);
+        const newUrl = new URL("http://test.com");
+        url.searchParams.forEach((nValue, nKey) => {
+          if (persist.includes(nKey)) {
+            newUrl.searchParams.append(nKey, nValue);
+          }
+        });
+        newUrl.searchParams.append(key, value);
+        params = newUrl.search;
+      } else {
+        params = `${key}=${value}`;
+      }
+    }
     document.location.search = params;
   };
   const tipos_vehList = [
@@ -131,7 +144,7 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
                     <List.Item
                       key={index}
                       as="a"
-                      onClick={() => insertParam("tipo", item.id)}
+                      onClick={() => insertParam("tipo", item.id, true)}
                       style={{
                         color: params.tipo == item.id && '#2185d0'
                       }}

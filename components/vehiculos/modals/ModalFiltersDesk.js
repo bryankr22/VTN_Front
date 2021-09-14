@@ -7,7 +7,7 @@ import { List, Modal } from "semantic-ui-react";
  * }} param0 
  * @returns 
  */
-export default function ModalFiltersDesk({showModal, onClose, titulo, param, listado = [], resetOnClick}) {
+export default function ModalFiltersDesk({showModal, onClose, titulo, param, listado = [], resetOnClick, modalAction}) {
     const insertParam = (key, value) => {
         key = encodeURIComponent(key);
         value = encodeURIComponent(value);
@@ -31,6 +31,9 @@ export default function ModalFiltersDesk({showModal, onClose, titulo, param, lis
         document.location.search = params;
     }
     const handleChangeFilter = (item) => {
+        if(modalAction) {
+            return modalAction?.(item.label)
+        }
         insertParam(param, item.label);
     }
     return (

@@ -16,11 +16,16 @@ import OpcionesComponent from "./OpcionesComponent";
 import MarcaModeloComponent from "./MarcaModeloComponent";
 import TiposComponent from "./TiposComponent";
 import ModalFiltersDesk from "./ModalFiltersDesk";
-import { groupByAlphabet, groupByDecade } from '../../../helpers/dataStructure';
+import { groupByAlphabet, groupByDecade } from "../../../helpers/dataStructure";
 
 const getSlug = (slug) => {
-    return slug === 'ano' ? 'anios' : slug
-}
+  return slug === "ano" ? "anios" : slug;
+};
+
+const persistKey = {
+  categoria: [],
+  marca: ["categoria"],
+};
 
 export default function ModalFiltersMobile({
   showModal,
@@ -28,7 +33,7 @@ export default function ModalFiltersMobile({
   filtros,
   params,
 }) {
-  const mapping_contador = (contador, canWatchAll = true, {lower} = {}) => {
+  const mapping_contador = (contador, canWatchAll = true, { lower } = {}) => {
     var mapItems = Object.keys(contador).map((item, index) => {
       return {
         label: lower ? item?.toLowerCase?.() : item,
@@ -39,12 +44,12 @@ export default function ModalFiltersMobile({
     var size = 5;
     var sliceItems = mapItems.slice(0, size);
 
-    if(canWatchAll) {
-        sliceItems.push({
-          label: "Ver Todos",
-          slug: "",
-          qty: 0,
-        });
+    if (canWatchAll) {
+      sliceItems.push({
+        label: "Ver Todos",
+        slug: "",
+        qty: 0,
+      });
     }
     return sliceItems;
   };
@@ -61,10 +66,10 @@ export default function ModalFiltersMobile({
     const size = 5;
     const sliceItems = aniosByLabel.slice(0, size);
     sliceItems.push({
-        label: "Ver Todos",
-        slug: "",
-        qty: 0,
-      });
+      label: "Ver Todos",
+      slug: "",
+      qty: 0,
+    });
     return sliceItems;
   };
   const kilometraje_filter = [
@@ -93,7 +98,7 @@ export default function ModalFiltersMobile({
     {
       text: "Ubicacion",
       open: false,
-      values: mapping_contador(filtros.ubicacion, false, {lower: true}),
+      values: mapping_contador(filtros.ubicacion, false, { lower: true }),
       slug: "ubicacion",
       component: false,
     },
@@ -204,14 +209,23 @@ export default function ModalFiltersMobile({
       kvp[kvp.length] = [key, value].join("=");
     }
     let params = kvp.join("&");
-
-    if(reset) {
-      params = `${key}=${value}`
+    if (reset) {
+      if (persistKey[key]?.length) {
+        const url = new URL(location.href);
+        const newUrl = new URL("http://test.com");
+        url.searchParams.forEach((nValue, nKey) => {
+          if (persistKey[key].includes(nKey)) {
+            newUrl.searchParams.append(nKey, nValue);
+          }
+        });
+        newUrl.searchParams.append(key, value);
+        params = newUrl.search;
+      } else {
+        params = `${key}=${value}`;
+      }
     }
-
     document.location.search = params;
   };
-
   const [modalAll, setModalAll] = useState(false);
   const [tituloModal, setTituloModal] = useState("");
   const [paramModal, setParamModal] = useState("");
@@ -270,100 +284,100 @@ export default function ModalFiltersMobile({
                         </Header>
                       </Accordion.Title>
                       <Accordion.Content active={item.open}>
-                          <List link>
-                            <List.Item>
-                              <List.Content>
-                                <List.List style={{ paddingLeft: 15 }}>
-                                  {item.values.map(
-                                    (itemSecond, indexSecond) => (
-                                      <List.Item
-                                        key={item.text + indexSecond}
-                                        as="a"
-                                        style={{
-                                          padding: "7px 0px",
-                                          borderBottom: "1px solid #cccccc",
-                                          textTransform: 'capitalize',
-                                          color: params[item.slug] == itemSecond.slug ?  "#2185d0" : undefined,
-                                        }}
-                                        onClick={() => {
-                                          if (itemSecond.slug != "") {
-                                            return insertParam(
-                                              item.slug,
-                                              itemSecond.slug,
-                                              item.reset
-                                            );
-                                          }
-                                          let {slug} = item;
-                                          openModal(
-                                            item.text,
-                                            filtros[getSlug(slug)],
-                                            slug,
-                                            item.reset
-                                          );
-                                        }}
-                                      >
-                                        {itemSecond.label}
-                                      </List.Item>
-                                    )
-                                  )}
-                                </List.List>
-                              </List.Content>
-                            </List.Item>
-                          </List>
-                          {item.slug === "precio" ||
-                          item.slug === "kilometraje" ? (
-                            <Grid
-                              id="grid-range-price"
-                              style={{ marginBottom: 8 }}
+                        <List link>
+                          <List.Item>
+                            <List.Content>
+                              <List.List style={{ paddingLeft: 15 }}>
+                                {item.values.map((itemSecond, indexSecond) => (
+                                  <List.Item
+                                    key={item.text + indexSecond}
+                                    as="a"
+                                    style={{
+                                      padding: "7px 0px",
+                                      borderBottom: "1px solid #cccccc",
+                                      textTransform: "capitalize",
+                                      color:
+                                        params[item.slug] == itemSecond.slug
+                                          ? "#2185d0"
+                                          : undefined,
+                                    }}
+                                    onClick={() => {
+                                      if (itemSecond.slug != "") {
+                                        return insertParam(
+                                          item.slug,
+                                          itemSecond.slug,
+                                          item.reset
+                                        );
+                                      }
+                                      let { slug } = item;
+                                      openModal(
+                                        item.text,
+                                        filtros[getSlug(slug)],
+                                        slug,
+                                        item.reset
+                                      );
+                                    }}
+                                  >
+                                    {itemSecond.label}
+                                  </List.Item>
+                                ))}
+                              </List.List>
+                            </List.Content>
+                          </List.Item>
+                        </List>
+                        {item.slug === "precio" ||
+                        item.slug === "kilometraje" ? (
+                          <Grid
+                            id="grid-range-price"
+                            style={{ marginBottom: 8 }}
+                          >
+                            <Grid.Column width={6}>
+                              <Input
+                                type="number"
+                                fluid
+                                value={item.minimo}
+                                onChange={(e, { value }) =>
+                                  changeInputFiltro(value, index, "minimo")
+                                }
+                                placeholder="Mínimo"
+                              />
+                            </Grid.Column>
+                            <Grid.Column
+                              width={1}
+                              style={{
+                                textAlign: "center",
+                                marginTop: 3,
+                                fontSize: 16,
+                              }}
                             >
-                              <Grid.Column width={6}>
-                                <Input
-                                  type="number"
-                                  fluid
-                                  value={item.minimo}
-                                  onChange={(e, { value }) =>
-                                    changeInputFiltro(value, index, "minimo")
-                                  }
-                                  placeholder="Mínimo"
-                                />
-                              </Grid.Column>
-                              <Grid.Column
-                                width={1}
-                                style={{
-                                  textAlign: "center",
-                                  marginTop: 3,
-                                  fontSize: 16,
-                                }}
-                              >
-                                -
-                              </Grid.Column>
-                              <Grid.Column width={6}>
-                                <Input
-                                  type="number"
-                                  fluid
-                                  placeholder="Máximo"
-                                  value={item.maximo}
-                                  onChange={(e, { value }) =>
-                                    changeInputFiltro(value, index, "maximo")
-                                  }
-                                />
-                              </Grid.Column>
-                              <Grid.Column width={3}>
-                                <Button
-                                  onClick={() =>
-                                    insertParam(
-                                      item.slug,
-                                      item.minimo + ":" + item.maximo
-                                    )
-                                  }
-                                  style={{ marginLeft: 6 }}
-                                  circular
-                                  icon="angle right"
-                                />
-                              </Grid.Column>
-                            </Grid>
-                          ) : null}
-
+                              -
+                            </Grid.Column>
+                            <Grid.Column width={6}>
+                              <Input
+                                type="number"
+                                fluid
+                                placeholder="Máximo"
+                                value={item.maximo}
+                                onChange={(e, { value }) =>
+                                  changeInputFiltro(value, index, "maximo")
+                                }
+                              />
+                            </Grid.Column>
+                            <Grid.Column width={3}>
+                              <Button
+                                onClick={() =>
+                                  insertParam(
+                                    item.slug,
+                                    item.minimo + ":" + item.maximo
+                                  )
+                                }
+                                style={{ marginLeft: 6 }}
+                                circular
+                                icon="angle right"
+                              />
+                            </Grid.Column>
+                          </Grid>
+                        ) : null}
                       </Accordion.Content>
                     </Accordion>
                   )
