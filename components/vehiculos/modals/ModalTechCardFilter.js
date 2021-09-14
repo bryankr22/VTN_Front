@@ -84,7 +84,7 @@ export default function ModalTechCardFilter({
     {
       text: "Transmisión",
       open: false,
-      values: mapping_contador(filtros.caja, false),
+      values: mapping_contador(filtros.transmision, false),
       slug: "transmision",
       component: false,
     },
@@ -185,7 +185,7 @@ export default function ModalTechCardFilter({
                       </Accordion.Title>
                       <Accordion.Content active={item.open}>
                         <Grid.Column>
-                          <List>
+                          <List link>
                             <List.Item>
                               <List.Content>
                                 <List.List style={{ paddingLeft: 15 }}>
@@ -197,7 +197,7 @@ export default function ModalTechCardFilter({
                                         style={{
                                           padding: "7px 0px",
                                           borderBottom: "1px solid #cccccc",
-                                          color: "#2185d0",
+                                          color: params[item.slug] === itemSecond.slug && "#2185d0",
                                         }}
                                         onClick={() => {
                                           console.log(itemSecond, item)
