@@ -68,6 +68,7 @@ export default function ModalTechCardFilter({
       slug: 'tipo',
       component: false,
       values: vehicleType,
+      reset: true
     },
     {
       text: "Marcas",
@@ -108,7 +109,7 @@ export default function ModalTechCardFilter({
     filtrosLocal[index][input] = value;
     setFiltrosLocal([...filtrosLocal]);
   };
-  const insertParam = (key, value) => {
+  const insertParam = (key, value, reset, persist) => {
     key = encodeURIComponent(key);
     value = encodeURIComponent(value);
     var kvp = document.location.search.substr(1).split("&");
@@ -125,6 +126,21 @@ export default function ModalTechCardFilter({
       kvp[kvp.length] = [key, value].join("=");
     }
     let params = kvp.join("&");
+    if (reset) {
+      if (persist) {
+        const url = new URL(location.href);
+        const newUrl = new URL("http://test.com");
+        url.searchParams.forEach((nValue, nKey) => {
+          if (persist.includes(nKey)) {
+            newUrl.searchParams.append(nKey, nValue);
+          }
+        });
+        newUrl.searchParams.append(key, value);
+        params = newUrl.search;
+      } else {
+        params = `${key}=${value}`;
+      }
+    }
     document.location.search = params;
   };
 
@@ -132,9 +148,11 @@ export default function ModalTechCardFilter({
   const [tituloModal, setTituloModal] = useState("");
   const [paramModal, setParamModal] = useState("");
   const [listadoModal, setListadoModal] = useState([]);
-  const openModal = (titulo, listado, param) => {
+  const [modalAction, setActionModal] = useState();
+  const openModal = (titulo, listado, param, action) => {
     setTituloModal(titulo);
     setParamModal(param);
+    setActionModal(() => action)
     var mapItems = Object.keys(listado).map((item, index) => {
       return {
         label: item,
@@ -204,14 +222,20 @@ export default function ModalTechCardFilter({
                                           if (itemSecond.slug != "") {
                                             return insertParam(
                                               item.slug,
-                                              itemSecond.slug
+                                              itemSecond.slug,
+                                              item.reset
                                             );
                                           }
                                           let {slug} = item;
                                           openModal(
                                             item.text,
                                             filtros[getSlug(slug)],
-                                            slug
+                                            slug,
+                                            (label) => insertParam(
+                                              item.slug,
+                                              label,
+                                              item.reset
+                                            )
                                           );
                                         }}
                                       >
@@ -293,6 +317,7 @@ export default function ModalTechCardFilter({
           titulo={tituloModal}
           param={paramModal}
           listado={listadoModal}
+          modalAction={modalAction}
         />
       )}
     </>
