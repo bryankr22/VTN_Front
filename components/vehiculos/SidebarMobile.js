@@ -92,6 +92,7 @@ export default function SidebarMobile({
           Ordenar
         </Button>
         <ModalOrderMobile
+          isFicha={isFicha}
           showModal={modalOrder}
           onClose={() => setModalOrder(!modalOrder)}
         />
