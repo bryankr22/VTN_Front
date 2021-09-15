@@ -29,8 +29,6 @@ export default function ListadoFichas({
     "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x300/vendetunave/images/ficha-tecnica/";
   const filter = [
     { key: 0, value: 0, text: "Más reciente" },
-    { key: 1, value: 1, text: "Nuevo" },
-    { key: 2, value: 2, text: "Usado" },
     { key: 3, value: 3, text: "Precio más bajo" },
     { key: 4, value: 4, text: "Precio más alto" },
   ];
@@ -142,7 +140,7 @@ export default function ListadoFichas({
           <Grid.Column width={4}>
             <Select
               onChange={handleChangeFilter}
-              value={parseInt(params.orden)}
+              value={parseInt(params.orden || 0)}
               fluid
               placeholder="Ordenar por..."
               search
