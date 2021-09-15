@@ -1,14 +1,22 @@
 import React, { useEffect } from "react";
-import { Image, Card, Grid, Header, Button } from "semantic-ui-react";
+import {
+  Image,
+  Card,
+  Grid,
+  Header,
+  Button,
+  Container,
+  Pagination,
+} from "semantic-ui-react";
 import { useLocalStorage } from "../../helpers/hooks/useLocalStorage";
 import { useSelector, useDispatch } from "react-redux";
 import { addFicha } from "../../store/comparadorSlice";
 import HeaderFicha from "../../components/comparadores/HeaderFicha";
-export default function ListadoFichasMobile({ vehiculos }) {
+export default function ListadoFichasMobile({ vehiculos, totalRecords, page}) {
   const compareList = useSelector(({ comparador }) => comparador.fichas);
   const dispatch = useDispatch();
   const [compare, setCompare] = useLocalStorage("compareFichatecnica", "0");
-  const [isComparing, setIsComparing] = useLocalStorage("isComparing", '0');
+  const [isComparing, setIsComparing] = useLocalStorage("isComparing", "0");
   const pathS3 =
     "https://d3bmp4azzreq60.cloudfront.net/fit-in/120x120/vendetunave/images/ficha-tecnica/";
   const normalize = (function () {
@@ -40,6 +48,41 @@ export default function ListadoFichasMobile({ vehiculos }) {
       setCompare("0");
     }
     return;
+  };
+  const insertParam = (key, value, reset, persist) => {
+    var kvp = document.location.search.substr(1).split("&");
+    let i = 0;
+    for (; i < kvp.length; i++) {
+      if (kvp[i].startsWith(key + "=")) {
+        let pair = kvp[i].split("=");
+        pair[1] = value;
+        kvp[i] = pair.join("=");
+        break;
+      }
+    }
+    if (i >= kvp.length) {
+      kvp[kvp.length] = [key, value].join("=");
+    }
+    let params = kvp.join("&");
+    if (reset) {
+      if (persist) {
+        const url = new URL(location.href);
+        const newUrl = new URL("http://test.com");
+        url.searchParams.forEach((nValue, nKey) => {
+          if (persist.includes(nKey)) {
+            newUrl.searchParams.append(nKey, nValue);
+          }
+        });
+        newUrl.searchParams.append(key, value);
+        params = newUrl.search;
+      } else {
+        params = `${key}=${value}`;
+      }
+    }
+    document.location.search = params;
+  };
+  const handlePaginationChange = (e, { activePage }) => {
+    insertParam("page", activePage);
   };
   useEffect(() => {
     if (compareList.length <= 0 && isComparing == "0") {
@@ -350,22 +393,22 @@ export default function ListadoFichasMobile({ vehiculos }) {
           ))}
         </Card.Group>
       )}
-      {/**Math.ceil(this.state.resultTotal / 20) > 1 && (
-            <Container fluid style={{ textAlign: "center", margin: 25 }}>
-              <Pagination
-                pointing
-                secondary
-                boundaryRange={0}
-                activePage={this.state.activePage}
-                ellipsisItem={null}
-                firstItem={null}
-                lastItem={null}
-                siblingRange={2}
-                onPageChange={this.handlePaginationChange}
-                totalPages={Math.ceil(this.state.resultTotal / 20)}
-              />
-            </Container>
-          )**/}
+      {Math.ceil(totalRecords / 20) > 1 && (
+        <Container fluid style={{ textAlign: "center", margin: 25 }}>
+          <Pagination
+            pointing
+            secondary
+            boundaryRange={0}
+            activePage={parseInt(page)}
+            ellipsisItem={null}
+            firstItem={null}
+            lastItem={null}
+            siblingRange={2}
+            onPageChange={handlePaginationChange}
+            totalPages={Math.ceil(totalRecords / 20)}
+          />
+        </Container>
+      )}
     </div>
   );
 }
