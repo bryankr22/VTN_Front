@@ -12,6 +12,7 @@ export const servicios_api = '/servicios';
 export const concesionarios_api = '/concesionarios';
 export const comunidad_api = '/comunidad';
 export const get_modelos = '/modelos/';
+export const GET_BRANDS = `${API_URL}/marcas/:id`
 export const login_api = '/login';
 export const register_api = '/register';
 

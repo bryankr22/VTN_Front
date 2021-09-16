@@ -2,26 +2,30 @@ import React, {useState} from 'react'
 import { Header, Form, Container, Button, Input, Select, Responsive } from "semantic-ui-react";
 
 import axios from 'axios';
-import { API_URL, get_modelos } from '../../helpers/constants';
+import { API_URL, GET_BRANDS, get_modelos } from '../../helpers/constants';
 
-export default function FiltersHome({options}) {
-    const FilterPricing = [
-        { key: 0, text: "Precio", value: 0 },
-        { key: 1, text: "Hasta $10.000.000", value: '0:10000000' },
-        { key: 2, text: "$10.000.000 a $20.000.000", value: '10000000:20000000' },
-        { key: 3, text: "$20.000.000 a $35.000.000", value: '20000000:35000000' },
-        { key: 4, text: "$35.000.000 a $50.000.000", value: '35000000:50000000' },
-        { key: 5, text: "$50.000.000 a $100.000.000", value: '50000000:100000000' },
-        { key: 6, text: "$100.000.000 a $125.000.000", value: '100000000:125000000' },
-        { key: 7, text: "$125.000.000 a $150.000.000", value: '125000000:150000000' },
-        { key: 8, text: "$150.000.000 a $175.000.000", value: '150000000:175000000' },
-        { key: 9, text: "$175.000.000 a $200.000.000", value: '175000000:200000000' },
-        { key: 10, text: "$200.000.000 a $250.000.000", value: '200000000:250000000' },
-        { key: 11, text: "$250.000.000 a $300.000.000", value: '250000000:300000000' },
-        { key: 12, text: "$300.000.000 a $350.000.000", value: '300000000:350000000' },
-        { key: 13, text: "$350.000.000 a $400.000.000", value: '350000000:400000000' },
-        { key: 14, text: "Más de $400.000.000", value: '400000000:500000000' },
-    ];
+const FilterPricing = [
+    { key: 0, text: "Precio", value: 0 },
+    { key: 1, text: "Hasta $10.000.000", value: '0:10000000' },
+    { key: 2, text: "$10.000.000 a $20.000.000", value: '10000000:20000000' },
+    { key: 3, text: "$20.000.000 a $35.000.000", value: '20000000:35000000' },
+    { key: 4, text: "$35.000.000 a $50.000.000", value: '35000000:50000000' },
+    { key: 5, text: "$50.000.000 a $100.000.000", value: '50000000:100000000' },
+    { key: 6, text: "$100.000.000 a $125.000.000", value: '100000000:125000000' },
+    { key: 7, text: "$125.000.000 a $150.000.000", value: '125000000:150000000' },
+    { key: 8, text: "$150.000.000 a $175.000.000", value: '150000000:175000000' },
+    { key: 9, text: "$175.000.000 a $200.000.000", value: '175000000:200000000' },
+    { key: 10, text: "$200.000.000 a $250.000.000", value: '200000000:250000000' },
+    { key: 11, text: "$250.000.000 a $300.000.000", value: '250000000:300000000' },
+    { key: 12, text: "$300.000.000 a $350.000.000", value: '300000000:350000000' },
+    { key: 13, text: "$350.000.000 a $400.000.000", value: '350000000:400000000' },
+    { key: 14, text: "Más de $400.000.000", value: '400000000:500000000' },
+];
+
+export default function FiltersHome({options: optsProp}) {
+
+    const [options, setOptions] =useState(() => optsProp);
+
     const [filters, setFilters] = useState({
         category: 'carros',
         marca_id: '',
@@ -86,6 +90,24 @@ export default function FiltersHome({options}) {
             modelos: optionsModelos
         })
     }
+
+    const handleChangeType = async (e, { value }) => {
+        const {key} = options.optionsCategories?.find?.(item => item.value === value) || {};
+        const res = await axios.get(GET_BRANDS.replace(':id', key )).catch(() => []);
+        const optionsMarcas = [{ key: "", value: "", text: "Marca" }];
+        await res?.data?.marcas?.forEach?.(function (item) {
+            optionsMarcas.push({
+                key: item.id,
+                value: item.id,
+                text: item.nombre,
+            });
+        });
+        changeFilter('category', value)
+        setOptions(prev => ({ ...prev, optionsMarcas }))
+    }
+
+    console.log({options});
+
     return (
         <div>
             <Container
@@ -102,7 +124,7 @@ export default function FiltersHome({options}) {
                                 search
                                 options={options.optionsCategories}
                                 defaultValue={filters.category}
-                                onChange={(e, { value }) => changeFilter('category', value)}
+                                onChange={handleChangeType}
                                 placeholder="Tipo"
                                 style={{ borderRadius: 18 }}
                             />
@@ -206,7 +228,7 @@ export default function FiltersHome({options}) {
                                 options={options.optionsCategories}
                                 defaultValue={options.selectCategory}
                                 placeholder="Tipo"
-                                onChange={(e, { value }) => changeFilter('category', value)}
+                                onChange={handleChangeType}
                                 style={{ borderRadius: 18 }}
                             />
                         </Form.Field>
@@ -312,7 +334,7 @@ export default function FiltersHome({options}) {
                                     search
                                     options={options.optionsCategories}
                                     defaultValue={filters.category}
-                                    onChange={(e, { value }) => changeFilter('category', value)}
+                                    onChange={handleChangeType}
                                     placeholder="Tipo"
                                     style={{ borderRadius: 18 }}
                                 />

@@ -26,19 +26,35 @@ export default function index({ data }) {
         <SidebarMobile
           isFicha
           params={router.query}
-          contadores={{ ...data.contadores, total_records: data.total_records }}
+          contadores={{
+            ...data.contadores,
+            total_records: data.total_records,
+          }}
           vehiculos={data.vehicles}
         />
-        <ListadoFichasMobile vehiculos={data.vehicles} />
+        <ListadoFichasMobile
+          params={router.query}
+          vehiculos={data.vehicles}
+          page={data.page}
+          totalRecords={data.total_records}
+        />
       </Responsive>
       <Responsive {...Responsive.onlyTablet}>
         <SidebarMobile
           isFicha
           params={router.query}
-          contadores={{ ...data.contadores, total_records: data.total_records }}
+          contadores={{
+            ...data.contadores,
+            total_records: data.total_records,
+          }}
           vehiculos={data.vehicles}
         />
-        <ListadoFichasMobile vehiculos={data.vehicles} />
+        <ListadoFichasMobile
+          params={router.query}
+          vehiculos={data.vehicles}
+          page={data.page}
+          totalRecords={data.total_records}
+        />
       </Responsive>
       <Responsive {...Responsive.onlyComputer}>
         <Grid style={{ paddingTop: 15 }}>
