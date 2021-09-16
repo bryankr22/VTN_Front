@@ -39,13 +39,6 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
     var sliceItems = mapItems.slice(0, size);
     return sliceItems;
   };
-  const kilometraje_filter = [
-    { text: "De 0 a 5.000" },
-    { text: "De 5.000 a 10.000" },
-    { text: "De 10.000 a 20.000" },
-    { text: "De 20.000 a 30.000" },
-    { text: "De 30.000 a 45.000" },
-  ];
   const precios_filter = [
     { label: "Hasta $10.000.000", slug: "0:10000000" },
     { label: "$10.000.000 a $20.000.000", slug: "10000000:20000000" },
@@ -121,6 +114,24 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
     setModalAll(true);
   };
 
+  const [filters, setFilters] = useState({
+    min_precio: 0,
+    max_precio: 0,
+    min_km: 0,
+    max_km: 0,
+  });
+
+  const setInputVal = (input, value) => {
+    setFilters({
+      ...filters,
+      [input]: value,
+    });
+  };
+
+  const setPrice = () => {
+    insertParam("precio", filters.min_precio + ":" + filters.max_precio);
+  };
+
   return (
     <Grid.Column style={{ paddingLeft: "3%" }} width={3}>
       <Header style={{ margin: 0 }} as="h3">
@@ -133,196 +144,217 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
         <ActiveTagsVehiculos tags={params} />
       </Container>
       <Container>
-          <List link>
-            <List.Item>
+        <List link>
+          <List.Item>
+            <List.Content>
+              <List.Header>
+                <Header as="h5">Tipo de vehiculo</Header>
+              </List.Header>
+              <List.List style={{ paddingLeft: 15 }}>
+                {tipos_vehList.map((item, index) => (
+                  <List.Item
+                    key={index}
+                    as="a"
+                    onClick={() => insertParam("tipo", item.id, true)}
+                    style={{
+                      color: params.tipo == item.id && "#2185d0",
+                    }}
+                  >
+                    {item.nombre}
+                  </List.Item>
+                ))}
+              </List.List>
+            </List.Content>
+          </List.Item>
+        </List>
+        <List link>
+          <List.Item>
+            <List.Content>
+              <List.Header>
+                <Header as="h5">Marca</Header>
+              </List.Header>
+              <List.List style={{ paddingLeft: 15 }}>
+                {mapping_contador(contadores.marca).map((item, index) => (
+                  <List.Item
+                    key={index}
+                    as="a"
+                    onClick={() => insertParam("marca", item.label)}
+                    style={{
+                      color: params.marca == item.label && "#2185d0",
+                    }}
+                  >
+                    {item.label}
+                  </List.Item>
+                ))}
+                {handleRenderModal(contadores.marca) && (
+                  <List.Item
+                    as="a"
+                    onClick={() =>
+                      openModal("Marcas", contadores.marca, "marca")
+                    }
+                  >
+                    Ver Todos
+                  </List.Item>
+                )}
+              </List.List>
+            </List.Content>
+          </List.Item>
+        </List>
+
+        <List link>
+          <List.Item>
+            <List.Content>
+              <List.Header>
+                <Header as="h5">Modelo</Header>
+              </List.Header>
+              <List.List style={{ paddingLeft: 15 }}>
+                {mapping_contador(contadores.modelo).map((item, index) => (
+                  <List.Item
+                    key={index}
+                    as="a"
+                    onClick={() => insertParam("modelo", item.label)}
+                    style={{
+                      color: params.modelo == item.label && "#2185d0",
+                    }}
+                  >
+                    {item.label}
+                  </List.Item>
+                ))}
+                {handleRenderModal(contadores.modelo) && (
+                  <List.Item
+                    as="a"
+                    onClick={() =>
+                      openModal("Modelo", contadores.modelo, "modelo")
+                    }
+                  >
+                    Ver Todos
+                  </List.Item>
+                )}
+              </List.List>
+            </List.Content>
+          </List.Item>
+        </List>
+
+        <List link>
+          <List.Item>
+            <List.Content>
+              <List.Header>
+                <Header as="h5">Tipo de Motor</Header>
+              </List.Header>
+              <List.List style={{ paddingLeft: 15 }}>
+                {mapping_contador(contadores.combustible).map((item, index) => (
+                  <List.Item
+                    key={index}
+                    as="a"
+                    onClick={() => insertParam("combustible", item.label)}
+                    style={{
+                      color: params.combustible == item.label && "#2185d0",
+                    }}
+                  >
+                    {item.label}
+                  </List.Item>
+                ))}
+
+                {handleRenderModal(contadores.combustible) && (
+                  <List.Item
+                    as="a"
+                    onClick={() =>
+                      openModal(
+                        "Tipo de Motor",
+                        contadores.combustible,
+                        "combustible"
+                      )
+                    }
+                  >
+                    Ver Todos
+                  </List.Item>
+                )}
+              </List.List>
+            </List.Content>
+          </List.Item>
+        </List>
+        <List link>
+          <List.Item>
+            <List.Content>
+              <List.Header>
+                <Header as="h5">Transmision</Header>
+              </List.Header>
+              <List.List style={{ paddingLeft: 15 }}>
+                {mapping_contador(contadores.transmision).map((item, index) => (
+                  <List.Item
+                    key={index}
+                    as="a"
+                    onClick={() => insertParam("transmision", item.label)}
+                    style={{
+                      color: params.transmision == item.label && "#2185d0",
+                    }}
+                  >
+                    {item.label}
+                  </List.Item>
+                ))}
+              </List.List>
+            </List.Content>
+          </List.Item>
+        </List>
+        <>
+          <List link style={{ marginBottom: 0 }}>
+            <List.Item style={{ marginBottom: 0 }}>
               <List.Content>
                 <List.Header>
-                  <Header as="h5">Tipo de vehiculo</Header>
+                  <Header as="h5">Precio</Header>
                 </List.Header>
-                <List.List style={{ paddingLeft: 15 }}>
-                  {tipos_vehList.map((item, index) => (
+                <List.List>
+                  {precios_filter.map((item, index) => (
                     <List.Item
                       key={index}
                       as="a"
-                      onClick={() => insertParam("tipo", item.id, true)}
+                      onClick={() => insertParam("precio", item.slug)}
                       style={{
-                        color: params.tipo == item.id && '#2185d0'
-                      }}
-                    >
-                      {item.nombre}
-                    </List.Item>
-                  ))}
-                </List.List>
-              </List.Content>
-            </List.Item>
-          </List>
-          <List link>
-            <List.Item>
-              <List.Content>
-                <List.Header>
-                  <Header as="h5">Marca</Header>
-                </List.Header>
-                <List.List style={{ paddingLeft: 15 }}>
-                  {mapping_contador(contadores.marca).map((item, index) => (
-                    <List.Item
-                      key={index}
-                      as="a"
-                      onClick={() => insertParam("marca", item.label)}
-                      style={{
-                        color: params.marca == item.label && '#2185d0'
+                        color: params.precio == item.slug && "#2185d0",
                       }}
                     >
                       {item.label}
                     </List.Item>
                   ))}
-                  {handleRenderModal(contadores.marca) && (
-                    <List.Item
-                      as="a"
-                      onClick={() =>
-                        openModal("Marcas", contadores.marca, "marca")
-                      }
-                    >
-                      Ver Todos
-                    </List.Item>
-                  )}
                 </List.List>
               </List.Content>
             </List.Item>
+            <Grid id="grid-range-price" style={{ marginBottom: 8, marginTop: 10 }}>
+              <Grid.Column width={6}>
+                <Input
+                  type="number"
+                  fluid
+                  defaultValue={0}
+                  placeholder="Mínimo"
+                  onChange={(e, { value }) => setInputVal("min_precio", value)}
+                />
+              </Grid.Column>
+              <Grid.Column
+                width={1}
+                style={{ textAlign: "center", marginTop: 3, fontSize: 16 }}
+              >
+                -
+              </Grid.Column>
+              <Grid.Column width={6}>
+                <Input
+                  type="number"
+                  fluid
+                  defaultValue={0}
+                  placeholder="Máximo"
+                  onChange={(e, { value }) => setInputVal("max_precio", value)}
+                />
+              </Grid.Column>
+              <Grid.Column width={3}>
+                <Button
+                  style={{ marginLeft: 6 }}
+                  circular
+                  icon="angle right"
+                  onClick={() => setPrice()}
+                />
+              </Grid.Column>
+            </Grid>
           </List>
-
-          <List link>
-            <List.Item>
-              <List.Content>
-                <List.Header>
-                  <Header as="h5">Modelo</Header>
-                </List.Header>
-                <List.List style={{ paddingLeft: 15 }}>
-                  {mapping_contador(contadores.modelo).map((item, index) => (
-                    <List.Item
-                      key={index}
-                      as="a"
-                      onClick={() => insertParam("modelo", item.label)}
-                      style={{
-                        color: params.modelo == item.label && '#2185d0'
-                      }}
-                    >
-                      {item.label}
-                    </List.Item>
-                  ))}
-                  {handleRenderModal(contadores.modelo) && (
-                    <List.Item
-                      as="a"
-                      onClick={() =>
-                        openModal("Modelo", contadores.modelo, "modelo")
-                      }
-                    >
-                      Ver Todos
-                    </List.Item>
-                  )}
-                </List.List>
-              </List.Content>
-            </List.Item>
-          </List>
-
-          <List link>
-            <List.Item>
-              <List.Content>
-                <List.Header>
-                  <Header as="h5">Tipo de Motor</Header>
-                </List.Header>
-                <List.List style={{ paddingLeft: 15 }}>
-                  {mapping_contador(contadores.combustible).map(
-                    (item, index) => (
-                      <List.Item
-                        key={index}
-                        as="a"
-                        onClick={() => insertParam("combustible", item.label)}
-                        style={{
-                          color: params.combustible == item.label && '#2185d0'
-                        }}
-                      >
-                        {item.label}
-                      </List.Item>
-                    )
-                  )}
-
-                  {handleRenderModal(contadores.combustible) && (
-                    <List.Item
-                      as="a"
-                      onClick={() =>
-                        openModal(
-                          "Tipo de Motor",
-                          contadores.combustible,
-                          "combustible"
-                        )
-                      }
-                    >
-                      Ver Todos
-                    </List.Item>
-                  )}
-                </List.List>
-              </List.Content>
-            </List.Item>
-          </List>
-          <List link>
-            <List.Item>
-              <List.Content>
-                <List.Header>
-                  <Header as="h5">Transmision</Header>
-                </List.Header>
-                <List.List style={{ paddingLeft: 15 }}>
-                  {mapping_contador(contadores.transmision).map((item, index) => (
-                    <List.Item
-                      key={index}
-                      as="a"
-                      onClick={() => insertParam("transmision", item.label)}
-                      style={{
-                        color: params.transmision == item. label && '#2185d0'
-                      }}
-                    >
-                      {item.label}
-                    </List.Item>
-                  ))}
-                </List.List>
-              </List.Content>
-            </List.Item>
-          </List>
-          <>
-            <List link style={{ marginBottom: 0 }}>
-              <List.Item style={{ marginBottom: 0 }}>
-                <List.Content>
-                  <List.Header>
-                    <Header as="h5">Precio</Header>
-                  </List.Header>
-                  <List.List>
-                    {precios_filter.map((item, index) => (
-                      <List.Item
-                        key={index}
-                        as="a"
-                        onClick={() => insertParam("precio", item.slug)}
-                        style={{
-                        color: params.precio == item.slug && '#2185d0'
-                      }}
-                      >
-                        {item.label}
-                      </List.Item>
-                    ))}
-                  </List.List>
-                </List.Content>
-              </List.Item>
-            </List>
-            <div id="grid-range-km" style={{ marginBottom: 8 }}>
-              <div className="mb-2 mt-3">
-                <Input type="number" fluid placeholder="Mínimo" />
-              </div>
-              <div className="mb-3">
-                <Input type="number" fluid placeholder="Máximo" />
-              </div>
-              <div width={2}>
-                <Button style={{ marginLeft: 6 }} circular icon="angle right" />
-              </div>
-            </div>
-          </>
+        </>
       </Container>
       {modalAll && (
         <ModalFiltersDesk
