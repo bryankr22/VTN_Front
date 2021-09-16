@@ -7,9 +7,23 @@ import {
   Header,
   Button,
 } from "semantic-ui-react";
+import { PRICES_FILTER } from '../../helpers/constants';
 import { groupByAlphabet, groupByDecade } from "../../helpers/dataStructure";
 import ActiveTagsVehiculos from "./ActiveTagsVehiculos";
 import ModalFiltersDesk from "./modals/ModalFiltersDesk";
+
+const mapArray = (contador = []) => {
+  var mapItems = contador.map((item) => {
+    return {
+      label: item.label,
+      slug: item.slug,
+    };
+  });
+  var size = 5;
+  var sliceItems = mapItems.slice(0, size);
+  return sliceItems;
+};
+
 export default function SidebarFichas({ params, contadores, vehiculos }) {
   //console.log(">>>>", contadores);
   const title_page = (slug) => {
@@ -98,9 +112,11 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
   const openModal = (titulo, listado, param) => {
     setTituloModal(titulo);
     setParamModal(param);
-    var mapItems = Object.keys(listado).map((item, index) => {
+    const list = Array.isArray(listado) ? listado : Object.keys(listado);
+    var mapItems = list.map((item, index) => {
       return {
-        label: item,
+        label: item.label,
+        slug: item.slug,
         qty: index,
       };
     });
@@ -109,7 +125,13 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
       var aniosByLabel = R.sort(byLabel, mapItems);
       setListadoModal(groupByDecade(aniosByLabel));
     } else {
-      setListadoModal(groupByAlphabet(mapItems));
+      let grouped = [];
+      if(Array.isArray(listado)) {
+        grouped = [[...mapItems]]
+      } else {
+        grouped = groupByAlphabet(mapItems)
+      }
+      setListadoModal(grouped);
     }
     setModalAll(true);
   };
@@ -134,6 +156,13 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
 
   return (
     <Grid.Column style={{ paddingLeft: "3%" }} width={3}>
+      <style>
+        {`
+          .ui.horizontal.list:not(.celled)>.item:first-child {
+            margin: 10px !important;
+          }
+        `}
+      </style>
       <Header style={{ margin: 0 }} as="h3">
         {title_page(params.categoria)}
       </Header>
@@ -297,28 +326,39 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
           </List.Item>
         </List>
         <>
-          <List link style={{ marginBottom: 0 }}>
+        <List link style={{ marginBottom: 0 }}>
             <List.Item style={{ marginBottom: 0 }}>
               <List.Content>
                 <List.Header>
                   <Header as="h5">Precio</Header>
                 </List.Header>
                 <List.List>
-                  {precios_filter.map((item, index) => (
+                  {mapArray(PRICES_FILTER).map((item, index) => (
                     <List.Item
                       key={index}
                       as="a"
-                      onClick={() => insertParam("precio", item.slug)}
                       style={{
-                        color: params.precio == item.slug && "#2185d0",
+                        textTransform: "capitalize",
+                        color:
+                          params.precio == item.slug ? "#2185d0" : undefined,
                       }}
+                      onClick={() => insertParam("precio", item.slug)}
                     >
                       {item.label}
                     </List.Item>
                   ))}
+                  <List.Item
+                    as="a"
+                    onClick={() =>
+                      openModal("Precios", [...PRICES_FILTER].splice(1, PRICES_FILTER.length -1), "precio", true)
+                    }
+                  >
+                    Ver Todos
+                  </List.Item>
                 </List.List>
               </List.Content>
             </List.Item>
+          </List>
             <Grid id="grid-range-price" style={{ marginBottom: 8, marginTop: 10 }}>
               <Grid.Column width={6}>
                 <Input
@@ -353,7 +393,6 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
                 />
               </Grid.Column>
             </Grid>
-          </List>
         </>
       </Container>
       {modalAll && (

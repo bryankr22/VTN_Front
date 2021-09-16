@@ -15,6 +15,7 @@ import ActiveTagsVehiculos from "./ActiveTagsVehiculos";
 import ModalFiltersDesk from "./modals/ModalFiltersDesk";
 import * as R from "ramda";
 import { groupByAlphabet, groupByDecade } from "../../helpers/dataStructure";
+import { KM_FILTER, PRICES_FILTER } from "../../helpers/constants";
 export default function SidebarVehiculos({ params, contadores, vehiculos }) {
   const [filters, setFilters] = useState({
     min_precio: 0,
@@ -38,6 +39,18 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
         return "Carros y camionetas";
     }
   };
+  const mapArray = (contador = []) => {
+    var mapItems = contador.map((item) => {
+      return {
+        label: item.label,
+        slug: item.slug,
+      };
+    });
+    var size = 5;
+    var sliceItems = mapItems.slice(0, size);
+    return sliceItems;
+  };
+
   const mapping_contador = (contador) => {
     var mapItems = Object.keys(contador).map((item, index) => {
       return {
@@ -62,20 +75,8 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
     var sliceItems = aniosByLabel.slice(0, size);
     return sliceItems;
   };
-  const kilometraje_filter = [
-    { text: "De 0 a 5.000", slug: "0:5000" },
-    { text: "De 5.000 a 10.000", slug: "5000:10000" },
-    { text: "De 10.000 a 20.000", slug: "10000:20000" },
-    { text: "De 20.000 a 30.000", slug: "20000:30000" },
-    { text: "De 30.000 a 45.000", slug: "30000:45000" },
-  ];
-  const precios_filter = [
-    { text: "Hasta $10.000.000", slug: "0:10000000" },
-    { text: "$10.000.000 a $20.000.000", slug: "10000000:20000000" },
-    { text: "$20.000.000 a $35.000.000", slug: "20000000:35000000" },
-    { text: "$35.000.000 a $50.000.000", slug: "35000000:50000000" },
-    { text: "$50.000.000 a $100.000.000", slug: "50000000:100000000" },
-  ];
+
+
   const categorias_filter = [
     { text: "Carros y camionetas", slug: "carros" },
     { text: "Camiones", slug: "camiones" },
@@ -137,9 +138,11 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
   const openModal = (titulo, listado, param) => {
     setTituloModal(titulo);
     setParamModal(param);
-    var mapItems = Object.keys(listado).map((item, index) => {
+    const list = Array.isArray(listado) ? listado : Object.keys(listado);
+    var mapItems = list.map((item, index) => {
       return {
-        label: item,
+        label: item.label,
+        slug: item.slug,
         qty: index,
       };
     });
@@ -148,7 +151,13 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
       var aniosByLabel = R.sort(byLabel, mapItems);
       setListadoModal(groupByDecade(aniosByLabel));
     } else {
-      setListadoModal(groupByAlphabet(mapItems));
+      let grouped = [];
+      if(Array.isArray(listado)) {
+        grouped = [[...mapItems]]
+      } else {
+        grouped = groupByAlphabet(mapItems)
+      }
+      setListadoModal(grouped);
     }
     setModalAll(true);
   };
@@ -469,7 +478,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                   <Header as="h5">Kilometraje</Header>
                 </List.Header>
                 <List.List>
-                  {kilometraje_filter.map((item, index) => (
+                  {mapArray(KM_FILTER).map((item, index) => (
                     <List.Item
                       key={index}
                       as="a"
@@ -482,14 +491,22 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                       }}
                       onClick={() => insertParam("kilometraje", item.slug)}
                     >
-                      {item.text}
+                      {item.label}
                     </List.Item>
                   ))}
+                  <List.Item
+                    as="a"
+                    onClick={() =>
+                      openModal("Kilometraje", [...KM_FILTER], "kilometraje", true)
+                    }
+                  >
+                    Ver Todos
+                  </List.Item>
                 </List.List>
               </List.Content>
             </List.Item>
           </List>
-          <Grid id="grid-range-km" style={{ marginBottom: 8 }}>
+          <Grid id="grid-range-km" style={{ marginBottom: 10, marginTop: 5 }}>
             <Grid.Column width={6}>
               <Input
                 type="number"
@@ -532,7 +549,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                   <Header as="h5">Precio</Header>
                 </List.Header>
                 <List.List>
-                  {precios_filter.map((item, index) => (
+                  {mapArray(PRICES_FILTER).map((item, index) => (
                     <List.Item
                       key={index}
                       as="a"
@@ -543,14 +560,22 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                       }}
                       onClick={() => insertParam("precio", item.slug)}
                     >
-                      {item.text}
+                      {item.label}
                     </List.Item>
                   ))}
+                  <List.Item
+                    as="a"
+                    onClick={() =>
+                      openModal("Precios", [...PRICES_FILTER].splice(1, PRICES_FILTER.length -1), "precio", true)
+                    }
+                  >
+                    Ver Todos
+                  </List.Item>
                 </List.List>
               </List.Content>
             </List.Item>
           </List>
-          <Grid id="grid-range-km" style={{ marginBottom: 8 }}>
+          <Grid id="grid-range-km" style={{ marginTop: 4 }}>
             <Grid.Column width={6}>
               <Input
                 type="number"

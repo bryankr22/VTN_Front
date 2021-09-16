@@ -17,6 +17,7 @@ import MarcaModeloComponent from "./MarcaModeloComponent";
 import TiposComponent from "./TiposComponent";
 import ModalFiltersDesk from "./ModalFiltersDesk";
 import { groupByAlphabet, groupByDecade } from "../../../helpers/dataStructure";
+import { KM_FILTER, PRICES_FILTER } from '../../../helpers/constants';
 
 const getSlug = (slug) => {
   return slug === "ano" ? "anios" : slug;
@@ -34,10 +35,11 @@ export default function ModalFiltersMobile({
   params,
 }) {
   const mapping_contador = (contador, canWatchAll = true, { lower } = {}) => {
-    var mapItems = Object.keys(contador).map((item, index) => {
+    const list = Array.isArray(contador) ? contador : Object.keys(contador);
+    var mapItems = list.map((item, index) => {
       return {
-        label: lower ? item?.toLowerCase?.() : item,
-        slug: item,
+        label: lower ? item?.toLowerCase?.() : (item.label || item),
+        slug: item.slug || item,
         qty: index,
       };
     });
@@ -72,20 +74,7 @@ export default function ModalFiltersMobile({
     });
     return sliceItems;
   };
-  const kilometraje_filter = [
-    { label: "De 0 a 5.000", slug: "0:5000" },
-    { label: "De 5.000 a 10.000", slug: "5000:10000" },
-    { label: "De 10.000 a 20.000", slug: "10000:20000" },
-    { label: "De 20.000 a 30.000", slug: "20000:30000" },
-    { label: "De 30.000 a 45.000", slug: "30000:45000" },
-  ];
-  const precios_filter = [
-    { label: "Hasta $10.000.000", slug: "0:10000000" },
-    { label: "$10.000.000 a $20.000.000", slug: "10000000:20000000" },
-    { label: "$20.000.000 a $35.000.000", slug: "20000000:35000000" },
-    { label: "$35.000.000 a $50.000.000", slug: "35000000:50000000" },
-    { label: "$50.000.000 a $100.000.000", slug: "50000000:100000000" },
-  ];
+
   const categorias_filter = [
     { label: "Carros y camionetas", slug: "carros" },
     { label: "Camiones", slug: "camiones" },
@@ -169,7 +158,7 @@ export default function ModalFiltersMobile({
       slug: "precio",
       open: false,
       component: false,
-      values: precios_filter,
+      values: mapping_contador(PRICES_FILTER),
       minimo: 0,
       maximo: 0,
     },
@@ -178,7 +167,7 @@ export default function ModalFiltersMobile({
       slug: "kilometraje",
       open: false,
       components: false,
-      values: kilometraje_filter,
+      values: mapping_contador(KM_FILTER),
       minimo: 0,
       maximo: 0,
     },
@@ -234,9 +223,18 @@ export default function ModalFiltersMobile({
   const openModal = (titulo, listado, param, reset) => {
     setTituloModal(titulo);
     setParamModal(param);
-    var mapItems = Object.keys(listado).map((item, index) => {
+
+    if(param === 'precio') {
+      listado = [...PRICES_FILTER].slice(1, PRICES_FILTER.length)
+    } else if (param === 'kilometraje') {
+      listado = [...KM_FILTER]
+    }
+
+    const list = Array.isArray(listado) ? listado : Object.keys(listado);
+    var mapItems = list.map((item, index) => {
       return {
-        label: item,
+        label: item.label || item,
+        slug: item.slug,
         qty: index,
       };
     });
@@ -245,7 +243,14 @@ export default function ModalFiltersMobile({
       var aniosByLabel = R.sort(byLabel, mapItems);
       setListadoModal(groupByDecade(aniosByLabel));
     } else {
-      setListadoModal(groupByAlphabet(mapItems));
+      let grouped = [];
+      if(Array.isArray(listado)) {
+        grouped = [[...mapItems]]
+      } else {
+        grouped = groupByAlphabet(mapItems)
+      }
+
+      setListadoModal(grouped);
     }
     setModalAll(true);
     setResetModal(reset);

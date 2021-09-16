@@ -14,6 +14,7 @@ import {
 import * as R from "ramda";
 import ModalFiltersDesk from "./ModalFiltersDesk";
 import { groupByAlphabet, groupByDecade } from '../../../helpers/dataStructure';
+import { PRICES_FILTER } from '../../../helpers/constants';
 
 const getSlug = (slug) => {
     return slug === 'ano' ? 'anios' : slug
@@ -34,33 +35,28 @@ export default function ModalTechCardFilter({
   filtros,
   params,
 }) {
-  const mapping_contador = (contador, canWatchAll = true) => {
-    var mapItems = Object.keys(contador).map((item, index) => {
+  const mapping_contador = (contador, canWatchAll = true, {lower} = {}) => {
+    const list = Array.isArray(contador) ? contador : Object.keys(contador);
+    var mapItems = list.map((item, index) => {
       return {
-        label: item,
-        slug: item,
+        label: lower ? item?.toLowerCase?.() : (item.label || item),
+        slug: item.slug || item,
         qty: index,
       };
     });
     var size = 5;
     var sliceItems = mapItems.slice(0, size);
 
-    if(canWatchAll) {
-        sliceItems.push({
-          label: "Ver Todos",
-          slug: "",
-          qty: 0,
-        });
+    if (canWatchAll) {
+      sliceItems.push({
+        label: "Ver Todos",
+        slug: "",
+        qty: 0,
+      });
     }
     return sliceItems;
   };
-  const precios_filter = [
-    { label: "Hasta $10.000.000", slug: "0:10000000" },
-    { label: "$10.000.000 a $20.000.000", slug: "10000000:20000000" },
-    { label: "$20.000.000 a $35.000.000", slug: "20000000:35000000" },
-    { label: "$35.000.000 a $50.000.000", slug: "35000000:50000000" },
-    { label: "$50.000.000 a $100.000.000", slug: "50000000:100000000" },
-  ];
+
 
   const [filtrosLocal, setFiltrosLocal] = useState([
     {
@@ -95,7 +91,7 @@ export default function ModalTechCardFilter({
       slug: "precio",
       open: false,
       component: false,
-      values: precios_filter,
+      values: mapping_contador(PRICES_FILTER),
       minimo: 0,
       maximo: 0,
     },
@@ -153,9 +149,17 @@ export default function ModalTechCardFilter({
     setTituloModal(titulo);
     setParamModal(param);
     setActionModal(() => action)
-    var mapItems = Object.keys(listado).map((item, index) => {
+
+    if(param === 'precio') {
+      listado = [...PRICES_FILTER].slice(1, PRICES_FILTER.length)
+    }
+
+    const list = Array.isArray(listado) ? listado : Object.keys(listado);
+
+    var mapItems = list.map((item, index) => {
       return {
-        label: item,
+        label: item.label || item,
+        slug: item.slug,
         qty: index,
       };
     });
@@ -164,7 +168,13 @@ export default function ModalTechCardFilter({
       var aniosByLabel = R.sort(byLabel, mapItems);
       setListadoModal(groupByDecade(aniosByLabel));
     } else {
-      setListadoModal(groupByAlphabet(mapItems));
+      let grouped = [];
+      if(Array.isArray(listado)) {
+        grouped = [[...mapItems]]
+      } else {
+        grouped = groupByAlphabet(mapItems)
+      }
+      setListadoModal(grouped);
     }
     setModalAll(true);
   };
