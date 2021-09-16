@@ -38,14 +38,14 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
         return "Carros y camionetas";
     }
   };
-  const mapping_contador = (contador) => {
+  const mapping_contador = (contador, allList = false) => {
     var mapItems = Object.keys(contador).map((item, index) => {
       return {
         label: item,
         qty: index,
       };
     });
-    var size = 5;
+    var size = allList ? mapItems.length : 5;
     var sliceItems = mapItems.slice(0, size);
     return sliceItems;
   };
@@ -333,7 +333,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                 <Header as="h5">Tipo de Motor</Header>
               </List.Header>
               <List.List style={{ paddingLeft: 15 }}>
-                {mapping_contador(contadores.combustible).map((item, index) => (
+                {mapping_contador(contadores.combustible, true).map((item, index) => (
                   <List.Item
                     key={index}
                     as="a"

@@ -74,7 +74,6 @@ export default function ListadoVehiculos({params, vehiculos, page, totalRecords}
         }
         return;
     }
-    const router = useRouter();
     const [query, setQuery] = useState("");
     const handleKeyDown = (e) => {
         if (e.keyCode === 13) {
@@ -82,7 +81,7 @@ export default function ListadoVehiculos({params, vehiculos, page, totalRecords}
         }      
     };
     const handleSubmit = () => {
-        router.push('/vehiculos?q='+query)
+        insertParam('q', query)
     };
     useEffect(() => {
         setQuery(params.q)
