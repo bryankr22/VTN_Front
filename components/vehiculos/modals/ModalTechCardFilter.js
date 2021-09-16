@@ -151,7 +151,7 @@ export default function ModalTechCardFilter({
     setActionModal(() => action)
 
     if(param === 'precio') {
-      listado = [...PRICES_FILTER].slice(1, PRICES_FILTER.length)
+      listado = [...PRICES_FILTER].slice(5, PRICES_FILTER.length)
     }
 
     const list = Array.isArray(listado) ? listado : Object.keys(listado);

@@ -225,7 +225,7 @@ export default function ModalFiltersMobile({
     setParamModal(param);
 
     if(param === 'precio') {
-      listado = [...PRICES_FILTER].slice(1, PRICES_FILTER.length)
+      listado = [...PRICES_FILTER].slice(5, PRICES_FILTER.length)
     } else if (param === 'kilometraje') {
       listado = [...KM_FILTER]
     }

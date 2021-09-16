@@ -43,6 +43,7 @@ export default function ModalFiltersDesk({showModal, onClose, titulo, param, lis
         open={showModal}
         onClose={onClose}
         closeIcon
+        scrolling
         >
             <Modal.Header>{titulo}</Modal.Header>
             <Modal.Content scrolling>

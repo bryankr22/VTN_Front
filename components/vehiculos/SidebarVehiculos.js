@@ -566,7 +566,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                   <List.Item
                     as="a"
                     onClick={() =>
-                      openModal("Precios", [...PRICES_FILTER].splice(1, PRICES_FILTER.length -1), "precio", true)
+                      openModal("Precios", [...PRICES_FILTER].splice(5, PRICES_FILTER.length -1), "precio", true)
                     }
                   >
                     Ver Todos
