@@ -230,59 +230,62 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
           </List.Item>
         </List>
 
-        <List link>
-          <List.Item>
-            <List.Content>
-              <List.Header>
-                <Header as="h5">Modelo</Header>
-              </List.Header>
-              <List.List style={{ paddingLeft: 15 }}>
-                {mapping_contador(contadores.modelo).map((item, index) => (
-                  <List.Item
-                    key={index}
-                    as="a"
-                    onClick={() => insertParam("modelo", item.label)}
-                    style={{
-                      color: params.modelo == item.label && "#2185d0",
-                    }}
-                  >
-                    {item.label}
-                  </List.Item>
-                ))}
-                {handleRenderModal(contadores.modelo) && (
-                  <List.Item
-                    as="a"
-                    onClick={() =>
-                      openModal("Modelo", contadores.modelo, "modelo")
-                    }
-                  >
-                    Ver Todos
-                  </List.Item>
-                )}
-              </List.List>
-            </List.Content>
-          </List.Item>
-        </List>
-
-        <List link>
-          <List.Item>
-            <List.Content>
-              <List.Header>
-                <Header as="h5">Tipo de Motor</Header>
-              </List.Header>
-              <List.List style={{ paddingLeft: 15 }}>
-                {mapping_contador(contadores.combustible).map((item, index) => (
-                  <List.Item
-                    key={index}
-                    as="a"
-                    onClick={() => insertParam("combustible", item.label)}
-                    style={{
-                      color: params.combustible == item.label && "#2185d0",
-                    }}
-                  >
-                    {item.label}
-                  </List.Item>
-                ))}
+          {params.marca && 
+            <List link>
+              <List.Item>
+                <List.Content>
+                  <List.Header>
+                    <Header as="h5">Modelo</Header>
+                  </List.Header>
+                  <List.List style={{ paddingLeft: 15 }}>
+                    {mapping_contador(contadores.modelo).map((item, index) => (
+                      <List.Item
+                        key={index}
+                        as="a"
+                        onClick={() => insertParam("modelo", item.label)}
+                        style={{
+                          color: params.modelo == item.label && '#2185d0'
+                        }}
+                      >
+                        {item.label}
+                      </List.Item>
+                    ))}
+                    {handleRenderModal(contadores.modelo) && (
+                      <List.Item
+                        as="a"
+                        onClick={() =>
+                          openModal("Modelo", contadores.modelo, "modelo")
+                        }
+                      >
+                        Ver Todos
+                      </List.Item>
+                    )}
+                  </List.List>
+                </List.Content>
+              </List.Item>
+            </List>
+          }
+          <List link>
+            <List.Item>
+              <List.Content>
+                <List.Header>
+                  <Header as="h5">Tipo de Motor</Header>
+                </List.Header>
+                <List.List style={{ paddingLeft: 15 }}>
+                  {mapping_contador(contadores.combustible).map(
+                    (item, index) => (
+                      <List.Item
+                        key={index}
+                        as="a"
+                        onClick={() => insertParam("combustible", item.label)}
+                        style={{
+                          color: params.combustible == item.label && '#2185d0'
+                        }}
+                      >
+                        {item.label}
+                      </List.Item>
+                    )
+                  )}
 
                 {handleRenderModal(contadores.combustible) && (
                   <List.Item
