@@ -32,16 +32,18 @@ export default function ModalFiltersDesk({showModal, onClose, titulo, param, lis
     }
     const handleChangeFilter = (item) => {
         if(modalAction) {
-            return modalAction?.(item.label)
+            return modalAction?.(item.slug || item.label)
         }
-        insertParam(param, item.label);
+        insertParam(param, item.slug || item.label);
     }
+
     return (
         <Modal
         size="tiny"
         open={showModal}
         onClose={onClose}
         closeIcon
+        scrolling
         >
             <Modal.Header>{titulo}</Modal.Header>
             <Modal.Content scrolling>
@@ -53,7 +55,7 @@ export default function ModalFiltersDesk({showModal, onClose, titulo, param, lis
                                     <List.Item
                                         key={item.label}
                                         as="a"
-                                        style={{ marginBottom: 10 }}
+                                        style={{ margin: 10 }}
                                         onClick={() => handleChangeFilter(item)}
                                     >
                                         {item.label}

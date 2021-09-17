@@ -15,6 +15,13 @@ export default function index({ data }) {
   const router = useRouter();
   return (
     <PublicLayout>
+      <style>
+        {`
+            #grid-range-price > div {
+                padding: 0px !important;
+            }
+        `}
+      </style>
       <Responsive {...Responsive.onlyMobile}>
         <SidebarMobile
           isFicha
