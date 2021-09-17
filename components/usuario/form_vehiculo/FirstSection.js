@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateVehiculo } from '../../../store/productoSlice';
 import { API_URL } from '../../../helpers/constants';
 
-export default function FirstSection({tipo_vehiculo, data}) {
+export default function FirstSection({tipo_vehiculo, data, isMobile}) {
     const dispatch = useDispatch();
     const vehiculoRedux = useSelector(({ producto }) => producto.vehiculo);
     const [marcas, setMarcas] = useState([])
