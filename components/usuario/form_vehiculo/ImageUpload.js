@@ -6,7 +6,7 @@ import Resizer from "react-image-file-resizer";
 import { useDispatch } from 'react-redux';
 import { addImage, removeImage } from '../../../store/productoSlice';
 
-export default function ImageUpload({ principal, index }) {
+export default function ImageUpload({ principal, index, addAlt, removeAlt}) {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
     const getUploadParams = ({ file, meta }) => {
@@ -16,7 +16,8 @@ export default function ImageUpload({ principal, index }) {
             orientation = 90;
         }
         Resizer.imageFileResizer( file, 1000, 1000, "JPEG", 100, 360, (uri) => {
-            dispatch(addImage({index, image: uri}));
+            const add = addAlt || addImage;
+            dispatch(add({index, image: uri}));
             setLoading(false);
         }, "base64" );
 
@@ -24,7 +25,8 @@ export default function ImageUpload({ principal, index }) {
     }
     const handleChangeStatus = (status, index) => { 
         if (status === "removed") {
-            dispatch(removeImage(index));
+            const remove = removeAlt || removeImage
+            dispatch(remove(index));
         }
     }
     return (
