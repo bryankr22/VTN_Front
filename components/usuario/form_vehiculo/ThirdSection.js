@@ -218,9 +218,14 @@ export default function ThirdSection({ estado_vehiculo, data }) {
                         name="placa_vehiculo"
                         max={9}
                         min={0}
+                        maxLength="1"
                         placeholder="Placa"
                         id="placa_vehiculo"
-                        onChange={(e, { value }) => dispatch(updateVehiculo({ input: 'placa_vehiculo', value }))}
+                        onChange={(e, { value }) => {
+                            value = isNaN(value[0]) ? '' : value[0];
+                            e.target.value = value
+                            dispatch(updateVehiculo({ input: 'placa_vehiculo', value }))
+                        }}
                     />
                 </Form.Field>
             )}
