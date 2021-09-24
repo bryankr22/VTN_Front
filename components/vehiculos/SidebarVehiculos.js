@@ -139,7 +139,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
     const list = Array.isArray(listado) ? listado : Object.keys(listado);
     var mapItems = list.map((item, index) => {
       return {
-        label: item.label,
+        label: item.label || item,
         slug: item.slug,
         qty: index,
       };
