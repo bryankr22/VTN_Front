@@ -87,7 +87,7 @@ export default function ModalFiltersMobile({
     {
       text: "Ubicacion",
       open: false,
-      values: mapping_contador(filtros.ubicacion, false, { lower: true }),
+      values: mapping_contador(filtros.ubicacion, true, { lower: true }),
       slug: "ubicacion",
       component: false,
     },
