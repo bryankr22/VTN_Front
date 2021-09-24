@@ -187,6 +187,7 @@ export default function VehiculoContainer({ data }) {
                     content={alert.message}
                 />
             )}
+
             <Responsive {...Responsive.onlyComputer}>
                 <FirstSection data={data} />
                 <Form.Field style={{ marginTop: 20 }}>
@@ -218,7 +219,7 @@ export default function VehiculoContainer({ data }) {
                     <label>Agrega una o más fotos (Mínimo 5 fotos)*</label>
                     <SecondSection isMobile/>
                 </Form.Field>
-                <ThirdSection data={data} />
+                <ThirdSection data={data} isMobile />
                 <Button
                     style={{ marginBottom: 10 }}
                     color="blue"
@@ -243,7 +244,7 @@ export default function VehiculoContainer({ data }) {
                     <label>Agrega una o más fotos (Mínimo 5 fotos)*</label>
                     <SecondSection isMobile />
                 </Form.Field>
-                <ThirdSection data={data} />
+                <ThirdSection data={data} isMobile />
                 <Button
                     style={{ marginBottom: 10 }}
                     color="blue"
