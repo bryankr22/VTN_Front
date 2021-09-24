@@ -453,19 +453,22 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
         <Checkbox
           name="promocion"
           label="Promoción"
-          defaultValue={params.promocion}
+          checked={Boolean(params.promocion)}
+          defaultValue={Boolean(params.promocion)}
           onChange={({ value }) => insertParam("promocion", !value)}
         />
         <Checkbox
           name="permuta"
           label="Permuta"
-          defaultValue={params.permuta}
+          checked={Boolean(params.permuta)}
+          defaultValue={Boolean(params.permuta)}
           onChange={({ value }) => insertParam("permuta", !value)}
         />
         <Checkbox
           name="blindaje"
           label="Blindaje"
-          defaultValue={params.blindaje}
+          checked={Boolean(params.blindaje)}
+          defaultValue={Boolean(params.blindaje)}
           onChange={({ value }) => insertParam("blindaje", !value)}
         />
         <>
