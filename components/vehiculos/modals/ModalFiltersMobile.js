@@ -83,14 +83,30 @@ export default function ModalFiltersMobile({
     { label: "Otros", slug: "otros" },
   ];
 
-  const [filtrosLocal, setFiltrosLocal] = useState([
+  const objectCities = [
     {
       text: "Ubicacion",
       open: false,
       values: mapping_contador(filtros.ubicacion, true, { lower: true }),
       slug: "ubicacion",
       component: false,
-    },
+    }
+  ];
+
+  if (params.ubicacion !== undefined) {
+    objectCities.push(
+      {
+        text: "Ciudades",
+        open: false,
+        values: mapping_contador(filtros.ciudad, true, { lower: true }),
+        slug: "ciudad",
+        component: false,
+      }
+    );
+  }
+
+  const [filtrosLocal, setFiltrosLocal] = useState([
+    ...objectCities,
     {
       text: "Categorias",
       open: false,
@@ -224,7 +240,7 @@ export default function ModalFiltersMobile({
     setTituloModal(titulo);
     setParamModal(param);
 
-    if(param === 'precio') {
+    if (param === 'precio') {
       listado = [...PRICES_FILTER].slice(5, PRICES_FILTER.length)
     } else if (param === 'kilometraje') {
       listado = [...KM_FILTER]
@@ -244,7 +260,7 @@ export default function ModalFiltersMobile({
       setListadoModal(groupByDecade(aniosByLabel));
     } else {
       let grouped = [];
-      if(Array.isArray(listado)) {
+      if (Array.isArray(listado)) {
         grouped = [[...mapItems]]
       } else {
         grouped = groupByAlphabet(mapItems)
@@ -331,7 +347,7 @@ export default function ModalFiltersMobile({
                           </List.Item>
                         </List>
                         {item.slug === "precio" ||
-                        item.slug === "kilometraje" ? (
+                          item.slug === "kilometraje" ? (
                           <Grid
                             id="grid-range-price"
                             style={{ marginBottom: 8 }}

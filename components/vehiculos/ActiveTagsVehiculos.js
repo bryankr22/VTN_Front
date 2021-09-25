@@ -30,6 +30,12 @@ export default function ActiveTagsVehiculos({ tags }) {
           <Icon name="delete" onClick={() => removeFilter("ubicacion")} />
         </Label>
       ) : null}
+      {tags.ciudad ? (
+        <Label as="a" style={{ marginBottom: 5, textTransform: "capitalize" }}>
+          {tags.ciudad}
+          <Icon name="delete" onClick={() => removeFilter("ciudad")} />
+        </Label>
+      ) : null}
       {tags.tipo ? (
         <Label as="a" style={{ marginBottom: 5, textTransform: "capitalize" }}>
           {tags.tipo}
