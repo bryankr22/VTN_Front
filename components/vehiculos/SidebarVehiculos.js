@@ -204,6 +204,41 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
             </List.Content>
           </List.Item>
         </List>
+        {params.ubicacion &&
+          <List link>
+            <List.Item>
+              <List.Content>
+                <List.Header>
+                  <Header as="h5">Ciudades</Header>
+                </List.Header>
+                <List.List style={{ paddingLeft: 15 }}>
+                  {mapping_contador(contadores.ciudad).map((item, index) => (
+                    <List.Item
+                      key={index}
+                      as="a"
+                      style={{
+                        textTransform: "capitalize",
+                        color:
+                          params.ciudad === item.label ? "#2185d0" : undefined,
+                      }}
+                      onClick={() => insertParam("ciudad", item.label)}
+                    >
+                      {item.label?.toLowerCase()}
+                    </List.Item>
+                  ))}
+                  <List.Item
+                    as="a"
+                    onClick={() =>
+                      openModal("Ciudades", contadores.ciudad, "ciudad")
+                    }
+                  >
+                    Ver Todos
+                  </List.Item>
+                </List.List>
+              </List.Content>
+            </List.Item>
+          </List>
+        }
         <List link>
           <List.Item>
             <List.Content>
