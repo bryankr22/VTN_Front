@@ -372,6 +372,7 @@
 .search-input > input::placeholder {
   text-align: center;
   letter-spacing: 3px;
+  color: #000 !important;
 }
 
 .search-input-alt > input {
