@@ -446,13 +446,13 @@ const Header = (props) => {
                         </Link>
                       </span>
                     </div>
-                    <div
+                    {/* <div
                       style={{
                         borderTop: "1px solid rgb(255 255 255 / 10%)",
                         margin: ".5em 0",
                       }}
-                    ></div>
-                    <div className="item" href="#" style={{ padding: 11 }}>
+                    ></div> */}
+                    {/* <div className="item" href="#" style={{ padding: 11 }}>
                       <span>
                         <Link href="/accesorios">
                           <a
@@ -467,7 +467,7 @@ const Header = (props) => {
                           </a>
                         </Link>
                       </span>
-                    </div>
+                    </div> */}
                     <div
                       style={{
                         borderTop: "1px solid rgb(255 255 255 / 10%)",
