@@ -26,7 +26,7 @@ export default function ListadoFichas({
   const [compare, setCompare] = useLocalStorage("compareFichatecnica", "0");
   const [isComparing, setIsComparing] = useLocalStorage("isComparing", "0");
   const pathS3 =
-    "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x300/vendetunave/images/ficha-tecnica/";
+    "https://vendetunave.s3.amazonaws.com/vendetunave/images/ficha-tecnica/";
   const filter = [
     { key: 0, value: 0, text: "Más reciente" },
     { key: 3, value: 3, text: "Precio más bajo" },

@@ -18,7 +18,7 @@ export default function ListadoFichasMobile({ vehiculos, totalRecords, page}) {
   const [compare, setCompare] = useLocalStorage("compareFichatecnica", "0");
   const [isComparing, setIsComparing] = useLocalStorage("isComparing", "0");
   const pathS3 =
-    "https://d3bmp4azzreq60.cloudfront.net/fit-in/120x120/vendetunave/images/ficha-tecnica/";
+    "https://vendetunave.s3.amazonaws.com/vendetunave/images/ficha-tecnica/";
   const normalize = (function () {
     var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
       to = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc",

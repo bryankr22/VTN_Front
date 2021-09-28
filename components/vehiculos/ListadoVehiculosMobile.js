@@ -9,7 +9,8 @@ export default function ListadoVehiculosMobile({ params, vehiculos, page, totalR
     const dispatch = useDispatch();
     const [compare, setCompare] = useLocalStorage("compareVehiculos", '0');
     const [isComparing, setIsComparing] = useLocalStorage("isComparing", '0');
-    const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/200x200/vendetunave/images/vehiculos/";
+    // const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/200x200/vendetunave/images/vehiculos/";
+    const pathS3 = "https://vendetunave.s3.amazonaws.com/vendetunave/images/thumbnails/";
     const normalize = (function () {
         var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
             to = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc",
@@ -101,7 +102,7 @@ export default function ListadoVehiculosMobile({ params, vehiculos, page, totalR
                         }}
                     >
                         <Image
-                            src={pathS3 + item.nameImage + "." + item.extension}
+                            src={pathS3 + item.nameImage + "300x300." + item.extension}
                             wrapped
                             ui={false}
                         />
