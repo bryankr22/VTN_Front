@@ -314,7 +314,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                         params.marca === item.label ? "#2185d0" : undefined,
                     }}
                     onClick={() =>
-                      insertParam("marca", item.label, true, ["categoria"])
+                      insertParam("marca", item.label, true, ["categoria", "ubicacion", "ciudad"])
                     }
                   >
                     {item.label}
