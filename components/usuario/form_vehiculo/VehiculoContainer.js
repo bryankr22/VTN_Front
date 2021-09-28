@@ -11,14 +11,13 @@ import axios from "axios";
 import { clearForm } from '../../../store/productoSlice';
 import { AUTH_URL } from "../../../helpers/constants";
 
-export default function VehiculoContainer({ data }) {
+export default function VehiculoContainer({ data, isEdit }) {
     const dispatch = useDispatch();
     const [cookies] = useCookies(["vtn_token"]);
     const [loading, setLoading] = useState(false);
     const [alert, setAlert] = useState({});
     const vehiculoRedux = useSelector(({ producto }) => producto.vehiculo);
     const imagesVehiculoRedux = useSelector(({ producto }) => producto.images);
-
     const isValidForm = (data) => {
         for (let key in data) {
             if (data.hasOwnProperty(key)) {

@@ -5,6 +5,7 @@ import { validateAuth } from '../../helpers/auth';
 import { panes } from '../../components/usuario/productoTabs';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
+import { API_URL } from '../../helpers/constants';
 
 export default function crear_producto({ data }) {
     return (
@@ -106,7 +107,7 @@ export async function getServerSideProps(context) {
                 tipoPrecio: optionsTipoPrecio,
                 tipoAccesorio: optionsTipoAccesorios,
                 departamentos: optionsDepartamentos,
-                tipoMotos: optionsTipoMoto,
+                tipoMotos: optionsTipoMoto
             }
         }
     }

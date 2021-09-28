@@ -7,7 +7,7 @@ import { updateVehiculo } from "../../../store/productoSlice";
 import { API_URL } from "../../../helpers/constants";
 import { toCurrency } from "../../../helpers/format";
 
-export default function ThirdSection({ estado_vehiculo, data, isMobile }) {
+export default function ThirdSection({ estado_vehiculo, data: {edit, ...data}, isMobile }) {
   const dispatch = useDispatch();
   const [cities, setCities] = useState([]);
   const [stateVehicle, setStateVehicle] = useState("Nuevo");
@@ -54,6 +54,7 @@ export default function ThirdSection({ estado_vehiculo, data, isMobile }) {
         <Form.Input
           name="titulo_vehiculo"
           fluid
+          defaultValue={edit?.vehiculo?.title}
           placeholder="Ej: Mazda 3 Gran Touring LX 2017"
           onChange={(e, { value }) =>
             dispatch(updateVehiculo({ input: "titulo_vehiculo", value }))
@@ -66,6 +67,7 @@ export default function ThirdSection({ estado_vehiculo, data, isMobile }) {
           name="descripcion_vehiculo"
           fluid
           placeholder="Descripción"
+          defaultValue={edit?.vehiculo?.descripcion}
           onChange={(e, { value }) =>
             dispatch(updateVehiculo({ input: "descripcion_vehiculo", value }))
           }
