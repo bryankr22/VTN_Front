@@ -11,10 +11,20 @@ import { validateAuth } from '../../../helpers/auth';
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
 import { Responsive, Icon, Breadcrumb, Grid, Header, Container } from "semantic-ui-react";
+
+import Head from 'next/head';
+
 export default function detalle({ data }) {
+
+    const { imagenes } = data;
 
     return (
         <PublicLayout>
+            <Head>
+                <meta property="og:title" content={`<c:out value="${data.vehiculo.title}"/>`} />
+                <meta property="og:type" content="product"/>
+                <meta property="og:image" content={`<c:out value="${imagenes?.[0]?.url}${imagenes?.[0]?.extension}"/>`} />
+            </Head>
             <style>
             {`
                 .image > img {

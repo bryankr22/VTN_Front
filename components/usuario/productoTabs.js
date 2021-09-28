@@ -18,20 +18,20 @@ export const panes = (data) => {
                 </Tab.Pane>
             ),
         },
-        {
-            menuItem: "ACCESORIOS",
-            render: () => (
-                <Tab.Pane>
-                    <Header as="h2">PUBLICAR ACCESORIOS</Header>
-                    <p>
-                        Para publicar un accesorio con VENDETUNAVE se requiere
-                        diligenciar completamente el formulario. Una vez diligenciado
-                        pasará a revisión por parte del soporte técnico, y publicado en
-                        un periodo máximo de 24 horas.
-                    </p>
-                    <AccesorioContainer data={data} />
-                </Tab.Pane>
-            ),
-        },
+        // {
+        //     menuItem: "ACCESORIOS",
+        //     render: () => (
+        //         <Tab.Pane>
+        //             <Header as="h2">PUBLICAR ACCESORIOS</Header>
+        //             <p>
+        //                 Para publicar un accesorio con VENDETUNAVE se requiere
+        //                 diligenciar completamente el formulario. Una vez diligenciado
+        //                 pasará a revisión por parte del soporte técnico, y publicado en
+        //                 un periodo máximo de 24 horas.
+        //             </p>
+        //             <AccesorioContainer data={data} />
+        //         </Tab.Pane>
+        //     ),
+        // },
     ];
 }

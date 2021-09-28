@@ -149,8 +149,8 @@ export default function MenuMobile() {
                                 </Link>
                             </span>
                         </div>
-                        <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
-                        <div className="item" href="#" style={{padding: 11}}>
+                        {/* <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div> */}
+                        {/* <div className="item" href="#" style={{padding: 11}}>
                             <span>
                                 <Link
                                 href="/accesorios"
@@ -158,7 +158,7 @@ export default function MenuMobile() {
                                     <a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Accesorios</a>
                                 </Link>
                             </span>
-                        </div>
+                        </div> */}
                         <div style={{borderTop: '1px solid rgb(255 255 255 / 10%)', margin:'.5em 0'}}></div>
                         <div className="item" href="#" style={{padding: 11}}>
                             <span>
