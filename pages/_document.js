@@ -13,7 +13,7 @@ class MyDocument extends Document {
             <Html lang={this.props.lang}>
                 <Head>
                     <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-                    <meta name="Description" content="VendeTuNave"></meta>
+                    <meta name="Description" content="Vende tu vehículo completamente gratis en VendeTuNave. Encuentra carros, camionetas, motos, servicios y recomendaciones en un solo sitio."></meta>
                     <link rel="preconnect" href="https://fonts.googleapis.com" />
                     <link rel="preconnect" href="https://fonts.gstatic.com" />
                     <link media="all" href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css" />
@@ -23,6 +23,21 @@ class MyDocument extends Document {
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
                     <script src="https://cdn.jsdelivr.net/npm/ez-plus-extended@1.0.2/src/jquery.ez-plus.min.js"></script>
+                    {process?.env?.NODE_ENV != 'development' && (
+                        <>
+                        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158787289-1"></script>
+                        <script dangerouslySetInnerHTML={{
+                        __html: `
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);}
+                            gtag('js', new Date());
+
+                            gtag('config', 'UA-158787289-1');
+                        `
+                        }}>
+                        </script>
+                        </>
+                    )}
                 </Head>
                 <body>
                     <Main />
