@@ -11,7 +11,7 @@ import DestacadosHome from '../components/home/DestacadosHome';
 import axios from 'axios';
 import { API_URL, home } from '../helpers/constants';
 
-const Home = ({ vehiculos, slider, sliderMobile, categorias, marcas, noticias, filters}) => {
+const Home = ({ vehiculos, slider, sliderMobile, categorias, marcas, noticias, filters, config}) => {
     return(
         <PublicLayout>
             <SliderHome slider={slider} sliderMobile={sliderMobile}/>
@@ -20,18 +20,20 @@ const Home = ({ vehiculos, slider, sliderMobile, categorias, marcas, noticias, f
             <MarcasHome marcas={marcas}/>
             <DestacadosHome vehiculos={vehiculos}/>
             <NoticiasHome noticias={noticias}/>
-            <ContentHome />
+            <ContentHome config={config} />
         </PublicLayout>
     );
 }
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const res = await axios.get(API_URL + home);
+    console.log(res.data);
     const vehiculos = await res.data.vehiculos_promocion;
     const slider = await res.data.banners;
     const sliderMobile = await res.data.bannersMobile;
     const categorias = await res.data.categories;
     const marcas = await res.data.marcas;
     const noticias = await res.data.noticias;
+    const config = res.data.config;
     let optionsCategories = [];
     await res.data.categories.forEach(function (item) {
         optionsCategories.push({
@@ -83,7 +85,8 @@ export async function getStaticProps() {
             categorias,
             marcas,
             noticias,
-            filters
+            filters,
+            config
         }
     }
 }
