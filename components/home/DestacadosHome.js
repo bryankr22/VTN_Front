@@ -9,7 +9,7 @@ export default function DestacadosHome({vehiculos}) {
                 <Header
                     as="h2"
                     textAlign="left"
-                    style={{ marginLeft: 16, fontSize: "1.4rem", textTransform: "uppercase" }}
+                    style={{ marginLeft: 16, fontSize: "1.4rem", textTransform: "uppercase", marginTop: '30px' }}
                 >
                     vehículos en promoción
                 </Header>
@@ -26,7 +26,7 @@ export default function DestacadosHome({vehiculos}) {
                 <Header
                     as="h2"
                     textAlign="left"
-                    style={{ marginLeft: 16, fontSize: "1.4rem", textTransform: "uppercase" }}
+                    style={{ marginLeft: 16, fontSize: "1.4rem", textTransform: "uppercase", marginTop: '30px' }}
                 >
                     vehículos en promoción
                 </Header>
@@ -44,7 +44,7 @@ export default function DestacadosHome({vehiculos}) {
                 <Header
                     as="h2"
                     textAlign="center"
-                    style={{ marginLeft: 16, marginBottom: 40, fontSize: "1.4rem", textTransform: "uppercase" }}
+                    style={{ marginLeft: 16, marginBottom: 40, fontSize: "1.4rem", textTransform: "uppercase",marginTop: '30px' }}
                 >
                     vehículos en promoción
                 </Header>

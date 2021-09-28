@@ -22,7 +22,7 @@ export default function Loading() {
     },[])
     return loading && (
         <Dimmer style={{ position: "fixed", zIndex: 9999 }} active={loading}>
-            <Loader>Cargando pagina...</Loader>
+            <Loader>Cargando página...</Loader>
         </Dimmer>  
     );
 }
