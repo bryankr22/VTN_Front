@@ -10,7 +10,7 @@ export default function ListadoVehiculos({params, vehiculos, page, totalRecords}
     const dispatch = useDispatch();
     const [compare, setCompare] = useLocalStorage("compareVehiculos", '0');
     const [isComparing, setIsComparing] = useLocalStorage("isComparing", '0');
-    const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x300/vendetunave/images/vehiculos/";
+    const pathS3 = "https://vendetunave.s3.amazonaws.com/vendetunave/images/thumbnails/";
     const filter = [
         { key: 0, value: 0, text: "Más reciente" },
         { key: 1, value: 1, text: "Nuevo" },
@@ -158,7 +158,7 @@ export default function ListadoVehiculos({params, vehiculos, page, totalRecords}
                     }
                 >
                     <Image
-                        src={pathS3 + item.nameImage + "." + item.extension}
+                        src={pathS3 + item.nameImage + "300x300." + item.extension}
                         wrapped
                         ui={false}
                     />

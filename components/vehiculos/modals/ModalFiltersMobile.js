@@ -25,7 +25,7 @@ const getSlug = (slug) => {
 
 const persistKey = {
   categoria: [],
-  marca: ["categoria"],
+  marca: ["categoria", 'ubicacion', 'ciudad'],
 };
 
 export default function ModalFiltersMobile({

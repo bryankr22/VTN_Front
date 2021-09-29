@@ -140,7 +140,7 @@ export default function MarcaModeloComponent({ filtros, params }) {
                               marcasList.slug,
                               itemSecond.slug,
                               true,
-                              ['categoria']
+                              ['categoria', "ubicacion", 'ciudad']
                             );
                           }
                           openModal(

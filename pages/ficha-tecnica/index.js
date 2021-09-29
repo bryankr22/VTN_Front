@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PublicLayout from "../../layouts/PublicLayout";
 import SidebarFichas from "../../components/vehiculos/SidebarFichas";
 import ListadoFichas from "../../components/vehiculos/ListadoFichas";

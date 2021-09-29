@@ -5,12 +5,13 @@ import Iframe from "react-iframe";
 import axios from 'axios';
 import { API_URL, newsletter_api } from '../../helpers/constants';
 
-const ContentHome = () => {
+const ContentHome = ({config}) => {
     const [form, setForm] = useState({
         nombreNewsletter: "",
         emailNewsletter: "",
         disabledNews: true,
-        link_video: "https://www.youtube.com/embed/Z97oTgtn_VU"
+        link_video: "https://www.youtube.com/embed/Z97oTgtn_VU",
+        ...config
     });
     const [response, setResponse] = useState({
         mensaje: "",

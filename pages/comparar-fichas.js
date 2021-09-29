@@ -15,6 +15,7 @@ export default function comparar_fichas() {
         if(confirm('¿Estas seguro?, se quitaran todos los vehículos que estas comparando actualmente.')) {
             dispatch(restartFicha());
             localStorage.setItem("compareFichatecnica", "1")
+            localStorage.setItem("isComparing", "1");
             window.location.href = '/ficha-tecnica';
         }
     }
