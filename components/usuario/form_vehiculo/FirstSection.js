@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateVehiculo } from "../../../store/productoSlice";
 import { API_URL, GET_BRANDS } from "../../../helpers/constants";
 
-export default function FirstSection({ tipo_vehiculo, data, isMobile }) {
+export default function FirstSection({ tipo_vehiculo, data: {edit, ...data}, isMobile }) {
   const dispatch = useDispatch();
   const vehiculoRedux = useSelector(({ producto }) => producto.vehiculo);
-  const [marcas, setMarcas] = useState([]);
+  const [marcas, setMarcas] = useState(() => edit?.marcas || []);
   const [marcasMotos, setMarcasMotos] = useState([]);
-  const [modelos, setModelos] = useState([]);
+  const [modelos, setModelos] = useState(() => edit?.modelos || []);
   const changeTipoVehiculo = (value) => {
     if (value !== 5) {
       axios.get(`${API_URL}/marcas/${value}`).then((res) => {
@@ -73,6 +73,7 @@ export default function FirstSection({ tipo_vehiculo, data, isMobile }) {
           name="tipo_vehiculo"
           search
           options={data.categories}
+          defaultValue={data.categories?.find(item => item.value == edit?.vehiculo.tipo_vehiculo)?.value}
           fluid
           placeholder="Tipo"
           onChange={(e, { value }) => changeTipoVehiculo(value)}
@@ -85,6 +86,7 @@ export default function FirstSection({ tipo_vehiculo, data, isMobile }) {
             name="marca_vehiculo"
             search
             options={marcas}
+            defaultValue={marcas.find(item => item.value == edit?.vehiculo?.marcaId)?.value}
             fluid
             placeholder="Marca"
             onChange={(e, { value }) => changeMarca(value)}
@@ -101,6 +103,7 @@ export default function FirstSection({ tipo_vehiculo, data, isMobile }) {
               options={data.tipoMotos}
               fluid
               placeholder="Tipo Moto"
+              defaultValue={data.tipoMotos?.find(item => item.value == edit?.vehiculo?.tipo_moto)?.value}
               onChange={(e, { value }) =>
                 dispatch(updateVehiculo({ input: "tipo_moto", value }))
               }
@@ -114,6 +117,7 @@ export default function FirstSection({ tipo_vehiculo, data, isMobile }) {
               options={marcasMotos}
               fluid
               placeholder="Marca"
+              defaultValue={edit?.vehiculo?.marcaId}
               onChange={(e, { value }) => changeMarca(value)}
             />
           </Form.Field>
@@ -128,6 +132,7 @@ export default function FirstSection({ tipo_vehiculo, data, isMobile }) {
             options={modelos}
             fluid
             placeholder="Modelo"
+            defaultValue={edit?.vehiculo?.modelo_id}
             onChange={(e, { value }) =>
               dispatch(updateVehiculo({ input: "modelo", value }))
             }
@@ -141,6 +146,7 @@ export default function FirstSection({ tipo_vehiculo, data, isMobile }) {
           type="number"
           id="group-input"
           fluid
+          defaultValue={edit?.vehiculo?.ano}
           placeholder="Año"
           onChange={(e, { value }) =>
             dispatch(updateVehiculo({ input: "anio", value }))
@@ -158,6 +164,7 @@ export default function FirstSection({ tipo_vehiculo, data, isMobile }) {
           options={data.categories}
           fluid
           placeholder="Tipo"
+          defaultValue={data.categories?.find(item => item.value == edit?.vehiculo.tipo_vehiculo)?.value}
           onChange={(e, { value }) => changeTipoVehiculo(value)}
         />
         <Fragment>
@@ -168,6 +175,7 @@ export default function FirstSection({ tipo_vehiculo, data, isMobile }) {
               options={marcas}
               fluid
               placeholder="Marca"
+              defaultValue={marcas.find(item => item.value == edit?.vehiculo?.marcaId)?.value}
               onChange={(e, { value }) => changeMarca(value)}
             />
           )}
@@ -179,6 +187,7 @@ export default function FirstSection({ tipo_vehiculo, data, isMobile }) {
                 options={data.tipoMotos}
                 fluid
                 placeholder="Tipo Moto"
+                defaultValue={edit?.vehiculo?.tipo_moto}
                 onChange={(e, { value }) =>
                   dispatch(updateVehiculo({ input: "tipo_moto", value }))
                 }
@@ -189,6 +198,7 @@ export default function FirstSection({ tipo_vehiculo, data, isMobile }) {
                 options={marcasMotos}
                 fluid
                 placeholder="Marca"
+                defaultValue={edit?.vehiculo?.marcaId}
                 onChange={(e, { value }) => changeMarca(value)}
               />
             </Fragment>
@@ -200,6 +210,7 @@ export default function FirstSection({ tipo_vehiculo, data, isMobile }) {
               options={modelos}
               fluid
               placeholder="Modelo"
+              defaultValue={edit?.vehiculo?.modelo_id}
               onChange={(e, { value }) =>
                 dispatch(updateVehiculo({ input: "modelo", value }))
               }
@@ -212,6 +223,7 @@ export default function FirstSection({ tipo_vehiculo, data, isMobile }) {
           id="group-input"
           fluid
           placeholder="Año"
+          defaultValue={edit?.vehiculo?.ano}
           onChange={(e, { value }) =>
             dispatch(updateVehiculo({ input: "anio", value }))
           }
