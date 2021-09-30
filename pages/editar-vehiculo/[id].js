@@ -5,8 +5,17 @@ import jwt from "jsonwebtoken";
 import axios from "axios";
 import { Container } from "semantic-ui-react";
 import { API_URL, AUTH_URL } from '../../helpers/constants';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { setVehicle } from '../../store/productoSlice';
 
 export default function EditVehicle({ data }) {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setVehicle(data.edit.vehiculo))
+  }, []);
+
   return (
     <PublicLayout>
       <Container style={{ paddingTop: 25 }}>
@@ -107,6 +116,25 @@ export async function getServerSideProps(context) {
           user_id: decoded.user.id
       }, config)
       edit = result.data;
+  }
+
+  if(edit) {
+    console.log(edit);
+    edit.marcas = edit.marcas.map(item => ({
+      key: item.id,
+      value: item.id,
+      text: item.nombre,
+    }));
+    edit.modelos = edit.modelos.map(item => ({
+      key: item.id,
+      value: item.id,
+      text: item.nombre,
+    }))
+    edit.ciudades = edit.ciudades.map(item => ({
+      key: item.id,
+      value: item.id,
+      text: item.nombre,
+    }))
   }
   return {
     props: {

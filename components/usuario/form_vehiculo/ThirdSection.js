@@ -9,7 +9,7 @@ import { toCurrency } from "../../../helpers/format";
 
 export default function ThirdSection({ estado_vehiculo, data: {edit, ...data}, isMobile }) {
   const dispatch = useDispatch();
-  const [cities, setCities] = useState([]);
+  const [cities, setCities] = useState(() => edit?.ciudades || []);
   const [stateVehicle, setStateVehicle] = useState("Nuevo");
   const [checkPromotion, setCheckPromotion] = useState(false);
   const [chechPermuta, setChechPermuta] = useState(false);
@@ -47,6 +47,7 @@ export default function ThirdSection({ estado_vehiculo, data: {edit, ...data}, i
     dispatch(updateVehiculo({ input: "estado_vehiculo", value }));
   };
 
+  console.log(data.tipoPrecio);
   return (
     <>
       <Form.Field>
@@ -83,6 +84,7 @@ export default function ThirdSection({ estado_vehiculo, data: {edit, ...data}, i
           inputmode="numeric"
           pattern="[0-9]*"
           placeholder="Número de contacto"
+          defaultValue={edit?.vehiculo?.contacto}
           onChange={(e, { value }) => {
             value = isNaN(value) ? value.slice(0, -1) : value;
             e.target.value = value;
@@ -96,6 +98,7 @@ export default function ThirdSection({ estado_vehiculo, data: {edit, ...data}, i
           name="estado_vehiculo"
           options={optionsCondicion}
           placeholder="Condición"
+          defaultValue={optionsCondicion.find(item => edit?.vehiculo?.condicion == item.value)?.value}
           onChange={(e, { value }) => changeState(value)}
         />
       </Form.Field>
@@ -107,6 +110,7 @@ export default function ThirdSection({ estado_vehiculo, data: {edit, ...data}, i
               name="precio_vehiculo"
               type="text"
               placeholder="$"
+              defaultValue={edit && toCurrency({target: {value: ""+edit?.vehiculo?.precio}})}
               onChange={(e, { value }) => {
                 value = toCurrency(e);
                 dispatch(updateVehiculo({ input: "precio_vehiculo", value }));
@@ -118,6 +122,7 @@ export default function ThirdSection({ estado_vehiculo, data: {edit, ...data}, i
               name="tipo_precio_vehiculo"
               options={data.tipoPrecio}
               placeholder="Tipo precio"
+              defaultValue={data.tipoPrecio?.find(item => item.value == edit?.vehiculo.tipo_precio)?.value}
               onChange={(e, { value }) =>
                 dispatch(
                   updateVehiculo({ input: "tipo_precio_vehiculo", value })
@@ -134,6 +139,7 @@ export default function ThirdSection({ estado_vehiculo, data: {edit, ...data}, i
               name="precio_vehiculo"
               type="text"
               placeholder="$"
+              defaultValue={edit && toCurrency({target: {value: ""+edit?.vehiculo?.precio}})}
               onChange={(e, { value }) => {
                 value = toCurrency(e);
                 dispatch(updateVehiculo({ input: "precio_vehiculo", value }));
@@ -143,6 +149,7 @@ export default function ThirdSection({ estado_vehiculo, data: {edit, ...data}, i
               name="tipo_precio_vehiculo"
               options={data.tipoPrecio}
               placeholder="Tipo precio"
+              defaultValue={data.tipoPrecio?.find(item => item.value == edit?.vehiculo.tipo_precio)?.value}
               onChange={(e, { value }) =>
                 dispatch(
                   updateVehiculo({ input: "tipo_precio_vehiculo", value })
@@ -157,29 +164,31 @@ export default function ThirdSection({ estado_vehiculo, data: {edit, ...data}, i
           name="promocion"
           label="Promoción"
           style={{ marginRight: 15 }}
-          onChange={() => {
-            const value = !checkPromotion;
-            setCheckPromotion(value);
-            dispatch(updateVehiculo({ input: "promocion", value }));
+          defaultChecked={!!edit?.vehiculo?.promocion}
+          onChange={(_, {checked}) => {
+            setCheckPromotion(checked);
+            dispatch(updateVehiculo({ input: "promocion", value: checked}));
           }}
         />
         <Checkbox
           name="permuta"
           label="Acepta Permuta"
           style={{ marginRight: 15 }}
-          onChange={() => {
-            const value = !chechPermuta;
-            setChechPermuta(!value);
-            dispatch(updateVehiculo({ input: "permuta", value }));
+          defaultChecked={!!edit?.vehiculo?.permuta}
+          onChange={(_, {checked}) => {
+            setChechPermuta(prev => {
+              dispatch(updateVehiculo({ input: "permuta", value: checked }));
+              return checked
+            });
           }}
         />
         <Checkbox
           name="financiacion"
           label="Financiación"
-          onChange={() => {
-            const value = !checkFinanciacion;
-            setCheckFinanciacion(value);
-            dispatch(updateVehiculo({ input: "financiacion", value }));
+          defaultChecked={!!edit?.vehiculo?.financiacion}
+          onChange={(_, {checked}) => {
+            setCheckFinanciacion(checked);
+            dispatch(updateVehiculo({ input: "financiacion", value: checked }));
           }}
         />
         <p style={{ color: "#828282" }}>
@@ -194,6 +203,7 @@ export default function ThirdSection({ estado_vehiculo, data: {edit, ...data}, i
           name="kilometraje_vehiculo"
           min="0"
           placeholder="Km"
+          defaultValue={edit && toCurrency({target: {value: ""+edit?.vehiculo?.kilometraje}})}
           onChange={(e, { value }) => {
             value = toCurrency(e);
             console.log(value);
@@ -207,6 +217,7 @@ export default function ThirdSection({ estado_vehiculo, data: {edit, ...data}, i
           name="cilindraje_vehiculo"
           min="0"
           placeholder="Cilindraje"
+          defaultValue={edit && toCurrency({target: {value: ""+edit?.vehiculo?.cilindraje}})}
           onChange={(e, { value }) => {
             value = toCurrency(e);
             dispatch(updateVehiculo({ input: "cilindraje_vehiculo", value }));
@@ -219,6 +230,7 @@ export default function ThirdSection({ estado_vehiculo, data: {edit, ...data}, i
           name="combustible_vehiculo"
           search
           options={data.combustibles}
+          defaultValue={edit?.vehiculo?.combustible}
           placeholder="Selecciona combustible"
           onChange={(e, { value }) =>
             dispatch(updateVehiculo({ input: "combustible_vehiculo", value }))
@@ -233,6 +245,7 @@ export default function ThirdSection({ estado_vehiculo, data: {edit, ...data}, i
           search
           selection
           options={data.colores}
+          defaultValue={edit?.vehiculo?.color}
           placeholder="Selecciona color"
           onChange={(e, { value }) =>
             dispatch(updateVehiculo({ input: "color_vehiculo", value }))
@@ -245,6 +258,7 @@ export default function ThirdSection({ estado_vehiculo, data: {edit, ...data}, i
           name="transmision_vehiculo"
           search
           options={data.transmision}
+          defaultValue={edit?.vehiculo?.transmision}
           placeholder="Selecciona transmisión"
           onChange={(e, { value }) =>
             dispatch(updateVehiculo({ input: "transmision_vehiculo", value }))
@@ -257,6 +271,7 @@ export default function ThirdSection({ estado_vehiculo, data: {edit, ...data}, i
           name="blindado_vehiculo"
           options={optionsBlindado}
           placeholder="Selecciona blindaje"
+          defaultValue={edit?.vehiculo?.blindado}
           onChange={(e, { value }) =>
             dispatch(updateVehiculo({ input: "blindado_vehiculo", value }))
           }
@@ -272,6 +287,7 @@ export default function ThirdSection({ estado_vehiculo, data: {edit, ...data}, i
             maxLength="1"
             placeholder="Placa"
             id="placa_vehiculo"
+            defaultValue={edit?.vehiculo?.placa}
             onChange={(e, { value }) => {
               value = isNaN(value[0]) ? "" : value[0];
               e.target.value = value;
@@ -290,6 +306,7 @@ export default function ThirdSection({ estado_vehiculo, data: {edit, ...data}, i
               options={data.departamentos}
               fluid
               placeholder="DEPARTAMENTO"
+              defaultValue={edit?.vehiculo?.departamento}
               onChange={(e, { value }) => changeDeparment(value)}
             />
           </Form.Field>
@@ -300,6 +317,7 @@ export default function ThirdSection({ estado_vehiculo, data: {edit, ...data}, i
               options={cities}
               fluid
               placeholder="MUNICIPIO"
+              defaultValue={edit?.vehiculo?.ciudad_id}
               onChange={(e, { value }) =>
                 dispatch(updateVehiculo({ input: "ciudad_vehiculo", value }))
               }
@@ -316,6 +334,7 @@ export default function ThirdSection({ estado_vehiculo, data: {edit, ...data}, i
               options={data.departamentos}
               fluid
               placeholder="DEPARTAMENTO"
+              defaultValue={edit?.vehiculo?.departamento}
               onChange={(e, { value }) => changeDeparment(value)}
             />
             <Select
@@ -324,6 +343,7 @@ export default function ThirdSection({ estado_vehiculo, data: {edit, ...data}, i
               options={cities}
               fluid
               placeholder="MUNICIPIO"
+              defaultValue={edit?.vehiculo?.ciudad_id}
               onChange={(e, { value }) =>
                 dispatch(updateVehiculo({ input: "ciudad_vehiculo", value }))
               }

@@ -62,7 +62,7 @@ const tree = {
   },
 };
 
-export default function SecondSection({ isMobile }) {
+export default function SecondSection({ data: { edit } = {}, isMobile }) {
   const { inputsList_one, inputsList_two, inputsList_three, listMobile } =
     tree[isMobile ? "mobile" : "desktop"];
   return (
@@ -94,11 +94,12 @@ export default function SecondSection({ isMobile }) {
             {listMobile.map((item) => (
               <>
                 <ImageUpload
+                  images={edit?.imagenes}
                   key={item.index}
                   principal={item.principal}
                   index={item.index}
                 />
-                <div style={{marginBottom: 5}}></div>
+                <div style={{ marginBottom: 5 }}></div>
               </>
             ))}
           </Grid.Column>
@@ -108,6 +109,7 @@ export default function SecondSection({ isMobile }) {
           <Grid.Column className="columDrop">
             {inputsList_one.map((item, index) => (
               <ImageUpload
+                images={edit?.imagenes}
                 key={item.index}
                 principal={item.principal}
                 index={item.index}
@@ -117,6 +119,7 @@ export default function SecondSection({ isMobile }) {
           <Grid.Column className="columDrop">
             {inputsList_two.map((item, index) => (
               <ImageUpload
+                images={edit?.imagenes}
                 key={item.index}
                 principal={item.principal}
                 index={item.index}
@@ -126,6 +129,7 @@ export default function SecondSection({ isMobile }) {
           <Grid.Column className="columDrop">
             {inputsList_three.map((item, index) => (
               <ImageUpload
+                images={edit?.imagenes}
                 key={item.index}
                 principal={item.principal}
                 index={item.index}

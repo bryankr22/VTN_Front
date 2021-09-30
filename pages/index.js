@@ -24,9 +24,9 @@ const Home = ({ vehiculos, slider, sliderMobile, categorias, marcas, noticias, f
         </PublicLayout>
     );
 }
+
 export async function getServerSideProps() {
     const res = await axios.get(API_URL + home);
-    console.log(res.data);
     const vehiculos = await res.data.vehiculos_promocion;
     const slider = await res.data.banners;
     const sliderMobile = await res.data.bannersMobile;
