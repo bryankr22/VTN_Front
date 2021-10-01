@@ -404,3 +404,12 @@
 }
 
 @import url('./CrearProducto.css');
+
+@media screen and (max-width: 425px) {
+  .ant-card-body > .ant-row:first-child {
+    flex-direction: column !important;
+  }
+  .ant-row > .ant-col {
+    max-width: unset;
+  }
+}
