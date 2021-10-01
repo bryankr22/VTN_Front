@@ -160,7 +160,7 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
                   window.scrollTo({ top: 0, behavior: "smooth" });
                   setLoading(false);
                   setTimeout(() => {
-                    // location.replace("/usuario/mis_publicaciones");
+                    location.replace("/usuario/mis_publicaciones");
                   }, 2000);
             }else {
                 throw {error: true}
