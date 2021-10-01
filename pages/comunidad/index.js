@@ -182,9 +182,9 @@ export default function index({q, page, preguntas, tags, total_records}) {
 
                         <Item.Content>
                             <Item.Header as='a'>
-                                <Link href={'/comunidad/detalle/'+ (item.titulo.split(' ').join('-')).split('?').join('') + '-' + item.id} style={{ color: 'black' }}>
+                                <a href={'/comunidad/detalle/'+ (item.titulo.split(' ').join('-')).split('?').join('') + '-' + item.id}>
                                     {item.titulo}
-                                </Link>
+                                </a>
                             </Item.Header>
                             <Item.Meta style={{ marginTop: '20px' }}>
                                 {(tags).map((itemTags) =>
