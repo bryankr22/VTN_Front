@@ -23,6 +23,8 @@ class MyDocument extends Document {
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
                     <script src="https://cdn.jsdelivr.net/npm/ez-plus-extended@1.0.2/src/jquery.ez-plus.min.js"></script>
+                    <meta name="description" content="Vende tu vehículo completamente gratis en VendeTuNave. Encuentra carros, camionetas, motos, servicios y recomendaciones en un solo sitio." />
+                    <meta name="keywords" content="vende tu nave, carros en venta, carros de segunda, mercado libre carros, venta de carros usados y nuevos, compra y venta de carros, compra y venta motos, venta de carros" />
                     {process?.env?.NODE_ENV != 'development' && (
                         <>
                         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158787289-1"></script>

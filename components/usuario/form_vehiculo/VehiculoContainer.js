@@ -29,7 +29,7 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
   const isValidForm = (data) => {
     for (let key in data) {
       if (data.hasOwnProperty(key)) {
-        if (!data[key] || data[key].length === 0) {
+        if ((data[key] == undefined || data[key] === '')|| data[key].length === 0) {
           console.log(key);
           return false;
         }
