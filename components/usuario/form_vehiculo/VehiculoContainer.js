@@ -24,11 +24,11 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState({});
   const vehiculoRedux = useSelector(({ producto }) => producto.vehiculo);
-  const imagesVehiculoRedux = useSelector(({ producto }) => producto.images);
+  const imagesVehiculoRedux = useSelector(({ producto }) => producto.images, () => true);
   const isValidForm = (data) => {
     for (let key in data) {
       if (data.hasOwnProperty(key)) {
-        if (!data[key] || data[key].length === 0) {
+        if ((data[key] == undefined || data[key] === '')|| data[key].length === 0) {
           console.log(key);
           return false;
         }
@@ -44,7 +44,9 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
       images.push(imagesVehiculoRedux[item]);
     });
 
-    if (!isEdit && images.length < 5) {
+    console.log({images, imagesVehiculoRedux});
+
+    if (images.length < 5) {
       setAlert({
         message: "Debes subir 5 imágenes.",
         success: false,
@@ -139,7 +141,7 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
         departamento_vehiculo,
         ciudad_vehiculo,
         tipo_moto_select,
-        images: isEdit ? undefined : images,
+        images,
         user_id,
         id
       };
@@ -159,7 +161,7 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
                   window.scrollTo({ top: 0, behavior: "smooth" });
                   setLoading(false);
                   setTimeout(() => {
-                   location.replace("/usuario/mis_publicaciones");
+                    location.replace("/usuario/mis_publicaciones");
                   }, 2000);
             }else {
                 throw {error: true}

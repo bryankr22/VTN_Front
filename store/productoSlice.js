@@ -31,6 +31,9 @@ const productoSlice = createSlice({
     imagesAcc: [],
   },
   reducers: {
+    setImages(state, action) {
+      state.images = [...(action.payload || [])];
+    },
     addImage(state, action) {
       state.images[action.payload.index] = action.payload.image;
     },
@@ -92,12 +95,13 @@ const productoSlice = createSlice({
         departamento_vehiculo: action.payload?.departamento,
         contacto_vehiculo: action.payload?.contacto,
         ciudad_vehiculo: action.payload?.ciudad_id,
-        cilindraje_vehiculo: action.payload?.cilindraje
+        cilindraje_vehiculo: action.payload?.cilindraje,
       };
     },
   },
 });
 export const {
+  setImages,
   addImage,
   addImageAcc,
   removeImage,
