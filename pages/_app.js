@@ -21,4 +21,5 @@ function MyApp({ Component, pageProps }) {
         </CookiesProvider>
     );
 }
+
 export default MyApp
