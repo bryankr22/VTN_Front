@@ -21,6 +21,26 @@ import {
 
 import Head from "next/head";
 import { NextSeo } from "next-seo";
+import { API_URL } from "../../../helpers/constants";
+
+const normalize = (function() {
+  var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
+    to = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc",
+    mapping = {};
+
+  for (var i = 0, j = from.length; i < j; i++)
+    mapping[from.charAt(i)] = to.charAt(i);
+
+  return function(str) {
+    var ret = [];
+    for (var i = 0, j = str.length; i < j; i++) {
+      var c = str.charAt(i);
+      if (mapping.hasOwnProperty(str.charAt(i))) ret.push(mapping[c]);
+      else ret.push(c);
+    }
+    return ret.join("");
+  };
+})();
 
 export default function detalle({ data }) {
   const { imagenes } = data;
@@ -412,8 +432,9 @@ export async function getServerSideProps(context) {
       headers: { Authorization: `Bearer ${decoded.token_server.access_token}` },
     };
   }
-  const res = await axios.get(
-    "https://api.vendetunave.co/api/vehiculo/" + context.params.slug,
+
+  const idNormalize = normalize(context.params.slug).split(" ").join("-").split("%").join("").split("?").join("").split("/").join("").split(".").join("");
+  const res = await axios.get(`${API_URL}/vehiculo/${idNormalize}`,
     config
   );
   const data = await res.data;
