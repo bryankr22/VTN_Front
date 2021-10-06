@@ -111,7 +111,7 @@ export default function SecondSection({
     dispatch(setImages(sources))
     document.querySelector('.rug-handle-drop-text').innerHTML = ('Arrastra aquí las imágenes que quieres cargar. Máximo 10.')
     document.querySelector('.rug-handle-drop-text+span').innerHTML = 'O'
-    document.querySelector('.rug-handle-button').innerHTML = 'Seleccionalas'
+    document.querySelector('.rug-handle-button').innerHTML = 'Selecciónalas'
   }, [sources]);
 
   return (
