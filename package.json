@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "sitemap:generate": "node sitemap-generator.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -12,6 +13,7 @@
     "@loadable/component": "^5.15.0",
     "@next/bundle-analyzer": "^11.0.1",
     "@reduxjs/toolkit": "^1.6.0",
+    "@sergeymyssak/nextjs-sitemap": "^2.0.3",
     "axios": "^0.21.1",
     "bootstrap": "^5.0.2",
     "cookie": "^0.4.1",
@@ -21,6 +23,7 @@
     "mysql2": "^2.2.5",
     "next": "11.0.1",
     "next-pwa": "^5.2.23",
+    "next-seo": "^4.28.1",
     "optimize-css-assets-webpack-plugin": "^6.0.1",
     "ramda": "^0.27.1",
     "react": "17.0.2",
