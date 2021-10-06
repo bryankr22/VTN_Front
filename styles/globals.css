@@ -413,3 +413,37 @@
     max-width: unset;
   }
 }
+
+.rug .rug-handle:before{
+  border: 2px dashed lightgray !important;
+}
+
+.rug {
+  font-family: 'Montserrat' !important;
+}
+
+.rug-handle-drop-text, .rug-handle-button {
+  font-size: 0.9em !important;
+}
+
+.rug-handle-icon {
+  width: 30px !important;
+}
+
+@media (max-width: 960px) {
+  .rug-handle-button {
+    text-indent: -9999px;
+    line-height: 0;
+  }
+  .rug-handle-button::after {
+    content: 'Selecciona máximo 10 imágenes';
+    text-indent: 0;
+    display: block;
+    line-height: initial;
+  }
+}
+
+.rug .rug-items.__card {
+  min-height: unset !important;
+}
+
