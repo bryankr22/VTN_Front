@@ -6,7 +6,7 @@ import { removeVehiculo } from '../../store/comparadorSlice';
 export default function HeaderVehiculo() {
     const vehiculosList = useSelector(({ comparador }) => comparador.vehiculos);
     const dispatch = useDispatch();
-    const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/55x55/vendetunave/images/vehiculos/";
+    const pathS3 = "https://vendetunave.s3.amazonaws.com/vendetunave/images/thumbnails/";
     const removeVehiculoClick = (index) => {
         dispatch(removeVehiculo(index));
     }
@@ -40,7 +40,7 @@ export default function HeaderVehiculo() {
                                                 className="image-compare"
                                                 floated='left'
                                                 size='mini'
-                                                src={pathS3 + item.nameImage + "." + item.extension}
+                                                src={pathS3 + item.nameImage + "300x300.webp"}
                                                 wrapped
                                                 ui={false}
                                             />
