@@ -24,7 +24,7 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState({});
   const vehiculoRedux = useSelector(({ producto }) => producto.vehiculo);
-  const imagesVehiculoRedux = useSelector(({ producto }) => producto.images, () => true);
+  const imagesVehiculoRedux = useSelector(({ producto }) => producto.images);
   const isValidForm = (data) => {
     for (let key in data) {
       if (data.hasOwnProperty(key)) {
@@ -38,13 +38,15 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
     return true;
   };
 
+  console.log({imagesVehiculoRedux});
   const publicVehicle = () => {
-    let images = [];
-    Object.keys(imagesVehiculoRedux).map((item) => {
-      images.push(imagesVehiculoRedux[item]);
-    });
 
-    console.log({images, imagesVehiculoRedux});
+    const backup = dataProp?.edit?.imagenes?.filter((item) => !!item.url)
+    .map((item) => ({
+      id: item?.imageId,
+      source: item?.url,
+    }))
+    const images = !imagesVehiculoRedux.length ? (backup || []) : imagesVehiculoRedux
 
     if (images.length < 5) {
       setAlert({

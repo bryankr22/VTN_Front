@@ -89,8 +89,8 @@ export default function SecondSection({
         .map((item) => ({
           id: item?.imageId,
           source: item?.url,
-        })) || [],
-    [edit?.imagenes]
+        })),
+    [edit]
   );
 
   const handleChange = useCallback(
