@@ -1,143 +1,128 @@
-import React from "react";
-import { Dimmer, Loader, Grid, Segment } from "semantic-ui-react";
-import ImageUpload from "./ImageUpload";
+import axios from "axios";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import Resizer from "react-image-file-resizer";
+import jwt from "jsonwebtoken";
+import { useDispatch } from "react-redux";
+import RUG from "react-upload-gallery";
+import "react-upload-gallery/dist/style.css"; // or scss
+import { AUTH_URL } from "../../../helpers/constants";
+import { setImages } from "../../../store/productoSlice";
+import { useCookies } from "react-cookie";
 
-const listMobile = [...Array(10)].map((_, index) => {
-  if (index === 0) return { principal: true, index };
-  return { index };
-});
-const inputsList_one = [
-  {
-    principal: true,
-    index: 0,
-  },
-  {
-    principal: false,
-    index: 5,
-  },
-  {
-    principal: false,
-    index: 8,
-  },
-];
-const inputsList_two = [
-  {
-    principal: false,
-    index: 1,
-  },
-  {
-    principal: false,
-    index: 3,
-  },
-  {
-    principal: false,
-    index: 6,
-  },
-  {
-    principal: false,
-    index: 9,
-  },
-];
-const inputsList_three = [
-  {
-    principal: false,
-    index: 2,
-  },
-  {
-    principal: false,
-    index: 4,
-  },
-  {
-    principal: false,
-    index: 7,
-  },
-];
+const customRequest = (cookies, id, update) => {
+  return function ({
+    uid,
+    file,
+    send,
+    action,
+    headers,
+    onProgress,
+    onSuccess,
+    onError,
+  }) {
+    const cookie = cookies.vtn_token;
+    const decoded = jwt.verify(cookie, "vendetunave2021");
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
+    const config = {
+      headers: { Authorization: `Bearer ${decoded.token_server.access_token}` },
+    };
 
-const tree = {
-  mobile: { listMobile },
-  desktop: {
-    inputsList_one,
-    inputsList_two,
-    inputsList_three,
-  },
+    Resizer.imageFileResizer(
+      file,
+      1000,
+      1000,
+      "JPEG",
+      100,
+      360,
+      (uri) => {
+        const body = {
+          id,
+          source: uri,
+        };
+
+        axios
+          .post(action, body, {
+            ...config,
+            onUploadProgress: ({ total, loaded }) => {
+              onProgress(uid, Math.round((loaded / total) * 100));
+            },
+            cancelToken: source.token,
+          })
+          .then(({ data: response }) => {
+            update((prev) => ({ ...prev, [uid]: response }));
+            setTimeout(() => {
+              onSuccess(uid, response);
+            }, 300);
+          })
+          .catch((error) => {
+            onError(uid, {
+              action,
+              status: error.request,
+              response: error.response,
+            });
+          });
+      },
+      "base64"
+    );
+    return {
+      abort() {
+        source.cancel();
+      },
+    };
+  };
 };
 
-export default function SecondSection({ data: { edit } = {}, isMobile }) {
-  const { inputsList_one, inputsList_two, inputsList_three, listMobile } =
-    tree[isMobile ? "mobile" : "desktop"];
-  return (
-    <Grid columns={3} divided>
-      <style>
-        {`
-                    .ui.grid>.column:not(.row), .ui.grid>.row>.column {
-                        padding-left: 0 !important;
-                        padding-right: 0 !important;
-                    }
-                    .columDrop {
-                        padding: 0px !important;
-                    }
-                    .dzu-inputLabel {
-                        color: #000;
-                    }
-                    .dzu-previewStatusContainer > progress {
-                        display: none
-                    }
-                    .dzu-previewStatusContainer > span:last-child {
-                        display: none
-                    }
-                `}
-      </style>
+export default function SecondSection({
+  data: { edit } = {},
+  isMobile,
+  maxFiles = 10,
+}) {
+  const dispatch = useDispatch();
+  const [cookies] = useCookies(["vtn_token"]);
+  const [imagesLoaded, setImagesLoaded] = useState({});
 
-      {isMobile ? (
-        <Grid.Row>
-          <Grid.Column className="columDrop" style={{ width: "100%" }}>
-            {listMobile.map((item) => (
-              <>
-                <ImageUpload
-                  images={edit?.imagenes}
-                  key={item.index}
-                  principal={item.principal}
-                  index={item.index}
-                />
-                <div style={{ marginBottom: 5 }}></div>
-              </>
-            ))}
-          </Grid.Column>
-        </Grid.Row>
-      ) : (
-        <Grid.Row stretched>
-          <Grid.Column className="columDrop">
-            {inputsList_one.map((item, index) => (
-              <ImageUpload
-                images={edit?.imagenes}
-                key={item.index}
-                principal={item.principal}
-                index={item.index}
-              />
-            ))}
-          </Grid.Column>
-          <Grid.Column className="columDrop">
-            {inputsList_two.map((item, index) => (
-              <ImageUpload
-                images={edit?.imagenes}
-                key={item.index}
-                principal={item.principal}
-                index={item.index}
-              />
-            ))}
-          </Grid.Column>
-          <Grid.Column className="columDrop">
-            {inputsList_three.map((item, index) => (
-              <ImageUpload
-                images={edit?.imagenes}
-                key={item.index}
-                principal={item.principal}
-                index={item.index}
-              />
-            ))}
-          </Grid.Column>
-        </Grid.Row>
-      )}
-    </Grid>
+  const sources = useMemo(
+    () =>
+      edit?.imagenes
+        ?.filter((item) => !!item.url)
+        .map((item) => ({
+          id: item?.imageId,
+          source: item?.url,
+        })) || [],
+    [edit?.imagenes]
+  );
+
+  const handleChange = useCallback(
+    (list = []) => {
+      const imagesReady = list
+        ?.filter((image) => image.done && !image.error)
+        .map(({ id, source, uid }) => ({
+          id: id || imagesLoaded[uid]?.imagen_id,
+          source,
+        }));
+      dispatch(setImages(imagesReady));
+      console.log({ list, imagesReady, imagesLoaded });
+    },
+    [imagesLoaded, dispatch]
+  );
+
+  useEffect(() => {
+    dispatch(setImages(sources))
+  }, [sources]);
+
+  return (
+    <RUG
+      initialState={sources}
+      action={`${AUTH_URL}/upload_vehicle_image`}
+      customRequest={customRequest(cookies, edit?.vehiculo.id, setImagesLoaded)}
+      inOrder
+      onChange={handleChange}
+      rules={{ limit: maxFiles }}
+      source={(response) => response?.url_image_webp}
+      onConfirmDelete={(currentImage, images) => {
+        return window.confirm("¿Desea borrar la imagen?");
+      }}
+    />
   );
 }
