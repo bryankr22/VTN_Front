@@ -119,7 +119,6 @@ export async function getServerSideProps(context) {
   }
 
   if(edit) {
-    console.log(edit);
     edit.marcas = edit.marcas.map(item => ({
       key: item.id,
       value: item.id,
@@ -136,6 +135,7 @@ export async function getServerSideProps(context) {
       text: item.nombre,
     }))
   }
+
   return {
     props: {
       data: {

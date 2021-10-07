@@ -11,8 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { removeVehiculo } from "../../store/comparadorSlice";
 export default function CompareVehiculo() {
   const dispatch = useDispatch();
-  const pathS3 =
-    "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x300/vendetunave/images/vehiculos/";
+  const pathS3 = "https://vendetunave.s3.amazonaws.com/vendetunave/images/thumbnails/";
   const parseListings = (storageList) => {
     var newListado = [{ id: 0 }, { id: 0 }, { id: 0 }];
     if (storageList.length > 0) {
@@ -48,7 +47,7 @@ export default function CompareVehiculo() {
                 <Image
                   centered
                   style={{ height: 200, objectFit: "none", width: "100%" }}
-                  src={pathS3 + vehicle.nameImage + "." + vehicle.extension}
+                  src={pathS3 + vehicle.nameImage + "300x300.webp"}
                 />
                 {index === 0 && <Header as="h2">Características</Header>}
                 {index !== 0 && (

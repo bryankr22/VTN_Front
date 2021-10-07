@@ -19,7 +19,6 @@ import { clearForm } from "../../../store/productoSlice";
 import { AUTH_URL } from "../../../helpers/constants";
 
 export default function VehiculoContainer({ data: dataProp, isEdit }) {
-  console.log(dataProp.edit);
   const dispatch = useDispatch();
   const [cookies] = useCookies(["vtn_token"]);
   const [loading, setLoading] = useState(false);
@@ -39,13 +38,17 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
     return true;
   };
 
+  console.log({imagesVehiculoRedux});
   const publicVehicle = () => {
-    let images = [];
-    Object.keys(imagesVehiculoRedux).map((item) => {
-      images.push(imagesVehiculoRedux[item]);
-    });
 
-    if (!isEdit && images.length < 5) {
+    const backup = dataProp?.edit?.imagenes?.filter((item) => !!item.url)
+    .map((item) => ({
+      id: item?.imageId,
+      source: item?.url,
+    }))
+    const images = !imagesVehiculoRedux.length ? (backup || []) : imagesVehiculoRedux
+
+    if (images.length < 5) {
       setAlert({
         message: "Debes subir 5 imágenes.",
         success: false,
@@ -140,7 +143,7 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
         departamento_vehiculo,
         ciudad_vehiculo,
         tipo_moto_select,
-        images: isEdit ? undefined : images,
+        images,
         user_id,
         id
       };
@@ -206,12 +209,10 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
 
       <Responsive {...Responsive.onlyComputer}>
         <FirstSection data={dataProp} />
-        {!isEdit && (
           <Form.Field style={{ marginTop: 20 }}>
             <label>Agrega una o más fotos (Mínimo 5 fotos)*</label>
             <SecondSection data={dataProp} />
           </Form.Field>
-        )}
         <ThirdSection data={dataProp} />
         <Button
           style={{ marginBottom: 10 }}
@@ -233,12 +234,10 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
       </Responsive>
       <Responsive {...Responsive.onlyMobile}>
         <FirstSection data={dataProp} isMobile />
-        {!isEdit && (
           <Form.Field style={{ marginTop: 20 }}>
             <label>Agrega una o más fotos (Mínimo 5 fotos)*</label>
             <SecondSection data={dataProp} isMobile />
           </Form.Field>
-        )}
         <ThirdSection data={dataProp} isMobile />
         <Button
           style={{ marginBottom: 10 }}
@@ -260,12 +259,10 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
       </Responsive>
       <Responsive {...Responsive.onlyTablet}>
         <FirstSection data={dataProp} isMobile />
-        {!isEdit && (
           <Form.Field style={{ marginTop: 20 }}>
             <label>Agrega una o más fotos (Mínimo 5 fotos)*</label>
             <SecondSection data={dataProp} isMobile />
           </Form.Field>
-        )}
         <ThirdSection data={dataProp} isMobile />
         <Button
           style={{ marginBottom: 10 }}

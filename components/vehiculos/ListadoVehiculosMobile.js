@@ -102,7 +102,7 @@ export default function ListadoVehiculosMobile({ params, vehiculos, page, totalR
                         }}
                     >
                         <Image
-                            src={pathS3 + item.nameImage + "300x300." + item.extension}
+                            src={pathS3 + item.nameImage + "300x300.webp"}
                             wrapped
                             ui={false}
                         />

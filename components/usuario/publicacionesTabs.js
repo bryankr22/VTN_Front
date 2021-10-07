@@ -1,31 +1,136 @@
-import React, {Fragment} from 'react';
-import { Container, Header, Table, Button, Image, Responsive, Tab, Pagination } from 'semantic-ui-react'
+/* eslint-disable jsx-a11y/alt-text */
+import React, { Fragment, useState } from 'react';
+import { Container, Header, Table, Button, Image, Responsive, Tab, Pagination, Message, Modal } from 'semantic-ui-react';
+import { useCookies } from "react-cookie";
+import jwt from 'jsonwebtoken';
+import axios from 'axios';
+import { AUTH_URL } from '../../helpers/constants';
+
 const pathS3_vehiculos = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x300/vendetunave/images/vehiculos/";
 const pathS3_acc = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x300/vendetunave/images/accesorios/";
-const normalize = (function() {
-    var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
-      to = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc",
-      mapping = {};
-  
-    for (var i = 0, j = from.length; i < j; i++)
-      mapping[from.charAt(i)] = to.charAt(i);
-  
-    return function(str) {
-      var ret = [];
-      for (var i = 0, j = str.length; i < j; i++) {
-        var c = str.charAt(i);
-        if (mapping.hasOwnProperty(str.charAt(i))) ret.push(mapping[c]);
-        else ret.push(c);
-      }
-      return ret.join("");
+
+
+
+export const panes = (vehicles, resultTotalV, accesorios, resultTotalA) => {
+  const [cookies, setCookie] = useCookies(['vtn_token']);
+  const [idVehicle, setIdVehicle] = useState();
+  const [action, setAction] = useState('');
+  const [modal, setModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState(false);
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState({
+    error: false,
+    success: false
+  });
+
+  const confirmAction = (id, action) => {
+    setIdVehicle(id);
+    setAction(action);
+    setModalMessage(action === 'remove' ? '¿Estas seguro de eliminar este anuncio?' : '¿Estas seguro de marcar este anuncio como vendido?')
+    setModal(true);
+  }
+
+  const removeVehicle = (id) => {
+    const cookie = cookies.vtn_token;
+    const decoded = jwt.verify(cookie, 'vendetunave2021');
+    const user_id = decoded.user.id;
+    const config = {
+      headers: { Authorization: `Bearer ${decoded.token_server.access_token}` }
     };
-})();
-export const panes = (vehicles, resultTotalV, accesorios, resultTotalA) => { 
-return [
+    const data = { user_id, id };
+    setModal(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    axios.post(`${AUTH_URL}/vehicle_remove`, data, config).then((res) => {
+      if (res.data.status) {
+        setMessage("Proceso exitoso.");
+        setStatus({
+          error: false,
+          success: true
+        });
+
+        location.reload();
+      } else {
+        setMessage("Ocurrió un error inesperado. Intente nuevamente más tarde.");
+        setStatus({
+          error: true,
+          success: false
+        });
+      }
+    })
+      .catch(() => {
+        setMessage("Ocurrió un error inesperado. Intente nuevamente más tarde.");
+        setStatus({
+          error: true,
+          success: false
+        });
+      });
+  }
+
+  const soldVehicle = (id) => {
+    const cookie = cookies.vtn_token;
+    const decoded = jwt.verify(cookie, 'vendetunave2021');
+    const user_id = decoded.user.id;
+    const config = {
+      headers: { Authorization: `Bearer ${decoded.token_server.access_token}` }
+    };
+    const data = { user_id, id };
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    axios.post(`${AUTH_URL}/vehicle_sold`, data, config).then((res) => {
+      if (res.data.status) {
+        setMessage("Proceso exitoso.");
+        setStatus({
+          error: false,
+          success: true
+        });
+
+        location.reload();
+      } else {
+        setMessage("Ocurrió un error inesperado. Intente nuevamente más tarde.");
+        setStatus({
+          error: true,
+          success: false
+        });
+      }
+    })
+      .catch((error) => {
+        setMessage("Ocurrió un error inesperado. Intente nuevamente más tarde.");
+        setStatus({
+          error: true,
+          success: false
+        });
+      });
+  }
+
+  return [
     {
       menuItem: "VEHÍCULOS",
       render: () => (
         <Tab.Pane>
+          <Modal
+            size="mini"
+            open={modal}
+            onClose={() => setModal(false)}
+          >
+            <Modal.Header>¿Estas seguro?</Modal.Header>
+            <Modal.Content>
+              <p>{modalMessage}</p>
+            </Modal.Content>
+            <Modal.Actions>
+              <Button onClick={() => setModal(false)}>
+                No
+              </Button>
+              <Button secondary onClick={() => action === 'remove' ? removeVehicle(idVehicle) : soldVehicle(idVehicle)}>
+                Si
+              </Button>
+            </Modal.Actions>
+          </Modal>
+          {(status.error || status.success) &&
+            <Message
+              error={status.error}
+              positive={status.success}
+              content={message}
+            />
+          }
           {vehicles.length > 0 && (
             <Fragment>
               <Table>
@@ -68,7 +173,7 @@ return [
                         >
                           <Image
                             src={
-                            pathS3_vehiculos +
+                              pathS3_vehiculos +
                               item.nameImage +
                               "." +
                               item.extension
@@ -128,7 +233,7 @@ return [
                       <Table.Cell>
                         {item.activo == 1 && item.vendido == 0 && (
                           <Button
-                            onClick={() => this.vendido(item.id)}
+                            onClick={() => confirmAction(item.id, 'sold')}
                             fluid
                           >
                             VENDIDO
@@ -145,7 +250,7 @@ return [
                           </Button>
                         )}
                         <Button
-                          onClick={() => this.removeVehicle(item.id)}
+                          onClick={() => confirmAction(item.id, 'remove')}
                           color="red"
                           fluid
                           style={{ marginTop: 7 }}
@@ -180,7 +285,7 @@ return [
           )}
           {vehicles.length == 0 && (
             <Header as="h4">Aún no cuentas con publicaciones.</Header>
-            )}
+          )}
         </Tab.Pane>
       ),
     },

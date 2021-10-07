@@ -158,7 +158,7 @@ export default function ListadoVehiculos({params, vehiculos, page, totalRecords}
                     }
                 >
                     <Image
-                        src={pathS3 + item.nameImage + "300x300." + item.extension}
+                        src={pathS3 + item.nameImage + "300x300.webp"}
                         wrapped
                         ui={false}
                     />

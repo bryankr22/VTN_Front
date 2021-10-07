@@ -83,8 +83,8 @@ export default function CarruselHome(props) {
                 <img
                   alt="image"
                   id={"image_vehicle_" + index}
-                  data-zoom-image={item.url + item.extension}
-                  data-image={item.url + item.extension}
+                  data-zoom-image={item.url + "webp"}
+                  data-image={item.url + "webp"}
                   key={index}
                   style={{
                     objectFit: "contain",
@@ -92,8 +92,8 @@ export default function CarruselHome(props) {
                     height: "100%",
                     objectPosition: "center",
                   }}
-                  src={item.url + item.extension}
-                  zoomSrc={item.url + item.extension}
+                  src={item.url + "webp"}
+                  zoomSrc={item.url + "webp"}
                   zoomScale={2}
                   hideCloseButton
                   hideHint
