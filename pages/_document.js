@@ -7,7 +7,7 @@ class MyDocument extends Document {
     const initialProps = await Document.getInitialProps(ctx);
     const lang = getLangFromReq(ctx.req);
     return { ...initialProps, lang };
-  }
+    }
 
   render() {
     return (

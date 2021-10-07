@@ -71,7 +71,7 @@ export default function CarruselHome(props) {
                 />
               </div>
             )}
-            {props.seccion == "desc" && (
+            {props.seccion == "desc" && process.browser && (
               <PrismaZoom
                 style={{
                   objectFit: "contain",
