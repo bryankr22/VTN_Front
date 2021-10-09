@@ -61,6 +61,7 @@ export default function CarruselHome(props) {
             {props.seccion == "home" && (
               <div className="d-flex full-height">
                 <img
+                  loading="lazy"
                   src={item.url}
                   style={{
                     objectFit: "fill",
@@ -81,6 +82,7 @@ export default function CarruselHome(props) {
                 }}
               >
                 <img
+                  loading="lazy"
                   alt="image"
                   id={"image_vehicle_" + index}
                   data-zoom-image={item.url + "webp"}

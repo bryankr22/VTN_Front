@@ -45,6 +45,7 @@ export default function CardProductsDesk({item}) {
         >
         {item.new_image === 0 && (
             <Image
+                loading="lazy"
                 priority={true}
                 src={pathS3 + item.nameImage + "300x300." + item.extension}
                 alt={item.nameImage + "." + item.extension}
@@ -58,6 +59,7 @@ export default function CardProductsDesk({item}) {
         )}
         {item.new_image === 1 && (
             <Image
+                loading="lazy"
                 priority={true}
                 src={pathS3 + item.nameImage + "." + item.extension}
                 alt={item.nameImage + "." + item.extension}
@@ -71,6 +73,7 @@ export default function CardProductsDesk({item}) {
         )}
         {item.new_image === 2 && (
             <Image
+                loading="lazy"
                 priority={true}
                 src={ pathS3.replace("vehiculos", "thumbnails") + item.nameImage + "300x300.webp" }
                 alt={item.nameImage + "300x300.webp"}

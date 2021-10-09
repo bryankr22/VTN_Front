@@ -45,6 +45,8 @@ const normalize = (function() {
 export default function detalle({ data }) {
   const { imagenes } = data;
 
+  console.log(imagenes?.[0]?.url);
+
   return (
     <>
       <NextSeo
@@ -55,8 +57,8 @@ export default function detalle({ data }) {
             {
               url: `${imagenes?.[0]?.url}${imagenes?.[0]?.extension}`,
               alt: data.vehiculo.title,
-              width: 200,
-              height: 150,
+              width: 300,
+              height: 200,
             },
           ],
           url: `https://vendetunave.co/vehiculos/detalle/${data.vehiculo.id}`,
@@ -67,6 +69,9 @@ export default function detalle({ data }) {
           site_name: "VendeTuNave - Vehiculo",
         }}
       />
+      <Head>
+        <meta property="og:image:secure_url" content={`${imagenes?.[0]?.url}${imagenes?.[0]?.extension}`} />
+      </Head>
       <PublicLayout>
         <style>
           {`
