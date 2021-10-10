@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image, Card } from "semantic-ui-react";
 export default function CardProducts({item}) {
-    const pathS3 = "https://vendetunave.s3.amazonaws.com/vendetunave/images/thumbnails/";
+    const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/250x250/vendetunave/images/vehiculos/";
     const normalize = (function() {
         var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
           to = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc",
@@ -83,11 +83,11 @@ export default function CardProducts({item}) {
                             floated="left"
                             size="small"
                             src={
-                                pathS3.replace("vehiculos", "thumbnails") +
+                                pathS3 +
                                 item.nameImage +
-                                "300x300.webp"
+                                ".webp"
                             }
-                            alt={item.nameImage + "300x300.webp"}
+                            alt={item.nameImage + ".webp"}
                             style={{
                                 marginBottom: 0,
                                 height: 150,
