@@ -62,7 +62,7 @@ export default function CarruselHome(props) {
               <div className="d-flex full-height">
                 <img
                   loading="lazy"
-                  src={item.url}
+                  src={item.url.replace("https://vendetunave.s3.amazonaws.com", "https://d3bmp4azzreq60.cloudfront.net/fit-in/1100x1100")}
                   style={{
                     objectFit: "fill",
                     width: "100%",

@@ -32,7 +32,7 @@ export default function CarruselMarcas({ data = [], numberCards }) {
                                 quality={50}
                                 loading='lazy'
                                 className="lazyload"
-                                src={item.url}
+                                src={item.url.replace("https://vendetunave.s3.amazonaws.com", "https://d3bmp4azzreq60.cloudfront.net/fit-in/50x50" )}
                                 alt={item.url.replace("https://vendetunave.s3.amazonaws.com/vendetunave/images/marcas/", "" )}
                                 style={{
                                     width: 50,

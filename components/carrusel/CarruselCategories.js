@@ -54,7 +54,7 @@ export default function CarruselCategories({ data = [], numberCards }) {
                             <Image
                                 quality={50}
                                 loading='lazy'
-                                src={item.path}
+                                src={item.path.replace("https://vendetunave.s3.amazonaws.com", "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x300" )}
                                 alt={item.path.replace("https://vendetunave.s3.amazonaws.com/vendetunave/images/categorias/", "" )}
                                 wrapped
                                 ui={false}
