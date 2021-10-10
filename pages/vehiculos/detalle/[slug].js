@@ -23,6 +23,13 @@ import Head from "next/head";
 import { NextSeo } from "next-seo";
 import { API_URL } from "../../../helpers/constants";
 
+const CDN = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x200/"
+const REPLACE = "https://vendetunave.s3.amazonaws.com/"
+
+const getMetaUrl = (str='') => {
+  return str.replace(REPLACE, CDN)
+}
+
 const normalize = (function() {
   var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
     to = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc",
@@ -55,7 +62,7 @@ export default function detalle({ data }) {
         openGraph={{
           images: [
             {
-              url: `${imagenes?.[0]?.url}${imagenes?.[0]?.extension}`,
+              url: `${getMetaUrl(imagenes?.[0]?.url)}${imagenes?.[0]?.extension}`,
               alt: data.vehiculo.title,
               width: 300,
               height: 200,
@@ -70,7 +77,7 @@ export default function detalle({ data }) {
         }}
       />
       <Head>
-        <meta property="og:image:secure_url" content={`${imagenes?.[0]?.url}${imagenes?.[0]?.extension}`} />
+        <meta property="og:image:secure_url" content={`${getMetaUrl(imagenes?.[0]?.url)}${imagenes?.[0]?.extension}`} />
       </Head>
       <PublicLayout>
         <style>
