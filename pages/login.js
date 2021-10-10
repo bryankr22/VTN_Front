@@ -6,6 +6,13 @@ import { useCookies } from "react-cookie"
 import { AUTH_URL, login_api, register_api } from '../helpers/constants';
 import jwt from 'jsonwebtoken';
 import { useRouter } from 'next/router'
+
+const nextYear = () => {
+  let oneYearFromNow = new Date();
+  oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() + 1);
+  return oneYearFromNow
+}
+
 export default function login(props) {
     const router = useRouter();
     const [cookie, setCookie] = useCookies(["vtn_token"])
@@ -29,7 +36,7 @@ export default function login(props) {
             const token = jwt.sign(res.data, 'vendetunave2021');
             setCookie('vtn_token', token, {
                 path: "/",
-                maxAge: 3600,
+                expires: nextYear(), 
                 sameSite: true
             });
             router.push(register ? '/usuario/perfil' : '/');
