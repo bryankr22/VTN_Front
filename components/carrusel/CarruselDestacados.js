@@ -56,7 +56,8 @@ export default function CarruselDestacados(props) {
               backgroundColor: 'white'
             }}
           >
-            <Image
+            <img
+              loading="lazy"
               alt="Ver más botón"
               src={url}
               style={{

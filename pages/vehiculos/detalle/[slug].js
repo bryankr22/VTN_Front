@@ -23,6 +23,13 @@ import Head from "next/head";
 import { NextSeo } from "next-seo";
 import { API_URL } from "../../../helpers/constants";
 
+const CDN = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x200/"
+const REPLACE = "https://vendetunave.s3.amazonaws.com/"
+
+const getMetaUrl = (str='') => {
+  return str.replace(REPLACE, CDN)
+}
+
 const normalize = (function() {
   var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
     to = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc",
@@ -45,6 +52,8 @@ const normalize = (function() {
 export default function detalle({ data }) {
   const { imagenes } = data;
 
+  console.log(imagenes?.[0]?.url);
+
   return (
     <>
       <NextSeo
@@ -53,10 +62,10 @@ export default function detalle({ data }) {
         openGraph={{
           images: [
             {
-              url: `${imagenes?.[0]?.url}${imagenes?.[0]?.extension}`,
+              url: `${getMetaUrl(imagenes?.[0]?.url)}${imagenes?.[0]?.extension}`,
               alt: data.vehiculo.title,
-              width: 200,
-              height: 150,
+              width: 300,
+              height: 200,
             },
           ],
           url: `https://vendetunave.co/vehiculos/detalle/${data.vehiculo.id}`,
@@ -67,6 +76,9 @@ export default function detalle({ data }) {
           site_name: "VendeTuNave - Vehiculo",
         }}
       />
+      <Head>
+        <meta property="og:image:secure_url" content={`${getMetaUrl(imagenes?.[0]?.url)}${imagenes?.[0]?.extension}`} />
+      </Head>
       <PublicLayout>
         <style>
           {`
