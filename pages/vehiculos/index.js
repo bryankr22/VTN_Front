@@ -1,4 +1,8 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react';
+import Head from "next/head";
+import { NextSeo } from "next-seo";
+import axios from 'axios';
+
 import PublicLayout from '../../layouts/PublicLayout';
 import SidebarVehiculos from '../../components/vehiculos/SidebarVehiculos';
 import ListadoVehiculos from '../../components/vehiculos/ListadoVehiculos';
@@ -9,7 +13,6 @@ import ListadoVehiculosMobile from '../../components/vehiculos/ListadoVehiculosM
 import { Grid, Responsive } from "semantic-ui-react";
 import { useRouter } from 'next/router';
 
-import axios from 'axios';
 import { API_URL } from '../../helpers/constants';
 export default function index({ data }) {
     const router = useRouter();
@@ -40,6 +43,19 @@ export default function index({ data }) {
                     }
                 `}
             </style>
+            <NextSeo
+                title="VendeTuNave - Carros en Venta"
+                description="Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."
+                openGraph={{
+                    title: "VendeTuNave - Carros en Venta",
+                    locale: "es_ES",
+                    type: "website",
+                    description: "Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."
+                }}
+            />
+            <Head>
+                <meta property="keywords" content="carros usados, venta de carros, carros de segunda, compra y venta de motos, venta de carros usados, carros baratos, carros usados bogota, carros usados medellin" />
+            </Head>
             <Responsive {...Responsive.onlyMobile}>
                 <style>
                 {`

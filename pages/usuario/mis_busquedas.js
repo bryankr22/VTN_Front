@@ -1,4 +1,6 @@
-import React, {useState, useEffect, Fragment} from 'react'
+import React, {useState, useEffect, Fragment} from 'react';
+import Head from "next/head";
+import { NextSeo } from "next-seo";
 import PublicLayout from '../../layouts/PublicLayout';
 import { Header, Container, Table, Button, Image, Responsive, Pagination, Dimmer, Loader } from "semantic-ui-react";
 import { authInitialProps } from '../../helpers/auth';
@@ -67,6 +69,19 @@ export default function mis_busquedas() {
     }
     return (
         <PublicLayout>
+            <NextSeo
+                title="VendeTuNave - Historial de carros"
+                description="Historial de búsqueda de vehiculos dentro de la plataforma Vende Tu Nave."
+                openGraph={{
+                    title: "VendeTuNave - Historial de carros",
+                    locale: "es_ES",
+                    type: "website",
+                    description: "Historial de búsqueda de vehiculos dentro de la plataforma Vende Tu Nave."
+                }}
+            />
+            <Head>
+                <meta property="keywords" content="Carros bonitos, venta de camionetas usadas, carros lujosos, carros automáticos, carros viejos, carros convertibles" />
+            </Head>
             <Dimmer style={{ position: "fixed" }} active={loading}>
                 <Loader>Eliminando...</Loader>
             </Dimmer>   

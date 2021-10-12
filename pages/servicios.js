@@ -1,9 +1,13 @@
-import React from 'react'
+import React from 'react';
+import Head from "next/head";
+import { NextSeo } from "next-seo";
+
 import PublicLayout from '../layouts/PublicLayout';
 import ListaServicios from '../components/servicios/ListaServicios';
-import { Container, Header, Select, Button, Responsive, Grid, Item, Segment, Pagination } from 'semantic-ui-react'
+import { Container, Header, Select, Responsive, Grid } from 'semantic-ui-react'
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import { API_URL } from '../helpers/constants';
 export default function servicios({data}) {
     const router = useRouter();
     const mapping_filters = (array) => {
@@ -43,6 +47,19 @@ export default function servicios({data}) {
     }
     return (
         <PublicLayout>
+            <NextSeo
+                title="VendeTuNave - Recomendación de Servicios"
+                description="Te recomomendamos los mejores sitios para realizar todo tipo de servicios para tu carro como: mecánica, talleres de pintura, lavado, serviteca y mucho más."
+                openGraph={{
+                    title: "VendeTuNave - Recomendación de Servicios",
+                    locale: "es_ES",
+                    type: "website",
+                    description: "Te recomomendamos los mejores sitios para realizar todo tipo de servicios para tu carro como: mecánica, talleres de pintura, lavado, serviteca y mucho más."
+                }}
+            />
+            <Head>
+                <meta property="keywords" content="serviteca, lavadero de carros, mecánicos, mecánico automotriz, montallanta, carros blindados, casa toro usados" />
+            </Head>
             <div>
             <Container style={{ paddingTop: 25 }} text>
                 <Header as='h2' style={{ textTransform: 'uppercase' }}>RECOMENDACIONES DE SERVICIOS PARA TU CARRO</Header>
@@ -158,7 +175,7 @@ export default function servicios({data}) {
     )
 }
 export async function getServerSideProps({query}) {
-    const res = await axios.get('https://api.vendetunave.co/api/servicios', {
+    const res = await axios.get(`${API_URL}/servicios`, {
         params: {
             ciudad: query.ciudad,
             servicio: query.servicio,

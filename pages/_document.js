@@ -15,21 +15,18 @@ class MyDocument extends Document {
         <Head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
           <link
-            media="all"
+            media="screen"
             href="https://fonts.googleapis.com/css?family=Raleway:100,600"
             rel="stylesheet"
             type="text/css"
           />
           <link
-            media="all"
+            media="screen"
             href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
             rel="stylesheet"
             type="text/css"
-          />
-          <meta
-            name="keywords"
-            content="vende tu nave, carros en venta, carros de segunda, mercado libre carros, venta de carros usados y nuevos, compra y venta de carros, compra y venta motos, venta de carros"
           />
           <meta name="robots" content="index, follow" />
           <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />

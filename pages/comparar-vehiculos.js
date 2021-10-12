@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Head from "next/head";
+import { NextSeo } from "next-seo";
 import PublicLayout from "../layouts/PublicLayout";
 import {
   Container,
@@ -68,6 +70,19 @@ export default function comparar_vehiculos() {
   };
   return (
     <PublicLayout>
+      <NextSeo
+          title="VendeTuNave - Comparar Carros"
+          description="Compara todas las características de carros, camionetas y motos en Vende Tu Nave. Compara entre ellos y escoge la mejor opción."
+          openGraph={{
+              title: "VendeTuNave - Comparar Carros",
+              locale: "es_ES",
+              type: "website",
+              description: "Compara todas las características de carros, camionetas y motos en Vende Tu Nave. Compara entre ellos y escoge la mejor opción."
+          }}
+      />
+      <Head>
+          <meta property="keywords" content="comparar carros, comparar motos, características de un carro, comparar moto, camionetas 4x4, pickup, 4x4" />
+      </Head>
       <Dimmer style={{ position: "fixed" }} active={loading}>
         <Loader>Descargando...</Loader>
       </Dimmer>

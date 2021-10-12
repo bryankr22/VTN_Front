@@ -35,7 +35,7 @@ export default function MenuUsuarioMobile() {
                 <Dropdown.Divider />
             </Fragment>
             <Fragment>
-                <Link href="/usuario/crear_producto">
+                <Link href="/usuario/vender-carro">
                     <Dropdown.Item>Vender mi vehiculo</Dropdown.Item>
                 </Link>
                 <Dropdown.Divider />
