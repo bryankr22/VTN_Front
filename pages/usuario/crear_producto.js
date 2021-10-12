@@ -17,7 +17,10 @@ export default function crear_producto({ data }) {
     )
 }
 export async function getServerSideProps(context) {
+    console.log(context);
     const auth = validateAuth(context);
+    console.log(auth);
+
     if (!auth.vtn_token) {
         context.res.writeHead(301, {
             Location: '/'
