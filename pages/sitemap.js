@@ -83,7 +83,7 @@ export const getServerSideProps = async ({ res }) => {
     </urlset>
   `;
 
-    fs.writeFileSync("./public/sitemap.xml", sitemap);
+    fs.writeFileSync("/sitemap.xml", sitemap);
     res.writeHead(301, {
         Location: '/sitemap.xml'
     });
