@@ -149,15 +149,25 @@ export default function detalle({ data }) {
         </PublicLayout>
     )
 }
-export async function getServerSideProps({ params, statusCode }) {
-    const res = await axios.get('https://api.vendetunave.co/api/accesorio/' + params.slug);
-    const data = await res.data;
-    /**if(!data.status){
+export async function getServerSideProps({ params, statusCode, res}) {
+    try {
+      const res = await axios.get(
+        "https://api.vendetunave.co/api/accesorio/" + params.slug
+      );
+      const data = await res.data;
+      /**if(!data.status){
         statusCode = 404;
     }**/
-    return {
+      return {
         props: {
-            data
+          data,
         },
+      };
+    } catch ({ response }) {
+      res.writeHead(301, {
+        Location: `/${response.status}`,
+      });
+      res.end();
+      return { props: {} };
     }
 }

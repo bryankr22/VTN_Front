@@ -29,8 +29,18 @@ export async function getServerSideProps(context) {
     const config = {
         headers: { Authorization: `Bearer ${decoded.token_server.access_token}` }
     };
-    const res = await axios.get('https://api.vendetunave.co/auth/form_producto', config);
-    const data = await res.data;
+    let data;
+    try {
+        const res = await axios.get('https://api.vendetunave.co/auth/form_producto', config);
+        data = res.data;
+    } catch({response}) {
+        if(response.status === 401) {
+            context.res.writeHead(301, {
+                Location: '/401'
+            });
+            context.res.end();
+        }
+    }
     //
     let optionsCategories = [];
     let optionsCombustibles = [];

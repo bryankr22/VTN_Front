@@ -40,20 +40,27 @@ export default function index({ data }) {
         </PublicLayout>
     )
 }
-export async function getServerSideProps({query}) {
-    
-    const res = await axios.get('https://api.vendetunave.co/api/accesorios', {
-        params: {
-            page: query.page,
-            precio: query.precio,
-            kilometraje: query.kilometraje,
-            orden: query.orden
+export async function getServerSideProps({query, res}) {
+    try {
+        const res = await axios.get('https://api.vendetunave.co/api/accesorios', {
+            params: {
+                page: query.page,
+                precio: query.precio,
+                kilometraje: query.kilometraje,
+                orden: query.orden
+            }
+        });
+        const data = await res.data;
+        return {
+            props: {
+                data
+            },
         }
-    });
-    const data = await res.data;
-    return {
-        props: {
-            data
-        },
+    } catch({response}) {
+            res.writeHead(301, {
+                Location: `/${response.status}`
+            });
+            res.end();
+        return {props: {}}
     }
 }

@@ -121,13 +121,23 @@ export default function detalle({ data }) {
         </PublicLayout>
     )
 }
-export async function getServerSideProps({ params }) {
-    const res = await axios.get('https://api.vendetunave.co/api/pregunta/' + params.slug);
-    const data = await res.data;
-    //const imagenes = await res.data.imagenes;
-    return {
+export async function getServerSideProps({ params, res }) {
+    try {
+      const res = await axios.get(
+        "https://api.vendetunave.co/api/pregunta/" + params.slug
+      );
+      const data = await res.data;
+      //const imagenes = await res.data.imagenes;
+      return {
         props: {
-            data
+          data,
         },
+      };
+    } catch ({ response }) {
+      res.writeHead(301, {
+        Location: `/${response.status}`,
+      });
+      res.end();
+      return { props: {} };
     }
 }
