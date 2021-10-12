@@ -97,7 +97,7 @@ export const getServerSideProps = async ({ res }) => {
             <url>
               <loc>${url.replace(".js", "")}</loc>
               <lastmod>${new Date().toISOString()}</lastmod>
-              <changefreq>daily</changefreq>
+              <changefreq>monthly</changefreq>
               <priority>1.0</priority>
             </url>
           `;
