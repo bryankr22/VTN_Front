@@ -1,4 +1,6 @@
-import React, {Fragment, useState} from 'react'
+import React, {Fragment, useState} from 'react';
+import Head from "next/head";
+import { NextSeo } from "next-seo";
 import Link from 'next/link';
 import PublicLayout from '../../layouts/PublicLayout';
 import { Container, Header, Grid, Input, Item, Label, Button, Responsive, Pagination } from 'semantic-ui-react';
@@ -43,6 +45,19 @@ export default function index({q, page, preguntas, tags, total_records}) {
 
     return (
         <PublicLayout>
+            <NextSeo
+                title="Comunidad - VendeTuNave"
+                description="En nuestro sector de comunidad puedes resolver tus dudas sobre carros. Además, puedes ayudar a aclarar las dudas de vehículos de los demás."
+                openGraph={{
+                    title: "Comunidad - VendeTuNave",
+                    locale: "es_ES",
+                    type: "website",
+                    description: "En nuestro sector de comunidad puedes resolver tus dudas sobre carros. Además, puedes ayudar a aclarar las dudas de vehículos de los demás."
+                }}
+            />
+            <Head>
+                <meta property="keywords" content="carros kia, carros jeep, Suzuki carros, los coches, carro convertible, usados autos, carro nuevo" />
+            </Head>
             <Container style={{ paddingTop: 25 }} text>
                 <Header as='h2' style={{ textTransform: 'uppercase' }}>Comunidad - Vende Tu Nave</Header>
                 <p style={{ textAlign: 'justify' }}>

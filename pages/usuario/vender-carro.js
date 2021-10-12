@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import Head from "next/head";
+import { NextSeo } from "next-seo";
 import PublicLayout from '../../layouts/PublicLayout';
 import { Container, Tab } from "semantic-ui-react";
 import { validateAuth } from '../../helpers/auth';
@@ -10,6 +12,19 @@ import { API_URL } from '../../helpers/constants';
 export default function crear_producto({ data }) {
     return (
         <PublicLayout>
+            <NextSeo
+                title="VendeTuNave -  Vende tu carro 100% gratis"
+                description="Vende tu carro, camioneta o moto completamente gratis, de manera simple y rápida. Publica tu vehículo en nuestro portal."
+                openGraph={{
+                    title: "VendeTuNave -  Vende tu carro 100% gratis",
+                    locale: "es_ES",
+                    type: "website",
+                    description: "Vende tu carro, camioneta o moto completamente gratis, de manera simple y rápida. Publica tu vehículo en nuestro portal."
+                }}
+            />
+            <Head>
+                <meta property="keywords" content="venta de carros, venta de motos, vender carro, venta de carros, compra y venta de carros, tu carro ya, tu carro Colombia" />
+            </Head>
             <Container style={{ paddingTop: 25 }} text id="crear-producto">
                 <Tab panes={panes(data)} />
             </Container>

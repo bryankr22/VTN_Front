@@ -508,7 +508,7 @@ const Header = (props) => {
                 <li className="nav-item">
                   <Link
                     href={
-                      !cookies.vtn_token ? "/login" : "/usuario/crear_producto"
+                      !cookies.vtn_token ? "/login" : "/usuario/vender-carro"
                     }
                   >
                     <a className="nav-link" style={{ letterSpacing: 2 }}>

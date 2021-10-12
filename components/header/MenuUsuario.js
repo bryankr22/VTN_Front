@@ -60,7 +60,7 @@ export default function MenuUsuario() {
                     <span>
                         <Link
                         style={{ textDecoration: "none" }}
-                        href="/usuario/crear_producto"
+                        href="/usuario/vender-carro"
                         ><a style={{ color: '#000000de', fontSize: '1rem', fontWeight: 400 }}>Vender mi vehiculo</a>
                         </Link>
                     </span>

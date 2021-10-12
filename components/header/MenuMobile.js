@@ -187,7 +187,7 @@ export default function MenuMobile() {
                 className="nav-item"
                 >
                 <Link
-                    href={!cookies.vtn_token ? '/login' : '/usuario/crear_producto'}
+                    href={!cookies.vtn_token ? '/login' : '/usuario/vender-carro'}
                 >
                     <a className="nav-link" style={{ letterSpacing: 2, textAlign: 'left', fontSize: 16 }}>VENDER
                     </a>

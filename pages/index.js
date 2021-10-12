@@ -1,4 +1,6 @@
 import React from 'react';
+import Head from "next/head";
+
 import PublicLayout from '../layouts/PublicLayout';
 import ContentHome from '../components/home/ContentHome';
 import NoticiasHome from '../components/home/NoticiasHome';
@@ -14,6 +16,9 @@ import { API_URL, home } from '../helpers/constants';
 const Home = ({ vehiculos, slider, sliderMobile, categorias, marcas, noticias, filters, config}) => {
     return(
         <PublicLayout>
+            <Head>
+                <meta property="keywords" content="vende tu nave, carros en venta, carros de segunda, mercado libre carros, venta de carros usados y nuevos, compra y venta de carros, compra y venta motos, venta de carros" />
+            </Head>
             <SliderHome slider={slider} sliderMobile={sliderMobile}/>
             <FiltersHome options={filters}/>
             <CategoriasHome categorias={categorias}/>

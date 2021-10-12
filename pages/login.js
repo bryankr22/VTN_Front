@@ -1,4 +1,6 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
+import Head from "next/head";
+import { NextSeo } from "next-seo";
 import PublicLayout from '../layouts/PublicLayout';
 import { Divider, Grid, Input, Segment, Button, Checkbox, Form, Header, Responsive, Dimmer, Loader, Message} from "semantic-ui-react";
 import axios from 'axios';
@@ -79,6 +81,19 @@ export default function login(props) {
 
           `}
         </style>
+        <NextSeo
+          title="VendeTuNave – Regístrate o Inicia sesión"
+          description="Regístrate y pertenece a la comunidad automotriz más grande de Colombia. Además, accede a beneficios como publicar gratis, interactuar en nuestra comunidad y mucho más."
+          openGraph={{
+              title: "VendeTuNave – Regístrate o Inicia sesión",
+              locale: "es_ES",
+              type: "website",
+              description: "Regístrate y pertenece a la comunidad automotriz más grande de Colombia. Además, accede a beneficios como publicar gratis, interactuar en nuestra comunidad y mucho más."
+          }}
+        />
+        <Head>
+            <meta property="keywords" content="camionetas usadas medellin, carros usados barranquilla, vehiculos usados, carros de segunda baratos, carros nuevos baratos, venta de carros usados en bogota, carros de venta usados" />
+        </Head>
         <Dimmer style={{ position: "fixed" }} active={loading}>
           <Loader>Cargando...</Loader>
         </Dimmer>
