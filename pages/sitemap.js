@@ -84,7 +84,7 @@ export const getServerSideProps = async ({ res }) => {
   `;
 
     fs.writeFileSync("./public/sitemap.xml", sitemap);
-    res.writeHead(200, {
+    res.writeHead(301, {
         Location: '/sitemap.xml'
     });
     res.end();
