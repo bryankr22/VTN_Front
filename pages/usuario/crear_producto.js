@@ -32,8 +32,7 @@ export async function getServerSideProps(context) {
     const config = {
         headers: { Authorization: `Bearer ${decoded.token_server.access_token}` }
     };
-    const res = await axios.get('https://api.vendetunave.co/auth/form_producto', config);
-    const data = await res.data;
+   
     //
     let optionsCategories = [];
     let optionsCombustibles = [];
@@ -43,63 +42,7 @@ export async function getServerSideProps(context) {
     let optionsTipoAccesorios = [];
     let optionsDepartamentos = [];
     let optionsTipoMoto = [];
-    //
-    data.categories.forEach(function (item) {
-        optionsCategories.push({
-            key: item.id,
-            value: item.id,
-            text: item.nombre,
-        });
-    });
-    data.combustibles.forEach(function (item) {
-        optionsCombustibles.push({
-            key: item.id,
-            value: item.id,
-            text: item.nombre,
-        });
-    });
-    data.colores.forEach(function (item) {
-        optionsColores.push({
-            key: item.id,
-            value: item.id,
-            text: item.nombre,
-        });
-    });
-    data.transmisiones.forEach(function (item) {
-        optionsTransmision.push({
-            key: item.id,
-            value: item.id,
-            text: item.nombre,
-        });
-    });
-    data.tipoPrecio.forEach(function (item) {
-        optionsTipoPrecio.push({
-            key: item.id,
-            value: item.id,
-            text: item.nombre,
-        });
-    });
-    data.tipoAccesorio.forEach(function (item) {
-        optionsTipoAccesorios.push({
-            key: item.id,
-            value: item.id,
-            text: item.nombre,
-        });
-    });
-    data.departamentos.forEach(function (item) {
-        optionsDepartamentos.push({
-            key: item.id,
-            value: item.id,
-            text: item.nombre,
-        });
-    });
-    data.tipoMoto.forEach(function (item) {
-        optionsTipoMoto.push({
-            key: item.id,
-            value: item.id,
-            text: item.nombre,
-        });
-    });
+    
     return {
         props: {
             data : {
