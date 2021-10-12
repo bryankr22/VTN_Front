@@ -1,7 +1,9 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react';
+import Head from "next/head";
+import { NextSeo } from "next-seo";
 import PublicLayout from '../../layouts/PublicLayout';
 import { authInitialProps } from '../../helpers/auth';
-import { Container, Header, Table, Button, Image, Responsive, Dimmer, Loader, Tab } from 'semantic-ui-react'
+import { Container, Header, Tab } from 'semantic-ui-react';
 import { panes } from '../../components/usuario/favoritosTabs';
 
 import { AUTH_URL, favoritos_api, favoritos_remove_vehiculo, favoritos_remove_ficha } from '../../helpers/constants';
@@ -62,6 +64,19 @@ export default function favoritos() {
     }
     return (
         <PublicLayout>
+            <NextSeo
+                title="VendeTuNave - Vehículos favoritos"
+                description="Guarda tus carros favoritos en Vende Tu Nave y míralos cuando quieras."
+                openGraph={{
+                    title: "VendeTuNave - Vehículos favoritos",
+                    locale: "es_ES",
+                    type: "website",
+                    description: "Guarda tus carros favoritos en Vende Tu Nave y míralos cuando quieras."
+                }}
+            />
+            <Head>
+                <meta property="keywords" content="los mejores carros del mundo, carros de segunda baratos, carros de venta usados, motos usadas, usados autos, carros último modelo" />
+            </Head>
             <Container style={{ paddingTop: 25 }} text>
                 <Header as="h2" style={{ textTransform: 'uppercase' }}>Favoritos</Header>
                 <Tab

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import Head from "next/head";
+import { NextSeo } from "next-seo";
 import {
   Container,
   Header,
@@ -131,6 +133,19 @@ export default function perfil() {
   };
   return (
     <AdminLayout>
+      <NextSeo
+          title="VendeTuNave - Mi cuenta"
+          description="Administra tu información personal como usuario de Vende Tu Nave. La cual será utilizada a la hora de publicar o interactuar en la comunidad."
+          openGraph={{
+              title: "VendeTuNave - Mi cuenta",
+              locale: "es_ES",
+              type: "website",
+              description: "Administra tu información personal como usuario de Vende Tu Nave. La cual será utilizada a la hora de publicar o interactuar en la comunidad."
+          }}
+      />
+      <Head>
+          <meta property="keywords" content="Vende tu nave, vendetunave, venta de carros,carros deportivos, carros antiguos, camionetas" />
+      </Head>
       <Dimmer style={{ position: "fixed" }} active={loading}>
         <Loader>Actualizando...</Loader>
       </Dimmer>

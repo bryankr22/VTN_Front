@@ -1,4 +1,6 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect} from 'react';
+import Head from "next/head";
+import { NextSeo } from "next-seo";
 import PublicLayout from '../../layouts/PublicLayout';
 import { Header, Container, Tab } from "semantic-ui-react";
 import { authInitialProps } from '../../helpers/auth';
@@ -32,6 +34,19 @@ export default function mis_publicaciones() {
     }, [])
     return (
         <PublicLayout>
+            <NextSeo
+                title="VendeTuNave - Mis publicaciones"
+                description="Mira las publicaciones de vehiculos que hayas hecho. Publica tu carro, camioneta o moto completamente gratis, sin límite alguno."
+                openGraph={{
+                    title: "VendeTuNave - Mis publicaciones",
+                    locale: "es_ES",
+                    type: "website",
+                    description: "Mira las publicaciones de vehiculos que hayas hecho. Publica tu carro, camioneta o moto completamente gratis, sin límite alguno."
+                }}
+            />
+            <Head>
+                <meta property="keywords" content="moto deportiva, camiones, camioneta, automóvil, moto enduro, marcas de motos, automotriz" />
+            </Head>
             <Container style={{ paddingTop: 25 }} text>
                 <Header as="h2">MIS PUBLICACIONES</Header>
                 <Tab

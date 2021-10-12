@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Head from "next/head";
+import { NextSeo } from "next-seo";
 import dayjs from "dayjs";
 import {
   Container,
@@ -112,6 +114,19 @@ export default function financiacion() {
 
   return (
     <PublicLayout>
+      <NextSeo
+          title="VendeTuNave – Opciones de crédito para tu carro"
+          description="Te ayudamos con la financiación de tu carro. Ayudándote cumplir tu sueño de comprar carro."
+          openGraph={{
+              title: "VendeTuNave – Opciones de crédito para tu carro",
+              locale: "es_ES",
+              type: "website",
+              description: "Te ayudamos con la financiación de tu carro. Ayudándote cumplir tu sueño de comprar carro."
+          }}
+      />
+      <Head>
+          <meta property="keywords" content="sufi, occiauto, simuladores de crédito vehiculos, simulador de crédito, prestamos, financiaciones" />
+      </Head>
       <Container style={{ paddingTop: 25 }} text>
         <Header as="h2">FINANCIACIÓN DE TU VEHICULO</Header>
         <p style={{ textAlign: "justify" }}>

@@ -28,10 +28,6 @@ class MyDocument extends Document {
             rel="stylesheet"
             type="text/css"
           />
-          <meta
-            name="keywords"
-            content="vende tu nave, carros en venta, carros de segunda, mercado libre carros, venta de carros usados y nuevos, compra y venta de carros, compra y venta motos, venta de carros"
-          />
           <meta name="robots" content="index, follow" />
           <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
           <meta name="language" content="Spanish" />
