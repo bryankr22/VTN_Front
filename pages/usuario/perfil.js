@@ -62,6 +62,9 @@ export default function perfil() {
       headers: { Authorization: `Bearer ${decoded.token_server.access_token}` },
     };
     axios.get(AUTH_URL + perfil_api + user_id, config).then((res) => {
+      if(res.status === 401) {
+        window.location = '/401'
+      }
       setUsuario({ ...usuario, ...res.data });
     });
   }, []);

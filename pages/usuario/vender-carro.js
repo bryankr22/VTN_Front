@@ -36,17 +36,33 @@ export async function getServerSideProps(context) {
 
     if (!auth.vtn_token) {
         context.res.writeHead(301, {
-            Location: '/'
+            Location: '/401'
         });
         context.res.end();
+        return {
+            props: {}
+        }
     }
     const cookie = auth.vtn_token;
     const decoded = jwt.verify(cookie, 'vendetunave2021');
     const config = {
         headers: { Authorization: `Bearer ${decoded.token_server.access_token}` }
     };
-    const res = await axios.get('https://api.vendetunave.co/auth/form_producto', config);
-    const data = await res.data;
+    let data;
+    try {
+        const res = await axios.get('https://api.vendetunave.co/auth/form_producto', config);
+        data = res.data;
+    } catch({response}) {
+        if(response.status === 401) {
+            context.res.writeHead(301, {
+                Location: '/401'
+            });
+            context.res.end();
+        }
+        return {
+            props: {}
+        }
+    }
     //
     let optionsCategories = [];
     let optionsCombustibles = [];

@@ -43,6 +43,9 @@ export default function mis_busquedas() {
             headers: { Authorization: `Bearer ${decoded.token_server.access_token}` }
         };
         axios.get(AUTH_URL + busquedas_api + user_id, config).then((res) => {
+            if(res.status === 401) {
+                window.location = '/401'
+            }
             setBusqueda({...busqueda, ...res.data});
         })
     }, [])

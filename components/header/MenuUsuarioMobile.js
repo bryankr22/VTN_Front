@@ -12,7 +12,7 @@ export default function MenuUsuarioMobile() {
     const CloseSession = () => {
         dispatch(updateToken(null));
         removeCookie('vtn_token', {});
-        router.push('/');
+        window.location = '/login'
     }
     return (
         <Dropdown.Menu scrolling>
