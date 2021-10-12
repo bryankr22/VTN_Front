@@ -1,5 +1,4 @@
 import React from "react";
-import fs from "fs";
 import axios from 'axios';
 import { API_URL } from "../helpers/constants";
 
@@ -27,75 +26,52 @@ const normalize = (function () {
 export const getServerSideProps = async ({ res }) => {
     const baseUrl = 'https://www.vendetunave.co';
 
-    const staticFiles = fs
-        .readdirSync({
-            development: 'pages',
-            production: './',
-        }[process.env.NODE_ENV], { withFileTypes: true })
-        .filter((staticPage) => {
-            return ![
-                "404.js",
-                "_app.js",
-                "_document.js",
-                "_error.js",
-                "sitemap.xml.js",
-            ].includes(staticPage.name);
-        })
-        .filter(dirent => !dirent.isDirectory())
-        .map((staticPagePath) => {
-            return `${baseUrl}/${staticPagePath.name}`;
-        });
-
-    const staticSecondFolders = fs
-        .readdirSync({
-            development: 'pages',
-            production: './',
-        }[process.env.NODE_ENV], { withFileTypes: true })
-        .filter((staticPage) => {
-            return ![
-                "_app.js",
-                "_document.js",
-                "_error.js",
-                "sitemap.xml.js",
-            ].includes(staticPage);
-        }).filter(dirent => dirent.isDirectory());
-
-    let staticFolders = [`${baseUrl}/vehiculos`, `${baseUrl}/ficha-tecnica`];
-    staticSecondFolders.forEach(file => {
-        fs.readdirSync({
-            development: `pages/${file.name}`,
-            production: './',
-        }[process.env.NODE_ENV], { withFileTypes: true })
-            .map((staticPagePath) => {
-                if (staticPagePath.name !== 'index.js' && staticPagePath.name !== 'detalle' && staticPagePath.name !== 'auth' && staticPagePath.name !== '[id].js') {
-                    staticFolders.push(`${baseUrl}/${file.name}/${staticPagePath.name}`);
-                }
-            });
-    });
+    const staticPages = [
+        `/comparar-fichas`,
+        `/comparar-vehiculos`,
+        `/comparar`,
+        `/concesionarios`,
+        `/crear-pregunta`,
+        `/financiacion`,
+        `/index`,
+        `/login`,
+        `/servicios`,
+        `/terminos-y-condiciones`,
+        `/api/hello`,
+        `/restablecer/link`,
+        `/usuario/crear_producto`,
+        `/usuario/favoritos`,
+        `/usuario/mis_busquedas`,
+        `/usuario/mis_publicaciones`,
+        `/usuario/perfil`,
+        `/vehiculos`,
+        `/ficha-tecnica`,
+        `/comunidad`
+    ];
 
     const dynamicPages = [];
     const response = await axios.get(`${API_URL}/sitemap`);
     const { vehiculos, ficha_tecnica, preguntas } = await response.data;
     vehiculos.forEach((vehiculo) => {
-        dynamicPages.push(`${baseUrl}/vehiculos/detalle/${normalize(vehiculo.title)}-${vehiculo.id}`)
-        dynamicPages.push(`${baseUrl}/editar-vehiculo/${vehiculo.id}`)
+        dynamicPages.push(`/vehiculos/detalle/${normalize(vehiculo.title)}-${vehiculo.id}`)
+        dynamicPages.push(`/editar-vehiculo/${vehiculo.id}`)
     });
     ficha_tecnica.forEach((ficha) => {
-        dynamicPages.push(`${baseUrl}/ficha-tecnica/detalle/${normalize(ficha.title)}-${ficha.id}`)
+        dynamicPages.push(`/ficha-tecnica/detalle/${normalize(ficha.title)}-${ficha.id}`)
     });
     preguntas.forEach((pregunta) => {
-        dynamicPages.push(`${baseUrl}/comunidad/detalle/${normalize(pregunta.titulo)}-${pregunta.id}`)
+        dynamicPages.push(`/comunidad/detalle/${normalize(pregunta.titulo)}-${pregunta.id}`)
     });
 
-    const staticPages = [...staticFiles, ...staticFolders, ...dynamicPages];
+    const pages = [...staticPages, ...dynamicPages];
 
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-      ${staticPages
+      ${pages
             .map((url) => {
                 return `
             <url>
-              <loc>${url.replace(".js", "")}</loc>
+              <loc>${baseUrl}${url.replace(".js", "")}</loc>
               <lastmod>${new Date().toISOString()}</lastmod>
               <changefreq>monthly</changefreq>
               <priority>1.0</priority>
