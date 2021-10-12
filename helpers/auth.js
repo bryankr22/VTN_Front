@@ -7,7 +7,7 @@ export const authInitialProps = () => ({ req, res }) => {
     const auth = parseCookies(req);
     if(!auth.vtn_token){
         res.writeHead(301, {
-            Location: '/'
+            Location: '/401'
         });
         res.end();
     }

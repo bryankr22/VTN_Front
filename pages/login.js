@@ -31,7 +31,7 @@ export default function login(props) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [errorRegister, setErrorRegister] = useState(false);
-    
+
     const sendLogin = (register = false, email = login.email, password = login.password) => {
         setLoading(true);
         axios.post(AUTH_URL + login_api, { email, password }).then((res) => {
@@ -41,7 +41,7 @@ export default function login(props) {
                 expires: nextYear(), 
                 sameSite: true
             });
-            router.push(register ? '/usuario/perfil' : '/');
+            window.location = register ? '/usuario/perfil' : '/';
             //console.log(">>>>", res.data);
             setLoading(false);
         }).catch(error => {

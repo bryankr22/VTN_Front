@@ -36,7 +36,7 @@ export async function getServerSideProps(context) {
 
     if (!auth.vtn_token) {
         context.res.writeHead(301, {
-            Location: '/'
+            Location: '/401'
         });
         context.res.end();
         return {

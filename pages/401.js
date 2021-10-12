@@ -14,7 +14,7 @@ export default function Custom404() {
     const CloseSession = () => {
         dispatch(updateToken(null));
         removeCookie('vtn_token', {});
-        router.push('/');
+        window.location = '/login'
     }
 
     useEffect(() => {
