@@ -1,4 +1,5 @@
 import React from "react";
+import fs from "fs";
 import axios from 'axios';
 import { API_URL } from "../helpers/constants";
 
@@ -82,8 +83,10 @@ export const getServerSideProps = async ({ res }) => {
     </urlset>
   `;
 
-    res.setHeader("Content-Type", "text/xml");
-    res.write(sitemap);
+    fs.writeFileSync("./public/sitemap.xml", sitemap);
+    res.writeHead(200, {
+        Location: '/sitemap.xml'
+    });
     res.end();
 
     return {
