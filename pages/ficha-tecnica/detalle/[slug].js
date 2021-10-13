@@ -1,11 +1,13 @@
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react';
+import Head from "next/head";
+import { NextSeo } from "next-seo";
 import { useRouter } from 'next/router'
 import PublicLayout from '../../../layouts/PublicLayout';
 import TableDescription from '../../../components/fichatecnica/TableDescription';
 import CarruselHome from '../../../components/carrusel/CarruselHome';
 import CarruselRelacionados from '../../../components/carrusel/CarruselRelacionados';
 import axios from 'axios';
-import { Responsive, Icon, Breadcrumb, Grid, Header, Container, Button, Dimmer, Loader } from "semantic-ui-react";
+import { Responsive, Icon, Header, Container, Button, Dimmer, Loader } from "semantic-ui-react";
 import { useCookies } from "react-cookie"
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -50,6 +52,19 @@ export default function detalle({ data }) {
     }
     return (
         <PublicLayout>
+            <NextSeo
+                title={`${data.vehicle.title} ${data.vehicle.description}`}
+                description={`Conoce todas las características, equipamiento y novedades del nuevo ${data.vehicle.title} como seguridad, autonomía, potencia y mucho más.`}
+                openGraph={{
+                    title: `${data.vehicle.title} ${data.vehicle.description}`,
+                    locale: "es_ES",
+                    type: "website",
+                    description: `Conoce todas las características, equipamiento y novedades del nuevo ${data.vehicle.title} como seguridad, autonomía, potencia y mucho más.`
+                }}
+            />
+            <Head>
+                <meta property="keywords" content={`Ficha técnica, ${data.vehicle.marcaLabel}, ${data.vehicle.marcaLabel} ${data.vehicle.modeloLabel}, ${data.vehicle.title}, ${data.vehicle.modeloLabel}`} />
+            </Head>
             <Dimmer style={{ position: "fixed" }} active={loading}>
                 <Loader>Agregando a favoritos...</Loader>
             </Dimmer>  
@@ -217,6 +232,7 @@ export default function detalle({ data }) {
 export async function getServerSideProps({ params }) {
     const res = await axios.get('https://api.vendetunave.co/api/ficha_tecnica/' + params.slug);
     const data = await res.data;
+    console.log(data);
     //const imagenes = await res.data.imagenes;
     return {
         props: {

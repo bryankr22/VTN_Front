@@ -1,14 +1,14 @@
 import React from "react";
+import Head from "next/head";
+import { NextSeo } from "next-seo";
 import PublicLayout from "../layouts/PublicLayout";
 import ListaConcesionarios from "../components/servicios/ListaConcesionarios";
 import {
   Container,
   Header,
   Select,
-  Button,
   Responsive,
   Grid,
-  Item,
 } from "semantic-ui-react";
 import axios from "axios";
 //import { API_URL, concesionarios_api } from '../helpers/constants';
@@ -51,6 +51,19 @@ export default function concesionarios({
 
   return (
     <PublicLayout>
+      <NextSeo
+          title="Concesionarios Bogotá, Medellín, Cali y más"
+          description="Conoce todos los concesionarios de carros o moto Renault, Mazda, Chevrolet, Kia, Ford y más, cercanos a ti en Vende Tu Nave."
+          openGraph={{
+              title: "Concesionarios Bogotá, Medellín, Cali y más",
+              locale: "es_ES",
+              type: "website",
+              description: "Conoce todos los concesionarios de carros o moto Renault, Mazda, Chevrolet, Kia, Ford y más, cercanos a ti en Vende Tu Nave."
+          }}
+      />
+      <Head>
+          <meta property="keywords" content="concesionario, concesionario Chevrolet, compra y venta de carros, concesionarios usados, concesionario Renault, venta de carros usados, concesionario Mazda" />
+      </Head>
       <div>
         <Container style={{ paddingTop: 25 }} text>
           <Header as="h2" style={{ textTransform: "uppercase" }}>
