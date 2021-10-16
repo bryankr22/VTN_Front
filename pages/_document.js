@@ -18,7 +18,7 @@ class MyDocument extends Document {
           <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
           <link
             media="screen"
-            href="https://fonts.googleapis.com/css?family=Raleway:100,600"
+            href="https://fonts.googleapis.com/css?family=Raleway:100,600&display=swap"
             rel="stylesheet"
             type="text/css"
           />

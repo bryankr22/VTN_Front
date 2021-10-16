@@ -7,29 +7,6 @@ export default function CarruselHome(props) {
   const [page, setPage] = useState(0);
   const router = useRouter();
 
-  // const handleZoom = (page) => {
-  //   setTimeout(() => {
-  //     $(`#image_vehicle_${page}`).ezPlus({
-  //       scrollZoom: true,
-  //       zoomWindowWidth: 500,
-  //       zoomWindowHeight: 500
-  //     })
-  //   }, 1000)
-  // };
-
-  // useEffect(() => {
-  //   if (
-  //     typeof window !== "undefined" &&
-  //     router.asPath.includes("vehiculos/detalle")
-  //   ) {
-  //     handleZoom(page);
-  //   }
-  // }, [page]);
-
-  console.log(
- router.asPath.includes('vehiculos/detalle')
-  );
-
   return (
     <div>
       <Carousel
