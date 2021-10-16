@@ -24,7 +24,7 @@ export default function restablecer() {
                     setLoading(false);
 
                     if (!res.data.status) {
-                        setMessage('Lo sentimos, tu usuario no se encuentra en nuestra base de datos.');
+                        setMessage(res.data.message);
                         setStatus({
                             error: true,
                             success: false
