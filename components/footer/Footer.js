@@ -87,6 +87,7 @@ const Footer = () => {
                                 >
                                     <Image
                                     layout='fill'
+                                    alt="VTN_logo_white"
                                     className={'imglogo'}
                                     src="/images/VTN_logo_white.png"
                                     />
@@ -105,6 +106,7 @@ const Footer = () => {
                                     rel="noreferrer"
                                 >
                                     <img
+                                        alt="call button"
                                         src="/images/vtn_call.png"
                                         style={{ height: 'auto', width: '55px' }}
                                     />
@@ -178,6 +180,7 @@ const Footer = () => {
                                 >
                                     <Image
                                     layout='fill'
+                                    alt="VTN_logo_white"
                                     className={'imglogo'}
                                     src="/images/VTN_logo_white.png"
                                     />
@@ -197,6 +200,7 @@ const Footer = () => {
                                 >
                                     <Image
                                         layout='fill'
+                                        alt="call button"
                                         src="/images/vtn_call.png"
                                         style={{ height: 'auto', width: '55px' }}
                                     />
@@ -265,6 +269,7 @@ const Footer = () => {
                                 >
                                     <Image
                                     layout='fill'
+                                    alt="VTN_logo_white"
                                     className={'imglogo'}
                                     src="/images/VTN_logo_white.png"
                                     />
@@ -285,6 +290,7 @@ const Footer = () => {
                                 >
                                     <Image
                                         layout='fill'
+                                        alt="call button"
                                         src="/images/vtn_call.png"
                                         style={{ height: 'auto', width: '55px', position: 'absolute', right: 0 }}
                                     />

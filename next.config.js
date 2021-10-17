@@ -1,7 +1,6 @@
 module.exports = {
-    reactStrictMode: false,
+    reactStrictMode: true,
     compress: true,
-    webpack5: false,
     images: {
         domains: ['vendetunave.s3.amazonaws.com'],
     },

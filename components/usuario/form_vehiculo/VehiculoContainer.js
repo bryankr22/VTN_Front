@@ -28,7 +28,11 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
   const isValidForm = (data) => {
     for (let key in data) {
       if (data.hasOwnProperty(key)) {
-        if ((data[key] == undefined || data[key] === '')|| data[key].length === 0) {
+        if (
+          data[key] == undefined ||
+          data[key] === "" ||
+          data[key].length === 0
+        ) {
           console.log(key);
           return false;
         }
@@ -38,15 +42,16 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
     return true;
   };
 
-  console.log({imagesVehiculoRedux});
   const publicVehicle = () => {
-
-    const backup = dataProp?.edit?.imagenes?.filter((item) => !!item.url)
-    .map((item) => ({
-      id: item?.imageId,
-      source: item?.url,
-    }))
-    const images = !imagesVehiculoRedux.length ? (backup || []) : imagesVehiculoRedux
+    const backup = dataProp?.edit?.imagenes
+      ?.filter((item) => !!item.url)
+      .map((item) => ({
+        id: item?.imageId,
+        source: item?.url,
+      }));
+    const images = !imagesVehiculoRedux.length
+      ? backup || []
+      : imagesVehiculoRedux;
 
     if (images.length < 5) {
       setAlert({
@@ -82,7 +87,7 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
       departamento_vehiculo,
       ciudad_vehiculo,
       tipo_moto_select,
-      id
+      id,
     } = vehiculoRedux;
 
     const dataValid = {
@@ -145,29 +150,31 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
         tipo_moto_select,
         images,
         user_id,
-        id
+        id,
       };
 
-      const url = `${AUTH_URL}/vehicle_${isEdit ? 'update' : 'insert'}`
+      const url = `${AUTH_URL}/vehicle_${isEdit ? "update" : "insert"}`;
 
       axios
         .post(url, data, config)
         .then((res) => {
-            if(res.data.status) {
-                setAlert({
-                    message: `Vehículo ${isEdit ? 'actualizado' : 'creado'} correctamente`,
-                    error: false,
-                    info: false,
-                    success: true,
-                  });
-                  window.scrollTo({ top: 0, behavior: "smooth" });
-                  setLoading(false);
-                  setTimeout(() => {
-                    location.replace("/usuario/mis_publicaciones");
-                  }, 2000);
-            }else {
-                throw {error: true}
-            }
+          if (res.data.status) {
+            setAlert({
+              message: `Vehículo ${
+                isEdit ? "actualizado" : "creado"
+              } correctamente`,
+              error: false,
+              info: false,
+              success: true,
+            });
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            setLoading(false);
+            setTimeout(() => {
+              location.replace("/usuario/mis_publicaciones");
+            }, 2000);
+          } else {
+            throw { error: true };
+          }
         })
         .catch(() => {
           setLoading(false);
@@ -209,10 +216,10 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
 
       <Responsive {...Responsive.onlyComputer}>
         <FirstSection data={dataProp} />
-          <Form.Field style={{ marginTop: 20 }}>
-            <label>Agrega una o más fotos (Mínimo 5 fotos)*</label>
-            <SecondSection data={dataProp} />
-          </Form.Field>
+        <Form.Field style={{ marginTop: 20 }}>
+          <label>Agrega una o más fotos (Mínimo 5 fotos)*</label>
+          <SecondSection data={dataProp} />
+        </Form.Field>
         <ThirdSection data={dataProp} />
         <Button
           style={{ marginBottom: 10 }}
@@ -220,7 +227,7 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
           type="submit"
           onClick={publicVehicle}
         >
-          {!dataProp.edit ? 'PUBLICAR' : 'GUARDAR'}
+          {!dataProp.edit ? "PUBLICAR" : "GUARDAR"}
         </Button>
         <br />
         <a
@@ -234,10 +241,10 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
       </Responsive>
       <Responsive {...Responsive.onlyMobile}>
         <FirstSection data={dataProp} isMobile />
-          <Form.Field style={{ marginTop: 20 }}>
-            <label>Agrega una o más fotos (Mínimo 5 fotos)*</label>
-            <SecondSection data={dataProp} isMobile />
-          </Form.Field>
+        <Form.Field style={{ marginTop: 20 }}>
+          <label>Agrega una o más fotos (Mínimo 5 fotos)*</label>
+          <SecondSection data={dataProp} isMobile />
+        </Form.Field>
         <ThirdSection data={dataProp} isMobile />
         <Button
           style={{ marginBottom: 10 }}
@@ -245,7 +252,7 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
           type="submit"
           onClick={publicVehicle}
         >
-          {!dataProp.edit ? 'PUBLICAR' : 'GUARDAR'}
+          {!dataProp.edit ? "PUBLICAR" : "GUARDAR"}
         </Button>
         <br />
         <a
@@ -259,10 +266,10 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
       </Responsive>
       <Responsive {...Responsive.onlyTablet}>
         <FirstSection data={dataProp} isMobile />
-          <Form.Field style={{ marginTop: 20 }}>
-            <label>Agrega una o más fotos (Mínimo 5 fotos)*</label>
-            <SecondSection data={dataProp} isMobile />
-          </Form.Field>
+        <Form.Field style={{ marginTop: 20 }}>
+          <label>Agrega una o más fotos (Mínimo 5 fotos)*</label>
+          <SecondSection data={dataProp} isMobile />
+        </Form.Field>
         <ThirdSection data={dataProp} isMobile />
         <Button
           style={{ marginBottom: 10 }}
@@ -270,7 +277,7 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
           type="submit"
           onClick={publicVehicle}
         >
-          {!dataProp.edit ? 'PUBLICAR' : 'GUARDAR'}
+          {!dataProp.edit ? "PUBLICAR" : "GUARDAR"}
         </Button>
         <br />
         <a

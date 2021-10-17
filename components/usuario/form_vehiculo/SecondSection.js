@@ -8,6 +8,7 @@ import "react-upload-gallery/dist/style.css"; // or scss
 import { AUTH_URL } from "../../../helpers/constants";
 import { setImages } from "../../../store/productoSlice";
 import { useCookies } from "react-cookie";
+import { Message } from "semantic-ui-react";
 
 const customRequest = (cookies, id, update) => {
   return function ({
@@ -73,15 +74,19 @@ const customRequest = (cookies, id, update) => {
   };
 };
 
-export default function SecondSection({
-  data: { edit } = {},
-  isMobile,
-  maxFiles = 10,
-}) {
+const onWarning = (setMessage) => (type, rules) => {
+  if (type === "limit") {
+    setMessage(`La cantidad máxima de archivos es ${rules.limit}`);
+  }
+};
+
+export default function SecondSection({ data: { edit } = {}, maxFiles = 10 }) {
   const dispatch = useDispatch();
   const [cookies] = useCookies(["vtn_token"]);
   const [imagesLoaded, setImagesLoaded] = useState({});
-
+  const [message, setMessage] = useState();
+  const warningCallback = useCallback(onWarning(setMessage), []);
+  console.log({ message });
   const sources = useMemo(
     () =>
       edit?.imagenes
@@ -108,24 +113,34 @@ export default function SecondSection({
   );
 
   useEffect(() => {
-    dispatch(setImages(sources))
-    document.querySelector('.rug-handle-drop-text').innerHTML = ('Arrastra aquí las imágenes que quieres cargar. Máximo 10.')
-    document.querySelector('.rug-handle-drop-text+span').innerHTML = 'O'
-    document.querySelector('.rug-handle-button').innerHTML = 'Selecciónalas'
+    dispatch(setImages(sources));
+    document.querySelector(".rug-handle-drop-text").innerHTML =
+      "Arrastra aquí las imágenes que quieres cargar. Máximo 10.";
+    document.querySelector(".rug-handle-drop-text+span").innerHTML = "O";
+    document.querySelector(".rug-handle-button").innerHTML = "Selecciónalas";
   }, [sources]);
 
   return (
-    <RUG
-      initialState={sources}
-      action={`${AUTH_URL}/upload_vehicle_image`}
-      customRequest={customRequest(cookies, edit?.vehiculo.id, setImagesLoaded)}
-      inOrder
-      onChange={handleChange}
-      rules={{ limit: maxFiles }}
-      source={(response) => response?.url_image_webp}
-      onConfirmDelete={(currentImage, images) => {
-        return window.confirm("¿Desea borrar la imagen?");
-      }}
-    />
+    <>
+      <style>{`.error.message { display: block !important; margin: 20px; margin-bottom:10px !important}`}</style>
+      {message && <Message error content={message} onDismiss={() => setMessage(undefined)} /> }
+      <RUG
+        initialState={sources}
+        action={`${AUTH_URL}/upload_vehicle_image`}
+        customRequest={customRequest(
+          cookies,
+          edit?.vehiculo.id,
+          setImagesLoaded
+        )}
+        inOrder
+        onChange={handleChange}
+        rules={{ limit: maxFiles }}
+        source={(response) => response?.url_image_webp}
+        onWarning={warningCallback}
+        onConfirmDelete={() => {
+          return window.confirm("¿Desea borrar la imagen?");
+        }}
+      />
+    </>
   );
 }

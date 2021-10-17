@@ -6,12 +6,11 @@ import { useCookies } from "react-cookie"
 import MenuMobile from './MenuMobile'
 import MenuUsuario from './MenuUsuario'
 import MenuUsuarioMobile from './MenuUsuarioMobile';
-import { insert } from 'ramda';
-import { useSelector } from 'react-redux';
+
 import { useRouter } from 'next/router'
-const Header = (props) => {
+const Header = () => {
     const router = useRouter();
-    const [cookies, setCookie] = useCookies(['vtn_token']);
+    const [cookies,] = useCookies(['vtn_token']);
     const [query, setQuery] = useState("");
     const handleSearch = () => {
         if ( document.getElementById("dropSearchInput").classList.contains("visible") ) {
@@ -54,6 +53,7 @@ const Header = (props) => {
               <Link href="/">
                 <div className={"image-container-tablet"}>
                   <Image
+                    alt="image logo"
                     quality={50}
                     loading="lazy"
                     layout="fill"
@@ -97,6 +97,7 @@ const Header = (props) => {
               <Link href="/">
                 <div className={"image-container"}>
                   <Image
+                    alt="image logo"
                     quality={50}
                     loading="lazy"
                     layout="fill"
@@ -142,9 +143,10 @@ const Header = (props) => {
                 style={{ width: "auto", margin: "0 auto" }}
               >
                 <li className="nav-item deleteMobile">
-                  <Link href="/">
+                  <Link href="/" passHref>
                     <div className={"image-container"}>
                       <Image
+                        alt="image logo"
                         quality={50}
                         loading="lazy"
                         layout="fill"
@@ -548,6 +550,7 @@ const Header = (props) => {
                 {!cookies.vtn_token ? (
                   <li className="nav-item deleteMobile" style={{ width: 250 }}>
                     <Link
+                      passHref
                       id="link-login"
                       href="/login"
                       style={{ textDecoration: "none" }}

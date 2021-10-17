@@ -1,14 +1,14 @@
-import React from 'react';
 import Head from "next/head";
+import dynamic from 'next/dynamic';
 
 import PublicLayout from '../layouts/PublicLayout';
-import ContentHome from '../components/home/ContentHome';
 import NoticiasHome from '../components/home/NoticiasHome';
 import MarcasHome from '../components/home/MarcasHome';
 import CategoriasHome from '../components/home/CategoriasHome';
 import FiltersHome from '../components/home/FiltersHome';
-import SliderHome from '../components/home/SliderHome';
 import DestacadosHome from '../components/home/DestacadosHome';
+const SliderHome  = dynamic(() => import('../components/home/SliderHome'));
+const ContentHome  = dynamic(() => import('../components/home/ContentHome'));
 
 import axios from 'axios';
 import { API_URL, home } from '../helpers/constants';

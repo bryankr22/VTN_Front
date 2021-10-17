@@ -1,0 +1,27 @@
+
+
+.container {
+  position: relative;
+  display: flex;
+  margin-bottom: 20px;
+  padding: 5px;
+  max-height: 300px;
+}
+
+.image {
+  object-fit: fill;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.button {
+  position: absolute;
+  z-index: 1;
+  top: 70%;
+  left: 15%;
+  color: var(--light);
+  background-color: var(--blue);
+  min-width: fit-content;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
