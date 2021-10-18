@@ -42,6 +42,7 @@ class MyDocument extends Document {
           <meta name="zipcode" content="760001" />
           <meta name="city" content="Cali" />
           <meta name="country" content="Colombia" />
+          <meta name="robots" content="NOODP" />
 
           <script defer src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
           <script defer src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
