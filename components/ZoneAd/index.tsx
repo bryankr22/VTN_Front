@@ -25,7 +25,7 @@ function ZoneAd({ slug }: Props) {
   const changeRoute = useCallback(
     (id: number, path: string) => () => {
       reportClick(id);
-      window.location = path as any;
+      window.open(path, '_blank');
     },
     []
   );
