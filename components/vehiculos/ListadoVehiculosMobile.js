@@ -73,7 +73,7 @@ export default function ListadoVehiculosMobile({ params, vehiculos, page, totalR
     return (
         <>
             <HeaderVehiculo />
-            <ZoneAd  slug={params.categoria} />
+            {/* <ZoneAd  slug={params.categoria} /> */}
             {vehiculos.length === 0 && (
             <p
                 style={{
