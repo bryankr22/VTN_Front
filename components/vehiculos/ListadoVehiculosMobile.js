@@ -4,7 +4,9 @@ import HeaderVehiculo from '../../components/comparadores/HeaderVehiculo';
 import { useLocalStorage } from '../../helpers/hooks/useLocalStorage';
 import { useSelector, useDispatch } from 'react-redux';
 import { addVehiculo } from '../../store/comparadorSlice';
-import ZoneAd from '../ZoneAd';
+import dynamic from 'next/dynamic';
+const ZoneAd = dynamic(() => import("../ZoneAd"));
+
 export default function ListadoVehiculosMobile({ params, vehiculos, page, totalRecords }) {
     const compareList = useSelector(({ comparador }) => comparador.vehiculos);
     const dispatch = useDispatch();
