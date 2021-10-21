@@ -1,4 +1,3 @@
-import { DefaultSeo } from "next-seo";
 import Document, { Html, Main, Head, NextScript } from "next/document";
 import { getLangFromReq } from "../helpers/fromReq";
 
@@ -6,8 +5,9 @@ class MyDocument extends Document {
   static async getInitialProps(ctx) {
     const initialProps = await Document.getInitialProps(ctx);
     const lang = getLangFromReq(ctx.req);
-    return { ...initialProps, lang };
-    }
+    const props = {...initialProps, lang};
+    return props;
+  }
 
   render() {
     return (
@@ -44,11 +44,26 @@ class MyDocument extends Document {
           <meta name="country" content="Colombia" />
           <meta name="robots" content="NOODP" />
 
-          <script defer src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-          <script defer src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-          <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
-          <script defer src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
-          <script defer src="https://cdn.jsdelivr.net/npm/ez-plus-extended@1.0.2/src/jquery.ez-plus.min.js"></script>
+          <script
+            defer
+            src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+          ></script>
+          <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+          ></script>
+          <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+          ></script>
+          <script
+            defer
+            src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"
+          ></script>
+          <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/ez-plus-extended@1.0.2/src/jquery.ez-plus.min.js"
+          ></script>
           {process?.env?.NODE_ENV != "development" && (
             <>
               <script
