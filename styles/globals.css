@@ -447,3 +447,8 @@
   min-height: unset !important;
 }
 
+h1, h2, h3, h4, h5 {
+  font-family: Montserrat,Lato,'Helvetica Neue',Arial,Helvetica,sans-serif !important;
+}
+
+
