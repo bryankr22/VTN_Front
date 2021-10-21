@@ -154,7 +154,7 @@ export default function ListadoVehiculos({
         </p>
       )}
 
-      {/* <ZoneAd slug={params.categoria} /> */}
+      <ZoneAd slug={params.categoria} />
 
       {vehiculos.length > 0 && (
         <Card.Group itemsPerRow={4}>

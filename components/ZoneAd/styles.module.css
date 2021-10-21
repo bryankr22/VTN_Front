@@ -5,7 +5,6 @@
   display: flex;
   margin-bottom: 20px;
   padding: 5px;
-  max-height: 300px;
 }
 
 .image {
@@ -17,8 +16,8 @@
 .button {
   position: absolute;
   z-index: 1;
-  top: 70%;
-  left: 15%;
+  left: 5%;
+  bottom: 20px;
   color: var(--light);
   background-color: var(--blue);
   min-width: fit-content;
