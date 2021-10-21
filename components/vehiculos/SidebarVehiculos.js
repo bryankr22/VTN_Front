@@ -357,7 +357,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                   <List.Item
                     as="a"
                     onClick={() =>
-                      openModal("Modelos", contadores.modelos, "modelos")
+                      openModal("Modelos", contadores.modelos, "modelo")
                     }
                   >
                     Ver Todos

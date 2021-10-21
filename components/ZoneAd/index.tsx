@@ -7,7 +7,9 @@ interface Props {
   slug: string;
 }
 
-const parseCategory = (rawCategory: string): AdSlug => {
+const parseCategory = (rawCategory: string): AdSlug | undefined => {
+  if(!rawCategory) return
+
   if (rawCategory === "carros") {
     return "carros-y-camionetas";
   }
@@ -33,6 +35,7 @@ function ZoneAd({ slug }: Props) {
   if (!value?.data?.patterns) {
     return null;
   }
+
   const ad = value.data.patterns;
 
   return (
