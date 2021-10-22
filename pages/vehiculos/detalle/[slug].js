@@ -57,7 +57,7 @@ export default function detalle({ data }) {
   return (
     <>
       <NextSeo
-        title={data.vehiculo.title}
+        title={`${data.vehiculo.title} ${data.vehiculo.descripcion}`}
         description={data.vehiculo.descripcion}
         openGraph={{
           images: [

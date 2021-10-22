@@ -38,7 +38,7 @@ export const getServerSideProps = async ({ res }) => {
         `/servicios`,
         `/terminos-y-condiciones`,
         `/api/hello`,
-        `/restablecer/link`,
+        `/restablecer`,
         `/usuario/crear_producto`,
         `/usuario/favoritos`,
         `/usuario/mis_busquedas`,
