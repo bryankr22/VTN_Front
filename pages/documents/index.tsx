@@ -1,6 +1,10 @@
 import { Button, Container, Row, Spacer, Text } from "@nextui-org/react";
-import { GeneralData, RequestForm } from '../../components/Documents';
+import { GetServerSideProps } from "next";
+import { GeneralData, RequestForm } from "../../components/Documents";
 import PublicLayout from "../../layouts/PublicLayout";
+import { validateAuth } from "../../helpers/auth";
+import axios, { AxiosResponse } from "axios";
+import jwt from "jsonwebtoken";
 
 export default function Documents() {
   return (
@@ -67,3 +71,52 @@ export default function Documents() {
     </PublicLayout>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const auth = validateAuth(context);
+
+  if (!auth.vtn_token) {
+    context.res.writeHead(301, {
+      Location: "/401",
+    });
+    context.res.end();
+    return {
+      props: {},
+    };
+  }
+  const cookie = auth.vtn_token;
+  const decoded = jwt.verify(cookie, "vendetunave2021");
+  const config = {
+    headers: {
+      Authorization: `Bearer ${(decoded as any).token_server.access_token}`,
+    },
+  };
+  let data;
+  try {
+    const res = await axios.get(
+      "https://api.vendetunave.co/auth/form_producto",
+      config
+    );
+    data = res.data;
+  } catch (err: any) {
+    const { response } = err as any;
+    if (response.status === 401) {
+      context.res.writeHead(301, {
+        Location: "/401",
+      });
+      context.res.end();
+    }
+
+    return {
+      props: {
+        data,
+      },
+    };
+  }
+
+
+  console.log(data)
+  return {
+    props: {},
+  };
+};

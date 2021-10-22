@@ -1,15 +1,15 @@
-import { ReactNode } from 'react';
+import { Spacer } from '@nextui-org/react';
+import { ReactNode } from "react";
 import Collapsible from "react-collapsible";
 import TitleCollapsible from "../TitleCollapsible";
 
 import styles from "./styles.module.css";
 
 interface Props {
-  children: ReactNode
+  children: ReactNode;
 }
 
-export default function Collapse({children}:Props) {
-
+export default function Collapse({ children }: Props) {
   return (
     <Collapsible
       trigger={<TitleCollapsible text="Llenar Datos" />}
@@ -17,6 +17,7 @@ export default function Collapse({children}:Props) {
       className={styles.colapsible}
       openedClassName={styles.colapsible}
     >
+      <Spacer y={2} />
       {children}
     </Collapsible>
   );
