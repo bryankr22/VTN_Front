@@ -16,7 +16,76 @@ export const VEHICLE_CLASS = [
   "Otro",
 ];
 
-export const validateAsNumber = (value: string) => {
+export const TYPE_ARMOR = {
+  Automovil: [
+    "Sedán",
+    "Coupé",
+    "Buggy",
+    "Convertible",
+    "Limosina",
+    "Station Wagon",
+    "Hatchback",
+  ],
+  Bus: ["Escalera - Chiva Abierta", "Cerrado", "Artiulado", "Biarticulado"],
+  Buseta: ["Escalera - Chiva Abierta", "Cerrado"],
+  ["Camión"]: [
+    "Estacas",
+    "Furgón",
+    "Tanque",
+    "Grúa",
+    "Reparto",
+    "Planchón Plataforma",
+    "Recolector compactado",
+    "Estibas",
+    "Portacontenedor",
+    "Estibas",
+    "Bomba de concreto",
+    "Casa rodante",
+    "Tolva",
+    "Niñera",
+    "Bomberos",
+    "Barredora",
+    "Mixer",
+    "Limpieza de alcantarillas",
+    "Taladro",
+    "Cañero",
+    "Ambulancia",
+  ],
+  Camioneta: [
+    "Estacas",
+    "Furgón",
+    "Reparto",
+    "Estibas",
+    "Panel",
+    "Van",
+    "Pico",
+    "Doble Cabina",
+    "Pico Cerrada",
+    "Doble Cabina Cerrada",
+    "Ambulancia",
+    "Wagon",
+  ],
+  Campero: ["Cabinado", "Carpado", "Dual (cabinado - carpado)", "Wagon"],
+  Microbus: ["Cerrado"],
+  ["Tractocamión"]: ["Sin carroceria"],
+  Motocicleta: ["Sin carroceria"],
+  Motocarro: [
+    "Estacas",
+    "Furgón",
+    "Reparto",
+    "Panel",
+    "Pico",
+    "Cabinado",
+    "Carpado",
+  ],
+  Mototriciclo: ["Sin carroceria"],
+  Cuatrimoto: ["Sin carroceria"],
+  Volqueta: ["Platón"],
+};
+export const SERVICES = ["", "Particular", "Publico"];
+
+export const validateAsNumber = (value?: any) => {
+  if (!value) return;
   const reg = /^\d+$/;
   return !reg.test(value) ? "Campo debe ser solo números" : undefined;
 };

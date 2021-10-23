@@ -4,8 +4,6 @@ import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import LoaderPage from "../components/head/LoaderPage";
 import lodable from "@loadable/component";
-import { ThemeProvider } from "@nextui-org/react";
-import { Fragment } from "react";
 const CssBaseline = lodable(() =>
   import("@nextui-org/react").then(({ CssBaseline }) => CssBaseline)
 );

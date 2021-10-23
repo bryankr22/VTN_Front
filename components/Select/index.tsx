@@ -31,7 +31,7 @@ export default function Select({
       </select>
       <i className={`angle down icon ${styles.icon}`} />
       {error && (
-        <Text span color="error">
+        <Text small color="error" margin={'10px'}>
           {error}
         </Text>
       )}

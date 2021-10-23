@@ -21,6 +21,10 @@
 
 .container {
   width: 100%;
-  height: calc(1.687 * 16pt);
+  height: calc(1.7 * 16pt);
   position: relative;
+}
+
+.label {
+  margin-bottom: .3rem !important;
 }
