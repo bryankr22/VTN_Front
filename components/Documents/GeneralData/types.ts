@@ -24,3 +24,36 @@ export interface BuySellingFields {
   servicio: string;
   clausulas: string;
 }
+
+export interface Marca {
+  id: number;
+  nombre: string;
+  categoria_id: number;
+  visibility: number;
+  url: string;
+}
+
+export interface Modelo {
+  id: number;
+  marca_id: number;
+  nombre: string;
+  tipo_id: number;
+}
+
+export interface ClaseVehiculo {
+  id: number;
+  name: string;
+}
+
+export interface Carroceria {
+  id: number;
+  name: string;
+  id_vehicle_class: number;
+}
+
+export interface ResponseLists {
+  marcas: Marca[];
+  modelos: Modelo[];
+  clase_vehiculo: ClaseVehiculo[];
+  carroceria: Carroceria[];
+}

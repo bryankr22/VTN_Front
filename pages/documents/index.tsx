@@ -3,10 +3,11 @@ import { GetServerSideProps } from "next";
 import { GeneralData, RequestForm } from "../../components/Documents";
 import PublicLayout from "../../layouts/PublicLayout";
 import { validateAuth } from "../../helpers/auth";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import jwt from "jsonwebtoken";
+import { API_URL } from "../../helpers/constants";
 
-export default function Documents() {
+export default function Documents({ data }: any) {
   return (
     <PublicLayout nextUi>
       <Container>
@@ -39,7 +40,7 @@ export default function Documents() {
           qui praesentium eos, consequatur unde veniam. Cumque earum distinctio
           odio omnis dicta?
         </Text>
-        <GeneralData />
+        <GeneralData data={data} />
         <Spacer y={1} />
         <Text h5 weight="bolder">
           Formato de mandato
@@ -93,10 +94,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
   let data;
   try {
-    const res = await axios.get(
-      "https://api.vendetunave.co/auth/form_producto",
-      config
-    );
+    const res = await axios.get(`${API_URL}/informacion-documentos`, config);
     data = res.data;
   } catch (err: any) {
     const { response } = err as any;
@@ -114,9 +112,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-
-  console.log(data)
   return {
-    props: {},
+    props: {
+      data,
+    },
   };
 };

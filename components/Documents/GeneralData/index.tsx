@@ -11,7 +11,7 @@ import {
   Text,
   Textarea,
 } from "@nextui-org/react";
-import { BuySellingFields } from "./types";
+import { BuySellingFields, ResponseLists } from "./types";
 import { toCurrency } from "../../../helpers/format";
 
 import {
@@ -31,19 +31,26 @@ import { useEffectOnce } from "react-use";
 import { verify } from "jsonwebtoken";
 import { useCookies } from "react-cookie";
 
-export default function GeneralData() {
+interface Props {
+  data: ResponseLists;
+}
+
+export default function GeneralData({ data }: Props) {
   const { register, handleSubmit, formState, watch, setValue } =
     useForm<BuySellingFields>({
       mode: "all",
     });
   const vehicleClass = watch("clase_vehiculo");
+  const vehicleBrand = watch("marca");
   const [cookies] = useCookies(["vtn_token"]);
-  const [brands, setBrands] = useState<{ label: string; key: string }[]>([]);
+  const [brands] = useState<{ label: string; key: string }[]>(() => {
+    return data.marcas.map(({ nombre }) => ({ key: nombre, label: nombre }));
+  });
+  const [models, setModels] = useState([""]);
   const [isSending, setIsSending] = useState(false);
   const [message, setMessage] = useState({ type: "", txt: "" });
   const [bodywork, setBodyWork] = useState<string[]>([]);
-  const onSubmit = handleSubmit((data) => {
-    setIsSending(true);
+  const getSession = () => {
     const cookie = cookies.vtn_token;
     const decoded: any = verify(cookie, "vendetunave2021");
     const user_id = decoded?.user?.id;
@@ -52,49 +59,70 @@ export default function GeneralData() {
         Authorization: `Bearer ${decoded.token_server.access_token}`,
       },
     };
+
+    return { config, user_id };
+  };
+  const onSubmit = handleSubmit((data) => {
+    setIsSending(true);
+    const { config, user_id } = getSession();
     axios
       .post(`${AUTH_URL}/documento-compra-venta`, { ...data, user_id }, config)
       .then((res) => {
-        if (!res.data.status) {
-          setMessage({
-            type: "error",
-            txt: "Ha ocurrido un problema, intenta mas tarde",
-          });
-        } else {
-          setMessage({
-            type: "success",
-            txt: "Datos enviados satisfactoriamente",
-          });
-        }
+        const url = window.URL.createObjectURL(new Blob([res.data]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", `doc_compraventa_${Date.now()}.pdf`); //or any other extension
+        document.body.appendChild(link);
+        link.click();
+        setIsSending(false);
+        setMessage({
+          type: "success",
+          txt: "Datos enviados satisfactoriamente",
+        });
+      })
+      .catch((err) => {
+        console.warn(err);
+        setIsSending(false);
+      });
+  });
+  const downLoadEmptyFile = () => {
+    const { config, user_id } = getSession();
+    axios
+      .post(`${AUTH_URL}/documento-compra-venta`, { user_id }, config)
+      .then((res) => {
+        const url = window.URL.createObjectURL(new Blob([res.data]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", `doc_compraventa_${Date.now()}.pdf`); //or any other extension
+        document.body.appendChild(link);
+        link.click();
         setIsSending(false);
       })
-      .catch((err) => console.warn(err));
-  });
-
-  const changeTipoVehiculo = (value = 1) => {
-    if (value !== 5) {
-      axios.get(`${API_URL}/marcas/${value}`).then((res) => {
-        const optionsMarcas = [{ value: "", label: "" }];
-        res.data.marcas.forEach(function (item: { id: any; nombre: any }) {
-          optionsMarcas.push({
-            value: item.nombre,
-            label: item.nombre,
-          });
-        });
-        setBrands(optionsMarcas as any);
+      .catch((err) => {
+        console.warn(err);
+        setIsSending(false);
       });
-    }
   };
 
-  useEffectOnce(() => {
-    changeTipoVehiculo();
-  });
+  useEffect(() => {
+    const idClass = data.clase_vehiculo.find(
+      (item) => item.name === vehicleClass
+    )?.id;
+    const list = data.carroceria
+      .filter((item) => item.id_vehicle_class == idClass)
+      .map((item) => item.name);
+    setBodyWork(["", ...list]);
+    setValue("tipo_carroceria", "", { shouldValidate: true });
+  }, [vehicleClass]);
 
   useEffect(() => {
-    const list = TYPE_ARMOR[vehicleClass] || [];
-    setBodyWork(["", ...list]);
-    setValue("tipo_carroceria", "");
-  }, [vehicleClass]);
+    const id = data.marcas.find((item) => item.nombre === vehicleBrand)?.id;
+    const list = data.modelos
+      .filter((item) => item.marca_id === id)
+      .map((item) => item.nombre);
+    setModels(["", ...list]);
+    setValue("modelo", "", { shouldValidate: true });
+  }, [vehicleBrand]);
 
   return (
     <form onSubmit={onSubmit}>
@@ -215,7 +243,7 @@ export default function GeneralData() {
           <Grid xs={12} md={6} direction="column">
             <Select
               label={"Clase de vehiculo"}
-              options={VEHICLE_CLASS}
+              options={data.clase_vehiculo.map((item) => item.name)}
               inputProps={{ ...register("clase_vehiculo", { required }) }}
               error={formState.errors.clase_vehiculo?.message}
             />
@@ -225,6 +253,13 @@ export default function GeneralData() {
               options={brands as any}
               inputProps={{ ...register("marca", { required }) }}
               error={formState.errors.marca?.message}
+            />
+            <Spacer y={2.05} />
+            <Select
+              label="Modelo"
+              options={models as any}
+              inputProps={{ ...register("modelo", { required }) }}
+              error={formState.errors.modelo?.message}
             />
             <Spacer y={2.16} />
             <Input
@@ -350,7 +385,7 @@ export default function GeneralData() {
                   toCurrency(e);
                 },
               })}
-              {...getStatusError(formState.errors.numero_chasis?.message)}
+              {...getStatusError(formState.errors.precio?.message)}
             />
           </Grid>
           <Grid md={12} xs={12} direction="column">
@@ -380,7 +415,9 @@ export default function GeneralData() {
           Generar Documento
         </Button>
         <Spacer />
-        <Button>Documento Vacío</Button>
+        <Button disabled={isSending} onClick={downLoadEmptyFile}>
+          Documento Vacío
+        </Button>
       </Row>
     </form>
   );
