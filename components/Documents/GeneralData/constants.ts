@@ -93,10 +93,10 @@ export const validateAsNumber = (value?: any) => {
 export const guardOptional =
   (...args: Function[]) =>
   (value: string) => {
-    if (!value) return true;
+    if (!value) return;
     for (const validate of args) {
       const result = validate(value);
-      if (typeof result === "string") {
+      if (typeof result !== "string") {
         continue;
       }
       return result;

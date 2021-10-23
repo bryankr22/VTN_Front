@@ -1,8 +1,9 @@
 import Collapse from "../Collapse";
-import { useForm, useWatch } from "react-hook-form";
-import styles from "./styles.module.css";
+import { useForm } from "react-hook-form";
+
 import {
   Button,
+  Card,
   Grid,
   Input,
   Row,
@@ -11,6 +12,7 @@ import {
   Textarea,
 } from "@nextui-org/react";
 import { BuySellingFields } from "./types";
+import { toCurrency } from "../../../helpers/format";
 
 import {
   getStatusError,
@@ -23,24 +25,52 @@ import {
 } from "./constants";
 import Select from "../../Select";
 import axios from "axios";
-import { API_URL } from "../../../helpers/constants";
+import { API_URL, AUTH_URL } from "../../../helpers/constants";
 import { useEffect, useState } from "react";
 import { useEffectOnce } from "react-use";
+import { verify } from "jsonwebtoken";
+import { useCookies } from "react-cookie";
 
 export default function GeneralData() {
   const { register, handleSubmit, formState, watch, setValue } =
     useForm<BuySellingFields>({
       mode: "all",
     });
-
   const vehicleClass = watch("clase_vehiculo");
-
+  const [cookies] = useCookies(["vtn_token"]);
   const [brands, setBrands] = useState<{ label: string; key: string }[]>([]);
+  const [isSending, setIsSending] = useState(false);
+  const [message, setMessage] = useState({ type: "", txt: "" });
   const [bodywork, setBodyWork] = useState<string[]>([]);
-
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    setIsSending(true);
+    const cookie = cookies.vtn_token;
+    const decoded: any = verify(cookie, "vendetunave2021");
+    const user_id = decoded?.user?.id;
+    const config = {
+      headers: {
+        Authorization: `Bearer ${decoded.token_server.access_token}`,
+      },
+    };
+    axios
+      .post(`${AUTH_URL}/documento-compra-venta`, { ...data, user_id }, config)
+      .then((res) => {
+        if (!res.data.status) {
+          setMessage({
+            type: "error",
+            txt: "Ha ocurrido un problema, intenta mas tarde",
+          });
+        } else {
+          setMessage({
+            type: "success",
+            txt: "Datos enviados satisfactoriamente",
+          });
+        }
+        setIsSending(false);
+      })
+      .catch((err) => console.warn(err));
   });
+
   const changeTipoVehiculo = (value = 1) => {
     if (value !== 5) {
       axios.get(`${API_URL}/marcas/${value}`).then((res) => {
@@ -70,6 +100,20 @@ export default function GeneralData() {
     <form onSubmit={onSubmit}>
       <Collapse>
         <Grid.Container gap={2}>
+          <Grid xs={12} md={12}>
+            {message.type && (
+              <Card
+                color={message.type}
+                textColor="white"
+                clickable
+                onClick={() => setMessage({ type: "", txt: "" })}
+              >
+                <Text h5 transform="capitalize">
+                  {message.txt}
+                </Text>
+              </Card>
+            )}
+          </Grid>
           <Grid xs={12} md={6} direction="column">
             <Input
               underlined
@@ -300,15 +344,16 @@ export default function GeneralData() {
               shadow={false}
               fullWidth
               label="Precio"
-              type="number"
               {...register("precio", {
                 required,
-                validate: validateAsNumber,
+                onChange(e) {
+                  toCurrency(e);
+                },
               })}
               {...getStatusError(formState.errors.numero_chasis?.message)}
             />
           </Grid>
-          <Grid md={12} direction="column">
+          <Grid md={12} xs={12} direction="column">
             <Spacer></Spacer>
             <Textarea
               shadow={false}
@@ -331,7 +376,9 @@ export default function GeneralData() {
       </Collapse>
       <Spacer />
       <Row justify="center">
-        <Button type="submit">Generar Documento</Button>
+        <Button type="submit" disabled={isSending}>
+          Generar Documento
+        </Button>
         <Spacer />
         <Button>Documento Vacío</Button>
       </Row>
