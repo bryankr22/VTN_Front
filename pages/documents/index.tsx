@@ -1,5 +1,6 @@
 import { Button, Container, Link, Row, Spacer, Text } from "@nextui-org/react";
 import { GetServerSideProps } from "next";
+import Head from "next/head";
 import { GeneralData, RequestForm } from "../../components/Documents";
 import PublicLayout from "../../layouts/PublicLayout";
 import { validateAuth } from "../../helpers/auth";
@@ -11,8 +12,9 @@ import { useState } from "react";
 import { NextSeo } from "next-seo";
 
 const desc =
-  "Genera o descarga gratuitamente los documentos para hacer el traspaso de tu carro o moto (contrato de compraventa, contrato de mandato y documento para solicitar el trámite) Validos por el RUNT y secretaria de tránsito. Palabras claves: runt por placa, contrato de mandato, contrato de compraventa, promesa de compraventa, traspaso de moto, contrato de compraventa vehículo, runt por cedula.";
-
+  "Genera o descarga gratuitamente los documentos para hacer el traspaso de tu carro o moto (contrato de compraventa, contrato de mandato y documento para solicitar el trámite) Validos por el RUNT y secretaria de tránsito.";
+const keyWords =
+  "runt por placa, contrato de mandato, contrato de compraventa, promesa de compraventa, traspaso de moto, contrato de compraventa vehículo, runt por cedula";
 export default function Documents({ data }: any) {
   const [isSending, setIsSending] = useState(false);
   const [cookies] = useCookies(["vtn_token"]);
@@ -52,10 +54,21 @@ export default function Documents({ data }: any) {
 
   return (
     <>
+      <style>{`
+        h1 {
+          font-size: 1.4rem;
+        }
+        h2 {
+          font-size: 1.2rem;
+        }
+      `}</style>
       <NextSeo
         title="Como hacer el traspaso de un vehículo (carro o moto) en Colombia"
         description={desc}
       />
+      <Head>
+        <meta property="keywords" content={keyWords} />
+      </Head>
       <PublicLayout nextUi>
         <Container>
           <Spacer y={2} />
@@ -63,8 +76,8 @@ export default function Documents({ data }: any) {
             Documentos
           </Text>
           <Spacer y={1} />
-          <Text h4 weight="bolder">
-            ¿Cómo hacer el trámite de traspaso de un vehículo?
+          <Text h1 weight="bolder">
+            3 pasos para hacer el traspaso de tu vehículo en Colombia
           </Text>
           <Spacer y={0.5} />
           <Text p className="text-justify">
@@ -82,8 +95,8 @@ export default function Documents({ data }: any) {
             </Text>
           </Text>
           <Spacer y={1} />
-          <Text h5 weight="bolder">
-            Promesa de compra-venta
+          <Text h2 weight="bolder">
+            Contrato de Compraventa
           </Text>
           <Spacer y={0.5} />
           <Text p className="text-justify">
@@ -106,8 +119,8 @@ export default function Documents({ data }: any) {
           </Text>
           <GeneralData data={data} />
           <Spacer y={1} />
-          <Text h5 weight="bolder">
-            Formato de mandato
+          <Text h2 weight="bolder">
+            Contrato de Mandato
           </Text>
           <Spacer y={0.5} />
           <Text p className="text-justify">
@@ -130,8 +143,8 @@ export default function Documents({ data }: any) {
           </Text>
           <RequestForm data={data} />
           <Spacer y={1} />
-          <Text h5 weight="bolder">
-            Formulario de solicitud de tramite
+          <Text h2 weight="bolder">
+            Formulario de Solicitud de Tramite Del Registro Nacional Automotor
           </Text>
           <Spacer y={0.5} />
           <Text p className="text-justify">
@@ -174,7 +187,7 @@ export default function Documents({ data }: any) {
             Estado de la persona (Runt por cedula):
           </Text>
           <Text p className="text-justify">
-            <Link color>
+            <Link color style={{ wordBreak: "break-all" }}>
               https://www.runt.com.co/consultaCiudadana/#/consultaPersona
             </Link>
           </Text>
@@ -183,7 +196,9 @@ export default function Documents({ data }: any) {
             Consulta multas por Placa o Cedula:
           </Text>
           <Text p className="text-justify">
-            <Link color>https://fcm.org.co/simit/#/home-public</Link>
+            <Link color style={{ wordBreak: "break-all" }}>
+              https://fcm.org.co/simit/#/home-public
+            </Link>
           </Text>
           <Spacer y={1} />
           <Row justify="center">

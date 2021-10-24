@@ -409,12 +409,11 @@ export default function GeneralData({ data }: Props) {
         </Grid.Container>
       </Collapse>
       <Spacer />
-      <Row justify="center">
-        <Button type="submit" disabled={isSending}>
+     <Row justify="center" wrap="wrap" align="center">
+        <Button type="submit" disabled={isSending} className="mt-2 mr-2">
           Generar Documento
         </Button>
-        <Spacer />
-        <Button disabled={isSending} onClick={downLoadEmptyFile}>
+        <Button disabled={isSending} onClick={downLoadEmptyFile} className="mt-2 mr-2">
           Documento Vacío
         </Button>
       </Row>
