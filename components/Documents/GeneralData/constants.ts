@@ -82,7 +82,7 @@ export const TYPE_ARMOR = {
   Cuatrimoto: ["Sin carroceria"],
   Volqueta: ["Platón"],
 };
-export const SERVICES = ["", "Particular", "Publico"];
+export const SERVICES = ["", "Particular", "Público"];
 
 export const validateAsNumber = (value?: any) => {
   if (!value) return;

@@ -178,7 +178,7 @@ export default function Documents({ data }: any) {
             Consulta acá el estado: Estado del vehículo (Runt por placa):
           </Text>
           <Text p className="text-justify">
-            <Link color>
+            <Link color style={{ wordBreak: "break-all" }}>
               https://www.runt.com.co/consultaCiudadana/#/consultaVehiculo
             </Link>
           </Text>
