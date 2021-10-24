@@ -404,36 +404,31 @@ const Header = () => {
                     minWidth: 210,
                   }}
                 >
-                  {cookies.vtn_token && (
-                    <>
-                      <div className="item" href="#" style={{ padding: 11 }}>
-                        <span>
-                          <Link
-                            href="/documents"
-                            style={{ textDecoration: "none" }}
-                          >
-                            <a
-                              style={{
-                                color: "#fff",
-                                fontSize: "1rem",
-                                fontWeight: 400,
-                                letterSpacing: 2,
-                              }}
-                            >
-                              Documentos
-                            </a>
-                          </Link>
-                        </span>
-                      </div>
-                      <div
-                        style={{
-                          borderTop: "1px solid rgb(255 255 255 / 10%)",
-                          margin: ".5em 0",
-                        }}
-                      ></div>
-                    </>
-                  )}
-
+                  <div className="item" href="#" style={{ padding: 11 }}>
+                    <span>
+                      <Link
+                        href="/documents"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <a
+                          style={{
+                            color: "#fff",
+                            fontSize: "1rem",
+                            fontWeight: 400,
+                            letterSpacing: 2,
+                          }}
+                        >
+                          Documentos
+                        </a>
+                      </Link>
+                    </span>
+                  </div>
+                  <div
+                    style={{
+                      borderTop: "1px solid rgb(255 255 255 / 10%)",
+                      margin: ".5em 0",
+                    }}
+                  ></div>
                   <div className="item" href="#" style={{ padding: 11 }}>
                     <span>
                       <Link

@@ -200,7 +200,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   if (!auth.vtn_token) {
     context.res.writeHead(301, {
-      Location: "/401",
+      Location: "/401?path=/documents",
     });
     context.res.end();
     return {
@@ -222,7 +222,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const { response } = err as any;
     if (response.status === 401) {
       context.res.writeHead(301, {
-        Location: "/401",
+        Location: "/401?path=/documents",
       });
       context.res.end();
     }

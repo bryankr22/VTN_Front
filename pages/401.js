@@ -10,17 +10,17 @@ import { updateToken } from '../store/authSlice';
 export default function Custom404() {
     const router = useRouter();
     const dispatch = useDispatch();
-    const [,,removeCookie] = useCookies(['vtn_token']);
+    const [, , removeCookie] = useCookies(['vtn_token']);
     const CloseSession = () => {
         dispatch(updateToken(null));
         removeCookie('vtn_token', {});
-        window.location = '/login'
+        window.location = `/login${location.search}`
     }
 
     useEffect(() => {
-       setTimeout(() => {
-        CloseSession()
-       }, 1000)
+        setTimeout(() => {
+            CloseSession()
+        }, 1000)
     }, [])
 
     return (
