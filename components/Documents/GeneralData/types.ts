@@ -44,6 +44,10 @@ export interface ClaseVehiculo {
   id: number;
   name: string;
 }
+export interface Combustible {
+  id: number;
+  nombre: string;
+}
 
 export interface Carroceria {
   id: number;
@@ -56,4 +60,5 @@ export interface ResponseLists {
   modelos: Modelo[];
   clase_vehiculo: ClaseVehiculo[];
   carroceria: Carroceria[];
+  combustibles: Combustible[];
 }

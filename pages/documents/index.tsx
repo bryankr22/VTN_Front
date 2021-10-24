@@ -52,7 +52,7 @@ export default function Documents({ data }: any) {
           qui praesentium eos, consequatur unde veniam. Cumque earum distinctio
           odio omnis dicta?
         </Text>
-        <RequestForm />
+        <RequestForm data={data} />
         <Spacer y={1} />
         <Text h5 weight="bolder">
           Formulario de solicitud de tramite
@@ -111,7 +111,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   }
-
+  console.log(data.combustibles);
   return {
     props: {
       data,

@@ -19,15 +19,12 @@ import {
   guardOptional,
   required,
   SERVICES,
-  TYPE_ARMOR,
   validateAsNumber,
-  VEHICLE_CLASS,
 } from "./constants";
 import Select from "../../Select";
 import axios from "axios";
-import { API_URL, AUTH_URL } from "../../../helpers/constants";
+import { AUTH_URL } from "../../../helpers/constants";
 import { useEffect, useState } from "react";
-import { useEffectOnce } from "react-use";
 import { verify } from "jsonwebtoken";
 import { useCookies } from "react-cookie";
 
@@ -59,7 +56,6 @@ export default function GeneralData({ data }: Props) {
         Authorization: `Bearer ${decoded.token_server.access_token}`,
       },
     };
-
     return { config, user_id };
   };
   const onSubmit = handleSubmit((data) => {

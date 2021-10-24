@@ -1,2 +1,2 @@
 export { default as GeneralData } from './GeneralData'
-export { default as RequestForm } from './RequestForm'
+export { default as RequestForm } from './MandateForm'
