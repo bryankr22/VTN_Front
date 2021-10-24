@@ -33,7 +33,7 @@ interface Props {
 }
 
 export default function GeneralData({ data }: Props) {
-  const { register, handleSubmit, formState, watch, setValue } =
+  const { register, handleSubmit, formState, watch, setValue, reset } =
     useForm<BuySellingFields>({
       mode: "all",
     });
@@ -51,10 +51,12 @@ export default function GeneralData({ data }: Props) {
     const cookie = cookies.vtn_token;
     const decoded: any = verify(cookie, "vendetunave2021");
     const user_id = decoded?.user?.id;
-    const config = {
+    const config: any = {
       headers: {
         Authorization: `Bearer ${decoded.token_server.access_token}`,
+        Accept: "application/pdf",
       },
+      responseType: "blob",
     };
     return { config, user_id };
   };
@@ -92,6 +94,7 @@ export default function GeneralData({ data }: Props) {
         link.setAttribute("download", `doc_compraventa_${Date.now()}.pdf`); //or any other extension
         document.body.appendChild(link);
         link.click();
+        reset();
         setIsSending(false);
       })
       .catch((err) => {

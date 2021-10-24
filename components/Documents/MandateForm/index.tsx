@@ -31,7 +31,7 @@ interface Props {
 
 export default function MandateForm({ data }: Props) {
   const [cookies] = useCookies(["vtn_token"]);
-  const { register, formState, handleSubmit, watch, setValue } =
+  const { register, formState, handleSubmit, watch, setValue, reset } =
     useForm<MandateFields>({
       mode: "all",
     });
@@ -50,10 +50,12 @@ export default function MandateForm({ data }: Props) {
     const cookie = cookies.vtn_token;
     const decoded: any = verify(cookie, "vendetunave2021");
     const user_id = decoded?.user?.id;
-    const config = {
+    const config: any = {
       headers: {
         Authorization: `Bearer ${decoded.token_server.access_token}`,
+        Accept: "application/pdf",
       },
+      responseType: "blob",
     };
     return { config, user_id };
   };
@@ -63,13 +65,14 @@ export default function MandateForm({ data }: Props) {
     return axios
       .post(`${AUTH_URL}/documento-mandato`, { ...data, user_id }, config)
       .then((res) => {
-        const url = window.URL.createObjectURL(new Blob(res.data));
+        const url = window.URL.createObjectURL(new Blob([res.data]));
         const link = document.createElement("a");
         link.href = url;
         link.setAttribute("download", `doc_mandato_${Date.now()}.pdf`); //or any other extension
         document.body.appendChild(link);
         link.click();
         setIsSending(false);
+        reset()
         if (res.data.status == false) {
           setMessage({
             type: "error",
@@ -164,7 +167,6 @@ export default function MandateForm({ data }: Props) {
               shadow={false}
               label="* Nombre Mandatario (tramitador)"
               fullWidth
-              required
               {...register("nombre_mandatario")}
               {...getStatusError(formState.errors.nombre_mandatario?.message)}
             />
@@ -174,10 +176,8 @@ export default function MandateForm({ data }: Props) {
               shadow={false}
               label="* Número de identidad"
               fullWidth
-              required
               type="number"
               {...register("documento_mandatario", {
-                required,
                 validate: guardOptional(validateAsNumber),
               })}
               {...getStatusError(formState.errors.documento_mandate?.message)}

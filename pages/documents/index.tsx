@@ -4,10 +4,48 @@ import { GeneralData, RequestForm } from "../../components/Documents";
 import PublicLayout from "../../layouts/PublicLayout";
 import { validateAuth } from "../../helpers/auth";
 import axios from "axios";
-import jwt from "jsonwebtoken";
-import { API_URL } from "../../helpers/constants";
+import jwt, { verify } from "jsonwebtoken";
+import { API_URL, AUTH_URL } from "../../helpers/constants";
+import { useCookies } from "react-cookie";
+import { useState } from "react";
 
 export default function Documents({ data }: any) {
+  const [isSending, setIsSending] = useState(false);
+  const [cookies] = useCookies(["vtn_token"]);
+
+  const getSession = () => {
+    const cookie = cookies.vtn_token;
+    const decoded: any = verify(cookie, "vendetunave2021");
+    const user_id = decoded?.user?.id;
+    const config: any = {
+      headers: {
+        Authorization: `Bearer ${decoded.token_server.access_token}`,
+        Accept: "application/pdf",
+      },
+      responseType: "blob",
+    };
+    return { config, user_id };
+  };
+
+  const downLoadEmptyFile = () => {
+    const { config, user_id } = getSession();
+    axios
+      .post(`${AUTH_URL}/documento-tramite`, { user_id }, config)
+      .then((res) => {
+        const url = window.URL.createObjectURL(new Blob([res.data]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", `doc_compraventa_${Date.now()}.pdf`); //or any other extension
+        document.body.appendChild(link);
+        link.click();
+        setIsSending(false);
+      })
+      .catch((err) => {
+        console.warn(err);
+        setIsSending(false);
+      });
+  };
+
   return (
     <PublicLayout nextUi>
       <Container>
@@ -66,7 +104,7 @@ export default function Documents({ data }: any) {
         </Text>
         <Spacer y={1} />
         <Row justify="center">
-          <Button>Documento Vacío</Button>
+          <Button onClick={downLoadEmptyFile}>Documento Vacío</Button>
         </Row>
       </Container>
     </PublicLayout>
@@ -111,7 +149,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   }
-  console.log(data.combustibles);
   return {
     props: {
       data,
