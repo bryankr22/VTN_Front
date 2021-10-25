@@ -20,17 +20,25 @@ export default function Documents({ data }: any) {
   const [cookies] = useCookies(["vtn_token"]);
 
   const getSession = () => {
-    const cookie = cookies.vtn_token;
-    const decoded: any = verify(cookie, "vendetunave2021");
-    const user_id = decoded?.user?.id;
+    const cookie = cookies?.vtn_token;
     const config: any = {
       headers: {
-        Authorization: `Bearer ${decoded.token_server.access_token}`,
         Accept: "application/pdf",
       },
       responseType: "blob",
     };
-    return { config, user_id };
+    try {
+      const decoded: any = verify(cookie, "vendetunave2021");
+      const user_id = decoded?.user?.id;
+      config.headers[
+        "Authorization"
+      ] = `Bearer ${decoded.token_server.access_token}`;
+      return { config, user_id };
+    } catch (e) {
+      return {
+        config,
+      };
+    }
   };
 
   const downLoadEmptyFile = () => {
@@ -85,7 +93,7 @@ export default function Documents({ data }: any) {
             por eso, te enseñamos{" "}
             <Text span weight="bolder">
               como hacer la documentación gratuitamente
-            </Text>
+            </Text>{" "}
             a la hora de comprar o vender tu vehículo, sea carro, camioneta,
             moto etc. Para realizar el traspaso de propietario de un vehículo,
             necesitaremos llenar estos 3 documentos:{" "}
@@ -109,11 +117,9 @@ export default function Documents({ data }: any) {
             acuerdos etc. Para llenar este documento necesitaremos toda la
             información del vehículo la cual se encuentra en el RUNT{" "}
             <Text span weight="bolder">
-              (Consultar RUNT por placa{" "}
-              <Link color>
-                https://www.runt.com.co/ciudadano/consulta-placa
+              <Link color href="https://www.runt.com.co/ciudadano/consulta-placa" target="_blank">
+              (Consultar RUNT por placa)
               </Link>
-              )
             </Text>{" "}
             o en la tarjeta de propiedad.
           </Text>
@@ -174,35 +180,43 @@ export default function Documents({ data }: any) {
             impuestos para realizar cualquier tipo de trámite.
           </Text>
           <Spacer y={0.5} />
-          <Text p className="text-justify">
-            Consulta acá el estado: Estado del vehículo (Runt por placa):
-          </Text>
-          <Text p className="text-justify">
-            <Link color style={{ wordBreak: "break-all" }}>
-              https://www.runt.com.co/consultaCiudadana/#/consultaVehiculo
-            </Link>
-          </Text>
+          <Link
+            color
+            style={{ wordBreak: "break-all" }}
+            href="https://www.runt.com.co/consultaCiudadana/#/consultaVehiculo"
+            target="_blank"
+          >
+            <Text p className="text-justify">
+              Consulta acá el estado: Estado del vehículo (Runt por placa)
+            </Text>
+          </Link>
           <Spacer y={0.5} />
-          <Text p className="text-justify">
-            Estado de la persona (Runt por cedula):
-          </Text>
-          <Text p className="text-justify">
-            <Link color style={{ wordBreak: "break-all" }}>
-              https://www.runt.com.co/consultaCiudadana/#/consultaPersona
-            </Link>
-          </Text>
+          <Link
+            color
+            style={{ wordBreak: "break-all" }}
+            href="https://www.runt.com.co/consultaCiudadana/#/consultaPersona"
+            target="_blank"
+          >
+            <Text p className="text-justify">
+              Estado de la persona (Runt por cedula)
+            </Text>
+          </Link>
           <Spacer y={0.5} />
-          <Text p className="text-justify">
-            Consulta multas por Placa o Cedula:
-          </Text>
-          <Text p className="text-justify">
-            <Link color style={{ wordBreak: "break-all" }}>
-              https://fcm.org.co/simit/#/home-public
-            </Link>
-          </Text>
+          <Link
+            color
+            style={{ wordBreak: "break-all" }}
+            href="https://fcm.org.co/simit/#/home-public"
+            target="_blank"
+          >
+            <Text p className="text-justify">
+              Consulta multas por Placa o Cedula
+            </Text>
+          </Link>
           <Spacer y={1} />
           <Row justify="center">
-            <Button onClick={downLoadEmptyFile}>Documento Vacío</Button>
+            <Button onClick={downLoadEmptyFile} disabled={isSending}>
+              Documento Vacío
+            </Button>
           </Row>
         </Container>
       </PublicLayout>

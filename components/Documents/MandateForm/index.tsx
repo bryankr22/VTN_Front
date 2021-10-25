@@ -24,6 +24,7 @@ import {
 import { FORMALITIES } from "./constants";
 import { MandateFields } from "./types";
 import { ResponseLists } from "../GeneralData/types";
+import dayjs from 'dayjs'
 
 interface Props {
   data: ResponseLists;
@@ -34,6 +35,9 @@ export default function MandateForm({ data }: Props) {
   const { register, formState, handleSubmit, watch, setValue, reset } =
     useForm<MandateFields>({
       mode: "all",
+      defaultValues: {
+        fecha: dayjs().format('YYYY-M-D')
+      }
     });
   const vehicleBrand = watch("marca");
   const [message, setMessage] = useState({ type: "", txt: "" });
@@ -151,6 +155,7 @@ export default function MandateForm({ data }: Props) {
               type="date"
               {...register("fecha", { required })}
               {...getStatusError(formState.errors.fecha?.message)}
+              defaultValue="01-01-2021"
             />
             <Spacer />
             <Select
@@ -274,7 +279,11 @@ export default function MandateForm({ data }: Props) {
         <Button type="submit" disabled={isSending} className="mt-2 mr-2">
           Generar Documento
         </Button>
-        <Button disabled={isSending} onClick={downLoadEmptyFile} className="mt-2 mr-2">
+        <Button
+          disabled={isSending}
+          onClick={downLoadEmptyFile}
+          className="mt-2 mr-2"
+        >
           Documento Vacío
         </Button>
       </Row>
