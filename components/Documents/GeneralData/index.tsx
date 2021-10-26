@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Collapse from "../Collapse";
 import { useForm } from "react-hook-form";
 
@@ -25,8 +26,6 @@ import Select from "../../Select";
 import axios from "axios";
 import { AUTH_URL } from "../../../helpers/constants";
 import { useEffect, useState } from "react";
-import { verify } from "jsonwebtoken";
-import { useCookies } from "react-cookie";
 
 interface Props {
   data: ResponseLists;
@@ -39,7 +38,6 @@ export default function GeneralData({ data }: Props) {
     });
   const vehicleClass = watch("clase_vehiculo");
   const vehicleBrand = watch("marca");
-  const [cookies] = useCookies(["vtn_token"]);
   const [brands] = useState<{ label: string; key: string }[]>(() => {
     return data.marcas.map(({ nombre }) => ({ key: nombre, label: nombre }));
   });
@@ -47,24 +45,19 @@ export default function GeneralData({ data }: Props) {
   const [isSending, setIsSending] = useState(false);
   const [message, setMessage] = useState({ type: "", txt: "" });
   const [bodywork, setBodyWork] = useState<string[]>([]);
-  const getSession = () => {
-    const cookie = cookies.vtn_token;
-    const decoded: any = verify(cookie, "vendetunave2021");
-    const user_id = decoded?.user?.id;
-    const config: any = {
-      headers: {
-        Authorization: `Bearer ${decoded.token_server.access_token}`,
-        Accept: "application/pdf",
-      },
-      responseType: "blob",
-    };
-    return { config, user_id };
-  };
   const onSubmit = handleSubmit((data) => {
     setIsSending(true);
-    const { config, user_id } = getSession();
     axios
-      .post(`${AUTH_URL}/documento-compra-venta`, { ...data, user_id }, config)
+      .post(
+        `${AUTH_URL}/documento-compra-venta`,
+        { ...data },
+        {
+          headers: {
+            Accept: "application/pdf",
+          },
+          responseType: "blob",
+        }
+      )
       .then((res) => {
         const url = window.URL.createObjectURL(new Blob([res.data]));
         const link = document.createElement("a");
@@ -84,9 +77,17 @@ export default function GeneralData({ data }: Props) {
       });
   });
   const downLoadEmptyFile = () => {
-    const { config, user_id } = getSession();
     axios
-      .post(`${AUTH_URL}/documento-compra-venta`, { user_id }, config)
+      .post(
+        `${AUTH_URL}/documento-compra-venta`,
+        {},
+        {
+          headers: {
+            Accept: "application/pdf",
+          },
+          responseType: "blob",
+        }
+      )
       .then((res) => {
         const url = window.URL.createObjectURL(new Blob([res.data]));
         const link = document.createElement("a");
@@ -409,11 +410,15 @@ export default function GeneralData({ data }: Props) {
         </Grid.Container>
       </Collapse>
       <Spacer />
-     <Row justify="center" wrap="wrap" align="center">
+      <Row justify="center" wrap="wrap" align="center">
         <Button type="submit" disabled={isSending} className="mt-2 mr-2">
           Generar Documento
         </Button>
-        <Button disabled={isSending} onClick={downLoadEmptyFile} className="mt-2 mr-2">
+        <Button
+          disabled={isSending}
+          onClick={downLoadEmptyFile}
+          className="mt-2 mr-2"
+        >
           Documento Vacío
         </Button>
       </Row>

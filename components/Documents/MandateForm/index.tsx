@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Button,
   Card,
@@ -8,9 +9,7 @@ import {
   Text,
 } from "@nextui-org/react";
 import axios from "axios";
-import { verify } from "jsonwebtoken";
 import { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
 import { useForm } from "react-hook-form";
 import { AUTH_URL } from "../../../helpers/constants";
 import Select from "../../Select";
@@ -24,20 +23,19 @@ import {
 import { FORMALITIES } from "./constants";
 import { MandateFields } from "./types";
 import { ResponseLists } from "../GeneralData/types";
-import dayjs from 'dayjs'
+import dayjs from "dayjs";
 
 interface Props {
   data: ResponseLists;
 }
 
 export default function MandateForm({ data }: Props) {
-  const [cookies] = useCookies(["vtn_token"]);
   const { register, formState, handleSubmit, watch, setValue, reset } =
     useForm<MandateFields>({
       mode: "all",
       defaultValues: {
-        fecha: dayjs().format('YYYY-M-D')
-      }
+        fecha: dayjs().format("YYYY-M-D"),
+      },
     });
   const vehicleBrand = watch("marca");
   const [message, setMessage] = useState({ type: "", txt: "" });
@@ -49,25 +47,15 @@ export default function MandateForm({ data }: Props) {
     ];
   });
   const [models, setModels] = useState([""]);
-
-  const getSession = () => {
-    const cookie = cookies.vtn_token;
-    const decoded: any = verify(cookie, "vendetunave2021");
-    const user_id = decoded?.user?.id;
-    const config: any = {
+  const request = (data = {}) => {
+    setIsSending(true);
+    return axios
+      .post(`${AUTH_URL}/documento-mandato`, { ...data }, {
       headers: {
-        Authorization: `Bearer ${decoded.token_server.access_token}`,
         Accept: "application/pdf",
       },
       responseType: "blob",
-    };
-    return { config, user_id };
-  };
-  const request = (data = {}) => {
-    setIsSending(true);
-    const { user_id, config } = getSession();
-    return axios
-      .post(`${AUTH_URL}/documento-mandato`, { ...data, user_id }, config)
+    })
       .then((res) => {
         const url = window.URL.createObjectURL(new Blob([res.data]));
         const link = document.createElement("a");
@@ -185,7 +173,9 @@ export default function MandateForm({ data }: Props) {
               {...register("documento_mandatario", {
                 validate: guardOptional(validateAsNumber),
               })}
-              {...getStatusError(formState.errors.documento_mandate?.message)}
+              {...getStatusError(
+                formState.errors.documento_mandatario?.message
+              )}
             />
             <Spacer />
             <Input

@@ -5,9 +5,7 @@ import { GeneralData, RequestForm } from "../../components/Documents";
 import PublicLayout from "../../layouts/PublicLayout";
 import { validateAuth } from "../../helpers/auth";
 import axios from "axios";
-import jwt, { verify } from "jsonwebtoken";
 import { API_URL, AUTH_URL } from "../../helpers/constants";
-import { useCookies } from "react-cookie";
 import { useState } from "react";
 import { NextSeo } from "next-seo";
 
@@ -17,34 +15,19 @@ const keyWords =
   "runt por placa, contrato de mandato, contrato de compraventa, promesa de compraventa, traspaso de moto, contrato de compraventa vehículo, runt por cedula";
 export default function Documents({ data }: any) {
   const [isSending, setIsSending] = useState(false);
-  const [cookies] = useCookies(["vtn_token"]);
-
-  const getSession = () => {
-    const cookie = cookies?.vtn_token;
-    const config: any = {
-      headers: {
-        Accept: "application/pdf",
-      },
-      responseType: "blob",
-    };
-    try {
-      const decoded: any = verify(cookie, "vendetunave2021");
-      const user_id = decoded?.user?.id;
-      config.headers[
-        "Authorization"
-      ] = `Bearer ${decoded.token_server.access_token}`;
-      return { config, user_id };
-    } catch (e) {
-      return {
-        config,
-      };
-    }
-  };
 
   const downLoadEmptyFile = () => {
-    const { config, user_id } = getSession();
     axios
-      .post(`${AUTH_URL}/documento-tramite`, { user_id }, config)
+      .post(
+        `${AUTH_URL}/documento-tramite`,
+        {},
+        {
+          headers: {
+            Accept: "application/pdf",
+          },
+          responseType: "blob",
+        }
+      )
       .then((res) => {
         const url = window.URL.createObjectURL(new Blob([res.data]));
         const link = document.createElement("a");
@@ -117,8 +100,12 @@ export default function Documents({ data }: any) {
             acuerdos etc. Para llenar este documento necesitaremos toda la
             información del vehículo la cual se encuentra en el RUNT{" "}
             <Text span weight="bolder">
-              <Link color href="https://www.runt.com.co/ciudadano/consulta-placa" target="_blank">
-              (Consultar RUNT por placa)
+              <Link
+                color
+                href="https://www.runt.com.co/ciudadano/consulta-placa"
+                target="_blank"
+              >
+                (Consultar RUNT por placa)
               </Link>
             </Text>{" "}
             o en la tarjeta de propiedad.
@@ -225,27 +212,9 @@ export default function Documents({ data }: any) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const auth = validateAuth(context);
-
-  if (!auth.vtn_token) {
-    context.res.writeHead(301, {
-      Location: "/401?path=/documents",
-    });
-    context.res.end();
-    return {
-      props: {},
-    };
-  }
-  const cookie = auth.vtn_token;
-  const decoded = jwt.verify(cookie, "vendetunave2021");
-  const config = {
-    headers: {
-      Authorization: `Bearer ${(decoded as any).token_server.access_token}`,
-    },
-  };
   let data;
   try {
-    const res = await axios.get(`${API_URL}/informacion-documentos`, config);
+    const res = await axios.get(`${API_URL}/informacion-documentos`);
     data = res.data;
   } catch (err: any) {
     const { response } = err as any;
