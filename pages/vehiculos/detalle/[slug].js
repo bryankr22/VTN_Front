@@ -45,7 +45,7 @@ const normalize = (function() {
       if (mapping.hasOwnProperty(str.charAt(i))) ret.push(mapping[c]);
       else ret.push(c);
     }
-    return ret.join("");
+    return ret.join("").split(" ").join("-").split("%").join("").split("?").join("").split("/").join("").split(".").join("");
   };
 })();
 
@@ -57,8 +57,8 @@ export default function detalle({ data }) {
   return (
     <>
       <NextSeo
-        title={`${data.vehiculo.title} ${data.vehiculo.descripcion}`}
-        description={data.vehiculo.descripcion}
+        title={`${data.vehiculo.title}`}
+        description={`${data.vehiculo.title} en venta en ${data.vehiculo.ciudadLabel} ${data.vehiculo.departamentoLabel} por ${data.vehiculo.precio}. Compra o vende tu vehículo gratis en Vende Tu Nave`}
         openGraph={{
           images: [
             {
@@ -68,16 +68,17 @@ export default function detalle({ data }) {
               height: 200,
             },
           ],
-          url: `https://vendetunave.co/vehiculos/detalle/${data.vehiculo.id}`,
+          url: `https://vendetunave.co/vehiculos/detalle/${normalize(data.vehiculo.title)}-${data.vehiculo.id}`,
           title: data.vehiculo.title,
           locale: "es_ES",
           type: "website",
-          description: data.vehiculo.descripcion,
+          description: `${data.vehiculo.title} en venta en ${data.vehiculo.ciudadLabel} ${data.vehiculo.departamentoLabel} por ${data.vehiculo.precio}. Compra o vende tu vehículo gratis en Vende Tu Nave`,
           site_name: "VendeTuNave - Vehiculo",
         }}
       />
       <Head>
         <meta property="og:image:secure_url" content={`${getMetaUrl(imagenes?.[0]?.url)}${imagenes?.[0]?.extension}`} />
+        <meta property="keywords" content={`${data.vehiculo.title}, ${data.vehiculo.modeloLabel}, ${data.vehiculo.marcaLabel}, ${data.vehiculo.title} en venta, carros usados, carro en venta, vehículo.`} />
       </Head>
       <PublicLayout>
         <style>
@@ -445,7 +446,7 @@ export async function getServerSideProps(context) {
     };
   }
 
-  const idNormalize = normalize(context.params.slug).split(" ").join("-").split("%").join("").split("?").join("").split("/").join("").split(".").join("");
+  const idNormalize = normalize(context.params.slug);
   const res = await axios.get(`${API_URL}/vehiculo/${idNormalize}`,
     config
   );
