@@ -53,10 +53,10 @@ export default function detalle({ data }) {
     return (
         <PublicLayout>
             <NextSeo
-                title={`${data.vehicle.title} ${data.vehicle.description}`}
+                title={data.vehicle.title}
                 description={`Conoce todas las características, equipamiento y novedades del nuevo ${data.vehicle.title} como seguridad, autonomía, potencia y mucho más.`}
                 openGraph={{
-                    title: `${data.vehicle.title} ${data.vehicle.description}`,
+                    title: data.vehicle.title,
                     locale: "es_ES",
                     type: "website",
                     description: `Conoce todas las características, equipamiento y novedades del nuevo ${data.vehicle.title} como seguridad, autonomía, potencia y mucho más.`
