@@ -10,7 +10,7 @@ import { AUTH_URL, favoritos_add_vehiculo } from '../../helpers/constants';
 import jwt from 'jsonwebtoken';
 import { useRouter } from 'next/router'
 
-export default function SidebarDetalle({ vehiculo, vehicleFav }) {
+export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
     const dispatch = useDispatch()
     const router = useRouter()
     const [cookies, setCookie] = useCookies(['vtn_token']);
@@ -158,6 +158,7 @@ export default function SidebarDetalle({ vehiculo, vehicleFav }) {
                             <ModalContacto 
                             showModal={modalContacto}
                             onClose={() => setModalContacto(!modalContacto)}
+                            id={id}
                             />
                         </Grid.Column>
                         <Grid.Column>

@@ -45,7 +45,7 @@ const normalize = (function() {
       if (mapping.hasOwnProperty(str.charAt(i))) ret.push(mapping[c]);
       else ret.push(c);
     }
-    return ret.join("").split(" ").join("-").split("%").join("").split("?").join("").split("/").join("").split(".").join("");
+    return ret.join("").split(" ").join("-").split("%").join("").split("?").join("").split("/").join("");
   };
 })();
 
@@ -204,6 +204,7 @@ export default function detalle({ data }) {
             <SidebarDetalle
               vehicleFav={data.vehicleFav}
               vehiculo={data.vehiculo}
+              id={normalize(data.vehiculo.title) + '-' + data.vehiculo.id}
             />
             <Grid columns={1} divided="vertically">
               <Grid.Row style={{ marginTop: 30 }}>
@@ -269,6 +270,7 @@ export default function detalle({ data }) {
             <SidebarDetalle
               vehicleFav={data.vehicleFav}
               vehiculo={data.vehiculo}
+              id={normalize(data.vehiculo.title) + '-' + data.vehiculo.id}
             />
             <Grid columns={1} divided="vertically">
               <Grid.Row style={{ marginTop: 30 }}>
@@ -334,6 +336,7 @@ export default function detalle({ data }) {
             <SidebarDetalle
               vehicleFav={data.vehicleFav}
               vehiculo={data.vehiculo}
+              id={normalize(data.vehiculo.title) + '-' + data.vehiculo.id}
             />
             <Grid columns={1} divided="vertically">
               <Grid.Row style={{ marginTop: 30 }}>
@@ -417,6 +420,7 @@ export default function detalle({ data }) {
               diasPublicado={data.diasPublicado}
               vehicleFav={data.vehicleFav}
               vehiculo={data.vehiculo}
+              id={normalize(data.vehiculo.title) + '-' + data.vehiculo.id}
             />
           </Grid>
           {data.vehiculosRelacionados.length > 0 && (
