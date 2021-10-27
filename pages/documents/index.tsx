@@ -3,16 +3,16 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { GeneralData, RequestForm } from "../../components/Documents";
 import PublicLayout from "../../layouts/PublicLayout";
-import { validateAuth } from "../../helpers/auth";
 import axios from "axios";
 import { API_URL, AUTH_URL } from "../../helpers/constants";
 import { useState } from "react";
 import { NextSeo } from "next-seo";
+import { PropertyCard } from "../../components/Documents/PropertyCard";
 
 const desc =
   "Genera o descarga gratuitamente los documentos para hacer el traspaso de tu carro o moto (contrato de compraventa, contrato de mandato y documento para solicitar el trámite) Validos por el RUNT y secretaria de tránsito.";
 const keyWords =
-  "runt por placa, contrato de mandato, contrato de compraventa, promesa de compraventa, traspaso de moto, contrato de compraventa vehículo, runt por cedula";
+  "runt por placa, contrato de mandato, contrato de compraventa, promesa de compraventa, traspaso de moto, contrato de compraventa vehículo, runt por cédula";
 export default function Documents({ data }: any) {
   const [isSending, setIsSending] = useState(false);
 
@@ -85,6 +85,7 @@ export default function Documents({ data }: any) {
               Solicitud de Tramite.
             </Text>
           </Text>
+          <PropertyCard />
           <Spacer y={1} />
           <Text h2 weight="bolder">
             Contrato de Compraventa
@@ -158,8 +159,11 @@ export default function Documents({ data }: any) {
           <Spacer y={0.5} />
           <Text p className="text-justify">
             Nota: Se recomiendan autenticar estos 3 documentos en una notaría,
-            deben ir acompañados de las improntas del vehículo y las fotocopias
-            de las cedulas del vendedor como el comprador.
+            deben ir acompañados de las improntas del vehículo,{" "}
+            <Text weight="bolder" span>
+              fotocopia de la tarjeta de propiedad actual
+            </Text>{" "}
+            y las fotocopias de las cédulas del vendedor como el comprador.
           </Text>
           <Spacer y={0.5} />
           <Text p className="text-justify">
@@ -169,7 +173,7 @@ export default function Documents({ data }: any) {
           <Spacer y={0.5} />
           <Link
             color
-            style={{ wordBreak: "break-all" }}
+            style={{ wordBreak: "break-word" }}
             href="https://www.runt.com.co/consultaCiudadana/#/consultaVehiculo"
             target="_blank"
           >
@@ -180,23 +184,23 @@ export default function Documents({ data }: any) {
           <Spacer y={0.5} />
           <Link
             color
-            style={{ wordBreak: "break-all" }}
+            style={{ wordBreak: "break-word" }}
             href="https://www.runt.com.co/consultaCiudadana/#/consultaPersona"
             target="_blank"
           >
             <Text p className="text-justify">
-              Estado de la persona (Runt por cedula)
+              Estado de la persona (Runt por cédula)
             </Text>
           </Link>
           <Spacer y={0.5} />
           <Link
             color
-            style={{ wordBreak: "break-all" }}
+            style={{ wordBreak: "break-word" }}
             href="https://fcm.org.co/simit/#/home-public"
             target="_blank"
           >
             <Text p className="text-justify">
-              Consulta multas por Placa o Cedula
+              Consulta multas por Placa o Cédula
             </Text>
           </Link>
           <Spacer y={1} />
@@ -212,10 +216,13 @@ export default function Documents({ data }: any) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  let data;
   try {
-    const res = await axios.get(`${API_URL}/informacion-documentos`);
-    data = res.data;
+    const { data } = await axios.get(`${API_URL}/informacion-documentos`);
+    return {
+      props: {
+        data,
+      },
+    };
   } catch (err: any) {
     const { response } = err as any;
     if (response.status === 401) {
@@ -224,16 +231,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       });
       context.res.end();
     }
-
-    return {
-      props: {
-        data,
-      },
-    };
+    return { props: {} };
   }
-  return {
-    props: {
-      data,
-    },
-  };
 };
