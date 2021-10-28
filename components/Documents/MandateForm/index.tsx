@@ -11,7 +11,7 @@ import {
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { AUTH_URL } from "../../../helpers/constants";
+import { API_URL } from "../../../helpers/constants";
 import Select from "../../Select";
 import Collapse from "../Collapse";
 import {
@@ -50,7 +50,7 @@ export default function MandateForm({ data }: Props) {
   const request = (data = {}) => {
     setIsSending(true);
     return axios
-      .post(`${AUTH_URL}/documento-mandato`, { ...data }, {
+      .post(`${API_URL}/documento-mandato`, { ...data }, {
       headers: {
         Accept: "application/pdf",
       },

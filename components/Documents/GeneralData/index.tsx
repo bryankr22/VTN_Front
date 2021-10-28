@@ -24,7 +24,7 @@ import {
 } from "./constants";
 import Select from "../../Select";
 import axios from "axios";
-import { AUTH_URL } from "../../../helpers/constants";
+import { API_URL } from "../../../helpers/constants";
 import { useEffect, useState } from "react";
 
 interface Props {
@@ -49,7 +49,7 @@ export default function GeneralData({ data }: Props) {
     setIsSending(true);
     axios
       .post(
-        `${AUTH_URL}/documento-compra-venta`,
+        `${API_URL}/documento-compra-venta`,
         { ...data },
         {
           headers: {
@@ -79,7 +79,7 @@ export default function GeneralData({ data }: Props) {
   const downLoadEmptyFile = () => {
     axios
       .post(
-        `${AUTH_URL}/documento-compra-venta`,
+        `${API_URL}/documento-compra-venta`,
         {},
         {
           headers: {

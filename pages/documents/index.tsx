@@ -4,7 +4,7 @@ import Head from "next/head";
 import { GeneralData, RequestForm } from "../../components/Documents";
 import PublicLayout from "../../layouts/PublicLayout";
 import axios from "axios";
-import { API_URL, AUTH_URL } from "../../helpers/constants";
+import { API_URL } from "../../helpers/constants";
 import { useState } from "react";
 import { NextSeo } from "next-seo";
 import { PropertyCard } from "../../components/Documents/PropertyCard";
@@ -19,7 +19,7 @@ export default function Documents({ data }: any) {
   const downLoadEmptyFile = () => {
     axios
       .post(
-        `${AUTH_URL}/documento-tramite`,
+        `${API_URL}/documento-tramite`,
         {},
         {
           headers: {
@@ -171,14 +171,18 @@ export default function Documents({ data }: any) {
             impuestos para realizar cualquier tipo de trámite.
           </Text>
           <Spacer y={0.5} />
+          <Text p className="text-justify">
+            Consulta acá el estado:
+          </Text>
           <Link
             color
-            style={{ wordBreak: "break-word" }}
+            style={{ wordBreak: "break-word", display: "block" }}
             href="https://www.runt.com.co/consultaCiudadana/#/consultaVehiculo"
             target="_blank"
           >
+            <Spacer y={0.4} />
             <Text p className="text-justify">
-              Consulta acá el estado: Estado del vehículo (Runt por placa)
+              Estado del vehículo (Runt por placa)
             </Text>
           </Link>
           <Spacer y={0.5} />
