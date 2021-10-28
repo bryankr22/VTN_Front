@@ -18,16 +18,17 @@ export default function Custom404() {
     }
 
     useEffect(() => {
-        setTimeout(() => {
-            CloseSession()
-        }, 1000)
+        // setTimeout(() => {
+        //     CloseSession()
+        // }, 1000)
     }, [])
 
     return (
         <PublicLayout>
             <Container style={{ paddingTop: 66, minHeight: 400 }} text textAlign='center'>
                 <Image src="/images/logo_VTN.png" size='small' alt="VTN_logo" centered />
-                <h1>401 - No estás autorizado</h1>
+                <h1>- 401 -</h1>
+                <h2>Lo sentimos, para ingresar a esta sección debes estar registrado. ¡Te invitamos a hacerlo!</h2>
             </Container>
         </PublicLayout>
     )

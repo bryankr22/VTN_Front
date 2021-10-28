@@ -13,7 +13,6 @@ export function PropertyCard() {
           <Text weight="bold">
             Para llenar los formularios utiliza la tarjeta de propiedad.
           </Text>
-          <Spacer />
         </Grid>
         <Grid md={6} xs={6} justify="center">
           <Image
@@ -34,7 +33,6 @@ export function PropertyCard() {
           />
         </Grid>
       </Grid.Container>
-      <Spacer />
     </>
   );
 }
