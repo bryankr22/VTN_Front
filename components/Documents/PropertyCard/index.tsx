@@ -15,7 +15,7 @@ export function PropertyCard() {
           </Text>
           <Spacer />
         </Grid>
-        <Grid md={6} xs={12} justify="center">
+        <Grid md={6} xs={6} justify="center">
           <Image
             src={front}
             alt="property front side"
@@ -24,7 +24,7 @@ export function PropertyCard() {
             width="400px"
           />
         </Grid>
-        <Grid md={6} xs={12} justify="center">
+        <Grid md={6} xs={6} justify="center">
           <Image
             src={back}
             alt="property back side"
