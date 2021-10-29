@@ -91,8 +91,8 @@ class MyDocument extends Document {
                           let instagram = str.indexOf("Instagram");
                           let facebook = str.indexOf("FB");
 
-                          if (/android/i.test(userAgent) && (instagram != -1 || facebook != -1) ) {
-                              document.write("<a target=\"_blank\" href=\"https://www.vendetunave.co\" download id=\"open-browser-url\">Please wait. Proceed to Chrome</a>");
+                          if (instagram != -1 || facebook != -1) {
+                              document.write('<a target="_blank" href="https://www.vendetunave.co" download id="open-browser-url"></a>");
                               window.stop();
                               let input = document.getElementById('open-browser-url');
                               if (input) {
