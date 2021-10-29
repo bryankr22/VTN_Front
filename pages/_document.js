@@ -86,8 +86,18 @@ class MyDocument extends Document {
           <script
             dangerouslySetInnerHTML={{
               __html: `
-                          if(navigator.userAgent.includes("Instagram")){
-                            window.location.href = "https://www.vendetunave.co/";
+                          let userAgent = navigator.userAgent || navigator.vendor || window.opera;
+                          let str = navigator.userAgent;
+                          let instagram = str.indexOf("Instagram");
+                          let facebook = str.indexOf("FB");
+
+                          if (/android/i.test(userAgent) && (instagram != -1 || facebook != -1) ) {
+                              document.write("<a target=\"_blank\" href=\"https://www.vendetunave.co\" download id=\"open-browser-url\">Please wait. Proceed to Chrome</a>");
+                              window.stop();
+                              let input = document.getElementById('open-browser-url');
+                              if (input) {
+                                  input.click();
+                              }
                           }
                       `,
             }}
