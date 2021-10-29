@@ -18,9 +18,9 @@ export default function Custom404() {
     }
 
     useEffect(() => {
-        // setTimeout(() => {
-        //     CloseSession()
-        // }, 1000)
+        setTimeout(() => {
+            CloseSession()
+        }, 1000)
     }, [])
 
     return (

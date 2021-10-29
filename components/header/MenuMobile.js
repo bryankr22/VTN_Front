@@ -136,7 +136,7 @@ export default function MenuMobile() {
                                 <Link
                                     href="/documents"
                                     style={{ textDecoration: "none" }}
-                                ><a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Documentos</a></Link>
+                                ><a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Documentos <span className="new-tag">Nuevo</span></a></Link>
                             </span>
                         </div>
                         <div style={{ borderTop: '1px solid rgb(255 255 255 / 10%)', margin: '.5em 0' }}></div>

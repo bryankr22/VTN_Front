@@ -418,7 +418,7 @@ const Header = () => {
                             letterSpacing: 2,
                           }}
                         >
-                          Documentos
+                          Documentos <span className="new-tag small">Nuevo</span>
                         </a>
                       </Link>
                     </span>

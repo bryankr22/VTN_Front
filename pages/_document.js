@@ -5,7 +5,7 @@ class MyDocument extends Document {
   static async getInitialProps(ctx) {
     const initialProps = await Document.getInitialProps(ctx);
     const lang = getLangFromReq(ctx.req);
-    const props = {...initialProps, lang};
+    const props = { ...initialProps, lang };
     return props;
   }
 

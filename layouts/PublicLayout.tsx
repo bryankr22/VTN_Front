@@ -4,6 +4,8 @@ import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import LoaderPage from "../components/head/LoaderPage";
 import lodable from "@loadable/component";
+import dayjs from "dayjs";
+import { useEffect } from "react";
 const CssBaseline = lodable(() =>
   import("@nextui-org/react").then(({ CssBaseline }) => CssBaseline)
 );
@@ -14,6 +16,17 @@ interface Props {
 }
 
 const PublicLayout = ({ nextUi, ...props }: Props) => {
+  useEffect(() => {
+    //TODO: remove this when the date is over
+    const maxDate = dayjs("2021-11-28").unix();
+    const minDate = dayjs().unix();
+    if (minDate > maxDate) {
+      document.querySelectorAll(".new-tag")?.forEach((el) => {
+        el.remove();
+      });
+    }
+  }, []);
+
   return (
     <>
       <Head>

@@ -460,3 +460,19 @@ h5 {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+
+.new-tag {
+  background-color: #ec3939;
+  border-radius: 5px;
+  color: #000;
+  margin-right: 5px;
+  padding: 0 5px;
+  position: relative;
+  vertical-align: middle;
+  white-space: nowrap;
+  margin-bottom: 10px;
+}
+
+.new-tag.small {
+  font-size: small;
+}
