@@ -2,13 +2,14 @@ import { useCallback, useState } from "react";
 
 import { AdSlug, reportClick, useRequestInfo } from "./useRequest";
 import styles from "./styles.module.css";
+import { useMedia } from "react-use";
 
 interface Props {
   slug: string;
 }
 
 const parseCategory = (rawCategory: string): AdSlug | undefined => {
-  if(!rawCategory) return
+  if (!rawCategory) return;
 
   if (rawCategory === "carros") {
     return "carros-y-camionetas";
@@ -22,12 +23,13 @@ const parseCategory = (rawCategory: string): AdSlug | undefined => {
 
 function ZoneAd({ slug }: Props) {
   const { value } = useRequestInfo(parseCategory(slug));
+  const xs = useMedia("(max-width: 767px)");
   const [showButton, setShowButton] = useState(false);
 
   const changeRoute = useCallback(
     (id: number, path: string) => () => {
       reportClick(id);
-      window.open(path, '_blank');
+      window.open(path, "_blank");
     },
     []
   );
@@ -43,7 +45,7 @@ function ZoneAd({ slug }: Props) {
       <img
         alt={ad.name}
         loading="lazy"
-        src={ad.image}
+        src={xs ? ad.image_mobile : ad.image}
         className={styles.image}
         onLoad={() => {
           setShowButton(true);
