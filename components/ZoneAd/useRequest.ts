@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { useAsync } from "react-use";
-import { AsyncState } from 'react-use/lib/useAsyncFn';
+import { AsyncState } from "react-use/lib/useAsyncFn";
 
 import { API_URL } from "../../helpers/constants";
 
@@ -20,6 +20,7 @@ export interface AD {
   id: number;
   name: string;
   image: string;
+  image_mobile: string;
   link: string;
   button_name: string;
   active: number;
@@ -28,9 +29,9 @@ export interface AD {
 }
 
 const SlugReplace = {
-  GET : "[SLUG]",
-  PUT : "[id-pattner]",
-}
+  GET: "[SLUG]",
+  PUT: "[id-pattner]",
+};
 const URL_GET = `${API_URL}/pattners/${SlugReplace.GET}`;
 const URL_PUT = `${API_URL}/click-pattner/${SlugReplace.PUT}`;
 
@@ -40,8 +41,10 @@ export const reportClick = (id) => {
 
 export const useRequestInfo = (slug: AdSlug) => {
   const state = useAsync(async () => {
-    if(!slug) return {} as AxiosResponse<Response>;
-    const result = await axios.get<Response>(URL_GET.replace(SlugReplace.GET, slug));
+    if (!slug) return {} as AxiosResponse<Response>;
+    const result = await axios.get<Response>(
+      URL_GET.replace(SlugReplace.GET, slug)
+    );
     return result;
   }, [slug]);
   return { ...state };
