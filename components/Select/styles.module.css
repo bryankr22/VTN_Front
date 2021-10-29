@@ -1,0 +1,30 @@
+.select {
+  width: inherit;
+  height: 100%;
+  border: none;
+  border-bottom: 2px solid #eaeaea;
+  transition: border-bottom-color 0.25s ease;
+  -webkit-appearance: none;
+  background-color: transparent;
+  color: var(--dark);
+}
+
+.icon {
+  position: absolute;
+  right: 15px;
+  top: 90%;
+}
+
+.select:focus {
+  border-bottom-color: black;
+}
+
+.container {
+  width: 100%;
+  height: calc(1.7 * 16pt);
+  position: relative;
+}
+
+.label {
+  margin-bottom: .3rem !important;
+}

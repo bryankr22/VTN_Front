@@ -2,7 +2,6 @@
   object-fit: cover;
 }
 .ui.selection.dropdown {
-
 }
 .ui.default.dropdown:not(.button) > .text,
 .ui.dropdown:not(.button) > .default.text {
@@ -380,7 +379,7 @@
   border-top: none !important;
   border-left: none !important;
   background-color: #000 !important;
-  color:white !important;
+  color: white !important;
 }
 
 .search-input-alt > input::placeholder {
@@ -395,7 +394,7 @@
   padding: 10px;
 }
 
-.full-height{
+.full-height {
   height: 100%;
 }
 
@@ -403,7 +402,7 @@
   background-color: #000;
 }
 
-@import url('./CrearProducto.css');
+@import url("./CrearProducto.css");
 
 @media screen and (max-width: 425px) {
   .ant-card-body > .ant-row:first-child {
@@ -414,15 +413,16 @@
   }
 }
 
-.rug .rug-handle:before{
+.rug .rug-handle:before {
   border: 2px dashed lightgray !important;
 }
 
 .rug {
-  font-family: 'Montserrat' !important;
+  font-family: "Montserrat" !important;
 }
 
-.rug-handle-drop-text, .rug-handle-button {
+.rug-handle-drop-text,
+.rug-handle-button {
   font-size: 0.9em !important;
 }
 
@@ -436,7 +436,7 @@
     line-height: 0;
   }
   .rug-handle-button::after {
-    content: 'Selecciona máximo 10 imágenes';
+    content: "Selecciona máximo 10 imágenes";
     text-indent: 0;
     display: block;
     line-height: initial;
@@ -447,3 +447,32 @@
   min-height: unset !important;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: Montserrat, Lato, "Helvetica Neue", Arial, Helvetica, sans-serif !important;
+}
+
+.boxsizingBorder textarea {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.new-tag {
+  background-color: #ec3939;
+  border-radius: 5px;
+  color: #000;
+  margin-right: 5px;
+  padding: 0 5px;
+  position: relative;
+  vertical-align: middle;
+  white-space: nowrap;
+  margin-bottom: 10px;
+}
+
+.new-tag.small {
+  font-size: small;
+}

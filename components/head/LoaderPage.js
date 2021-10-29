@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Dimmer, Loader } from "semantic-ui-react";
 import { useRouter } from 'next/router';
 export default function Loading() {
@@ -12,17 +12,20 @@ export default function Loading() {
         router.events.on('routeChangeComplete', handleComplete)
         router.events.on('routeChangeError', handleComplete)
         //router.events.on('hashChangeComplete', handleComplete)
-        
+
 
         return () => {
             router.events.off('routeChangeStart', handleStart)
             router.events.off('routeChangeComplete', handleComplete)
             router.events.off('routeChangeError', handleComplete)
         }
-    },[])
-    return loading && (
+    }, [])
+
+    if (!loading) return null
+
+    return (
         <Dimmer style={{ position: "fixed", zIndex: 9999 }} active={loading}>
             <Loader>Cargando página...</Loader>
-        </Dimmer>  
+        </Dimmer>
     );
 }

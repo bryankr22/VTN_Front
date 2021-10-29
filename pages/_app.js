@@ -1,6 +1,7 @@
 //import '../styles/header.css'
 import "../public/css/app.min.css";
 import "../styles/globals.css";
+import '../styles/normalize.css'
 
 import { Provider as ProviderRedux } from "react-redux";
 import store from "../store";
@@ -10,8 +11,8 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import { Fragment } from "react";
 import { DefaultSeo } from 'next-seo';
-let persistor = persistStore(store);
 
+let persistor = persistStore(store);
 function MyApp({ Component, pageProps }) {
   const Gate = process.browser ? PersistGate : Fragment;
   return (

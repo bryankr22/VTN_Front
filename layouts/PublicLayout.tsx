@@ -1,10 +1,32 @@
 import Head from "next/head";
-import React from "react";
+
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import LoaderPage from "../components/head/LoaderPage";
-import { DefaultSeo } from "next-seo";
-const PublicLayout = (props) => {
+import lodable from "@loadable/component";
+import dayjs from "dayjs";
+import { useEffect } from "react";
+const CssBaseline = lodable(() =>
+  import("@nextui-org/react").then(({ CssBaseline }) => CssBaseline)
+);
+
+interface Props {
+  nextUi?: boolean;
+  [key: string]: any;
+}
+
+const PublicLayout = ({ nextUi, ...props }: Props) => {
+  useEffect(() => {
+    //TODO: remove this when the date is over
+    const maxDate = dayjs("2021-11-28").unix();
+    const minDate = dayjs().unix();
+    if (minDate > maxDate) {
+      document.querySelectorAll(".new-tag")?.forEach((el) => {
+        el.remove();
+      });
+    }
+  }, []);
+
   return (
     <>
       <Head>
@@ -12,6 +34,7 @@ const PublicLayout = (props) => {
           name="viewport"
           content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width"
         />
+        {nextUi && <CssBaseline />}
       </Head>
       <div className="container">
         <Header {...props} />

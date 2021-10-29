@@ -7,10 +7,12 @@ import {
   Responsive,
   Message,
 } from "semantic-ui-react";
-import Iframe from "react-iframe";
+import loadable from '@loadable/component';
 
 import axios from "axios";
 import { API_URL, newsletter_api } from "../../helpers/constants";
+
+const VideoPlayer = loadable(() => import('./VideoPlayer'));
 
 const ContentHome = ({ config }) => {
   const [form, setForm] = useState({
@@ -60,14 +62,7 @@ const ContentHome = ({ config }) => {
   return (
     <div>
       {form.link_video != "" && (
-        <iframe
-          loading="lazy"
-          src={form.link_video}
-          width="100%"
-          height="500px"
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        ></iframe>
+        <VideoPlayer link={form.link_video} />
       )}
       <Responsive {...Responsive.onlyMobile}>
         <Container
