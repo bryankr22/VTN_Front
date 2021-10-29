@@ -83,6 +83,15 @@ class MyDocument extends Document {
               ></script>
             </>
           )}
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                          if(navigator.userAgent.includes("Instagram")){
+                            window.location.href = "https://www.vendetunave.co/";
+                          }
+                      `,
+            }}
+          ></script>
         </Head>
         <body>
           <Main />
