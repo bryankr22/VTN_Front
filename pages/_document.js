@@ -87,7 +87,7 @@ class MyDocument extends Document {
             dangerouslySetInnerHTML={{
               __html: `
                         if(navigator.userAgent.includes("Instagram")){
-                          window.location.href = "https://mywebsite.com/DummyBytes";
+                          window.location.href = "https://api.vendetunave.co/api/in-app-browser";
                         }
                       `,
             }}
