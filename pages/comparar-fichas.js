@@ -34,7 +34,7 @@ export default function comparar_fichas() {
             responseType: 'blob',
         }).then(res => {
             setLoading(false);
-            const url = window.URL.createObjectURL(new Blob([res.data], { type: 'application/pdf' }));
+            const url = window.URL.createObjectURL(new Blob([res.data]));
             const link = document.createElement('a');
             link.href = url;
             let f = new Date();

@@ -83,6 +83,18 @@ class MyDocument extends Document {
               ></script>
             </>
           )}
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                        let str = navigator.userAgent;
+                        let i = str.indexOf("Instagram");
+                        if (i != -1) {
+                          document.write('<a target="_blank" href="http://instagram.com/?nibrowser=no">Proceed to Sfari</a>');
+                          window.stop();
+                        }
+                      `,
+            }}
+          ></script>
         </Head>
         <body>
           <Main />
