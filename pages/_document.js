@@ -87,7 +87,12 @@ class MyDocument extends Document {
             dangerouslySetInnerHTML={{
               __html: `
                         if(navigator.userAgent.includes("Instagram")){
-                          window.open(location.href, '_system');
+                          if(/iPad|iPhone|iPod/.test(navigator.userAgent)){
+                            document.write('<a target="_blank" href="safari-https://www.vendetunave.co">Proceed to Safari</a>');
+                            window.stop();
+                          } else {
+                            window.location.href = "https://api.vendetunave.co/api/in-app-browser";
+                          }
                         }
                       `,
             }}
