@@ -86,9 +86,9 @@ class MyDocument extends Document {
           <script
             dangerouslySetInnerHTML={{
               __html: `
-                      if (navigator.userAgent.includes ("Instagram")) { 
-                          window.location.href = "https://mywebsite.com/DummyBytes"; 
-                      } 
+                        if(navigator.userAgent.includes("Instagram")){
+                          window.location.href = "https://mywebsite.com/DummyBytes";
+                        }
                       `,
             }}
           ></script>
