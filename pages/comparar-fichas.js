@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Head from "next/head";
 import { NextSeo } from "next-seo";
 import PublicLayout from '../layouts/PublicLayout';
@@ -14,7 +14,7 @@ export default function comparar_fichas() {
     const dispatch = useDispatch();
     const compareList = useSelector(({ comparador }) => comparador.fichas);
     const cleanSelector = () => {
-        if(confirm('¿Estas seguro?, se quitaran todos los vehículos que estas comparando actualmente.')) {
+        if (confirm('¿Estas seguro?, se quitaran todos los vehículos que estas comparando actualmente.')) {
             dispatch(restartFicha());
             localStorage.setItem("compareFichatecnica", "1")
             localStorage.setItem("isComparing", "1");
@@ -34,7 +34,7 @@ export default function comparar_fichas() {
             responseType: 'blob',
         }).then(res => {
             setLoading(false);
-            const url = window.URL.createObjectURL(new Blob([res.data]));
+            const url = window.URL.createObjectURL(new Blob([res.data], { type: 'application/pdf' }));
             const link = document.createElement('a');
             link.href = url;
             let f = new Date();
@@ -62,7 +62,7 @@ export default function comparar_fichas() {
             </Head>
             <Dimmer style={{ position: "fixed" }} active={loading}>
                 <Loader>Descargando...</Loader>
-            </Dimmer>    
+            </Dimmer>
             <Container style={{ paddingTop: 25, paddingLeft: 20, paddingRight: 20 }} fluid>
                 <Header as='h1'>Resultados de comparación</Header>
                 <Responsive {...Responsive.onlyMobile}>
@@ -79,15 +79,15 @@ export default function comparar_fichas() {
                     <CompareFicha />
                 </Responsive>
                 <Segment vertical style={{ textAlign: 'center' }}>
-                    { compareList.length > 0 ?
-                        <Button 
-                        onClick={()=> downloadAction() }
-                        style={{ marginTop: 15 }} primary>Descargar PDF</Button>
-                    : null}
+                    {compareList.length > 0 ?
+                        <Button
+                            onClick={() => downloadAction()}
+                            style={{ marginTop: 15 }} primary>Descargar PDF</Button>
+                        : null}
                     <br />
-                    <Button 
-                    onClick={()=> cleanSelector()}
-                    style={{ marginTop: 15 }} >Comparar más versiones</Button>
+                    <Button
+                        onClick={() => cleanSelector()}
+                        style={{ marginTop: 15 }} >Comparar más versiones</Button>
                 </Segment>
             </Container>
         </PublicLayout>

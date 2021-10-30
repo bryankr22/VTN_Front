@@ -83,25 +83,6 @@ class MyDocument extends Document {
               ></script>
             </>
           )}
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-                          let userAgent = navigator.userAgent || navigator.vendor || window.opera;
-                          let str = navigator.userAgent;
-                          let instagram = str.indexOf("Instagram");
-                          let facebook = str.indexOf("FB");
-
-                          if (instagram != -1 || facebook != -1) {
-                              document.write('<a target="_blank" href="https://www.vendetunave.co" download id="open-browser-url"></a>");
-                              window.stop();
-                              let input = document.getElementById('open-browser-url');
-                              if (input) {
-                                  input.click();
-                              }
-                          }
-                      `,
-            }}
-          ></script>
         </Head>
         <body>
           <Main />
