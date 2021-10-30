@@ -86,24 +86,9 @@ class MyDocument extends Document {
           <script
             dangerouslySetInnerHTML={{
               __html: `
-                        let str = navigator.userAgent;
-                        let i = str.indexOf("Instagram");
-                        if (i != -1) {
-                          if (/android/i.test(navigator.userAgent)) {
-                            evt.preventDefault();
-                    
-                            var url = $(this).attr('href').replace("https://", "googlechromes://");
-                            url = url.replace("http://", "googlechrome://");
-                            window.open(url, '_blank');
-                    
-                            return false;
-                          }
-                    
-                          if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-                            document.write('<a target="_blank" href="http://instagram.com/?nibrowser=no">Proceed to Sfari</a>');
-                            window.stop();
-                          }
-                        }
+                      if (navigator.userAgent.includes ("Instagram")) { 
+                          window.location.href = "https://mywebsite.com/DummyBytes"; 
+                      } 
                       `,
             }}
           ></script>
