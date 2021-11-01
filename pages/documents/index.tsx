@@ -21,6 +21,16 @@ export default function Documents({ data }: any) {
   const closeHandler = () => setVisible(false);
 
   const downLoadEmptyFile = () => {
+    if (navigator.userAgent.includes("Instagram")) {
+      axios.post(`${API_URL}/documento-tramite`, {}).then(res => {
+        window.location.href = `https://api.vendetunave.co/api/in-app-browser/${res.data.file}`;
+        return;
+      }).catch(error => {
+        console.log(error)
+      });
+
+      return;
+    }
     axios
       .post(
         `${API_URL}/documento-tramite`,
