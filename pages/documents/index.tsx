@@ -1,4 +1,5 @@
-import { Button, Container, Link, Row, Spacer, Text } from "@nextui-org/react";
+import { useEffect } from 'react'
+import { Button, Container, Link, Row, Spacer, Text, Modal } from "@nextui-org/react";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { GeneralData, RequestForm } from "../../components/Documents";
@@ -15,6 +16,9 @@ const keyWords =
   "runt por placa, contrato de mandato, contrato de compraventa, promesa de compraventa, traspaso de moto, contrato de compraventa vehículo, runt por cédula";
 export default function Documents({ data }: any) {
   const [isSending, setIsSending] = useState(false);
+  const [visible, setVisible] = useState(false);
+
+  const closeHandler = () => setVisible(false);
 
   const downLoadEmptyFile = () => {
     axios
@@ -43,6 +47,10 @@ export default function Documents({ data }: any) {
       });
   };
 
+  useEffect(() => {
+    if (navigator.userAgent.includes("Instagram")) setVisible(true);
+  }, [])
+
   return (
     <>
       <style>{`
@@ -61,6 +69,28 @@ export default function Documents({ data }: any) {
         <meta property="keywords" content={keyWords} />
       </Head>
       <PublicLayout nextUi>
+        <Modal
+          closeButton
+          aria-labelledby="modal-title"
+          open={visible}
+          onClose={closeHandler}
+        >
+          <Modal.Header>
+            <Text id="modal-title" size={18}>
+              <Text b size={18}>
+                ¡Atención!
+              </Text>
+            </Text>
+          </Modal.Header>
+          <Modal.Body>
+            Desde el navegador de instagram no podrás descargar documentos, solo podrás pervisualizarlos. Si necesitas descargarlos te invitamos a usar Safari o Chrome para hacerlo.
+          </Modal.Body>
+          <Modal.Footer>
+            <Button auto flat color="error" onClick={closeHandler}>
+              Cerrar
+            </Button>
+          </Modal.Footer>
+        </Modal>
         <Container>
           <Spacer y={2} />
           <Text h3 weight="bolder">
