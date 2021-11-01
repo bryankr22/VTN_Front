@@ -22,7 +22,7 @@ export default function Documents({ data }: any) {
 
   const downLoadEmptyFile = () => {
     if (navigator.userAgent.includes("Instagram")) {
-      window.location.replace(`https://api.vendetunave.co/api/in-app-browser/FUNT.pdf`);
+      window.location.replace(`https://api.vendetunave.co/api/in-app-browser/FUNT`);
       return;
     }
     axios
