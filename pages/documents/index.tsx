@@ -87,7 +87,7 @@ export default function Documents({ data }: any) {
             </Text>
           </Modal.Header>
           <Modal.Body>
-            Desde el navegador de instagram no podrás descargar documentos, solo podrás pervisualizarlos. Si necesitas descargarlos te invitamos a usar Safari o Chrome para hacerlo.
+            Desde el navegador de instagram no podrás descargar documentos. Si necesitas descargarlos te invitamos a usar Safari o Chrome para hacerlo.
           </Modal.Body>
           <Modal.Footer>
             <Button auto flat color="error" onClick={closeHandler}>
