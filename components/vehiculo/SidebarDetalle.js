@@ -72,7 +72,7 @@ export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
                     <p style={{ display: 'inline' }}>{new Intl.NumberFormat("de-DE").format(vehiculo.views)}</p>
                 </div>
             </Header>
-            <Header as="h2" style={{ marginTop: 8 }}>
+            <Header as="h1" style={{ marginTop: 8 }}>
                 {vehiculo.title}
             </Header>
             <Header as="h2" style={{ marginTop: 8 }}>
@@ -80,7 +80,7 @@ export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
                 {new Intl.NumberFormat("de-DE").format(vehiculo.precio)}{" "}
                 COP
             </Header>
-            <Header as="h6" style={{ marginTop: 8 }}>
+            <Header as="h3" style={{ marginTop: 8 }}>
                 SKU:
                 <p
                     style={{
@@ -127,7 +127,7 @@ export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
             </Grid>
             {cookies.vtn_token && (
                 <Header
-                    as="h4"
+                    as="h3"
                     textAlign="center"
                     onClick={() => addFavoritos()}
                     style={{ marginTop: 8, marginBottom: 30 }}
