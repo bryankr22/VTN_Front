@@ -136,6 +136,9 @@ export default function detalle({ data }) {
                 .slider-wrapper, .slide {
                     height: calc(55vh - 75px) !important;
                 }
+                #desc-desk  h3 {
+                  font-size: 1rem !important;
+                }
             `}
         </style>
 
@@ -368,14 +371,14 @@ export default function detalle({ data }) {
                 </div>
               </Grid.Row>
               <Grid.Row className="p-3">
-                <Header as="h5" style={{ marginTop: 20 }}>
+                <Header as="h3" style={{ marginTop: 20 }}>
                   CARACTERÍSTICAS
                 </Header>
                 <TableCaracteristicasDesk vehiculo={data.vehiculo} />
               </Grid.Row>
               <Grid.Row>
                 <div className="p-3">
-                  <Header as="h5" icon>
+                  <Header as="h3" icon>
                     DESCRIPCIÓN
                   </Header>
                   <p style={{ fontSize: 14 }}>{data.vehiculo.descripcion}</p>
@@ -405,12 +408,12 @@ export default function detalle({ data }) {
                 data={data.imagenes}
                 description={""}
               />
-              <Header as="h5" style={{ marginTop: 20 }}>
+              <Header as="h3" style={{ marginTop: 20 }}>
                 CARACTERÍSTICAS
               </Header>
               <TableCaracteristicasDesk vehiculo={data.vehiculo} />
               <hr />
-              <Header as="h5" icon>
+              <Header as="h3" icon>
                 DESCRIPCIÓN
               </Header>
               <p style={{ fontSize: 14 }}>{data.vehiculo.descripcion}</p>

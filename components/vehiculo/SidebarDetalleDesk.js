@@ -95,7 +95,7 @@ export default function SidebarDetalleDesk({ imagenPrincipal, vehiculo, vehicleF
             </Header>
             <Header
                 textAlign="left"
-                as="h1"
+                as="h2"
                 style={{ marginBottom: 20, marginTop: 20 }}
             >
                 <Header.Content>
