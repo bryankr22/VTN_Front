@@ -48,7 +48,7 @@ export default function mis_publicaciones() {
                 <meta property="keywords" content="moto deportiva, camiones, camioneta, automóvil, moto enduro, marcas de motos, automotriz" />
             </Head>
             <Container style={{ paddingTop: 25 }} text>
-                <Header as="h2">MIS PUBLICACIONES</Header>
+                <Header as="h1">MIS PUBLICACIONES</Header>
                 <Tab
                     panes={panes(publicaciones.vehiculos, 0, publicaciones.accesorios, 0)}
                     activeIndex={activeIndex}

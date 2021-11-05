@@ -182,6 +182,7 @@ export default function ListadoVehiculos({
                 src={pathS3 + item.nameImage + "300x300.webp"}
                 wrapped
                 ui={false}
+                alt={item.title}
               />
               <Card.Content>
                 <Card.Description
@@ -192,14 +193,20 @@ export default function ListadoVehiculos({
                     marginBottom: 7,
                   }}
                 >
-                  {item.title}
+                  <h2 className="fnt-size-inherit">
+                    {item.title}
+                  </h2>
                 </Card.Description>
                 <Card.Header>
-                  $ {new Intl.NumberFormat("de-DE").format(item.precio)} COP
+                  <h3 className="fnt-size-inherit">
+                    $ {new Intl.NumberFormat("de-DE").format(item.precio)} COP
+                  </h3>
                 </Card.Header>
                 <Card.Description>
-                  {item.ano} -{" "}
-                  {new Intl.NumberFormat("de-DE").format(item.kilometraje)} KM
+                  <h5 className="fnt-size-inherit">
+                    {item.ano} -{" "}
+                    {new Intl.NumberFormat("de-DE").format(item.kilometraje)} KM
+                  </h5>
                 </Card.Description>
                 <Card.Description>
                   {item.labelCiudad.toLowerCase().charAt(0).toUpperCase() +

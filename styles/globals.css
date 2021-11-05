@@ -476,3 +476,13 @@ h5 {
 .new-tag.small {
   font-size: small;
 }
+
+.fnt-size-inherit {
+  font-size: inherit;
+  font-weight: inherit;
+  font-family: inherit;
+}
+
+.fnt-weight-bold {
+  font-weight: bold !important;
+}

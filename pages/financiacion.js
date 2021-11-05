@@ -128,7 +128,7 @@ export default function financiacion() {
           <meta property="keywords" content="sufi, occiauto, simuladores de crédito vehiculos, simulador de crédito, prestamos, financiaciones" />
       </Head>
       <Container style={{ paddingTop: 25 }} text>
-        <Header as="h2">FINANCIACIÓN DE TU VEHICULO</Header>
+        <Header as="h1">FINANCIACIÓN DE TU VEHICULO</Header>
         <p style={{ textAlign: "justify" }}>
           Para acceder a nuestros recomendados en financiación de vehículos, se
           requiere diligenciar el siguiente formulario. Posteriormente, un

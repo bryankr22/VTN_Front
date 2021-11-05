@@ -150,7 +150,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
       setListadoModal(groupByDecade(aniosByLabel));
     } else {
       let grouped = [];
-      if(Array.isArray(listado)) {
+      if (Array.isArray(listado)) {
         grouped = [[...mapItems]]
       } else {
         grouped = groupByAlphabet(mapItems)
@@ -161,7 +161,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
   };
   return (
     <Grid.Column style={{ paddingLeft: "3%" }} width={3}>
-      <Header style={{ margin: 0 }} as="h3">
+      <Header style={{ margin: 0, fontSize: '1.28571429rem' }} as="h1">
         {title_page(params.categoria)}
       </Header>
       <Header style={{ marginTop: 15 }} as="h3">
@@ -602,7 +602,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
                   <List.Item
                     as="a"
                     onClick={() =>
-                      openModal("Precios", [...PRICES_FILTER].splice(5, PRICES_FILTER.length -1), "precio", true)
+                      openModal("Precios", [...PRICES_FILTER].splice(5, PRICES_FILTER.length - 1), "precio", true)
                     }
                   >
                     Ver Todos

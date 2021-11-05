@@ -124,7 +124,7 @@ export default function perfil() {
         window.scrollTo({ top: 0, behavior: "smooth" });
         setLoading(false);
       })
-      .catch((error) => {
+      .catch(() => {
         setLoading(false);
         setAlert({
           message: "Ha ocurrido un error, intenta más tarde",
@@ -153,7 +153,7 @@ export default function perfil() {
         <Loader>Actualizando...</Loader>
       </Dimmer>
       <Container style={{ paddingTop: 25 }} text>
-        <Header as="h2">DATOS DE LA CUENTA</Header>
+        <Header as="h1">DATOS DE LA CUENTA</Header>
         {(alert.success || alert.error) && (
           <Message
             success={!!alert.success}
@@ -176,6 +176,7 @@ export default function perfil() {
                 circular
                 bordered
                 style={{ height: 210, marginBottom: 20 }}
+                alt="Imagen de perfil"
               />
               <input
                 type="file"
@@ -262,6 +263,7 @@ export default function perfil() {
                 circular
                 bordered
                 style={{ height: 290, marginBottom: 20 }}
+                alt="Imagen de perfil"
               />
               <input
                 type="file"
@@ -346,6 +348,7 @@ export default function perfil() {
                 circular
                 bordered
                 style={{ height: 290, marginBottom: 20 }}
+                alt="Imagen de perfil"
               />
               <input
                 type="file"
