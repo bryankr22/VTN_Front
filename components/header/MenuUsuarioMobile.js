@@ -17,31 +17,31 @@ export default function MenuUsuarioMobile() {
     return (
         <Dropdown.Menu scrolling>
             <Fragment>
-                <Link href="/usuario/mis_busquedas">
+                <Link href="/usuario/mis_busquedas" passHref>
                     <Dropdown.Item>Mis Busquedas</Dropdown.Item>
                 </Link>
                 <Dropdown.Divider />
             </Fragment>
             <Fragment>
-                <Link href="/usuario/favoritos">
+                <Link href="/usuario/favoritos" passHref>
                     <Dropdown.Item>Favoritos</Dropdown.Item>
                 </Link>
                 <Dropdown.Divider />
             </Fragment>
             <Fragment>
-                <Link href="/usuario/mis_publicaciones">
+                <Link href="/usuario/mis_publicaciones" passHref>
                     <Dropdown.Item>Mis Publicaciones</Dropdown.Item>
                 </Link>
                 <Dropdown.Divider />
             </Fragment>
             <Fragment>
-                <Link href="/usuario/vender-carro">
+                <Link href="/usuario/vender-carro" passHref>
                     <Dropdown.Item>Vender mi vehiculo</Dropdown.Item>
                 </Link>
                 <Dropdown.Divider />
             </Fragment>
             <Fragment>
-                <Link href="/usuario/perfil">
+                <Link href="/usuario/perfil" passHref>
                     <Dropdown.Item>Perfil</Dropdown.Item>
                 </Link>
                 <Dropdown.Divider />

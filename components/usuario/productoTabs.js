@@ -7,7 +7,7 @@ export const panes = (data) => {
             menuItem: "VEHÍCULOS",
             render: () => (
                 <Tab.Pane>
-                    <Header as="h2">PUBLICAR VEHÍCULOS</Header>
+                    <Header as="h1">PUBLICAR VEHÍCULOS</Header>
                     <p>
                         Para publicar tu vehículo con VENDETUNAVE se requiere
                         diligenciar completamente el formulario. Una vez diligenciado

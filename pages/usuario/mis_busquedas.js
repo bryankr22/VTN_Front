@@ -86,7 +86,7 @@ export default function mis_busquedas() {
                 <Loader>Eliminando...</Loader>
             </Dimmer>   
             <Container style={{ paddingTop: 25 }} text>
-                <Header as="h2">MIS BÚSQUEDAS</Header>
+                <Header as="h1">MIS BÚSQUEDAS</Header>
                 {busqueda.busquedas.length > 0 && (
                 <Fragment>
                     <Table>
@@ -115,6 +115,7 @@ export default function mis_busquedas() {
                                     src={pathS3 + item.nameImage + "." + item.extension}
                                     rounded
                                     size="massive"
+                                    alt={item.title}
                                 />
                                 <Header.Content
                                     style={{
@@ -124,8 +125,8 @@ export default function mis_busquedas() {
                                         overflow: "hidden",
                                     }}
                                 >
-                                    {item.title.substr(0, 22)}
-                                    <Header.Subheader style={{ fontSize: 10 }}>
+                                    <h2 className="fnt-size-inherit">{item.title.substr(0, 22)}</h2>
+                                    <Header.Subheader style={{ fontSize: 10 }} as="h3">
                                         {item.labelCiudad}
                                     </Header.Subheader>
                                     <Responsive {...Responsive.onlyMobile}>

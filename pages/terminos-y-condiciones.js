@@ -15,7 +15,7 @@ export default function terminosycondiciones() {
     return (
         <PublicLayout>
             <Container style={{ paddingTop: 66, minHeight: 482 }} text>
-                <Header>TÉRMINOS Y CONDICIONES</Header>
+                <Header as="h1">TÉRMINOS Y CONDICIONES</Header>
                 <p>
                     {tyc}
                 </p>

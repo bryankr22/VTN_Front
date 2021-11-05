@@ -79,7 +79,7 @@ const ContentHome = ({ config }) => {
               content={response.mensaje}
             />
           ) : null}
-          <Header as="h1" style={{ fontSize: "1.4rem" }} textAlign="left">
+          <Header as="h3" style={{ fontSize: "1.4rem" }} textAlign="left">
             REGISTRARSE AL NEWSLETTER
           </Header>
           <Header
@@ -141,7 +141,7 @@ const ContentHome = ({ config }) => {
               content={response.mensaje}
             />
           ) : null}
-          <Header as="h1" style={{ fontSize: "1.4rem" }} textAlign="left">
+          <Header as="h3" style={{ fontSize: "1.4rem" }} textAlign="left">
             REGISTRARSE AL NEWSLETTER
           </Header>
           <Header
@@ -207,7 +207,7 @@ const ContentHome = ({ config }) => {
               content={response.mensaje}
             />
           ) : null}
-          <Header as="h1" style={{ fontSize: "1.4rem" }}>
+          <Header as="h3" style={{ fontSize: "1.4rem" }}>
             REGISTRARSE AL NEWSLETTER
           </Header>
           <Header as="h6" style={{ marginBottom: 20, fontWeight: 500 }}>

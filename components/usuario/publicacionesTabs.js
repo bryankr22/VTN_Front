@@ -186,11 +186,13 @@ export const panes = (vehicles, resultTotalV, accesorios, resultTotalA) => {
                             }}
                             rounded
                             size="massive"
+                            alt={item.title}
                           />
                           <Header.Content style={{ width: "75%" }}>
                             {item.activo == 0 && item.vendido == 0 && (
                               <Header.Subheader
                                 style={{ fontSize: 13, color: "orange" }}
+                                as="h3"
                               >
                                 Pendiente de aprobación
                               </Header.Subheader>
@@ -198,6 +200,7 @@ export const panes = (vehicles, resultTotalV, accesorios, resultTotalA) => {
                             {item.vendido == 1 && (
                               <Header.Subheader
                                 style={{ fontSize: 13, color: "green" }}
+                                as="h3"
                               >
                                 Vendido
                               </Header.Subheader>
@@ -205,29 +208,34 @@ export const panes = (vehicles, resultTotalV, accesorios, resultTotalA) => {
                             {item.activo == 2 && (
                               <Header.Subheader
                                 style={{ fontSize: 13, color: "red" }}
+                                as="h3"
                               >
                                 Rechazado
                               </Header.Subheader>
                             )}
-                            {item.title.substr(0, 15)}
-                            <Header.Subheader style={{ fontSize: 10 }}>
+                            <h2 className="fnt-size-inherit">
+                              {item.title.substr(0, 15)}
+                            </h2>
+                            <Header.Subheader style={{ fontSize: 10 }} as="h3">
                               SKU: {item.sku}
                             </Header.Subheader>
-                            <Header.Subheader style={{ fontSize: 10 }}>
+                            <Header.Subheader style={{ fontSize: 10 }} as="h3">
                               {item.labelCiudad}
                             </Header.Subheader>
-                            <Header.Subheader style={{ fontSize: 10 }}>
+                            <Header.Subheader style={{ fontSize: 10 }} as="h3">
                               {item.ano}
                             </Header.Subheader>
-                            <Header.Subheader style={{ fontSize: 10 }}>
+                            <Header.Subheader style={{ fontSize: 10 }} as="h3">
                               {item.modeloLabel}
                             </Header.Subheader>
                           </Header.Content>
                         </Header>
                       </Table.Cell>
                       <Table.Cell>
-                        ${" "}
-                        {new Intl.NumberFormat("de-DE").format(item.precio)}
+                        <h3 className="fnt-size-inherit">
+                          ${" "}
+                          {new Intl.NumberFormat("de-DE").format(item.precio)}
+                        </h3>
                       </Table.Cell>
                       <Table.Cell>{item.fecha_creacion}</Table.Cell>
                       <Table.Cell>

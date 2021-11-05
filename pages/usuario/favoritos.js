@@ -78,7 +78,7 @@ export default function favoritos() {
                 <meta property="keywords" content="los mejores carros del mundo, carros de segunda baratos, carros de venta usados, motos usadas, usados autos, carros último modelo" />
             </Head>
             <Container style={{ paddingTop: 25 }} text>
-                <Header as="h2" style={{ textTransform: 'uppercase' }}>Favoritos</Header>
+                <Header as="h1" style={{ textTransform: 'uppercase' }}>Favoritos</Header>
                 <Tab
                     panes={panes(favoritos.vehiculos, 0, favoritos.fichas_tecnicas, 0, eliminarVehiculo, eliminarFicha)}
                     activeIndex={activeIndex}
