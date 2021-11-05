@@ -54,7 +54,6 @@ export const getServerSideProps = async ({ res }) => {
     const { vehiculos, ficha_tecnica, preguntas } = await response.data;
     vehiculos.forEach((vehiculo) => {
         dynamicPages.push(`/vehiculos/detalle/${normalize(vehiculo.title)}-${vehiculo.id}`)
-        dynamicPages.push(`/editar-vehiculo/${vehiculo.id}`)
     });
     ficha_tecnica.forEach((ficha) => {
         dynamicPages.push(`/ficha-tecnica/detalle/${normalize(ficha.title)}-${ficha.id}`)
