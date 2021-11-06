@@ -12,7 +12,7 @@ import { useLocalStorage } from "../../helpers/hooks/useLocalStorage";
 import { useSelector, useDispatch } from "react-redux";
 import { addFicha } from "../../store/comparadorSlice";
 import HeaderFicha from "../../components/comparadores/HeaderFicha";
-export default function ListadoFichasMobile({ vehiculos, totalRecords, page}) {
+export default function ListadoFichasMobile({ vehiculos, totalRecords, page }) {
   const compareList = useSelector(({ comparador }) => comparador.fichas);
   const dispatch = useDispatch();
   const [compare, setCompare] = useLocalStorage("compareFichatecnica", "0");
@@ -158,10 +158,11 @@ export default function ListadoFichasMobile({ vehiculos, totalRecords, page}) {
                   src={pathS3 + item.nameImage + "." + item.extension}
                   wrapped
                   ui={false}
+                  alt={item.title}
                 />
                 <Card.Content>
                   <Card.Header
-                    as="a"
+                    as="h2"
                     style={{
                       marginBottom: 10,
                       marginTop: 10,
@@ -178,8 +179,9 @@ export default function ListadoFichasMobile({ vehiculos, totalRecords, page}) {
                         <Grid.Row columns={2} style={{ paddingBottom: 0 }}>
                           <Grid.Column>
                             <Header
-                              as="h5"
+                              as="h3"
                               style={{
+                                fontSize: '1rem',
                                 color: "gray",
                                 marginBottom: 0,
                                 fontSize: 12,
@@ -205,8 +207,9 @@ export default function ListadoFichasMobile({ vehiculos, totalRecords, page}) {
                           </Grid.Column>
                           <Grid.Column>
                             <Header
-                              as="h5"
+                              as="h3"
                               style={{
+                                fontSize: '1rem',
                                 color: "gray",
                                 marginBottom: 0,
                                 fontSize: 12,
@@ -233,8 +236,9 @@ export default function ListadoFichasMobile({ vehiculos, totalRecords, page}) {
                         >
                           <Grid.Column>
                             <Header
-                              as="h5"
+                              as="h3"
                               style={{
+                                fontSize: '1rem',
                                 color: "gray",
                                 marginBottom: 0,
                                 fontSize: 12,
@@ -256,8 +260,9 @@ export default function ListadoFichasMobile({ vehiculos, totalRecords, page}) {
                           </Grid.Column>
                           <Grid.Column>
                             <Header
-                              as="h5"
+                              as="h3"
                               style={{
+                                fontSize: '1rem',
                                 color: "gray",
                                 marginBottom: 0,
                                 fontSize: 12,
@@ -287,8 +292,9 @@ export default function ListadoFichasMobile({ vehiculos, totalRecords, page}) {
                         >
                           <Grid.Column>
                             <Header
-                              as="h5"
+                              as="h3"
                               style={{
+                                fontSize: '1rem',
                                 color: "gray",
                                 marginBottom: 0,
                                 fontSize: 12,
@@ -313,8 +319,9 @@ export default function ListadoFichasMobile({ vehiculos, totalRecords, page}) {
                           </Grid.Column>
                           <Grid.Column>
                             <Header
-                              as="h5"
+                              as="h3"
                               style={{
+                                fontSize: '1rem',
                                 color: "gray",
                                 marginBottom: 0,
                                 fontSize: 12,
@@ -341,8 +348,9 @@ export default function ListadoFichasMobile({ vehiculos, totalRecords, page}) {
                         >
                           <Grid.Column>
                             <Header
-                              as="h5"
+                              as="h3"
                               style={{
+                                fontSize: '1rem',
                                 color: "gray",
                                 marginBottom: 0,
                                 fontSize: 12,

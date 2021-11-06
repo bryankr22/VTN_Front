@@ -116,7 +116,7 @@ export default function SidebarDetalleDesk({ imagenPrincipal, vehiculo, vehicleF
                     )}
                 </Header.Content>
             </Header>
-            <Header as="h6" style={{ marginTop: 8 }}>
+            <Header as="p" style={{ marginTop: 8 }}>
                 Este vehículo cuenta con:
             </Header>
             <Container style={{ marginTop: 20 }}>
@@ -126,7 +126,7 @@ export default function SidebarDetalleDesk({ imagenPrincipal, vehiculo, vehicleF
                             <Grid.Column
                                 style={{ textAlign: "center", marginBottom: 0 }}
                             >
-                                <Header as="h6" icon style={{ marginBottom: 0 }}>
+                                <Header as="h4" icon style={{ fontSize: '1rem', marginBottom: 0 }} >
                                     <Icon name="exchange" style={{ marginBottom: 0 }} />
                                     Permuta
                                 </Header>
@@ -134,7 +134,7 @@ export default function SidebarDetalleDesk({ imagenPrincipal, vehiculo, vehicleF
                         )}
                         {vehiculo.financiacion == 1 && (
                             <Grid.Column style={{ textAlign: "center" }}>
-                                <Header as="h6" icon>
+                                <Header as="h4" icon style={{ fontSize: '1rem' }}>
                                     <Icon name="wpforms" />
                                     Financiación
                                 </Header>
@@ -142,7 +142,7 @@ export default function SidebarDetalleDesk({ imagenPrincipal, vehiculo, vehicleF
                         )}
                         {vehiculo.confiable == 1 && (
                             <Grid.Column style={{ textAlign: "center" }}>
-                                <Header as="h6" icon>
+                                <Header as="h4" icon style={{ fontSize: '1rem' }}>
                                     <Icon name="check" />
                                     Verificado
                                 </Header>
@@ -151,14 +151,14 @@ export default function SidebarDetalleDesk({ imagenPrincipal, vehiculo, vehicleF
                     </Grid.Row>
                 </Grid>
             </Container>
-            <Header as="h5" style={{ marginBottom: 0 }}>
+            <Header as="h3" style={{ fontSize: '1.1rem', marginBottom: 0 }}>
                 Publicado hace: {diasPublicado} días
             </Header>
-            <Header as="h5" style={{ marginbottom: 0, marginTop: 10 }}>
+            <Header as="h3" style={{ fontSize: '1.1rem', marginbottom: 0, marginTop: 10 }}>
                 {vehiculo.ciudadLabel},{" "}
                 {vehiculo.departamentoLabel}
             </Header>
-            <Header as="h5" style={{ marginTop: 10 }}>
+            <Header as="h3" style={{ fontSize: '1.1rem', marginTop: 10 }}>
                 Teléfono:{" "}
                 <b style={{ fontSize: 20 }}>{vehiculo.contacto}</b>
             </Header>
@@ -195,7 +195,7 @@ export default function SidebarDetalleDesk({ imagenPrincipal, vehiculo, vehicleF
                         content={alert.message}
                     />
                 )}
-                <Header as="h5" style={{ color: "#fff" }}>
+                <Header as="h4" style={{ color: "#fff" }}>
                     CONTACTA AL VENDEDOR
                 </Header>
                 <Form inverted>

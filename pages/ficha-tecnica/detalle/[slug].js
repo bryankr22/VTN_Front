@@ -24,9 +24,9 @@ export default function detalle({ data }) {
         return compareList.some((element) => element.id === item.id);
     }
     const addComparar = (item) => {
-        if(compareList.length < 3){
+        if (compareList.length < 3) {
             dispatch(addFicha(item))
-        }else{
+        } else {
             //setCompare('0');
         }
         localStorage.setItem("compareFichatecnica", "1")
@@ -67,9 +67,9 @@ export default function detalle({ data }) {
             </Head>
             <Dimmer style={{ position: "fixed" }} active={loading}>
                 <Loader>Agregando a favoritos...</Loader>
-            </Dimmer>  
+            </Dimmer>
             <style>
-            {`
+                {`
                 .image > img {
                     object-fit: cover;
                 }
@@ -187,41 +187,33 @@ export default function detalle({ data }) {
                     <Header as="h1" textAlign="left" style={{ marginTop: 25, marginBottom: 10, marginLeft: 10 }}>
                         {data.vehicle.title}
                     </Header>
-                    <Responsive {...Responsive.onlyMobile}>
-                        <TableDescription data={data} />
-                    </Responsive>
-                    <Responsive {...Responsive.onlyTablet}>
-                        <TableDescription data={data} />
-                    </Responsive>
-                    <Responsive {...Responsive.onlyComputer} style={{display: 'content'}}>
-                        <TableDescription data={data} />
-                    </Responsive>
+                    <TableDescription data={data} />
                     {cookies.vtn_token &&
                         <div style={{ margin: '20px auto', textAlign: 'center' }}>
-                            <Button 
-                            onClick={(e) => { addFavoritos(); }} 
-                            primary 
-                            style={{ borderRadius: 20, padding: '11px 40px' }}>Agregar a favoritos</Button>
+                            <Button
+                                onClick={(e) => { addFavoritos(); }}
+                                primary
+                                style={{ borderRadius: 20, padding: '11px 40px' }}>Agregar a favoritos</Button>
                         </div>
                     }
-                    { compareList.length < 3 && !isOnStorage(data.vehicle) &&
+                    {compareList.length < 3 && !isOnStorage(data.vehicle) &&
                         <div style={{ margin: '20px auto', textAlign: 'center' }}>
-                            <Button 
-                            onClick={(e) => { e.preventDefault();addComparar(data.vehicle) }} 
-                            primary style={{ borderRadius: 20, padding: '11px 40px' }}>Comparar</Button>
-                        </div> 
+                            <Button
+                                onClick={(e) => { e.preventDefault(); addComparar(data.vehicle) }}
+                                primary style={{ borderRadius: 20, padding: '11px 40px' }}>Comparar</Button>
+                        </div>
                     }
                     {data.vehiculosRelacionados.length > 0 && (
-                    <Container fluid id="cont-inf">
-                        <Header as="h4" style={{ marginTop: 20, marginLeft: 15 }}>
-                            PRODUCTOS RELACIONADOS
-                        </Header>
-                        <CarruselRelacionados 
-                            type='products'
-                            data={data.vehiculosRelacionados}
-                            numberCards={1}
-                        />
-                    </Container>
+                        <Container fluid id="cont-inf">
+                            <Header as="h4" style={{ marginTop: 20, marginLeft: 15 }}>
+                                PRODUCTOS RELACIONADOS
+                            </Header>
+                            <CarruselRelacionados
+                                type='products'
+                                data={data.vehiculosRelacionados}
+                                numberCards={1}
+                            />
+                        </Container>
                     )}
                 </div>
             )}

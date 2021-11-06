@@ -2,12 +2,12 @@ import React from 'react'
 import CarruselHome from '../carrusel/CarruselHome';
 import { Dimmer } from "semantic-ui-react";
 
-export default function SliderPrincipal({ imagenes }) {
+export default function SliderPrincipal({ imagenes, alt }) {
     return (
         <div>
             {imagenes.length > 0 && (
                 <div>
-                    <CarruselHome seccion="desc" data={imagenes} description={'bbbbb'} />
+                    <CarruselHome seccion="desc" data={imagenes} description={'N/a'} alt={alt} />
                 </div>
             )}
             {imagenes.length > 0 && (
@@ -22,7 +22,8 @@ export default function SliderPrincipal({ imagenes }) {
                         showThumbs={false}
                         seccion="desc"
                         data={imagenes}
-                        description={'aaaaaa'}
+                        description={'N/a'}
+                        alt={alt}
                     />
                 </Dimmer>
             )}

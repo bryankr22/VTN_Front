@@ -83,7 +83,7 @@ const ContentHome = ({ config }) => {
             REGISTRARSE AL NEWSLETTER
           </Header>
           <Header
-            as="h6"
+            as="p"
             textAlign="left"
             style={{ marginBottom: 20, fontWeight: 500 }}
           >
@@ -145,7 +145,7 @@ const ContentHome = ({ config }) => {
             REGISTRARSE AL NEWSLETTER
           </Header>
           <Header
-            as="h6"
+            as="p"
             textAlign="left"
             style={{ marginBottom: 20, fontWeight: 500 }}
           >
@@ -210,7 +210,7 @@ const ContentHome = ({ config }) => {
           <Header as="h3" style={{ fontSize: "1.4rem" }}>
             REGISTRARSE AL NEWSLETTER
           </Header>
-          <Header as="h6" style={{ marginBottom: 20, fontWeight: 500 }}>
+          <Header as="p" style={{ marginBottom: 20, fontWeight: 500 }}>
             Suscríbete a nuestro newsletter y recibe notificaciones del mejor
             contenido de VendeTuNave.
           </Header>

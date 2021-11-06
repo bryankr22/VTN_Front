@@ -45,9 +45,10 @@ const Footer = () => {
                                     style={{
                                         marginBottom: 9,
                                         paddingBottom: 2,
+                                        fontSize: '1.1rem'
                                     }}
                                     inverted
-                                    as='h4'
+                                    as='h2'
                                     content='SÍGUENOS'
                                 />
                                 <List link inverted style={{ marginTop: 5 }}>
@@ -69,9 +70,10 @@ const Footer = () => {
                                     style={{
                                         marginBottom: 9,
                                         paddingBottom: 2,
+                                        fontSize: '1.1rem'
                                     }}
                                     inverted
-                                    as='h4'
+                                    as='h2'
                                     content='CONTÁCTANOS'
                                 />
                                 <List link inverted>
@@ -83,13 +85,13 @@ const Footer = () => {
                         <Grid.Row>
                             <Grid.Column width={16} style={{ textAlign: 'center' }}>
                                 <div
-                                className={'image-container'}
+                                    className={'image-container'}
                                 >
                                     <Image
-                                    layout='fill'
-                                    alt="VTN_logo_white"
-                                    className={'imglogo'}
-                                    src="/images/VTN_logo_white.png"
+                                        layout='fill'
+                                        alt="VTN_logo_white"
+                                        className={'imglogo'}
+                                        src="/images/VTN_logo_white.png"
                                     />
                                 </div>
                             </Grid.Column>
@@ -105,7 +107,9 @@ const Footer = () => {
                                     target='_blank'
                                     rel="noreferrer"
                                 >
-                                    <img
+                                    <Image
+                                        width="55px"
+                                        height="55px"
                                         alt="call button"
                                         src="/images/vtn_call.png"
                                         style={{ height: 'auto', width: '55px' }}
@@ -115,7 +119,7 @@ const Footer = () => {
                         </Grid.Row>
                         <Grid.Row>
                             <Grid.Column width={16} style={{ textAlign: 'center' }}>
-                                <p style={{ marginBottom: 2 }}>Copyright { footer.dateC } - VendeTuNave</p>
+                                <p style={{ marginBottom: 2 }}>Copyright {footer.dateC} - VendeTuNave</p>
                                 <a style={{ color: '#fff' }} href='/terminos-y-condiciones'>Términos y Condiciones</a>
                             </Grid.Column>
                         </Grid.Row>
@@ -138,9 +142,10 @@ const Footer = () => {
                                     style={{
                                         marginBottom: 9,
                                         paddingBottom: 2,
+                                        fontSize: '1.1rem'
                                     }}
                                     inverted
-                                    as='h4'
+                                    as='h2'
                                     content='SÍGUENOS'
                                 />
                                 <List link inverted style={{ marginTop: 5 }}>
@@ -162,9 +167,10 @@ const Footer = () => {
                                     style={{
                                         marginBottom: 9,
                                         paddingBottom: 2,
+                                        fontSize: '1.1rem'
                                     }}
                                     inverted
-                                    as='h4'
+                                    as='h2'
                                     content='CONTÁCTANOS'
                                 />
                                 <List link inverted>
@@ -176,13 +182,13 @@ const Footer = () => {
                         <Grid.Row>
                             <Grid.Column width={16} style={{ textAlign: 'center' }}>
                                 <div
-                                className={'image-container'}
+                                    className={'image-container'}
                                 >
                                     <Image
-                                    layout='fill'
-                                    alt="VTN_logo_white"
-                                    className={'imglogo'}
-                                    src="/images/VTN_logo_white.png"
+                                        layout='fill'
+                                        alt="VTN_logo_white"
+                                        className={'imglogo'}
+                                        src="/images/VTN_logo_white.png"
                                     />
                                 </div>
                             </Grid.Column>
@@ -199,7 +205,8 @@ const Footer = () => {
                                     rel="noreferrer"
                                 >
                                     <Image
-                                        layout='fill'
+                                        width="55px"
+                                        height="55px"
                                         alt="call button"
                                         src="/images/vtn_call.png"
                                         style={{ height: 'auto', width: '55px' }}
@@ -209,7 +216,7 @@ const Footer = () => {
                         </Grid.Row>
                         <Grid.Row>
                             <Grid.Column width={16} style={{ textAlign: 'center' }}>
-                                <p style={{ marginBottom: 2 }}>Copyright { footer.dateC } - VendeTuNave</p>
+                                <p style={{ marginBottom: 2 }}>Copyright {footer.dateC} - VendeTuNave</p>
                                 <a style={{ color: '#fff' }} href='/terminos-y-condiciones'>Términos y Condiciones</a>
                             </Grid.Column>
                         </Grid.Row>
@@ -226,10 +233,11 @@ const Footer = () => {
                                         marginBottom: 9,
                                         paddingBottom: 2,
                                         borderBottom: '1px solid',
-                                        borderImage: 'conic-gradient(black, black, white) 1'
+                                        borderImage: 'conic-gradient(black, black, white) 1',
+                                        fontSize: '1.1rem'
                                     }}
                                     inverted
-                                    as='h4'
+                                    as='h2'
                                     content='SÍGUENOS'
                                 />
                                 <List link inverted style={{ marginTop: 5 }}>
@@ -252,10 +260,11 @@ const Footer = () => {
                                         marginBottom: 9,
                                         paddingBottom: 2,
                                         borderBottom: '1px solid',
-                                        borderImage: 'conic-gradient(black, black, white) 1'
+                                        borderImage: 'conic-gradient(black, black, white) 1',
+                                        fontSize: '1.1rem'
                                     }}
                                     inverted
-                                    as='h4'
+                                    as='h2'
                                     content='CONTÁCTANOS'
                                 />
                                 <List link inverted>
@@ -265,13 +274,13 @@ const Footer = () => {
                             </Grid.Column>
                             <Grid.Column width={2}>
                                 <div
-                                className={'image-container-footer'}
+                                    className={'image-container-footer'}
                                 >
                                     <Image
-                                    layout='fill'
-                                    alt="VTN_logo_white"
-                                    className={'imglogo'}
-                                    src="/images/VTN_logo_white.png"
+                                        layout='fill'
+                                        alt="VTN_logo_white"
+                                        className={'imglogo'}
+                                        src="/images/VTN_logo_white.png"
                                     />
                                 </div>
                             </Grid.Column>
@@ -289,7 +298,8 @@ const Footer = () => {
                                     rel="noreferrer"
                                 >
                                     <Image
-                                        layout='fill'
+                                        width="55px"
+                                        height="55px"
                                         alt="call button"
                                         src="/images/vtn_call.png"
                                         style={{ height: 'auto', width: '55px', position: 'absolute', right: 0 }}
@@ -299,7 +309,7 @@ const Footer = () => {
                         </Grid.Row>
                         <Grid.Row>
                             <Grid.Column width={16} style={{ textAlign: 'center' }}>
-                                <p style={{ marginBottom: 2 }}>Copyright { footer.dateC } - VendeTuNave</p>
+                                <p style={{ marginBottom: 2 }}>Copyright {footer.dateC} - VendeTuNave</p>
                                 <a style={{ color: '#fff' }} href='/terminos-y-condiciones'>Términos y Condiciones</a>
                             </Grid.Column>
                         </Grid.Row>
@@ -308,6 +318,6 @@ const Footer = () => {
             </Responsive>
         </Segment>
     );
-    
+
 }
 export default Footer;

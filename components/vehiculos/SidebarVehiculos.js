@@ -164,7 +164,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
       <Header style={{ margin: 0, fontSize: '1.28571429rem' }} as="h1">
         {title_page(params.categoria)}
       </Header>
-      <Header style={{ marginTop: 15 }} as="h3">
+      <Header style={{ marginTop: 15, fontSize: '1.3rem' }} as="h2">
         {contadores.total_records} resultados
       </Header>
       <Container>
@@ -175,7 +175,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
           <List.Item>
             <List.Content>
               <List.Header>
-                <Header as="h5">Ubicaciones</Header>
+                <Header as="h3" style={{fontSize: '1rem'}}>Ubicaciones</Header>
               </List.Header>
               <List.List style={{ paddingLeft: 15 }}>
                 {mapping_contador(contadores.ubicacion).map((item, index) => (
@@ -209,7 +209,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
             <List.Item>
               <List.Content>
                 <List.Header>
-                  <Header as="h5">Ciudades</Header>
+                  <Header as="h3" style={{fontSize: '1rem'}}>Ciudades</Header>
                 </List.Header>
                 <List.List style={{ paddingLeft: 15 }}>
                   {mapping_contador(contadores.ciudad).map((item, index) => (
@@ -243,7 +243,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
           <List.Item>
             <List.Content>
               <List.Header>
-                <Header as="h5">Categorias</Header>
+                <Header as="h3" style={{fontSize: '1rem'}}>Categorias</Header>
               </List.Header>
               <List.List style={{ paddingLeft: 15 }}>
                 {categorias_filter.map((item, index) => (
@@ -269,7 +269,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
             <List.Item>
               <List.Content>
                 <List.Header>
-                  <Header as="h5">Tipos</Header>
+                  <Header as="h3" style={{fontSize: '1rem'}}>Tipos</Header>
                 </List.Header>
                 <List.List style={{ paddingLeft: 15 }}>
                   {mapping_contador(contadores.tipo).map((item, index) => (
@@ -301,7 +301,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
           <List.Item>
             <List.Content>
               <List.Header>
-                <Header as="h5">Marcas</Header>
+                <Header as="h3" style={{fontSize: '1rem'}}>Marcas</Header>
               </List.Header>
               <List.List style={{ paddingLeft: 15 }}>
                 {mapping_contador(contadores.marcas).map((item, index) => (
@@ -337,7 +337,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
             <List.Item>
               <List.Content>
                 <List.Header>
-                  <Header as="h5">Modelos</Header>
+                  <Header as="h3" style={{fontSize: '1rem'}}>Modelos</Header>
                 </List.Header>
                 <List.List style={{ paddingLeft: 15 }}>
                   {mapping_contador(contadores.modelos).map((item, index) => (
@@ -372,7 +372,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
           <List.Item>
             <List.Content>
               <List.Header>
-                <Header as="h5">Tipo de Motor</Header>
+                <Header as="h3" style={{fontSize: '1rem'}}>Tipo de Motor</Header>
               </List.Header>
               <List.List style={{ paddingLeft: 15 }}>
                 {mapping_contador(contadores.combustible, true).map((item, index) => (
@@ -400,7 +400,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
           <List.Item>
             <List.Content>
               <List.Header>
-                <Header as="h5">Año</Header>
+                <Header as="h3" style={{fontSize: '1rem'}}>Año</Header>
               </List.Header>
               <List.List style={{ paddingLeft: 15 }}>
                 {mapping_anios(contadores.anios).map((item, index) => (
@@ -431,7 +431,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
           <List.Item>
             <List.Content>
               <List.Header>
-                <Header as="h5">Estado</Header>
+                <Header as="h3" style={{fontSize: '1rem'}}>Estado</Header>
               </List.Header>
               <List.List style={{ paddingLeft: 15 }}>
                 <List.Item
@@ -462,7 +462,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
           <List.Item>
             <List.Content>
               <List.Header>
-                <Header as="h5">Transmision</Header>
+                <Header as="h3" style={{fontSize: '1rem'}}>Transmision</Header>
               </List.Header>
               <List.List style={{ paddingLeft: 15 }}>
                 {mapping_contador(contadores.caja).map((item, index) => (
@@ -511,7 +511,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
             <List.Item style={{ marginBottom: 0 }}>
               <List.Content>
                 <List.Header>
-                  <Header as="h5">Kilometraje</Header>
+                  <Header as="h3" style={{fontSize: '1rem'}}>Kilometraje</Header>
                 </List.Header>
                 <List.List>
                   {mapArray(KM_FILTER).map((item, index) => (
@@ -582,7 +582,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
             <List.Item style={{ marginBottom: 0 }}>
               <List.Content>
                 <List.Header>
-                  <Header as="h5">Precio</Header>
+                  <Header as="h3" style={{fontSize: '1rem'}}>Precio</Header>
                 </List.Header>
                 <List.List>
                   {mapArray(PRICES_FILTER).map((item, index) => (
