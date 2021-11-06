@@ -203,12 +203,12 @@ export default function ListadoVehiculos({
                   </h3>
                 </Card.Header>
                 <Card.Description>
-                  <h5 className="fnt-size-inherit">
+                  <h4 className="fnt-size-inherit">
                     {item.ano} -{" "}
                     {new Intl.NumberFormat("de-DE").format(item.kilometraje)} KM
-                  </h5>
+                  </h4>
                 </Card.Description>
-                <Card.Description>
+                <Card.Description as="h4" style={{fontSize: '12px'}}>
                   {item.labelCiudad.toLowerCase().charAt(0).toUpperCase() +
                     item.labelCiudad.toLowerCase().slice(1)}
                   {compare === 1 &&

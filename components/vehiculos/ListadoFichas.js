@@ -192,12 +192,12 @@ export default function ListadoFichas({
             <Item.Image
               size="medium"
               src={pathS3 + item.nameImage + "." + item.extension}
-              alt={item.description}
+              alt={item.title}
             />
             <Item.Content>
               <Item.Header
-                as="a"
-                style={{ marginBottom: 10, marginTop: 10, fontSize: 20 }}
+                as="h2"
+                style={{ marginBottom: 10, marginTop: 10, fontSize: 20, fontWeight: "bold" }}
               >
                 {item.title}
               </Item.Header>
@@ -207,8 +207,8 @@ export default function ListadoFichas({
                     <Grid.Row columns={2} style={{ paddingBottom: 5 }}>
                       <Grid.Column>
                         <Header
-                          as="h5"
-                          style={{ color: "gray", marginBottom: 0 }}
+                          as="h3"
+                          style={{ color: "gray", marginBottom: 0, fontSize: '1rem' }}
                         >
                           Precio:
                         </Header>
@@ -227,8 +227,8 @@ export default function ListadoFichas({
                       </Grid.Column>
                       <Grid.Column>
                         <Header
-                          as="h5"
-                          style={{ color: "gray", marginBottom: 0 }}
+                          as="h3"
+                          style={{ fontSize: '1rem', color: "gray", marginBottom: 0 }}
                         >
                           Tipo de Motor:
                         </Header>
@@ -251,8 +251,8 @@ export default function ListadoFichas({
                     >
                       <Grid.Column>
                         <Header
-                          as="h5"
-                          style={{ color: "gray", marginBottom: 0 }}
+                          as="h3"
+                          style={{ fontSize: '1rem', color: "gray", marginBottom: 0 }}
                         >
                           Año:
                         </Header>
@@ -270,8 +270,8 @@ export default function ListadoFichas({
                       </Grid.Column>
                       <Grid.Column>
                         <Header
-                          as="h5"
-                          style={{ color: "gray", marginBottom: 0 }}
+                          as="h3"
+                          style={{ fontSize: '1rem', color: "gray", marginBottom: 0 }}
                         >
                           Autonomía:
                         </Header>
@@ -295,8 +295,8 @@ export default function ListadoFichas({
                     >
                       <Grid.Column>
                         <Header
-                          as="h5"
-                          style={{ color: "gray", marginBottom: 0 }}
+                          as="h3"
+                          style={{ fontSize: '1rem', color: "gray", marginBottom: 0 }}
                         >
                           Motor:
                         </Header>
@@ -315,8 +315,8 @@ export default function ListadoFichas({
                       </Grid.Column>
                       <Grid.Column>
                         <Header
-                          as="h5"
-                          style={{ color: "gray", marginBottom: 0 }}
+                          as="h3"
+                          style={{ fontSize: '1rem', color: "gray", marginBottom: 0 }}
                         >
                           Transmisión:
                         </Header>
@@ -339,8 +339,8 @@ export default function ListadoFichas({
                     >
                       <Grid.Column>
                         <Header
-                          as="h5"
-                          style={{ color: "gray", marginBottom: 0 }}
+                          as="h3"
+                          style={{ fontSize: '1rem', color: "gray", marginBottom: 0 }}
                         >
                           Potencia:
                         </Header>

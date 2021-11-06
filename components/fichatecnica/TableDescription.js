@@ -5,13 +5,13 @@ export default function TableDescription({data}) {
     return (
         <Grid columns="equal">
             <Grid.Column width={16} style={{ padding: "30px 10px 15px 30px" }}>
-                <Header as="h3" style={{ marginTop: 20, textAlign: 'left' }}>
+                <Header as="h2" style={{ marginTop: 20, textAlign: 'left' }}>
                     CARACTERÍSTICAS
                 </Header>
                 <Grid divided="vertically">
                     <Grid.Row columns={2} style={{ paddingBottom: 0 }}>
                         <Grid.Column>
-                            <Header as="h5" style={{ color: "gray", marginBottom: 5 }}>
+                            <Header as="h3" style={{ fontSize: '1rem', color: "gray", marginBottom: 5 }}>
                                 Marca:
                             </Header>
                             <p
@@ -25,7 +25,7 @@ export default function TableDescription({data}) {
                             </p>
                         </Grid.Column>
                         <Grid.Column>
-                            <Header as="h5" style={{ color: "gray", marginBottom: 5 }}>
+                            <Header as="h3" style={{ fontSize: '1rem', color: "gray", marginBottom: 5 }}>
                                 Modelo:
                             </Header>
                             <p
@@ -41,7 +41,7 @@ export default function TableDescription({data}) {
                     </Grid.Row>
                     <Grid.Row columns={2} style={{ paddingTop: 0 }}>
                         <Grid.Column>
-                            <Header as="h5" style={{ color: "gray", marginBottom: 5 }}>
+                            <Header as="h3" style={{ fontSize: '1rem', color: "gray", marginBottom: 5 }}>
                                 Tipo de vehículo:
                             </Header>
                             <p
@@ -55,7 +55,7 @@ export default function TableDescription({data}) {
                             </p>
                         </Grid.Column>
                         <Grid.Column>
-                            <Header as="h5" style={{ color: "gray", marginBottom: 5 }}>
+                            <Header as="h3" style={{ fontSize: '1rem', color: "gray", marginBottom: 5 }}>
                                 Título:
                             </Header>
                             <p
@@ -71,7 +71,7 @@ export default function TableDescription({data}) {
                     </Grid.Row>
                     <Grid.Row columns={2} style={{ paddingTop: 0 }}>
                         <Grid.Column>
-                            <Header as="h5" style={{ color: "gray", marginBottom: 5 }}>
+                            <Header as="h3" style={{ fontSize: '1rem', color: "gray", marginBottom: 5 }}>
                                 Precio:
                             </Header>
                             <p
@@ -85,7 +85,7 @@ export default function TableDescription({data}) {
                             </p>
                         </Grid.Column>
                         <Grid.Column>
-                            <Header as="h5" style={{ color: "gray", marginBottom: 5 }}>
+                            <Header as="h3" style={{ fontSize: '1rem', color: "gray", marginBottom: 5 }}>
                                 Año:
                             </Header>
                             <p
@@ -101,7 +101,7 @@ export default function TableDescription({data}) {
                     </Grid.Row>
                     <Grid.Row columns={2} style={{ paddingTop: 0 }}>
                         <Grid.Column>
-                            <Header as="h5" style={{ color: "gray", marginBottom: 5 }}>
+                            <Header as="h3" style={{ fontSize: '1rem', color: "gray", marginBottom: 5 }}>
                                 Motor:
                             </Header>
                             <p
@@ -115,7 +115,7 @@ export default function TableDescription({data}) {
                             </p>
                         </Grid.Column>
                         <Grid.Column>
-                            <Header as="h5" style={{ color: "gray", marginBottom: 5 }}>
+                            <Header as="h3" style={{ fontSize: '1rem', color: "gray", marginBottom: 5 }}>
                                 Potencia:
                             </Header>
                             <p
@@ -131,7 +131,7 @@ export default function TableDescription({data}) {
                     </Grid.Row>
                     <Grid.Row columns={2} style={{ paddingTop: 0 }}>
                         <Grid.Column>
-                            <Header as="h5" style={{ color: "gray", marginBottom: 5 }}>
+                            <Header as="h3" style={{ fontSize: '1rem', color: "gray", marginBottom: 5 }}>
                                 Torque:
                             </Header>
                             <p
@@ -145,7 +145,7 @@ export default function TableDescription({data}) {
                             </p>
                         </Grid.Column>
                         <Grid.Column>
-                            <Header as="h5" style={{ color: "gray", marginBottom: 5 }}>
+                            <Header as="h3" style={{ fontSize: '1rem', color: "gray", marginBottom: 5 }}>
                                 Tracción:
                             </Header>
                             <p
@@ -161,7 +161,7 @@ export default function TableDescription({data}) {
                     </Grid.Row>
                     <Grid.Row columns={2} style={{ paddingTop: 0 }}>
                         <Grid.Column>
-                            <Header as="h5" style={{ color: "gray", marginBottom: 5 }}>
+                            <Header as="h3" style={{ fontSize: '1rem', color: "gray", marginBottom: 5 }}>
                                 Tipo de motor:
                             </Header>
                             <p
@@ -175,7 +175,7 @@ export default function TableDescription({data}) {
                             </p>
                         </Grid.Column>
                         <Grid.Column>
-                            <Header as="h5" style={{ color: "gray", marginBottom: 5 }}>
+                            <Header as="h3" style={{ fontSize: '1rem', color: "gray", marginBottom: 5 }}>
                                 Transmisión:
                             </Header>
                             <p
@@ -191,7 +191,7 @@ export default function TableDescription({data}) {
                     </Grid.Row>
                     <Grid.Row columns={2} style={{ paddingTop: 0 }}>
                         <Grid.Column>
-                            <Header as="h5" style={{ color: "gray", marginBottom: 5 }}>
+                            <Header as="h3" style={{ fontSize: '1rem', color: "gray", marginBottom: 5 }}>
                                 Autonomía:
                             </Header>
                             <p
@@ -205,7 +205,7 @@ export default function TableDescription({data}) {
                             </p>
                         </Grid.Column>
                         <Grid.Column>
-                            <Header as="h5" style={{ color: "gray", marginBottom: 5 }}>
+                            <Header as="h3" style={{ fontSize: '1rem', color: "gray", marginBottom: 5 }}>
                                 Rendimiento:
                             </Header>
                             <p
@@ -221,7 +221,7 @@ export default function TableDescription({data}) {
                     </Grid.Row>
                     <Grid.Row columns={2} style={{ paddingTop: 0 }}>
                         <Grid.Column>
-                            <Header as="h5" style={{ color: "gray", marginBottom: 5 }}>
+                            <Header as="h3" style={{ fontSize: '1rem', color: "gray", marginBottom: 5 }}>
                                 Seguridad en estrellas:
                             </Header>
                             <p
@@ -288,7 +288,7 @@ export default function TableDescription({data}) {
                             </p>
                         </Grid.Column>
                         <Grid.Column>
-                            <Header as="h5" style={{ color: "gray", marginBottom: 5 }}>
+                            <Header as="h3" style={{ fontSize: '1rem', color: "gray", marginBottom: 5 }}>
                                 Número de AirBags:
                             </Header>
                             <p
@@ -304,7 +304,7 @@ export default function TableDescription({data}) {
                     </Grid.Row>
                     <Grid.Row columns={2} style={{ paddingTop: 0 }}>
                         <Grid.Column>
-                            <Header as="h5" style={{ color: "gray", marginBottom: 5 }}>
+                            <Header as="h3" style={{ fontSize: '1rem', color: "gray", marginBottom: 5 }}>
                                 Rines:
                             </Header>
                             <p
@@ -318,7 +318,7 @@ export default function TableDescription({data}) {
                             </p>
                         </Grid.Column>
                         <Grid.Column>
-                            <Header as="h5" style={{ color: "gray", marginBottom: 5 }}>
+                            <Header as="h3" style={{ fontSize: '1rem', color: "gray", marginBottom: 5 }}>
                                 Cojinería:
                             </Header>
                             <p
@@ -334,7 +334,7 @@ export default function TableDescription({data}) {
                     </Grid.Row>
                     <Grid.Row columns={2} style={{ paddingTop: 0 }}>
                         <Grid.Column>
-                            <Header as="h5" style={{ color: "gray", marginBottom: 5 }}>
+                            <Header as="h3" style={{ fontSize: '1rem', color: "gray", marginBottom: 5 }}>
                                 Capacidad del baúl:
                             </Header>
                             <p
@@ -348,7 +348,7 @@ export default function TableDescription({data}) {
                             </p>
                         </Grid.Column>
                         <Grid.Column>
-                            <Header as="h5" style={{ color: "gray", marginBottom: 5 }}>
+                            <Header as="h3" style={{ fontSize: '1rem', color: "gray", marginBottom: 5 }}>
                                 Peso:
                             </Header>
                             <p
@@ -365,7 +365,7 @@ export default function TableDescription({data}) {
                     <Grid.Row columns={2} style={{ paddingTop: 0 }}>
                         {data.vehicle.fuel_type &&
                             <Grid.Column>
-                                <Header as="h5" style={{ color: "gray", marginBottom: 5 }}>
+                                <Header as="h3" style={{ fontSize: '1rem', color: "gray", marginBottom: 5 }}>
                                     Tipo de gasolina:
                                 </Header>
                                 <p

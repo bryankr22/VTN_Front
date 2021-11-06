@@ -52,21 +52,21 @@ export default function concesionarios({
   return (
     <PublicLayout>
       <NextSeo
-          title="Concesionarios Bogotá, Medellín, Cali y más"
-          description="Conoce todos los concesionarios de carros o moto Renault, Mazda, Chevrolet, Kia, Ford y más, cercanos a ti en Vende Tu Nave."
-          openGraph={{
-              title: "Concesionarios Bogotá, Medellín, Cali y más",
-              locale: "es_ES",
-              type: "website",
-              description: "Conoce todos los concesionarios de carros o moto Renault, Mazda, Chevrolet, Kia, Ford y más, cercanos a ti en Vende Tu Nave."
-          }}
+        title="Concesionarios Bogotá, Medellín, Cali y más"
+        description="Conoce todos los concesionarios de carros o moto Renault, Mazda, Chevrolet, Kia, Ford y más, cercanos a ti en Vende Tu Nave."
+        openGraph={{
+          title: "Concesionarios Bogotá, Medellín, Cali y más",
+          locale: "es_ES",
+          type: "website",
+          description: "Conoce todos los concesionarios de carros o moto Renault, Mazda, Chevrolet, Kia, Ford y más, cercanos a ti en Vende Tu Nave."
+        }}
       />
       <Head>
-          <meta property="keywords" content="concesionario, concesionario Chevrolet, compra y venta de carros, concesionarios usados, concesionario Renault, venta de carros usados, concesionario Mazda" />
+        <meta property="keywords" content="concesionario, concesionario Chevrolet, compra y venta de carros, concesionarios usados, concesionario Renault, venta de carros usados, concesionario Mazda" />
       </Head>
       <div>
         <Container style={{ paddingTop: 25 }} text>
-          <Header as="h2" style={{ textTransform: "uppercase" }}>
+          <Header as="h1" style={{ textTransform: "uppercase" }}>
             Concesionarios
           </Header>
           <p style={{ textAlign: "justify" }}>
@@ -112,18 +112,18 @@ export default function concesionarios({
                   />
                 </Grid.Column>
                 <Grid.Column>
-                {router.query.tipo !== "USADO" && (
-                  <Select
-                    fluid
-                    search
-                    options={tiposServices}
-                    onChange={(e, { value }) => onChangeFilter("marca", value)}
-                    defaultValue={
-                      router.query.marca
-                        ? router.query.marca
-                        : tiposServices[0].value
-                    }
-                  />)}
+                  {router.query.tipo !== "USADO" && (
+                    <Select
+                      fluid
+                      search
+                      options={tiposServices}
+                      onChange={(e, { value }) => onChangeFilter("marca", value)}
+                      defaultValue={
+                        router.query.marca
+                          ? router.query.marca
+                          : tiposServices[0].value
+                      }
+                    />)}
                 </Grid.Column>
               </Grid.Row>
             </Grid>
@@ -158,19 +158,19 @@ export default function concesionarios({
                   />
                 </Grid.Column>
                 <Grid.Column style={{ marginBottom: 15 }}>
-                {router.query.tipo !== "USADO" && (
-                  <Select
-                    fluid
-                    search
-                    options={tiposServices}
-                    onChange={(e, { value }) => onChangeFilter("marca", value)}
-                    defaultValue={
-                      router.query.marca
-                        ? router.query.marca
-                        : tiposServices[0].value
-                    }
-                  />
-                )}
+                  {router.query.tipo !== "USADO" && (
+                    <Select
+                      fluid
+                      search
+                      options={tiposServices}
+                      onChange={(e, { value }) => onChangeFilter("marca", value)}
+                      defaultValue={
+                        router.query.marca
+                          ? router.query.marca
+                          : tiposServices[0].value
+                      }
+                    />
+                  )}
                 </Grid.Column>
               </Grid.Row>
             </Grid>
@@ -224,16 +224,7 @@ export default function concesionarios({
               </Grid.Row>
             </Grid>
           </Responsive>
-
-          <Responsive {...Responsive.onlyComputer}>
-            <ListaConcesionarios concesionarios_res={data.servicios} />
-          </Responsive>
-          <Responsive {...Responsive.onlyTablet}>
-            <ListaConcesionarios concesionarios_res={data.servicios} />
-          </Responsive>
-          <Responsive {...Responsive.onlyMobile}>
-            <ListaConcesionarios concesionarios_res={data.servicios} />
-          </Responsive>
+          <ListaConcesionarios concesionarios_res={data.servicios} />
         </Container>
       </div>
     </PublicLayout>

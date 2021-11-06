@@ -48,7 +48,7 @@ export default function CardProductsDesk({item}) {
                 loading="lazy"
                 priority={true}
                 src={pathS3 + item.nameImage + "." + item.extension}
-                alt={item.nameImage + "." + item.extension}
+                alt={item.title}
                 style={{
                     marginBottom: 0,
                     height: 150,
@@ -62,7 +62,7 @@ export default function CardProductsDesk({item}) {
                 loading="lazy"
                 priority={true}
                 src={pathS3 + item.nameImage + "." + item.extension}
-                alt={item.nameImage + "." + item.extension}
+                alt={item.title}
                 style={{
                     marginBottom: 0,
                     height: 150,
@@ -76,7 +76,7 @@ export default function CardProductsDesk({item}) {
                 loading="lazy"
                 priority={true}
                 src={ pathS3 + item.nameImage + ".webp" }
-                alt={item.nameImage + ".webp"}
+                alt={item.title}
                 style={{
                     marginBottom: 0,
                     height: 150,

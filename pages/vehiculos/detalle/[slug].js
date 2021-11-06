@@ -26,11 +26,11 @@ import { API_URL } from "../../../helpers/constants";
 const CDN = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x200/"
 const REPLACE = "https://vendetunave.s3.amazonaws.com/"
 
-const getMetaUrl = (str='') => {
+const getMetaUrl = (str = '') => {
   return str.replace(REPLACE, CDN)
 }
 
-const normalize = (function() {
+const normalize = (function () {
   var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
     to = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc",
     mapping = {};
@@ -38,7 +38,7 @@ const normalize = (function() {
   for (var i = 0, j = from.length; i < j; i++)
     mapping[from.charAt(i)] = to.charAt(i);
 
-  return function(str) {
+  return function (str) {
     var ret = [];
     for (var i = 0, j = str.length; i < j; i++) {
       var c = str.charAt(i);
@@ -51,8 +51,6 @@ const normalize = (function() {
 
 export default function detalle({ data }) {
   const { imagenes } = data;
-
-  console.log(imagenes?.[0]?.url);
 
   return (
     <>
@@ -203,7 +201,7 @@ export default function detalle({ data }) {
 
         <Responsive {...Responsive.onlyTablet}>
           <Container style={{ marginTop: 20 }}>
-            <SliderPrincipal imagenes={data.imagenes} />
+            <SliderPrincipal imagenes={data.imagenes} alt={data.vehiculo.title} />
             <SidebarDetalle
               vehicleFav={data.vehicleFav}
               vehiculo={data.vehiculo}
@@ -269,7 +267,7 @@ export default function detalle({ data }) {
         </Responsive>
         <Responsive {...Responsive.onlyMobile}>
           <Container style={{ marginTop: 20 }}>
-            <SliderPrincipal imagenes={data.imagenes} />
+            <SliderPrincipal imagenes={data.imagenes} alt={data.vehiculo.title} />
             <SidebarDetalle
               vehicleFav={data.vehicleFav}
               vehiculo={data.vehiculo}
@@ -406,6 +404,7 @@ export default function detalle({ data }) {
                 seccion="desc"
                 showThumbs
                 data={data.imagenes}
+                alt={data.vehiculo.title}
                 description={""}
               />
               <Header as="h3" style={{ marginTop: 20 }}>

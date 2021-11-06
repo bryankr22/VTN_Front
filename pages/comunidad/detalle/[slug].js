@@ -36,9 +36,9 @@ export default function detalle({ data }) {
                 <Loader>Cargando...</Loader>
             </Dimmer>
             <Container style={{ paddingTop: 25 }} text>
-                <Header as='h1'>COMUNIDAD - Vende Tu Nave</Header>
-                <Header as='h2' style={{ fontSize: '1rem' }}>{data.pregunta.nombre}</Header>
-                <Header as='h3' dividing>{data.pregunta.titulo}</Header>
+                <Header as='h2'>COMUNIDAD - Vende Tu Nave</Header>
+                <Header as='h3' style={{ fontSize: '1rem' }}>{data.pregunta.nombre}</Header>
+                <Header as='h1' dividing>{data.pregunta.titulo}</Header>
 
                 <p>
                     {data.pregunta.descripcion}

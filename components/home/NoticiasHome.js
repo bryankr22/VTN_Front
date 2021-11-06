@@ -28,7 +28,7 @@ const NoticiasHome = ({noticias}) => {
                             {noticias.map((item, index) => (
                                 <Grid.Column key={index}>
                                     <Header
-                                        as="h4"
+                                        as="h3"
                                         textAlign="left"
                                         style={{ fontSize: "1.2rem" }}
                                     >
@@ -74,7 +74,7 @@ const NoticiasHome = ({noticias}) => {
                             <Grid.Row key={index}>
                                 <Grid.Column>
                                     <Header
-                                        as="h4"
+                                        as="h3"
                                         textAlign="left"
                                         style={{ fontSize: "1.2rem" }}
                                     >
@@ -118,7 +118,7 @@ const NoticiasHome = ({noticias}) => {
                             <Grid.Row key={index}>
                                 <Grid.Column>
                                     <Header
-                                        as="h4"
+                                        as="h3"
                                         textAlign="left"
                                         style={{ fontSize: "1.2rem" }}
                                     >

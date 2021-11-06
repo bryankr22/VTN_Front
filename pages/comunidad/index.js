@@ -170,8 +170,8 @@ export default function index({ q, page, preguntas, tags, total_records }) {
                                     color: '#2185d0'
                                 }}
                                 className="ui tiny image">
-                                <Header as='h3' style={{ color: '#2185d0', fontSize: '2rem' }}>
-                                    {item.repuestas}
+                                <Header as='h2' style={{ color: '#2185d0', fontSize: '2rem' }}>
+                                    {item.repuestas}{' '}
                                     <span className="d-block" style={{ fontSize: '1rem' }}>Respuestas</span>
                                 </Header>
                             </div>
