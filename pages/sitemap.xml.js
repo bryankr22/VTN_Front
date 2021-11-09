@@ -37,7 +37,6 @@ export const getServerSideProps = async ({ res }) => {
         `/login`,
         `/servicios`,
         `/terminos-y-condiciones`,
-        `/api/hello`,
         `/restablecer`,
         `/usuario/crear_producto`,
         `/usuario/favoritos`,
@@ -46,7 +45,8 @@ export const getServerSideProps = async ({ res }) => {
         `/usuario/perfil`,
         `/vehiculos`,
         `/ficha-tecnica`,
-        `/comunidad`
+        `/comunidad`,
+        `/documents`
     ];
 
     const dynamicPages = [];
