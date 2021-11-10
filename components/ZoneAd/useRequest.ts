@@ -41,9 +41,8 @@ export const reportClick = (id) => {
 
 export const useRequestInfo = (slug: AdSlug) => {
   const state = useAsync(async () => {
-    if (!slug) return {} as AxiosResponse<Response>;
     const result = await axios.get<Response>(
-      URL_GET.replace(SlugReplace.GET, slug)
+      URL_GET.replace(SlugReplace.GET, slug || "otro")
     );
     return result;
   }, [slug]);
