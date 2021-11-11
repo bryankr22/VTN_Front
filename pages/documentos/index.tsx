@@ -1,5 +1,13 @@
-import { useEffect } from 'react'
-import { Button, Container, Link, Row, Spacer, Text, Modal } from "@nextui-org/react";
+import { useEffect } from "react";
+import {
+  Button,
+  Container,
+  Link,
+  Row,
+  Spacer,
+  Text,
+  Modal,
+} from "@nextui-org/react";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { GeneralData, RequestForm } from "../../components/Documents";
@@ -22,7 +30,9 @@ export default function Documents({ data }: any) {
 
   const downLoadEmptyFile = () => {
     if (navigator.userAgent.includes("Instagram")) {
-      window.location.replace(`https://api.vendetunave.co/api/in-app-browser/FUNT`);
+      window.location.replace(
+        `https://api.vendetunave.co/api/in-app-browser/FUNT`
+      );
       return;
     }
     axios
@@ -53,7 +63,7 @@ export default function Documents({ data }: any) {
 
   useEffect(() => {
     if (navigator.userAgent.includes("Instagram")) setVisible(true);
-  }, [])
+  }, []);
 
   return (
     <>
@@ -87,7 +97,9 @@ export default function Documents({ data }: any) {
             </Text>
           </Modal.Header>
           <Modal.Body>
-            Desde el navegador de instagram no podrás descargar documentos. Si necesitas descargarlos te invitamos a usar Safari o Chrome para hacerlo.
+            Desde el navegador de instagram no podrás descargar documentos. Si
+            necesitas descargarlos te invitamos a usar Safari o Chrome para
+            hacerlo.
           </Modal.Body>
           <Modal.Footer>
             <Button auto flat color="error" onClick={closeHandler}>
@@ -265,7 +277,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const { response } = err as any;
     if (response.status === 401) {
       context.res.writeHead(301, {
-        Location: "/401?path=/documents",
+        Location: "/401?path=/documentos",
       });
       context.res.end();
     }
