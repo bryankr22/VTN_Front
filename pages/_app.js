@@ -2,6 +2,8 @@
 import "../public/css/app.min.css";
 import "../styles/globals.css";
 import '../styles/normalize.css'
+import "./../components/ExpCarousel/dist/index.css";
+
 
 import { Provider as ProviderRedux } from "react-redux";
 import store from "../store";
