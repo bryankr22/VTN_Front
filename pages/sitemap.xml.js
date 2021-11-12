@@ -46,7 +46,7 @@ export const getServerSideProps = async ({ res }) => {
         `/vehiculos`,
         `/ficha-tecnica`,
         `/comunidad`,
-        `/documents`
+        `/documentos`
     ];
 
     const dynamicPages = [];
