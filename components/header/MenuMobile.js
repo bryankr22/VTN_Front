@@ -134,7 +134,7 @@ export default function MenuMobile() {
                         <div className="item" href="#" style={{ padding: 11 }}>
                             <span>
                                 <Link
-                                    href="/documents"
+                                    href="/documentos"
                                     style={{ textDecoration: "none" }}
                                 ><a style={{ color: '#fff', fontSize: '1rem', fontWeight: 400, letterSpacing: 2 }}>Documentos <span className="new-tag">Nuevo</span></a></Link>
                             </span>

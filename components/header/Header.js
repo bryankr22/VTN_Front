@@ -407,7 +407,7 @@ const Header = () => {
                   <div className="item" href="#" style={{ padding: 11 }}>
                     <span>
                       <Link
-                        href="/documents"
+                        href="/documentos"
                         style={{ textDecoration: "none" }}
                       >
                         <a
