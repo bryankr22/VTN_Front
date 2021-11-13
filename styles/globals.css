@@ -496,3 +496,15 @@ h5 {
   flex-direction: column;
   justify-content: space-between;
 }
+
+.white {
+  color: #fff !important;
+}
+
+.white-hvr:hover {
+  color: #fff !important;
+}
+
+.ic-big {
+  font-size: 3em !important;
+}

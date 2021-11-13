@@ -20,8 +20,14 @@ export default function VehicleCarousel({ images = [], alt, mobile }: Props) {
         objectFit={"contain"}
         style={{ height: mobile ? 400 : 500 }}
         shouldMaximizeOnClick
+        leftIcon={<i className="angle left icon ic-big white"></i>}
+        rightIcon={<i className="angle right icon ic-big white"></i>}
+        minIcon={<i className="close icon ic-big white mt-1"></i>}
+        hasIndexBoardAtMax
+        hasIndexBoard={false}
+        maxIcon={null}
+        playIcon={null}
       />
-      ;
     </div>
   );
 }
