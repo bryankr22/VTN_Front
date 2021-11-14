@@ -21,7 +21,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
     max_km: 0,
   });
 
-  const [rangeYear, setRangeYear] = useState({ min: 0, max: 0 });
+  const [rangeYear, setRangeYear] = useState({ min: 0, max: new Date().getFullYear() });
 
   const setYear = ({ min, max }) => {
     if (min) {
@@ -34,10 +34,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
 
   const submitYear = () => {
     const { min, max } = rangeYear;
-    console.log(min, max);
-    if (min && max) {
-      insertParam("anio", `${min}:${max}`);
-    }
+    insertParam("anio", `${min || 0}:${max || new Date().getFullYear() + 1}`);
   }
 
   const title_page = (slug) => {
@@ -447,12 +444,13 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
             </List.Content>
           </List.Item>
         </List>
-        <Grid id="grid-range-year" style={{ marginTop: 4 }}>
+        <Grid id="grid-range-km" style={{ marginTop: 4 }}>
           <Grid.Column width={6}>
             <Input
               type="number"
               fluid
               placeholder="Mínimo"
+              defaultValue={0}
               onChange={(e, { value }) => setYear({ min: value })}
             />
           </Grid.Column>
@@ -467,6 +465,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
               type="number"
               fluid
               placeholder="Máximo"
+              defaultValue={new Date().getFullYear()}
               max={new Date().getFullYear() + 1}
               onChange={(e, { value }) => setYear({ max: value })}
             />
