@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import PublicLayout from "../../../layouts/PublicLayout";
 import SliderPrincipal from "../../../components/vehiculo/SliderPrincipal";
@@ -17,6 +17,7 @@ import {
   Grid,
   Header,
   Container,
+  Input,
 } from "semantic-ui-react";
 
 import Head from "next/head";
@@ -51,6 +52,13 @@ const normalize = (function () {
 
 export default function detalle({ data }) {
   const { imagenes } = data;
+  const router = useRouter();
+  const [query, setQuery] = useState();
+  const handleKeyDown = (e) => {
+    if ((!e || e.keyCode === 13) && query) {
+      router.push("/vehiculos?q=" + query);
+    }
+  };
 
   return (
     <>
@@ -140,6 +148,28 @@ export default function detalle({ data }) {
             `}
         </style>
 
+        <Responsive maxWidth={768}>
+          <Input
+            action={{
+              icon: "search",
+              style: {
+                background: "transparent",
+                color: "black",
+                borderBottom: "1px solid black",
+                height: 47,
+                paddingTop: 10,
+              },
+              onClick: () => handleKeyDown(),
+            }}
+            onChange={(e, { value }) => setQuery(value)}
+            onKeyDown={(e) => handleKeyDown(e)}
+            fluid
+            id="search-responsive"
+            style={{ margin: "10px 20px 0 20px" }}
+            className="search-input"
+            placeholder="¿Qué estas buscando?"
+          />
+        </Responsive>
         <div
           style={{
             margin: 10,
