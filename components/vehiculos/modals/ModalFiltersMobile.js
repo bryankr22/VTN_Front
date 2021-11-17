@@ -347,7 +347,8 @@ export default function ModalFiltersMobile({
                           </List.Item>
                         </List>
                         {item.slug === "precio" ||
-                          item.slug === "kilometraje" ? (
+                          item.slug === "kilometraje" ||
+                          item.slug === "ano" ? (
                           <Grid
                             id="grid-range-price"
                             style={{ marginBottom: 8 }}
@@ -388,7 +389,7 @@ export default function ModalFiltersMobile({
                               <Button
                                 onClick={() =>
                                   insertParam(
-                                    item.slug,
+                                    item.slug === "ano" ? "anio" : item.slug,
                                     item.minimo + ":" + item.maximo
                                   )
                                 }
