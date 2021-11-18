@@ -154,8 +154,7 @@ export default function detalle({ data }) {
               background: "transparent",
               padding: 15,
               position: "absolute",
-              zIndex: 1000,
-              width: "100%",
+              zIndex: 1000
             }}
           >
             <Breadcrumb.Section link href={"/vehiculos/"}>
@@ -202,8 +201,7 @@ export default function detalle({ data }) {
 
         <Responsive {...Responsive.onlyTablet}>
           <Container style={{ marginTop: 20 }}>
-            <VehicleCarousel images={data.imagenes} alt={data.vehiculo.title} />
-
+            <VehicleCarousel images={data.imagenes} alt={data.vehiculo.title} mobile />
             <SidebarDetalle
               vehicleFav={data.vehicleFav}
               vehiculo={data.vehiculo}
