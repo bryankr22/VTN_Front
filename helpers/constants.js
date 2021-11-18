@@ -61,4 +61,3 @@ export const KM_FILTER = [
   { label: "De 100.000 a 150.000", slug: "100000:150000" },
   { label: "Más de $150.000", slug: "150000:0" },
 ];
-

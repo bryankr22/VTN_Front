@@ -11,7 +11,7 @@ import {
 import ActiveTagsVehiculos from "./ActiveTagsVehiculos";
 import ModalFiltersDesk from "./modals/ModalFiltersDesk";
 import * as R from "ramda";
-import { groupByAlphabet, groupByDecade } from "../../helpers/dataStructure";
+import { extractMaxYearRange, extractMinYearRange, groupByAlphabet, groupByDecade } from "../../helpers/dataStructure";
 import { KM_FILTER, PRICES_FILTER } from "../../helpers/constants";
 export default function SidebarVehiculos({ params, contadores, vehiculos }) {
   const [filters, setFilters] = useState({
@@ -21,7 +21,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
     max_km: 0,
   });
 
-  const [rangeYear, setRangeYear] = useState({ min: 0, max: new Date().getFullYear() });
+  const [rangeYear, setRangeYear] = useState(() => ({ min: extractMinYearRange(params.anio), max: extractMaxYearRange(params.anio) }));
 
   const setYear = ({ min, max }) => {
     if (min) {
@@ -450,7 +450,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
               type="number"
               fluid
               placeholder="Mínimo"
-              defaultValue={0}
+              defaultValue={extractMinYearRange(params.anio)}
               onChange={(e, { value }) => setYear({ min: value })}
             />
           </Grid.Column>
@@ -465,7 +465,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
               type="number"
               fluid
               placeholder="Máximo"
-              defaultValue={new Date().getFullYear()}
+              defaultValue={extractMaxYearRange(params.anio)}
               max={new Date().getFullYear() + 1}
               onChange={(e, { value }) => setYear({ max: value })}
             />
