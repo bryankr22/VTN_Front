@@ -444,7 +444,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos }) {
             </List.Content>
           </List.Item>
         </List>
-        <Grid id="grid-range-km" style={{ marginTop: 4 }}>
+        <Grid id="grid-range-km" style={{ marginTop: 4, marginBottom: 5 }}>
           <Grid.Column width={6}>
             <Input
               type="number"
