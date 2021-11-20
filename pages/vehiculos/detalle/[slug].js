@@ -6,6 +6,7 @@ import SidebarDetalle from "../../../components/vehiculo/SidebarDetalle";
 import SidebarDetalleDesk from "../../../components/vehiculo/SidebarDetalleDesk";
 import TableCaracteristicasDesk from "../../../components/vehiculo/TableCaracteristicasDesk";
 import CarruselHome from "../../../components/carrusel/CarruselHome";
+import VehicleCarousel from '../../../components/VehicleCarousel'
 import CarruselRelacionados from "../../../components/carrusel/CarruselRelacionados";
 import { validateAuth } from "../../../helpers/auth";
 import jwt from "jsonwebtoken";
@@ -176,6 +177,7 @@ export default function detalle({ data }) {
             padding: "15px 15px 5px 15px",
             display: "flex",
             alignItems: "center",
+            justifyContent: "space-between",
           }}
         >
           <Breadcrumb
@@ -184,7 +186,6 @@ export default function detalle({ data }) {
               padding: 15,
               position: "absolute",
               zIndex: 1000,
-              width: "100%",
             }}
           >
             <Breadcrumb.Section link href={"/vehiculos/"}>
@@ -207,31 +208,30 @@ export default function detalle({ data }) {
             <Breadcrumb.Section link href={"/vehiculos/"}>
               {data.vehiculo.modeloLabel}
             </Breadcrumb.Section>
-            <Responsive
-              {...Responsive.onlyComputer}
-              style={{ display: "inline", marginLeft: "auto" }}
-            >
-              <div
-                style={{
-                  display: "inline-block",
-                  cssFloat: "right",
-                  marginRight: 40,
-                  fontSize: 18,
-                  color: "#5c5c5c",
-                }}
-              >
-                <Icon name="eye" style={{ marginRight: 5 }} />
-                <p style={{ display: "inline" }}>
-                  {new Intl.NumberFormat("de-DE").format(data.vehiculo.views)}
-                </p>
-              </div>
-            </Responsive>
           </Breadcrumb>
+          <Responsive
+            {...Responsive.onlyComputer}
+            style={{ display: "inline", marginLeft: "auto" }}
+          >
+            <div
+              style={{
+                display: "inline-block",
+                cssFloat: "right",
+                fontSize: 18,
+                color: "#5c5c5c"
+              }}
+            >
+              <Icon name="eye" style={{ marginRight: 5 }} />
+              <p style={{ display: "inline" }}>
+                {new Intl.NumberFormat("de-DE").format(data.vehiculo.views)}
+              </p>
+            </div>
+          </Responsive>
         </div>
 
-        <Responsive {...Responsive.onlyTablet}>
+        <Responsive maxWidth={1023}>
           <Container style={{ marginTop: 20 }}>
-            <SliderPrincipal imagenes={data.imagenes} alt={data.vehiculo.title} />
+            <VehicleCarousel images={data.imagenes} alt={data.vehiculo.title} mobile />
             <SidebarDetalle
               vehicleFav={data.vehicleFav}
               vehiculo={data.vehiculo}
@@ -295,9 +295,9 @@ export default function detalle({ data }) {
             )}
           </Container>
         </Responsive>
-        <Responsive {...Responsive.onlyMobile}>
+        {/* <Responsive {...Responsive.onlyMobile}>
           <Container style={{ marginTop: 20 }}>
-            <SliderPrincipal imagenes={data.imagenes} alt={data.vehiculo.title} />
+            <VehicleCarousel images={data.imagenes} alt={data.vehiculo.title} mobile />
             <SidebarDetalle
               vehicleFav={data.vehicleFav}
               vehiculo={data.vehiculo}
@@ -360,10 +360,10 @@ export default function detalle({ data }) {
               </Container>
             )}
           </Container>
-        </Responsive>
-        <Responsive maxWidth={319}>
+        </Responsive> */}
+        {/* <Responsive maxWidth={319}>
           <Container style={{ marginTop: 20 }}>
-            <SliderPrincipal imagenes={data.imagenes} />
+            <VehicleCarousel images={data.imagenes} alt={data.vehiculo.title} mobile/>
             <SidebarDetalle
               vehicleFav={data.vehicleFav}
               vehiculo={data.vehiculo}
@@ -426,17 +426,11 @@ export default function detalle({ data }) {
               </Container>
             )}
           </Container>
-        </Responsive>
+        </Responsive> */}
         <Responsive {...Responsive.onlyComputer}>
           <Grid columns="equal">
             <Grid.Column width={10} style={{ padding: "30px 10px 15px 30px" }}>
-              <CarruselHome
-                seccion="desc"
-                showThumbs
-                data={data.imagenes}
-                alt={data.vehiculo.title}
-                description={""}
-              />
+              <VehicleCarousel images={data.imagenes} alt={data.vehiculo.title} />
               <Header as="h3" style={{ marginTop: 20 }}>
                 CARACTERÍSTICAS
               </Header>
