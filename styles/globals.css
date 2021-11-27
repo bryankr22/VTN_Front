@@ -522,3 +522,7 @@ h5 {
   background-color: transparent !important;
   color: rgba(0, 0, 0, 0.2) !important;
 }
+
+.bg-black {
+  background-color: #000 !important;
+}
