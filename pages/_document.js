@@ -16,6 +16,8 @@ class MyDocument extends Document {
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+          <link rel="preload" href="https://fonts.googleapis.com/css?family=Raleway:100,600&display=swap" as="style" />
+          <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" as="style" />
           <link
             media="screen"
             href="https://fonts.googleapis.com/css?family=Raleway:100,600&display=swap"
@@ -56,14 +58,14 @@ class MyDocument extends Document {
             defer
             src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
           ></script>
-          <script
+          {/* <script
             defer
             src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"
           ></script>
           <script
             defer
             src="https://cdn.jsdelivr.net/npm/ez-plus-extended@1.0.2/src/jquery.ez-plus.min.js"
-          ></script>
+          ></script> */}
           {process?.env?.NODE_ENV != "development" && (
             <>
               <script
@@ -71,6 +73,7 @@ class MyDocument extends Document {
                 src="https://www.googletagmanager.com/gtag/js?id=UA-158787289-1"
               ></script>
               <script
+                defer
                 dangerouslySetInnerHTML={{
                   __html: `
                             window.dataLayer = window.dataLayer || [];

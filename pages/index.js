@@ -1,14 +1,13 @@
 import Head from "next/head";
 
-import loadable from "@loadable/component";
 import PublicLayout from "../layouts/PublicLayout";
 import NoticiasHome from "../components/home/NoticiasHome";
 import MarcasHome from "../components/home/MarcasHome";
 import CategoriasHome from "../components/home/CategoriasHome";
 import FiltersHome from "../components/home/FiltersHome";
 import DestacadosHome from "../components/home/DestacadosHome";
-const SliderHome = loadable(() => import("../components/home/SliderHome"));
-const ContentHome = loadable(() => import("../components/home/ContentHome"));
+import SliderHome from "../components/home/SliderHome"
+import ContentHome from "../components/home/ContentHome";
 
 import axios from "axios";
 import { API_URL, home } from "../helpers/constants";
@@ -24,21 +23,21 @@ const Home = ({
   config,
 }) => {
   return (
-      <PublicLayout>
-        <Head>
-          <meta
-            property="keywords"
-            content="vende tu nave, carros en venta, carros de segunda, mercado libre carros, venta de carros usados y nuevos, compra y venta de carros, compra y venta motos, venta de carros"
-          />
-        </Head>
-        <SliderHome slider={slider} sliderMobile={sliderMobile} />
-        <FiltersHome options={filters} />
-        <CategoriasHome categorias={categorias} />
-        <MarcasHome marcas={marcas} />
-        <DestacadosHome vehiculos={vehiculos} />
-        <NoticiasHome noticias={noticias} />
-        <ContentHome config={config} />
-      </PublicLayout>
+    <PublicLayout>
+      <Head>
+        <meta
+          property="keywords"
+          content="vende tu nave, carros en venta, carros de segunda, mercado libre carros, venta de carros usados y nuevos, compra y venta de carros, compra y venta motos, venta de carros"
+        />
+      </Head>
+      <SliderHome slider={slider} sliderMobile={sliderMobile} />
+      <FiltersHome options={filters} />
+      <CategoriasHome categorias={categorias} />
+      <MarcasHome marcas={marcas} />
+      <DestacadosHome vehiculos={vehiculos} />
+      <NoticiasHome noticias={noticias} />
+      <ContentHome config={config} />
+    </PublicLayout>
   );
 };
 
