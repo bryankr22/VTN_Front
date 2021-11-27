@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Dimmer, Loader, Grid, Segment } from "semantic-ui-react";
+import React, { useState } from "react";
+import { Dimmer, Loader, Segment } from "semantic-ui-react";
 import "react-dropzone-uploader/dist/styles.css";
 import Dropzone from "react-dropzone-uploader";
 import Resizer from "react-image-file-resizer";
@@ -15,7 +15,6 @@ export default function ImageUpload({
 }) {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const [file, setFile] = useState();
   const getUploadParams = ({ file, meta }) => {
     setLoading(true);
     let orientation = 0;
