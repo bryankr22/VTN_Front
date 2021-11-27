@@ -1,6 +1,6 @@
-import { Container, Header, Table, Button, Image, Responsive, Dimmer, Loader, Tab } from 'semantic-ui-react'
-import VehiculoContainer from './form_vehiculo/VehiculoContainer';
-import AccesorioContainer from './form_accesorios/AccesorioContainer';
+import { Header, Tab } from 'semantic-ui-react'
+import VehiculoContainer from './form_vehiculo/VehiculoContainer'
+
 export const panes = (data) => {
     return [
         {

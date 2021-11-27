@@ -142,6 +142,7 @@ export default function ListadoVehiculos({
         </Grid>
       </Container>
       <HeaderVehiculo />
+      <ZoneAd slug={params.categoria} />
       {vehiculos.length === 0 && (
         <p
           style={{
@@ -153,9 +154,6 @@ export default function ListadoVehiculos({
           No encontramos resultados
         </p>
       )}
-
-      <ZoneAd slug={params.categoria} />
-
       {vehiculos.length > 0 && (
         <Card.Group itemsPerRow={4}>
           {vehiculos.map((item, index) => (
@@ -208,7 +206,7 @@ export default function ListadoVehiculos({
                     {new Intl.NumberFormat("de-DE").format(item.kilometraje)} KM
                   </h4>
                 </Card.Description>
-                <Card.Description as="h4" style={{fontSize: '12px'}}>
+                <Card.Description as="h4" style={{ fontSize: '12px' }}>
                   {item.labelCiudad.toLowerCase().charAt(0).toUpperCase() +
                     item.labelCiudad.toLowerCase().slice(1)}
                   {compare === 1 &&

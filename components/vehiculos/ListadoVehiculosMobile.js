@@ -67,11 +67,13 @@ export default function ListadoVehiculosMobile({ params, vehiculos, page, totalR
         }
         return;
     }
+
     useEffect(() => {
         if(compareList.length <= 0 && isComparing == '0') {
             setCompare('0')
         }
     }, [compareList])
+
     return (
         <>
             <HeaderVehiculo />
@@ -106,6 +108,7 @@ export default function ListadoVehiculosMobile({ params, vehiculos, page, totalR
                         }}
                     >
                         <Image
+                            alt={item.title}
                             src={pathS3 + item.nameImage + "300x300.webp"}
                             wrapped
                             ui={false}

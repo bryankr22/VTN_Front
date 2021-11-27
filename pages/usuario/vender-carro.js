@@ -1,4 +1,3 @@
-import React from 'react';
 import Head from "next/head";
 import { NextSeo } from "next-seo";
 import PublicLayout from '../../layouts/PublicLayout';
@@ -7,7 +6,6 @@ import { validateAuth } from '../../helpers/auth';
 import { panes } from '../../components/usuario/productoTabs';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
-import { API_URL } from '../../helpers/constants';
 
 export default function crear_producto({ data }) {
     return (
@@ -52,8 +50,8 @@ export async function getServerSideProps(context) {
     try {
         const res = await axios.get('https://api.vendetunave.co/auth/form_producto', config);
         data = res.data;
-    } catch({response}) {
-        if(response.status === 401) {
+    } catch ({ response }) {
+        if (response.status === 401) {
             context.res.writeHead(301, {
                 Location: '/401'
             });
@@ -131,7 +129,7 @@ export async function getServerSideProps(context) {
     });
     return {
         props: {
-            data : {
+            data: {
                 categories: optionsCategories,
                 combustibles: optionsCombustibles,
                 colores: optionsColores,
