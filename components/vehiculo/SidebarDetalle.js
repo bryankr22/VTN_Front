@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import { Grid, Header, Icon, Container, Form, Button, Modal, Dimmer, Loader } from "semantic-ui-react";
+import { useState } from 'react'
+import { Grid, Header, Icon, Container, Button, Dimmer, Loader } from "semantic-ui-react";
 import { useCookies } from "react-cookie"
 import { useSelector, useDispatch } from 'react-redux';
 import { addVehiculo } from '../../store/comparadorSlice';
@@ -13,8 +13,7 @@ import { useRouter } from 'next/router'
 export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
     const dispatch = useDispatch()
     const router = useRouter()
-    const [cookies, setCookie] = useCookies(['vtn_token']);
-    const vehiculoFav = [];
+    const [cookies] = useCookies(['vtn_token']);
     const compareList = useSelector(({ comparador }) => comparador.vehiculos);
     const [modalContacto, setModalContacto] = useState(false);
     const isOnStorage = (item) => {
@@ -22,9 +21,9 @@ export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
     }
     const addComparar = (item) => {
         //console.log(">>>>>", item);
-        if(compareList.length < 3){
+        if (compareList.length < 3) {
             dispatch(addVehiculo(item))
-        }else{
+        } else {
             //setCompare('0');
         }
         window.location.href = '/vehiculos';
@@ -133,9 +132,9 @@ export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
                     style={{ marginTop: 8, marginBottom: 30 }}
                 >
                     <Icon
-                    id={"icon-fav-" + vehiculo.id}
-                    name={ vehicleFav.length > 0 ? "heart" : "heart outline" }
-                    color="blue"
+                        id={"icon-fav-" + vehiculo.id}
+                        name={vehicleFav.length > 0 ? "heart" : "heart outline"}
+                        color="blue"
                     />
                     Agregar a favoritos
                 </Header>
@@ -155,10 +154,10 @@ export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
                             >
                                 Contactar al vendedor
                             </Button>
-                            <ModalContacto 
-                            showModal={modalContacto}
-                            onClose={() => setModalContacto(!modalContacto)}
-                            id={id}
+                            <ModalContacto
+                                showModal={modalContacto}
+                                onClose={() => setModalContacto(!modalContacto)}
+                                id={id}
                             />
                         </Grid.Column>
                         <Grid.Column>
@@ -186,12 +185,12 @@ export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
                     WhatsApp
                 </Button>
                 <br />
-                { compareList.length < 3 && !isOnStorage(vehiculo) &&
+                {compareList.length < 3 && !isOnStorage(vehiculo) &&
                     <Button
-                    onClick={() => addComparar(vehiculo)}
-                    fluid  
-                    primary 
-                    style={{ borderRadius: 20 }}>Comparar</Button> 
+                        onClick={() => addComparar(vehiculo)}
+                        fluid
+                        primary
+                        style={{ borderRadius: 20 }}>Comparar</Button>
                 }
             </Container>
         </Container>

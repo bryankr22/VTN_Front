@@ -195,6 +195,24 @@ export default function TableCaracteristicasDesk({ vehiculo }) {
                     </p>
                 </Grid.Column>
             </Grid.Row>
+            <Grid.Row columns={2} style={{ paddingTop: 0 }}>
+                <Grid.Column>
+                    <Header as="h3" style={{ color: "gray", marginBottom: 5 }}>
+                        Peritaje:
+                    </Header>
+                    <p
+                        style={{
+                            display: "inline-block",
+                            fontWeight: 700,
+                            fontSize: 14,
+                        }}
+                    >
+                        <a href={vehiculo.peritaje == '0' ? undefined : vehiculo.peritaje} target="_blank" rel="noreferrer">
+                            {vehiculo.peritaje == '0' ? 'No' : 'Si'}
+                        </a>
+                    </p>
+                </Grid.Column>
+            </Grid.Row>
         </Grid>
     )
 }

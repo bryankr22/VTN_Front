@@ -1,0 +1,30 @@
+.container {
+  position: relative;
+  color: var(--white);
+}
+
+.container * {
+  cursor: pointer;
+}
+
+.container > label {
+  appearance: button;
+  background-color: #007aff;
+  padding: 5px 30px;
+  border-radius: 4px;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.container.disabled > label {
+  background-color: #ccc;
+  pointer-events: none;
+}
+
+.input {
+  display: none;
+}
+
+.text {
+  font-size: 1rem;
+}
