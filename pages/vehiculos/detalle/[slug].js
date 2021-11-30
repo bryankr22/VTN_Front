@@ -1,11 +1,9 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { useRouter } from "next/router";
 import PublicLayout from "../../../layouts/PublicLayout";
-import SliderPrincipal from "../../../components/vehiculo/SliderPrincipal";
 import SidebarDetalle from "../../../components/vehiculo/SidebarDetalle";
 import SidebarDetalleDesk from "../../../components/vehiculo/SidebarDetalleDesk";
 import TableCaracteristicasDesk from "../../../components/vehiculo/TableCaracteristicasDesk";
-import CarruselHome from "../../../components/carrusel/CarruselHome";
 import VehicleCarousel from '../../../components/VehicleCarousel'
 import CarruselRelacionados from "../../../components/carrusel/CarruselRelacionados";
 import { validateAuth } from "../../../helpers/auth";
@@ -53,6 +51,8 @@ const normalize = (function () {
 
 export default function detalle({ data }) {
   const { imagenes } = data;
+
+  console.log(data)
   const router = useRouter();
   const [query, setQuery] = useState();
   const handleKeyDown = (e) => {
@@ -228,7 +228,6 @@ export default function detalle({ data }) {
             </div>
           </Responsive>
         </div>
-
         <Responsive maxWidth={1023}>
           <Container style={{ marginTop: 20 }}>
             <VehicleCarousel images={data.imagenes} alt={data.vehiculo.title} mobile />
@@ -295,138 +294,6 @@ export default function detalle({ data }) {
             )}
           </Container>
         </Responsive>
-        {/* <Responsive {...Responsive.onlyMobile}>
-          <Container style={{ marginTop: 20 }}>
-            <VehicleCarousel images={data.imagenes} alt={data.vehiculo.title} mobile />
-            <SidebarDetalle
-              vehicleFav={data.vehicleFav}
-              vehiculo={data.vehiculo}
-              id={normalize(data.vehiculo.title) + '-' + data.vehiculo.id}
-            />
-            <Grid columns={1} divided="vertically">
-              <Grid.Row style={{ marginTop: 30 }}>
-                <div className="p-3">
-                  <Grid>
-                    <Grid.Row columns={2} style={{ paddingBottom: 8 }}>
-                      <Grid.Column>
-                        <Header as="h5">
-                          Publicado hace:
-                          {" " + data.diasPublicado} días
-                        </Header>
-                      </Grid.Column>
-                      <Grid.Column>
-                        <Header as="h5">
-                          {" " + data.vehiculo.ciudadLabel},
-                          {" " + data.vehiculo.departamentoLabel}
-                        </Header>
-                      </Grid.Column>
-                    </Grid.Row>
-                    <Grid.Row columns={2} style={{ paddingBottom: 8 }}>
-                      <Grid.Column>
-                        <Header as="h5">
-                          Teléfono:
-                          {" " + data.vehiculo.contacto}
-                        </Header>
-                      </Grid.Column>
-                    </Grid.Row>
-                  </Grid>
-                </div>
-              </Grid.Row>
-              <Grid.Row className="p-3">
-                <Header as="h5" style={{ marginTop: 20 }}>
-                  CARACTERÍSTICAS
-                </Header>
-                <TableCaracteristicasDesk vehiculo={data.vehiculo} />
-              </Grid.Row>
-              <Grid.Row>
-                <div className="p-3">
-                  <Header as="h5" icon>
-                    DESCRIPCIÓN
-                  </Header>
-                  <p style={{ fontSize: 14 }}>{data.vehiculo.descripcion}</p>
-                </div>
-              </Grid.Row>
-            </Grid>
-            {data.vehiculosRelacionados.length > 0 && (
-              <Container fluid id="cont-inf">
-                <Header as="h4" style={{ marginTop: 20, marginLeft: 15 }}>
-                  PRODUCTOS RELACIONADOS
-                </Header>
-                <CarruselRelacionados
-                  type="products"
-                  data={data.vehiculosRelacionados}
-                  numberCards={1}
-                />
-              </Container>
-            )}
-          </Container>
-        </Responsive> */}
-        {/* <Responsive maxWidth={319}>
-          <Container style={{ marginTop: 20 }}>
-            <VehicleCarousel images={data.imagenes} alt={data.vehiculo.title} mobile/>
-            <SidebarDetalle
-              vehicleFav={data.vehicleFav}
-              vehiculo={data.vehiculo}
-              id={normalize(data.vehiculo.title) + '-' + data.vehiculo.id}
-            />
-            <Grid columns={1} divided="vertically">
-              <Grid.Row style={{ marginTop: 30 }}>
-                <div className="p-3">
-                  <Grid>
-                    <Grid.Row columns={2} style={{ paddingBottom: 8 }}>
-                      <Grid.Column>
-                        <Header as="h5">
-                          Publicado hace:
-                          {" " + data.diasPublicado} días
-                        </Header>
-                      </Grid.Column>
-                      <Grid.Column>
-                        <Header as="h5">
-                          {" " + data.vehiculo.ciudadLabel},
-                          {" " + data.vehiculo.departamentoLabel}
-                        </Header>
-                      </Grid.Column>
-                    </Grid.Row>
-                    <Grid.Row columns={2} style={{ paddingBottom: 8 }}>
-                      <Grid.Column>
-                        <Header as="h5">
-                          Teléfono:
-                          {" " + data.vehiculo.contacto}
-                        </Header>
-                      </Grid.Column>
-                    </Grid.Row>
-                  </Grid>
-                </div>
-              </Grid.Row>
-              <Grid.Row className="p-3">
-                <Header as="h3" style={{ marginTop: 20 }}>
-                  CARACTERÍSTICAS
-                </Header>
-                <TableCaracteristicasDesk vehiculo={data.vehiculo} />
-              </Grid.Row>
-              <Grid.Row>
-                <div className="p-3">
-                  <Header as="h3" icon>
-                    DESCRIPCIÓN
-                  </Header>
-                  <p style={{ fontSize: 14 }}>{data.vehiculo.descripcion}</p>
-                </div>
-              </Grid.Row>
-            </Grid>
-            {data.vehiculosRelacionados.length > 0 && (
-              <Container fluid id="cont-inf">
-                <Header as="h4" style={{ marginTop: 20, marginLeft: 15 }}>
-                  PRODUCTOS RELACIONADOS
-                </Header>
-                <CarruselRelacionados
-                  type="products"
-                  data={data.vehiculosRelacionados}
-                  numberCards={1}
-                />
-              </Container>
-            )}
-          </Container>
-        </Responsive> */}
         <Responsive {...Responsive.onlyComputer}>
           <Grid columns="equal">
             <Grid.Column width={10} style={{ padding: "30px 10px 15px 30px" }}>
