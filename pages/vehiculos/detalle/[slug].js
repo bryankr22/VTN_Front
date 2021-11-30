@@ -52,7 +52,6 @@ const normalize = (function () {
 export default function detalle({ data }) {
   const { imagenes } = data;
 
-  console.log(data)
   const router = useRouter();
   const [query, setQuery] = useState();
   const handleKeyDown = (e) => {

@@ -284,7 +284,6 @@ export const panes = (vehicles, resultTotalV, accesorios, resultTotalA) => {
                     firstItem={null}
                     lastItem={null}
                     siblingRange={2}
-                    onPageChange={() => console.log(">>>>")}
                     totalPages={Math.ceil(resultTotalV / 20)}
                   />
                 </Container>

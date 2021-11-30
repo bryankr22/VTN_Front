@@ -51,7 +51,6 @@ export default function ThirdSection({
     dispatch(updateVehiculo({ input: "estado_vehiculo", value }));
   };
 
-  console.log(data.tipoPrecio);
   return (
     <>
       <Form.Field>
@@ -193,7 +192,6 @@ export default function ThirdSection({
           }
           onChange={(e, { value }) => {
             value = toCurrency(e);
-            console.log(value);
             dispatch(updateVehiculo({ input: "kilometraje_vehiculo", value }));
           }}
         />

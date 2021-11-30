@@ -109,7 +109,6 @@ export default function perfil() {
 
     Object.keys(dataForm).forEach(key => form.append(key, dataForm[key]))
     form.append('user_id', user_id);
-    console.log(dataForm)
 
     axios
       .post(AUTH_URL + perfil_update, form, config)
