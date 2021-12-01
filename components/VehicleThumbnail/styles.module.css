@@ -1,0 +1,23 @@
+.imageWrapped {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.imageWrapped img {
+  object-fit: contain !important;
+  height: 250px !important;
+  width: 100%;
+}
+
+.indicator {
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+  background-color: #111112c2;
+  font-size: large;
+  color: white;
+}
