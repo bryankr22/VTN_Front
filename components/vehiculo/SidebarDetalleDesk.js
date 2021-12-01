@@ -156,7 +156,7 @@ export default function SidebarDetalleDesk({ vehiculo, vehicleFav, diasPublicado
                                 </Header>
                             </Grid.Column>
                         )}
-                        {vehiculo.peritaje == 1 && (
+                        {vehiculo.peritaje != '0' && (
                             <Grid.Column style={{ textAlign: "center" }}>
                                 <Header as="h4" icon style={{ fontSize: '1rem' }}>
                                     <Icon name="clipboard check" />
