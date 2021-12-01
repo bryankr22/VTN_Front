@@ -14,7 +14,9 @@ import HeaderVehiculo from "../../components/comparadores/HeaderVehiculo";
 import { useSelector, useDispatch } from "react-redux";
 import { addVehiculo } from "../../store/comparadorSlice";
 import { useRouter } from "next/router";
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
+import VehicleThumbnail from '../VehicleThumbnail';
+
 const ZoneAd = dynamic(() => import("../ZoneAd"));
 
 export default function ListadoVehiculos({
@@ -176,11 +178,9 @@ export default function ListadoVehiculos({
                 item.id
               }
             >
-              <Image
+              <VehicleThumbnail
                 src={pathS3 + item.nameImage + "300x300.webp"}
-                wrapped
-                ui={false}
-                alt={item.title}
+                item={item}
               />
               <Card.Content>
                 <Card.Description
@@ -191,9 +191,7 @@ export default function ListadoVehiculos({
                     marginBottom: 7,
                   }}
                 >
-                  <h2 className="fnt-size-inherit">
-                    {item.title}
-                  </h2>
+                  <h2 className="fnt-size-inherit">{item.title}</h2>
                 </Card.Description>
                 <Card.Header>
                   <h3 className="fnt-size-inherit">
@@ -206,7 +204,7 @@ export default function ListadoVehiculos({
                     {new Intl.NumberFormat("de-DE").format(item.kilometraje)} KM
                   </h4>
                 </Card.Description>
-                <Card.Description as="h4" style={{ fontSize: '12px' }}>
+                <Card.Description as="h4" style={{ fontSize: "12px" }}>
                   {item.labelCiudad.toLowerCase().charAt(0).toUpperCase() +
                     item.labelCiudad.toLowerCase().slice(1)}
                   {compare === 1 &&

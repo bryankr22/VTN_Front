@@ -23,7 +23,6 @@ export default function CompareFicha() {
   const removeFichaClick = (index) => {
     dispatch(removeFicha(index));
   };
-  console.log(compareList);
   return (
     <Grid columns={3} divided id="grid-compare">
       <Grid.Row style={{ textAlign: "left" }}>

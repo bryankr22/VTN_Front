@@ -86,7 +86,6 @@ export default function SecondSection({ data: { edit } = {}, maxFiles = 10 }) {
   const [imagesLoaded, setImagesLoaded] = useState({});
   const [message, setMessage] = useState();
   const warningCallback = useCallback(onWarning(setMessage), []);
-  console.log({ message });
   const sources = useMemo(
     () =>
       edit?.imagenes
@@ -107,7 +106,6 @@ export default function SecondSection({ data: { edit } = {}, maxFiles = 10 }) {
           source,
         }));
       dispatch(setImages(imagesReady));
-      console.log({ list, imagesReady, imagesLoaded });
     },
     [imagesLoaded, dispatch]
   );

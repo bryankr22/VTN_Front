@@ -31,7 +31,6 @@ export default function AccesorioContainer({ data }) {
     for (let key in data) {
       if (data.hasOwnProperty(key)) {
         if (!data[key] || data[key].length === 0) {
-          console.log(key);
           return false;
         }
       }
@@ -41,8 +40,6 @@ export default function AccesorioContainer({ data }) {
   };
 
   const publicAccesorio = () => {
-    console.log(accesorioRedux);
-    console.log(imagesAccesorioRedux);
     let images = [];
     Object.keys(imagesAccesorioRedux).map((item) => {
       images.push(imagesAccesorioRedux[item]);

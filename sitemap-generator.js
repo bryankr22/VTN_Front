@@ -1,6 +1,5 @@
 const { configureSitemap } = require('@sergeymyssak/nextjs-sitemap');
 
-console.log(__dirname);
 const Sitemap = configureSitemap({
   domains: [{ domain: 'vendetunave.co', defaultLocale: 'es', http: true }],
   exclude: [],

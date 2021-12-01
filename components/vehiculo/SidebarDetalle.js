@@ -20,7 +20,6 @@ export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
         return compareList.some((element) => element.id === item.id);
     }
     const addComparar = (item) => {
-        //console.log(">>>>>", item);
         if (compareList.length < 3) {
             dispatch(addVehiculo(item))
         } else {
@@ -119,6 +118,22 @@ export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
                             <Header as="h6" icon>
                                 <Icon name="check" />
                                 Verificado
+                            </Header>
+                        </Grid.Column>
+                    )}
+                    {vehiculo.blindado == 1 && (
+                        <Grid.Column style={{ textAlign: "center" }}>
+                            <Header as="h6" icon>
+                                <Icon name="shield" />
+                                Blindado
+                            </Header>
+                        </Grid.Column>
+                    )}
+                    {vehiculo.peritaje == 1 && (
+                        <Grid.Column style={{ textAlign: "center" }}>
+                            <Header as="h6" icon>
+                                <Icon name="clipboard check" />
+                                Peritaje
                             </Header>
                         </Grid.Column>
                     )}
