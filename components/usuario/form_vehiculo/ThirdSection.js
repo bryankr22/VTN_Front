@@ -13,7 +13,7 @@ const optionsCondicion = [
   { key: "Usado", value: "Usado", text: "Usado" },
 ];
 
-const optionsBlindado = [
+const optionsGeneric = [
   { key: 0, value: 0, text: "NO" },
   { key: 1, value: 1, text: "SI" },
 ];
@@ -22,8 +22,10 @@ export default function ThirdSection({ data: { edit, ...data }, isMobile }) {
   console.log(edit, 'EDIT')
   const dispatch = useDispatch();
   const [cities, setCities] = useState(() => edit?.ciudades || []);
+  const [examination, setExamination] = useState(() => edit ? (edit?.vehiculo?.peritaje == '0' ? 0 : 1) : 0);
   const [stateVehicle, setStateVehicle] = useState("Nuevo");
 
+  console.log(examination)
   const changeDeparment = (value) => {
     axios.get(`${API_URL}/ciudades/${value}`).then((res) => {
       let optionsCities = [
@@ -249,7 +251,7 @@ export default function ThirdSection({ data: { edit, ...data }, isMobile }) {
         <label>BLINDADO *</label>
         <Select
           name="blindado_vehiculo"
-          options={optionsBlindado}
+          options={optionsGeneric}
           placeholder="Selecciona blindaje"
           defaultValue={edit?.vehiculo?.blindado}
           onChange={(e, { value }) =>
@@ -276,19 +278,33 @@ export default function ThirdSection({ data: { edit, ...data }, isMobile }) {
           />
         </Form.Field>
       )}
-      <div className="d-flex mb-4" style={{ flexWrap: 'wrap' }}>
-        <InputFile
-          label="Cargar peritaje"
-          name="peritaje"
-          onChange={(res) => {
-            dispatch(updateVehiculo({ input: "peritaje", value: res?.file_name }));
-          }}
-          request={`${AUTH_URL}/upload_vehicle_peritaje`}
+      <Form.Field>
+        <label>PERITAJE</label>
+        <Select
+          name="peritaje_vehiculo"
+          options={optionsGeneric}
+          placeholder="Selecciona peritaje"
+          defaultValue={edit ? (edit?.vehiculo?.peritaje == '0' ? 0 : 1) : 0}
+          onChange={(e, { value }) =>
+            setExamination(value)
+          }
         />
-        {edit?.vehiculo?.peritaje && (
-          <a href={edit?.vehiculo?.peritaje} target="_blank" className="ml-2 mt-2" style={{ whiteSpace: 'nowrap' }} rel="noreferrer">Descargar peritaje</a>
-        )}
-      </div>
+      </Form.Field>
+      {!!examination && (
+        <div className="d-flex mb-4" style={{ flexWrap: 'wrap' }}>
+          <InputFile
+            label="Cargar peritaje"
+            name="peritaje"
+            onChange={(res) => {
+              dispatch(updateVehiculo({ input: "peritaje", value: res?.file_name }));
+            }}
+            request={`${AUTH_URL}/upload_vehicle_peritaje`}
+          />
+          {edit?.vehiculo?.peritaje && (
+            <a href={edit?.vehiculo?.peritaje} target="_blank" className="ml-2 mt-2" style={{ whiteSpace: 'nowrap' }} rel="noreferrer">Descargar peritaje</a>
+          )}
+        </div>
+      )}
       {isMobile ? (
         <>
           <Form.Field style={{ marginBottom: 10 }}>
