@@ -101,7 +101,6 @@ export const panes = (favoritos, resultTotalV, accesorios, resultTotalA, removeF
                                         firstItem={null}
                                         lastItem={null}
                                         siblingRange={2}
-                                        onPageChange={() => console.log()}
                                         totalPages={Math.ceil(resultTotalV / 20)}
                                     />
                                 </Container>
@@ -204,7 +203,6 @@ export const panes = (favoritos, resultTotalV, accesorios, resultTotalA, removeF
                                         firstItem={null}
                                         lastItem={null}
                                         siblingRange={2}
-                                        onPageChange={() => console.log()}
                                         totalPages={Math.ceil(resultTotalA / 20)}
                                     />
                                 </Container>

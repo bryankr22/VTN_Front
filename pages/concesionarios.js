@@ -47,7 +47,6 @@ export default function concesionarios({
   const onChangeFilter = (input, value) => {
     insertParam(input, value);
   };
-  console.log(router.query);
 
   return (
     <PublicLayout>

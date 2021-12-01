@@ -33,7 +33,6 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
           data[key] === "" ||
           data[key].length === 0
         ) {
-          console.log(key);
           return false;
         }
       }

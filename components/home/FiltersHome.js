@@ -106,7 +106,6 @@ export default function FiltersHome({options: optsProp}) {
         setOptions(prev => ({ ...prev, optionsMarcas }))
     }
 
-    console.log({options});
 
     return (
         <div>

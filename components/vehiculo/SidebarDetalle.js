@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { Grid, Header, Icon, Container, Form, Button, Modal, Dimmer, Loader } from "semantic-ui-react";
 import { useCookies } from "react-cookie"
 import { useSelector, useDispatch } from 'react-redux';
@@ -21,10 +21,9 @@ export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
         return compareList.some((element) => element.id === item.id);
     }
     const addComparar = (item) => {
-        //console.log(">>>>>", item);
-        if(compareList.length < 3){
+        if (compareList.length < 3) {
             dispatch(addVehiculo(item))
-        }else{
+        } else {
             //setCompare('0');
         }
         window.location.href = '/vehiculos';
@@ -123,6 +122,22 @@ export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
                             </Header>
                         </Grid.Column>
                     )}
+                    {vehiculo.blindado == 1 && (
+                        <Grid.Column style={{ textAlign: "center" }}>
+                            <Header as="h6" icon>
+                                <Icon name="shield" />
+                                Blindado
+                            </Header>
+                        </Grid.Column>
+                    )}
+                    {vehiculo.peritaje == 1 && (
+                        <Grid.Column style={{ textAlign: "center" }}>
+                            <Header as="h6" icon>
+                                <Icon name="clipboard check" />
+                                Peritaje
+                            </Header>
+                        </Grid.Column>
+                    )}
                 </Grid.Row>
             </Grid>
             {cookies.vtn_token && (
@@ -133,9 +148,9 @@ export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
                     style={{ marginTop: 8, marginBottom: 30 }}
                 >
                     <Icon
-                    id={"icon-fav-" + vehiculo.id}
-                    name={ vehicleFav.length > 0 ? "heart" : "heart outline" }
-                    color="blue"
+                        id={"icon-fav-" + vehiculo.id}
+                        name={vehicleFav.length > 0 ? "heart" : "heart outline"}
+                        color="blue"
                     />
                     Agregar a favoritos
                 </Header>
@@ -155,10 +170,10 @@ export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
                             >
                                 Contactar al vendedor
                             </Button>
-                            <ModalContacto 
-                            showModal={modalContacto}
-                            onClose={() => setModalContacto(!modalContacto)}
-                            id={id}
+                            <ModalContacto
+                                showModal={modalContacto}
+                                onClose={() => setModalContacto(!modalContacto)}
+                                id={id}
                             />
                         </Grid.Column>
                         <Grid.Column>
@@ -186,12 +201,12 @@ export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
                     WhatsApp
                 </Button>
                 <br />
-                { compareList.length < 3 && !isOnStorage(vehiculo) &&
+                {compareList.length < 3 && !isOnStorage(vehiculo) &&
                     <Button
-                    onClick={() => addComparar(vehiculo)}
-                    fluid  
-                    primary 
-                    style={{ borderRadius: 20 }}>Comparar</Button> 
+                        onClick={() => addComparar(vehiculo)}
+                        fluid
+                        primary
+                        style={{ borderRadius: 20 }}>Comparar</Button>
                 }
             </Container>
         </Container>

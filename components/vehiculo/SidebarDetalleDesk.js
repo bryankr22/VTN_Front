@@ -9,10 +9,10 @@ import { API_URL, AUTH_URL, favoritos_add_vehiculo } from '../../helpers/constan
 import jwt from 'jsonwebtoken';
 import { useRouter } from 'next/router'
 
-export default function SidebarDetalleDesk({ imagenPrincipal, vehiculo, vehicleFav, diasPublicado, accesorio, id }) {
+export default function SidebarDetalleDesk({ vehiculo, vehicleFav, diasPublicado, accesorio, id }) {
     const dispatch = useDispatch()
     const router = useRouter();
-    const [cookies, setCookie] = useCookies(['vtn_token']);
+    const [cookies] = useCookies(['vtn_token']);
     const compareList = useSelector(({ comparador }) => comparador.vehiculos);
     const isOnStorage = (item) => {
         return compareList.some((element) => element.id === item.id);
@@ -121,7 +121,7 @@ export default function SidebarDetalleDesk({ imagenPrincipal, vehiculo, vehicleF
             </Header>
             <Container style={{ marginTop: 20 }}>
                 <Grid centered divided="vertically">
-                    <Grid.Row columns={3} style={{ paddingBottom: 0 }}>
+                    <Grid.Row columns={5} style={{ paddingBottom: 0 }}>
                         {vehiculo.permuta == 1 && (
                             <Grid.Column
                                 style={{ textAlign: "center", marginBottom: 0 }}
@@ -145,6 +145,22 @@ export default function SidebarDetalleDesk({ imagenPrincipal, vehiculo, vehicleF
                                 <Header as="h4" icon style={{ fontSize: '1rem' }}>
                                     <Icon name="check" />
                                     Verificado
+                                </Header>
+                            </Grid.Column>
+                        )}
+                        {vehiculo.blindado == 1 && (
+                            <Grid.Column style={{ textAlign: "center" }}>
+                                <Header as="h4" icon style={{ fontSize: '1rem' }}>
+                                    <Icon name="shield" />
+                                    Blindado
+                                </Header>
+                            </Grid.Column>
+                        )}
+                        {vehiculo.peritaje != '0' && (
+                            <Grid.Column style={{ textAlign: "center" }}>
+                                <Header as="h4" icon style={{ fontSize: '1rem' }}>
+                                    <Icon name="clipboard check" />
+                                    Peritaje
                                 </Header>
                             </Grid.Column>
                         )}

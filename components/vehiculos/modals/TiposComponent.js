@@ -111,7 +111,6 @@ export default function TiposComponent({ filtros, params }) {
                               params.tipo === itemSecond.label && "#2185d0",
                           }}
                           onClick={() => {
-                            console.log(itemSecond);
                             if (itemSecond.slug !== "") {
                               return insertParam(
                                 opcionesList.slug,

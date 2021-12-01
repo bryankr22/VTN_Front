@@ -224,7 +224,6 @@ export default function detalle({ data }) {
 export async function getServerSideProps({ params }) {
     const res = await axios.get('https://api.vendetunave.co/api/ficha_tecnica/' + params.slug);
     const data = await res.data;
-    console.log(data);
     //const imagenes = await res.data.imagenes;
     return {
         props: {

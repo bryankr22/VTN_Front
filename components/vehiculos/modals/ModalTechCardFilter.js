@@ -228,7 +228,6 @@ export default function ModalTechCardFilter({
                                           color: params[item.slug] === itemSecond.slug && "#2185d0",
                                         }}
                                         onClick={() => {
-                                          console.log(itemSecond, item)
                                           if (itemSecond.slug != "") {
                                             return insertParam(
                                               item.slug,
