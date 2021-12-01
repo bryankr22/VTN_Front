@@ -1,34 +1,31 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Form, Input, Select, Checkbox, Dropdown } from "semantic-ui-react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
+import InputFile from "../../../components/InputFile";
 import { updateVehiculo } from "../../../store/productoSlice";
-import { API_URL } from "../../../helpers/constants";
+import { API_URL, AUTH_URL } from "../../../helpers/constants";
 import { toCurrency } from "../../../helpers/format";
 
-export default function ThirdSection({
-  estado_vehiculo,
-  data: { edit, ...data },
-  isMobile,
-}) {
+const optionsCondicion = [
+  { key: "Nuevo", value: "Nuevo", text: "Nuevo" },
+  { key: "Usado", value: "Usado", text: "Usado" },
+];
+
+const optionsGeneric = [
+  { key: 0, value: 0, text: "NO" },
+  { key: 1, value: 1, text: "SI" },
+];
+
+export default function ThirdSection({ data: { edit, ...data }, isMobile }) {
+  console.log(edit, 'EDIT')
   const dispatch = useDispatch();
   const [cities, setCities] = useState(() => edit?.ciudades || []);
+  const [examination, setExamination] = useState(() => edit ? (edit?.vehiculo?.peritaje == '0' ? 0 : 1) : 0);
   const [stateVehicle, setStateVehicle] = useState("Nuevo");
-  const [checkPromotion, setCheckPromotion] = useState(false);
-  const [chechPermuta, setChechPermuta] = useState(false);
-  const [checkFinanciacion, setCheckFinanciacion] = useState(false);
 
-  const optionsCondicion = [
-    { key: "Nuevo", value: "Nuevo", text: "Nuevo" },
-    { key: "Usado", value: "Usado", text: "Usado" },
-  ];
-
-  const optionsBlindado = [
-    { key: 0, value: 0, text: "NO" },
-    { key: 1, value: 1, text: "SI" },
-  ];
-
+  console.log(examination)
   const changeDeparment = (value) => {
     axios.get(`${API_URL}/ciudades/${value}`).then((res) => {
       let optionsCities = [
@@ -149,7 +146,6 @@ export default function ThirdSection({
           style={{ marginRight: 15 }}
           defaultChecked={!!edit?.vehiculo?.promocion}
           onChange={(_, { checked }) => {
-            setCheckPromotion(checked);
             dispatch(updateVehiculo({ input: "promocion", value: checked }));
           }}
         />
@@ -159,10 +155,7 @@ export default function ThirdSection({
           style={{ marginRight: 15 }}
           defaultChecked={!!edit?.vehiculo?.permuta}
           onChange={(_, { checked }) => {
-            setChechPermuta((prev) => {
-              dispatch(updateVehiculo({ input: "permuta", value: checked }));
-              return checked;
-            });
+            dispatch(updateVehiculo({ input: "permuta", value: checked }));
           }}
         />
         <Checkbox
@@ -170,7 +163,6 @@ export default function ThirdSection({
           label="Financiación"
           defaultChecked={!!edit?.vehiculo?.financiacion}
           onChange={(_, { checked }) => {
-            setCheckFinanciacion(checked);
             dispatch(updateVehiculo({ input: "financiacion", value: checked }));
           }}
         />
@@ -257,7 +249,7 @@ export default function ThirdSection({
         <label>BLINDADO *</label>
         <Select
           name="blindado_vehiculo"
-          options={optionsBlindado}
+          options={optionsGeneric}
           placeholder="Selecciona blindaje"
           defaultValue={edit?.vehiculo?.blindado}
           onChange={(e, { value }) =>
@@ -283,6 +275,33 @@ export default function ThirdSection({
             }}
           />
         </Form.Field>
+      )}
+      <Form.Field>
+        <label>PERITAJE</label>
+        <Select
+          name="peritaje_vehiculo"
+          options={optionsGeneric}
+          placeholder="Selecciona peritaje"
+          defaultValue={edit ? (edit?.vehiculo?.peritaje == '0' ? 0 : 1) : 0}
+          onChange={(e, { value }) =>
+            setExamination(value)
+          }
+        />
+      </Form.Field>
+      {!!examination && (
+        <div className="d-flex mb-4" style={{ flexWrap: 'wrap' }}>
+          <InputFile
+            label="Cargar peritaje"
+            name="peritaje"
+            onChange={(res) => {
+              dispatch(updateVehiculo({ input: "peritaje", value: res?.file_name }));
+            }}
+            request={`${AUTH_URL}/upload_vehicle_peritaje`}
+          />
+          {edit?.vehiculo?.peritaje && (
+            <a href={edit?.vehiculo?.peritaje} target="_blank" className="ml-2 mt-2" style={{ whiteSpace: 'nowrap' }} rel="noreferrer">Descargar peritaje</a>
+          )}
+        </div>
       )}
       {isMobile ? (
         <>
