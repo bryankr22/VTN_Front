@@ -4,7 +4,13 @@
   width: 100%;
 }
 
-.imageWrapped img {
+.compact img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover !important;
+}
+
+.imageWrapped img:not(.compact img) {
   object-fit: contain !important;
   height: 250px !important;
   width: 100%;

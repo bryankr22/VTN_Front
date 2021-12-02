@@ -1,5 +1,6 @@
 import React from 'react'
 import { Image, Card } from "semantic-ui-react";
+import VehicleThumbnail from '../../VehicleThumbnail';
 export default function CardProducts({ item }) {
     const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x300/vendetunave/images/vehiculos/";
     const normalize = (function () {
@@ -40,61 +41,7 @@ export default function CardProducts({ item }) {
                     }
                     style={{ textDecoration: "none" }}
                 >
-                    {item.new_image === 0 && (
-                        <Image
-                            quality={50}
-                            loading='lazy'
-                            className="lazyload"
-                            priority={true}
-                            floated="left"
-                            size="small"
-                            src={pathS3 + item.nameImage + '.webp'}
-                            alt={item.title}
-                            style={{
-                                marginBottom: 0,
-                                height: 150,
-                                objectFit: "cover",
-                            }}
-                        />
-                    )}
-                    {item.new_image === 1 && (
-                        <Image
-                            quality={50}
-                            loading='lazy'
-                            className="lazyload"
-                            priority={true}
-                            floated="left"
-                            size="small"
-                            src={pathS3 + item.nameImage + '.webp'}
-                            alt={item.title}
-                            style={{
-                                marginBottom: 0,
-                                height: 150,
-                                objectFit: "cover",
-                            }}
-                        />
-                    )}
-                    {item.new_image === 2 && (
-                        <Image
-                            quality={50}
-                            loading='lazy'
-                            className="lazyload"
-                            priority={true}
-                            floated="left"
-                            size="small"
-                            src={
-                                pathS3 +
-                                item.nameImage +
-                                ".webp"
-                            }
-                            alt={item.title}
-                            style={{
-                                marginBottom: 0,
-                                height: 150,
-                                objectFit: "cover",
-                            }}
-                        />
-                    )}
+                    <VehicleThumbnail item={item} src={pathS3 + item.nameImage + "." + item.extension} compact small />
                 </a>
                 <Card.Header style={{ fontSize: 12, marginTop: 30 }}>
                     <a
