@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Form, Input, Select, Checkbox, Dropdown } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
@@ -19,13 +19,13 @@ const optionsGeneric = [
 ];
 
 export default function ThirdSection({ data: { edit, ...data }, isMobile }) {
-  console.log(edit, 'EDIT')
   const dispatch = useDispatch();
   const [cities, setCities] = useState(() => edit?.ciudades || []);
-  const [examination, setExamination] = useState(() => edit ? (edit?.vehiculo?.peritaje == '0' ? 0 : 1) : 0);
+  const [examination, setExamination] = useState(() =>
+    edit ? (edit?.vehiculo?.peritaje == "0" ? 0 : 1) : 0
+  );
   const [stateVehicle, setStateVehicle] = useState("Nuevo");
 
-  console.log(examination)
   const changeDeparment = (value) => {
     axios.get(`${API_URL}/ciudades/${value}`).then((res) => {
       let optionsCities = [
@@ -47,6 +47,10 @@ export default function ThirdSection({ data: { edit, ...data }, isMobile }) {
     setStateVehicle(value);
     dispatch(updateVehiculo({ input: "estado_vehiculo", value }));
   };
+
+  useEffect(() => {
+    dispatch(updateVehiculo({ input: "peritaje_vehiculo", value: examination }));
+  }, [examination]);
 
   return (
     <>
@@ -282,24 +286,35 @@ export default function ThirdSection({ data: { edit, ...data }, isMobile }) {
           name="peritaje_vehiculo"
           options={optionsGeneric}
           placeholder="Selecciona peritaje"
-          defaultValue={edit ? (edit?.vehiculo?.peritaje == '0' ? 0 : 1) : 0}
-          onChange={(e, { value }) =>
-            setExamination(value)
-          }
+          defaultValue={edit ? (edit?.vehiculo?.peritaje == "0" ? 0 : 1) : 0}
+          onChange={(e, { value }) => {
+            setExamination(value);
+          }}
         />
       </Form.Field>
       {!!examination && (
-        <div className="d-flex mb-4" style={{ flexWrap: 'wrap' }}>
+        <div className="d-flex mb-4" style={{ flexWrap: "wrap" }}>
           <InputFile
             label="Cargar peritaje"
             name="peritaje"
             onChange={(res) => {
-              dispatch(updateVehiculo({ input: "peritaje", value: res?.file_name }));
+              dispatch(
+                updateVehiculo({ input: "peritaje", value: res?.file_name })
+              );
             }}
+            required={!!examination}
             request={`${AUTH_URL}/upload_vehicle_peritaje`}
           />
           {edit?.vehiculo?.peritaje && (
-            <a href={edit?.vehiculo?.peritaje} target="_blank" className="ml-2 mt-2" style={{ whiteSpace: 'nowrap' }} rel="noreferrer">Descargar peritaje</a>
+            <a
+              href={edit?.vehiculo?.peritaje}
+              target="_blank"
+              className="ml-2 mt-2"
+              style={{ whiteSpace: "nowrap" }}
+              rel="noreferrer"
+            >
+              Descargar peritaje
+            </a>
           )}
         </div>
       )}

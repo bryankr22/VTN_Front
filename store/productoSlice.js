@@ -96,6 +96,7 @@ const productoSlice = createSlice({
         contacto_vehiculo: action.payload?.contacto,
         ciudad_vehiculo: action.payload?.ciudad_id,
         cilindraje_vehiculo: action.payload?.cilindraje,
+        peritaje_vehiculo: action.payload?.peritaje != '0' ? 1 : 0,
       };
     },
   },
