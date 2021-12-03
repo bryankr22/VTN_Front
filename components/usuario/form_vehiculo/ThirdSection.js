@@ -22,7 +22,7 @@ export default function ThirdSection({ data: { edit, ...data }, isMobile }) {
   const dispatch = useDispatch();
   const [cities, setCities] = useState(() => edit?.ciudades || []);
   const [examination, setExamination] = useState(() =>
-    edit ? (edit?.vehiculo?.peritaje == "0" ? 0 : 1) : 0
+    edit ? (edit?.vehiculo?.peritaje ? 1 : 0) : ''
   );
   const [stateVehicle, setStateVehicle] = useState("Nuevo");
 
