@@ -31,8 +31,8 @@ const customRequest = (cookies, id, update) => {
 
     Resizer.imageFileResizer(
       file,
-      1000,
-      1000,
+      4000,
+      4000,
       "JPEG",
       100,
       360,
@@ -121,7 +121,7 @@ export default function SecondSection({ data: { edit } = {}, maxFiles = 10 }) {
   return (
     <>
       <style>{`.error.message { display: block !important; margin: 20px; margin-bottom:10px !important}`}</style>
-      {message && <Message error content={message} onDismiss={() => setMessage(undefined)} /> }
+      {message && <Message error content={message} onDismiss={() => setMessage(undefined)} />}
       <RUG
         initialState={sources}
         action={`${AUTH_URL}/upload_vehicle_image`}
