@@ -34,13 +34,9 @@ export default function CarruselDestacados(props) {
               key={index}
               style={{ padding: 10, display: "flex", justifyContent: "center" }}
             >
-              {props.type.endsWith("tablet") && (
-                <CardProducts {...props} item={item} />
-              )}
-              {(props.type.endsWith("desktop") ||
-                props.type === "products") && (
-                <CardProductsDesk {...props} item={item} />
-              )}
+
+              <CardProductsDesk {...props} item={item} />
+
             </div>
           );
         })}
@@ -69,11 +65,11 @@ export default function CarruselDestacados(props) {
               }}
             />
             <Card.Content style={{ textAlign: "center", border: 'none' }}>
-            <Card.Header>
+              <Card.Header>
                 <span style={{ fontFamily: "Montserrat-Bold" }}>
-                    Ver más
+                  Ver más
                 </span>
-            </Card.Header>
+              </Card.Header>
             </Card.Content>
           </Card>
         </div>

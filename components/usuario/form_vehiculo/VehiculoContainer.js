@@ -18,6 +18,40 @@ import axios from "axios";
 import { clearForm } from "../../../store/productoSlice";
 import { AUTH_URL } from "../../../helpers/constants";
 
+const isValidForm = (data) => {
+  for (let key in data) {
+    if (key === 'peritaje' && data['peritaje_vehiculo'] == 1) {
+      if (data['peritaje'] && data['peritaje'] != '0') {
+        continue;
+      } else {
+
+        console.log(key, data)
+        return false;
+      }
+    }
+    if (key === 'peritaje' && data['peritaje_vehiculo'] == 0) {
+      continue;
+    }
+
+    if (key === 'peritaje_vehiculo' && !!data['peritaje']) {
+      continue
+    }
+
+    if (data.hasOwnProperty(key)) {
+      if (
+        data[key] == undefined ||
+        data[key] === "" ||
+        data[key].length === 0
+      ) {
+        console.log(key, data)
+        return false;
+      }
+    }
+  }
+
+  return true;
+};
+
 export default function VehiculoContainer({ data: dataProp, isEdit }) {
   const dispatch = useDispatch();
   const [cookies] = useCookies(["vtn_token"]);
@@ -25,21 +59,7 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
   const [alert, setAlert] = useState({});
   const vehiculoRedux = useSelector(({ producto }) => producto.vehiculo);
   const imagesVehiculoRedux = useSelector(({ producto }) => producto.images);
-  const isValidForm = (data) => {
-    for (let key in data) {
-      if (data.hasOwnProperty(key)) {
-        if (
-          data[key] == undefined ||
-          data[key] === "" ||
-          data[key].length === 0
-        ) {
-          return false;
-        }
-      }
-    }
 
-    return true;
-  };
 
   const publicVehicle = () => {
     const backup = dataProp?.edit?.imagenes
@@ -87,6 +107,8 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
       ciudad_vehiculo,
       tipo_moto_select,
       id,
+      peritaje_vehiculo,
+      peritaje
     } = vehiculoRedux;
 
     const dataValid = {
@@ -108,6 +130,8 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
       ciudad_vehiculo,
       contacto_vehiculo,
       cilindraje_vehiculo,
+      peritaje_vehiculo,
+      peritaje: peritaje_vehiculo == 0 ? undefined : peritaje,
     };
 
     if (isValidForm(dataValid)) {
@@ -150,6 +174,8 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
         images,
         user_id,
         id,
+        peritaje_vehiculo,
+        peritaje: peritaje_vehiculo == 0 ? undefined : peritaje,
       };
 
       const url = `${AUTH_URL}/vehicle_${isEdit ? "update" : "insert"}`;
@@ -159,9 +185,8 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
         .then((res) => {
           if (res.data.status) {
             setAlert({
-              message: `Vehículo ${
-                isEdit ? "actualizado" : "creado"
-              } correctamente`,
+              message: `Vehículo ${isEdit ? "actualizado" : "creado"
+                } correctamente`,
               error: false,
               info: false,
               success: true,

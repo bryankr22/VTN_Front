@@ -129,7 +129,7 @@ export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
                             </Header>
                         </Grid.Column>
                     )}
-                    {vehiculo.peritaje == 1 && (
+                    {vehiculo.peritaje != '0' && (
                         <Grid.Column style={{ textAlign: "center" }}>
                             <Header as="h6" icon>
                                 <Icon name="clipboard check" />

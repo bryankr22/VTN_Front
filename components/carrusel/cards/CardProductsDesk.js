@@ -1,5 +1,5 @@
-import React from 'react'
-import { Image, Card } from "semantic-ui-react";
+import { Card } from "semantic-ui-react";
+import VehicleThumbnail from '../../VehicleThumbnail';
 export default function CardProductsDesk({ item }) {
     const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/500x500/vendetunave/images/vehiculos/";
     const normalize = (function () {
@@ -44,46 +44,13 @@ export default function CardProductsDesk({ item }) {
             }}
         >
             {item.new_image === 0 && (
-                <Image
-                    loading="lazy"
-                    priority={true}
-                    src={pathS3 + item.nameImage + "." + item.extension}
-                    alt={item.title}
-                    style={{
-                        marginBottom: 0,
-                        height: 150,
-                        objectFit: "cover",
-                        borderRadius: 0,
-                    }}
-                />
+                <VehicleThumbnail item={item} src={pathS3 + item.nameImage + "." + item.extension} compact />
             )}
             {item.new_image === 1 && (
-                <Image
-                    loading="lazy"
-                    priority={true}
-                    src={pathS3 + item.nameImage + "." + item.extension}
-                    alt={item.title}
-                    style={{
-                        marginBottom: 0,
-                        height: 150,
-                        objectFit: "cover",
-                        borderRadius: 0,
-                    }}
-                />
+                <VehicleThumbnail item={item} src={pathS3 + item.nameImage + "." + item.extension} compact />
             )}
             {item.new_image === 2 && (
-                <Image
-                    loading="lazy"
-                    priority={true}
-                    src={pathS3 + item.nameImage + ".webp"}
-                    alt={item.title}
-                    style={{
-                        marginBottom: 0,
-                        height: 150,
-                        objectFit: "cover",
-                        borderRadius: 0,
-                    }}
-                />
+                <VehicleThumbnail item={item} src={pathS3 + item.nameImage + ".webp"} compact />
             )}
             <Card.Content style={{ textAlign: "left" }}>
                 <Card.Meta>
