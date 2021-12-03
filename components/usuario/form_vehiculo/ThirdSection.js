@@ -286,7 +286,7 @@ export default function ThirdSection({ data: { edit, ...data }, isMobile }) {
           name="peritaje_vehiculo"
           options={optionsGeneric}
           placeholder="Selecciona peritaje"
-          defaultValue={edit ? (edit?.vehiculo?.peritaje == "0" ? 0 : 1) : 0}
+          defaultValue={edit ? (edit?.vehiculo?.peritaje ? 1 : 0) : ''}
           onChange={(e, { value }) => {
             setExamination(value);
           }}
