@@ -1,5 +1,6 @@
-import { Icon, Image } from "semantic-ui-react";
+import { Icon } from "semantic-ui-react";
 import styles from "./styles.module.css";
+import Image from "next/image";
 
 const showSection = ({
   permuta,
@@ -19,19 +20,19 @@ export default function VehicleThumbnail({ item, src, compact }) {
     <div className={styles.imageWrapped}>
       <Image
         src={src}
-        wrapped={!compact}
-        priority={compact}
+        loading="lazy"
         className={compact && styles.compact}
-        ui={false}
         alt={item.title}
-        style={
-          compact && {
-            marginBottom: 0,
-            height: 150,
-            objectFit: "cover",
-            borderRadius: 0,
-          }
-        }
+        layout="fill"
+        objectFit="cover"
+        // style={
+        //   compact && {
+        //     marginBottom: 0,
+        //     height: 150,
+        //     objectFit: "cover",
+        //     borderRadius: 0,
+        //   }
+        // }
       />
       {showSection(item) && (
         <div className={styles.indicator}>
