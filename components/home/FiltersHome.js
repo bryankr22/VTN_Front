@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import { useState } from 'react'
 import { Header, Form, Container, Button, Input, Select, Responsive } from "semantic-ui-react";
 
 import axios from 'axios';
@@ -22,9 +22,9 @@ const FilterPricing = [
     { key: 14, text: "Más de $400.000.000", value: '400000000:500000000' },
 ];
 
-export default function FiltersHome({options: optsProp}) {
+export default function FiltersHome({ options: optsProp }) {
 
-    const [options, setOptions] =useState(() => optsProp);
+    const [options, setOptions] = useState(() => optsProp);
 
     const [filters, setFilters] = useState({
         category: 'carros',
@@ -43,34 +43,34 @@ export default function FiltersHome({options: optsProp}) {
             ...filters,
             [input]: value
         })
-        if(input === 'marca_id'){
+        if (input === 'marca_id') {
             onChangeMarca(value);
             setMarca(value);
         }
     }
     const onClickFilter = () => {
-        var newUrl = new URL(window.location.protocol+"//"+window.location.hostname+":"+window.location.port+"/vehiculos");
+        var newUrl = new URL(window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/vehiculos");
         newUrl.searchParams.append('categoria', filters.category);
         //Filtros
-        if(marca){
+        if (marca) {
             var marcaObj = options.optionsMarcas.find(element => element.value === marca);
             newUrl.searchParams.append('marca', marcaObj.text);
         }
-        if(filters.modelo){
+        if (filters.modelo) {
             var modeloObj = filters.modelos.find(element => element.value === filters.modelo);
             newUrl.searchParams.append('modelo', modeloObj.text);
         }
         //
-        if(filters.precio){
+        if (filters.precio) {
             newUrl.searchParams.append('precio', filters.precio);
         }
-        if(filters.anioDesde){
-            newUrl.searchParams.append('anio', filters.anioDesde+':'+filters.anioHasta);
+        if (filters.anioDesde) {
+            newUrl.searchParams.append('anio', filters.anioDesde + ':' + filters.anioHasta);
         }
-        if(filters.permuta){
+        if (filters.permuta) {
             newUrl.searchParams.append('permuta', filters.permuta);
         }
-        if(filters.promocion){
+        if (filters.promocion) {
             newUrl.searchParams.append('promocion', filters.promocion);
         }
         window.location.href = newUrl.href;
@@ -92,8 +92,8 @@ export default function FiltersHome({options: optsProp}) {
     }
 
     const handleChangeType = async (e, { value }) => {
-        const {key} = options.optionsCategories?.find?.(item => item.value === value) || {};
-        const res = await axios.get(GET_BRANDS.replace(':id', key )).catch(() => []);
+        const { key } = options.optionsCategories?.find?.(item => item.value === value) || {};
+        const res = await axios.get(GET_BRANDS.replace(':id', key)).catch(() => []);
         const optionsMarcas = [{ key: "", value: "", text: "Marca" }];
         await res?.data?.marcas?.forEach?.(function (item) {
             optionsMarcas.push({
@@ -212,9 +212,9 @@ export default function FiltersHome({options: optsProp}) {
                                 />
                             </Form.Group>
                         </Form.Field>
-                        <Button  
-                        onClick={()=> onClickFilter()}
-                        color="blue" type="submit">
+                        <Button
+                            onClick={() => onClickFilter()}
+                            color="blue" type="submit">
                             BUSCAR VEHÍCULO
                         </Button>
                     </Form>
@@ -315,9 +315,9 @@ export default function FiltersHome({options: optsProp}) {
                                 />
                             </Form.Group>
                         </Form.Field>
-                        <Button  
-                        onClick={()=> onClickFilter()}
-                        color="blue" type="submit">
+                        <Button
+                            onClick={() => onClickFilter()}
+                            color="blue" type="submit">
                             BUSCAR VEHÍCULO
                         </Button>
                     </Form>
@@ -418,9 +418,9 @@ export default function FiltersHome({options: optsProp}) {
                                 />
                             </Form.Group>
                         </Form.Field>
-                        <Button  
-                        onClick={()=> onClickFilter()}
-                        color="blue" style={{ textTransform: "uppercase" }}>
+                        <Button
+                            onClick={() => onClickFilter()}
+                            color="blue" style={{ textTransform: "uppercase" }}>
                             buscar vehículo
                         </Button>
                     </Form>

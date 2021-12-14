@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import Head from "next/head";
 import { NextSeo } from "next-seo";
 import PublicLayout from '../../layouts/PublicLayout';
@@ -13,10 +13,10 @@ import axios from 'axios';
 
 export default function mis_publicaciones() {
     const [activeIndex, setActiveIndex] = useState(0);
-    const handleTabChange = (e, {activeIndex}) => {
+    const handleTabChange = (e, { activeIndex }) => {
         setActiveIndex(activeIndex);
     };
-    const [cookies, setCookie] = useCookies(['vtn_token']);
+    const [cookies] = useCookies(['vtn_token']);
     const [publicaciones, setPublicaciones] = useState({
         vehiculos: [],
         accesorios: []
@@ -29,8 +29,9 @@ export default function mis_publicaciones() {
             headers: { Authorization: `Bearer ${decoded.token_server.access_token}` }
         };
         axios.get(AUTH_URL + publicaciones_api + user_id, config).then((res) => {
-            setPublicaciones({...publicaciones, ...res.data});
+            setPublicaciones({ ...publicaciones, ...res.data });
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (
         <PublicLayout>

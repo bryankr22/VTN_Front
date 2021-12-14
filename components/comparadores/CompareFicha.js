@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { Header, Grid, Image, Button, Divider, Icon } from "semantic-ui-react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFicha } from "../../store/comparadorSlice";

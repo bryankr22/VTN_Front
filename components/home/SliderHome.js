@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
-import React, { useState } from "react";
-import { Input, Responsive } from "semantic-ui-react";
+import { useState } from "react";
+import { Responsive, Input } from 'semantic-ui-react';
 import Image from "next/image";
 
 export default function SliderHome({ slider, sliderMobile }) {
@@ -16,7 +16,7 @@ export default function SliderHome({ slider, sliderMobile }) {
   };
   return (
     <div>
-      <Responsive className="banner-home" {...Responsive.onlyComputer}>
+      <Responsive className="banner-home" {...Responsive?.onlyComputer}>
         <div style={{ width: '100%', position: 'relative', height: 500 }}>
           <Image
             layout="fill"
@@ -29,7 +29,7 @@ export default function SliderHome({ slider, sliderMobile }) {
           />
         </div>
       </Responsive>
-      <Responsive className="banner-home" {...Responsive.onlyMobile}>
+      <Responsive className="banner-home" {...Responsive?.onlyMobile}>
         <>
           <div style={{ width: '100%', position: 'relative', height: 400 }}>
             <Image
@@ -66,7 +66,7 @@ export default function SliderHome({ slider, sliderMobile }) {
           </div>
         </>
       </Responsive>
-      <Responsive className="banner-home" {...Responsive.onlyTablet}>
+      <Responsive className="banner-home" {...Responsive?.onlyTablet}>
         <div style={{ width: '100%', position: 'relative', height: 400 }}>
           <Image
             layout="fill"

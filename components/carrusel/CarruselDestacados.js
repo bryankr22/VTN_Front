@@ -1,10 +1,9 @@
-import React, { Fragment, useState } from "react";
+import { useState } from "react";
 import ItemsCarousel from "react-items-carousel";
-import CardProducts from "./cards/CardProducts";
 import CardProductsDesk from "./cards/CardProductsDesk";
-import { Image, Card } from "semantic-ui-react";
+import { Card } from "semantic-ui-react";
 const url =
-  "https://vendetunave.s3.amazonaws.com/vendetunave/images/categorias/VTN_Otros.jpg";
+  "https://d3bmp4azzreq60.cloudfront.net/fit-in/150x150/vendetunave/images/categorias/VTN_Otros.webp";
 export default function CarruselDestacados(props) {
   const [activeItemIndex3, setActiveItemIndex3] = useState(0);
   const chevronWidth = 40;
@@ -56,9 +55,10 @@ export default function CarruselDestacados(props) {
               loading="lazy"
               alt="Ver más botón"
               src={url}
+              width={150}
+              height={150}
               style={{
                 marginBottom: 0,
-                height: 150,
                 objectFit: "contain",
                 borderRadius: 0,
                 backgroundColor: 'white'

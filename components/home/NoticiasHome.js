@@ -1,6 +1,5 @@
-import React from 'react';
 import { Header, Container, Grid, Button, Responsive } from "semantic-ui-react";
-const NoticiasHome = ({noticias}) => {
+const NoticiasHome = ({ noticias }) => {
     return (
         <div>
             <Container

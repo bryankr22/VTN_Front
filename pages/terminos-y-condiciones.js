@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import PublicLayout from '../layouts/PublicLayout';
-import { Container, Header, Form, Select, Button, Dimmer, Loader } from 'semantic-ui-react'
+import { Container, Header } from 'semantic-ui-react'
 import axios from 'axios';
 import { API_URL, config } from '../helpers/constants';
 export default function terminosycondiciones() {

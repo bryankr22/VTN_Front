@@ -1,7 +1,7 @@
-import React, {Fragment} from 'react'
-import { Grid, Header, Responsive, Dimmer, Loader, Icon, Container, Form, Button, Modal, Image, Breadcrumb } from "semantic-ui-react";
-  
-export default function TableDescription({data}) {
+import { Fragment } from 'react'
+import { Grid, Header, Icon } from "semantic-ui-react";
+
+export default function TableDescription({ data }) {
     return (
         <Grid columns="equal">
             <Grid.Column width={16} style={{ padding: "30px 10px 15px 30px" }}>

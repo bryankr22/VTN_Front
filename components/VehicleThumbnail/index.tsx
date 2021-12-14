@@ -15,7 +15,6 @@ const showSection = ({
 };
 
 export default function VehicleThumbnail({ item, src, compact }) {
-  console.log(item, " >>>>>>");
   return (
     <div className={styles.imageWrapped}>
       <Image

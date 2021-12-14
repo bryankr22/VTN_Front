@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import Head from "next/head";
 import { NextSeo } from "next-seo";
 import PublicLayout from '../../layouts/PublicLayout';
@@ -13,10 +13,10 @@ import axios from 'axios';
 
 export default function favoritos() {
     const [activeIndex, setActiveIndex] = useState(0);
-    const handleTabChange = (e, {activeIndex}) => {
+    const handleTabChange = (e, { activeIndex }) => {
         setActiveIndex(activeIndex);
     };
-    const [cookies, setCookie] = useCookies(['vtn_token']);
+    const [cookies] = useCookies(['vtn_token']);
     const [favoritos, setFavoritos] = useState({
         vehiculos: [],
         fichas_tecnicas: []
@@ -29,8 +29,9 @@ export default function favoritos() {
             headers: { Authorization: `Bearer ${decoded.token_server.access_token}` }
         };
         axios.get(AUTH_URL + favoritos_api + user_id, config).then((res) => {
-            setFavoritos({...favoritos, ...res.data});
+            setFavoritos({ ...favoritos, ...res.data });
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     const eliminarVehiculo = (vehicle_id) => {
         const cookie = cookies.vtn_token;
@@ -39,13 +40,13 @@ export default function favoritos() {
         const config = {
             headers: { Authorization: `Bearer ${decoded.token_server.access_token}` }
         };
-        const data = { user_id, vehicle_id }; 
-        axios.post(AUTH_URL + favoritos_remove_vehiculo, data, config).then((res) => {
+        const data = { user_id, vehicle_id };
+        axios.post(AUTH_URL + favoritos_remove_vehiculo, data, config).then(() => {
             location.reload();
         })
-        .catch((error) => {
-            //console.log(error);
-        });
+            .catch(() => {
+                //console.log(error);
+            });
     }
     const eliminarFicha = (ficha_id) => {
         const cookie = cookies.vtn_token;
@@ -54,13 +55,13 @@ export default function favoritos() {
         const config = {
             headers: { Authorization: `Bearer ${decoded.token_server.access_token}` }
         };
-        const data = { user_id, ficha_id }; 
-        axios.post(AUTH_URL + favoritos_remove_ficha, data, config).then((res) => {
+        const data = { user_id, ficha_id };
+        axios.post(AUTH_URL + favoritos_remove_ficha, data, config).then(() => {
             location.reload();
         })
-        .catch((error) => {
-            //console.log(error);
-        });
+            .catch(() => {
+                //console.log(error);
+            });
     }
     return (
         <PublicLayout>

@@ -1,4 +1,3 @@
-import React, {useEffect, useState} from 'react'
 import PublicLayout from '../../layouts/PublicLayout';
 import SidebarAccesorios from '../../components/vehiculos/SidebarAccesorios';
 import ListadoAccesorios from '../../components/vehiculos/ListadoAccesorios';
@@ -24,23 +23,23 @@ export default function index({ data }) {
             </Responsive>
             <Responsive {...Responsive.onlyComputer}>
                 <Grid style={{ paddingTop: 15 }}>
-                    <SidebarAccesorios 
-                    params={router.query} 
-                    contadores={data.contadores}
-                    vehiculos={data.vehicles}
+                    <SidebarAccesorios
+                        params={router.query}
+                        contadores={data.contadores}
+                        vehiculos={data.vehicles}
                     />
-                    <ListadoAccesorios 
-                    params={router.query} 
-                    vehiculos={data.vehicles}
-                    page={data.page}
-                    totalRecords={data.total_records}
+                    <ListadoAccesorios
+                        params={router.query}
+                        vehiculos={data.vehicles}
+                        page={data.page}
+                        totalRecords={data.total_records}
                     />
                 </Grid>
             </Responsive>
         </PublicLayout>
     )
 }
-export async function getServerSideProps({query, res}) {
+export async function getServerSideProps({ query, res }) {
     try {
         const res = await axios.get('https://api.vendetunave.co/api/accesorios', {
             params: {
@@ -56,11 +55,11 @@ export async function getServerSideProps({query, res}) {
                 data
             },
         }
-    } catch({response}) {
-            res.writeHead(301, {
-                Location: `/${response.status}`
-            });
-            res.end();
-        return {props: {}}
+    } catch ({ response }) {
+        res.writeHead(301, {
+            Location: `/${response.status}`
+        });
+        res.end();
+        return { props: {} }
     }
 }

@@ -1,9 +1,11 @@
 import Head from "next/head";
 
+import loadable from '@loadable/component';
+
 import PublicLayout from "../layouts/PublicLayout";
 import NoticiasHome from "../components/home/NoticiasHome";
 import MarcasHome from "../components/home/MarcasHome";
-import CategoriasHome from "../components/home/CategoriasHome";
+// import CategoriasHome from "../components/home/CategoriasHome";
 import FiltersHome from "../components/home/FiltersHome";
 import DestacadosHome from "../components/home/DestacadosHome";
 import SliderHome from "../components/home/SliderHome"
@@ -11,6 +13,10 @@ import ContentHome from "../components/home/ContentHome";
 
 import axios from "axios";
 import { API_URL, home } from "../helpers/constants";
+
+const CategoriasHome = loadable(() => import('../components/home/CategoriasHome'), {
+  fallback: <div>...</div>
+});
 
 const Home = ({
   vehiculos,

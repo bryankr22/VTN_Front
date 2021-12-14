@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import { useState, Fragment } from "react";
 import ItemsCarousel from "react-items-carousel";
 import { Image, Card, Icon } from "semantic-ui-react";
 
@@ -23,7 +23,7 @@ export default function CarruselCards(props, { data = [] }) {
     }
 
     let orientation = window.orientation;
-    
+
     if (orientation == 90 || orientation == -90) {
         cards = 2.1;
     }
