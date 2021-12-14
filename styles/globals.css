@@ -526,3 +526,7 @@ h5 {
 .bg-black {
   background-color: #000 !important;
 }
+
+.nav-item i {
+  display: none;
+}

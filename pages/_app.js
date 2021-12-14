@@ -1,5 +1,4 @@
 //import '../styles/header.css'
-import "../public/css/app.min.css";
 import "../styles/globals.css";
 import '../styles/normalize.css'
 import "./../components/ExpCarousel/dist/index.css";
