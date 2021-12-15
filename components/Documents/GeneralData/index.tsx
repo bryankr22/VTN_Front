@@ -37,11 +37,9 @@ export default function GeneralData({ data }: Props) {
       mode: "all",
     });
   const vehicleClass = watch("clase_vehiculo");
-  const vehicleBrand = watch("marca");
   const [brands] = useState<{ label: string; key: string }[]>(() => {
     return data.marcas.map(({ nombre }) => ({ key: nombre, label: nombre }));
   });
-  const [models, setModels] = useState([""]);
   const [isSending, setIsSending] = useState(false);
   const [message, setMessage] = useState({ type: "", txt: "" });
   const [bodywork, setBodyWork] = useState<string[]>([]);
@@ -114,15 +112,6 @@ export default function GeneralData({ data }: Props) {
     setBodyWork(["", ...list]);
     setValue("tipo_carroceria", "", { shouldValidate: true });
   }, [vehicleClass]);
-
-  useEffect(() => {
-    const id = data.marcas.find((item) => item.nombre === vehicleBrand)?.id;
-    const list = data.modelos
-      .filter((item) => item.marca_id === id)
-      .map((item) => item.nombre);
-    setModels(["", ...list]);
-    setValue("modelo", "", { shouldValidate: true });
-  }, [vehicleBrand]);
 
   return (
     <form onSubmit={onSubmit}>
@@ -255,11 +244,13 @@ export default function GeneralData({ data }: Props) {
               error={formState.errors.marca?.message}
             />
             <Spacer y={2.05} />
-            <Select
+            <Input
+              underlined
+              shadow={false}
+              fullWidth
               label="Modelo"
-              options={models as any}
-              inputProps={{ ...register("modelo", { required }) }}
-              error={formState.errors.modelo?.message}
+              {...register("modelo", { required })}
+              {...getStatusError(formState.errors.modelo?.message)}
             />
             <Spacer y={2.16} />
             <Input

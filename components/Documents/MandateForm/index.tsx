@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Button,
   Card,
@@ -9,7 +8,7 @@ import {
   Text,
 } from "@nextui-org/react";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { API_URL } from "../../../helpers/constants";
 import Select from "../../Select";
@@ -30,14 +29,12 @@ interface Props {
 }
 
 export default function MandateForm({ data }: Props) {
-  const { register, formState, handleSubmit, watch, setValue, reset } =
-    useForm<MandateFields>({
-      mode: "all",
-      defaultValues: {
-        fecha: dayjs().format("YYYY-M-D"),
-      },
-    });
-  const vehicleBrand = watch("marca");
+  const { register, formState, handleSubmit, reset } = useForm<MandateFields>({
+    mode: "all",
+    defaultValues: {
+      fecha: dayjs().format("YYYY-M-D"),
+    },
+  });
   const [message, setMessage] = useState({ type: "", txt: "" });
   const [isSending, setIsSending] = useState(false);
   const [brands] = useState<{ label: string; key: string }[]>(() => {
@@ -46,16 +43,19 @@ export default function MandateForm({ data }: Props) {
       ...data.marcas.map(({ nombre }) => ({ key: nombre, label: nombre })),
     ];
   });
-  const [models, setModels] = useState([""]);
   const request = (data = {}) => {
     setIsSending(true);
     return axios
-      .post(`${API_URL}/documento-mandato`, { ...data }, {
-      headers: {
-        Accept: "application/pdf",
-      },
-      responseType: "blob",
-    })
+      .post(
+        `${API_URL}/documento-mandato`,
+        { ...data },
+        {
+          headers: {
+            Accept: "application/pdf",
+          },
+          responseType: "blob",
+        }
+      )
       .then((res) => {
         const url = window.URL.createObjectURL(new Blob([res.data]));
         const link = document.createElement("a");
@@ -81,15 +81,6 @@ export default function MandateForm({ data }: Props) {
   const downLoadEmptyFile = () => request();
 
   const onSubmit = handleSubmit((data) => request(data));
-
-  useEffect(() => {
-    const id = data.marcas.find((item) => item.nombre === vehicleBrand)?.id;
-    const list = data.modelos
-      .filter((item) => item.marca_id === id)
-      .map((item) => item.nombre);
-    setModels(["", ...list]);
-    setValue("modelo", "", { shouldValidate: true });
-  }, [vehicleBrand]);
 
   return (
     <form onSubmit={onSubmit}>
@@ -209,11 +200,13 @@ export default function MandateForm({ data }: Props) {
               error={formState.errors.marca?.message}
             />
             <Spacer y={2.05} />
-            <Select
+            <Input
+              underlined
+              shadow={false}
+              fullWidth
               label="Modelo"
-              options={models as any}
-              inputProps={{ ...register("modelo", { required }) }}
-              error={formState.errors.modelo?.message}
+              {...register("modelo", { required })}
+              {...getStatusError(formState.errors.modelo?.message)}
             />
             <Spacer y={2.05} />
             <Input
