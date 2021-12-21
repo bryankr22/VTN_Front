@@ -1,5 +1,4 @@
-import React from 'react'
-import { Image, Card } from "semantic-ui-react";
+import { Card } from "semantic-ui-react";
 import VehicleThumbnail from '../../VehicleThumbnail';
 export default function CardProducts({ item }) {
     const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x300/vendetunave/images/vehiculos/";

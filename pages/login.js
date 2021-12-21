@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Head from "next/head";
 import { NextSeo } from "next-seo";
 import PublicLayout from '../layouts/PublicLayout';
@@ -7,7 +7,6 @@ import axios from 'axios';
 import { useCookies } from "react-cookie"
 import { AUTH_URL, login_api, register_api } from '../helpers/constants';
 import jwt from 'jsonwebtoken';
-import { useRouter } from 'next/router'
 
 const nextYear = () => {
   let oneYearFromNow = new Date();
@@ -16,8 +15,8 @@ const nextYear = () => {
 }
 
 export default function login(props) {
-  const router = useRouter();
-  const [cookie, setCookie] = useCookies(["vtn_token"])
+
+  const [, setCookie] = useCookies(["vtn_token"])
   const [login, setLogin] = useState({
     email: '',
     password: ''
@@ -45,7 +44,7 @@ export default function login(props) {
       window.location = register ? '/usuario/perfil' : (!path ? '/' : path);
       //console.log(">>>>", res.data);
       setLoading(false);
-    }).catch(error => {
+    }).catch(() => {
       setError(true);
       setLoading(false);
     });
@@ -53,9 +52,9 @@ export default function login(props) {
   const sendRegister = () => {
     setLoading(true);
 
-    axios.post(AUTH_URL + register_api, { ...register }).then((res) => {
+    axios.post(AUTH_URL + register_api, { ...register }).then(() => {
       sendLogin(true, register.email, register.password);
-    }).catch(error => {
+    }).catch(() => {
       setErrorRegister(true);
       setLoading(false);
     });
@@ -183,7 +182,7 @@ export default function login(props) {
                   <Checkbox
                     label="Subscribirse al newsletter"
                     value={register.remember}
-                    onChange={(e) =>
+                    onChange={() =>
                       updateRegistro("remember", !register.remember)
                     }
                   />
@@ -274,7 +273,7 @@ export default function login(props) {
             <Form.Field>
               <Checkbox
                 label="Subscribirse al newsletter"
-                onChange={(e) =>
+                onChange={() =>
                   updateRegistro("remember", !register.remember)
                 }
               />
@@ -360,7 +359,7 @@ export default function login(props) {
             <Form.Field>
               <Checkbox
                 label="Subscribirse al newsletter"
-                onChange={(e) =>
+                onChange={() =>
                   updateRegistro("remember", !register.remember)
                 }
               />

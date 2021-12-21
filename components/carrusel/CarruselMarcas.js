@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react'
+import { Fragment, useState } from 'react'
 import ItemsCarousel from "react-items-carousel";
 import { Image, Card } from "semantic-ui-react";
 export default function CarruselMarcas({ data = [], numberCards }) {
@@ -7,45 +7,46 @@ export default function CarruselMarcas({ data = [], numberCards }) {
     return (
         <div style={{ padding: `0 ${chevronWidth}px` }}>
             <ItemsCarousel
-            requestToChangeActive={setActiveItemIndex2}
-            activeItemIndex={activeItemIndex2}
-            numberOfCards={numberCards}
-            gutter={20}
-            leftChevron={<button><i className="angle left big icon" /></button>}
-            rightChevron={<button><i className="angle right big icon" /></button>}
-            outsideChevron
-            chevronWidth={chevronWidth}
+                requestToChangeActive={setActiveItemIndex2}
+                activeItemIndex={activeItemIndex2}
+                numberOfCards={numberCards}
+                gutter={20}
+                leftChevron={<button><i className="angle left big icon" /></button>}
+                rightChevron={<button><i className="angle right big icon" /></button>}
+                outsideChevron
+                chevronWidth={chevronWidth}
             >
-            {data.map((item, index) => {
+                {data.map((item, index) => {
                     return (
                         <Fragment key={index}>
                             <Card
-                            as="a"
-                            href={`/vehiculos?marca=`+item.nombre}
-                            style={{
-                                textAlign: "center",
-                                boxShadow: "none",
-                                background: "transparent",
-                            }}
-                        >
-                            <Image
-                                quality={50}
-                                loading='lazy'
-                                className="lazyload"
-                                src={item.url.replace("https://vendetunave.s3.amazonaws.com", "https://d3bmp4azzreq60.cloudfront.net/fit-in/50x50" )}
-                                alt={item.url.replace("https://vendetunave.s3.amazonaws.com/vendetunave/images/marcas/", "" )}
+                                as="a"
+                                href={`/vehiculos?marca=` + item.nombre}
                                 style={{
-                                    width: 50,
-                                    margin: "0 auto",
-                                    marginBottom: 5,
+                                    textAlign: "center",
+                                    boxShadow: "none",
                                     background: "transparent",
                                 }}
-                            />
-                            <span style={{ color: "#4775fc", fontWeight: 700 }}>
-                                {item.nombre}
-                            </span>
-                        </Card>
-                    </Fragment>
+                            >
+                                <Image
+                                    quality={50}
+                                    loading='lazy'
+                                    className="lazyload"
+                                    src={item.url.replace("https://vendetunave.s3.amazonaws.com", "https://d3bmp4azzreq60.cloudfront.net/fit-in/50x50")}
+                                    alt={item.url.replace("https://vendetunave.s3.amazonaws.com/vendetunave/images/marcas/", "")}
+                                    width="50px"
+                                    height="50px"
+                                    style={{
+                                        margin: "0 auto",
+                                        marginBottom: 5,
+                                        background: "transparent",
+                                    }}
+                                />
+                                <span style={{ color: "#4775fc", fontWeight: 700 }}>
+                                    {item.nombre}
+                                </span>
+                            </Card>
+                        </Fragment>
                     );
                 })}
             </ItemsCarousel>

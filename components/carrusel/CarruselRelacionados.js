@@ -1,6 +1,6 @@
-import React, { Fragment, useState } from 'react'
+import { Fragment, useState } from 'react'
 import ItemsCarousel from "react-items-carousel";
-import CardProducts from './cards/CardProducts';
+
 import CardProductsDesk from './cards/CardProductsDesk';
 export default function CarruselRelacionados(props) {
     const [activeItemIndex3, setActiveItemIndex3] = useState(0);

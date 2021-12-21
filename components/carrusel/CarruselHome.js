@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import { useRouter } from "next/router";
 import PrismaZoom from 'react-prismazoom'
 
 export default function CarruselHome(props) {
-  const [page, setPage] = useState(0);
+
   const router = useRouter();
 
   return (
@@ -18,7 +17,6 @@ export default function CarruselHome(props) {
         }
         showStatus={false}
         transitionTime={1000}
-        onChange={setPage}
         swipeable={false}
         autoPlay={(props.autoPlay === false ? props.autoPlay : true) && !router.asPath.includes('vehiculos/detalle')}
         renderArrowNext={(click) => (

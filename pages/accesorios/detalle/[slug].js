@@ -1,5 +1,4 @@
-import React, { Fragment } from 'react'
-import { useRouter } from 'next/router'
+import React from 'react'
 import PublicLayout from '../../../layouts/PublicLayout';
 import SliderPrincipal from '../../../components/vehiculo/SliderPrincipal';
 import SidebarDetalle from '../../../components/vehiculo/SidebarDetalle';
@@ -7,7 +6,7 @@ import SidebarDetalleDesk from '../../../components/vehiculo/SidebarDetalleDesk'
 import TableCaracteristicasAccDesk from '../../../components/vehiculo/TableCaracteristicasAccDesk';
 import CarruselHome from '../../../components/carrusel/CarruselHome';
 import axios from 'axios';
-import { Responsive, Icon, Breadcrumb, Grid, Header, Container } from "semantic-ui-react";
+import { Responsive, Grid, Header, Container } from "semantic-ui-react";
 
 export default function detalle({ data }) {
     return (
@@ -149,25 +148,25 @@ export default function detalle({ data }) {
         </PublicLayout>
     )
 }
-export async function getServerSideProps({ params, statusCode, res}) {
+export async function getServerSideProps({ params, res }) {
     try {
-      const res = await axios.get(
-        "https://api.vendetunave.co/api/accesorio/" + params.slug
-      );
-      const data = await res.data;
-      /**if(!data.status){
-        statusCode = 404;
-    }**/
-      return {
-        props: {
-          data,
-        },
-      };
+        const res = await axios.get(
+            "https://api.vendetunave.co/api/accesorio/" + params.slug
+        );
+        const data = await res.data;
+        /**if(!data.status){
+          statusCode = 404;
+      }**/
+        return {
+            props: {
+                data,
+            },
+        };
     } catch ({ response }) {
-      res.writeHead(301, {
-        Location: `/${response.status}`,
-      });
-      res.end();
-      return { props: {} };
+        res.writeHead(301, {
+            Location: `/${response.status}`,
+        });
+        res.end();
+        return { props: {} };
     }
 }

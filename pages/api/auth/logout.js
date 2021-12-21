@@ -1,8 +1,8 @@
 import cookie from "cookie";
 
-export default (req, res) => {
+export default function Logout(req, res) {
     res.setHeader(
-    "Set-Cookie",
+        "Set-Cookie",
         cookie.serialize("token", "", {
             httpOnly: true,
             secure: process.env.NODE_ENV !== "development",

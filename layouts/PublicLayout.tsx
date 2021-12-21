@@ -1,7 +1,7 @@
 import Head from "next/head";
 
 import Header from "../components/header/Header";
-import Footer from "../components/footer/Footer";
+
 import LoaderPage from "../components/head/LoaderPage";
 import lodable from "@loadable/component";
 import dayjs from "dayjs";
@@ -9,6 +9,10 @@ import { useEffect } from "react";
 const CssBaseline = lodable(() =>
   import("@nextui-org/react").then(({ CssBaseline }) => CssBaseline)
 );
+
+const Footer = lodable(() => import("../components/footer/Footer"), {
+  ssr: false,
+});
 
 interface Props {
   nextUi?: boolean;

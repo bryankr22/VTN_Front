@@ -1,5 +1,4 @@
-import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { useDispatch } from 'react-redux';
 import { Container, Image } from 'semantic-ui-react';
@@ -8,7 +7,7 @@ import PublicLayout from '../layouts/PublicLayout';
 import { updateToken } from '../store/authSlice';
 
 export default function Custom404() {
-    const router = useRouter();
+
     const dispatch = useDispatch();
     const [, , removeCookie] = useCookies(['vtn_token']);
     const CloseSession = () => {
@@ -21,6 +20,7 @@ export default function Custom404() {
         setTimeout(() => {
             CloseSession()
         }, 1000)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

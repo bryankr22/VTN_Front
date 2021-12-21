@@ -2,7 +2,6 @@
   NOTE: This modifies next.js internal api behavior and may break your application.
   Tested on next.js version: 9.2.1
 */
-import React from 'react';
 import { Head } from 'next/document';
 
 class HeadCustom extends Head {
@@ -12,12 +11,12 @@ class HeadCustom extends Head {
         return [...normalScripts].map((file) => {
             return (
                 <link
-                key={file}
-                src={`${assetPrefix}/_next/${encodeURI( file )}${devOnlyCacheBusterQueryString}`}
-                nonce={this.props.nonce}
-                rel="stylesheet" 
-                type="text/css"
-                media="all"
+                    key={file}
+                    src={`${assetPrefix}/_next/${encodeURI(file)}${devOnlyCacheBusterQueryString}`}
+                    nonce={this.props.nonce}
+                    rel="stylesheet"
+                    type="text/css"
+                    media="all"
                 />
             );
         });

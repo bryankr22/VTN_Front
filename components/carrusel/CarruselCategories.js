@@ -1,6 +1,6 @@
-import React, {Fragment, useState} from 'react'
+import { Fragment, useState } from 'react'
 import ItemsCarousel from "react-items-carousel";
-import { Image, Card, Icon } from "semantic-ui-react";
+import { Image, Card } from "semantic-ui-react";
 
 export default function CarruselCategories({ data = [], numberCards }) {
     const [activeItemIndex, setActiveItemIndex] = useState(0);
@@ -22,57 +22,57 @@ export default function CarruselCategories({ data = [], numberCards }) {
     return (
         <div style={{ padding: `0 ${chevronWidth}px` }}>
             <ItemsCarousel
-            requestToChangeActive={setActiveItemIndex}
-            activeItemIndex={activeItemIndex}
-            numberOfCards={numberCards}
-            gutter={20}
-            leftChevron={<button><i className="angle left big icon" /></button>}
-            rightChevron={<button><i className="angle right big icon" /></button>}
-            outsideChevron
-            chevronWidth={chevronWidth}
+                requestToChangeActive={setActiveItemIndex}
+                activeItemIndex={activeItemIndex}
+                numberOfCards={numberCards}
+                gutter={20}
+                leftChevron={<button><i className="angle left big icon" /></button>}
+                rightChevron={<button><i className="angle right big icon" /></button>}
+                outsideChevron
+                chevronWidth={chevronWidth}
             >
-            {data.map((item, index) => {
+                {data.map((item, index) => {
                     return (
                         <Fragment key={index}>
                             <Card
-                            as="a"
-                            href={returnLink(item.nombre)}
-                            style={{
-                                margin: 5,
-                                boxShadow: "none",
-                                textDecoration: "none",
-                                padding: 10,
-                            }}
+                                as="a"
+                                href={returnLink(item.nombre)}
+                                style={{
+                                    margin: 5,
+                                    boxShadow: "none",
+                                    textDecoration: "none",
+                                    padding: 10,
+                                }}
                             >
-                            <style>
-                                {`
+                                <style>
+                                    {`
                                     .ui.card>.image>img, .ui.cards>.card>.image>img {
                                     height: auto !important
                                     }
                                 `}
-                            </style>
-                            <Image
-                                quality={50}
-                                loading='lazy'
-                                src={item.path.replace("https://vendetunave.s3.amazonaws.com", "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x300" )}
-                                alt={item.path.replace("https://vendetunave.s3.amazonaws.com/vendetunave/images/categorias/", "" )}
-                                wrapped
-                                ui={false}
-                                className="image-card-home lazyload"
-                                style={{
-                                    background: "white",
-                                    width: "40%",
-                                    display: "block",
-                                    margin: "auto",
-                                }}
-                            />
-                            <Card.Content style={{ borderTop: "none" }}>
-                                <Card.Header style={{ fontSize: 20, textAlign: "center" }}>
-                                    {item.nombre}
-                                </Card.Header>
-                            </Card.Content>
-                        </Card>
-                    </Fragment>
+                                </style>
+                                <Image
+                                    quality={50}
+                                    loading='lazy'
+                                    src={item.path.replace("https://vendetunave.s3.amazonaws.com", "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x300")}
+                                    alt={item.path.replace("https://vendetunave.s3.amazonaws.com/vendetunave/images/categorias/", "")}
+                                    wrapped
+                                    ui={false}
+                                    className="image-card-home lazyload"
+                                    style={{
+                                        background: "white",
+                                        width: "40%",
+                                        display: "block",
+                                        margin: "auto",
+                                    }}
+                                />
+                                <Card.Content style={{ borderTop: "none" }}>
+                                    <Card.Header style={{ fontSize: 20, textAlign: "center" }}>
+                                        {item.nombre}
+                                    </Card.Header>
+                                </Card.Content>
+                            </Card>
+                        </Fragment>
                     );
                 })}
             </ItemsCarousel>

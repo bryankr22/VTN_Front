@@ -1,9 +1,7 @@
-import React from 'react';
 import { NextScript } from 'next/document';
-import Script from 'next/script'
 
 class NextScriptCustom extends NextScript {
-    getDynamicChunks(files){
+    getDynamicChunks(files) {
         const { dynamicImports, assetPrefix, isDevelopment, devOnlyCacheBusterQueryString } = this.context;
         (dynamicImports).map((bundle) => {
             if (!bundle.file.endsWith('.js') || files.allFiles.includes(bundle.file))
@@ -12,25 +10,25 @@ class NextScriptCustom extends NextScript {
                 <script
                     defer={!isDevelopment}
                     key={bundle.file}
-                    src={`${assetPrefix}/_next/${encodeURI( bundle.file )}${devOnlyCacheBusterQueryString}`}
+                    src={`${assetPrefix}/_next/${encodeURI(bundle.file)}${devOnlyCacheBusterQueryString}`}
                     nonce={this.props.nonce}
-                    crossOrigin={ this.props.crossOrigin || process.env.__NEXT_CROSS_ORIGIN }
+                    crossOrigin={this.props.crossOrigin || process.env.__NEXT_CROSS_ORIGIN}
                 />
             );
         })
     }
-    getScripts(files){
+    getScripts(files) {
         const { assetPrefix, buildManifest, isDevelopment, devOnlyCacheBusterQueryString, } = this.context;
         const normalScripts = files.allFiles.filter((file) => file.endsWith('.js'));
-        const lowPriorityScripts = buildManifest.lowPriorityFiles?.filter((file) => file.endsWith('.js') );
+        const lowPriorityScripts = buildManifest.lowPriorityFiles?.filter((file) => file.endsWith('.js'));
         return [...normalScripts, ...lowPriorityScripts].map((file) => {
             return (
                 <script
-                key={file}
-                src={`${assetPrefix}/_next/${encodeURI( file )}${devOnlyCacheBusterQueryString}`}
-                nonce={this.props.nonce}
-                defer={!isDevelopment}
-                crossOrigin={ this.props.crossOrigin || process.env.__NEXT_CROSS_ORIGIN }
+                    key={file}
+                    src={`${assetPrefix}/_next/${encodeURI(file)}${devOnlyCacheBusterQueryString}`}
+                    nonce={this.props.nonce}
+                    defer={!isDevelopment}
+                    crossOrigin={this.props.crossOrigin || process.env.__NEXT_CROSS_ORIGIN}
                 />
             );
         });

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Dimmer, Loader } from "semantic-ui-react";
 import { useRouter } from 'next/router';
 export default function Loading() {
@@ -19,6 +19,7 @@ export default function Loading() {
             router.events.off('routeChangeComplete', handleComplete)
             router.events.off('routeChangeError', handleComplete)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     if (!loading) return null

@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
 import {
-  Container,
   Header,
   Grid,
   Image,
@@ -53,6 +51,7 @@ export default function CompareVehiculoMobile() {
                   centered
                   style={{ height: 200, objectFit: "none", width: "100%" }}
                   src={pathS3 + vehicle.nameImage + "300x300.webp"}
+                  alt={vehicle.title}
                 />
                 {index === 0 && <Header as="h2">Características</Header>}
                 {index !== 0 && (

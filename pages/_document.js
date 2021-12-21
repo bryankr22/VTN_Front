@@ -16,17 +16,27 @@ class MyDocument extends Document {
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-          <link rel="preload" href="https://fonts.googleapis.com/css?family=Raleway:100,600&display=swap" as="style" />
+          <link rel="preload" href="https://fonts.googleapis.com/css?family=Raleway:100,600&display=swap" as="style" onLoad="this.onload=null;this.rel='stylesheet'" />
           <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" as="style" />
-          <link
-            media="screen"
-            href="https://fonts.googleapis.com/css?family=Raleway:100,600&display=swap"
-            rel="stylesheet"
-            type="text/css"
-          />
+          <link rel="preload" href="/css/app.min.css" as="style" onLoad="this.onload=null;this.rel='stylesheet'" />
           <link
             media="screen"
             href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+            rel="stylesheet"
+            type="text/css"
+          />
+          <noscript>
+            <link
+              media="screen"
+              href="https://fonts.googleapis.com/css?family=Raleway:100,600&display=swap"
+              rel="stylesheet"
+              type="text/css"
+            />
+          </noscript>
+          {/* eslint-disable-next-line @next/next/no-css-tags */}
+          <link
+            media="screen"
+            href="/css/app.min.css"
             rel="stylesheet"
             type="text/css"
           />
@@ -45,6 +55,8 @@ class MyDocument extends Document {
           <meta name="city" content="Cali" />
           <meta name="country" content="Colombia" />
           <meta name="robots" content="NOODP" />
+
+
 
           <script
             defer
