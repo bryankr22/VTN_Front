@@ -31,8 +31,8 @@ const customRequest = (cookies, id, update) => {
 
     Resizer.imageFileResizer(
       file,
-      4000,
-      4000,
+      2000,
+      2000,
       "JPEG",
       100,
       360,
