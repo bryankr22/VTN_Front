@@ -117,10 +117,8 @@ export default function MandateForm({ data }: Props) {
               label="* Número de identidad"
               fullWidth
               required
-              type="number"
               {...register("documento_mandate", {
                 required,
-                validate: validateAsNumber,
               })}
               {...getStatusError(formState.errors.documento_mandate?.message)}
             />
@@ -160,10 +158,7 @@ export default function MandateForm({ data }: Props) {
               shadow={false}
               label="* Número de identidad"
               fullWidth
-              type="number"
-              {...register("documento_mandatario", {
-                validate: guardOptional(validateAsNumber),
-              })}
+              {...register("documento_mandatario")}
               {...getStatusError(
                 formState.errors.documento_mandatario?.message
               )}
@@ -204,7 +199,7 @@ export default function MandateForm({ data }: Props) {
               underlined
               shadow={false}
               fullWidth
-              label="Modelo"
+              label="Línea"
               {...register("modelo", { required })}
               {...getStatusError(formState.errors.modelo?.message)}
             />
