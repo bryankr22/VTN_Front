@@ -149,7 +149,6 @@ export default function GeneralData({ data }: Props) {
               fullWidth
               {...register("documento_vendedor", {
                 required,
-                validate: validateAsNumber,
               })}
               {...getStatusError(formState.errors.documento_vendedor?.message)}
             />
@@ -195,9 +194,7 @@ export default function GeneralData({ data }: Props) {
               shadow={false}
               label="Número de Identidad"
               fullWidth
-              {...register("documento_comprador", {
-                validate: guardOptional(validateAsNumber),
-              })}
+              {...register("documento_comprador")}
               {...getStatusError(formState.errors.documento_comprador?.message)}
             />
             <Spacer />
@@ -248,7 +245,7 @@ export default function GeneralData({ data }: Props) {
               underlined
               shadow={false}
               fullWidth
-              label="Modelo"
+              label="Línea"
               {...register("modelo", { required })}
               {...getStatusError(formState.errors.modelo?.message)}
             />
