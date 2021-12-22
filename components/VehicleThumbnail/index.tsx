@@ -11,7 +11,7 @@ const showSection = ({
 }) => {
   return (
     [permuta, financiacion, confiable, blindado].some(Boolean) ||
-    peritaje != "0"
+    (peritaje && peritaje != "0")
   );
 };
 
@@ -42,7 +42,7 @@ export default function VehicleThumbnail({ item, src, compact }) {
           )}
           {item.confiable == 1 && <Icon name="check" title="confiable" />}
           {item.blindado == 1 && <Icon name="shield" title="blindado" />}
-          {item.peritaje != "0" && (
+          {item.peritaje && item.peritaje != "0" && (
             <Icon name="clipboard check" title="peritaje" />
           )}
         </div>
