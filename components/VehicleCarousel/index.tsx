@@ -15,6 +15,7 @@ export default function VehicleCarousel({ images = [], alt, mobile }: Props) {
   const imageList = useMemo(() => {
     return images.map((image) => ({ src: image.url + "webp", alt }));
   }, []);
+
   return (
     <div>
       <Carousel
@@ -31,6 +32,7 @@ export default function VehicleCarousel({ images = [], alt, mobile }: Props) {
         maxIcon={null}
         playIcon={null}
         className={"crsl-adapt"}
+        hasThumbnails={!mobile}
       />
     </div>
   );

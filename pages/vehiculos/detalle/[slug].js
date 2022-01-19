@@ -17,6 +17,7 @@ import {
   Header,
   Container,
   Input,
+  Image
 } from "semantic-ui-react";
 
 import Head from "next/head";
@@ -62,33 +63,35 @@ export default function detalle({ data }) {
 
   return (
     <>
-      <NextSeo
-        title={`${data.vehiculo.title}`}
-        description={`${data.vehiculo.title} en venta en ${data.vehiculo.ciudadLabel} ${data.vehiculo.departamentoLabel} por ${data.vehiculo.precio}. Compra o vende tu vehículo gratis en Vende Tu Nave`}
-        openGraph={{
-          images: [
-            {
-              url: `${getMetaUrl(imagenes?.[0]?.url)}${imagenes?.[0]?.extension}`,
-              alt: data.vehiculo.title,
-              width: 300,
-              height: 200,
-            },
-          ],
-          url: `https://vendetunave.co/vehiculos/detalle/${normalize(data.vehiculo.title)}-${data.vehiculo.id}`,
-          title: data.vehiculo.title,
-          locale: "es_ES",
-          type: "website",
-          description: `${data.vehiculo.title} en venta en ${data.vehiculo.ciudadLabel} ${data.vehiculo.departamentoLabel} por ${data.vehiculo.precio}. Compra o vende tu vehículo gratis en Vende Tu Nave`,
-          site_name: "VendeTuNave - Vehiculo",
-        }}
-      />
-      <Head>
-        <meta property="og:image:secure_url" content={`${getMetaUrl(imagenes?.[0]?.url)}${imagenes?.[0]?.extension}`} />
-        <meta property="keywords" content={`${data.vehiculo.title}, ${data.vehiculo.modeloLabel}, ${data.vehiculo.marcaLabel}, ${data.vehiculo.title} en venta, carros usados, carro en venta, vehículo.`} />
-      </Head>
-      <PublicLayout>
-        <style>
-          {`
+      {data.vehicleExists &&
+        <>
+          <NextSeo
+            title={`${data.vehiculo.title}`}
+            description={`${data.vehiculo.title} en venta en ${data.vehiculo.ciudadLabel} ${data.vehiculo.departamentoLabel} por ${data.vehiculo.precio}. Compra o vende tu vehículo gratis en Vende Tu Nave`}
+            openGraph={{
+              images: [
+                {
+                  url: `${getMetaUrl(imagenes?.[0]?.url)}${imagenes?.[0]?.extension}`,
+                  alt: data.vehiculo.title,
+                  width: 300,
+                  height: 200,
+                },
+              ],
+              url: `https://vendetunave.co/vehiculos/detalle/${normalize(data.vehiculo.title)}-${data.vehiculo.id}`,
+              title: data.vehiculo.title,
+              locale: "es_ES",
+              type: "website",
+              description: `${data.vehiculo.title} en venta en ${data.vehiculo.ciudadLabel} ${data.vehiculo.departamentoLabel} por ${data.vehiculo.precio}. Compra o vende tu vehículo gratis en Vende Tu Nave`,
+              site_name: "VendeTuNave - Vehiculo",
+            }}
+          />
+          <Head>
+            <meta property="og:image:secure_url" content={`${getMetaUrl(imagenes?.[0]?.url)}${imagenes?.[0]?.extension}`} />
+            <meta property="keywords" content={`${data.vehiculo.title}, ${data.vehiculo.modeloLabel}, ${data.vehiculo.marcaLabel}, ${data.vehiculo.title} en venta, carros usados, carro en venta, vehículo.`} />
+          </Head>
+          <PublicLayout>
+            <style>
+              {`
                 .image > img {
                     object-fit: cover;
                 }
@@ -146,189 +149,199 @@ export default function detalle({ data }) {
                   font-size: 1rem !important;
                 }
             `}
-        </style>
+            </style>
 
-        <Responsive maxWidth={768}>
-          <Input
-            action={{
-              icon: "search",
-              style: {
-                background: "transparent",
-                color: "black",
-                borderBottom: "1px solid black",
-                height: 47,
-                paddingTop: 10,
-              },
-              onClick: () => handleKeyDown(),
-            }}
-            onChange={(e, { value }) => setQuery(value)}
-            onKeyDown={(e) => handleKeyDown(e)}
-            fluid
-            id="search-responsive"
-            style={{ margin: "10px 20px 0 20px" }}
-            className="search-input"
-            placeholder="¿Qué estas buscando?"
-          />
-        </Responsive>
-        <div
-          style={{
-            margin: 10,
-            padding: "15px 15px 5px 15px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <Breadcrumb
-            style={{
-              background: "transparent",
-              padding: 15,
-              position: "absolute",
-              zIndex: 1000,
-            }}
-          >
-            <Breadcrumb.Section link href={"/vehiculos/"}>
-              {data.vehiculo.tipoLabel}
-            </Breadcrumb.Section>
-            <Breadcrumb.Divider icon="right angle" />
-
-            {data.vehiculo.tipoMotoLabel && (
-              <Fragment>
-                <Breadcrumb.Section link href={"/vehiculos/"}>
-                  {data.vehiculo.tipoMotoLabel}
-                </Breadcrumb.Section>
-                <Breadcrumb.Divider icon="right angle" />
-              </Fragment>
-            )}
-            <Breadcrumb.Section link href={"/vehiculos/"}>
-              {data.vehiculo.marcaLabel}
-            </Breadcrumb.Section>
-            <Breadcrumb.Divider icon="right angle" />
-            <Breadcrumb.Section link href={"/vehiculos/"}>
-              {data.vehiculo.modeloLabel}
-            </Breadcrumb.Section>
-          </Breadcrumb>
-          <Responsive
-            {...Responsive.onlyComputer}
-            style={{ display: "inline", marginLeft: "auto" }}
-          >
+            <Responsive maxWidth={768}>
+              <Input
+                action={{
+                  icon: "search",
+                  style: {
+                    background: "transparent",
+                    color: "black",
+                    borderBottom: "1px solid black",
+                    height: 47,
+                    paddingTop: 10,
+                  },
+                  onClick: () => handleKeyDown(),
+                }}
+                onChange={(e, { value }) => setQuery(value)}
+                onKeyDown={(e) => handleKeyDown(e)}
+                fluid
+                id="search-responsive"
+                style={{ margin: "10px 20px 0 20px" }}
+                className="search-input"
+                placeholder="¿Qué estas buscando?"
+              />
+            </Responsive>
             <div
               style={{
-                display: "inline-block",
-                cssFloat: "right",
-                fontSize: 18,
-                color: "#5c5c5c"
+                margin: 10,
+                padding: "15px 15px 5px 15px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
               }}
             >
-              <Icon name="eye" style={{ marginRight: 5 }} />
-              <p style={{ display: "inline" }}>
-                {new Intl.NumberFormat("de-DE").format(data.vehiculo.views)}
-              </p>
-            </div>
-          </Responsive>
-        </div>
-        <Responsive maxWidth={1023}>
-          <Container style={{ marginTop: 20 }}>
-            <VehicleCarousel images={data.imagenes} alt={data.vehiculo.title} mobile />
-            <SidebarDetalle
-              vehicleFav={data.vehicleFav}
-              vehiculo={data.vehiculo}
-              id={normalize(data.vehiculo.title) + '-' + data.vehiculo.id}
-            />
-            <Grid columns={1} divided="vertically">
-              <Grid.Row style={{ marginTop: 30 }}>
-                <div className="p-3">
-                  <Grid>
-                    <Grid.Row columns={2} style={{ paddingBottom: 8 }}>
-                      <Grid.Column>
-                        <Header as="h5">
-                          Publicado hace:
-                          {" " + data.diasPublicado} días
-                        </Header>
-                      </Grid.Column>
-                      <Grid.Column>
-                        <Header as="h5">
-                          {" " + data.vehiculo.ciudadLabel},
-                          {" " + data.vehiculo.departamentoLabel}
-                        </Header>
-                      </Grid.Column>
-                    </Grid.Row>
-                    <Grid.Row columns={2} style={{ paddingBottom: 8 }}>
-                      <Grid.Column>
-                        <Header as="h5">
-                          Teléfono:
-                          {" " + data.vehiculo.contacto}
-                        </Header>
-                      </Grid.Column>
-                    </Grid.Row>
-                  </Grid>
+              <Breadcrumb
+                style={{
+                  background: "transparent",
+                  padding: 15,
+                  position: "absolute",
+                  zIndex: 1000,
+                }}
+              >
+                <Breadcrumb.Section link href={"/vehiculos/"}>
+                  {data.vehiculo.tipoLabel}
+                </Breadcrumb.Section>
+                <Breadcrumb.Divider icon="right angle" />
+
+                {data.vehiculo.tipoMotoLabel && (
+                  <Fragment>
+                    <Breadcrumb.Section link href={"/vehiculos/"}>
+                      {data.vehiculo.tipoMotoLabel}
+                    </Breadcrumb.Section>
+                    <Breadcrumb.Divider icon="right angle" />
+                  </Fragment>
+                )}
+                <Breadcrumb.Section link href={"/vehiculos/"}>
+                  {data.vehiculo.marcaLabel}
+                </Breadcrumb.Section>
+                <Breadcrumb.Divider icon="right angle" />
+                <Breadcrumb.Section link href={"/vehiculos/"}>
+                  {data.vehiculo.modeloLabel}
+                </Breadcrumb.Section>
+              </Breadcrumb>
+              <Responsive
+                {...Responsive.onlyComputer}
+                style={{ display: "inline", marginLeft: "auto" }}
+              >
+                <div
+                  style={{
+                    display: "inline-block",
+                    cssFloat: "right",
+                    fontSize: 18,
+                    color: "#5c5c5c"
+                  }}
+                >
+                  <Icon name="eye" style={{ marginRight: 5 }} />
+                  <p style={{ display: "inline" }}>
+                    {new Intl.NumberFormat("de-DE").format(data.vehiculo.views)}
+                  </p>
                 </div>
-              </Grid.Row>
-              <Grid.Row className="p-3">
-                <Header as="h5" style={{ marginTop: 20 }}>
-                  CARACTERÍSTICAS
-                </Header>
-                <TableCaracteristicasDesk vehiculo={data.vehiculo} />
-              </Grid.Row>
-              <Grid.Row>
-                <div className="p-3">
-                  <Header as="h5" icon>
+              </Responsive>
+            </div>
+            <Responsive maxWidth={1023}>
+              <Container style={{ marginTop: 20 }}>
+                <VehicleCarousel images={data.imagenes} alt={data.vehiculo.title} mobile />
+                <SidebarDetalle
+                  vehicleFav={data.vehicleFav}
+                  vehiculo={data.vehiculo}
+                  id={normalize(data.vehiculo.title) + '-' + data.vehiculo.id}
+                />
+                <Grid columns={1} divided="vertically">
+                  <Grid.Row style={{ marginTop: 30 }}>
+                    <div className="p-3">
+                      <Grid>
+                        <Grid.Row columns={2} style={{ paddingBottom: 8 }}>
+                          <Grid.Column>
+                            <Header as="h5">
+                              Publicado hace:
+                              {" " + data.diasPublicado} días
+                            </Header>
+                          </Grid.Column>
+                          <Grid.Column>
+                            <Header as="h5">
+                              {" " + data.vehiculo.ciudadLabel},
+                              {" " + data.vehiculo.departamentoLabel}
+                            </Header>
+                          </Grid.Column>
+                        </Grid.Row>
+                        <Grid.Row columns={2} style={{ paddingBottom: 8 }}>
+                          <Grid.Column>
+                            <Header as="h5">
+                              Teléfono:
+                              {" " + data.vehiculo.contacto}
+                            </Header>
+                          </Grid.Column>
+                        </Grid.Row>
+                      </Grid>
+                    </div>
+                  </Grid.Row>
+                  <Grid.Row className="p-3">
+                    <Header as="h5" style={{ marginTop: 20 }}>
+                      CARACTERÍSTICAS
+                    </Header>
+                    <TableCaracteristicasDesk vehiculo={data.vehiculo} />
+                  </Grid.Row>
+                  <Grid.Row>
+                    <div className="p-3">
+                      <Header as="h5" icon>
+                        DESCRIPCIÓN
+                      </Header>
+                      <p style={{ fontSize: 14 }}>{data.vehiculo.descripcion}</p>
+                    </div>
+                  </Grid.Row>
+                </Grid>
+                {data.vehiculosRelacionados.length > 0 && (
+                  <Container fluid id="cont-inf">
+                    <Header as="h4" style={{ marginTop: 20, marginLeft: 15 }}>
+                      PRODUCTOS RELACIONADOS
+                    </Header>
+                    <CarruselRelacionados
+                      type="products"
+                      data={data.vehiculosRelacionados}
+                      numberCards={1}
+                    />
+                  </Container>
+                )}
+              </Container>
+            </Responsive>
+            <Responsive {...Responsive.onlyComputer}>
+              <Grid columns="equal">
+                <Grid.Column width={10} style={{ padding: "30px 10px 15px 30px" }}>
+                  <VehicleCarousel images={data.imagenes} alt={data.vehiculo.title} />
+                  <Header as="h3" style={{ marginTop: 20 }}>
+                    CARACTERÍSTICAS
+                  </Header>
+                  <TableCaracteristicasDesk vehiculo={data.vehiculo} />
+                  <hr />
+                  <Header as="h3" icon>
                     DESCRIPCIÓN
                   </Header>
                   <p style={{ fontSize: 14 }}>{data.vehiculo.descripcion}</p>
-                </div>
-              </Grid.Row>
-            </Grid>
-            {data.vehiculosRelacionados.length > 0 && (
-              <Container fluid id="cont-inf">
-                <Header as="h4" style={{ marginTop: 20, marginLeft: 15 }}>
-                  PRODUCTOS RELACIONADOS
-                </Header>
-                <CarruselRelacionados
-                  type="products"
-                  data={data.vehiculosRelacionados}
-                  numberCards={1}
+                  <hr />
+                </Grid.Column>
+                <SidebarDetalleDesk
+                  diasPublicado={data.diasPublicado}
+                  vehicleFav={data.vehicleFav}
+                  vehiculo={data.vehiculo}
+                  id={normalize(data.vehiculo.title) + '-' + data.vehiculo.id}
                 />
-              </Container>
-            )}
+              </Grid>
+              {data.vehiculosRelacionados.length > 0 && (
+                <Container fluid id="cont-inf">
+                  <Header as="h4" style={{ marginTop: 20, marginLeft: 15 }}>
+                    PRODUCTOS RELACIONADOS
+                  </Header>
+                  <CarruselRelacionados
+                    type="products"
+                    data={data.vehiculosRelacionados}
+                    numberCards={4}
+                  />
+                </Container>
+              )}
+            </Responsive>
+          </PublicLayout>
+        </>
+      }
+      {!data.vehicleExists &&
+        <PublicLayout>
+          <Container style={{ paddingTop: 66, minHeight: 400 }} text textAlign='center'>
+            <Image src="/images/logo_VTN.png" size='small' alt="VTN_logo" centered />
+            <h2>Lo sentimos, esta publicación no se encuentra disponible.</h2>
           </Container>
-        </Responsive>
-        <Responsive {...Responsive.onlyComputer}>
-          <Grid columns="equal">
-            <Grid.Column width={10} style={{ padding: "30px 10px 15px 30px" }}>
-              <VehicleCarousel images={data.imagenes} alt={data.vehiculo.title} />
-              <Header as="h3" style={{ marginTop: 20 }}>
-                CARACTERÍSTICAS
-              </Header>
-              <TableCaracteristicasDesk vehiculo={data.vehiculo} />
-              <hr />
-              <Header as="h3" icon>
-                DESCRIPCIÓN
-              </Header>
-              <p style={{ fontSize: 14 }}>{data.vehiculo.descripcion}</p>
-              <hr />
-            </Grid.Column>
-            <SidebarDetalleDesk
-              diasPublicado={data.diasPublicado}
-              vehicleFav={data.vehicleFav}
-              vehiculo={data.vehiculo}
-              id={normalize(data.vehiculo.title) + '-' + data.vehiculo.id}
-            />
-          </Grid>
-          {data.vehiculosRelacionados.length > 0 && (
-            <Container fluid id="cont-inf">
-              <Header as="h4" style={{ marginTop: 20, marginLeft: 15 }}>
-                PRODUCTOS RELACIONADOS
-              </Header>
-              <CarruselRelacionados
-                type="products"
-                data={data.vehiculosRelacionados}
-                numberCards={4}
-              />
-            </Container>
-          )}
-        </Responsive>
-      </PublicLayout>
+        </PublicLayout>
+      }
     </>
   );
 }
@@ -347,6 +360,7 @@ export async function getServerSideProps(context) {
     config
   );
   const data = await res.data;
+  console.log(data);
   return {
     props: {
       data,
