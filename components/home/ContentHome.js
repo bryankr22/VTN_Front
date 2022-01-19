@@ -62,6 +62,9 @@ const ContentHome = ({ config }) => {
   return (
     <div>
       <Responsive {...Responsive.onlyMobile}>
+        {form.link_video != "" && (
+          <VideoPlayer link={form.link_video} />
+        )}
         <Container
           style={{
             paddingTop: 40,
@@ -124,6 +127,9 @@ const ContentHome = ({ config }) => {
         </Container>
       </Responsive>
       <Responsive {...Responsive.onlyTablet}>
+        {form.link_video != "" && (
+          <VideoPlayer link={form.link_video} />
+        )}
         <Container
           style={{
             paddingTop: 40,
