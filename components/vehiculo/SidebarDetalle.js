@@ -158,7 +158,7 @@ export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
                 fluid
                 style={{ margin: "0 !important", textAlign: "center" }}
             >
-                {/* <Grid>
+                <Grid>
                     <Grid.Row columns={2} style={{ maxHeight: 78 }}>
                         <Grid.Column>
                             <Button
@@ -187,23 +187,13 @@ export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
                             </Button>
                         </Grid.Column>
                     </Grid.Row>
-                </Grid> */}
-                <Button
-                    color="blue"
-                    fluid
-                    as="a"
-                    href={"tel:" + vehiculo.contacto}
-                    style={{ borderRadius: 20 }}
-                >
-                    Llamar
-                </Button>
-                <br />
+                </Grid>
                 <Button
                     as='a'
                     color="green"
                     fluid
                     target='_blank'
-                    style={{ borderRadius: 20 }}
+                    style={{ borderRadius: 20, marginTop: 20 }}
                     href={"https://api.whatsapp.com/send?phone=57" + vehiculo.contacto + "&text=Hola,%20estoy%20interesado.&source=vendetunave.co&data="}
                 >
                     WhatsApp
