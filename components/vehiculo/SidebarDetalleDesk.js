@@ -201,7 +201,7 @@ export default function SidebarDetalleDesk({ vehiculo, vehicleFav, diasPublicado
                     }
                 </>
             )}
-            {/* <Container
+            <Container
                 style={{ marginTop: 30, background: "gray", padding: 25 }}
             >
                 {(alert.success || alert.error) && (
@@ -236,7 +236,7 @@ export default function SidebarDetalleDesk({ vehiculo, vehicleFav, diasPublicado
                         ENVIAR MENSAJE
                     </Form.Button>
                 </Form>
-            </Container> */}
+            </Container>
         </Grid.Column>
     )
 }
