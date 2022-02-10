@@ -1,24 +1,33 @@
-import { useMemo } from "react";
-import Carousel from "./../ExpCarousel/dist";
+import { useMemo } from "react"
+import Carousel from "./../ExpCarousel/dist"
+import SwiperCore, { Lazy, Zoom, Virtual, Navigation, Pagination } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
+
+import 'swiper/css'
+import "swiper/css/zoom"
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
+
+import styles from './styles.module.css'
 
 interface Image {
-  url: string;
+  url: string
 }
 
 interface Props {
-  images?: Image[];
-  alt: string;
-  mobile?: boolean;
+  images?: Image[]
+  alt: string
+  mobile?: boolean
 }
 
 export default function VehicleCarousel({ images = [], alt, mobile }: Props) {
   const imageList = useMemo(() => {
-    return images.map((image) => ({ src: image.url + "webp", alt }));
-  }, []);
+    return images.map((image) => ({ src: image.url + "webp", alt }))
+  }, [])
 
   return (
     <div>
-      <Carousel
+      {/* <Carousel
         images={imageList}
         shouldLazyLoad={false}
         objectFit={"contain"}
@@ -33,7 +42,35 @@ export default function VehicleCarousel({ images = [], alt, mobile }: Props) {
         playIcon={null}
         className={"crsl-adapt"}
         hasThumbnails={!mobile}
-      />
+      /> */
+        <Swiper
+          className={styles.swiper}
+          style={{
+            "--swiper-navigation-color": "#000",
+            "--swiper-pagination-color": "#000"
+          } as any}
+          modules={[Virtual, Zoom, Lazy, Pagination, Navigation]}
+          lazy={false}
+          zoom={true}
+          virtual={true}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={true}
+        >
+          {
+            imageList.map((image, index) => (
+              <SwiperSlide className={styles['swiper-slide']} key={index} virtualIndex={index}>
+                <div className="swiper-zoom-container">
+                  <img className='swiper-lazy' src={image.src} alt={alt}>
+                  </img>
+                </div>
+                <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+              </SwiperSlide>
+            ))
+          }
+        </Swiper>
+      }
     </div>
-  );
+  )
 }
