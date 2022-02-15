@@ -1,5 +1,5 @@
 import Head from "next/head";
-
+import { useSelector, useDispatch } from 'react-redux';
 import loadable from '@loadable/component';
 
 import PublicLayout from "../layouts/PublicLayout";
@@ -13,6 +13,9 @@ import ContentHome from "../components/home/ContentHome";
 
 import axios from "axios";
 import { API_URL, home } from "../helpers/constants";
+import { Image } from "semantic-ui-react";
+import { changeMode } from "../store/darkMode";
+import { dark, light } from "../helpers/colors";
 
 const CategoriasHome = loadable(() => import('../components/home/CategoriasHome'), {
   fallback: <div>...</div>
@@ -28,14 +31,33 @@ const Home = ({
   filters,
   config,
 }) => {
+  const dispatch = useDispatch();
+  const darkMode = useSelector(({ darkMode }) => darkMode.status);
+  const statusMode = darkMode === dark ? light : dark;
+
   return (
-    <PublicLayout>
+    <PublicLayout darkMode={darkMode}>
+      <style>
+        {`
+          html {
+            background-color: ${darkMode}
+          }
+        `}
+      </style>
       <Head>
         <meta
           property="keywords"
           content="vende tu nave, carros en venta, carros de segunda, mercado libre carros, venta de carros usados y nuevos, compra y venta de carros, compra y venta motos, venta de carros"
         />
       </Head>
+      <Image
+        onClick={() => dispatch(changeMode(statusMode))}
+        width="30px"
+        height="30px"
+        alt="dark mode button"
+        src="/images/dark_mode.png"
+        style={{ height: 'auto', width: 30, position: 'absolute', right: 10, zIndex: 1, filter: 'invert(1)', cursor: 'pointer', top: 10 }}
+      />
       <SliderHome slider={slider} sliderMobile={sliderMobile} />
       <FiltersHome options={filters} />
       <CategoriasHome categorias={categorias} />

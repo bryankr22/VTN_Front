@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { Header, Form, Container, Button, Input, Select, Responsive } from "semantic-ui-react";
+import { useSelector } from 'react-redux';
 
 import axios from 'axios';
 import { API_URL, GET_BRANDS, get_modelos } from '../../helpers/constants';
+import { dark, light } from '../../helpers/colors';
 
 const FilterPricing = [
     { key: 0, text: "Precio", value: 0 },
@@ -106,6 +108,8 @@ export default function FiltersHome({ options: optsProp }) {
         setOptions(prev => ({ ...prev, optionsMarcas }))
     }
 
+    const darkMode = useSelector(({ darkMode }) => darkMode.status);
+    const colorText = darkMode === light ? dark : light;
 
     return (
         <div>
@@ -113,7 +117,17 @@ export default function FiltersHome({ options: optsProp }) {
                 text
                 style={{ textAlign: "center", marginTop: 20, marginBottom: 20 }}
             >
-                <Header className="centered" as="h1" style={{ fontSize: "1.4rem", textTransform: "uppercase" }}>
+                <style>
+                    {`
+                        .ui.checkbox>label {
+                            color: ${colorText}
+                        }
+                        .ui.checkbox label:hover, .ui.checkbox+label:hover {
+                            color: ${colorText}
+                        }
+                    `}
+                </style>
+                <Header className="centered" as="h1" style={{ fontSize: "1.4rem", textTransform: "uppercase", color: colorText }}>
                     ¿qué carro o moto quieres comprar en vende tu nave?
                 </Header>
                 <Responsive {...Responsive.onlyMobile}>
@@ -129,7 +143,7 @@ export default function FiltersHome({ options: optsProp }) {
                             />
                         </Form.Field>
                         <Form.Field>
-                            <label style={{ textAlign: "center", fontSize: 16 }}>
+                            <label style={{ textAlign: "center", fontSize: 16, color: colorText }}>
                                 Selecciona marca y modelo
                             </label>
                             <Input type="text" action>
@@ -162,7 +176,7 @@ export default function FiltersHome({ options: optsProp }) {
                             </Input>
                         </Form.Field>
                         <Form.Field style={{ width: "100%" }}>
-                            <label style={{ textAlign: "center", fontSize: 16 }}>
+                            <label style={{ textAlign: "center", fontSize: 16, color: colorText }}>
                                 Precios
                             </label>
                             <Select
@@ -175,7 +189,7 @@ export default function FiltersHome({ options: optsProp }) {
                             />
                         </Form.Field>
                         <Form.Field>
-                            <label style={{ textAlign: "center", fontSize: 16 }}>Año</label>
+                            <label style={{ textAlign: "center", fontSize: 16, color: colorText }}>Año</label>
                             <Input type="text" action>
                                 <Select
                                     search
@@ -232,7 +246,7 @@ export default function FiltersHome({ options: optsProp }) {
                             />
                         </Form.Field>
                         <Form.Field>
-                            <label style={{ textAlign: "center", fontSize: 16 }}>
+                            <label style={{ textAlign: "center", fontSize: 16, color: colorText }}>
                                 Selecciona marca y modelo
                             </label>
                             <Input type="text" action>
@@ -265,7 +279,7 @@ export default function FiltersHome({ options: optsProp }) {
                             </Input>
                         </Form.Field>
                         <Form.Field style={{ width: "100%" }}>
-                            <label style={{ textAlign: "center", fontSize: 16 }}>
+                            <label style={{ textAlign: "center", fontSize: 16, color: colorText }}>
                                 Precios
                             </label>
                             <Select
@@ -278,7 +292,7 @@ export default function FiltersHome({ options: optsProp }) {
                             />
                         </Form.Field>
                         <Form.Field>
-                            <label style={{ textAlign: "center", fontSize: 16 }}>Año</label>
+                            <label style={{ textAlign: "center", fontSize: 16, color: colorText }}>Año</label>
                             <Input type="text" action>
                                 <Select
                                     search
@@ -326,7 +340,7 @@ export default function FiltersHome({ options: optsProp }) {
                     <Form style={{ marginTop: 50, marginBottom: 50 }}>
                         <Form.Group>
                             <Form.Field>
-                                <label style={{ textAlign: "center", fontSize: 16, textTransform: "uppercase" }}>
+                                <label style={{ textAlign: "center", fontSize: 16, textTransform: "uppercase", color: colorText }}>
                                     tipo
                                 </label>
                                 <Select
@@ -339,7 +353,7 @@ export default function FiltersHome({ options: optsProp }) {
                                 />
                             </Form.Field>
                             <Form.Field style={{ width: "100%" }}>
-                                <label style={{ textAlign: "center", fontSize: 16, textTransform: "uppercase" }}>
+                                <label style={{ textAlign: "center", fontSize: 16, textTransform: "uppercase", color: colorText }}>
                                     selecciona marca y modelo
                                 </label>
                                 <Input type="text" action>
@@ -365,7 +379,7 @@ export default function FiltersHome({ options: optsProp }) {
                         </Form.Group>
                         <Form.Group style={{ marginTop: 40, marginBottom: 40 }}>
                             <Form.Field style={{ width: "100%" }}>
-                                <label style={{ textAlign: "center", fontSize: 16, textTransform: "uppercase" }}>
+                                <label style={{ textAlign: "center", fontSize: 16, textTransform: "uppercase", color: colorText }}>
                                     precios
                                 </label>
                                 <Select
@@ -378,7 +392,7 @@ export default function FiltersHome({ options: optsProp }) {
                                 />
                             </Form.Field>
                             <Form.Field style={{ width: "74%" }}>
-                                <label style={{ textAlign: "center", fontSize: 16, textTransform: "uppercase" }}>
+                                <label style={{ textAlign: "center", fontSize: 16, textTransform: "uppercase", color: colorText }}>
                                     año
                                 </label>
                                 <Input type="text" action>

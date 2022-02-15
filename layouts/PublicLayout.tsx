@@ -45,7 +45,7 @@ const PublicLayout = ({ nextUi, ...props }: Props) => {
         <div className="row">
           <div
             className="col-md-12"
-            style={{ paddingRight: 0, paddingLeft: 0 }}
+            style={{ paddingRight: 0, paddingLeft: 0, backgroundColor: props.darkMode }}
           >
             <LoaderPage />
             {props.children}

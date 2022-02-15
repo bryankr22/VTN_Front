@@ -7,10 +7,12 @@ import {
   Responsive,
   Message,
 } from "semantic-ui-react";
+import { useSelector } from 'react-redux';
 import loadable from '@loadable/component';
 
 import axios from "axios";
 import { API_URL, newsletter_api } from "../../helpers/constants";
+import { light, dark } from "../../helpers/colors";
 
 const VideoPlayer = loadable(() => import('./VideoPlayer'));
 
@@ -59,6 +61,10 @@ const ContentHome = ({ config }) => {
         console.log(error);
       });
   };
+
+  const darkMode = useSelector(({ darkMode }) => darkMode.status);
+  const colorText = darkMode === light ? dark : light;
+
   return (
     <div>
       <Responsive {...Responsive.onlyMobile}>
@@ -79,13 +85,13 @@ const ContentHome = ({ config }) => {
               content={response.mensaje}
             />
           ) : null}
-          <Header as="h3" style={{ fontSize: "1.4rem" }} textAlign="left">
+          <Header as="h3" style={{ fontSize: "1.4rem", color: colorText }} textAlign="left">
             REGISTRARSE AL NEWSLETTER
           </Header>
           <Header
             as="p"
             textAlign="left"
-            style={{ marginBottom: 20, fontWeight: 500 }}
+            style={{ marginBottom: 20, fontWeight: 500, color: colorText }}
           >
             Suscríbete a nuestro newsletter y recibe notificaciones del mejor
             contenido de VendeTuNave.
@@ -144,13 +150,13 @@ const ContentHome = ({ config }) => {
               content={response.mensaje}
             />
           ) : null}
-          <Header as="h3" style={{ fontSize: "1.4rem" }} textAlign="left">
+          <Header as="h3" style={{ fontSize: "1.4rem", color: colorText }} textAlign="left">
             REGISTRARSE AL NEWSLETTER
           </Header>
           <Header
             as="p"
             textAlign="left"
-            style={{ marginBottom: 20, fontWeight: 500 }}
+            style={{ marginBottom: 20, fontWeight: 500, color: colorText }}
           >
             Suscríbete a nuestro newsletter y recibe notificaciones del mejor
             contenido de VendeTuNave.
@@ -212,10 +218,10 @@ const ContentHome = ({ config }) => {
               content={response.mensaje}
             />
           ) : null}
-          <Header as="h3" style={{ fontSize: "1.4rem" }}>
+          <Header as="h3" style={{ fontSize: "1.4rem", color: colorText }}>
             REGISTRARSE AL NEWSLETTER
           </Header>
-          <Header as="p" style={{ marginBottom: 20, fontWeight: 500 }}>
+          <Header as="p" style={{ marginBottom: 20, fontWeight: 500, color: colorText }}>
             Suscríbete a nuestro newsletter y recibe notificaciones del mejor
             contenido de VendeTuNave.
           </Header>
