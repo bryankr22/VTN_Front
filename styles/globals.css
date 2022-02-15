@@ -362,6 +362,10 @@
   opacity: 1;
 }
 
+.swiper-slide-thumb-active {
+  opacity: 1 !important;
+}
+
 .search-input > input {
   border: 1px solid black !important;
   border-top: none !important;
