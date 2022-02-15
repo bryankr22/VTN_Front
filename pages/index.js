@@ -43,7 +43,7 @@ const Home = ({
             background-color: ${darkMode}
           }
           #dark-mode-button:hover {
-            right: 5px !important;
+            right: -5px !important;
             transition: width 1s ease 0s, right 0.8s ease 0s;
           }
         `}
@@ -67,7 +67,7 @@ const Home = ({
             top: '30%'
           }}
         >
-          <Button onClick={() => dispatch(changeMode(statusMode))} size='big' icon='adjust' content='Modo Oscuro' />
+          <Button onClick={() => dispatch(changeMode(statusMode))} size='big' icon='adjust' content='Modo Oscuro' style={{ backgroundColor: light }} />
         </Button.Group>
       </Responsive>
       <Responsive {...Responsive.onlyTablet}>
@@ -83,7 +83,7 @@ const Home = ({
             top: '30%'
           }}
         >
-          <Button onClick={() => dispatch(changeMode(statusMode))} size='big' icon='adjust' content='Modo Oscuro' />
+          <Button onClick={() => dispatch(changeMode(statusMode))} size='big' icon='adjust' content='Modo Oscuro' style={{ backgroundColor: light }} />
         </Button.Group>
       </Responsive>
       <Responsive {...Responsive.onlyComputer}>
@@ -100,17 +100,9 @@ const Home = ({
             top: '30%'
           }}
         >
-          <Button onClick={() => dispatch(changeMode(statusMode))} size='big' icon='adjust' content='Modo Oscuro' />
+          <Button onClick={() => dispatch(changeMode(statusMode))} size='big' icon='adjust' content='Modo Oscuro' style={{ backgroundColor: light }} />
         </Button.Group>
       </Responsive>
-      {/* <Image
-        onClick={() => dispatch(changeMode(statusMode))}
-        width="30px"
-        height="30px"
-        alt="dark mode button"
-        src="/images/dark_mode.png"
-        style={{ height: 'auto', width: 30, position: 'absolute', right: 10, zIndex: 1, filter: 'invert(1)', cursor: 'pointer', top: 10 }}
-      /> */}
       <SliderHome slider={slider} sliderMobile={sliderMobile} />
       <FiltersHome options={filters} />
       <CategoriasHome categorias={categorias} />
