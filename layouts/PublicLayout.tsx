@@ -1,11 +1,13 @@
 import Head from "next/head";
+import { Container, Button } from "semantic-ui-react";
 
 import Header from "../components/header/Header";
 
 import LoaderPage from "../components/head/LoaderPage";
 import lodable from "@loadable/component";
 import dayjs from "dayjs";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 const CssBaseline = lodable(() =>
   import("@nextui-org/react").then(({ CssBaseline }) => CssBaseline)
 );
@@ -19,9 +21,22 @@ interface Props {
   [key: string]: any;
 }
 
+const nextYear = () => {
+  let oneYearFromNow = new Date();
+  oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() + 1);
+  return oneYearFromNow
+}
+
 const PublicLayout = ({ nextUi, ...props }: Props) => {
+  const [cookies, setCookie] = useCookies(["accept_cookies"]);
+  const [acceptCookies, setAcceptCookies] = useState(false);
+
   useEffect(() => {
     //TODO: remove this when the date is over
+
+    const cookie = cookies.accept_cookies;
+    if (cookie) setAcceptCookies(true);
+
     const maxDate = dayjs("2021-11-28").unix();
     const minDate = dayjs().unix();
     if (minDate > maxDate) {
@@ -30,6 +45,15 @@ const PublicLayout = ({ nextUi, ...props }: Props) => {
       });
     }
   }, []);
+
+  const handleAcceptCookies = () => {
+    setAcceptCookies(true);
+    setCookie('accept_cookies', true, {
+      path: "/",
+      expires: nextYear(),
+      sameSite: true
+    });
+  }
 
   return (
     <>
@@ -51,6 +75,32 @@ const PublicLayout = ({ nextUi, ...props }: Props) => {
             {props.children}
           </div>
         </div>
+        {!acceptCookies &&
+          <Container
+            fluid
+            style={{
+              position: 'fixed',
+              bottom: 0,
+              backgroundColor: 'black',
+              margin: 0,
+              padding: 5,
+              color: 'white',
+              textAlign: 'center',
+              zIndex: 1
+
+            }}
+          >
+            <p style={{ display: 'contents' }}>Al navegar en este sitio aceptas las cookies que utilizamos para mejorar tu experiencia.</p>
+            <Button
+              primary
+              compact
+              style={{ marginLeft: 10 }}
+              onClick={handleAcceptCookies}
+            >
+              Entendido
+            </Button>
+          </Container>
+        }
         <Footer />
       </div>
     </>
