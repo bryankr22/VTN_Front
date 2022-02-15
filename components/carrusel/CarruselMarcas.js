@@ -1,9 +1,14 @@
 import { Fragment, useState } from 'react'
 import ItemsCarousel from "react-items-carousel";
 import { Image, Card } from "semantic-ui-react";
-export default function CarruselMarcas({ data = [], numberCards }) {
+import { light, dark } from '../../helpers/colors';
+export default function CarruselMarcas({ data = [], numberCards, darkMode }) {
     const [activeItemIndex2, setActiveItemIndex2] = useState(0);
     const chevronWidth = 40;
+
+    const colorText = darkMode === light ? "#4775fc" : light;
+    const colorChevron = darkMode === light ? dark : light;
+
     return (
         <div style={{ padding: `0 ${chevronWidth}px` }}>
             <ItemsCarousel
@@ -11,8 +16,8 @@ export default function CarruselMarcas({ data = [], numberCards }) {
                 activeItemIndex={activeItemIndex2}
                 numberOfCards={numberCards}
                 gutter={20}
-                leftChevron={<button><i className="angle left big icon" /></button>}
-                rightChevron={<button><i className="angle right big icon" /></button>}
+                leftChevron={<button><i className="angle left big icon" style={{ color: colorChevron }} /></button>}
+                rightChevron={<button><i className="angle right big icon" style={{ color: colorChevron }} /></button>}
                 outsideChevron
                 chevronWidth={chevronWidth}
             >
@@ -26,8 +31,10 @@ export default function CarruselMarcas({ data = [], numberCards }) {
                                     textAlign: "center",
                                     boxShadow: "none",
                                     background: "transparent",
+                                    textDecorationColor: colorText
                                 }}
                             >
+
                                 <Image
                                     quality={50}
                                     loading='lazy'
@@ -40,9 +47,10 @@ export default function CarruselMarcas({ data = [], numberCards }) {
                                         margin: "0 auto",
                                         marginBottom: 5,
                                         background: "transparent",
+                                        filter: darkMode === dark ? 'invert(1)' : ''
                                     }}
                                 />
-                                <span style={{ color: "#4775fc", fontWeight: 700 }}>
+                                <span style={{ color: colorText, fontWeight: 700 }}>
                                     {item.nombre}
                                 </span>
                             </Card>
@@ -50,6 +58,6 @@ export default function CarruselMarcas({ data = [], numberCards }) {
                     );
                 })}
             </ItemsCarousel>
-        </div>
+        </div >
     )
 }

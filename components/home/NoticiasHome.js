@@ -1,5 +1,11 @@
 import { Header, Container, Grid, Button, Responsive } from "semantic-ui-react";
+import { useSelector } from 'react-redux';
+import { light, dark } from "../../helpers/colors";
+
 const NoticiasHome = ({ noticias }) => {
+    const darkMode = useSelector(({ darkMode }) => darkMode.status);
+    const colorText = darkMode === light ? dark : light;
+
     return (
         <div>
             <Container
@@ -7,7 +13,7 @@ const NoticiasHome = ({ noticias }) => {
                 style={{
                     padding: "70px 40px",
                     margin: "40px 0",
-                    background: "rgb(242, 244, 246)",
+                    background: darkMode === dark ? dark : "rgb(242, 244, 246)",
                 }}
             >
                 <Responsive {...Responsive.onlyComputer}>
@@ -16,7 +22,7 @@ const NoticiasHome = ({ noticias }) => {
                             <Grid.Column>
                                 <Header
                                     as="h2"
-                                    style={{ fontSize: "1.4rem", textTransform: "uppercase" }}
+                                    style={{ fontSize: "1.4rem", textTransform: "uppercase", color: colorText }}
                                     textAlign="center"
                                 >
                                     noticias de actualidad automotriz
@@ -29,12 +35,12 @@ const NoticiasHome = ({ noticias }) => {
                                     <Header
                                         as="h3"
                                         textAlign="left"
-                                        style={{ fontSize: "1.2rem" }}
+                                        style={{ fontSize: "1.2rem", color: colorText }}
                                     >
                                         {item.title}
                                     </Header>
 
-                                    <p style={{ fontWeight: 500, margin: 0 }}>
+                                    <p style={{ fontWeight: 500, margin: 0, color: colorText }}>
                                         {item.description}
                                     </p>
                                     <Button
@@ -44,7 +50,7 @@ const NoticiasHome = ({ noticias }) => {
                                         style={{
                                             float: "right",
                                             background: "transparent",
-                                            color: "#000",
+                                            color: colorText,
                                             textTransform: "uppercase"
                                         }}
                                     >
@@ -62,7 +68,7 @@ const NoticiasHome = ({ noticias }) => {
                             <Grid.Column>
                                 <Header
                                     as="h2"
-                                    style={{ fontSize: "1.4rem", textTransform: "uppercase" }}
+                                    style={{ fontSize: "1.4rem", textTransform: "uppercase", color: colorText }}
                                     textAlign="left"
                                 >
                                     noticias de actualidad automotriz
@@ -75,12 +81,12 @@ const NoticiasHome = ({ noticias }) => {
                                     <Header
                                         as="h3"
                                         textAlign="left"
-                                        style={{ fontSize: "1.2rem" }}
+                                        style={{ fontSize: "1.2rem", color: colorText }}
                                     >
                                         {item.title}
                                     </Header>
 
-                                    <p style={{ fontWeight: 500, margin: 0 }}>
+                                    <p style={{ fontWeight: 500, margin: 0, color: colorText }}>
                                         {item.description}
                                     </p>
                                     <Button
@@ -90,7 +96,7 @@ const NoticiasHome = ({ noticias }) => {
                                         style={{
                                             float: "right",
                                             background: "transparent",
-                                            color: "#000", textTransform: "uppercase"
+                                            color: colorText, textTransform: "uppercase"
                                         }}
                                     >
                                         ver más
@@ -106,7 +112,7 @@ const NoticiasHome = ({ noticias }) => {
                             <Grid.Column>
                                 <Header
                                     as="h2"
-                                    style={{ fontSize: "1.4rem", textTransform: "uppercase" }}
+                                    style={{ fontSize: "1.4rem", textTransform: "uppercase", color: colorText }}
                                     textAlign="left"
                                 >
                                     noticias de actualidad automotriz
@@ -119,12 +125,12 @@ const NoticiasHome = ({ noticias }) => {
                                     <Header
                                         as="h3"
                                         textAlign="left"
-                                        style={{ fontSize: "1.2rem" }}
+                                        style={{ fontSize: "1.2rem", color: colorText }}
                                     >
                                         {item.title}
                                     </Header>
 
-                                    <p style={{ fontWeight: 500, margin: 0 }}>
+                                    <p style={{ fontWeight: 500, margin: 0, color: colorText }}>
                                         {item.description}
                                     </p>
                                     <Button
@@ -134,7 +140,7 @@ const NoticiasHome = ({ noticias }) => {
                                         style={{
                                             float: "right",
                                             background: "transparent",
-                                            color: "#000", textTransform: "uppercase"
+                                            color: colorText, textTransform: "uppercase"
                                         }}
                                     >
                                         ver más

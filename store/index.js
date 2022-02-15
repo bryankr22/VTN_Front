@@ -9,13 +9,15 @@ import comparadorSlice from './comparadorSlice';
 import authSlice from './authSlice';
 import productoSlice from './productoSlice';
 import accesorioSlice from './accesorioSlice';
+import darkMode from './darkMode';
 
 const reducers = combineReducers({
     home: homeSlice,
     comparador: comparadorSlice,
     auth: authSlice,
     producto: productoSlice,
-    accesorio: accesorioSlice
+    accesorio: accesorioSlice,
+    darkMode
 });
 const persistConfig = {
     key: 'root',

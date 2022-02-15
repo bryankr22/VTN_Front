@@ -1,5 +1,5 @@
 import Head from "next/head";
-
+import { useSelector, useDispatch } from 'react-redux';
 import loadable from '@loadable/component';
 
 import PublicLayout from "../layouts/PublicLayout";
@@ -13,6 +13,9 @@ import ContentHome from "../components/home/ContentHome";
 
 import axios from "axios";
 import { API_URL, home } from "../helpers/constants";
+import { Responsive, Button } from "semantic-ui-react";
+import { changeMode } from "../store/darkMode";
+import { dark, light } from "../helpers/colors";
 
 const CategoriasHome = loadable(() => import('../components/home/CategoriasHome'), {
   fallback: <div>...</div>
@@ -28,14 +31,78 @@ const Home = ({
   filters,
   config,
 }) => {
+  const dispatch = useDispatch();
+  const darkMode = useSelector(({ darkMode }) => darkMode.status);
+  const statusMode = darkMode === dark ? light : dark;
+
   return (
-    <PublicLayout>
+    <PublicLayout darkMode={darkMode}>
+      <style>
+        {`
+          html {
+            background-color: ${darkMode}
+          }
+          #dark-mode-button:hover {
+            right: -5px !important;
+            transition: width 1s ease 0s, right 0.8s ease 0s;
+          }
+        `}
+      </style>
       <Head>
         <meta
           property="keywords"
           content="vende tu nave, carros en venta, carros de segunda, mercado libre carros, venta de carros usados y nuevos, compra y venta de carros, compra y venta motos, venta de carros"
         />
       </Head>
+      <Responsive {...Responsive.onlyMobile}>
+        <Button.Group
+          vertical
+          labeled
+          icon
+          style={{
+            position: 'fixed',
+            right: -175,
+            zIndex: 4,
+            cursor: 'pointer',
+            top: '30%'
+          }}
+        >
+          <Button onClick={() => dispatch(changeMode(statusMode))} size='big' icon='adjust' content='Modo Oscuro' style={{ backgroundColor: light }} />
+        </Button.Group>
+      </Responsive>
+      <Responsive {...Responsive.onlyTablet}>
+        <Button.Group
+          vertical
+          labeled
+          icon
+          style={{
+            position: 'fixed',
+            right: -175,
+            zIndex: 4,
+            cursor: 'pointer',
+            top: '30%'
+          }}
+        >
+          <Button onClick={() => dispatch(changeMode(statusMode))} size='big' icon='adjust' content='Modo Oscuro' style={{ backgroundColor: light }} />
+        </Button.Group>
+      </Responsive>
+      <Responsive {...Responsive.onlyComputer}>
+        <Button.Group
+          id="dark-mode-button"
+          vertical
+          labeled
+          icon
+          style={{
+            position: 'fixed',
+            right: -175,
+            zIndex: 4,
+            cursor: 'pointer',
+            top: '30%'
+          }}
+        >
+          <Button onClick={() => dispatch(changeMode(statusMode))} size='big' icon='adjust' content='Modo Oscuro' style={{ backgroundColor: light }} />
+        </Button.Group>
+      </Responsive>
       <SliderHome slider={slider} sliderMobile={sliderMobile} />
       <FiltersHome options={filters} />
       <CategoriasHome categorias={categorias} />

@@ -1,8 +1,9 @@
 import { Fragment, useState } from 'react'
 import ItemsCarousel from "react-items-carousel";
 import { Image, Card } from "semantic-ui-react";
+import { light, dark } from '../../helpers/colors';
 
-export default function CarruselCategories({ data = [], numberCards }) {
+export default function CarruselCategories({ data = [], numberCards, darkMode }) {
     const [activeItemIndex, setActiveItemIndex] = useState(0);
     const chevronWidth = 40;
     const returnLink = (nombre) => {
@@ -19,6 +20,9 @@ export default function CarruselCategories({ data = [], numberCards }) {
                 return `/vehiculos?categoria=otros`;
         }
     }
+
+    const colorText = darkMode === light ? dark : light;
+
     return (
         <div style={{ padding: `0 ${chevronWidth}px` }}>
             <ItemsCarousel
@@ -26,8 +30,8 @@ export default function CarruselCategories({ data = [], numberCards }) {
                 activeItemIndex={activeItemIndex}
                 numberOfCards={numberCards}
                 gutter={20}
-                leftChevron={<button><i className="angle left big icon" /></button>}
-                rightChevron={<button><i className="angle right big icon" /></button>}
+                leftChevron={<button><i className="angle left big icon" style={{ color: colorText }} /></button>}
+                rightChevron={<button><i className="angle right big icon" style={{ color: colorText }} /></button>}
                 outsideChevron
                 chevronWidth={chevronWidth}
             >
@@ -42,12 +46,14 @@ export default function CarruselCategories({ data = [], numberCards }) {
                                     boxShadow: "none",
                                     textDecoration: "none",
                                     padding: 10,
+                                    backgroundColor: darkMode,
                                 }}
                             >
                                 <style>
                                     {`
                                     .ui.card>.image>img, .ui.cards>.card>.image>img {
-                                    height: auto !important
+                                        height: auto !important;
+                                        ${darkMode === dark && 'filter: invert(1);'}
                                     }
                                 `}
                                 </style>
@@ -60,14 +66,14 @@ export default function CarruselCategories({ data = [], numberCards }) {
                                     ui={false}
                                     className="image-card-home lazyload"
                                     style={{
-                                        background: "white",
                                         width: "40%",
                                         display: "block",
                                         margin: "auto",
+                                        backgroundColor: darkMode,
                                     }}
                                 />
                                 <Card.Content style={{ borderTop: "none" }}>
-                                    <Card.Header style={{ fontSize: 20, textAlign: "center" }}>
+                                    <Card.Header style={{ fontSize: 20, textAlign: "center", color: colorText }}>
                                         {item.nombre}
                                     </Card.Header>
                                 </Card.Content>
