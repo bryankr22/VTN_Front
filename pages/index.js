@@ -13,7 +13,7 @@ import ContentHome from "../components/home/ContentHome";
 
 import axios from "axios";
 import { API_URL, home } from "../helpers/constants";
-import { Image } from "semantic-ui-react";
+import { Responsive, Button } from "semantic-ui-react";
 import { changeMode } from "../store/darkMode";
 import { dark, light } from "../helpers/colors";
 
@@ -42,6 +42,10 @@ const Home = ({
           html {
             background-color: ${darkMode}
           }
+          #dark-mode-button:hover {
+            right: 5px !important;
+            transition: width 1s ease 0s, right 0.8s ease 0s;
+          }
         `}
       </style>
       <Head>
@@ -50,14 +54,63 @@ const Home = ({
           content="vende tu nave, carros en venta, carros de segunda, mercado libre carros, venta de carros usados y nuevos, compra y venta de carros, compra y venta motos, venta de carros"
         />
       </Head>
-      <Image
+      <Responsive {...Responsive.onlyMobile}>
+        <Button.Group
+          vertical
+          labeled
+          icon
+          style={{
+            position: 'fixed',
+            right: -175,
+            zIndex: 4,
+            cursor: 'pointer',
+            top: '30%'
+          }}
+        >
+          <Button onClick={() => dispatch(changeMode(statusMode))} size='big' icon='adjust' content='Modo Oscuro' />
+        </Button.Group>
+      </Responsive>
+      <Responsive {...Responsive.onlyTablet}>
+        <Button.Group
+          vertical
+          labeled
+          icon
+          style={{
+            position: 'fixed',
+            right: -175,
+            zIndex: 4,
+            cursor: 'pointer',
+            top: '30%'
+          }}
+        >
+          <Button onClick={() => dispatch(changeMode(statusMode))} size='big' icon='adjust' content='Modo Oscuro' />
+        </Button.Group>
+      </Responsive>
+      <Responsive {...Responsive.onlyComputer}>
+        <Button.Group
+          id="dark-mode-button"
+          vertical
+          labeled
+          icon
+          style={{
+            position: 'fixed',
+            right: -175,
+            zIndex: 4,
+            cursor: 'pointer',
+            top: '30%'
+          }}
+        >
+          <Button onClick={() => dispatch(changeMode(statusMode))} size='big' icon='adjust' content='Modo Oscuro' />
+        </Button.Group>
+      </Responsive>
+      {/* <Image
         onClick={() => dispatch(changeMode(statusMode))}
         width="30px"
         height="30px"
         alt="dark mode button"
         src="/images/dark_mode.png"
         style={{ height: 'auto', width: 30, position: 'absolute', right: 10, zIndex: 1, filter: 'invert(1)', cursor: 'pointer', top: 10 }}
-      />
+      /> */}
       <SliderHome slider={slider} sliderMobile={sliderMobile} />
       <FiltersHome options={filters} />
       <CategoriasHome categorias={categorias} />

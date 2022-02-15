@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { Container, Button } from "semantic-ui-react";
-
+import { useSelector } from 'react-redux';
 import Header from "../components/header/Header";
 
 import LoaderPage from "../components/head/LoaderPage";
@@ -8,6 +8,8 @@ import lodable from "@loadable/component";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import { light, dark } from "../helpers/colors";
+
 const CssBaseline = lodable(() =>
   import("@nextui-org/react").then(({ CssBaseline }) => CssBaseline)
 );
@@ -30,6 +32,9 @@ const nextYear = () => {
 const PublicLayout = ({ nextUi, ...props }: Props) => {
   const [cookies, setCookie] = useCookies(["accept_cookies"]);
   const [acceptCookies, setAcceptCookies] = useState(false);
+
+  const darkMode = useSelector(({ darkMode }: any) => darkMode.status);
+  const colorText = darkMode === light ? dark : light;
 
   useEffect(() => {
     //TODO: remove this when the date is over
@@ -64,6 +69,13 @@ const PublicLayout = ({ nextUi, ...props }: Props) => {
         />
         {nextUi && <CssBaseline />}
       </Head>
+      <style>
+        {`
+          .container-cookie {
+            margin: 0px !important
+          }
+        `}
+      </style>
       <div className="container">
         <Header {...props} />
         <div className="row">
@@ -76,17 +88,17 @@ const PublicLayout = ({ nextUi, ...props }: Props) => {
           </div>
         </div>
         {!acceptCookies &&
-          <Container
-            fluid
+          <div
+            className="container-cookie"
             style={{
+              width: '100%',
               position: 'fixed',
               bottom: 0,
-              backgroundColor: 'black',
-              margin: 0,
-              padding: 5,
-              color: 'white',
+              backgroundColor: colorText,
+              padding: 20,
+              color: darkMode,
               textAlign: 'center',
-              zIndex: 1
+              zIndex: 4
 
             }}
           >
@@ -94,12 +106,12 @@ const PublicLayout = ({ nextUi, ...props }: Props) => {
             <Button
               primary
               compact
-              style={{ marginLeft: 10 }}
+              style={{ marginLeft: 10, marginTop: '1em' }}
               onClick={handleAcceptCookies}
             >
               Entendido
             </Button>
-          </Container>
+          </div>
         }
         <Footer />
       </div>
