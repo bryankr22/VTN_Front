@@ -58,33 +58,34 @@ export default function VehicleCarousel({ images = [], alt, mobile }: Props) {
         ))
       }
     </Swiper>,
-    <Swiper
-      key="thumbs"
-      onSwiper={setThumbsRef}
-      style={{
-        display: !mobile ? 'block' : 'none',
-      }}
-      spaceBetween={10}
-      slidesPerView={4}
-      freeMode={true}
-      watchSlidesProgress={true}
-      modules={[FreeMode, Navigation, Thumbs]}
-      className={styles['thumbs-swiper']}
-    >
-      {
-        imageList.map((image, index) => (
-          <SwiperSlide className={styles['thumbs-swiper-slide']} id={'thumb-' + index} key={index} onClick={(event) => {
-            thumbsRef.clickedSlide = (event.target as HTMLElement).parentElement
-            if (thumbsRef.clickedSlide) {
-              const index = thumbsRef.slides.indexOf(thumbsRef.clickedSlide)
-              carouselRef.slideTo(index)
-            }
-          }}>
-            <img src={image.src} alt={alt}>
-            </img>
-          </SwiperSlide>
-        ))
-      }
-    </Swiper>
+
+    !mobile && (
+      <Swiper
+        key="thumbs"
+        onSwiper={setThumbsRef}
+
+        spaceBetween={10}
+        slidesPerView={4}
+        freeMode={true}
+        watchSlidesProgress={true}
+        modules={[FreeMode, Navigation, Thumbs]}
+        className={styles['thumbs-swiper']}
+      >
+        {
+          imageList.map((image, index) => (
+            <SwiperSlide className={styles['thumbs-swiper-slide']} id={'thumb-' + index} key={index} onClick={(event) => {
+              thumbsRef.clickedSlide = (event.target as HTMLElement).parentElement
+              if (thumbsRef.clickedSlide) {
+                const index = thumbsRef.slides.indexOf(thumbsRef.clickedSlide)
+                carouselRef.slideTo(index)
+              }
+            }}>
+              <img src={image.src} alt={alt}>
+              </img>
+            </SwiperSlide>
+          ))
+        }
+      </Swiper>
+    )
   ]
 }
