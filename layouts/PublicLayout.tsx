@@ -1,6 +1,6 @@
 import Head from "next/head";
-import { Container, Button } from "semantic-ui-react";
-import { useSelector } from 'react-redux';
+import { Button } from "semantic-ui-react";
+import { useSelector, useDispatch } from 'react-redux';
 import Header from "../components/header/Header";
 
 import LoaderPage from "../components/head/LoaderPage";
@@ -8,6 +8,7 @@ import lodable from "@loadable/component";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import { changeMode } from "../store/darkMode";
 import { light, dark } from "../helpers/colors";
 
 const CssBaseline = lodable(() =>
@@ -30,6 +31,7 @@ const nextYear = () => {
 }
 
 const PublicLayout = ({ nextUi, ...props }: Props) => {
+  const dispatch = useDispatch();
   const [cookies, setCookie] = useCookies(["accept_cookies"]);
   const [acceptCookies, setAcceptCookies] = useState(false);
 
@@ -38,7 +40,7 @@ const PublicLayout = ({ nextUi, ...props }: Props) => {
 
   useEffect(() => {
     //TODO: remove this when the date is over
-
+    dispatch(changeMode(window.matchMedia('(prefers-color-scheme: dark)').matches ? dark : light));
     const cookie = cookies.accept_cookies;
     if (cookie) setAcceptCookies(true);
 
