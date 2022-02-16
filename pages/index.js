@@ -35,7 +35,7 @@ const Home = ({
   const darkMode = useSelector(({ darkMode }) => darkMode.status);
   const statusMode = darkMode === dark ? light : dark;
   const buttonText = darkMode === dark ? 'claro' : 'oscuro';
-  const buttonColor = darkMode === dark ? light : '#e0e1e2';
+  const buttonColor = darkMode === dark ? light : '#484848';
   const buttonMargin = darkMode === dark ? '-130px' : '-142px';
 
   return (
