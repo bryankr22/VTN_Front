@@ -34,6 +34,9 @@ const Home = ({
   const dispatch = useDispatch();
   const darkMode = useSelector(({ darkMode }) => darkMode.status);
   const statusMode = darkMode === dark ? light : dark;
+  const buttonText = darkMode === dark ? 'claro' : 'oscuro';
+  const buttonColor = darkMode === dark ? light : '#e0e1e2';
+  const buttonMargin = darkMode === dark ? '-130px' : '-142px';
 
   return (
     <PublicLayout darkMode={darkMode}>
@@ -64,7 +67,7 @@ const Home = ({
           icon
           style={{
             position: 'fixed',
-            right: -142,
+            right: buttonMargin,
             zIndex: 4,
             cursor: 'pointer',
             top: '30%'
@@ -75,8 +78,8 @@ const Home = ({
             className="label-buttons"
             size='small'
             icon='adjust'
-            content='modo oscuro'
-            style={{ backgroundColor: light, fontFamily: "Montserrat", textTransform: "uppercase" }}
+            content={`modo ${buttonText}`}
+            style={{ backgroundColor: buttonColor, fontFamily: "Montserrat", textTransform: "uppercase" }}
           />
         </Button.Group>
       </Responsive>
@@ -87,7 +90,7 @@ const Home = ({
           icon
           style={{
             position: 'fixed',
-            right: -142,
+            right: buttonMargin,
             zIndex: 4,
             cursor: 'pointer',
             top: '30%'
@@ -98,8 +101,8 @@ const Home = ({
             className="label-buttons"
             size='small'
             icon='adjust'
-            content='modo oscuro'
-            style={{ backgroundColor: light, fontFamily: "Montserrat", textTransform: "uppercase" }}
+            content={`modo ${buttonText}`}
+            style={{ backgroundColor: buttonColor, fontFamily: "Montserrat", textTransform: "uppercase" }}
           />
         </Button.Group>
       </Responsive>
@@ -111,7 +114,7 @@ const Home = ({
           icon
           style={{
             position: 'fixed',
-            right: -142,
+            right: buttonMargin,
             zIndex: 4,
             cursor: 'pointer',
             top: '30%'
@@ -122,8 +125,8 @@ const Home = ({
             size='small'
             className="label-buttons"
             icon='adjust'
-            content='modo oscuro'
-            style={{ backgroundColor: light, fontFamily: "Montserrat", textTransform: "uppercase" }}
+            content={`modo ${buttonText}`}
+            style={{ backgroundColor: buttonColor, fontFamily: "Montserrat", textTransform: "uppercase" }}
           />
         </Button.Group>
       </Responsive>
