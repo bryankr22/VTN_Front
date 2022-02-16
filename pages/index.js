@@ -51,6 +51,7 @@ const Home = ({
           }
           .label-buttons {
             font-size: 0.9rem !important;
+            color: ${darkMode === dark ? dark : light} !important;
           }
         `}
       </style>
