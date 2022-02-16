@@ -34,6 +34,9 @@ const Home = ({
   const dispatch = useDispatch();
   const darkMode = useSelector(({ darkMode }) => darkMode.status);
   const statusMode = darkMode === dark ? light : dark;
+  const buttonText = darkMode === dark ? 'claro' : 'oscuro';
+  const buttonColor = darkMode === dark ? light : '#484848';
+  const buttonMargin = darkMode === dark ? '-130px' : '-142px';
 
   return (
     <PublicLayout darkMode={darkMode}>
@@ -45,6 +48,10 @@ const Home = ({
           #dark-mode-button:hover {
             right: -5px !important;
             transition: width 1s ease 0s, right 0.8s ease 0s;
+          }
+          .label-buttons {
+            font-size: 0.9rem !important;
+            color: ${darkMode === dark ? dark : light} !important;
           }
         `}
       </style>
@@ -61,13 +68,20 @@ const Home = ({
           icon
           style={{
             position: 'fixed',
-            right: -175,
+            right: buttonMargin,
             zIndex: 4,
             cursor: 'pointer',
             top: '30%'
           }}
         >
-          <Button onClick={() => dispatch(changeMode(statusMode))} size='big' icon='adjust' content='Modo Oscuro' style={{ backgroundColor: light }} />
+          <Button
+            onClick={() => dispatch(changeMode(statusMode))}
+            className="label-buttons"
+            size='small'
+            icon='adjust'
+            content={`modo ${buttonText}`}
+            style={{ backgroundColor: buttonColor, fontFamily: "Montserrat", textTransform: "uppercase" }}
+          />
         </Button.Group>
       </Responsive>
       <Responsive {...Responsive.onlyTablet}>
@@ -77,13 +91,20 @@ const Home = ({
           icon
           style={{
             position: 'fixed',
-            right: -175,
+            right: buttonMargin,
             zIndex: 4,
             cursor: 'pointer',
             top: '30%'
           }}
         >
-          <Button onClick={() => dispatch(changeMode(statusMode))} size='big' icon='adjust' content='Modo Oscuro' style={{ backgroundColor: light }} />
+          <Button
+            onClick={() => dispatch(changeMode(statusMode))}
+            className="label-buttons"
+            size='small'
+            icon='adjust'
+            content={`modo ${buttonText}`}
+            style={{ backgroundColor: buttonColor, fontFamily: "Montserrat", textTransform: "uppercase" }}
+          />
         </Button.Group>
       </Responsive>
       <Responsive {...Responsive.onlyComputer}>
@@ -94,13 +115,20 @@ const Home = ({
           icon
           style={{
             position: 'fixed',
-            right: -175,
+            right: buttonMargin,
             zIndex: 4,
             cursor: 'pointer',
             top: '30%'
           }}
         >
-          <Button onClick={() => dispatch(changeMode(statusMode))} size='big' icon='adjust' content='Modo Oscuro' style={{ backgroundColor: light }} />
+          <Button
+            onClick={() => dispatch(changeMode(statusMode))}
+            size='small'
+            className="label-buttons"
+            icon='adjust'
+            content={`modo ${buttonText}`}
+            style={{ backgroundColor: buttonColor, fontFamily: "Montserrat", textTransform: "uppercase" }}
+          />
         </Button.Group>
       </Responsive>
       <SliderHome slider={slider} sliderMobile={sliderMobile} />
