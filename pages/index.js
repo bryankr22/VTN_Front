@@ -61,13 +61,19 @@ const Home = ({
           icon
           style={{
             position: 'fixed',
-            right: -175,
+            right: -180,
             zIndex: 4,
             cursor: 'pointer',
             top: '30%'
           }}
         >
-          <Button onClick={() => dispatch(changeMode(statusMode))} size='big' icon='adjust' content='Modo Oscuro' style={{ backgroundColor: light }} />
+          <Button
+            onClick={() => dispatch(changeMode(statusMode))}
+            size='large'
+            icon='adjust'
+            content='modo oscuro'
+            style={{ backgroundColor: light, fontFamily: "Montserrat-Regular", textTransform: "uppercase" }}
+          />
         </Button.Group>
       </Responsive>
       <Responsive {...Responsive.onlyTablet}>
@@ -77,13 +83,19 @@ const Home = ({
           icon
           style={{
             position: 'fixed',
-            right: -175,
+            right: -180,
             zIndex: 4,
             cursor: 'pointer',
             top: '30%'
           }}
         >
-          <Button onClick={() => dispatch(changeMode(statusMode))} size='big' icon='adjust' content='Modo Oscuro' style={{ backgroundColor: light }} />
+          <Button
+            onClick={() => dispatch(changeMode(statusMode))}
+            size='large'
+            icon='adjust'
+            content='modo oscuro'
+            style={{ backgroundColor: light, fontFamily: "Montserrat-Regular", textTransform: "uppercase" }}
+          />
         </Button.Group>
       </Responsive>
       <Responsive {...Responsive.onlyComputer}>
@@ -94,13 +106,19 @@ const Home = ({
           icon
           style={{
             position: 'fixed',
-            right: -175,
+            right: -180,
             zIndex: 4,
             cursor: 'pointer',
             top: '30%'
           }}
         >
-          <Button onClick={() => dispatch(changeMode(statusMode))} size='big' icon='adjust' content='Modo Oscuro' style={{ backgroundColor: light }} />
+          <Button
+            onClick={() => dispatch(changeMode(statusMode))}
+            size='large'
+            icon='adjust'
+            content='modo oscuro'
+            style={{ backgroundColor: light, fontFamily: "Montserrat-Regular", textTransform: "uppercase" }}
+          />
         </Button.Group>
       </Responsive>
       <SliderHome slider={slider} sliderMobile={sliderMobile} />
