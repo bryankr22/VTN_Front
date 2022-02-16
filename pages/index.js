@@ -46,6 +46,9 @@ const Home = ({
             right: -5px !important;
             transition: width 1s ease 0s, right 0.8s ease 0s;
           }
+          .label-buttons {
+            font-size: 0.9rem !important;
+          }
         `}
       </style>
       <Head>
@@ -61,7 +64,7 @@ const Home = ({
           icon
           style={{
             position: 'fixed',
-            right: -180,
+            right: -142,
             zIndex: 4,
             cursor: 'pointer',
             top: '30%'
@@ -69,10 +72,11 @@ const Home = ({
         >
           <Button
             onClick={() => dispatch(changeMode(statusMode))}
-            size='large'
+            className="label-buttons"
+            size='small'
             icon='adjust'
             content='modo oscuro'
-            style={{ backgroundColor: light, fontFamily: "Montserrat-Regular", textTransform: "uppercase" }}
+            style={{ backgroundColor: light, fontFamily: "Montserrat", textTransform: "uppercase" }}
           />
         </Button.Group>
       </Responsive>
@@ -83,7 +87,7 @@ const Home = ({
           icon
           style={{
             position: 'fixed',
-            right: -180,
+            right: -142,
             zIndex: 4,
             cursor: 'pointer',
             top: '30%'
@@ -91,10 +95,11 @@ const Home = ({
         >
           <Button
             onClick={() => dispatch(changeMode(statusMode))}
-            size='large'
+            className="label-buttons"
+            size='small'
             icon='adjust'
             content='modo oscuro'
-            style={{ backgroundColor: light, fontFamily: "Montserrat-Regular", textTransform: "uppercase" }}
+            style={{ backgroundColor: light, fontFamily: "Montserrat", textTransform: "uppercase" }}
           />
         </Button.Group>
       </Responsive>
@@ -106,7 +111,7 @@ const Home = ({
           icon
           style={{
             position: 'fixed',
-            right: -180,
+            right: -142,
             zIndex: 4,
             cursor: 'pointer',
             top: '30%'
@@ -114,10 +119,11 @@ const Home = ({
         >
           <Button
             onClick={() => dispatch(changeMode(statusMode))}
-            size='large'
+            size='small'
+            className="label-buttons"
             icon='adjust'
             content='modo oscuro'
-            style={{ backgroundColor: light, fontFamily: "Montserrat-Regular", textTransform: "uppercase" }}
+            style={{ backgroundColor: light, fontFamily: "Montserrat", textTransform: "uppercase" }}
           />
         </Button.Group>
       </Responsive>
