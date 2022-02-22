@@ -16,7 +16,12 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "baseUrl": "./",
+    "paths": {
+      "@helpers/*": ["./helpers/*"],
+      "@helpers": ["./helpers/index.ts"]
+    }
   },
   "include": [
     "next-env.d.ts",

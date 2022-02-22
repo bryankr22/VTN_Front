@@ -4,6 +4,9 @@ export const AUTH_URL = 'https://api.vendetunave.co/auth';
 export const home = '/home';
 export const config = '/config';
 
+export const validateRecaptcha = '/api/auth/recaptcha'
+
+
 export const vehiculos = '/vehiculos';
 export const fichas_tecnicas = '/fichas_tecnicas';
 export const accesorios = '/accesorios';
@@ -61,3 +64,7 @@ export const KM_FILTER = [
   { label: "De 100.000 a 150.000", slug: "100000:150000" },
   { label: "Más de $150.000", slug: "150000:0" },
 ];
+
+
+export const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+export const RECAPTCHA_SECRET_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SECRET_KEY

@@ -7,6 +7,8 @@ import axios from 'axios';
 import { useCookies } from "react-cookie"
 import { AUTH_URL, login_api, register_api } from '../helpers/constants';
 import jwt from 'jsonwebtoken';
+import { Formik } from "formik";
+import * as yup from "yup";
 
 const nextYear = () => {
   let oneYearFromNow = new Date();
@@ -24,6 +26,7 @@ export default function login(props) {
   const [register, setRegister] = useState({
     email: '',
     password: '',
+    confirmPassword: '',
     nombre: '',
     remember: false
   })
@@ -179,6 +182,18 @@ export default function login(props) {
                   />
                 </Form.Field>
                 <Form.Field>
+                  <label>Confirma tu contraseña</label>
+                  <Input
+                    name="pass_confirm_register"
+                    type="password"
+                    placeholder="Contraseña"
+                    value={register.confirmPassword}
+                    onChange={(e) =>
+                      updateRegistro("confirmPassword", e.target.value)
+                    }
+                  />
+                </Form.Field>
+                <Form.Field>
                   <Checkbox
                     label="Subscribirse al newsletter"
                     value={register.remember}
@@ -320,52 +335,81 @@ export default function login(props) {
 
           <Divider horizontal>Ó</Divider>
 
-          <Form onSubmit={() => sendRegister()} error={errorRegister}>
-            <Message
-              error
-              header="Error Registro"
-              content="El correo ya existe o Falta algun dato, intentelo de nuevo."
-            />
+          <Formik
+            initialValues={{ nombre: '', email: '', password: '', confirmPassword: '', remember: false }}
+            validate={values => {
+              return {}
+            }}
+            onSubmit={(values, { setSubmitting }) => {
+              setTimeout(() => {
+                alert(JSON.stringify(values, null, 2));
+                setSubmitting(false);
+              }, 400);
+            }}
+          >
+            {({
+              values,
+              errors,
+              touched,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              isSubmitting,
+              /* and other goodies */
+            }) => (
+              <Form onSubmit={() => sendRegister()} error={errorRegister}>
+                <Message
+                  error
+                  header="Error Registro"
+                  content="El correo ya existe o Falta algun dato, intentelo de nuevo."
+                />
 
-            <Form.Field>
-              <Header as="h2">REGISTRARSE</Header>
-              <label>Nombre</label>
-              <Input
-                name="nombre_register"
-                placeholder="Nombre"
-                onChange={(e) => updateRegistro("nombre", e.target.value)}
-              />
-            </Form.Field>
-            <Form.Field>
-              <label>Correo electrónico</label>
-              <Input
-                name="email_register"
-                placeholder="Correo electrónico"
-                id="email_register"
-                onChange={(e) => updateRegistro("email", e.target.value)}
-              />
-            </Form.Field>
-            <Form.Field>
-              <label>Contraseña</label>
-              <Input
-                name="pass_register"
-                type="password"
-                placeholder="Contraseña"
-                onChange={(e) =>
-                  updateRegistro("password", e.target.value)
-                }
-              />
-            </Form.Field>
-            <Form.Field>
-              <Checkbox
-                label="Subscribirse al newsletter"
-                onChange={() =>
-                  updateRegistro("remember", !register.remember)
-                }
-              />
-            </Form.Field>
-            <Button secondary>REGISTRARSE</Button>
-          </Form>
+                <Form.Field>
+                  <Header as="h2">REGISTRARSE</Header>
+                  <label>Nombre</label>
+                  <Input
+                    name="nombre_register"
+                    placeholder="Nombre"
+                    // onChange={(e) => updateRegistro("nombre", e.target.value)}
+                    value={values.nombre}
+                    onChange={handleChange}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <label>Correo electrónico</label>
+                  <Input
+                    name="email_register"
+                    placeholder="Correo electrónico"
+                    id="email_register"
+                    // onChange={(e) => updateRegistro("email", e.target.value)}
+                    value={values.email}
+                    onChange={handleChange}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <label>Contraseña</label>
+                  <Input
+                    name="pass_register"
+                    type="password"
+                    placeholder="Contraseña"
+                    /* onChange={(e) =>
+                      updateRegistro("password", e.target.value)
+                    } */
+                    value={values.password}
+                    onChange={handleChange}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <Checkbox
+                    label="Subscribirse al newsletter"
+                    onChange={() =>
+                      updateRegistro("remember", !register.remember)
+                    }
+                  />
+                </Form.Field>
+                <Button secondary>REGISTRARSE</Button>
+              </Form>
+          )} </Formik>
         </Segment>
       </Responsive>
     </PublicLayout>
