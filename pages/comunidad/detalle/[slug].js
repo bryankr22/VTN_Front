@@ -28,6 +28,7 @@ export default function detalle({ data }) {
             location.reload();
         }).catch(error => {
             setLoading(false);
+            location.reload();
         });
     }
     return (
