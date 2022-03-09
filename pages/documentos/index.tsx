@@ -29,36 +29,16 @@ export default function Documents({ data }: any) {
   const closeHandler = () => setVisible(false);
 
   const downLoadEmptyFile = () => {
-    if (navigator.userAgent.includes("Instagram")) {
-      window.location.replace(
-        `https://api.vendetunave.co/api/in-app-browser/FUNT`
-      );
-      return;
-    }
-    axios
-      .post(
-        `${API_URL}/documento-tramite`,
-        {},
-        {
-          headers: {
-            Accept: "application/pdf",
-          },
-          responseType: "blob",
-        }
-      )
-      .then((res) => {
-        const url = window.URL.createObjectURL(new Blob([res.data]));
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", `doc_compraventa_${Date.now()}.pdf`); //or any other extension
-        document.body.appendChild(link);
-        link.click();
-        setIsSending(false);
-      })
-      .catch((err) => {
-        console.warn(err);
-        setIsSending(false);
-      });
+    setIsSending(true);
+    const url = `${API_URL.replace('api', '')}FUNT.pdf`;
+    const link = document.createElement("a");
+    link.setAttribute("download", `doc_compraventa_${Date.now()}.pdf`);
+    link.href = url;
+    console.log(link)
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setIsSending(false);
   };
 
   useEffect(() => {

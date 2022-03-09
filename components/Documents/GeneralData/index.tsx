@@ -49,15 +49,9 @@ export default function GeneralData({ data }: Props) {
       .post(
         `${API_URL}/documento-compra-venta`,
         { ...data },
-        {
-          headers: {
-            Accept: "application/pdf",
-          },
-          responseType: "blob",
-        }
       )
       .then((res) => {
-        const url = window.URL.createObjectURL(new Blob([res.data]));
+        const url = `${API_URL.replace('api', '') + res.data.path}`;
         const link = document.createElement("a");
         link.href = url;
         link.setAttribute("download", `doc_compraventa_${Date.now()}.pdf`); //or any other extension
@@ -78,16 +72,12 @@ export default function GeneralData({ data }: Props) {
     axios
       .post(
         `${API_URL}/documento-compra-venta`,
-        {},
-        {
-          headers: {
-            Accept: "application/pdf",
-          },
-          responseType: "blob",
-        }
+        {}
       )
       .then((res) => {
-        const url = window.URL.createObjectURL(new Blob([res.data]));
+        console.log(res)
+        const url = `${API_URL.replace('api', '') + res.data.path}`;
+        console.log(url);
         const link = document.createElement("a");
         link.href = url;
         link.setAttribute("download", `doc_compraventa_${Date.now()}.pdf`); //or any other extension
@@ -95,6 +85,8 @@ export default function GeneralData({ data }: Props) {
         link.click();
         reset();
         setIsSending(false);
+
+        setTimeout(async () => await axios.post(`${API_URL}/remove-zip`, { path: res.data.path }), 10000);
       })
       .catch((err) => {
         console.warn(err);
