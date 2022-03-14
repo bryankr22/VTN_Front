@@ -52,7 +52,7 @@ export default function GeneralData({ data }: Props) {
         { ...data, isIos: iOS() },
         {
           headers: {
-            Accept: "application/pdf",
+            Accept: iOS() ? "application/json" : "application/pdf",
           },
           responseType: iOS() ? "json" : "blob",
         }
@@ -94,7 +94,9 @@ export default function GeneralData({ data }: Props) {
         }
       )
       .then((res) => {
+        alert(iOS());
         if (iOS()) {
+          alert(`https://vendetunave.s3.amazonaws.com/${res.data.path}`);
           window.open(`https://vendetunave.s3.amazonaws.com/${res.data.path}`, '_blank');
           return;
         }
