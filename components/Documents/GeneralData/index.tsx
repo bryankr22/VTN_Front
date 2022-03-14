@@ -46,6 +46,8 @@ export default function GeneralData({ data }: Props) {
   const [bodywork, setBodyWork] = useState<string[]>([]);
   const onSubmit = handleSubmit((data) => {
     setIsSending(true);
+    let winRef = window.open("url", "_blank");
+
     axios
       .post(
         `${API_URL}/documento-compra-venta`,
@@ -59,7 +61,8 @@ export default function GeneralData({ data }: Props) {
       )
       .then((res) => {
         if (iOS()) {
-          window.open(`https://vendetunave.s3.amazonaws.com/${res.data.path}`, '_blank');
+          winRef.location = `https://vendetunave.s3.amazonaws.com/${res.data.path}`;
+          setIsSending(false);
           return;
         }
         const url = window.URL.createObjectURL(new Blob([res.data]));
@@ -80,6 +83,7 @@ export default function GeneralData({ data }: Props) {
       });
   });
   const downLoadEmptyFile = () => {
+    setIsSending(true);
     let winRef = window.open("url", "_blank");
 
     axios
