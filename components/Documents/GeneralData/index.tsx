@@ -80,6 +80,8 @@ export default function GeneralData({ data }: Props) {
       });
   });
   const downLoadEmptyFile = () => {
+    let winRef = window.open("url", "_blank");
+
     axios
       .post(
         `${API_URL}/documento-compra-venta`,
@@ -95,8 +97,7 @@ export default function GeneralData({ data }: Props) {
       )
       .then((res) => {
         if (iOS()) {
-          const url = 'https://vendetunave.s3.amazonaws.com/' + res.data.path;
-          window.open(url, '_blank');
+          winRef.location = `https://vendetunave.s3.amazonaws.com/${res.data.path}`;
           return;
         }
         const url = window.URL.createObjectURL(new Blob([res.data]));
