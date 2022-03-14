@@ -26,6 +26,7 @@ import Select from "../../Select";
 import axios from "axios";
 import { API_URL } from "../../../helpers/constants";
 import { useEffect, useState } from "react";
+import { iOS } from "@helpers/responsive.helper";
 
 interface Props {
   data: ResponseLists;
@@ -48,15 +49,19 @@ export default function GeneralData({ data }: Props) {
     axios
       .post(
         `${API_URL}/documento-compra-venta`,
-        { ...data },
+        { ...data, isIos: iOS() },
         {
           headers: {
             Accept: "application/pdf",
           },
-          responseType: "blob",
+          responseType: iOS() ? "json" : "blob",
         }
       )
       .then((res) => {
+        if (iOS()) {
+          window.open(`https://vendetunave.s3.amazonaws.com/${res.data.path}`, '_blank');
+          return;
+        }
         const url = window.URL.createObjectURL(new Blob([res.data]));
         const link = document.createElement("a");
         link.href = url;
@@ -78,15 +83,21 @@ export default function GeneralData({ data }: Props) {
     axios
       .post(
         `${API_URL}/documento-compra-venta`,
-        {},
+        {
+          isIos: iOS()
+        },
         {
           headers: {
-            Accept: "application/pdf",
+            Accept: iOS() ? "application/json" : "application/pdf",
           },
-          responseType: "blob",
+          responseType: iOS() ? "json" : "blob",
         }
       )
       .then((res) => {
+        if (iOS()) {
+          window.open(`https://vendetunave.s3.amazonaws.com/${res.data.path}`, '_blank');
+          return;
+        }
         const url = window.URL.createObjectURL(new Blob([res.data]));
         const link = document.createElement("a");
         link.href = url;
@@ -97,6 +108,7 @@ export default function GeneralData({ data }: Props) {
         setIsSending(false);
       })
       .catch((err) => {
+        alert(err);
         console.warn(err);
         setIsSending(false);
       });
