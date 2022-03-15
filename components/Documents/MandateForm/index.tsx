@@ -54,9 +54,9 @@ export default function MandateForm({ data }: Props) {
         { ...data, isIos: iOS() },
         {
           headers: {
-            Accept: "application/pdf",
+            Accept: iOS() ? "application/json" : "application/pdf",
           },
-          responseType: "blob",
+          responseType: iOS() ? "json" : "blob",
         }
       )
       .then((res) => {
