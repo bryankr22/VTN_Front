@@ -45,7 +45,6 @@ export default function MandateForm({ data }: Props) {
     ];
   });
   const request = (data = {}) => {
-    setIsSending(true);
     let winRef = window.open("", "_blank");
 
     return axios

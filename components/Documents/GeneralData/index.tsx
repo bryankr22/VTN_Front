@@ -45,7 +45,6 @@ export default function GeneralData({ data }: Props) {
   const [message, setMessage] = useState({ type: "", txt: "" });
   const [bodywork, setBodyWork] = useState<string[]>([]);
   const onSubmit = handleSubmit((data) => {
-    setIsSending(true);
     let winRef = window.open("", "_blank");
 
     axios
@@ -83,7 +82,6 @@ export default function GeneralData({ data }: Props) {
       });
   });
   const downLoadEmptyFile = () => {
-    setIsSending(true);
     let winRef = window.open("", "_blank");
 
     axios
