@@ -23,6 +23,7 @@ import { FORMALITIES } from "./constants";
 import { MandateFields } from "./types";
 import { ResponseLists } from "../GeneralData/types";
 import dayjs from "dayjs";
+import { iOS } from "@helpers/responsive.helper";
 
 interface Props {
   data: ResponseLists;
@@ -45,10 +46,12 @@ export default function MandateForm({ data }: Props) {
   });
   const request = (data = {}) => {
     setIsSending(true);
+    let winRef = window.open("", "_blank");
+
     return axios
       .post(
         `${API_URL}/documento-mandato`,
-        { ...data },
+        { ...data, isIos: iOS() },
         {
           headers: {
             Accept: "application/pdf",
@@ -57,6 +60,10 @@ export default function MandateForm({ data }: Props) {
         }
       )
       .then((res) => {
+        if (iOS()) {
+          winRef.location = `https://vendetunave.s3.amazonaws.com/${res.data.path}`;
+          return;
+        }
         const url = window.URL.createObjectURL(new Blob([res.data]));
         const link = document.createElement("a");
         link.href = url;

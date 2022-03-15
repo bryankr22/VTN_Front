@@ -46,7 +46,7 @@ export default function GeneralData({ data }: Props) {
   const [bodywork, setBodyWork] = useState<string[]>([]);
   const onSubmit = handleSubmit((data) => {
     setIsSending(true);
-    let winRef = window.open("url", "_blank");
+    let winRef = window.open("", "_blank");
 
     axios
       .post(
@@ -84,7 +84,7 @@ export default function GeneralData({ data }: Props) {
   });
   const downLoadEmptyFile = () => {
     setIsSending(true);
-    let winRef = window.open("url", "_blank");
+    let winRef = window.open("", "_blank");
 
     axios
       .post(
@@ -114,7 +114,6 @@ export default function GeneralData({ data }: Props) {
         setIsSending(false);
       })
       .catch((err) => {
-        alert(err);
         console.warn(err);
         setIsSending(false);
       });
