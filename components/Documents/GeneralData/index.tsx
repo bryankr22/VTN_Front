@@ -26,6 +26,7 @@ import Select from "../../Select";
 import axios from "axios";
 import { API_URL } from "../../../helpers/constants";
 import { useEffect, useState } from "react";
+import { iOS } from "@helpers/responsive.helper";
 
 interface Props {
   data: ResponseLists;
@@ -44,19 +45,25 @@ export default function GeneralData({ data }: Props) {
   const [message, setMessage] = useState({ type: "", txt: "" });
   const [bodywork, setBodyWork] = useState<string[]>([]);
   const onSubmit = handleSubmit((data) => {
-    setIsSending(true);
+    let winRef = window.open("", "_blank");
+
     axios
       .post(
         `${API_URL}/documento-compra-venta`,
-        { ...data },
+        { ...data, isIos: iOS() },
         {
           headers: {
-            Accept: "application/pdf",
+            Accept: iOS() ? "application/json" : "application/pdf",
           },
-          responseType: "blob",
+          responseType: iOS() ? "json" : "blob",
         }
       )
       .then((res) => {
+        if (iOS()) {
+          winRef.location = `https://vendetunave.s3.amazonaws.com/${res.data.path}`;
+          setIsSending(false);
+          return;
+        }
         const url = window.URL.createObjectURL(new Blob([res.data]));
         const link = document.createElement("a");
         link.href = url;
@@ -75,18 +82,26 @@ export default function GeneralData({ data }: Props) {
       });
   });
   const downLoadEmptyFile = () => {
+    let winRef = window.open("", "_blank");
+
     axios
       .post(
         `${API_URL}/documento-compra-venta`,
-        {},
+        {
+          isIos: iOS()
+        },
         {
           headers: {
-            Accept: "application/pdf",
+            Accept: iOS() ? "application/json" : "application/pdf",
           },
-          responseType: "blob",
+          responseType: iOS() ? "json" : "blob",
         }
       )
       .then((res) => {
+        if (iOS()) {
+          winRef.location = `https://vendetunave.s3.amazonaws.com/${res.data.path}`;
+          return;
+        }
         const url = window.URL.createObjectURL(new Blob([res.data]));
         const link = document.createElement("a");
         link.href = url;

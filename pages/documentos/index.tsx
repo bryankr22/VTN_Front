@@ -17,6 +17,7 @@ import { API_URL } from "../../helpers/constants";
 import { useState } from "react";
 import { NextSeo } from "next-seo";
 import { PropertyCard } from "../../components/Documents/PropertyCard";
+import { iOS } from "@helpers/responsive.helper";
 
 const desc =
   "Genera o descarga gratuitamente los documentos para hacer el traspaso de tu carro o moto (contrato de compraventa, contrato de mandato y documento para solicitar el trámite) Validos por el RUNT y secretaria de tránsito.";
@@ -29,6 +30,10 @@ export default function Documents({ data }: any) {
   const closeHandler = () => setVisible(false);
 
   const downLoadEmptyFile = () => {
+    if (iOS()) {
+      window.open(API_URL.substring(0, API_URL.length - 3) + 'FUNT.pdf', '_blank');
+      return;
+    }
     if (navigator.userAgent.includes("Instagram")) {
       window.location.replace(
         `https://api.vendetunave.co/api/in-app-browser/FUNT`
