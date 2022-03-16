@@ -2,7 +2,7 @@ import { BreakdownHelper } from '@helpers/responsive.helper'
 import { defaultTheme } from '@helpers/themes.helper'
 import MenuIcon from '@mui/icons-material/Menu'
 import SearchIcon from '@mui/icons-material/Search'
-import { alpha, AppBar, Box, Container, IconButton, InputBase, Stack, ThemeProvider, Toolbar } from '@mui/material'
+import { alpha, AppBar, Box, Container, IconButton, InputBase, Link, Stack, ThemeProvider, Toolbar } from '@mui/material'
 import { styled } from '@mui/system'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -20,16 +20,18 @@ type HeaderComponentState = {
 
 const PageLogo = () => {
     return (
-        <Box sx={{ width: 70, height: 50 }}>
-            <div style={{ width: '100%', height: '100%', position: 'relative' }}>
-                <Image
-                    alt='image logo'
-                    quality={50}
-                    layout='fill'
-                    src='/images/VTN_logo_white_mobile.png'
-                />
-            </div>
-        </Box>
+        <Link component='a' href='/'>
+            <Box sx={{ width: 70, height: 50 }}>
+                <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+                    <Image
+                        alt='image logo'
+                        quality={50}
+                        layout='fill'
+                        src='/images/VTN_logo_white_mobile.png'
+                    />
+                </div>
+            </Box>
+        </Link>
     )
 }
 
@@ -175,7 +177,7 @@ class Header extends Component<{ cookies: Cookies }, HeaderComponentState> {
             },
             sell: {
                 label: 'Vender',
-                link: '/vender-carro',
+                link: '/usuario/vender-carro',
             }
         },
         userMenu: {

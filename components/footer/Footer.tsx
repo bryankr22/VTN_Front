@@ -30,7 +30,7 @@ class Footer extends Component<{}, FooterComponentState> {
             mb: 2,
             pb: 1,
             width: '100%',
-            fontSize: '1.5rem',
+            fontSize: '1.2rem',
             textAlign: isSmOrDown ? 'center' : 'left',
             borderBottom: isSmOrDown ? 'none' : 'solid 1px white'
         }
@@ -78,7 +78,7 @@ class Footer extends Component<{}, FooterComponentState> {
                             paddingX: '10em',
                             marginTop: '50px !important',
                             color: 'white'
-                        }} container direction={{ xs: 'row', sm: 'row', md: 'row' }} justifyContent='center' columnSpacing={{ xs: 35, sm: 35, md: 35 }} rowSpacing={{ xs: 5, sm: 5, md: 8 }}>
+                        }} container direction={{ xs: 'row', sm: 'row', md: 'row' }} justifyContent='center' columnSpacing={{ xs: 35, sm: 35, md: 35 }} rowSpacing={{ xs: 5, sm: 5, md: 3 }}>
                             <Grid item xs={12} sm={6} md={4}>
                                 <Typography sx={{
                                     ...this.titleStyle(isSmOrDown),
@@ -142,7 +142,7 @@ class Footer extends Component<{}, FooterComponentState> {
                                     </div>
                                 </Box>
                             </Grid>
-                            <Grid item xs={12} sm={12} md={12}>
+                            <Grid sx={{ marginTop: '2em' }} item xs={12} sm={12} md={12}>
                                 <Stack direction='column' alignItems='center' spacing={1}>
                                     <span>© Copyright {copyrightYear} - VendeTuNave</span>
                                     <Link sx={this.linkStyle} component='a' underline='hover' href='/terminos-y-condiciones'>
@@ -156,6 +156,7 @@ class Footer extends Component<{}, FooterComponentState> {
                 </BreakdownHelper>
                 <Portal>
                     <Stack sx={{ 
+                        pointerEvents: 'none',
                         position: 'fixed', 
                         left: 0, 
                         bottom: 0, 
@@ -163,7 +164,7 @@ class Footer extends Component<{}, FooterComponentState> {
                         width: '100vw', 
                         p: 6
                     }} alignItems='end'>
-                        <Box sx={{ width: 60, height: 60, borderRadius: '100%' }}>
+                        <Box sx={{ width: 60, height: 60, borderRadius: '100%', pointerEvents: 'all' }}>
                             <Link component='a' href={whatsappChat} target='_blank'>
                                 <div style={{ width: '100%', height: '100%', position: 'relative' }}>
                                     <Image
