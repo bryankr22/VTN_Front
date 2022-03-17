@@ -2,7 +2,7 @@ import React from 'react';
 import Head from "next/head";
 import { NextSeo } from "next-seo";
 import axios from 'axios';
-
+import { useSelector } from "react-redux";
 import PublicLayout from '../../layouts/PublicLayout';
 import SidebarVehiculos from '../../components/vehiculos/SidebarVehiculos';
 import ListadoVehiculos from '../../components/vehiculos/ListadoVehiculos';
@@ -16,6 +16,7 @@ import { useRouter } from 'next/router';
 import { API_URL } from '../../helpers/constants';
 export default function index({ data }) {
     const router = useRouter();
+    const darkMode = useSelector(({ darkMode }) => darkMode.status);
     return (
         <PublicLayout>
             <style>
@@ -58,7 +59,7 @@ export default function index({ data }) {
             </Head>
             <Responsive {...Responsive.onlyMobile}>
                 <style>
-                {`
+                    {`
                     .ui.grid>.column:not(.row), .ui.grid>.row>.column {
                         padding-left: 1rem !important;
                         padding-right: 1rem !important;
@@ -84,46 +85,46 @@ export default function index({ data }) {
                         }
                 `}
                 </style>
-                <SidebarMobile 
-                params={router.query} 
-                contadores={{...data.contadores, total_records: data.total_records}}
-                vehiculos={data.vehicles} />
-                <ListadoVehiculosMobile 
-                params={router.query} 
-                vehiculos={data.vehicles}
-                page={data.page}
-                totalRecords={data.total_records} />
-            </Responsive>
-            <Responsive {...Responsive.onlyTablet}>
-                <SidebarMobile 
-                params={router.query} 
-                contadores={{...data.contadores, total_records: data.total_records}}
-                vehiculos={data.vehicles} />
-                <ListadoVehiculosMobile 
-                params={router.query} 
-                vehiculos={data.vehicles}
-                page={data.page}
-                totalRecords={data.total_records} />
-            </Responsive>
-            <Responsive {...Responsive.onlyComputer}>
-                <Grid style={{ paddingTop: 15 }}>
-                    <SidebarVehiculos 
-                    params={router.query} 
-                    contadores={{...data.contadores, total_records: data.total_records}}
-                    vehiculos={data.vehicles}
-                    />
-                    <ListadoVehiculos 
-                    params={router.query} 
+                <SidebarMobile
+                    params={router.query}
+                    contadores={{ ...data.contadores, total_records: data.total_records }}
+                    vehiculos={data.vehicles} />
+                <ListadoVehiculosMobile
+                    params={router.query}
                     vehiculos={data.vehicles}
                     page={data.page}
-                    totalRecords={data.total_records}
+                    totalRecords={data.total_records} />
+            </Responsive>
+            <Responsive {...Responsive.onlyTablet}>
+                <SidebarMobile
+                    params={router.query}
+                    contadores={{ ...data.contadores, total_records: data.total_records }}
+                    vehiculos={data.vehicles} />
+                <ListadoVehiculosMobile
+                    params={router.query}
+                    vehiculos={data.vehicles}
+                    page={data.page}
+                    totalRecords={data.total_records} />
+            </Responsive>
+            <Responsive {...Responsive.onlyComputer}>
+                <Grid style={{ paddingTop: 15, backgroundColor: darkMode }}>
+                    <SidebarVehiculos
+                        params={router.query}
+                        contadores={{ ...data.contadores, total_records: data.total_records }}
+                        vehiculos={data.vehicles}
+                    />
+                    <ListadoVehiculos
+                        params={router.query}
+                        vehiculos={data.vehicles}
+                        page={data.page}
+                        totalRecords={data.total_records}
                     />
                 </Grid>
             </Responsive>
         </PublicLayout>
     )
 }
-export async function getServerSideProps({query}) {
+export async function getServerSideProps({ query }) {
     const res = await axios.get(`${API_URL}/vehiculos`, {
         params: {
             categoria: query.categoria,

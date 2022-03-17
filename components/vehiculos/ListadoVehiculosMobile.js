@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addVehiculo } from "../../store/comparadorSlice";
 import dynamic from "next/dynamic";
 import VehicleThumbnail from '../VehicleThumbnail';
+import { dark, light } from "../../helpers/colors";
 const ZoneAd = dynamic(() => import("../ZoneAd"));
 
 export default function ListadoVehiculosMobile({
@@ -80,6 +81,9 @@ export default function ListadoVehiculosMobile({
             setCompare("0");
         }
     }, [compareList]);
+
+    const darkMode = useSelector(({ darkMode }) => darkMode.status);
+    const colorText = darkMode === light ? dark : light;
 
     return (
         <>
@@ -173,6 +177,17 @@ export default function ListadoVehiculosMobile({
             )}
             {Math.ceil(totalRecords / 20) > 1 && (
                 <Container fluid style={{ textAlign: "center", margin: 25 }}>
+                    {darkMode === dark &&
+                        <style>{`
+                            .ui.secondary.pointing.menu .active.item {
+                                color: ${colorText}
+                            }
+                            .ui.secondary.pointing.menu .item {
+                                border-color: ${colorText};
+                                color: ${colorText}
+                            }
+                        `}</style>
+                    }
                     <Pagination
                         pointing
                         secondary

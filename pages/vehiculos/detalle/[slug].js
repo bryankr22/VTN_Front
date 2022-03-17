@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from "react";
+import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import PublicLayout from "../../../layouts/PublicLayout";
 import SidebarDetalle from "../../../components/vehiculo/SidebarDetalle";
@@ -23,6 +24,7 @@ import {
 import Head from "next/head";
 import { NextSeo } from "next-seo";
 import { API_URL } from "../../../helpers/constants";
+import { dark, light } from "../../../helpers/colors";
 
 const CDN = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x200/"
 const REPLACE = "https://vendetunave.s3.amazonaws.com/"
@@ -61,6 +63,8 @@ export default function detalle({ data }) {
     }
   };
 
+  const darkMode = useSelector(({ darkMode }) => darkMode.status);
+  const colorText = darkMode === light ? undefined : light;
   return (
     <>
       {data.vehicleExists &&
@@ -148,6 +152,9 @@ export default function detalle({ data }) {
                 #desc-desk  h3 {
                   font-size: 1rem !important;
                 }
+                .swiper-pagination-bullet {
+                  background: ${colorText}
+                }
             `}
             </style>
 
@@ -190,24 +197,24 @@ export default function detalle({ data }) {
                   zIndex: 1000,
                 }}
               >
-                <Breadcrumb.Section link href={"/vehiculos/"}>
+                <Breadcrumb.Section style={{ color: colorText }} link href={"/vehiculos/"}>
                   {data.vehiculo.tipoLabel}
                 </Breadcrumb.Section>
-                <Breadcrumb.Divider icon="right angle" />
+                <Breadcrumb.Divider style={{ color: colorText }} icon="right angle" />
 
                 {data.vehiculo.tipoMotoLabel && (
                   <Fragment>
-                    <Breadcrumb.Section link href={"/vehiculos/"}>
+                    <Breadcrumb.Section style={{ color: colorText }} link href={"/vehiculos/"}>
                       {data.vehiculo.tipoMotoLabel}
                     </Breadcrumb.Section>
-                    <Breadcrumb.Divider icon="right angle" />
+                    <Breadcrumb.Divider style={{ color: colorText }} icon="right angle" />
                   </Fragment>
                 )}
-                <Breadcrumb.Section link href={"/vehiculos/"}>
+                <Breadcrumb.Section style={{ color: colorText }} link href={"/vehiculos/"}>
                   {data.vehiculo.marcaLabel}
                 </Breadcrumb.Section>
-                <Breadcrumb.Divider icon="right angle" />
-                <Breadcrumb.Section link href={"/vehiculos/"}>
+                <Breadcrumb.Divider style={{ color: colorText }} icon="right angle" />
+                <Breadcrumb.Section style={{ color: colorText }} link href={"/vehiculos/"}>
                   {data.vehiculo.modeloLabel}
                 </Breadcrumb.Section>
               </Breadcrumb>
@@ -223,8 +230,8 @@ export default function detalle({ data }) {
                     color: "#5c5c5c"
                   }}
                 >
-                  <Icon name="eye" style={{ marginRight: 5 }} />
-                  <p style={{ display: "inline" }}>
+                  <Icon name="eye" style={{ marginRight: 5, color: colorText }} />
+                  <p style={{ display: "inline", color: colorText }}>
                     {new Intl.NumberFormat("de-DE").format(data.vehiculo.views)}
                   </p>
                 </div>
@@ -244,13 +251,13 @@ export default function detalle({ data }) {
                       <Grid>
                         <Grid.Row columns={2} style={{ paddingBottom: 8 }}>
                           <Grid.Column>
-                            <Header as="h5">
+                            <Header as="h5" style={{ color: colorText }}>
                               Publicado hace:
                               {" " + data.diasPublicado} días
                             </Header>
                           </Grid.Column>
                           <Grid.Column>
-                            <Header as="h5">
+                            <Header as="h5" style={{ color: colorText }}>
                               {" " + data.vehiculo.ciudadLabel},
                               {" " + data.vehiculo.departamentoLabel}
                             </Header>
@@ -258,7 +265,7 @@ export default function detalle({ data }) {
                         </Grid.Row>
                         <Grid.Row columns={2} style={{ paddingBottom: 8 }}>
                           <Grid.Column>
-                            <Header as="h5">
+                            <Header as="h5" style={{ color: colorText }}>
                               Teléfono:
                               {" " + data.vehiculo.contacto}
                             </Header>
@@ -268,17 +275,17 @@ export default function detalle({ data }) {
                     </div>
                   </Grid.Row>
                   <Grid.Row className="p-3">
-                    <Header as="h5" style={{ marginTop: 20 }}>
+                    <Header as="h5" style={{ marginTop: 20, color: colorText }}>
                       CARACTERÍSTICAS
                     </Header>
                     <TableCaracteristicasDesk vehiculo={data.vehiculo} />
                   </Grid.Row>
                   <Grid.Row>
                     <div className="p-3">
-                      <Header as="h5" icon>
+                      <Header as="h5" icon style={{ color: colorText }}>
                         DESCRIPCIÓN
                       </Header>
-                      <p style={{ fontSize: 14 }}>{data.vehiculo.descripcion}</p>
+                      <p style={{ fontSize: 14, color: colorText }}>{data.vehiculo.descripcion}</p>
                     </div>
                   </Grid.Row>
                 </Grid>
@@ -300,15 +307,15 @@ export default function detalle({ data }) {
               <Grid columns="equal">
                 <Grid.Column width={10} style={{ padding: "30px 10px 15px 30px" }}>
                   <VehicleCarousel images={data.imagenes} alt={data.vehiculo.title} />
-                  <Header as="h3" style={{ marginTop: 20 }}>
+                  <Header as="h3" style={{ marginTop: 20, color: colorText }}>
                     CARACTERÍSTICAS
                   </Header>
                   <TableCaracteristicasDesk vehiculo={data.vehiculo} />
                   <hr />
-                  <Header as="h3" icon>
+                  <Header as="h3" icon style={{ color: colorText }}>
                     DESCRIPCIÓN
                   </Header>
-                  <p style={{ fontSize: 14 }}>{data.vehiculo.descripcion}</p>
+                  <p style={{ fontSize: 14, color: colorText }}>{data.vehiculo.descripcion}</p>
                   <hr />
                 </Grid.Column>
                 <SidebarDetalleDesk
@@ -320,7 +327,7 @@ export default function detalle({ data }) {
               </Grid>
               {data.vehiculosRelacionados.length > 0 && (
                 <Container fluid id="cont-inf">
-                  <Header as="h4" style={{ marginTop: 20, marginLeft: 15 }}>
+                  <Header as="h4" style={{ marginTop: 20, marginLeft: 15, color: colorText }}>
                     PRODUCTOS RELACIONADOS
                   </Header>
                   <CarruselRelacionados

@@ -16,6 +16,7 @@ import { addVehiculo } from "../../store/comparadorSlice";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import VehicleThumbnail from '../VehicleThumbnail';
+import { dark, light } from "../../helpers/colors";
 
 const ZoneAd = dynamic(() => import("../ZoneAd"));
 
@@ -114,8 +115,11 @@ export default function ListadoVehiculos({
     }
   }, [compareList]);
   //useEffect
+
+  const darkMode = useSelector(({ darkMode }) => darkMode.status);
+  const colorText = darkMode === light ? dark : light;
   return (
-    <Grid.Column width={13}>
+    <Grid.Column width={13} style={{ backgroundColor: darkMode }}>
       <Container fluid style={{ textAlign: "center", margin: 10 }}>
         <Grid>
           <Grid.Column width={12}>
@@ -230,8 +234,20 @@ export default function ListadoVehiculos({
         </Card.Group>
       )}
       {Math.ceil(totalRecords / 20) > 1 && (
-        <Container fluid style={{ textAlign: "center", margin: 25 }}>
+        <Container fluid style={{ textAlign: "center", margin: 25, color: colorText }}>
+          {darkMode === dark &&
+            <style>{`
+              .ui.secondary.pointing.menu .active.item {
+                color: ${colorText}
+              }
+              .ui.secondary.pointing.menu .item {
+                border-color: ${colorText};
+                color: ${colorText}
+              }
+            `}</style>
+          }
           <Pagination
+            style={{ color: colorText }}
             pointing
             secondary
             boundaryRange={0}

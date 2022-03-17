@@ -12,6 +12,7 @@ import { useLocalStorage } from "../../helpers/hooks/useLocalStorage";
 import { useSelector, useDispatch } from "react-redux";
 import { addFicha } from "../../store/comparadorSlice";
 import HeaderFicha from "../../components/comparadores/HeaderFicha";
+import { dark, light } from "../../helpers/colors";
 export default function ListadoFichasMobile({ vehiculos, totalRecords, page }) {
   const compareList = useSelector(({ comparador }) => comparador.fichas);
   const dispatch = useDispatch();
@@ -89,6 +90,10 @@ export default function ListadoFichasMobile({ vehiculos, totalRecords, page }) {
       setCompare("0");
     }
   }, [compareList]);
+
+  const darkMode = useSelector(({ darkMode }) => darkMode.status);
+  const colorText = darkMode === light ? dark : light;
+
   return (
     <div>
       <style>
@@ -403,6 +408,17 @@ export default function ListadoFichasMobile({ vehiculos, totalRecords, page }) {
       )}
       {Math.ceil(totalRecords / 20) > 1 && (
         <Container fluid style={{ textAlign: "center", margin: 25 }}>
+          {darkMode === dark &&
+            <style>{`
+              .ui.secondary.pointing.menu .active.item {
+                color: ${colorText}
+              }
+              .ui.secondary.pointing.menu .item {
+                border-color: ${colorText};
+                color: ${colorText}
+              }
+            `}</style>
+          }
           <Pagination
             pointing
             secondary

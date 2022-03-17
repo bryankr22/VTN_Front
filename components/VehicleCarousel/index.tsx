@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react"
-import Carousel from "./../ExpCarousel/dist"
+import Carousel from "./../ExpCarousel/dist";
+import { useSelector } from 'react-redux';
 import SwiperCore, { Zoom, Virtual, Navigation, Pagination, Thumbs, FreeMode } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
@@ -9,6 +10,7 @@ import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 
 import styles from './styles.module.css'
+import { dark, light } from "@helpers/colors";
 
 interface Image {
   url: string
@@ -26,17 +28,18 @@ export default function VehicleCarousel({ images = [], alt, mobile }: Props) {
   }, [])
 
   const [thumbsRef, setThumbsRef] = useState(null) as [SwiperCore, () => void]
-
   const [carouselRef, setCarouselRef] = useState(null) as [SwiperCore, () => void]
 
+  const darkMode = useSelector(({ darkMode }: any) => darkMode.status);
+  const colorText = darkMode === light ? dark : light;
   return [
     <Swiper
       key="carousel"
       onSwiper={setCarouselRef}
       className={styles.swiper}
       style={{
-        "--swiper-navigation-color": "#000",
-        "--swiper-pagination-color": "#000"
+        "--swiper-navigation-color": colorText,
+        "--swiper-pagination-color": colorText
       } as any}
       modules={[Virtual, Zoom, Pagination, Navigation, FreeMode, Thumbs]}
       thumbs={{ swiper: thumbsRef }}
@@ -49,7 +52,7 @@ export default function VehicleCarousel({ images = [], alt, mobile }: Props) {
     >
       {
         imageList.map((image, index) => (
-          <SwiperSlide className={styles['swiper-slide']} key={index} virtualIndex={index}>
+          <SwiperSlide className={darkMode === light ? styles['swiper-slide'] : styles['swiper-slide-darkMode']} key={index} virtualIndex={index}>
             <div className="swiper-zoom-container">
               <img src={image.src} alt={alt}>
               </img>
