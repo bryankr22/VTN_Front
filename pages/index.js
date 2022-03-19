@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import loadable from '@loadable/component';
 
 import PublicLayout from "../layouts/PublicLayout";
@@ -13,8 +13,6 @@ import ContentHome from "../components/home/ContentHome";
 
 import axios from "axios";
 import { API_URL, home } from "../helpers/constants";
-import { Responsive, Button } from "semantic-ui-react";
-import { changeMode } from "../store/darkMode";
 import { dark, light } from "../helpers/colors";
 
 const CategoriasHome = loadable(() => import('../components/home/CategoriasHome'), {
