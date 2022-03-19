@@ -27,6 +27,7 @@ import axios from "axios";
 import { API_URL } from "../../../helpers/constants";
 import { useEffect, useState } from "react";
 import { iOS } from "@helpers/responsive.helper";
+import { light } from "@helpers/colors";
 
 interface Props {
   data: ResponseLists;
@@ -131,7 +132,7 @@ export default function GeneralData({ data }: Props) {
   return (
     <form onSubmit={onSubmit}>
       <Collapse>
-        <Grid.Container gap={2}>
+        <Grid.Container gap={2} style={{ backgroundColor: light }}>
           <Grid xs={12} md={12}>
             {message.type && (
               <Card

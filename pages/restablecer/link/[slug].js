@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Container, Form, Button, Input, Dimmer, Loader, Message } from 'semantic-ui-react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 
 import PublicLayout from '../../../layouts/PublicLayout';
 import { API_URL } from '../../../helpers/constants';
+import { light } from '../../../helpers/colors';
 
 export default function restablecer({ data, token }) {
     const router = useRouter();
@@ -66,6 +68,9 @@ export default function restablecer({ data, token }) {
 
     }
 
+    const darkMode = useSelector(({ darkMode }) => darkMode.status);
+    const colorText = darkMode === light ? undefined : light;
+
     return (
         <PublicLayout>
             <Dimmer style={{ position: "fixed" }} active={loading}>
@@ -82,7 +87,7 @@ export default function restablecer({ data, token }) {
                 {state &&
                     <Form>
                         <Form.Field>
-                            <label>Nueva contraseña</label>
+                            <label style={{ color: colorText }}>Nueva contraseña</label>
                             <Input
                                 type="password"
                                 onChange={(e) => setPassword(e.target.value)}
@@ -91,7 +96,7 @@ export default function restablecer({ data, token }) {
                             />
                         </Form.Field>
                         <Form.Field>
-                            <label>Confirmar contraseña</label>
+                            <label style={{ color: colorText }}>Confirmar contraseña</label>
                             <Input
                                 type="password"
                                 onChange={(e) => setConfirmPass(e.target.value)}
@@ -106,7 +111,7 @@ export default function restablecer({ data, token }) {
                 }
                 {!state &&
                     <>
-                        <p>Lo sentimos, este link ha caducado o ya no es valido.</p>
+                        <p style={{ color: colorText }}>Lo sentimos, este link ha caducado o ya no es valido.</p>
                         <Button color="red" onClick={() => router.push('/restablecer')}>
                             IR RESTABLECER CONTRASEÑA
                         </Button>

@@ -8,6 +8,8 @@ export default function HeaderVehiculo() {
     const removeVehiculoClick = (index) => {
         dispatch(removeVehiculo(index));
     }
+
+    const darkMode = useSelector(({ darkMode }) => darkMode.status);
     return (
         <>
             <Container style={{ marginBottom: 10 }}>
@@ -60,7 +62,7 @@ export default function HeaderVehiculo() {
                                         </Card.Content>
                                     </Card>
                                 ))}
-                                <Card style={{ width: 'auto', marginLeft: 15, border: 'none', boxShadow: 'none' }}>
+                                <Card style={{ width: 'auto', marginLeft: 15, border: 'none', boxShadow: 'none', backgroundColor: darkMode }}>
                                     <Button as="a" href="/comparar-vehiculos" secondary fluid style={{ margin: 'auto' }}>Comparar</Button>
                                 </Card>
                             </Card.Group>

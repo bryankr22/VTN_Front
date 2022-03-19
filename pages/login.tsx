@@ -1,4 +1,6 @@
-import { BreakdownHelper, defaultTheme } from '@helpers'
+import { BreakdownHelper, defaultTheme } from '@helpers';
+import { connect } from 'react-redux';
+import { createTheme } from '@mui/material/styles';
 import { AUTH_URL, login_api, RECAPTCHA_SITE_KEY, register_api, validateRecaptcha } from '@helpers/constants'
 import LoadingButton from '@mui/lab/LoadingButton'
 import { Alert, Checkbox, Divider, FormControlLabel, FormGroup, ThemeProvider, Typography } from '@mui/material'
@@ -13,11 +15,12 @@ import jwt from 'jsonwebtoken'
 import { NextSeo } from "next-seo"
 import Head from "next/head"
 import { instanceOf } from 'prop-types'
-import { Component } from 'react'
+import { Component, useEffect } from 'react'
 import { Cookies, withCookies } from 'react-cookie'
 import Reaptcha from 'reaptcha'
 import * as yup from 'yup'
 import PublicLayout from '../layouts/PublicLayout'
+import { dark, light } from '@helpers/colors';
 
 type LoginData = {
     email: string,
@@ -37,7 +40,7 @@ type LoginPageState = {
     isSigningInUp: boolean
     isLoginError: boolean
     isSignUpError: boolean,
-    signUpVerified: boolean
+    signUpVerified: boolean,
 }
 
 
@@ -226,6 +229,7 @@ class LoginPage extends Component<{ cookies: Cookies }, LoginPageState> {
         this.onVerifySignUp = this.onVerifySignUp.bind(this)
         this.onLoginSubmit = this.onLoginSubmit.bind(this)
         this.onSignUpSubmit = this.onSignUpSubmit.bind(this)
+        this.onSignUpSubmit = this.onSignUpSubmit.bind(this)
     }
 
     render() {
@@ -236,8 +240,18 @@ class LoginPage extends Component<{ cookies: Cookies }, LoginPageState> {
             signUpVerified
         } = this.state
 
+
+        const darkMode = this.props.darkMode.status;
+        const colorText = darkMode === light ? undefined : light;
+
+        const themeDark = createTheme({
+            palette: {
+                mode: 'dark',
+            }
+        });
+
         return (
-            <ThemeProvider theme={defaultTheme} >
+            <ThemeProvider theme={darkMode === light ? defaultTheme : themeDark} >
                 <PublicLayout {...this.props}>
                     <NextSeo
                         title="VendeTuNave – Regístrate o Inicia sesión"
@@ -258,7 +272,7 @@ class LoginPage extends Component<{ cookies: Cookies }, LoginPageState> {
                                 <Grid container spacing={4}>
                                     <Grid item xs={12} sm={12} md={5}>
                                         <Box sx={{ my: 4 }}>
-                                            <Typography variant="h5" component="div" gutterBottom>
+                                            <Typography variant="h5" component="div" gutterBottom style={{ color: colorText }}>
                                                 INICIAR SESIÓN
                                             </Typography>
                                         </Box>
@@ -282,7 +296,6 @@ class LoginPage extends Component<{ cookies: Cookies }, LoginPageState> {
                                                             value={values.email}
                                                             onChange={handleChange}
                                                             error={touched.email && Boolean(errors.email)}
-                                                            helperText={touched.email && errors.email}
                                                         />
                                                     </Box>
                                                     <Box sx={{ my: 2 }}>
@@ -299,11 +312,11 @@ class LoginPage extends Component<{ cookies: Cookies }, LoginPageState> {
                                                         />
                                                     </Box>
                                                     <Box sx={{ mb: 2 }}>
-                                                        <Link href="/restablecer" underline="hover">
+                                                        <Link href="/restablecer" underline="hover" style={{ color: colorText }}>
                                                             ¿Olvidaste la contraseña?
                                                         </Link>
                                                     </Box>
-                                                    <LoadingButton color="primary" variant="contained" type="submit" loading={isLoginIn}>
+                                                    <LoadingButton color="primary" style={{ backgroundColor: colorText }} variant="contained" type="submit" loading={isLoginIn}>
                                                         INICIAR SESIÓN
                                                     </LoadingButton>
                                                 </Form>
@@ -318,7 +331,7 @@ class LoginPage extends Component<{ cookies: Cookies }, LoginPageState> {
                                     </Grid>
                                     <Grid item xs={12} sm={12} md={5}>
                                         <Box sx={{ my: 4 }}>
-                                            <Typography variant="h5" component="div" gutterBottom>
+                                            <Typography variant="h5" component="div" gutterBottom style={{ color: colorText }}>
                                                 REGISTRARSE
                                             </Typography>
                                         </Box>
@@ -393,12 +406,12 @@ class LoginPage extends Component<{ cookies: Cookies }, LoginPageState> {
                                                                 name="subscribeToNewsLetter"
                                                                 value={values.subscribeToNewsLetter}
                                                             />
-                                                        } label="Subscribirse al newsletter" />
+                                                        } label="Subscribirse al newsletter" style={{ color: colorText }} />
                                                     </FormGroup>
                                                     <Box sx={{ mb: 2 }}>
                                                         <Reaptcha sitekey={RECAPTCHA_SITE_KEY} onVerify={this.onVerifySignUp} />
                                                     </Box>
-                                                    <LoadingButton color="primary" variant="contained" type="submit" disabled={!signUpVerified} loading={isSigningInUp}>
+                                                    <LoadingButton color="primary" style={{ backgroundColor: colorText, color: darkMode }} variant="contained" type="submit" disabled={!signUpVerified} loading={isSigningInUp}>
                                                         REGISTRARSE
                                                     </LoadingButton>
                                                 </form>
@@ -414,4 +427,10 @@ class LoginPage extends Component<{ cookies: Cookies }, LoginPageState> {
     }
 }
 
-export default withCookies(LoginPage)
+const mapStateToProps = state => {
+    return {
+        darkMode: state.darkMode
+    }
+}
+
+export default connect(mapStateToProps)(withCookies(LoginPage))

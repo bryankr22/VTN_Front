@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Head from "next/head";
 import { NextSeo } from "next-seo";
+import { useSelector } from 'react-redux';
 import PublicLayout from '../../layouts/PublicLayout';
 import { authInitialProps } from '../../helpers/auth';
 import { Container, Header, Tab } from 'semantic-ui-react';
@@ -10,6 +11,7 @@ import { AUTH_URL, favoritos_api, favoritos_remove_vehiculo, favoritos_remove_fi
 import { useCookies } from "react-cookie"
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
+import { dark, light } from '../../helpers/colors';
 
 export default function favoritos() {
     const [activeIndex, setActiveIndex] = useState(0);
@@ -63,6 +65,8 @@ export default function favoritos() {
                 //console.log(error);
             });
     }
+
+    const darkMode = useSelector(({ darkMode }) => darkMode.status);
     return (
         <PublicLayout>
             <NextSeo
@@ -81,6 +85,7 @@ export default function favoritos() {
             <Container style={{ paddingTop: 25 }} text>
                 <Header as="h1" style={{ textTransform: 'uppercase' }}>Favoritos</Header>
                 <Tab
+                    menu={{ inverted: darkMode === dark, color: darkMode }}
                     panes={panes(favoritos.vehiculos, 0, favoritos.fichas_tecnicas, 0, eliminarVehiculo, eliminarFicha)}
                     activeIndex={activeIndex}
                     onTabChange={handleTabChange}

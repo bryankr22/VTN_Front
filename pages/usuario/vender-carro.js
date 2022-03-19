@@ -1,13 +1,18 @@
 import Head from "next/head";
+import { useSelector } from 'react-redux';
 import { NextSeo } from "next-seo";
 import PublicLayout from '../../layouts/PublicLayout';
-import { Container, Tab } from "semantic-ui-react";
+import { Container, Header } from "semantic-ui-react";
 import { validateAuth } from '../../helpers/auth';
-import { panes } from '../../components/usuario/productoTabs';
+import VehiculoContainer from '../../components/usuario/form_vehiculo/VehiculoContainer';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
+import { light } from "../../helpers/colors";
 
 export default function crear_producto({ data }) {
+    const darkMode = useSelector(({ darkMode }) => darkMode.status);
+    const colorText = darkMode === light ? undefined : light;
+
     return (
         <PublicLayout>
             <NextSeo
@@ -24,7 +29,14 @@ export default function crear_producto({ data }) {
                 <meta property="keywords" content="venta de carros, venta de motos, vender carro, venta de carros, compra y venta de carros, tu carro ya, tu carro Colombia" />
             </Head>
             <Container style={{ paddingTop: 25 }} text id="crear-producto">
-                <Tab panes={panes(data)} />
+                <Header as="h1" style={{ color: colorText }}>PUBLICAR VEHÍCULOS</Header>
+                <p style={{ color: colorText }}>
+                    Para publicar tu vehículo con VENDETUNAVE se requiere
+                    diligenciar completamente el formulario. Una vez diligenciado
+                    pasará a revisión por parte del soporte técnico, y publicado en
+                    un periodo máximo de 24 horas.
+                </p>
+                <VehiculoContainer data={data} darkMode={darkMode} />
             </Container>
         </PublicLayout>
     )

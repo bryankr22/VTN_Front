@@ -2,9 +2,11 @@
 import React, { Fragment, useState } from 'react';
 import { Container, Header, Table, Button, Image, Responsive, Tab, Pagination, Message, Modal } from 'semantic-ui-react';
 import { useCookies } from "react-cookie";
+import { useSelector } from 'react-redux';
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
 import { AUTH_URL } from '../../helpers/constants';
+import { dark, light } from '../../helpers/colors';
 
 const pathS3_vehiculos = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x300/vendetunave/images/vehiculos/";
 const pathS3_acc = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x300/vendetunave/images/accesorios/";
@@ -101,11 +103,14 @@ export const panes = (vehicles, resultTotalV, accesorios, resultTotalA) => {
       });
   }
 
+  const darkMode = useSelector(({ darkMode }) => darkMode.status);
+  const colorText = darkMode === light ? dark : light;
+
   return [
     {
       menuItem: "VEHÍCULOS",
       render: () => (
-        <Tab.Pane>
+        <Tab.Pane inverted={darkMode === dark} color={colorText}>
           <Modal
             size="mini"
             open={modal}
@@ -133,7 +138,7 @@ export const panes = (vehicles, resultTotalV, accesorios, resultTotalA) => {
           }
           {vehicles.length > 0 && (
             <Fragment>
-              <Table>
+              <Table inverted={darkMode === dark} color={colorText}>
                 <Responsive
                   {...Responsive.onlyComputer}
                   {...Responsive.onlyLargeScreen}
@@ -213,19 +218,19 @@ export const panes = (vehicles, resultTotalV, accesorios, resultTotalA) => {
                                 Rechazado
                               </Header.Subheader>
                             )}
-                            <h2 className="fnt-size-inherit">
+                            <h2 style={{ color: colorText }} className="fnt-size-inherit">
                               {item.title.substr(0, 15)}
                             </h2>
-                            <Header.Subheader style={{ fontSize: 10 }} as="h3">
+                            <Header.Subheader style={{ fontSize: 10, color: colorText }} as="h3">
                               SKU: {item.sku}
                             </Header.Subheader>
-                            <Header.Subheader style={{ fontSize: 10 }} as="h3">
+                            <Header.Subheader style={{ fontSize: 10, color: colorText }} as="h3">
                               {item.labelCiudad}
                             </Header.Subheader>
-                            <Header.Subheader style={{ fontSize: 10 }} as="h3">
+                            <Header.Subheader style={{ fontSize: 10, color: colorText }} as="h3">
                               {item.ano}
                             </Header.Subheader>
-                            <Header.Subheader style={{ fontSize: 10 }} as="h3">
+                            <Header.Subheader style={{ fontSize: 10, color: colorText }} as="h3">
                               {item.modeloLabel}
                             </Header.Subheader>
                           </Header.Content>
@@ -275,6 +280,17 @@ export const panes = (vehicles, resultTotalV, accesorios, resultTotalA) => {
                   fluid
                   style={{ textAlign: "center", margin: 25 }}
                 >
+                  {darkMode === dark &&
+                    <style>{`
+                      .ui.secondary.pointing.menu .active.item {
+                          color: ${colorText}
+                      }
+                      .ui.secondary.pointing.menu .item {
+                          border-color: ${colorText};
+                          color: ${colorText}
+                      }
+                      `}</style>
+                  }
                   <Pagination
                     pointing
                     secondary

@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import PublicLayout from '../../../layouts/PublicLayout';
 import { Container, Header, Form, Button, Label, Item, TextArea, Responsive, Comment, Dimmer, Loader } from 'semantic-ui-react'
 import axios from 'axios';
 import { useCookies } from "react-cookie"
 import { AUTH_URL, comment_api } from '../../../helpers/constants';
 import jwt from 'jsonwebtoken';
+import { dark, light } from '../../../helpers/colors';
+
 export default function detalle({ data }) {
     const [cookies, setCookie] = useCookies(['vtn_token']);
     const [loading, setLoading] = useState(false);
@@ -31,25 +34,32 @@ export default function detalle({ data }) {
             location.reload();
         });
     }
+
+    const darkMode = useSelector(({ darkMode }) => darkMode.status);
+    const colorText = darkMode === light ? dark : light;
+
     return (
         <PublicLayout>
             <Dimmer style={{ position: "fixed" }} active={loading}>
                 <Loader>Cargando...</Loader>
             </Dimmer>
             <Container style={{ paddingTop: 25 }} text>
-                <Header as='h2'>COMUNIDAD - Vende Tu Nave</Header>
-                <Header as='h3' style={{ fontSize: '1rem' }}>{data.pregunta.nombre}</Header>
-                <Header as='h1' dividing>{data.pregunta.titulo}</Header>
+                <Header style={{ color: colorText }} as='h2'>COMUNIDAD - Vende Tu Nave</Header>
+                <Header style={{ color: colorText, fontSize: '1rem' }} as='h3'>{data.pregunta.nombre}</Header>
+                <Header style={{ color: colorText }} as='h1' dividing>{data.pregunta.titulo}</Header>
 
-                <p>
+                <p style={{ color: colorText }}>
                     {data.pregunta.descripcion}
                 </p>
 
                 <div style={{ paddingBottom: '30px' }}>
                     {(data.tags).map((itemTag, index) =>
                         <Label
+                            style={{ marginRight: 5, marginBottom: 5 }}
                             key={index}
-                            as='a' tag>{itemTag.tag}</Label>
+                            as='a' tag>
+                            {itemTag.tag}
+                        </Label>
                     )}
                 </div>
 
@@ -70,15 +80,15 @@ export default function detalle({ data }) {
                         {(data.respuestas).map((item, index) =>
                             <Item key={index}>
                                 <Responsive {...Responsive.onlyComputer} style={{ marginRight: 20 }}>
-                                    <Item.Image size='tiny' src={(item.image == 0) ? userImagePre : pathS3 + item.image} />
+                                    <Item.Image style={{ backgroundColor: light }} size='tiny' src={(item.image == 0) ? userImagePre : pathS3 + item.image} />
                                 </Responsive>
 
                                 <Item.Content>
-                                    <Item.Extra style={{ textAlign: 'left', color: 'black', margin: 0, marginLeft: -10 }}>
+                                    <Item.Extra style={{ textAlign: 'left', color: colorText, margin: 0, marginLeft: -10 }}>
                                         {item.nombre}
                                     </Item.Extra>
-                                    <Item.Meta>{item.respuesta}</Item.Meta>
-                                    <Item.Extra style={{ textAlign: 'right', color: 'black' }}>
+                                    <Item.Meta style={{ color: colorText }}>{item.respuesta}</Item.Meta>
+                                    <Item.Extra style={{ textAlign: 'right', color: colorText }}>
                                         Respondido el {item.fecha}
                                     </Item.Extra>
                                 </Item.Content>
@@ -90,13 +100,13 @@ export default function detalle({ data }) {
                     <Comment.Group style={{ marginTop: 45 }}>
                         {(data.respuestas).map((item, index) =>
                             <Comment key={index}>
-                                <Comment.Avatar src={(item.image == 0) ? userImagePre : pathS3 + item.image} />
+                                <Comment.Avatar style={{ backgroundColor: light }} src={(item.image == 0) ? userImagePre : pathS3 + item.image} />
                                 <Comment.Content>
-                                    <Comment.Author as='a'>{item.nombre}</Comment.Author>
-                                    <Comment.Metadata>
+                                    <Comment.Author as='a' style={{ color: colorText }}>{item.nombre}</Comment.Author>
+                                    <Comment.Metadata style={{ color: colorText }}>
                                         <div>Respondido el {item.fecha}</div>
                                     </Comment.Metadata>
-                                    <Comment.Text>{item.respuesta}</Comment.Text>
+                                    <Comment.Text style={{ color: colorText }}>{item.respuesta}</Comment.Text>
                                 </Comment.Content>
                             </Comment>
                         )}
@@ -106,13 +116,13 @@ export default function detalle({ data }) {
                     <Comment.Group style={{ marginTop: 45 }}>
                         {(data.respuestas).map((item, index) =>
                             <Comment key={index}>
-                                <Comment.Avatar src={(item.image == 0) ? userImagePre : pathS3 + item.image} />
+                                <Comment.Avatar style={{ backgroundColor: light }} src={(item.image == 0) ? userImagePre : pathS3 + item.image} />
                                 <Comment.Content>
-                                    <Comment.Author as='a'>{item.nombre}</Comment.Author>
-                                    <Comment.Metadata>
+                                    <Comment.Author as='a' style={{ color: colorText }}>{item.nombre}</Comment.Author>
+                                    <Comment.Metadata style={{ color: colorText }}>
                                         <div>Respondido el {item.fecha}</div>
                                     </Comment.Metadata>
-                                    <Comment.Text>{item.respuesta}</Comment.Text>
+                                    <Comment.Text style={{ color: colorText }}>{item.respuesta}</Comment.Text>
                                 </Comment.Content>
                             </Comment>
                         )}

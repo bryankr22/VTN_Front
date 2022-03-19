@@ -4,8 +4,9 @@ import { Form, FormField, Input, Select } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateVehiculo } from "../../../store/productoSlice";
 import { API_URL, GET_BRANDS } from "../../../helpers/constants";
+import { light } from "../../../helpers/colors";
 
-export default function FirstSection({ tipo_vehiculo, data: {edit, ...data}, isMobile }) {
+export default function FirstSection({ tipo_vehiculo, data: { edit, ...data }, isMobile, darkMode }) {
   const dispatch = useDispatch();
   const vehiculoRedux = useSelector(({ producto }) => producto.vehiculo);
   const [marcas, setMarcas] = useState(() => edit?.marcas || []);
@@ -50,11 +51,11 @@ export default function FirstSection({ tipo_vehiculo, data: {edit, ...data}, isM
     const res = await axios.get(GET_BRANDS.replace(':id', 5)).catch(() => []);
     const optionsMarcas = [{ key: "", value: "", text: "Marca" }];
     res?.data?.marcas?.forEach?.(function (item) {
-        optionsMarcas.push({
-            key: item.id,
-            value: item.id,
-            text: item.nombre,
-        });
+      optionsMarcas.push({
+        key: item.id,
+        value: item.id,
+        text: item.nombre,
+      });
     });
 
     setMarcasMotos(optionsMarcas)
@@ -63,12 +64,15 @@ export default function FirstSection({ tipo_vehiculo, data: {edit, ...data}, isM
 
   useEffect(() => {
     fetchBike()
-  }, [])
+  }, []);
+
+  const colorText = darkMode === light ? undefined : light;
+  console.log(darkMode)
 
   return isMobile ? (
     <>
       <Form.Field>
-        <label>CATEGORÍAS *</label>
+        <label style={{ color: colorText }}>CATEGORÍAS *</label>
         <Select
           name="tipo_vehiculo"
           search
@@ -81,7 +85,7 @@ export default function FirstSection({ tipo_vehiculo, data: {edit, ...data}, isM
       </Form.Field>
       {vehiculoRedux?.tipo_vehiculo != 5 && (
         <Form.Field>
-          <label>Marca</label>
+          <label style={{ color: colorText }}>Marca</label>
           <Select
             name="marca_vehiculo"
             search
@@ -96,7 +100,7 @@ export default function FirstSection({ tipo_vehiculo, data: {edit, ...data}, isM
       {vehiculoRedux?.tipo_vehiculo == 5 && (
         <>
           <Form.Field>
-            <label>Tipo Moto</label>
+            <label style={{ color: colorText }}>Tipo Moto</label>
             <Select
               name="tipo_moto_select"
               search
@@ -110,7 +114,7 @@ export default function FirstSection({ tipo_vehiculo, data: {edit, ...data}, isM
             />
           </Form.Field>
           <Form.Field>
-            <label>Marca</label>
+            <label style={{ color: colorText }}>Marca</label>
             <Select
               name="marca_vehiculo"
               search
@@ -125,7 +129,7 @@ export default function FirstSection({ tipo_vehiculo, data: {edit, ...data}, isM
       )}
       {vehiculoRedux?.marca != 0 && (
         <Form.Field>
-          <label>Modelo</label>
+          <label style={{ color: colorText }}>Modelo</label>
           <Select
             name="modelo_vehiculo"
             search
@@ -140,7 +144,7 @@ export default function FirstSection({ tipo_vehiculo, data: {edit, ...data}, isM
         </Form.Field>
       )}
       <Form.Field>
-        <label>Año</label>
+        <label style={{ color: colorText }}>Año</label>
         <Form.Input
           name="anio_vehiculo"
           type="number"
@@ -156,7 +160,7 @@ export default function FirstSection({ tipo_vehiculo, data: {edit, ...data}, isM
     </>
   ) : (
     <Form.Field>
-      <label>CATEGORÍAS *</label>
+      <label style={{ color: colorText }}>CATEGORÍAS *</label>
       <Input type="text" action>
         <Select
           name="tipo_vehiculo"

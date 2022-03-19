@@ -10,12 +10,14 @@ import {
   Input,
   Message,
 } from "semantic-ui-react";
+import { useSelector } from 'react-redux';
 import Loader from "../components/Loader";
 import * as Format from './../helpers/format';
 
 import PublicLayout from "../layouts/PublicLayout";
 import axios from "axios";
 import { API_URL } from "../helpers/constants";
+import { light } from "../helpers/colors";
 
 const optionsCuotas = [
   { key: "", text: "", value: "" },
@@ -45,15 +47,15 @@ export default function financiacion() {
   const [statusMsg, setStatusMsg] = useState(true);
   const handleValues =
     (param) =>
-    (e, { value }) => {
-      const values = { ...selectValues };
-      if (!!value) {
-        values[param] = value;
-      } else {
-        delete values[param];
-      }
-      setSelectValues(values);
-    };
+      (e, { value }) => {
+        const values = { ...selectValues };
+        if (!!value) {
+          values[param] = value;
+        } else {
+          delete values[param];
+        }
+        setSelectValues(values);
+      };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -112,24 +114,32 @@ export default function financiacion() {
       });
   };
 
+  const darkMode = useSelector(({ darkMode }) => darkMode.status);
+  const colorText = darkMode === light ? undefined : light;
+
   return (
     <PublicLayout>
       <NextSeo
-          title="VendeTuNave – Opciones de crédito para tu carro"
-          description="Te ayudamos con la financiación de tu carro. Ayudándote cumplir tu sueño de comprar carro."
-          openGraph={{
-              title: "VendeTuNave – Opciones de crédito para tu carro",
-              locale: "es_ES",
-              type: "website",
-              description: "Te ayudamos con la financiación de tu carro. Ayudándote cumplir tu sueño de comprar carro."
-          }}
+        title="VendeTuNave – Opciones de crédito para tu carro"
+        description="Te ayudamos con la financiación de tu carro. Ayudándote cumplir tu sueño de comprar carro."
+        openGraph={{
+          title: "VendeTuNave – Opciones de crédito para tu carro",
+          locale: "es_ES",
+          type: "website",
+          description: "Te ayudamos con la financiación de tu carro. Ayudándote cumplir tu sueño de comprar carro."
+        }}
       />
       <Head>
-          <meta property="keywords" content="sufi, occiauto, simuladores de crédito vehiculos, simulador de crédito, prestamos, financiaciones" />
+        <meta property="keywords" content="sufi, occiauto, simuladores de crédito vehiculos, simulador de crédito, prestamos, financiaciones" />
       </Head>
+      <style>{`
+        .required.field > label {
+          color: ${colorText} !important;
+        }
+      `}</style>
       <Container style={{ paddingTop: 25 }} text>
-        <Header as="h1">FINANCIACIÓN DE TU VEHICULO</Header>
-        <p style={{ textAlign: "justify" }}>
+        <Header as="h1" style={{ color: colorText }}>FINANCIACIÓN DE TU VEHICULO</Header>
+        <p style={{ textAlign: "justify", color: colorText }}>
           Para acceder a nuestros recomendados en financiación de vehículos, se
           requiere diligenciar el siguiente formulario. Posteriormente, un
           asesor te contactará para resolver todas las inquietudes y colaborarte
@@ -145,15 +155,15 @@ export default function financiacion() {
 
         <Form onSubmit={handleSubmit}>
           <Form.Field>
-            <label>Nombre</label>
+            <label style={{ color: colorText }}>Nombre</label>
             <Form.Input placeholder="Nombre" name="nombre" required />
           </Form.Field>
           <Form.Field>
-            <label>Apellido</label>
+            <label style={{ color: colorText }}>Apellido</label>
             <input placeholder="Apellido" name="apellido" required />
           </Form.Field>
           <Form.Field>
-            <label>Fecha de nacimiento</label>
+            <label style={{ color: colorText }}>Fecha de nacimiento</label>
             <input
               type="date"
               placeholder="Fecha de nacimiento"
@@ -163,11 +173,11 @@ export default function financiacion() {
             />
           </Form.Field>
           <Form.Field>
-            <label>Correo electrónico</label>
+            <label style={{ color: colorText }}>Correo electrónico</label>
             <input placeholder="Email" name="email" type="email" required />
           </Form.Field>
           <Form.Field>
-            <label>WhatsApp</label>
+            <label style={{ color: colorText }}>WhatsApp</label>
             <input
               type="number"
               placeholder="WhatsApp"
@@ -176,7 +186,7 @@ export default function financiacion() {
             />
           </Form.Field>
           <Form.Field>
-            <label>¿Cuánto cuesta el carro que quieres?</label>
+            <label style={{ color: colorText }}>¿Cuánto cuesta el carro que quieres?</label>
             <Input
               name="cuanto_cuesta"
               type="text"
@@ -185,7 +195,7 @@ export default function financiacion() {
             />
           </Form.Field>
           <Form.Field>
-            <label>¿Cuánto dinero tienes para la cuota inicial?</label>
+            <label style={{ color: colorText }}>¿Cuánto dinero tienes para la cuota inicial?</label>
             <Input
               name="cuota_inicial"
               type="text"
@@ -220,7 +230,7 @@ export default function financiacion() {
             value={selectValues?.salario}
             required
           />
-          <div style={{ marginBottom: "25px", fontWeight: "bold" }}>
+          <div style={{ marginBottom: "25px", fontWeight: "bold", color: colorText }}>
             NOTA: Si usted gana menos de 2 salarios mínimos no podemos procesar
             su solicitud de financiación.
           </div>

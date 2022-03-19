@@ -7,6 +7,7 @@ import InputFile from "../../../components/InputFile";
 import { updateVehiculo } from "../../../store/productoSlice";
 import { API_URL, AUTH_URL } from "../../../helpers/constants";
 import { toCurrency } from "../../../helpers/format";
+import { dark, light } from "../../../helpers/colors";
 
 const optionsCondicion = [
   { key: "Nuevo", value: "Nuevo", text: "Nuevo" },
@@ -18,7 +19,7 @@ const optionsGeneric = [
   { key: 1, value: 1, text: "SI" },
 ];
 
-export default function ThirdSection({ data: { edit, ...data }, isMobile }) {
+export default function ThirdSection({ data: { edit, ...data }, isMobile, darkMode }) {
   const dispatch = useDispatch();
   const [cities, setCities] = useState(() => edit?.ciudades || []);
   const [examination, setExamination] = useState(() =>
@@ -52,10 +53,11 @@ export default function ThirdSection({ data: { edit, ...data }, isMobile }) {
     dispatch(updateVehiculo({ input: "peritaje_vehiculo", value: examination }));
   }, [examination]);
 
+  const colorText = darkMode === light ? dark : light;
   return (
     <>
       <Form.Field>
-        <label>TÍTULO *</label>
+        <label style={{ color: colorText }}>TÍTULO *</label>
         <Form.Input
           name="titulo_vehiculo"
           fluid
@@ -67,7 +69,7 @@ export default function ThirdSection({ data: { edit, ...data }, isMobile }) {
         />
       </Form.Field>
       <Form.Field>
-        <label>DESCRIPCIÓN *</label>
+        <label style={{ color: colorText }}>DESCRIPCIÓN *</label>
         <Form.TextArea
           name="descripcion_vehiculo"
           fluid
@@ -80,7 +82,7 @@ export default function ThirdSection({ data: { edit, ...data }, isMobile }) {
       </Form.Field>
 
       <Form.Field>
-        <label>CONTACTO *</label>
+        <label style={{ color: colorText }}>CONTACTO *</label>
         <Form.Input
           name="contacto_vehiculo"
           type="number"
@@ -97,7 +99,7 @@ export default function ThirdSection({ data: { edit, ...data }, isMobile }) {
         />
       </Form.Field>
       <Form.Field>
-        <label>CONDICIÓN *</label>
+        <label style={{ color: colorText }}>CONDICIÓN *</label>
         <Select
           name="estado_vehiculo"
           options={optionsCondicion}
@@ -112,7 +114,7 @@ export default function ThirdSection({ data: { edit, ...data }, isMobile }) {
       </Form.Field>
 
       <Form.Field style={{ marginBottom: 10 }}>
-        <label>PRECIO *</label>
+        <label style={{ color: colorText }}>PRECIO *</label>
         <Input
           name="precio_vehiculo"
           type="text"
@@ -143,6 +145,11 @@ export default function ThirdSection({ data: { edit, ...data }, isMobile }) {
         />
       </Form.Field>
 
+      <style>{`
+        .ui.checkbox > label {
+          color: ${colorText}
+        }
+      `}</style>
       <Form.Field>
         <Checkbox
           name="promocion"
@@ -170,14 +177,14 @@ export default function ThirdSection({ data: { edit, ...data }, isMobile }) {
             dispatch(updateVehiculo({ input: "financiacion", value: checked }));
           }}
         />
-        <p style={{ color: "#828282" }}>
+        <p style={{ color: darkMode === light ? "#828282" : light }}>
           Si marcas que el carro está en promoción, pasará por la aprobación del
           administrador que determinará si el precio está dentro de los rangos
           de promoción determinados por la plataforma.
         </p>
       </Form.Field>
       <Form.Field>
-        <label>KILOMETRAJE *</label>
+        <label style={{ color: colorText }}>KILOMETRAJE *</label>
         <Input
           name="kilometraje_vehiculo"
           min="0"
@@ -193,7 +200,7 @@ export default function ThirdSection({ data: { edit, ...data }, isMobile }) {
         />
       </Form.Field>
       <Form.Field>
-        <label>CILINDRAJE *</label>
+        <label style={{ color: colorText }}>CILINDRAJE *</label>
         <Input
           name="cilindraje_vehiculo"
           min="0"
@@ -209,7 +216,7 @@ export default function ThirdSection({ data: { edit, ...data }, isMobile }) {
         />
       </Form.Field>
       <Form.Field>
-        <label>COMBUSTIBLE *</label>
+        <label style={{ color: colorText }}>COMBUSTIBLE *</label>
         <Select
           name="combustible_vehiculo"
           search
@@ -222,7 +229,7 @@ export default function ThirdSection({ data: { edit, ...data }, isMobile }) {
         />
       </Form.Field>
       <Form.Field>
-        <label>COLOR *</label>
+        <label style={{ color: colorText }}>COLOR *</label>
         <Dropdown
           name="color_vehiculo"
           fluid
@@ -237,7 +244,7 @@ export default function ThirdSection({ data: { edit, ...data }, isMobile }) {
         />
       </Form.Field>
       <Form.Field>
-        <label>TRANSMISIÓN *</label>
+        <label style={{ color: colorText }}>TRANSMISIÓN *</label>
         <Select
           name="transmision_vehiculo"
           search
@@ -250,7 +257,7 @@ export default function ThirdSection({ data: { edit, ...data }, isMobile }) {
         />
       </Form.Field>
       <Form.Field>
-        <label>BLINDADO *</label>
+        <label style={{ color: colorText }}>BLINDADO *</label>
         <Select
           name="blindado_vehiculo"
           options={optionsGeneric}
@@ -263,7 +270,7 @@ export default function ThirdSection({ data: { edit, ...data }, isMobile }) {
       </Form.Field>
       {stateVehicle !== "Nuevo" && (
         <Form.Field>
-          <label>ÚLTIMO DÍGITO DE LA PLACA *</label>
+          <label style={{ color: colorText }}>ÚLTIMO DÍGITO DE LA PLACA *</label>
           <Input
             name="placa_vehiculo"
             max={9}
@@ -281,7 +288,7 @@ export default function ThirdSection({ data: { edit, ...data }, isMobile }) {
         </Form.Field>
       )}
       <Form.Field>
-        <label>PERITAJE</label>
+        <label style={{ color: colorText }}>PERITAJE</label>
         <Select
           name="peritaje_vehiculo"
           options={optionsGeneric}
@@ -321,7 +328,7 @@ export default function ThirdSection({ data: { edit, ...data }, isMobile }) {
       {isMobile ? (
         <>
           <Form.Field style={{ marginBottom: 10 }}>
-            <label>UBICACIÓN *</label>
+            <label style={{ color: colorText }}>UBICACIÓN *</label>
             <Select
               search
               name="departamento_vehiculo"
@@ -348,7 +355,7 @@ export default function ThirdSection({ data: { edit, ...data }, isMobile }) {
         </>
       ) : (
         <Form.Field style={{ marginBottom: 10 }}>
-          <label>UBICACIÓN *</label>
+          <label style={{ color: colorText }}>UBICACIÓN *</label>
           <Input type="text" action>
             <Select
               search

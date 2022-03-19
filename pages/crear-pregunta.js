@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import PublicLayout from '../layouts/PublicLayout';
 import { Container, Header, Form, Button, Dropdown, Dimmer, Loader } from "semantic-ui-react";
 import axios from 'axios';
@@ -7,6 +8,7 @@ import jwt from "jsonwebtoken";
 import { useRouter } from 'next/router';
 
 import { API_URL, AUTH_URL } from '../helpers/constants';
+import { light } from '../helpers/colors';
 
 export default function crear_pregunta({ data }) {
     const router = useRouter();
@@ -60,17 +62,25 @@ export default function crear_pregunta({ data }) {
 
     }
 
+    const darkMode = useSelector(({ darkMode }) => darkMode.status);
+    const colorText = darkMode === light ? undefined : light;
+
     return (
         <PublicLayout>
             <Dimmer style={{ position: "fixed" }} active={loading}>
                 <Loader>Cargando...</Loader>
             </Dimmer>
+            <style>{`
+                .field > label {
+                    color: ${colorText} !important;
+                }
+            `}</style>
             <Container style={{ paddingTop: 25 }} text>
-                <Header as="h2">COMUNIDAD</Header>
-                <Header as="h3" dividing>
+                <Header as="h2" style={{ color: colorText }}>COMUNIDAD</Header>
+                <Header as="h3" style={{ color: colorText }} dividing>
                     Crear una pregunta
                 </Header>
-                <p style={{ textAlign: "justify" }}>
+                <p style={{ textAlign: "justify", color: colorText }}>
                     Ejemplo: ¿Con 35 millones que vehículo podría comprar, que sea
                     familiar 4 puertas y económico? Después de encender mi vehículo, 10
                     minutos luego, sigue botando humo blanco. ¿Cuál será el motivo?
@@ -78,7 +88,7 @@ export default function crear_pregunta({ data }) {
 
                 <Form>
                     <Form.Field>
-                        <label>TÍTULO</label>
+                        <label style={{ color: colorText }}>TÍTULO</label>
                         <input
                             id="titulo"
                             onChange={(e) => updateForm("title", e.target.value)}
@@ -90,7 +100,7 @@ export default function crear_pregunta({ data }) {
                         onChange={(e) => updateForm("description", e.target.value)}
                     />
                     <Form.Field>
-                        <label>ETIQUETAS</label>
+                        <label style={{ color: colorText }}>ETIQUETAS</label>
                         <Dropdown
                             id="tags"
                             search
