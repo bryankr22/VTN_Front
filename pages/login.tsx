@@ -43,6 +43,10 @@ type LoginPageState = {
     signUpVerified: boolean,
 }
 
+type darkModeInterface = {
+    status: string
+}
+
 
 /**
  * Login and register page component.
@@ -50,7 +54,7 @@ type LoginPageState = {
  * @param props props for this page
  * @returns the login and register page template.
  */
-class LoginPage extends Component<{ cookies: Cookies }, LoginPageState> {
+class LoginPage extends Component<{ cookies: Cookies, darkMode: darkModeInterface }, LoginPageState> {
     state: LoginPageState = {
         // the login process is running
         isLoginIn: false,
