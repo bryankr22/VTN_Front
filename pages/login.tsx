@@ -20,7 +20,7 @@ import { Cookies, withCookies } from 'react-cookie'
 import Reaptcha from 'reaptcha'
 import * as yup from 'yup'
 import PublicLayout from '../layouts/PublicLayout'
-import { dark, light } from '@helpers/colors';
+import { light } from '@helpers/colors';
 
 type LoginData = {
     email: string,
@@ -43,7 +43,7 @@ type LoginPageState = {
     signUpVerified: boolean,
 }
 
-type darkModeInterface = {
+type DarkModeInterface = {
     status: string
 }
 
@@ -54,7 +54,7 @@ type darkModeInterface = {
  * @param props props for this page
  * @returns the login and register page template.
  */
-class LoginPage extends Component<{ cookies: Cookies, darkMode: darkModeInterface }, LoginPageState> {
+class LoginPage extends Component<{ cookies: Cookies, darkMode: DarkModeInterface }, LoginPageState> {
     state: LoginPageState = {
         // the login process is running
         isLoginIn: false,

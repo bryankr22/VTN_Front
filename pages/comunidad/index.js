@@ -85,7 +85,7 @@ export default function index({ q, page, preguntas, tags, total_records }) {
                                 </Button>
                             </Grid.Column>
                             <Grid.Column>
-                                <span className="text-center d-block mt-4 mb-4">
+                                <span className="text-center d-block mt-4 mb-4" style={{ color: colorText }}>
                                     &oacute; busca lo que necesites aquí:
                                 </span>
                             </Grid.Column>
@@ -114,7 +114,7 @@ export default function index({ q, page, preguntas, tags, total_records }) {
                                 </Button>
                             </Grid.Column>
                             <Grid.Column>
-                                <span className="text-center d-block mt-4 mb-4">
+                                <span className="text-center d-block mt-4 mb-4" style={{ color: colorText }}>
                                     &oacute; busca lo que necesites aquí:
                                 </span>
                             </Grid.Column>

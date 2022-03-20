@@ -4,13 +4,17 @@ import { Grid, Spacer, Text } from "@nextui-org/react";
 import front from "./assets/property-front.jpeg";
 import back from "./assets/property-back.jpeg";
 
-export function PropertyCard() {
+type propertyCard = {
+  colorText: string
+}
+
+export function PropertyCard({ colorText }: propertyCard) {
   return (
     <>
       <Grid.Container gap={2} justify="center">
         <Grid md={12} xs={12} direction="column">
           <Spacer />
-          <Text weight="bold">
+          <Text weight="bold" style={{ color: colorText }}>
             Para llenar los formularios utiliza la tarjeta de propiedad.
           </Text>
         </Grid>

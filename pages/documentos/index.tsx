@@ -141,7 +141,7 @@ export default function Documents({ data }: any) {
               Solicitud de Tramite.
             </Text>
           </Text>
-          <PropertyCard />
+          <PropertyCard colorText={colorText} />
           <Spacer y={1} />
           <Text style={{ color: colorText }} h2 weight="bolder">
             Contrato de Compraventa
