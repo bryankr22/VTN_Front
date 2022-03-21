@@ -36,6 +36,28 @@ export default function SidebarMobile({
 
   return (
     <>
+      <style>
+        {`
+          
+          #search-responsive {
+              border-top: none;
+              border-right: none;
+              border-bottom: 1px solid ${colorText} !important;
+              border-left: none;
+              border-radius: 0;
+              background-color: transparent;
+          }
+          #search-responsive::placeholder {
+              color: ${colorText} !important;
+              text-align: center;
+              letter-spacing: 3px;
+          }
+          #search-responsive + i {
+              color: ${colorText};
+              opacity: 1;
+          }
+        `}
+      </style>
       <Input
         action={{
           icon: "search",
