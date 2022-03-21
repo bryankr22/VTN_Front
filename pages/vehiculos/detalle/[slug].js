@@ -158,6 +158,7 @@ export default function detalle({ data }) {
                 }
 
                 #search-responsive {
+                  color: ${colorMargin};
                   border-top: none;
                   border-right: none;
                   border-bottom: 1px solid ${colorMargin} !important;
@@ -388,7 +389,6 @@ export async function getServerSideProps(context) {
     config
   );
   const data = await res.data;
-  console.log(data);
   return {
     props: {
       data,
