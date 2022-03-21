@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { Header, Grid, Image, Button, Divider, Icon } from "semantic-ui-react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFicha } from "../../store/comparadorSlice";
+import { light } from "../../helpers/colors";
 export default function CompareFicha() {
   const dispatch = useDispatch();
   const pathS3 =
@@ -23,6 +24,9 @@ export default function CompareFicha() {
   const removeFichaClick = (index) => {
     dispatch(removeFicha(index));
   };
+
+  const darkMode = useSelector(({ darkMode }) => darkMode.status);
+  const colorText = darkMode === light ? "gray" : light;
   return (
     <Grid
       columns={3}
@@ -48,14 +52,14 @@ export default function CompareFicha() {
                   style={{ height: 200, objectFit: "none", width: "100%" }}
                   src={pathS3 + vehicle.nameImage + "." + vehicle.extension}
                 />
-                {index === 0 && <Header as="h2">Características</Header>}
+                {index === 0 && <Header as="h2" style={{ color: colorText }}>Características</Header>}
                 {index !== 0 && (
                   <Header as="h2" style={{ color: "transparent" }}>
                     .
                   </Header>
                 )}
 
-                {index === 0 && <Header as="h3">Nombre</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Nombre</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -74,7 +78,7 @@ export default function CompareFicha() {
                   {vehicle.title}
                 </p>
 
-                {index === 0 && <Header as="h3">Precio</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Precio</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -92,7 +96,7 @@ export default function CompareFicha() {
                   ${new Intl.NumberFormat("de-DE").format(vehicle.price)} COP
                 </p>
 
-                {index === 0 && <Header as="h3">Potencia</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Potencia</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -110,7 +114,7 @@ export default function CompareFicha() {
                   {new Intl.NumberFormat("de-DE").format(vehicle.power)} HP
                 </p>
 
-                {index === 0 && <Header as="h3">Marca</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Marca</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -128,7 +132,7 @@ export default function CompareFicha() {
                   {vehicle.marca || vehicle.marcaLabel}
                 </p>
 
-                {index === 0 && <Header as="h3">Año</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Año</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -146,7 +150,7 @@ export default function CompareFicha() {
                   {vehicle.year}
                 </p>
 
-                {index === 0 && <Header as="h3">Modelo</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Modelo</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -164,7 +168,7 @@ export default function CompareFicha() {
                   {vehicle.modelo || vehicle.modeloLabel}
                 </p>
 
-                {index === 0 && <Header as="h3">Torque</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Torque</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -182,7 +186,7 @@ export default function CompareFicha() {
                   {new Intl.NumberFormat("de-DE").format(vehicle.torque)} NM
                 </p>
 
-                {index === 0 && <Header as="h3">Motor</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Motor</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -200,7 +204,7 @@ export default function CompareFicha() {
                   {new Intl.NumberFormat("de-DE").format(vehicle.engine)} C.C.
                 </p>
 
-                {index === 0 && <Header as="h3">Tipo de motor</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Tipo de motor</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -218,7 +222,7 @@ export default function CompareFicha() {
                   {vehicle.combustibleLabel}
                 </p>
 
-                {index === 0 && <Header as="h3">Tipo de gasolina:</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Tipo de gasolina:</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -236,7 +240,7 @@ export default function CompareFicha() {
                   {vehicle.fuel_type}
                 </p>
 
-                {index === 0 && <Header as="h3">Capacidad del baúl</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Capacidad del baúl</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     Capacidad del baúl
@@ -254,7 +258,7 @@ export default function CompareFicha() {
                   {new Intl.NumberFormat("de-DE").format(vehicle.trunk)} L
                 </p>
 
-                {index === 0 && <Header as="h3">Transmisión</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Transmisión</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -272,7 +276,7 @@ export default function CompareFicha() {
                   {vehicle.transmisionLabel}
                 </p>
 
-                {index === 0 && <Header as="h3">Tracción</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Tracción</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -290,7 +294,7 @@ export default function CompareFicha() {
                   {vehicle.traction}
                 </p>
 
-                {index === 0 && <Header as="h3">Autonomía</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Autonomía</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -308,7 +312,7 @@ export default function CompareFicha() {
                   {new Intl.NumberFormat("de-DE").format(vehicle.autonomy)} Km
                 </p>
 
-                {index === 0 && <Header as="h3">Rendimiento</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Rendimiento</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -327,7 +331,7 @@ export default function CompareFicha() {
                   por Galón
                 </p>
 
-                {index === 0 && <Header as="h3">Seguridad en estrellas</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Seguridad en estrellas</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     Seguridad en estrellas
@@ -399,7 +403,7 @@ export default function CompareFicha() {
                   )}
                 </p>
 
-                {index === 0 && <Header as="h3">Número de AirBags</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Número de AirBags</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     Número de AirBags
@@ -417,7 +421,7 @@ export default function CompareFicha() {
                   {vehicle.airbags}
                 </p>
 
-                {index === 0 && <Header as="h3">Rines</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Rines</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -435,7 +439,7 @@ export default function CompareFicha() {
                   {vehicle.wheels}
                 </p>
 
-                {index === 0 && <Header as="h3">Cojinería</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Cojinería</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -453,7 +457,7 @@ export default function CompareFicha() {
                   {vehicle.cushions}
                 </p>
 
-                {index === 0 && <Header as="h3">Peso</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Peso</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -473,7 +477,7 @@ export default function CompareFicha() {
 
                 <Divider />
 
-                {index === 0 && <Header as="h2">Descripción</Header>}
+                {index === 0 && <Header as="h2" style={{ color: colorText }}>Descripción</Header>}
                 {index !== 0 && (
                   <Header as="h2" style={{ color: "transparent" }}>
                     .
@@ -529,7 +533,7 @@ export default function CompareFicha() {
                   </Header>
                 )}
 
-                {index === 0 && <Header as="h3">Nombre</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Nombre</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -547,7 +551,7 @@ export default function CompareFicha() {
                   .
                 </p>
 
-                {index === 0 && <Header as="h3">Precio</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Precio</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -565,7 +569,7 @@ export default function CompareFicha() {
                   .
                 </p>
 
-                {index === 0 && <Header as="h3">Potencia</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Potencia</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -583,7 +587,7 @@ export default function CompareFicha() {
                   .
                 </p>
 
-                {index === 0 && <Header as="h3">Marca</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Marca</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -601,7 +605,7 @@ export default function CompareFicha() {
                   .
                 </p>
 
-                {index === 0 && <Header as="h3">Año</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Año</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -619,7 +623,7 @@ export default function CompareFicha() {
                   .
                 </p>
 
-                {index === 0 && <Header as="h3">Modelo</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Modelo</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -637,7 +641,7 @@ export default function CompareFicha() {
                   .
                 </p>
 
-                {index === 0 && <Header as="h3">Torque</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Torque</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -655,7 +659,7 @@ export default function CompareFicha() {
                   .
                 </p>
 
-                {index === 0 && <Header as="h3">Motor</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Motor</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -673,7 +677,7 @@ export default function CompareFicha() {
                   .
                 </p>
 
-                {index === 0 && <Header as="h3">Tipo de motor</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Tipo de motor</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -691,7 +695,7 @@ export default function CompareFicha() {
                   .
                 </p>
 
-                {index === 0 && <Header as="h3">Tipo de gasolina</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Tipo de gasolina</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -709,7 +713,7 @@ export default function CompareFicha() {
                   .
                 </p>
 
-                {index === 0 && <Header as="h3">Capacidad del baúl</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Capacidad del baúl</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     Capacidad del baúl
@@ -727,7 +731,7 @@ export default function CompareFicha() {
                   .
                 </p>
 
-                {index === 0 && <Header as="h3">Transmisión</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Transmisión</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -745,7 +749,7 @@ export default function CompareFicha() {
                   .
                 </p>
 
-                {index === 0 && <Header as="h3">Tracción</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Tracción</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -763,7 +767,7 @@ export default function CompareFicha() {
                   .
                 </p>
 
-                {index === 0 && <Header as="h3">Autonomía</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Autonomía</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -781,7 +785,7 @@ export default function CompareFicha() {
                   .
                 </p>
 
-                {index === 0 && <Header as="h3">Rendimiento</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Rendimiento</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -799,7 +803,7 @@ export default function CompareFicha() {
                   .
                 </p>
 
-                {index === 0 && <Header as="h3">Seguridad en estrellas</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Seguridad en estrellas</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     Seguridad en estrellas
@@ -817,7 +821,7 @@ export default function CompareFicha() {
                   .
                 </p>
 
-                {index === 0 && <Header as="h3">Número de AirBags</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Número de AirBags</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     Número de AirBags
@@ -835,7 +839,7 @@ export default function CompareFicha() {
                   .
                 </p>
 
-                {index === 0 && <Header as="h3">Rines</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Rines</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -853,7 +857,7 @@ export default function CompareFicha() {
                   .
                 </p>
 
-                {index === 0 && <Header as="h3">Cojinería</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Cojinería</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -871,7 +875,7 @@ export default function CompareFicha() {
                   .
                 </p>
 
-                {index === 0 && <Header as="h3">Peso</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Peso</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -891,7 +895,7 @@ export default function CompareFicha() {
 
                 <Divider />
 
-                {index === 0 && <Header as="h2">Descripción</Header>}
+                {index === 0 && <Header as="h2" style={{ color: colorText }}>Descripción</Header>}
                 {index !== 0 && (
                   <Header as="h2" style={{ color: "transparent" }}>
                     .

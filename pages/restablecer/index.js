@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Container, Form, Button, Input, Dimmer, Loader, Message } from 'semantic-ui-react';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 import PublicLayout from '../../layouts/PublicLayout';
 import { API_URL } from '../../helpers/constants';
+import { light } from '../../helpers/colors';
 
 export default function restablecer() {
     const [email, setEmail] = useState('');
@@ -50,6 +52,9 @@ export default function restablecer() {
 
     }
 
+    const darkMode = useSelector(({ darkMode }) => darkMode.status);
+    const colorText = darkMode === light ? undefined : light;
+
     return (
         <PublicLayout>
             <Dimmer style={{ position: "fixed" }} active={loading}>
@@ -63,7 +68,7 @@ export default function restablecer() {
                         content={message}
                     />
                 }
-                <p>
+                <p style={{ color: colorText }}>
                     ¿Perdiste tu contraseña? Por favor, introduce tu nombre de usuario o correo electrónico.
                     Recibirás un enlace para crear una contraseña nueva por correo electrónico.
                 </p>

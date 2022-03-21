@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Button } from "semantic-ui-react";
+import { Button, Responsive } from "semantic-ui-react";
 import { useSelector, useDispatch } from 'react-redux';
 import Header from "../components/header/Header";
 
@@ -8,7 +8,7 @@ import lodable from "@loadable/component";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
-import { changeMode } from "../store/darkMode";
+import { changeMode, initialMode } from "../store/darkMode";
 import { light, dark } from "../helpers/colors";
 
 const CssBaseline = lodable(() =>
@@ -34,13 +34,21 @@ const PublicLayout = ({ nextUi, ...props }: Props) => {
   const dispatch = useDispatch();
   const [cookies, setCookie] = useCookies(["accept_cookies"]);
   const [acceptCookies, setAcceptCookies] = useState(false);
+  const [darkModeBody, setDarkMode] = useState(light);
 
   const darkMode = useSelector(({ darkMode }: any) => darkMode.status);
   const colorText = darkMode === light ? dark : light;
 
   useEffect(() => {
     //TODO: remove this when the date is over
-    dispatch(changeMode(window.matchMedia('(prefers-color-scheme: dark)').matches ? dark : light));
+    dispatch(initialMode());
+    const darkModeStorage = localStorage.getItem("darkMode");
+    if (darkModeStorage === null || darkModeStorage === light) {
+      setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches ? dark : light);
+      dispatch(changeMode(window.matchMedia('(prefers-color-scheme: dark)').matches ? dark : light));
+    } else {
+      setDarkMode(darkModeStorage);
+    }
     const cookie = cookies.accept_cookies;
     if (cookie) setAcceptCookies(true);
 
@@ -62,6 +70,11 @@ const PublicLayout = ({ nextUi, ...props }: Props) => {
     });
   }
 
+  const statusMode = darkMode === dark ? light : dark;
+  const buttonText = darkMode === dark ? 'claro' : 'oscuro';
+  const buttonColor = darkMode === dark ? light : '#484848';
+  const buttonMargin = darkMode === dark ? '-130px' : '-142px';
+
   return (
     <>
       <Head>
@@ -73,17 +86,108 @@ const PublicLayout = ({ nextUi, ...props }: Props) => {
       </Head>
       <style>
         {`
+          body {
+            background-color: ${darkModeBody}
+          }
           .container-cookie {
             margin: 0px !important
           }
         `}
       </style>
+      <style>
+        {`
+          html {
+            background-color: ${darkMode}
+          }
+          #dark-mode-button:hover {
+            right: -5px !important;
+            transition: width 1s ease 0s, right 0.8s ease 0s;
+          }
+          .label-buttons {
+            font-size: 0.9rem !important;
+            color: ${darkMode === dark ? dark : light} !important;
+          }
+        `}
+      </style>
       <div className="container">
         <Header {...props} />
+
+
+        <Responsive {...Responsive.onlyMobile}>
+          <Button.Group
+            vertical
+            labeled
+            icon
+            style={{
+              position: 'fixed',
+              right: buttonMargin,
+              zIndex: 10,
+              cursor: 'pointer',
+              top: '30%'
+            }}
+          >
+            <Button
+              onClick={() => dispatch(changeMode(statusMode))}
+              className="label-buttons"
+              size='small'
+              icon='adjust'
+              content={`modo ${buttonText}`}
+              style={{ backgroundColor: buttonColor, fontFamily: "Montserrat", textTransform: "uppercase" }}
+            />
+          </Button.Group>
+        </Responsive>
+        <Responsive {...Responsive.onlyTablet}>
+          <Button.Group
+            vertical
+            labeled
+            icon
+            style={{
+              position: 'fixed',
+              right: buttonMargin,
+              zIndex: 10,
+              cursor: 'pointer',
+              top: '30%'
+            }}
+          >
+            <Button
+              onClick={() => dispatch(changeMode(statusMode))}
+              className="label-buttons"
+              size='small'
+              icon='adjust'
+              content={`modo ${buttonText}`}
+              style={{ backgroundColor: buttonColor, fontFamily: "Montserrat", textTransform: "uppercase" }}
+            />
+          </Button.Group>
+        </Responsive>
+        <Responsive {...Responsive.onlyComputer}>
+          <Button.Group
+            id="dark-mode-button"
+            vertical
+            labeled
+            icon
+            style={{
+              position: 'fixed',
+              right: buttonMargin,
+              zIndex: 10,
+              cursor: 'pointer',
+              top: '30%'
+            }}
+          >
+            <Button
+              onClick={() => dispatch(changeMode(statusMode))}
+              size='small'
+              className="label-buttons"
+              icon='adjust'
+              content={`modo ${buttonText}`}
+              style={{ backgroundColor: buttonColor, fontFamily: "Montserrat", textTransform: "uppercase" }}
+            />
+          </Button.Group>
+        </Responsive>
+
         <div className="row">
           <div
             className="col-md-12"
-            style={{ paddingRight: 0, paddingLeft: 0, backgroundColor: props.darkMode }}
+            style={{ paddingRight: 0, paddingLeft: 0, backgroundColor: darkMode }}
           >
             <LoaderPage />
             {props.children}

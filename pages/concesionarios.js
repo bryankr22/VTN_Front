@@ -1,5 +1,6 @@
 import React from "react";
 import Head from "next/head";
+import { useSelector } from 'react-redux';
 import { NextSeo } from "next-seo";
 import PublicLayout from "../layouts/PublicLayout";
 import ListaConcesionarios from "../components/servicios/ListaConcesionarios";
@@ -13,6 +14,7 @@ import {
 import axios from "axios";
 //import { API_URL, concesionarios_api } from '../helpers/constants';
 import { useRouter } from "next/router";
+import { light } from "../helpers/colors";
 export default function concesionarios({
   params,
   data,
@@ -48,6 +50,9 @@ export default function concesionarios({
     insertParam(input, value);
   };
 
+  const darkMode = useSelector(({ darkMode }) => darkMode.status);
+  const colorText = darkMode === light ? undefined : light;
+
   return (
     <PublicLayout>
       <NextSeo
@@ -65,10 +70,10 @@ export default function concesionarios({
       </Head>
       <div>
         <Container style={{ paddingTop: 25 }} text>
-          <Header as="h1" style={{ textTransform: "uppercase" }}>
+          <Header as="h1" style={{ textTransform: "uppercase", color: colorText }}>
             Concesionarios
           </Header>
-          <p style={{ textAlign: "justify" }}>
+          <p style={{ textAlign: "justify", color: colorText }}>
             En esta sección hemos escogido en las principales ciudades los
             mejores servicios para tú vehículos como: mecánica, tunning,
             latonería y pintura, polarizado, cambios de aceite, performance,

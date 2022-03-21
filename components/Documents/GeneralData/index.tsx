@@ -27,6 +27,7 @@ import axios from "axios";
 import { API_URL } from "../../../helpers/constants";
 import { useEffect, useState } from "react";
 import { iOS } from "@helpers/responsive.helper";
+import { light } from "@helpers/colors";
 
 interface Props {
   data: ResponseLists;
@@ -45,8 +46,10 @@ export default function GeneralData({ data }: Props) {
   const [message, setMessage] = useState({ type: "", txt: "" });
   const [bodywork, setBodyWork] = useState<string[]>([]);
   const onSubmit = handleSubmit((data) => {
-    let winRef = window.open("", "_blank");
-
+    let winRef;
+    if (iOS()) {
+      winRef = window.open("", "_blank");
+    }
     axios
       .post(
         `${API_URL}/documento-compra-venta`,
@@ -82,7 +85,10 @@ export default function GeneralData({ data }: Props) {
       });
   });
   const downLoadEmptyFile = () => {
-    let winRef = window.open("", "_blank");
+    let winRef;
+    if (iOS()) {
+      winRef = window.open("", "_blank");
+    }
 
     axios
       .post(
@@ -131,7 +137,7 @@ export default function GeneralData({ data }: Props) {
   return (
     <form onSubmit={onSubmit}>
       <Collapse>
-        <Grid.Container gap={2}>
+        <Grid.Container gap={2} style={{ backgroundColor: light }}>
           <Grid xs={12} md={12}>
             {message.type && (
               <Card

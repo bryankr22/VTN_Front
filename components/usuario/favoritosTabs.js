@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
-import { Container, Header, Table, Button, Image, Responsive, Dimmer, Loader, Tab, Pagination } from 'semantic-ui-react'
+import { useSelector } from 'react-redux';
+import { Container, Header, Table, Button, Image, Responsive, Tab, Pagination } from 'semantic-ui-react'
+import { dark, light } from '../../helpers/colors';
 const pathS3_favoritos = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x300/vendetunave/images/vehiculos/";
 const pathS3_fichas = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x300/vendetunave/images/ficha-tecnica/";
 const normalize = (function () {
@@ -20,15 +22,19 @@ const normalize = (function () {
         return ret.join("");
     };
 })();
+
 export const panes = (favoritos, resultTotalV, accesorios, resultTotalA, removeFicha, removeVehicle) => {
+    const darkMode = useSelector(({ darkMode }) => darkMode.status);
+    const colorText = darkMode === light ? dark : light;
+
     return [
         {
             menuItem: "VEHÍCULOS",
             render: () => (
-                <Tab.Pane>
+                <Tab.Pane inverted={darkMode === dark} color={colorText}>
                     {(favoritos).length > 0 &&
                         <Fragment>
-                            <Table>
+                            <Table inverted={darkMode === dark} color={colorText}>
                                 <Responsive  {...Responsive.onlyComputer} style={{ display: 'contents' }}>
                                     <Table.Header>
                                         <Table.Row>
@@ -45,16 +51,16 @@ export const panes = (favoritos, resultTotalV, accesorios, resultTotalA, removeF
                                                 <Header as='h4' image style={{ margin: 0, width: '85%' }}>
                                                     <Image src={pathS3_favoritos + item.nameImage + '.' + item.extension} rounded size='massive' alt={item.title} />
                                                     <Header.Content style={{ width: '70%', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
-                                                        <h2 className="fnt-size-inherit">
+                                                        <h2 style={{ color: colorText }} className="fnt-size-inherit">
                                                             {(item.title.substr(0, 22))}
                                                         </h2>
                                                         <Header.Subheader style={{ fontSize: 10 }}>
-                                                            <h3 className="fnt-size-inherit">
+                                                            <h3 style={{ color: colorText }} className="fnt-size-inherit">
                                                                 {item.labelCiudad}
                                                             </h3>
                                                         </Header.Subheader>
                                                         <Responsive  {...Responsive.onlyMobile}>
-                                                            <h3 className="fnt-size-inherit">
+                                                            <h3 style={{ color: colorText }} className="fnt-size-inherit">
                                                                 $ {new Intl.NumberFormat("de-DE").format(item.precio)}
                                                             </h3>
                                                         </Responsive>
@@ -63,7 +69,7 @@ export const panes = (favoritos, resultTotalV, accesorios, resultTotalA, removeF
                                             </Table.Cell>
                                             <Table.Cell style={{ verticalAlign: 'inherit' }}>
                                                 <Responsive  {...Responsive.onlyComputer}>
-                                                    <h3 className="fnt-size-inherit">
+                                                    <h3 style={{ color: colorText }} className="fnt-size-inherit">
                                                         $ {new Intl.NumberFormat("de-DE").format(item.precio)}
                                                     </h3>
                                                 </Responsive>
@@ -92,6 +98,17 @@ export const panes = (favoritos, resultTotalV, accesorios, resultTotalA, removeF
                                     fluid
                                     style={{ textAlign: "center", margin: 25 }}
                                 >
+                                    {darkMode === dark &&
+                                        <style>{`
+                                        .ui.secondary.pointing.menu .active.item {
+                                            color: ${colorText}
+                                        }
+                                        .ui.secondary.pointing.menu .item {
+                                            border-color: ${colorText};
+                                            color: ${colorText}
+                                        }
+                                        `}</style>
+                                    }
                                     <Pagination
                                         pointing
                                         secondary
@@ -116,10 +133,10 @@ export const panes = (favoritos, resultTotalV, accesorios, resultTotalA, removeF
         {
             menuItem: "FICHAS TÉCNICAS",
             render: () => (
-                <Tab.Pane>
+                <Tab.Pane inverted={darkMode === dark} color={colorText}>
                     {accesorios.length > 0 && (
                         <Fragment>
-                            <Table>
+                            <Table inverted={darkMode === dark} color={colorText}>
                                 <Responsive
                                     {...Responsive.onlyComputer}
                                     style={{ display: "contents" }}
@@ -139,16 +156,16 @@ export const panes = (favoritos, resultTotalV, accesorios, resultTotalA, removeF
                                                 <Header as='h4' image style={{ margin: 0, width: '85%' }}>
                                                     <Image src={pathS3_fichas + item.name + '.' + item.ext} rounded size='massive' alt={item.title} />
                                                     <Header.Content style={{ width: '70%', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
-                                                        <h2 className="fnt-size-inherit">
+                                                        <h2 style={{ color: colorText }} className="fnt-size-inherit">
                                                             {(item.title.substr(0, 22))}
                                                         </h2>
                                                         <Header.Subheader style={{ fontSize: 10 }}>
-                                                            <h3 className="fnt-size-inherit">
+                                                            <h3 style={{ color: colorText }} className="fnt-size-inherit">
                                                                 {item.year}
                                                             </h3>
                                                         </Header.Subheader>
                                                         <Responsive  {...Responsive.onlyMobile}>
-                                                            <h3 className="fnt-size-inherit">
+                                                            <h3 style={{ color: colorText }} className="fnt-size-inherit">
                                                                 $ {new Intl.NumberFormat("de-DE").format(item.price)}
                                                             </h3>
                                                         </Responsive>
@@ -159,7 +176,7 @@ export const panes = (favoritos, resultTotalV, accesorios, resultTotalA, removeF
                                                 <Responsive
                                                     {...Responsive.onlyComputer}
                                                 >
-                                                    <h3 className="fnt-size-inherit">
+                                                    <h3 style={{ color: colorText }} className="fnt-size-inherit">
                                                         ${" "}
                                                         {new Intl.NumberFormat("de-DE").format(
                                                             item.price
@@ -194,6 +211,17 @@ export const panes = (favoritos, resultTotalV, accesorios, resultTotalA, removeF
                                     fluid
                                     style={{ textAlign: "center", margin: 25 }}
                                 >
+                                    {darkMode === dark &&
+                                        <style>{`
+                                        .ui.secondary.pointing.menu .active.item {
+                                            color: ${colorText}
+                                        }
+                                        .ui.secondary.pointing.menu .item {
+                                            border-color: ${colorText};
+                                            color: ${colorText}
+                                        }
+                                        `}</style>
+                                    }
                                     <Pagination
                                         pointing
                                         secondary

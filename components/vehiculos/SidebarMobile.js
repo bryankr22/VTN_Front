@@ -6,6 +6,7 @@ import ModalFiltersMobile from "./modals/ModalFiltersMobile";
 import ModalOrderMobile from "./modals/ModalOrderMobile";
 import ModalTechCardFilter from "./modals/ModalTechCardFilter";
 export default function SidebarMobile({
+  colorText,
   params,
   contadores,
   vehiculos,
@@ -35,13 +36,36 @@ export default function SidebarMobile({
 
   return (
     <>
+      <style>
+        {`
+          
+          #search-responsive {
+              color: ${colorText};
+              border-top: none;
+              border-right: none;
+              border-bottom: 1px solid ${colorText} !important;
+              border-left: none;
+              border-radius: 0;
+              background-color: transparent;
+          }
+          #search-responsive::placeholder {
+              color: ${colorText} !important;
+              text-align: center;
+              letter-spacing: 3px;
+          }
+          #search-responsive + i {
+              color: ${colorText};
+              opacity: 1;
+          }
+        `}
+      </style>
       <Input
         action={{
           icon: "search",
           style: {
             background: "transparent",
-            color: "black",
-            borderBottom: "1px solid black",
+            borderBottom: `1px solid ${colorText}`,
+            color: colorText,
             height: 47,
             paddingTop: 10,
           },

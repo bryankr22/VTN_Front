@@ -15,6 +15,7 @@ import HeaderFicha from "../../components/comparadores/HeaderFicha";
 import { useSelector, useDispatch } from "react-redux";
 import { addFicha } from "../../store/comparadorSlice";
 import { useRouter } from "next/router";
+import { dark, light } from "../../helpers/colors";
 export default function ListadoFichas({
   params,
   vehiculos,
@@ -120,8 +121,12 @@ export default function ListadoFichas({
     }
   }, [compareList]);
   //useEffect
+
+  const darkMode = useSelector(({ darkMode }) => darkMode.status);
+  const colorText = darkMode === light ? dark : light;
+  const colorTextLink = darkMode === light ? undefined : light;
   return (
-    <Grid.Column width={13}>
+    <Grid.Column width={13} style={{ backgroundColor: darkMode }}>
       <Container fluid style={{ textAlign: "center", margin: 10 }}>
         <Grid>
           <Grid.Column width={12}>
@@ -197,7 +202,7 @@ export default function ListadoFichas({
             <Item.Content>
               <Item.Header
                 as="h2"
-                style={{ marginBottom: 10, marginTop: 10, fontSize: 20, fontWeight: "bold" }}
+                style={{ marginBottom: 10, marginTop: 10, fontSize: 20, fontWeight: "bold", color: colorTextLink }}
               >
                 {item.title}
               </Item.Header>
@@ -218,7 +223,7 @@ export default function ListadoFichas({
                             fontWeight: 700,
                             fontSize: 16,
                             textDecoration: "none",
-                            color: "black",
+                            color: colorText,
                           }}
                         >
                           $ {new Intl.NumberFormat("de-DE").format(item.price)}{" "}
@@ -238,7 +243,7 @@ export default function ListadoFichas({
                             fontWeight: 700,
                             fontSize: 16,
                             textDecoration: "none",
-                            color: "black",
+                            color: colorText,
                           }}
                         >
                           {item.combustibleLabel}
@@ -262,7 +267,7 @@ export default function ListadoFichas({
                             fontWeight: 700,
                             fontSize: 16,
                             textDecoration: "none",
-                            color: "black",
+                            color: colorText,
                           }}
                         >
                           {item.year}
@@ -281,7 +286,7 @@ export default function ListadoFichas({
                             fontWeight: 700,
                             fontSize: 16,
                             textDecoration: "none",
-                            color: "black",
+                            color: colorText,
                           }}
                         >
                           {new Intl.NumberFormat("de-DE").format(item.autonomy)}{" "}
@@ -306,7 +311,7 @@ export default function ListadoFichas({
                             fontWeight: 700,
                             fontSize: 16,
                             textDecoration: "none",
-                            color: "black",
+                            color: colorText,
                           }}
                         >
                           {new Intl.NumberFormat("de-DE").format(item.engine)}{" "}
@@ -326,7 +331,7 @@ export default function ListadoFichas({
                             fontWeight: 700,
                             fontSize: 16,
                             textDecoration: "none",
-                            color: "black",
+                            color: colorText,
                           }}
                         >
                           {item.transmisionLabel}
@@ -350,7 +355,7 @@ export default function ListadoFichas({
                             fontWeight: 700,
                             fontSize: 16,
                             textDecoration: "none",
-                            color: "black",
+                            color: colorText,
                           }}
                         >
                           {new Intl.NumberFormat("de-DE").format(item.power)} HP
@@ -384,6 +389,17 @@ export default function ListadoFichas({
       </Item.Group>
       {Math.ceil(totalRecords / 20) > 1 && (
         <Container fluid style={{ textAlign: "center", margin: 25 }}>
+          {darkMode === dark &&
+            <style>{`
+              .ui.secondary.pointing.menu .active.item {
+                color: ${colorText}
+              }
+              .ui.secondary.pointing.menu .item {
+                border-color: ${colorText};
+                color: ${colorText}
+              }
+            `}</style>
+          }
           <Pagination
             pointing
             secondary

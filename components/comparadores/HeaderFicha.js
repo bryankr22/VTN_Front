@@ -1,6 +1,7 @@
 import { Image, Container, Card, Grid, Button, } from "semantic-ui-react";
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFicha } from '../../store/comparadorSlice';
+import { dark, light } from "../../helpers/colors";
 export default function HeaderFicha() {
     const compareList = useSelector(({ comparador }) => comparador.fichas);
     const dispatch = useDispatch();
@@ -8,6 +9,8 @@ export default function HeaderFicha() {
     const removeFichaClick = (index) => {
         dispatch(removeFicha(index));
     }
+    const darkMode = useSelector(({ darkMode }) => darkMode.status);
+
     return (
         <>
             <Container style={{ marginBottom: 10 }}>
@@ -60,8 +63,8 @@ export default function HeaderFicha() {
                                         </Card.Content>
                                     </Card>
                                 ))}
-                                <Card style={{ width: 'auto', marginLeft: 15, border: 'none', boxShadow: 'none' }}>
-                                    <Button as="a" href="/comparar-fichas" secondary fluid style={{ margin: 'auto' }}>Comparar</Button>
+                                <Card style={{ width: 'auto', marginLeft: 15, border: 'none', boxShadow: 'none', backgroundColor: darkMode }}>
+                                    <Button as="a" href="/comparar-fichas" secondary={darkMode === light} fluid style={{ margin: 'auto' }}>Comparar</Button>
                                 </Card>
                             </Card.Group>
                         </Grid.Column>

@@ -1,5 +1,6 @@
 import React from "react";
 import Head from "next/head";
+import { useSelector } from "react-redux";
 import { NextSeo } from "next-seo";
 import PublicLayout from "../../layouts/PublicLayout";
 import SidebarFichas from "../../components/vehiculos/SidebarFichas";
@@ -12,9 +13,12 @@ import { useRouter } from "next/router";
 
 import axios from "axios";
 import { API_URL } from "../../helpers/constants";
+import { light } from "../../helpers/colors";
 
 export default function index({ data }) {
   const router = useRouter();
+  const darkMode = useSelector(({ darkMode }) => darkMode.status);
+  const colorText = darkMode === light ? undefined : light;
   return (
     <PublicLayout>
       <style>
@@ -25,20 +29,21 @@ export default function index({ data }) {
         `}
       </style>
       <NextSeo
-          title="Características de Carros 2022 | Ficha Técnica | VendeTuNave"
-          description="Conoce las características y equipamiento de carros nuevos: Chevrolet, Renault, Mazda, Toyota y muchos más último modelo."
-          openGraph={{
-              title: "Características de Carros 2022 | Ficha Técnica | VendeTuNave",
-              locale: "es_ES",
-              type: "website",
-              description: "Conoce las características y equipamiento de carros nuevos: Chevrolet, Renault, Mazda, Toyota y muchos más último modelo."
-          }}
+        title="Características de Carros 2022 | Ficha Técnica | VendeTuNave"
+        description="Conoce las características y equipamiento de carros nuevos: Chevrolet, Renault, Mazda, Toyota y muchos más último modelo."
+        openGraph={{
+          title: "Características de Carros 2022 | Ficha Técnica | VendeTuNave",
+          locale: "es_ES",
+          type: "website",
+          description: "Conoce las características y equipamiento de carros nuevos: Chevrolet, Renault, Mazda, Toyota y muchos más último modelo."
+        }}
       />
       <Head>
-          <meta property="keywords" content="Autonomía, ficha técnica, rendimiento, torque, velocidad máxima, latin ncap" />
+        <meta property="keywords" content="Autonomía, ficha técnica, rendimiento, torque, velocidad máxima, latin ncap" />
       </Head>
       <Responsive {...Responsive.onlyMobile}>
         <SidebarMobile
+          colorText={colorText}
           isFicha
           params={router.query}
           contadores={{

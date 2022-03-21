@@ -2,7 +2,7 @@ import React from 'react';
 import Head from "next/head";
 import { NextSeo } from "next-seo";
 import axios from 'axios';
-
+import { useSelector } from "react-redux";
 import PublicLayout from '../../layouts/PublicLayout';
 import SidebarVehiculos from '../../components/vehiculos/SidebarVehiculos';
 import ListadoVehiculos from '../../components/vehiculos/ListadoVehiculos';
@@ -14,8 +14,11 @@ import { Grid, Responsive } from "semantic-ui-react";
 import { useRouter } from 'next/router';
 
 import { API_URL } from '../../helpers/constants';
+import { dark, light } from '../../helpers/colors';
 export default function index({ data }) {
     const router = useRouter();
+    const darkMode = useSelector(({ darkMode }) => darkMode.status);
+    const colorText = darkMode === light ? dark : light;
     return (
         <PublicLayout>
             <style>
@@ -58,7 +61,7 @@ export default function index({ data }) {
             </Head>
             <Responsive {...Responsive.onlyMobile}>
                 <style>
-                {`
+                    {`
                     .ui.grid>.column:not(.row), .ui.grid>.row>.column {
                         padding-left: 1rem !important;
                         padding-right: 1rem !important;
@@ -67,63 +70,65 @@ export default function index({ data }) {
                     #search-responsive {
                         border-top: none;
                         border-right: none;
-                        border-bottom: 1px solid black;
+                        border-bottom: 1px solid ${colorText} !important;
                         border-left: none;
                         border-radius: 0;
+                        background-color: transparent;
                     }
 
                     #search-responsive::placeholder {
-                        color: black !important;
+                        color: ${colorText} !important;
                         text-align: center;
                         letter-spacing: 3px;
-                        }
+                    }
                         
-                        #search-responsive + i {
-                        color: black;
+                    #search-responsive + i {
+                        color: ${colorText};
                         opacity: 1;
-                        }
+                    }
                 `}
                 </style>
-                <SidebarMobile 
-                params={router.query} 
-                contadores={{...data.contadores, total_records: data.total_records}}
-                vehiculos={data.vehicles} />
-                <ListadoVehiculosMobile 
-                params={router.query} 
-                vehiculos={data.vehicles}
-                page={data.page}
-                totalRecords={data.total_records} />
-            </Responsive>
-            <Responsive {...Responsive.onlyTablet}>
-                <SidebarMobile 
-                params={router.query} 
-                contadores={{...data.contadores, total_records: data.total_records}}
-                vehiculos={data.vehicles} />
-                <ListadoVehiculosMobile 
-                params={router.query} 
-                vehiculos={data.vehicles}
-                page={data.page}
-                totalRecords={data.total_records} />
-            </Responsive>
-            <Responsive {...Responsive.onlyComputer}>
-                <Grid style={{ paddingTop: 15 }}>
-                    <SidebarVehiculos 
-                    params={router.query} 
-                    contadores={{...data.contadores, total_records: data.total_records}}
-                    vehiculos={data.vehicles}
-                    />
-                    <ListadoVehiculos 
-                    params={router.query} 
+                <SidebarMobile
+                    colorText={colorText}
+                    params={router.query}
+                    contadores={{ ...data.contadores, total_records: data.total_records }}
+                    vehiculos={data.vehicles} />
+                <ListadoVehiculosMobile
+                    params={router.query}
                     vehiculos={data.vehicles}
                     page={data.page}
-                    totalRecords={data.total_records}
+                    totalRecords={data.total_records} />
+            </Responsive>
+            <Responsive {...Responsive.onlyTablet}>
+                <SidebarMobile
+                    params={router.query}
+                    contadores={{ ...data.contadores, total_records: data.total_records }}
+                    vehiculos={data.vehicles} />
+                <ListadoVehiculosMobile
+                    params={router.query}
+                    vehiculos={data.vehicles}
+                    page={data.page}
+                    totalRecords={data.total_records} />
+            </Responsive>
+            <Responsive {...Responsive.onlyComputer}>
+                <Grid style={{ paddingTop: 15, backgroundColor: darkMode }}>
+                    <SidebarVehiculos
+                        params={router.query}
+                        contadores={{ ...data.contadores, total_records: data.total_records }}
+                        vehiculos={data.vehicles}
+                    />
+                    <ListadoVehiculos
+                        params={router.query}
+                        vehiculos={data.vehicles}
+                        page={data.page}
+                        totalRecords={data.total_records}
                     />
                 </Grid>
             </Responsive>
         </PublicLayout>
     )
 }
-export async function getServerSideProps({query}) {
+export async function getServerSideProps({ query }) {
     const res = await axios.get(`${API_URL}/vehiculos`, {
         params: {
             categoria: query.categoria,

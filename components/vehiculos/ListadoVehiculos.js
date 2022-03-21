@@ -16,6 +16,7 @@ import { addVehiculo } from "../../store/comparadorSlice";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import VehicleThumbnail from '../VehicleThumbnail';
+import { dark, light } from "../../helpers/colors";
 
 const ZoneAd = dynamic(() => import("../ZoneAd"));
 
@@ -114,8 +115,18 @@ export default function ListadoVehiculos({
     }
   }, [compareList]);
   //useEffect
+
+  const darkMode = useSelector(({ darkMode }) => darkMode.status);
+  const colorText = darkMode === light ? undefined : light;
+  const colorBorder = darkMode === light ? "#d4d4d5" : "#414141";
   return (
-    <Grid.Column width={13}>
+    <Grid.Column width={13} style={{ backgroundColor: darkMode }}>
+      <style>{`
+        .ui.card, .ui.cards>.card {
+          -webkit-box-shadow: 0 1px 3px 0 ${colorBorder}, 0 0 0 1px ${colorBorder};
+          box-shadow: 0 1px 3px 0 ${colorBorder}, 0 0 0 1px ${colorBorder};
+        }
+      `}</style>
       <Container fluid style={{ textAlign: "center", margin: 10 }}>
         <Grid>
           <Grid.Column width={12}>
@@ -162,7 +173,7 @@ export default function ListadoVehiculos({
             <Card
               key={index}
               as="a"
-              style={{ textDecoration: "none" }}
+              style={{ textDecoration: "none", backgroundColor: darkMode }}
               href={
                 "/vehiculos/detalle/" +
                 normalize(item.title)
@@ -189,22 +200,23 @@ export default function ListadoVehiculos({
                     overflow: "hidden",
                     textOverflow: "ellipsis",
                     marginBottom: 7,
+                    color: colorText
                   }}
                 >
                   <h2 className="fnt-size-inherit">{item.title}</h2>
                 </Card.Description>
-                <Card.Header>
+                <Card.Header style={{ color: colorText }}>
                   <h3 className="fnt-size-inherit">
                     $ {new Intl.NumberFormat("de-DE").format(item.precio)} COP
                   </h3>
                 </Card.Header>
-                <Card.Description>
+                <Card.Description style={{ color: colorText }}>
                   <h4 className="fnt-size-inherit">
                     {item.ano} -{" "}
                     {new Intl.NumberFormat("de-DE").format(item.kilometraje)} KM
                   </h4>
                 </Card.Description>
-                <Card.Description as="h4" style={{ fontSize: "12px" }}>
+                <Card.Description as="h4" style={{ fontSize: "12px", color: colorText }}>
                   {item.labelCiudad.toLowerCase().charAt(0).toUpperCase() +
                     item.labelCiudad.toLowerCase().slice(1)}
                   {compare === 1 &&
@@ -230,8 +242,20 @@ export default function ListadoVehiculos({
         </Card.Group>
       )}
       {Math.ceil(totalRecords / 20) > 1 && (
-        <Container fluid style={{ textAlign: "center", margin: 25 }}>
+        <Container fluid style={{ textAlign: "center", margin: 25, color: colorText }}>
+          {darkMode === dark &&
+            <style>{`
+              .ui.secondary.pointing.menu .active.item {
+                color: ${colorText}
+              }
+              .ui.secondary.pointing.menu .item {
+                border-color: ${colorText};
+                color: ${colorText}
+              }
+            `}</style>
+          }
           <Pagination
+            style={{ color: colorText }}
             pointing
             secondary
             boundaryRange={0}

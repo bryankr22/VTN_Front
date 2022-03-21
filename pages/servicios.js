@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from "next/head";
 import { NextSeo } from "next-seo";
+import { useSelector } from 'react-redux';
 
 import PublicLayout from '../layouts/PublicLayout';
 import ListaServicios from '../components/servicios/ListaServicios';
@@ -8,6 +9,8 @@ import { Container, Header, Select, Responsive, Grid } from 'semantic-ui-react'
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { API_URL } from '../helpers/constants';
+import { light } from '../helpers/colors';
+
 export default function servicios({ data }) {
     const router = useRouter();
     const mapping_filters = (array) => {
@@ -45,6 +48,9 @@ export default function servicios({ data }) {
     const handleFilterServicioChange = (e, { value }) => {
         insertParam('servicio', value);
     }
+
+    const darkMode = useSelector(({ darkMode }) => darkMode.status);
+    const colorText = darkMode === light ? undefined : light;
     return (
         <PublicLayout>
             <NextSeo
@@ -62,8 +68,8 @@ export default function servicios({ data }) {
             </Head>
             <div>
                 <Container style={{ paddingTop: 25 }} text>
-                    <Header as='h1' style={{ textTransform: 'uppercase' }}>RECOMENDACIONES DE SERVICIOS PARA TU CARRO</Header>
-                    <p style={{ textAlign: 'justify' }}>
+                    <Header as='h1' style={{ textTransform: 'uppercase', color: colorText }}>RECOMENDACIONES DE SERVICIOS PARA TU CARRO</Header>
+                    <p style={{ textAlign: 'justify', color: colorText }}>
                         En esta sección hemos escogido en las principales ciudades los mejores servicios para tú vehículos como: mecánica, tunning, latonería y pintura, polarizado, cambios de aceite, performance, porcelanizado, lavado, entre otros.
                     </p>
                     <style>

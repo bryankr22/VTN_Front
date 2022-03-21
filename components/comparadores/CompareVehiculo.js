@@ -7,6 +7,7 @@ import {
 } from "semantic-ui-react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeVehiculo } from "../../store/comparadorSlice";
+import { light } from "../../helpers/colors";
 export default function CompareVehiculo() {
   const dispatch = useDispatch();
   const pathS3 = "https://vendetunave.s3.amazonaws.com/vendetunave/images/thumbnails/";
@@ -27,6 +28,9 @@ export default function CompareVehiculo() {
   const removeVehiculoClick = (index) => {
     dispatch(removeVehiculo(index));
   };
+
+  const darkMode = useSelector(({ darkMode }) => darkMode.status);
+  const colorText = darkMode === light ? "gray" : light;
   return (
     <Grid columns={3} divided id="grid-compare">
       <Grid.Row style={{ textAlign: "left" }}>
@@ -48,13 +52,13 @@ export default function CompareVehiculo() {
                   src={pathS3 + vehicle.nameImage + "300x300.webp"}
                   alt={vehicle.title}
                 />
-                {index === 0 && <Header as="h2">Características</Header>}
+                {index === 0 && <Header as="h2" style={{ color: colorText }}>Características</Header>}
                 {index !== 0 && (
                   <Header as="h2" style={{ color: "transparent" }}>
                     .
                   </Header>
                 )}
-                {index === 0 && <Header as="h3">Nombre</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Nombre</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -71,7 +75,7 @@ export default function CompareVehiculo() {
                 >
                   {vehicle.title}
                 </p>
-                {index === 0 && <Header as="h3">Precio</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Precio</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -88,7 +92,7 @@ export default function CompareVehiculo() {
                   ${new Intl.NumberFormat("de-DE").format(vehicle.precio)} COP
                 </p>
 
-                {index === 0 && <Header as="h3">Ubicación</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Ubicación</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -105,7 +109,7 @@ export default function CompareVehiculo() {
                   {vehicle.labelCiudad || vehicle.ciudadLabel}
                 </p>
 
-                {index === 0 && <Header as="h3">Marca</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Marca</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -122,7 +126,7 @@ export default function CompareVehiculo() {
                   {vehicle.marca || vehicle.marcaLabel}
                 </p>
 
-                {index === 0 && <Header as="h3">Año</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Año</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -138,7 +142,7 @@ export default function CompareVehiculo() {
                 >
                   {vehicle.ano}
                 </p>
-                {index === 0 && <Header as="h3">Modelo</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Modelo</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -154,7 +158,7 @@ export default function CompareVehiculo() {
                 >
                   {vehicle.modelo || vehicle.modeloLabel}
                 </p>
-                {index === 0 && <Header as="h3">Estado</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Estado</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -170,7 +174,7 @@ export default function CompareVehiculo() {
                 >
                   {vehicle.condicion}
                 </p>
-                {index === 0 && <Header as="h3">Tipo de precio</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Tipo de precio</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -186,7 +190,7 @@ export default function CompareVehiculo() {
                 >
                   {vehicle.tipoPrecioLabel}
                 </p>
-                {index === 0 && <Header as="h3">Cilindraje</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Cilindraje</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -202,7 +206,7 @@ export default function CompareVehiculo() {
                 >
                   {new Intl.NumberFormat("de-DE").format(vehicle.cilindraje)} cc
                 </p>
-                {index === 0 && <Header as="h3">Kilometraje</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Kilometraje</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -219,7 +223,7 @@ export default function CompareVehiculo() {
                   {new Intl.NumberFormat("de-DE").format(vehicle.kilometraje)}{" "}
                   Km
                 </p>
-                {index === 0 && <Header as="h3">Transmisión</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Transmisión</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -235,7 +239,7 @@ export default function CompareVehiculo() {
                 >
                   {vehicle.transmision}
                 </p>
-                {index === 0 && <Header as="h3">Blindaje</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Blindaje</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -251,7 +255,7 @@ export default function CompareVehiculo() {
                 >
                   {vehicle.blindado ? "SI" : "NO"}
                 </p>
-                {index === 0 && <Header as="h3">Último dígito Placa</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Último dígito Placa</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     Último dígito Placa
@@ -268,7 +272,7 @@ export default function CompareVehiculo() {
                   {vehicle.placa}
                 </p>
                 <Divider />
-                {index === 0 && <Header as="h2">Descripción</Header>}
+                {index === 0 && <Header as="h2" style={{ color: colorText }}>Descripción</Header>}
                 {index !== 0 && (
                   <Header as="h2" style={{ color: "transparent" }}>
                     .
@@ -317,13 +321,13 @@ export default function CompareVehiculo() {
                   }}
                   src="/images/plus-compare.png"
                 />
-                {index === 0 && <Header as="h2">Características</Header>}
+                {index === 0 && <Header as="h2" style={{ color: colorText }}>Características</Header>}
                 {index !== 0 && (
                   <Header as="h2" style={{ color: "transparent" }}>
                     .
                   </Header>
                 )}
-                {index === 0 && <Header as="h3">Nombre</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Nombre</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -339,7 +343,7 @@ export default function CompareVehiculo() {
                 >
                   .
                 </p>
-                {index === 0 && <Header as="h3">Precio</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Precio</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -355,7 +359,7 @@ export default function CompareVehiculo() {
                 >
                   .
                 </p>
-                {index === 0 && <Header as="h3">Ubicación</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Ubicación</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -372,25 +376,7 @@ export default function CompareVehiculo() {
                   .
                 </p>
 
-                {index === 0 && <Header as="h3">Marca</Header>}
-                {index !== 0 && (
-                  <Header as="h3" style={{ color: "transparent" }}>
-                    .
-                  </Header>
-                )}
-
-                <p
-                  style={{
-                    fontWeight: 700,
-                    fontSize: 14,
-                    marginLeft: 15,
-                    color: "transparent",
-                  }}
-                >
-                  .
-                </p>
-
-                {index === 0 && <Header as="h3">Año</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Marca</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -408,7 +394,25 @@ export default function CompareVehiculo() {
                   .
                 </p>
 
-                {index === 0 && <Header as="h3">Modelo1</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Año</Header>}
+                {index !== 0 && (
+                  <Header as="h3" style={{ color: "transparent" }}>
+                    .
+                  </Header>
+                )}
+
+                <p
+                  style={{
+                    fontWeight: 700,
+                    fontSize: 14,
+                    marginLeft: 15,
+                    color: "transparent",
+                  }}
+                >
+                  .
+                </p>
+
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Modelo1</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -426,7 +430,7 @@ export default function CompareVehiculo() {
                   {vehicle.modelo}
                 </p>
 
-                {index === 0 && <Header as="h3">Estado</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Estado</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -444,7 +448,7 @@ export default function CompareVehiculo() {
                   .
                 </p>
 
-                {index === 0 && <Header as="h3">Tipo de precio</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Tipo de precio</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -462,7 +466,7 @@ export default function CompareVehiculo() {
                   .
                 </p>
 
-                {index === 0 && <Header as="h3">Cilindraje</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Cilindraje</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -480,7 +484,7 @@ export default function CompareVehiculo() {
                   .
                 </p>
 
-                {index === 0 && <Header as="h3">Kilometraje</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Kilometraje</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -498,7 +502,7 @@ export default function CompareVehiculo() {
                   .
                 </p>
 
-                {index === 0 && <Header as="h3">Transmisión</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Transmisión</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -516,7 +520,7 @@ export default function CompareVehiculo() {
                   .
                 </p>
 
-                {index === 0 && <Header as="h3">Blindaje</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Blindaje</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -534,7 +538,7 @@ export default function CompareVehiculo() {
                   .
                 </p>
 
-                {index === 0 && <Header as="h3">Último dígito Placa</Header>}
+                {index === 0 && <Header as="h3" style={{ color: colorText }}>Último dígito Placa</Header>}
                 {index !== 0 && (
                   <Header as="h3" style={{ color: "transparent" }}>
                     .
@@ -554,7 +558,7 @@ export default function CompareVehiculo() {
 
                 <Divider />
 
-                {index === 0 && <Header as="h2">Descripción</Header>}
+                {index === 0 && <Header as="h2" style={{ color: colorText }}>Descripción</Header>}
                 {index !== 0 && (
                   <Header as="h2" style={{ color: "transparent" }}>
                     .

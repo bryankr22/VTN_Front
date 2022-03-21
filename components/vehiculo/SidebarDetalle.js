@@ -9,6 +9,7 @@ import axios from 'axios';
 import { AUTH_URL, favoritos_add_vehiculo } from '../../helpers/constants';
 import jwt from 'jsonwebtoken';
 import { useRouter } from 'next/router'
+import { light } from '../../helpers/colors';
 
 export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
     const dispatch = useDispatch()
@@ -49,6 +50,11 @@ export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
             router.push('/usuario/favoritos');
         })
     }
+
+    const darkMode = useSelector(({ darkMode }) => darkMode.status);
+    const colorText = darkMode === light ? undefined : light;
+    const colorIcon = darkMode === light ? "blue" : light;
+
     return (
         <Container style={{ marginTop: 20 }}>
             <style>
@@ -61,24 +67,24 @@ export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
             <Dimmer style={{ position: "fixed" }} active={loading}>
                 <Loader>Agregando a favoritos...</Loader>
             </Dimmer>
-            <Header as="h6" disabled>
-                <div style={{ display: 'inline-block', width: '50%' }}>
+            <Header as="h6" disabled style={{ color: colorText }}>
+                <div style={{ display: 'inline-block', width: '50%', color: colorText }}>
                     {vehiculo.ano} - {" " + new Intl.NumberFormat("de-DE").format(vehiculo.kilometraje)}{" "}Km
                 </div>
-                <div style={{ display: 'inline-block', fontSize: 18, color: '#5c5c5c', width: '50%', textAlign: 'end' }}>
+                <div style={{ display: 'inline-block', fontSize: 18, color: darkMode === light ? '#5c5c5c' : light, width: '50%', textAlign: 'end' }}>
                     <Icon name="eye" style={{ marginRight: 5 }} />
-                    <p style={{ display: 'inline' }}>{new Intl.NumberFormat("de-DE").format(vehiculo.views)}</p>
+                    <p style={{ display: 'inline', color: colorText }}>{new Intl.NumberFormat("de-DE").format(vehiculo.views)}</p>
                 </div>
             </Header>
-            <Header as="h1" style={{ marginTop: 8 }}>
+            <Header as="h1" style={{ marginTop: 8, color: colorText }}>
                 {vehiculo.title}
             </Header>
-            <Header as="h2" style={{ marginTop: 8 }}>
+            <Header as="h2" style={{ marginTop: 8, color: colorText }}>
                 ${" "}
                 {new Intl.NumberFormat("de-DE").format(vehiculo.precio)}{" "}
                 COP
             </Header>
-            <Header as="h3" style={{ marginTop: 8 }}>
+            <Header as="h3" style={{ marginTop: 8, color: colorText }}>
                 SKU:
                 <p
                     style={{
@@ -99,32 +105,32 @@ export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
                 <Grid.Row columns={3}>
                     {vehiculo.permuta == 1 && (
                         <Grid.Column style={{ textAlign: "center" }}>
-                            <Header as="h6" icon>
-                                <Icon name="exchange" />
+                            <Header as="h6" icon style={{ color: colorText }}>
+                                <Icon name="exchange" style={{ color: colorText }} />
                                 Permuta
                             </Header>
                         </Grid.Column>
                     )}
                     {vehiculo.financiacion == 1 && (
                         <Grid.Column style={{ textAlign: "center" }}>
-                            <Header as="h6" icon>
-                                <Icon name="wpforms" />
+                            <Header as="h6" icon style={{ color: colorText }}>
+                                <Icon name="wpforms" style={{ color: colorText }} />
                                 Financiación
                             </Header>
                         </Grid.Column>
                     )}
                     {vehiculo.confiable == 1 && (
                         <Grid.Column style={{ textAlign: "center" }}>
-                            <Header as="h6" icon>
-                                <Icon name="check" />
+                            <Header as="h6" icon style={{ color: colorText }}>
+                                <Icon name="check" style={{ color: colorText }} />
                                 Verificado
                             </Header>
                         </Grid.Column>
                     )}
                     {vehiculo.blindado == 1 && (
                         <Grid.Column style={{ textAlign: "center" }}>
-                            <Header as="h6" icon>
-                                <Icon name="shield" />
+                            <Header as="h6" icon style={{ color: colorText }}>
+                                <Icon name="shield" style={{ color: colorText }} />
                                 Blindado
                             </Header>
                         </Grid.Column>
@@ -144,12 +150,12 @@ export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
                     as="h3"
                     textAlign="center"
                     onClick={() => addFavoritos()}
-                    style={{ marginTop: 8, marginBottom: 30 }}
+                    style={{ marginTop: 8, marginBottom: 30, color: colorText }}
                 >
                     <Icon
                         id={"icon-fav-" + vehiculo.id}
                         name={vehicleFav.length > 0 ? "heart" : "heart outline"}
-                        color="blue"
+                        color={colorIcon}
                     />
                     Agregar a favoritos
                 </Header>
