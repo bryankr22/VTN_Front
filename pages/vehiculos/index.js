@@ -14,9 +14,11 @@ import { Grid, Responsive } from "semantic-ui-react";
 import { useRouter } from 'next/router';
 
 import { API_URL } from '../../helpers/constants';
+import { dark, light } from '../../helpers/colors';
 export default function index({ data }) {
     const router = useRouter();
     const darkMode = useSelector(({ darkMode }) => darkMode.status);
+    const colorText = darkMode === light ? dark : light;
     return (
         <PublicLayout>
             <style>
@@ -68,24 +70,26 @@ export default function index({ data }) {
                     #search-responsive {
                         border-top: none;
                         border-right: none;
-                        border-bottom: 1px solid black;
+                        border-bottom: 1px solid ${colorText} !important;
                         border-left: none;
                         border-radius: 0;
+                        background-color: transparent;
                     }
 
                     #search-responsive::placeholder {
-                        color: black !important;
+                        color: ${colorText} !important;
                         text-align: center;
                         letter-spacing: 3px;
-                        }
+                    }
                         
-                        #search-responsive + i {
-                        color: black;
+                    #search-responsive + i {
+                        color: ${colorText};
                         opacity: 1;
-                        }
+                    }
                 `}
                 </style>
                 <SidebarMobile
+                    colorText={colorText}
                     params={router.query}
                     contadores={{ ...data.contadores, total_records: data.total_records }}
                     vehiculos={data.vehicles} />

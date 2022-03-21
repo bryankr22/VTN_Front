@@ -6,6 +6,7 @@ import ModalFiltersMobile from "./modals/ModalFiltersMobile";
 import ModalOrderMobile from "./modals/ModalOrderMobile";
 import ModalTechCardFilter from "./modals/ModalTechCardFilter";
 export default function SidebarMobile({
+  colorText,
   params,
   contadores,
   vehiculos,
@@ -40,8 +41,8 @@ export default function SidebarMobile({
           icon: "search",
           style: {
             background: "transparent",
-            color: "black",
-            borderBottom: "1px solid black",
+            borderBottom: `1px solid ${colorText}`,
+            color: colorText,
             height: 47,
             paddingTop: 10,
           },
