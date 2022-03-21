@@ -45,8 +45,10 @@ export default function MandateForm({ data }: Props) {
     ];
   });
   const request = (data = {}) => {
-    let winRef = window.open("", "_blank");
-
+    let winRef;
+    if (iOS()) {
+      winRef = window.open("", "_blank");
+    }
     return axios
       .post(
         `${API_URL}/documento-mandato`,

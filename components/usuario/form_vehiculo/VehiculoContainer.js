@@ -245,7 +245,7 @@ export default function VehiculoContainer({ data: dataProp, isEdit, darkMode }) 
       <Responsive {...Responsive.onlyComputer}>
         <FirstSection darkMode={darkMode} data={dataProp} />
         <Form.Field style={{ marginTop: 20 }}>
-          <label style={{ color: colorText }}>Agrega una o más fotos (Mínimo 5 fotos)*</label>
+          <label style={{ color: colorText }}>Agrega una o más fotos (mínimo 5 en el orden que desees que se muestren en la plataforma)*</label>
           <SecondSection darkMode={darkMode} data={dataProp} />
         </Form.Field>
         <ThirdSection darkMode={darkMode} data={dataProp} />
@@ -270,7 +270,7 @@ export default function VehiculoContainer({ data: dataProp, isEdit, darkMode }) 
       <Responsive {...Responsive.onlyMobile}>
         <FirstSection darkMode={darkMode} data={dataProp} isMobile />
         <Form.Field style={{ marginTop: 20 }}>
-          <label style={{ color: colorText }}>Agrega una o más fotos (Mínimo 5 fotos)*</label>
+          <label style={{ color: colorText }}>Agrega una o más fotos (mínimo 5 en el orden que desees que se muestren en la plataforma)*</label>
           <SecondSection darkMode={darkMode} data={dataProp} isMobile />
         </Form.Field>
         <ThirdSection darkMode={darkMode} data={dataProp} isMobile />
@@ -295,7 +295,7 @@ export default function VehiculoContainer({ data: dataProp, isEdit, darkMode }) 
       <Responsive {...Responsive.onlyTablet}>
         <FirstSection darkMode={darkMode} data={dataProp} isMobile />
         <Form.Field style={{ marginTop: 20 }}>
-          <label style={{ color: colorText }}>Agrega una o más fotos (Mínimo 5 fotos)*</label>
+          <label style={{ color: colorText }}>Agrega una o más fotos (mínimo 5 en el orden que desees que se muestren en la plataforma)*</label>
           <SecondSection darkMode={darkMode} data={dataProp} isMobile />
         </Form.Field>
         <ThirdSection darkMode={darkMode} data={dataProp} isMobile />

@@ -154,7 +154,7 @@ export default function AccesorioContainer({ data }) {
           />
         </Form.Field>
         <Form.Field style={{ marginTop: 20 }}>
-          <label>Agrega una o más fotos (Máximo 5 fotos)*</label>
+          <label>Agrega una o más fotos (mínimo 5 en el orden que desees que se muestren en la plataforma)*</label>
           <FotosContainer />
         </Form.Field>
         <FormContainer data={data} />
@@ -189,7 +189,7 @@ export default function AccesorioContainer({ data }) {
           />
         </Form.Field>
         <Form.Field style={{ marginTop: 20 }}>
-          <label>Agrega una o más fotos (Máximo 5 fotos)*</label>
+          <label>Agrega una o más fotos (mínimo 5 en el orden que desees que se muestren en la plataforma)*</label>
           <FotosContainer isMobile />
         </Form.Field>
         <FormContainer data={data} />
@@ -219,7 +219,7 @@ export default function AccesorioContainer({ data }) {
           />
         </Form.Field>
         <Form.Field style={{ marginTop: 20 }}>
-          <label>Agrega una o más fotos (Máximo 5 fotos)*</label>
+          <label>Agrega una o más fotos (mínimo 5 en el orden que desees que se muestren en la plataforma)*</label>
           <FotosContainer isMobile />
         </Form.Field>
         <FormContainer data={data} />

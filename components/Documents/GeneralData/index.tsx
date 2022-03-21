@@ -46,8 +46,10 @@ export default function GeneralData({ data }: Props) {
   const [message, setMessage] = useState({ type: "", txt: "" });
   const [bodywork, setBodyWork] = useState<string[]>([]);
   const onSubmit = handleSubmit((data) => {
-    let winRef = window.open("", "_blank");
-
+    let winRef;
+    if (iOS()) {
+      winRef = window.open("", "_blank");
+    }
     axios
       .post(
         `${API_URL}/documento-compra-venta`,
@@ -83,7 +85,10 @@ export default function GeneralData({ data }: Props) {
       });
   });
   const downLoadEmptyFile = () => {
-    let winRef = window.open("", "_blank");
+    let winRef;
+    if (iOS()) {
+      winRef = window.open("", "_blank");
+    }
 
     axios
       .post(
