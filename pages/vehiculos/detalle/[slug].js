@@ -65,6 +65,7 @@ export default function detalle({ data }) {
 
   const darkMode = useSelector(({ darkMode }) => darkMode.status);
   const colorText = darkMode === light ? undefined : light;
+  const colorMargin = darkMode === light ? dark : light;
   return (
     <>
       {data.vehicleExists &&
@@ -155,6 +156,26 @@ export default function detalle({ data }) {
                 .swiper-pagination-bullet {
                   background: ${colorText}
                 }
+
+                #search-responsive {
+                  border-top: none;
+                  border-right: none;
+                  border-bottom: 1px solid ${colorMargin} !important;
+                  border-left: none;
+                  border-radius: 0;
+                  background-color: transparent;
+                }
+
+                #search-responsive::placeholder {
+                    color: ${colorMargin} !important;
+                    text-align: center;
+                    letter-spacing: 3px;
+                }
+                  
+                #search-responsive + i {
+                    color: ${colorMargin};
+                    opacity: 1;
+                }
             `}
             </style>
 
@@ -164,8 +185,8 @@ export default function detalle({ data }) {
                   icon: "search",
                   style: {
                     background: "transparent",
-                    color: "black",
-                    borderBottom: "1px solid black",
+                    color: colorText,
+                    borderBottom: `1px solid ${colorMargin}`,
                     height: 47,
                     paddingTop: 10,
                   },

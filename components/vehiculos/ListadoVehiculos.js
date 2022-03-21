@@ -117,7 +117,7 @@ export default function ListadoVehiculos({
   //useEffect
 
   const darkMode = useSelector(({ darkMode }) => darkMode.status);
-  const colorText = darkMode === light ? dark : light;
+  const colorText = darkMode === light ? undefined : light;
   return (
     <Grid.Column width={13} style={{ backgroundColor: darkMode }}>
       <Container fluid style={{ textAlign: "center", margin: 10 }}>
@@ -166,7 +166,7 @@ export default function ListadoVehiculos({
             <Card
               key={index}
               as="a"
-              style={{ textDecoration: "none" }}
+              style={{ textDecoration: "none", backgroundColor: darkMode }}
               href={
                 "/vehiculos/detalle/" +
                 normalize(item.title)
@@ -193,22 +193,23 @@ export default function ListadoVehiculos({
                     overflow: "hidden",
                     textOverflow: "ellipsis",
                     marginBottom: 7,
+                    color: colorText
                   }}
                 >
                   <h2 className="fnt-size-inherit">{item.title}</h2>
                 </Card.Description>
-                <Card.Header>
+                <Card.Header style={{ color: colorText }}>
                   <h3 className="fnt-size-inherit">
                     $ {new Intl.NumberFormat("de-DE").format(item.precio)} COP
                   </h3>
                 </Card.Header>
-                <Card.Description>
+                <Card.Description style={{ color: colorText }}>
                   <h4 className="fnt-size-inherit">
                     {item.ano} -{" "}
                     {new Intl.NumberFormat("de-DE").format(item.kilometraje)} KM
                   </h4>
                 </Card.Description>
-                <Card.Description as="h4" style={{ fontSize: "12px" }}>
+                <Card.Description as="h4" style={{ fontSize: "12px", color: colorText }}>
                   {item.labelCiudad.toLowerCase().charAt(0).toUpperCase() +
                     item.labelCiudad.toLowerCase().slice(1)}
                   {compare === 1 &&

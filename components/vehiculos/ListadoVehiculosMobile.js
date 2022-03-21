@@ -83,7 +83,7 @@ export default function ListadoVehiculosMobile({
     }, [compareList]);
 
     const darkMode = useSelector(({ darkMode }) => darkMode.status);
-    const colorText = darkMode === light ? dark : light;
+    const colorText = darkMode === light ? undefined : light;
 
     return (
         <>
@@ -129,6 +129,7 @@ export default function ListadoVehiculosMobile({
                                 marginRight: 6,
                                 marginLeft: 6,
                                 textDecoration: "none",
+                                backgroundColor: darkMode
                             }}
                         >
                             <VehicleThumbnail item={item} src={pathS3 + item.nameImage + "300x300.webp"} />
@@ -139,18 +140,19 @@ export default function ListadoVehiculosMobile({
                                         overflow: "hidden",
                                         textOverflow: "ellipsis",
                                         marginBottom: 7,
+                                        color: colorText
                                     }}
                                 >
                                     {item.title}
                                 </Card.Description>
-                                <Card.Header>
+                                <Card.Header style={{ color: colorText }}>
                                     $ {new Intl.NumberFormat("de-DE").format(item.precio)} COP
                                 </Card.Header>
-                                <Card.Description>
+                                <Card.Description style={{ color: colorText }}>
                                     {item.ano} -{" "}
                                     {new Intl.NumberFormat("de-DE").format(item.kilometraje)} KM
                                 </Card.Description>
-                                <Card.Description>
+                                <Card.Description style={{ color: colorText }}>
                                     {item.labelCiudad.toLowerCase().charAt(0).toUpperCase() +
                                         item.labelCiudad.toLowerCase().slice(1)}
                                     {compare === 1 &&
