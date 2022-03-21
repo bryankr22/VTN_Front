@@ -40,6 +40,7 @@ export default function SidebarMobile({
         {`
           
           #search-responsive {
+              color: ${colorText};
               border-top: none;
               border-right: none;
               border-bottom: 1px solid ${colorText} !important;

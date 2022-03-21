@@ -118,8 +118,15 @@ export default function ListadoVehiculos({
 
   const darkMode = useSelector(({ darkMode }) => darkMode.status);
   const colorText = darkMode === light ? undefined : light;
+  const colorBorder = darkMode === light ? "#d4d4d5" : "#414141";
   return (
     <Grid.Column width={13} style={{ backgroundColor: darkMode }}>
+      <style>{`
+        .ui.card, .ui.cards>.card {
+          -webkit-box-shadow: 0 1px 3px 0 ${colorBorder}, 0 0 0 1px ${colorBorder};
+          box-shadow: 0 1px 3px 0 ${colorBorder}, 0 0 0 1px ${colorBorder};
+        }
+      `}</style>
       <Container fluid style={{ textAlign: "center", margin: 10 }}>
         <Grid>
           <Grid.Column width={12}>

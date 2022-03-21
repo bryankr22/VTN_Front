@@ -84,11 +84,18 @@ export default function ListadoVehiculosMobile({
 
     const darkMode = useSelector(({ darkMode }) => darkMode.status);
     const colorText = darkMode === light ? undefined : light;
+    const colorBorder = darkMode === light ? "#d4d4d5" : "#414141";
 
     return (
         <>
             <HeaderVehiculo />
             <ZoneAd slug={params.categoria} />
+            <style>{`
+                .ui.card, .ui.cards>.card {
+                -webkit-box-shadow: 0 1px 3px 0 ${colorBorder}, 0 0 0 1px ${colorBorder};
+                box-shadow: 0 1px 3px 0 ${colorBorder}, 0 0 0 1px ${colorBorder};
+                }
+            `}</style>
             {vehiculos.length === 0 && (
                 <p
                     style={{
