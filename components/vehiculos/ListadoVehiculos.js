@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import {
-  Image,
+  Label,
   Container,
   Input,
   Card,
@@ -189,6 +189,16 @@ export default function ListadoVehiculos({
                 item.id
               }
             >
+              {item.premium === 1 &&
+                <Label as='a' color='blue' ribbon style={{
+                  position: 'absolute',
+                  zIndex: 10,
+                  marginLeft: darkMode === dark ? 13 : 14,
+                  marginTop: 5
+                }}>
+                  Premium
+                </Label>
+              }
               <VehicleThumbnail
                 src={pathS3 + item.nameImage + "300x300.webp"}
                 item={item}

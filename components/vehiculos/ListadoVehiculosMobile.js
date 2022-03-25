@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Image, Card, Button, Container, Pagination } from "semantic-ui-react";
+import { Label, Card, Button, Container, Pagination } from "semantic-ui-react";
 import HeaderVehiculo from "../../components/comparadores/HeaderVehiculo";
 import { useLocalStorage } from "../../helpers/hooks/useLocalStorage";
 import { useSelector, useDispatch } from "react-redux";
@@ -139,6 +139,19 @@ export default function ListadoVehiculosMobile({
                                 backgroundColor: darkMode
                             }}
                         >
+                            {item.premium === 1 &&
+                                <div
+                                    style={{
+                                        position: 'absolute',
+                                        zIndex: 1,
+                                        background: '#2185d0',
+                                        color: 'white',
+                                        fontWeight: 700,
+                                        borderRadius: ' 0.28571429rem 0 0.28571429rem 0 !important',
+                                        padding: '0.5833em 0.833em'
+                                    }}
+                                >Premium</div>
+                            }
                             <VehicleThumbnail item={item} src={pathS3 + item.nameImage + "300x300.webp"} />
                             <Card.Content>
                                 <Card.Description
