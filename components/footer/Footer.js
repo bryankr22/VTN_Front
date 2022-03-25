@@ -286,7 +286,7 @@ const Footer = () => {
                             </Grid.Column>
                         </Grid.Row>
                         <Grid.Row>
-                            <Grid.Column width={16} style={{ textAlign: 'center' }}>
+                            <Grid.Column width={16} style={{ textAlign: 'center', zIndex: 10 }}>
                                 <a
                                     style={{
                                         position: 'fixed',
