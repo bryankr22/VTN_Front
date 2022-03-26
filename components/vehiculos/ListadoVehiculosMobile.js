@@ -144,11 +144,11 @@ export default function ListadoVehiculosMobile({
                                     style={{
                                         position: 'absolute',
                                         zIndex: 1,
-                                        background: '#2185d0',
-                                        color: 'white',
+                                        background: 'rgb(198, 168, 29)',
+                                        color: light,
                                         fontWeight: 700,
-                                        borderRadius: ' 0.28571429rem 0 0.28571429rem 0 !important',
-                                        padding: '0.5833em 0.833em'
+                                        borderRadius: ' 0.28571429rem 0.28571429rem !important',
+                                        padding: '0.1833em 0.833em'
                                     }}
                                 >Premium</div>
                             }

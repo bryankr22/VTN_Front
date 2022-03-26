@@ -189,12 +189,19 @@ export default function ListadoVehiculos({
                 item.id
               }
             >
+              <style>{`
+                .label-premium {
+                  background-color: rgb(198, 168, 29) !important;
+                  border-color: #78621c !important;
+                }
+              `}</style>
               {item.premium === 1 &&
-                <Label as='a' color='blue' ribbon style={{
+                <Label as='a' size="mini" className="label-premium" ribbon style={{
                   position: 'absolute',
                   zIndex: 10,
                   marginLeft: darkMode === dark ? 13 : 14,
-                  marginTop: 5
+                  marginTop: 5,
+                  color: light
                 }}>
                   Premium
                 </Label>
