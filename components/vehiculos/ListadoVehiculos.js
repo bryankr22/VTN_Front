@@ -156,6 +156,12 @@ export default function ListadoVehiculos({
       </Container>
       <HeaderVehiculo />
       <ZoneAd slug={params.categoria} />
+      <style>{`
+        .label-premium {
+          background-color: rgb(198, 168, 29) !important;
+          border-color: #78621c !important;
+        }
+      `}</style>
       {vehiculos.length === 0 && (
         <p
           style={{
@@ -189,12 +195,6 @@ export default function ListadoVehiculos({
                 item.id
               }
             >
-              <style>{`
-                .label-premium {
-                  background-color: rgb(198, 168, 29) !important;
-                  border-color: #78621c !important;
-                }
-              `}</style>
               {item.premium === 1 &&
                 <Label as='a' size="mini" className="label-premium" ribbon style={{
                   position: 'absolute',
