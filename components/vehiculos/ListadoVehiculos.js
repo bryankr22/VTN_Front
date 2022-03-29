@@ -196,7 +196,7 @@ export default function ListadoVehiculos({
               }
             >
               {item.premium === 1 &&
-                <Label as='a' size="mini" className="label-premium" ribbon style={{
+                <Label as='a' size="small" className="label-premium" ribbon style={{
                   position: 'absolute',
                   zIndex: 10,
                   marginLeft: darkMode === dark ? 13 : 14,

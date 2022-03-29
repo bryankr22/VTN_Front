@@ -95,6 +95,11 @@ export default function ListadoVehiculosMobile({
                 -webkit-box-shadow: 0 1px 3px 0 ${colorBorder}, 0 0 0 1px ${colorBorder};
                 box-shadow: 0 1px 3px 0 ${colorBorder}, 0 0 0 1px ${colorBorder};
                 }
+                
+                .label-premium {
+                background-color: rgb(198, 168, 29) !important;
+                border-color: #78621c !important;
+                }
             `}</style>
             {vehiculos.length === 0 && (
                 <p
@@ -140,17 +145,15 @@ export default function ListadoVehiculosMobile({
                             }}
                         >
                             {item.premium === 1 &&
-                                <div
-                                    style={{
-                                        position: 'absolute',
-                                        zIndex: 1,
-                                        background: 'rgb(198, 168, 29)',
-                                        color: light,
-                                        fontWeight: 700,
-                                        borderRadius: ' 0.28571429rem 0.28571429rem !important',
-                                        padding: '0.1833em 0.833em'
-                                    }}
-                                >Premium</div>
+                                <Label as='a' size="mini" className="label-premium" ribbon style={{
+                                    position: 'absolute',
+                                    zIndex: 10,
+                                    marginLeft: darkMode === dark ? 13 : 14,
+                                    marginTop: 5,
+                                    color: light
+                                }}>
+                                    Premium
+                                </Label>
                             }
                             <VehicleThumbnail item={item} src={pathS3 + item.nameImage + "300x300.webp"} />
                             <Card.Content>
