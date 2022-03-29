@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import {
-  Image,
+  Label,
   Container,
   Input,
   Card,
@@ -156,6 +156,12 @@ export default function ListadoVehiculos({
       </Container>
       <HeaderVehiculo />
       <ZoneAd slug={params.categoria} />
+      <style>{`
+        .label-premium {
+          background-color: rgb(198, 168, 29) !important;
+          border-color: #78621c !important;
+        }
+      `}</style>
       {vehiculos.length === 0 && (
         <p
           style={{
@@ -189,6 +195,17 @@ export default function ListadoVehiculos({
                 item.id
               }
             >
+              {item.premium === 1 &&
+                <Label as='a' size="small" className="label-premium" ribbon style={{
+                  position: 'absolute',
+                  zIndex: 10,
+                  marginLeft: darkMode === dark ? 13 : 14,
+                  marginTop: 5,
+                  color: light
+                }}>
+                  Premium
+                </Label>
+              }
               <VehicleThumbnail
                 src={pathS3 + item.nameImage + "300x300.webp"}
                 item={item}

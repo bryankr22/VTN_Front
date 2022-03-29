@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Image, Card, Button, Container, Pagination } from "semantic-ui-react";
+import { Label, Card, Button, Container, Pagination } from "semantic-ui-react";
 import HeaderVehiculo from "../../components/comparadores/HeaderVehiculo";
 import { useLocalStorage } from "../../helpers/hooks/useLocalStorage";
 import { useSelector, useDispatch } from "react-redux";
@@ -95,6 +95,11 @@ export default function ListadoVehiculosMobile({
                 -webkit-box-shadow: 0 1px 3px 0 ${colorBorder}, 0 0 0 1px ${colorBorder};
                 box-shadow: 0 1px 3px 0 ${colorBorder}, 0 0 0 1px ${colorBorder};
                 }
+                
+                .label-premium {
+                background-color: rgb(198, 168, 29) !important;
+                border-color: #78621c !important;
+                }
             `}</style>
             {vehiculos.length === 0 && (
                 <p
@@ -139,6 +144,17 @@ export default function ListadoVehiculosMobile({
                                 backgroundColor: darkMode
                             }}
                         >
+                            {item.premium === 1 &&
+                                <Label as='a' size="mini" className="label-premium" ribbon style={{
+                                    position: 'absolute',
+                                    zIndex: 10,
+                                    marginLeft: 14,
+                                    marginTop: 5,
+                                    color: light
+                                }}>
+                                    Premium
+                                </Label>
+                            }
                             <VehicleThumbnail item={item} src={pathS3 + item.nameImage + "300x300.webp"} />
                             <Card.Content>
                                 <Card.Description
