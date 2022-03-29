@@ -148,7 +148,7 @@ export default function ListadoVehiculosMobile({
                                 <Label as='a' size="mini" className="label-premium" ribbon style={{
                                     position: 'absolute',
                                     zIndex: 10,
-                                    marginLeft: darkMode === dark ? 13 : 14,
+                                    marginLeft: 14,
                                     marginTop: 5,
                                     color: light
                                 }}>
