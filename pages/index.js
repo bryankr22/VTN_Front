@@ -9,6 +9,7 @@ import MarcasHome from "../components/home/MarcasHome";
 import FiltersHome from "../components/home/FiltersHome";
 import DestacadosHome from "../components/home/DestacadosHome";
 import SliderHome from "../components/home/SliderHome"
+import PickAndPlate from '../components/PickAndPlate'
 import ContentHome from "../components/home/ContentHome";
 
 import axios from "axios";
@@ -55,6 +56,7 @@ const Home = ({
         />
       </Head>
       <SliderHome slider={slider} sliderMobile={sliderMobile} />
+      <PickAndPlate />
       <FiltersHome options={filters} />
       <CategoriasHome categorias={categorias} />
       <MarcasHome marcas={marcas} />
