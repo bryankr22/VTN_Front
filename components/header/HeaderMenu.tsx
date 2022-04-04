@@ -7,6 +7,7 @@ import { VTNMenu } from './common'
 const DesktopMenu = ({ menu }: { menu: VTNMenu }) => {
     const menuItemStyle: SxProps = {
         color: 'white',
+        letterSpacing: 2,
         "&:hover": {
             color: 'white'
         },
