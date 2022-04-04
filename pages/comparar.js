@@ -1,7 +1,8 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Head from "next/head";
 import { NextSeo } from "next-seo";
-import PublicLayout from '../layouts/PublicLayout'
+import PublicLayout from '../layouts/PublicLayout';
 import {
     Image,
     Grid,
@@ -11,7 +12,10 @@ import {
     Container
 } from 'semantic-ui-react'
 import Link from 'next/link'
+import { dark, light } from '../helpers/colors';
 export default function comparar() {
+    const darkMode = useSelector(({ darkMode }) => darkMode.status);
+    const colorText = darkMode === light ? dark : light;
     return (
         <PublicLayout>
             <NextSeo
@@ -35,24 +39,36 @@ export default function comparar() {
                 servicios (mecánica, latonería y pintura, polarizado, blindaje entre otros) y
                 financiación para compra de vehículo (ayuda para tramite de crédito de vehículo nuevo o usado).
             </p> */}
+                <style>
+                    {`
+                        .ui.placeholder.segment > img {
+                            height: auto !important;
+                            ${darkMode === dark && 'filter: invert(1);'}
+                        }
+
+                        .ui.placeholder, .ui.placeholder .image.header:after, .ui.placeholder .line, .ui.placeholder .line:after, .ui.placeholder>:before {
+                            background-color: transparent;
+                        }
+                    `}
+                </style>
                 <Responsive {...Responsive.onlyMobile}>
                     <Grid columns={1} divided style={{ marginTop: 25 }}>
                         <Grid.Row>
                             <Grid.Column>
-                                <Link href="/comparar-vehiculos" style={{ textDecoration: 'none', color: 'black' }} passHref>
+                                <Link href="/comparar-vehiculos" style={{ textDecoration: 'none', color: colorText }} passHref>
                                     <Segment placeholder style={{ alignItems: 'center', border: 'none', background: 'transparent' }}>
                                         <Image size='small' style={{ zIndex: 1, width: 215 }} src='https://vendetunave.s3.amazonaws.com/vendetunave/images/utils/Comparar_Vehiculos.png' alt="comparar vehiculo" />
-                                        <Header style={{ margin: 0, marginTop: -15 }}>
+                                        <Header style={{ margin: 0, marginTop: -15, color: colorText }}>
                                             Comparar vehículos en venta
                                         </Header>
                                     </Segment>
                                 </Link>
                             </Grid.Column>
                             <Grid.Column>
-                                <Link href="/comparar-fichas" style={{ textDecoration: 'none', color: 'black' }} passHref>
+                                <Link href="/comparar-fichas" style={{ textDecoration: 'none', color: colorText }} passHref>
                                     <Segment placeholder style={{ alignItems: 'center', border: 'none', background: 'transparent' }}>
                                         <Image size='small' style={{ zIndex: 1, width: 200 }} src='https://vendetunave.s3.amazonaws.com/vendetunave/images/utils/Comparar_Ficha_tecnica.png' alt="comparar ficha técnica" />
-                                        <Header style={{ margin: 0, marginTop: -15 }}>
+                                        <Header style={{ margin: 0, marginTop: -15, color: colorText }}>
                                             Comparar fichas técnicas (nuevos)
                                         </Header>
                                     </Segment>
@@ -65,7 +81,7 @@ export default function comparar() {
                     <Grid columns={1} divided style={{ marginTop: 25 }}>
                         <Grid.Row>
                             <Grid.Column>
-                                <Link href="/comparar-vehiculos" style={{ textDecoration: 'none', color: 'black' }} passHref>
+                                <Link href="/comparar-vehiculos" style={{ textDecoration: 'none', color: colorText }} passHref>
                                     <Segment placeholder style={{ alignItems: 'center', border: 'none', background: 'transparent' }}>
                                         <Image size='small' style={{ zIndex: 1, width: 200 }} src='https://vendetunave.s3.amazonaws.com/vendetunave/images/utils/Comparar_Vehiculos.png' alt="comparar vehiculo" />
                                         <Header style={{ margin: 0, marginTop: -15 }}>
@@ -75,10 +91,10 @@ export default function comparar() {
                                 </Link>
                             </Grid.Column>
                             <Grid.Column>
-                                <Link href="/comparar-fichas" style={{ textDecoration: 'none', color: 'black' }} passHref>
+                                <Link href="/comparar-fichas" style={{ textDecoration: 'none', color: colorText }} passHref>
                                     <Segment placeholder style={{ alignItems: 'center', border: 'none', background: 'transparent' }}>
                                         <Image size='small' style={{ zIndex: 1, width: 215 }} src='https://vendetunave.s3.amazonaws.com/vendetunave/images/utils/Comparar_Ficha_tecnica.png' alt="comparar ficha técnica" />
-                                        <Header style={{ margin: 0, marginTop: -15 }}>
+                                        <Header style={{ margin: 0, marginTop: -15, color: colorText }}>
                                             Comparar fichas técnicas (nuevos)
                                         </Header>
                                     </Segment>
@@ -92,20 +108,20 @@ export default function comparar() {
                     <Grid columns={2} divided style={{ marginTop: 25 }}>
                         <Grid.Row>
                             <Grid.Column>
-                                <Link href="/comparar-vehiculos" style={{ textDecoration: 'none', color: 'black' }} passHref>
-                                    <Segment placeholder style={{ alignItems: 'center', height: '100%' }}>
+                                <Link href="/comparar-vehiculos" style={{ textDecoration: 'none', color: colorText }} passHref>
+                                    <Segment placeholder style={{ alignItems: 'center', height: '100%', background: 'transparent', border: `1px solid ${colorText}` }}>
                                         <Image size='small' style={{ zIndex: 1, width: 200 }} src='https://vendetunave.s3.amazonaws.com/vendetunave/images/utils/Comparar_Vehiculos.png' alt="comparar vehiculo" />
-                                        <Header style={{ margin: 0, marginTop: -15 }}>
+                                        <Header style={{ margin: 0, marginTop: -15, color: colorText }}>
                                             Comparar vehículos en venta
                                         </Header>
                                     </Segment>
                                 </Link>
                             </Grid.Column>
                             <Grid.Column>
-                                <Link href="/comparar-fichas" style={{ textDecoration: 'none', color: 'black' }} passHref>
-                                    <Segment placeholder style={{ alignItems: 'center' }}>
+                                <Link href="/comparar-fichas" style={{ textDecoration: 'none', color: colorText }} passHref>
+                                    <Segment placeholder style={{ alignItems: 'center', background: 'transparent', border: `1px solid ${colorText}` }}>
                                         <Image size='small' style={{ zIndex: 1, width: 215 }} src='https://vendetunave.s3.amazonaws.com/vendetunave/images/utils/Comparar_Ficha_tecnica.png' alt="comparar ficha técnica" />
-                                        <Header style={{ margin: 0, marginTop: -15 }}>
+                                        <Header style={{ margin: 0, marginTop: -15, color: colorText }}>
                                             Comparar fichas técnicas (nuevos)
                                         </Header>
                                     </Segment>

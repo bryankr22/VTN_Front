@@ -1,5 +1,7 @@
-import React from 'react'
-import { Container, Header, Select, Button, Responsive, Grid, Item, Segment, Pagination } from 'semantic-ui-react'
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { Container, Button, Item, Pagination } from 'semantic-ui-react'
+import { dark, light } from '../../helpers/colors';
 export default function ListaServicios({ servicios_res, pagina, total }) {
     const insertParam = (key, value) => {
         key = encodeURIComponent(key);
@@ -23,22 +25,25 @@ export default function ListaServicios({ servicios_res, pagina, total }) {
     const handlePaginationChange = (e, { activePage }) => {
         insertParam('page', activePage);
     }
+
+    const darkMode = useSelector(({ darkMode }) => darkMode.status);
+    const colorText = darkMode === light ? undefined : light;
     return (
         <div>
             <Item.Group divided>
                 {(servicios_res).map((item, index) =>
                     <Item key={index}>
-                        <Item.Image size='small' src={item.image} alt={item.nombre}  />
+                        <Item.Image size='small' src={item.image} alt={item.nombre} />
                         <Item.Content>
-                            <Item.Header><h2 className="fnt-size-inherit">{item.nombre}</h2></Item.Header>
-                            <Item.Meta><h3 className="fnt-size-inherit">{item.descripcion}</h3></Item.Meta>
-                            <Item.Meta><h3 className="fnt-size-inherit">{item.direccion}</h3></Item.Meta>
-                            <Item.Meta><h3 className="fnt-size-inherit">{item.telefono}</h3></Item.Meta>
-                            <Item.Meta><h3 className="fnt-size-inherit">{item.servicio}</h3></Item.Meta>
+                            <Item.Header><h2 style={{ color: colorText }} className="fnt-size-inherit">{item.nombre}</h2></Item.Header>
+                            <Item.Meta><h3 style={{ color: colorText }} className="fnt-size-inherit">{item.descripcion}</h3></Item.Meta>
+                            <Item.Meta><h3 style={{ color: colorText }} className="fnt-size-inherit">{item.direccion}</h3></Item.Meta>
+                            <Item.Meta><h3 style={{ color: colorText }} className="fnt-size-inherit">{item.telefono}</h3></Item.Meta>
+                            <Item.Meta><h3 style={{ color: colorText }} className="fnt-size-inherit">{item.servicio}</h3></Item.Meta>
                             <Item.Extra style={{ float: 'right', marginTop: '-11%', width: '20%' }}>
                                 <Button
                                     onClick={() => { window.open(item.url, '_blank') }}
-                                    secondary
+                                    secondary={darkMode === light}
                                     floated='right'
                                 >
                                     VER
@@ -50,6 +55,17 @@ export default function ListaServicios({ servicios_res, pagina, total }) {
             </Item.Group>
             {Math.ceil((total) / 10) > 1 &&
                 <Container fluid style={{ textAlign: 'center', margin: 25 }}>
+                    {darkMode === dark &&
+                        <style>{`
+                            .ui.secondary.pointing.menu .active.item {
+                                color: ${colorText}
+                            }
+                            .ui.secondary.pointing.menu .item {
+                                border-color: ${colorText};
+                                color: ${colorText}
+                            }
+                        `}</style>
+                    }
                     <Pagination
                         pointing
                         secondary

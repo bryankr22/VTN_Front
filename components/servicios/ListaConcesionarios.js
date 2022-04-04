@@ -1,6 +1,12 @@
-import React from 'react'
-import { Button, Item } from 'semantic-ui-react'
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { Button, Item } from 'semantic-ui-react';
+import { light } from '../../helpers/colors';
+
 export default function ListaConcesionarios({ concesionarios_res }) {
+
+    const darkMode = useSelector(({ darkMode }) => darkMode.status);
+    const colorText = darkMode === light ? undefined : light;
     return (
         <div>
             <Item.Group divided>
@@ -8,14 +14,14 @@ export default function ListaConcesionarios({ concesionarios_res }) {
                     <Item key={index}>
                         <Item.Image size='small' src={item.image} alt={item.name} />
                         <Item.Content>
-                            <Item.Header as="h2" className="fnt-weight-bold">{item.name}</Item.Header>
-                            <Item.Meta as="h3" >{item.description}</Item.Meta>
-                            <Item.Meta as="h3" >{item.address}</Item.Meta>
-                            <Item.Meta as="h3" >Tel: {item.phone}</Item.Meta>
+                            <Item.Header style={{ color: colorText }} as="h2" className="fnt-weight-bold">{item.name}</Item.Header>
+                            <Item.Meta style={{ color: colorText }} as="h3" >{item.description}</Item.Meta>
+                            <Item.Meta style={{ color: colorText }} as="h3" >{item.address}</Item.Meta>
+                            <Item.Meta style={{ color: colorText }} as="h3" >Tel: {item.phone}</Item.Meta>
                             <Item.Extra style={{ float: 'right', marginTop: '-11%', width: '20%' }}>
                                 <Button
                                     onClick={() => { window.open(`http://maps.google.com/maps?q=${item.latitude},${item.longitude}`, '_blank') }}
-                                    secondary
+                                    secondary={darkMode === light}
                                     floated='right'
                                 >
                                     VER

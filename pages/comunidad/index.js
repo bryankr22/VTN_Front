@@ -1,11 +1,13 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import Head from "next/head";
+import { useSelector } from 'react-redux';
 import { NextSeo } from "next-seo";
 import Link from 'next/link';
 import PublicLayout from '../../layouts/PublicLayout';
 import { Container, Header, Grid, Input, Item, Label, Button, Responsive, Pagination } from 'semantic-ui-react';
 import axios from 'axios';
 import { API_URL, comunidad_api } from '../../helpers/constants';
+import { dark, light } from '../../helpers/colors';
 export default function index({ q, page, preguntas, tags, total_records }) {
     const [query, setQuery] = useState(q);
 
@@ -43,6 +45,10 @@ export default function index({ q, page, preguntas, tags, total_records }) {
         insertParam('q', query);
     }
 
+    const darkMode = useSelector(({ darkMode }) => darkMode.status);
+    const colorText = darkMode === light ? undefined : light;
+    const colorTextLink = darkMode === light ? "#2185d0" : light;
+
     return (
         <PublicLayout>
             <NextSeo
@@ -59,8 +65,8 @@ export default function index({ q, page, preguntas, tags, total_records }) {
                 <meta property="keywords" content="carros kia, carros jeep, Suzuki carros, los coches, carro convertible, usados autos, carro nuevo" />
             </Head>
             <Container style={{ paddingTop: 25 }} text>
-                <Header as='h1' style={{ textTransform: 'uppercase' }}>Comunidad - Vende Tu Nave</Header>
-                <p style={{ textAlign: 'justify' }}>
+                <Header as='h1' style={{ textTransform: 'uppercase', color: colorText }}>Comunidad - Vende Tu Nave</Header>
+                <p style={{ textAlign: 'justify', color: colorText }}>
                     Nuestro compromiso con nuestra comunidad transciende de una simple plataforma digital de comercio de vehículos,
                     es por esto que hemos creado esta sección en donde podrás compartir con los usuarios tus inquietudes, opiniones,
                     recomendaciones, comentarios y todo lo relacionado con el mundo automotor, y a las cuales serán tratadas por la misma comunidad
@@ -79,7 +85,7 @@ export default function index({ q, page, preguntas, tags, total_records }) {
                                 </Button>
                             </Grid.Column>
                             <Grid.Column>
-                                <span className="text-center d-block mt-4 mb-4">
+                                <span className="text-center d-block mt-4 mb-4" style={{ color: colorText }}>
                                     &oacute; busca lo que necesites aquí:
                                 </span>
                             </Grid.Column>
@@ -108,7 +114,7 @@ export default function index({ q, page, preguntas, tags, total_records }) {
                                 </Button>
                             </Grid.Column>
                             <Grid.Column>
-                                <span className="text-center d-block mt-4 mb-4">
+                                <span className="text-center d-block mt-4 mb-4" style={{ color: colorText }}>
                                     &oacute; busca lo que necesites aquí:
                                 </span>
                             </Grid.Column>
@@ -167,10 +173,10 @@ export default function index({ q, page, preguntas, tags, total_records }) {
                                     fontWeight: 'bold',
                                     fontSize: '16px',
                                     textAlign: 'center',
-                                    color: '#2185d0'
+                                    color: colorTextLink
                                 }}
                                 className="ui tiny image">
-                                <Header as='h2' style={{ color: '#2185d0', fontSize: '2rem' }}>
+                                <Header as='h2' style={{ color: colorTextLink, fontSize: '2rem' }}>
                                     {item.repuestas}{' '}
                                     <span className="d-block" style={{ fontSize: '1rem' }}>Respuestas</span>
                                 </Header>
@@ -178,7 +184,7 @@ export default function index({ q, page, preguntas, tags, total_records }) {
 
                             <Item.Content>
                                 <Item.Header as='a'>
-                                    <a href={'/comunidad/detalle/' + (item.titulo.split(' ').join('-')).split('?').join('') + '-' + item.id}>
+                                    <a href={'/comunidad/detalle/' + (item.titulo.split(' ').join('-')).split('?').join('') + '-' + item.id} style={{ color: colorText }}>
                                         <h2 className="fnt-size-inherit fnt-weight-bold ">
                                             {item.titulo}
                                         </h2>
@@ -209,6 +215,17 @@ export default function index({ q, page, preguntas, tags, total_records }) {
                 </Item.Group>
                 {Math.ceil((total_records) / 10) > 1 &&
                     <Container fluid style={{ textAlign: 'center', margin: 25 }}>
+                        {darkMode === dark &&
+                            <style>{`
+                                .ui.secondary.pointing.menu .active.item {
+                                    color: ${colorText}
+                                }
+                                .ui.secondary.pointing.menu .item {
+                                    border-color: ${colorText};
+                                    color: ${colorText}
+                                }
+                            `}</style>
+                        }
                         <Pagination
                             pointing
                             secondary

@@ -7,10 +7,12 @@ import {
   Header,
   Button,
 } from "semantic-ui-react";
+import { useSelector } from "react-redux";
 import { PRICES_FILTER } from '../../helpers/constants';
 import { groupByAlphabet, groupByDecade } from "../../helpers/dataStructure";
 import ActiveTagsVehiculos from "./ActiveTagsVehiculos";
 import ModalFiltersDesk from "./modals/ModalFiltersDesk";
+import { dark, light } from "../../helpers/colors";
 
 const mapArray = (contador = []) => {
   var mapItems = contador.map((item) => {
@@ -154,8 +156,12 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
     insertParam("precio", filters.min_precio + ":" + filters.max_precio);
   };
 
+  const darkMode = useSelector(({ darkMode }) => darkMode.status);
+  const colorText = darkMode === light ? dark : light;
+  const colorTextFilters = darkMode === light ? undefined : light;
+
   return (
-    <Grid.Column style={{ paddingLeft: "3%" }} width={3}>
+    <Grid.Column style={{ paddingLeft: "3%", backgroundColor: darkMode }} width={3}>
       <style>
         {`
           .ui.horizontal.list:not(.celled)>.item:first-child {
@@ -163,13 +169,13 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
           }
         `}
       </style>
-      <Header style={{ margin: 0, fontSize: '1.3rem' }} as="h1">
+      <Header style={{ margin: 0, fontSize: '1.3rem', color: colorText }} as="h1">
         Ficha Técnica
         <span className="d-block">
           {title_page(params.categoria)}
         </span>
       </Header>
-      <Header style={{ marginTop: 15, fontSize: '1.2rem' }} as="h2">
+      <Header style={{ marginTop: 15, fontSize: '1.2rem', color: colorText }} as="h2">
         {contadores.total_records} resultados
       </Header>
       <Container>
@@ -180,7 +186,7 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
           <List.Item>
             <List.Content>
               <List.Header>
-                <Header as="h3" style={{fontSize: '1rem'}}>Tipo de vehiculo</Header>
+                <Header as="h3" style={{ fontSize: '1rem', color: colorText }}>Tipo de vehiculo</Header>
               </List.Header>
               <List.List style={{ paddingLeft: 15 }}>
                 {tipos_vehList.map((item, index) => (
@@ -189,7 +195,7 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
                     as="a"
                     onClick={() => insertParam("tipo", item.id, true)}
                     style={{
-                      color: params.tipo == item.id && "#2185d0",
+                      color: params.tipo == item.id ? "#2185d0" : colorTextFilters,
                     }}
                   >
                     {item.nombre}
@@ -203,7 +209,7 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
           <List.Item>
             <List.Content>
               <List.Header>
-                <Header as="h3" style={{fontSize: '1rem'}}>Marca</Header>
+                <Header as="h3" style={{ fontSize: '1rem', color: colorText }}>Marca</Header>
               </List.Header>
               <List.List style={{ paddingLeft: 15 }}>
                 {mapping_contador(contadores.marca).map((item, index) => (
@@ -212,7 +218,7 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
                     as="a"
                     onClick={() => insertParam("marca", item.label)}
                     style={{
-                      color: params.marca == item.label && "#2185d0",
+                      color: params.marca == item.label ? "#2185d0" : colorTextFilters,
                     }}
                   >
                     {item.label}
@@ -221,6 +227,7 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
                 {handleRenderModal(contadores.marca) && (
                   <List.Item
                     as="a"
+                    style={{ color: colorText }}
                     onClick={() =>
                       openModal("Marcas", contadores.marca, "marca")
                     }
@@ -238,7 +245,7 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
             <List.Item>
               <List.Content>
                 <List.Header>
-                  <Header as="h3" style={{fontSize: '1rem'}}>Modelo</Header>
+                  <Header as="h3" style={{ fontSize: '1rem', color: colorText }}>Modelo</Header>
                 </List.Header>
                 <List.List style={{ paddingLeft: 15 }}>
                   {mapping_contador(contadores.modelo).map((item, index) => (
@@ -247,7 +254,7 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
                       as="a"
                       onClick={() => insertParam("modelo", item.label)}
                       style={{
-                        color: params.modelo == item.label && '#2185d0'
+                        color: params.modelo == item.label ? '#2185d0' : colorTextFilters
                       }}
                     >
                       {item.label}
@@ -256,6 +263,7 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
                   {handleRenderModal(contadores.modelo) && (
                     <List.Item
                       as="a"
+                      style={{ color: colorText }}
                       onClick={() =>
                         openModal("Modelo", contadores.modelo, "modelo")
                       }
@@ -272,7 +280,7 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
           <List.Item>
             <List.Content>
               <List.Header>
-                <Header as="h3" style={{fontSize: '1rem'}}>Tipo de Motor</Header>
+                <Header as="h3" style={{ fontSize: '1rem', color: colorText }}>Tipo de Motor</Header>
               </List.Header>
               <List.List style={{ paddingLeft: 15 }}>
                 {mapping_contador(contadores.combustible).map(
@@ -282,7 +290,7 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
                       as="a"
                       onClick={() => insertParam("combustible", item.label)}
                       style={{
-                        color: params.combustible == item.label && '#2185d0'
+                        color: params.combustible == item.label ? '#2185d0' : colorTextFilters
                       }}
                     >
                       {item.label}
@@ -293,6 +301,7 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
                 {handleRenderModal(contadores.combustible) && (
                   <List.Item
                     as="a"
+                    style={{ color: colorTextFilters }}
                     onClick={() =>
                       openModal(
                         "Tipo de Motor",
@@ -312,7 +321,7 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
           <List.Item>
             <List.Content>
               <List.Header>
-                <Header as="h3" style={{fontSize: '1rem'}}>Transmision</Header>
+                <Header as="h3" style={{ fontSize: '1rem', color: colorText }}>Transmision</Header>
               </List.Header>
               <List.List style={{ paddingLeft: 15 }}>
                 {mapping_contador(contadores.transmision).map((item, index) => (
@@ -321,7 +330,7 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
                     as="a"
                     onClick={() => insertParam("transmision", item.label)}
                     style={{
-                      color: params.transmision == item.label && "#2185d0",
+                      color: params.transmision == item.label ? "#2185d0" : colorTextFilters,
                     }}
                   >
                     {item.label}
@@ -336,7 +345,7 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
             <List.Item style={{ marginBottom: 0 }}>
               <List.Content>
                 <List.Header>
-                  <Header as="h3" style={{fontSize: '1rem'}}>Precio</Header>
+                  <Header as="h3" style={{ fontSize: '1rem', color: colorText }}>Precio</Header>
                 </List.Header>
                 <List.List>
                   {mapArray(PRICES_FILTER).map((item, index) => (
@@ -346,7 +355,7 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
                       style={{
                         textTransform: "capitalize",
                         color:
-                          params.precio == item.slug ? "#2185d0" : undefined,
+                          params.precio == item.slug ? "#2185d0" : colorTextFilters,
                       }}
                       onClick={() => insertParam("precio", item.slug)}
                     >
@@ -355,6 +364,7 @@ export default function SidebarFichas({ params, contadores, vehiculos }) {
                   ))}
                   <List.Item
                     as="a"
+                    style={{ color: colorTextFilters }}
                     onClick={() =>
                       openModal("Precios", [...PRICES_FILTER].splice(5, PRICES_FILTER.length - 1), "precio", true)
                     }

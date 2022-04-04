@@ -8,7 +8,7 @@ interface Props {
 
 export default function TitleCollapsible({ text, open }: Props) {
   return (
-    <Row justify="space-between" align="center" className={styles.title}>
+    <Row justify="space-between" align="center" className={styles.title} style={{ backgroundColor: 'white' }}>
       <Text h3 size={open ? 19 : 14} weight="bolder">
         {text}
       </Text>

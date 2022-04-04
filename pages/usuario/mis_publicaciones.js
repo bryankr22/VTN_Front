@@ -10,6 +10,8 @@ import { AUTH_URL, publicaciones_api } from '../../helpers/constants';
 import { useCookies } from "react-cookie"
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { dark } from '../../helpers/colors';
 
 export default function mis_publicaciones() {
     const [activeIndex, setActiveIndex] = useState(0);
@@ -33,6 +35,8 @@ export default function mis_publicaciones() {
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    const darkMode = useSelector(({ darkMode }) => darkMode.status);
     return (
         <PublicLayout>
             <NextSeo
@@ -51,6 +55,7 @@ export default function mis_publicaciones() {
             <Container style={{ paddingTop: 25 }} text>
                 <Header as="h1">MIS PUBLICACIONES</Header>
                 <Tab
+                    menu={{ inverted: darkMode === dark, color: darkMode }}
                     panes={panes(publicaciones.vehiculos, 0, publicaciones.accesorios, 0)}
                     activeIndex={activeIndex}
                     onTabChange={handleTabChange}

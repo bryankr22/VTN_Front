@@ -7,14 +7,7 @@ export const panes = (data) => {
             menuItem: "VEHÍCULOS",
             render: () => (
                 <Tab.Pane>
-                    <Header as="h1">PUBLICAR VEHÍCULOS</Header>
-                    <p>
-                        Para publicar tu vehículo con VENDETUNAVE se requiere
-                        diligenciar completamente el formulario. Una vez diligenciado
-                        pasará a revisión por parte del soporte técnico, y publicado en
-                        un periodo máximo de 24 horas.
-                    </p>
-                    <VehiculoContainer data={data} />
+
                 </Tab.Pane>
             ),
         },

@@ -12,6 +12,7 @@ import { useLocalStorage } from "../../helpers/hooks/useLocalStorage";
 import { useSelector, useDispatch } from "react-redux";
 import { addFicha } from "../../store/comparadorSlice";
 import HeaderFicha from "../../components/comparadores/HeaderFicha";
+import { dark, light } from "../../helpers/colors";
 export default function ListadoFichasMobile({ vehiculos, totalRecords, page }) {
   const compareList = useSelector(({ comparador }) => comparador.fichas);
   const dispatch = useDispatch();
@@ -89,6 +90,10 @@ export default function ListadoFichasMobile({ vehiculos, totalRecords, page }) {
       setCompare("0");
     }
   }, [compareList]);
+
+  const darkMode = useSelector(({ darkMode }) => darkMode.status);
+  const colorText = darkMode === light ? dark : light;
+
   return (
     <div>
       <style>
@@ -147,6 +152,7 @@ export default function ListadoFichasMobile({ vehiculos, totalRecords, page }) {
                 width: "100%",
                 boxShadow: "0 4px 2px -4px grey",
                 margin: 3,
+                backgroundColor: darkMode
               }}
             >
               <Card.Content style={{ paddingBottom: 20 }}>
@@ -167,7 +173,7 @@ export default function ListadoFichasMobile({ vehiculos, totalRecords, page }) {
                       marginBottom: 10,
                       marginTop: 10,
                       fontSize: 14,
-                      color: "black",
+                      color: colorText,
                       fontWeight: "bold",
                     }}
                   >
@@ -195,7 +201,7 @@ export default function ListadoFichasMobile({ vehiculos, totalRecords, page }) {
                                 fontWeight: 700,
                                 fontSize: 12,
                                 textDecoration: "none",
-                                color: "black",
+                                color: colorText,
                               }}
                             >
                               ${" "}
@@ -223,7 +229,7 @@ export default function ListadoFichasMobile({ vehiculos, totalRecords, page }) {
                                 fontWeight: 700,
                                 fontSize: 12,
                                 textDecoration: "none",
-                                color: "black",
+                                color: colorText,
                               }}
                             >
                               {item.combustibleLabel}
@@ -252,7 +258,7 @@ export default function ListadoFichasMobile({ vehiculos, totalRecords, page }) {
                                 fontWeight: 700,
                                 fontSize: 12,
                                 textDecoration: "none",
-                                color: "black",
+                                color: colorText,
                               }}
                             >
                               {item.year}
@@ -276,7 +282,7 @@ export default function ListadoFichasMobile({ vehiculos, totalRecords, page }) {
                                 fontWeight: 700,
                                 fontSize: 12,
                                 textDecoration: "none",
-                                color: "black",
+                                color: colorText,
                               }}
                             >
                               {new Intl.NumberFormat("de-DE").format(
@@ -308,7 +314,7 @@ export default function ListadoFichasMobile({ vehiculos, totalRecords, page }) {
                                 fontWeight: 700,
                                 fontSize: 12,
                                 textDecoration: "none",
-                                color: "black",
+                                color: colorText,
                               }}
                             >
                               {new Intl.NumberFormat("de-DE").format(
@@ -335,7 +341,7 @@ export default function ListadoFichasMobile({ vehiculos, totalRecords, page }) {
                                 fontWeight: 700,
                                 fontSize: 12,
                                 textDecoration: "none",
-                                color: "black",
+                                color: colorText,
                               }}
                             >
                               {item.transmisionLabel}
@@ -364,7 +370,7 @@ export default function ListadoFichasMobile({ vehiculos, totalRecords, page }) {
                                 fontWeight: 700,
                                 fontSize: 12,
                                 textDecoration: "none",
-                                color: "black",
+                                color: colorText,
                               }}
                             >
                               {new Intl.NumberFormat("de-DE").format(
@@ -403,6 +409,17 @@ export default function ListadoFichasMobile({ vehiculos, totalRecords, page }) {
       )}
       {Math.ceil(totalRecords / 20) > 1 && (
         <Container fluid style={{ textAlign: "center", margin: 25 }}>
+          {darkMode === dark &&
+            <style>{`
+              .ui.secondary.pointing.menu .active.item {
+                color: ${colorText}
+              }
+              .ui.secondary.pointing.menu .item {
+                border-color: ${colorText};
+                color: ${colorText}
+              }
+            `}</style>
+          }
           <Pagination
             pointing
             secondary

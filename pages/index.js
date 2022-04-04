@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import loadable from '@loadable/component';
 
 import PublicLayout from "../layouts/PublicLayout";
@@ -13,8 +13,6 @@ import ContentHome from "../components/home/ContentHome";
 
 import axios from "axios";
 import { API_URL, home } from "../helpers/constants";
-import { Responsive, Button } from "semantic-ui-react";
-import { changeMode } from "../store/darkMode";
 import { dark, light } from "../helpers/colors";
 
 const CategoriasHome = loadable(() => import('../components/home/CategoriasHome'), {
@@ -31,12 +29,7 @@ const Home = ({
   filters,
   config,
 }) => {
-  const dispatch = useDispatch();
   const darkMode = useSelector(({ darkMode }) => darkMode.status);
-  const statusMode = darkMode === dark ? light : dark;
-  const buttonText = darkMode === dark ? 'claro' : 'oscuro';
-  const buttonColor = darkMode === dark ? light : '#484848';
-  const buttonMargin = darkMode === dark ? '-130px' : '-142px';
 
   return (
     <PublicLayout darkMode={darkMode}>
@@ -61,76 +54,6 @@ const Home = ({
           content="vende tu nave, carros en venta, carros de segunda, mercado libre carros, venta de carros usados y nuevos, compra y venta de carros, compra y venta motos, venta de carros"
         />
       </Head>
-      <Responsive {...Responsive.onlyMobile}>
-        <Button.Group
-          vertical
-          labeled
-          icon
-          style={{
-            position: 'fixed',
-            right: buttonMargin,
-            zIndex: 4,
-            cursor: 'pointer',
-            top: '30%'
-          }}
-        >
-          <Button
-            onClick={() => dispatch(changeMode(statusMode))}
-            className="label-buttons"
-            size='small'
-            icon='adjust'
-            content={`modo ${buttonText}`}
-            style={{ backgroundColor: buttonColor, fontFamily: "Montserrat", textTransform: "uppercase" }}
-          />
-        </Button.Group>
-      </Responsive>
-      <Responsive {...Responsive.onlyTablet}>
-        <Button.Group
-          vertical
-          labeled
-          icon
-          style={{
-            position: 'fixed',
-            right: buttonMargin,
-            zIndex: 4,
-            cursor: 'pointer',
-            top: '30%'
-          }}
-        >
-          <Button
-            onClick={() => dispatch(changeMode(statusMode))}
-            className="label-buttons"
-            size='small'
-            icon='adjust'
-            content={`modo ${buttonText}`}
-            style={{ backgroundColor: buttonColor, fontFamily: "Montserrat", textTransform: "uppercase" }}
-          />
-        </Button.Group>
-      </Responsive>
-      <Responsive {...Responsive.onlyComputer}>
-        <Button.Group
-          id="dark-mode-button"
-          vertical
-          labeled
-          icon
-          style={{
-            position: 'fixed',
-            right: buttonMargin,
-            zIndex: 4,
-            cursor: 'pointer',
-            top: '30%'
-          }}
-        >
-          <Button
-            onClick={() => dispatch(changeMode(statusMode))}
-            size='small'
-            className="label-buttons"
-            icon='adjust'
-            content={`modo ${buttonText}`}
-            style={{ backgroundColor: buttonColor, fontFamily: "Montserrat", textTransform: "uppercase" }}
-          />
-        </Button.Group>
-      </Responsive>
       <SliderHome slider={slider} sliderMobile={sliderMobile} />
       <FiltersHome options={filters} />
       <CategoriasHome categorias={categorias} />

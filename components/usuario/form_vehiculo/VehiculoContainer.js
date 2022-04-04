@@ -17,6 +17,7 @@ import axios from "axios";
 
 import { clearForm } from "../../../store/productoSlice";
 import { AUTH_URL } from "../../../helpers/constants";
+import { light } from "../../../helpers/colors";
 
 const isValidForm = (data) => {
   for (let key in data) {
@@ -52,7 +53,7 @@ const isValidForm = (data) => {
   return true;
 };
 
-export default function VehiculoContainer({ data: dataProp, isEdit }) {
+export default function VehiculoContainer({ data: dataProp, isEdit, darkMode }) {
   const dispatch = useDispatch();
   const [cookies] = useCookies(["vtn_token"]);
   const [loading, setLoading] = useState(false);
@@ -225,6 +226,9 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const colorText = darkMode === light ? undefined : light;
+  const colorTextTYC = darkMode === light ? "#828282" : light;
+
   return (
     <Form>
       <Dimmer style={{ position: "fixed" }} active={loading}>
@@ -239,12 +243,12 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
       )}
 
       <Responsive {...Responsive.onlyComputer}>
-        <FirstSection data={dataProp} />
+        <FirstSection darkMode={darkMode} data={dataProp} />
         <Form.Field style={{ marginTop: 20 }}>
-          <label>Agrega una o más fotos (Mínimo 5 fotos)*</label>
-          <SecondSection data={dataProp} />
+          <label style={{ color: colorText }}>Agrega una o más fotos (mínimo 5 en el orden que desees que se muestren en la plataforma)*</label>
+          <SecondSection darkMode={darkMode} data={dataProp} />
         </Form.Field>
-        <ThirdSection data={dataProp} />
+        <ThirdSection darkMode={darkMode} data={dataProp} />
         <Button
           style={{ marginBottom: 10 }}
           color="blue"
@@ -257,19 +261,19 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
         <a
           href="/terminos-y-condiciones"
           target="_blank"
-          style={{ color: "#828282" }}
+          style={{ color: colorTextTYC }}
         >
           Al publicar un aviso, admites y aceptas los Términos y Condiciones de
           VENDETUNAVE.CO
         </a>
       </Responsive>
       <Responsive {...Responsive.onlyMobile}>
-        <FirstSection data={dataProp} isMobile />
+        <FirstSection darkMode={darkMode} data={dataProp} isMobile />
         <Form.Field style={{ marginTop: 20 }}>
-          <label>Agrega una o más fotos (Mínimo 5 fotos)*</label>
-          <SecondSection data={dataProp} isMobile />
+          <label style={{ color: colorText }}>Agrega una o más fotos (mínimo 5 en el orden que desees que se muestren en la plataforma)*</label>
+          <SecondSection darkMode={darkMode} data={dataProp} isMobile />
         </Form.Field>
-        <ThirdSection data={dataProp} isMobile />
+        <ThirdSection darkMode={darkMode} data={dataProp} isMobile />
         <Button
           style={{ marginBottom: 10 }}
           color="blue"
@@ -282,19 +286,19 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
         <a
           href="/terminos-y-condiciones"
           target="_blank"
-          style={{ color: "#828282" }}
+          style={{ color: colorTextTYC }}
         >
           Al publicar un aviso, admites y aceptas los Términos y Condiciones de
           VENDETUNAVE.CO
         </a>
       </Responsive>
       <Responsive {...Responsive.onlyTablet}>
-        <FirstSection data={dataProp} isMobile />
+        <FirstSection darkMode={darkMode} data={dataProp} isMobile />
         <Form.Field style={{ marginTop: 20 }}>
-          <label>Agrega una o más fotos (Mínimo 5 fotos)*</label>
-          <SecondSection data={dataProp} isMobile />
+          <label style={{ color: colorText }}>Agrega una o más fotos (mínimo 5 en el orden que desees que se muestren en la plataforma)*</label>
+          <SecondSection darkMode={darkMode} data={dataProp} isMobile />
         </Form.Field>
-        <ThirdSection data={dataProp} isMobile />
+        <ThirdSection darkMode={darkMode} data={dataProp} isMobile />
         <Button
           style={{ marginBottom: 10 }}
           color="blue"
@@ -307,7 +311,7 @@ export default function VehiculoContainer({ data: dataProp, isEdit }) {
         <a
           href="/terminos-y-condiciones"
           target="_blank"
-          style={{ color: "#828282" }}
+          style={{ color: colorTextTYC }}
         >
           Al publicar un aviso, admites y aceptas los Términos y Condiciones de
           VENDETUNAVE.CO

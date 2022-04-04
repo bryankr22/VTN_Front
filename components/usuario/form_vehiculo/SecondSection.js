@@ -9,6 +9,7 @@ import { AUTH_URL } from "../../../helpers/constants";
 import { setImages } from "../../../store/productoSlice";
 import { useCookies } from "react-cookie";
 import { Message } from "semantic-ui-react";
+import { dark, light } from "../../../helpers/colors";
 
 const customRequest = (cookies, id, update) => {
   return function ({
@@ -80,7 +81,7 @@ const onWarning = (setMessage) => (type, rules) => {
   }
 };
 
-export default function SecondSection({ data: { edit } = {}, maxFiles = 10 }) {
+export default function SecondSection({ data: { edit } = {}, maxFiles = 10, darkMode }) {
   const dispatch = useDispatch();
   const [cookies] = useCookies(["vtn_token"]);
   const [imagesLoaded, setImagesLoaded] = useState({});
@@ -118,9 +119,19 @@ export default function SecondSection({ data: { edit } = {}, maxFiles = 10 }) {
     document.querySelector(".rug-handle-button").innerHTML = "Selecciónalas";
   }, [sources]);
 
+  const colorText = darkMode === light ? dark : light;
+
   return (
     <>
-      <style>{`.error.message { display: block !important; margin: 20px; margin-bottom:10px !important}`}</style>
+      <style>{`
+        .error.message { display: block !important; margin: 20px; margin-bottom:10px !important}
+        .rug-handle-info > div {
+          color: ${colorText}
+        }
+        .rug-handle-info > span {
+          color: ${colorText}
+        }
+      `}</style>
       {message && <Message error content={message} onDismiss={() => setMessage(undefined)} />}
       <RUG
         initialState={sources}

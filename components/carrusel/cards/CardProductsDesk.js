@@ -1,5 +1,8 @@
 import { Card } from "semantic-ui-react";
+import { useSelector } from "react-redux";
 import VehicleThumbnail from '../../VehicleThumbnail';
+import { light } from "../../../helpers/colors";
+
 export default function CardProductsDesk({ item }) {
     const pathS3 = "https://d3bmp4azzreq60.cloudfront.net/fit-in/500x500/vendetunave/images/vehiculos/";
     const normalize = (function () {
@@ -20,6 +23,9 @@ export default function CardProductsDesk({ item }) {
             return ret.join("");
         };
     })();
+
+    const darkMode = useSelector(({ darkMode }) => darkMode.status);
+    const colorText = darkMode === light ? undefined : light;
     return (
         <Card
             as="a"
@@ -41,6 +47,7 @@ export default function CardProductsDesk({ item }) {
                 boxShadow: "none",
                 textDecoration: "none",
                 padding: 10,
+                backgroundColor: darkMode
             }}
         >
             {item.new_image === 0 && (
@@ -62,13 +69,14 @@ export default function CardProductsDesk({ item }) {
                             overflow: "hidden",
                             textOverflow: "ellipsis",
                             display: "block",
+                            color: colorText
                         }}
                     >
                         {item.title}
                     </span>
                 </Card.Meta>
                 <Card.Header>
-                    <span style={{ fontFamily: "Montserrat-Bold" }}>
+                    <span style={{ fontFamily: "Montserrat-Bold", color: colorText }}>
                         $
                         {" " +
                             new Intl.NumberFormat("de-DE").format(item.precio) +
@@ -82,6 +90,7 @@ export default function CardProductsDesk({ item }) {
                         style={{
                             fontFamily: "Montserrat-Regular",
                             fontSize: 14,
+                            color: colorText
                         }}
                     >
                         {item.ano} -{" "}
@@ -97,6 +106,7 @@ export default function CardProductsDesk({ item }) {
                         style={{
                             fontFamily: "Montserrat-Regular",
                             fontSize: 14,
+                            color: colorText
                         }}
                     >
                         {item.labelCiudad}

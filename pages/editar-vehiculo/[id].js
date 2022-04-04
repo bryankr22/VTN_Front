@@ -5,12 +5,13 @@ import jwt from "jsonwebtoken";
 import axios from "axios";
 import { Container } from "semantic-ui-react";
 import { API_URL, AUTH_URL } from "../../helpers/constants";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { setVehicle } from "../../store/productoSlice";
 
 export default function EditVehicle({ data }) {
   const dispatch = useDispatch();
+  const darkMode = useSelector(({ darkMode }) => darkMode.status);
 
   useEffect(() => {
     dispatch(setVehicle(data.edit.vehiculo));
@@ -19,7 +20,7 @@ export default function EditVehicle({ data }) {
   return (
     <PublicLayout>
       <Container style={{ paddingTop: 25 }}>
-        <VehiculoContainer data={data} isEdit />
+        <VehiculoContainer data={data} isEdit darkMode={darkMode} />
       </Container>
     </PublicLayout>
   );

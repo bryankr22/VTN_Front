@@ -22,8 +22,11 @@ import axios from "axios";
 import { AUTH_URL, perfil_api, perfil_update } from "../../helpers/constants";
 import { useCookies } from "react-cookie";
 import jwt from "jsonwebtoken";
+import { useSelector } from 'react-redux';
 
 import { IMAGE_DEFAULT as DEFAULT } from "../../helpers/h-constants";
+import { light } from "../../helpers/colors";
+import PublicLayout from "../../layouts/PublicLayout";
 
 const toBase64 = (file) =>
   new Promise((resolve, reject) => {
@@ -140,8 +143,11 @@ export default function perfil() {
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
   };
+
+  const darkMode = useSelector(({ darkMode }) => darkMode.status);
+  const colorText = darkMode === light ? undefined : light;
   return (
-    <AdminLayout>
+    <PublicLayout>
       <NextSeo
         title="VendeTuNave - Mi cuenta"
         description="Administra tu información personal como usuario de Vende Tu Nave. La cual será utilizada a la hora de publicar o interactuar en la comunidad."
@@ -163,7 +169,12 @@ export default function perfil() {
         <Loader>Actualizando...</Loader>
       </Dimmer>
       <Container style={{ paddingTop: 25 }} text>
-        <Header as="h1">DATOS DE LA CUENTA</Header>
+        <Header as="h1" style={{ color: colorText }}>DATOS DE LA CUENTA</Header>
+        <style>{`
+          .field > label {
+              color: ${colorText} !important;
+          }
+      `}</style>
         {(alert.success || alert.error) && (
           <Message
             success={!!alert.success}
@@ -185,7 +196,7 @@ export default function perfil() {
                 size="medium"
                 circular
                 bordered
-                style={{ height: 210, marginBottom: 20 }}
+                style={{ height: 210, marginBottom: 20, backgroundColor: colorText }}
                 alt="Imagen de perfil"
               />
               <input
@@ -198,7 +209,7 @@ export default function perfil() {
             <Grid.Column width={10}>
               <Form>
                 <Form.Field>
-                  <label>Nombre y Apellido *</label>
+                  <label style={{ color: colorText }}>Nombre y Apellido *</label>
                   <Input
                     name="name"
                     value={usuario.nombre}
@@ -208,7 +219,7 @@ export default function perfil() {
                   />
                 </Form.Field>
                 <Form.Field>
-                  <label>Teléfono</label>
+                  <label style={{ color: colorText }}>Teléfono</label>
                   <Input
                     type="number"
                     name="tel"
@@ -219,7 +230,7 @@ export default function perfil() {
                   />
                 </Form.Field>
                 <Form.Field>
-                  <label>Correo Electrónico</label>
+                  <label style={{ color: colorText }}>Correo Electrónico</label>
                   <Input
                     name="email"
                     disabled
@@ -243,7 +254,7 @@ export default function perfil() {
                   )}
                 </Form.Field>
                 <Form.Field>
-                  <label>Fecha de nacimiento</label>
+                  <label style={{ color: colorText }}>Fecha de nacimiento</label>
                   <Input
                     value={usuario.fecha_nacimiento}
                     name="fecha"
@@ -272,7 +283,7 @@ export default function perfil() {
                 size="medium"
                 circular
                 bordered
-                style={{ height: 290, marginBottom: 20 }}
+                style={{ height: 290, marginBottom: 20, backgroundColor: colorText }}
                 alt="Imagen de perfil"
               />
               <input
@@ -284,7 +295,7 @@ export default function perfil() {
               />
               <Form>
                 <Form.Field>
-                  <label>Nombre y Apellido *</label>
+                  <label style={{ color: colorText }}>Nombre y Apellido *</label>
                   <Input
                     value={usuario.nombre}
                     name="name"
@@ -294,7 +305,7 @@ export default function perfil() {
                   />
                 </Form.Field>
                 <Form.Field>
-                  <label>Teléfono</label>
+                  <label style={{ color: colorText }}>Teléfono</label>
                   <Input
                     value={usuario.telefono}
                     type="number"
@@ -305,7 +316,7 @@ export default function perfil() {
                   />
                 </Form.Field>
                 <Form.Field>
-                  <label>Correo Electrónico</label>
+                  <label style={{ color: colorText }}>Correo Electrónico</label>
                   <Input
                     value={usuario.email}
                     name="email"
@@ -329,7 +340,7 @@ export default function perfil() {
                   )}
                 </Form.Field>
                 <Form.Field>
-                  <label>Fecha de nacimiento</label>
+                  <label style={{ color: colorText }}>Fecha de nacimiento</label>
                   <Input
                     value={usuario.fecha_nacimiento}
                     onChange={(e, { value }) =>
@@ -357,7 +368,7 @@ export default function perfil() {
                 size="medium"
                 circular
                 bordered
-                style={{ height: 290, marginBottom: 20 }}
+                style={{ height: 290, marginBottom: 20, backgroundColor: colorText }}
                 alt="Imagen de perfil"
               />
               <input
@@ -369,7 +380,7 @@ export default function perfil() {
               />
               <Form>
                 <Form.Field>
-                  <label>Nombre y Apellido *</label>
+                  <label style={{ color: colorText }}>Nombre y Apellido *</label>
                   <Input
                     value={usuario.nombre}
                     name="name"
@@ -379,7 +390,7 @@ export default function perfil() {
                   />
                 </Form.Field>
                 <Form.Field>
-                  <label>Teléfono</label>
+                  <label style={{ color: colorText }}>Teléfono</label>
                   <Input
                     value={usuario.telefono}
                     type="number"
@@ -390,7 +401,7 @@ export default function perfil() {
                   />
                 </Form.Field>
                 <Form.Field>
-                  <label>Correo Electrónico</label>
+                  <label style={{ color: colorText }}>Correo Electrónico</label>
                   <Input
                     value={usuario.email}
                     name="email"
@@ -414,7 +425,7 @@ export default function perfil() {
                   )}
                 </Form.Field>
                 <Form.Field>
-                  <label>Fecha de nacimiento</label>
+                  <label style={{ color: colorText }}>Fecha de nacimiento</label>
                   <Input
                     onChange={(e, { value }) =>
                       setUsuario({ ...usuario, fecha_nacimiento: value })
@@ -429,10 +440,10 @@ export default function perfil() {
             </Grid.Column>
           </Grid>
         </Responsive>
-        <Header as="h2">CAMBIO DE CONTRASEÑA</Header>
+        <Header as="h2" style={{ color: colorText }}>CAMBIO DE CONTRASEÑA</Header>
         <Form>
           <Form.Field>
-            <label>
+            <label style={{ color: colorText }}>
               Contraseña actual (déjala en blanco para que no haya cambios)
             </label>
             <Input
@@ -444,7 +455,7 @@ export default function perfil() {
             />
           </Form.Field>
           <Form.Field>
-            <label>
+            <label style={{ color: colorText }}>
               Nueva contraseña (déjala en blanco para que no haya cambios)
             </label>
             <Input
@@ -456,7 +467,7 @@ export default function perfil() {
             />
           </Form.Field>
           <Form.Field>
-            <label>Confirmar nueva contraseña</label>
+            <label style={{ color: colorText }}>Confirmar nueva contraseña</label>
             <Input
               type="password"
               name="confirmPassNew"
@@ -474,7 +485,7 @@ export default function perfil() {
           GUARDAR CAMBIOS
         </Button>
       </Container>
-    </AdminLayout>
+    </PublicLayout>
   );
 }
 perfil.getInitialProps = authInitialProps();

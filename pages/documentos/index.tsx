@@ -8,6 +8,7 @@ import {
   Text,
   Modal,
 } from "@nextui-org/react";
+import { useSelector } from "react-redux";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { GeneralData, RequestForm } from "../../components/Documents";
@@ -17,6 +18,8 @@ import { API_URL } from "../../helpers/constants";
 import { useState } from "react";
 import { NextSeo } from "next-seo";
 import { PropertyCard } from "../../components/Documents/PropertyCard";
+import { iOS } from "@helpers/responsive.helper";
+import { light } from "@helpers/colors";
 
 const desc =
   "Genera o descarga gratuitamente los documentos para hacer el traspaso de tu carro o moto (contrato de compraventa, contrato de mandato y documento para solicitar el trámite) Validos por el RUNT y secretaria de tránsito.";
@@ -29,6 +32,10 @@ export default function Documents({ data }: any) {
   const closeHandler = () => setVisible(false);
 
   const downLoadEmptyFile = () => {
+    if (iOS()) {
+      window.open(API_URL.substring(0, API_URL.length - 3) + 'FUNT.pdf', '_blank');
+      return;
+    }
     if (navigator.userAgent.includes("Instagram")) {
       window.location.replace(
         `https://api.vendetunave.co/api/in-app-browser/FUNT`
@@ -64,6 +71,9 @@ export default function Documents({ data }: any) {
   useEffect(() => {
     if (navigator.userAgent.includes("Instagram")) setVisible(true);
   }, []);
+
+  const darkMode = useSelector(({ darkMode }: any) => darkMode.status);
+  const colorText = darkMode === light ? undefined : light;
 
   return (
     <>
@@ -109,44 +119,44 @@ export default function Documents({ data }: any) {
         </Modal>
         <Container>
           <Spacer y={2} />
-          <Text h3 weight="bolder">
+          <Text style={{ color: colorText }} h3 weight="bolder">
             Documentos
           </Text>
           <Spacer y={1} />
-          <Text h1 weight="bolder">
+          <Text style={{ color: colorText }} h1 weight="bolder">
             3 pasos para hacer el traspaso de tu vehículo en Colombia
           </Text>
           <Spacer y={0.5} />
-          <Text p className="text-justify">
+          <Text style={{ color: colorText }} p className="text-justify">
             En Vende Tu Nave nuestro servicio va más allá de la simple venta,
             por eso, te enseñamos{" "}
-            <Text span weight="bolder">
+            <Text style={{ color: colorText }} span weight="bolder">
               como hacer la documentación gratuitamente
             </Text>{" "}
             a la hora de comprar o vender tu vehículo, sea carro, camioneta,
             moto etc. Para realizar el traspaso de propietario de un vehículo,
             necesitaremos llenar estos 3 documentos:{" "}
-            <Text span weight="bolder">
+            <Text style={{ color: colorText }} span weight="bolder">
               Contrato de Compra Venta, Contrato de Mandato y Formulario de
               Solicitud de Tramite.
             </Text>
           </Text>
-          <PropertyCard />
+          <PropertyCard colorText={colorText} />
           <Spacer y={1} />
-          <Text h2 weight="bolder">
+          <Text style={{ color: colorText }} h2 weight="bolder">
             Contrato de Compraventa
           </Text>
           <Spacer y={0.5} />
-          <Text p className="text-justify">
+          <Text style={{ color: colorText }} p className="text-justify">
             El contrato de compra venta o promesa de compraventa, es el
             documento en donde el{" "}
-            <Text span weight="bolder">
+            <Text style={{ color: colorText }} span weight="bolder">
               Vendedor (Propietario) y Comprador
             </Text>{" "}
             acuerdan la venta del vehículo, con sus condiciones, precio,
             acuerdos etc. Para llenar este documento necesitaremos toda la
             información del vehículo la cual se encuentra en el RUNT{" "}
-            <Text span weight="bolder">
+            <Text style={{ color: colorText }} span weight="bolder">
               <Link
                 color
                 href="https://www.runt.com.co/ciudadano/consulta-placa"
@@ -159,23 +169,23 @@ export default function Documents({ data }: any) {
           </Text>
           <GeneralData data={data} />
           <Spacer y={1} />
-          <Text h2 weight="bolder">
+          <Text style={{ color: colorText }} h2 weight="bolder">
             Contrato de Mandato
           </Text>
           <Spacer y={0.5} />
-          <Text p className="text-justify">
+          <Text style={{ color: colorText }} p className="text-justify">
             Por otro lado, tenemos el Contrato de Mandato, en donde el Vendedor
             (Propietario del vehículo){" "}
-            <Text weight="bolder" span>
+            <Text style={{ color: colorText }} weight="bolder" span>
               autoriza para que otra persona (Mandatario)
             </Text>{" "}
             haga el trámite de venta por él (lleve los papeles al tránsito).
             Este{" "}
-            <Text weight="bolder" span>
+            <Text style={{ color: colorText }} weight="bolder" span>
               documento únicamente aplica
             </Text>{" "}
             en el caso de que el propietario del vehículo (Vendedor/ Mandante){" "}
-            <Text weight="bolder" span>
+            <Text style={{ color: colorText }} weight="bolder" span>
               no desee él mismo realizar la radicación del tramite
             </Text>{" "}
             en la secretaria de tránsito, y sea realizado por un tercero
@@ -183,19 +193,19 @@ export default function Documents({ data }: any) {
           </Text>
           <RequestForm data={data} />
           <Spacer y={1} />
-          <Text h2 weight="bolder">
+          <Text style={{ color: colorText }} h2 weight="bolder">
             Formulario de Solicitud de Tramite Del Registro Nacional Automotor
           </Text>
           <Spacer y={0.5} />
-          <Text p className="text-justify">
+          <Text style={{ color: colorText }} p className="text-justify">
             Finalmente, El documento de Solicitud de Tramite debe ser impreso,
             diligenciado correctamente (puede{" "}
-            <Text weight="bolder" span>
+            <Text style={{ color: colorText }} weight="bolder" span>
               ayudarse con la información del RUNT
             </Text>{" "}
             o tarjeta de propiedad) y firmado por vendedor y el comprador.
             Posteriormente,{" "}
-            <Text weight="bolder" span>
+            <Text style={{ color: colorText }} weight="bolder" span>
               ser radicado ante la secretaria de tránsito por el propietario o
               mandatario.
             </Text>{" "}
@@ -203,21 +213,21 @@ export default function Documents({ data }: any) {
             traspaso, cambio de color, duplicados etc.
           </Text>
           <Spacer y={0.5} />
-          <Text p className="text-justify">
+          <Text style={{ color: colorText }} p className="text-justify">
             Nota: Se recomiendan autenticar estos 3 documentos en una notaría,
             deben ir acompañados de las improntas del vehículo,{" "}
-            <Text weight="bolder" span>
+            <Text style={{ color: colorText }} weight="bolder" span>
               fotocopia de la tarjeta de propiedad actual
             </Text>{" "}
             y las fotocopias de las cédulas del vendedor como el comprador.
           </Text>
           <Spacer y={0.5} />
-          <Text p className="text-justify">
+          <Text style={{ color: colorText }} p className="text-justify">
             Es importante que el vehículo se encuentre al día de multas e
             impuestos para realizar cualquier tipo de trámite.
           </Text>
           <Spacer y={0.5} />
-          <Text p className="text-justify">
+          <Text style={{ color: colorText }} p className="text-justify">
             Consulta acá el estado:
           </Text>
           <Link

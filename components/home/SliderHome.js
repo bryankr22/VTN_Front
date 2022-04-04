@@ -18,15 +18,17 @@ export default function SliderHome({ slider, sliderMobile }) {
     <div>
       <Responsive className="banner-home" {...Responsive?.onlyComputer}>
         <div style={{ width: '100%', position: 'relative', height: 500 }}>
-          <Image
-            layout="fill"
-            src={slider?.[0]?.url.replace(
-              "https://vendetunave.s3.amazonaws.com",
-              `https://d3bmp4azzreq60.cloudfront.net/fit-in/1100x1100`
-            )}
-            className="bg-black"
-            alt={"banner"}
-          />
+          {slider?.[0]?.url &&
+            <Image
+              layout="fill"
+              src={slider?.[0]?.url.replace(
+                "https://vendetunave.s3.amazonaws.com",
+                `https://d3bmp4azzreq60.cloudfront.net/fit-in/1100x1100`
+              )}
+              className="bg-black"
+              alt={"banner"}
+            />
+          }
         </div>
       </Responsive>
       <Responsive className="banner-home" {...Responsive?.onlyMobile}>

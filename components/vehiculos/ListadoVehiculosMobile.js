@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
-import { Image, Card, Button, Container, Pagination } from "semantic-ui-react";
+import { Label, Card, Button, Container, Pagination } from "semantic-ui-react";
 import HeaderVehiculo from "../../components/comparadores/HeaderVehiculo";
 import { useLocalStorage } from "../../helpers/hooks/useLocalStorage";
 import { useSelector, useDispatch } from "react-redux";
 import { addVehiculo } from "../../store/comparadorSlice";
 import dynamic from "next/dynamic";
 import VehicleThumbnail from '../VehicleThumbnail';
+import { dark, light } from "../../helpers/colors";
 const ZoneAd = dynamic(() => import("../ZoneAd"));
 
 export default function ListadoVehiculosMobile({
@@ -81,10 +82,25 @@ export default function ListadoVehiculosMobile({
         }
     }, [compareList]);
 
+    const darkMode = useSelector(({ darkMode }) => darkMode.status);
+    const colorText = darkMode === light ? undefined : light;
+    const colorBorder = darkMode === light ? "#d4d4d5" : "#414141";
+
     return (
         <>
             <HeaderVehiculo />
             <ZoneAd slug={params.categoria} />
+            <style>{`
+                .ui.card, .ui.cards>.card {
+                -webkit-box-shadow: 0 1px 3px 0 ${colorBorder}, 0 0 0 1px ${colorBorder};
+                box-shadow: 0 1px 3px 0 ${colorBorder}, 0 0 0 1px ${colorBorder};
+                }
+                
+                .label-premium {
+                background-color: rgb(198, 168, 29) !important;
+                border-color: #78621c !important;
+                }
+            `}</style>
             {vehiculos.length === 0 && (
                 <p
                     style={{
@@ -125,8 +141,20 @@ export default function ListadoVehiculosMobile({
                                 marginRight: 6,
                                 marginLeft: 6,
                                 textDecoration: "none",
+                                backgroundColor: darkMode
                             }}
                         >
+                            {item.premium === 1 &&
+                                <Label as='a' size="mini" className="label-premium" ribbon style={{
+                                    position: 'absolute',
+                                    zIndex: 10,
+                                    marginLeft: 14,
+                                    marginTop: 5,
+                                    color: light
+                                }}>
+                                    Premium
+                                </Label>
+                            }
                             <VehicleThumbnail item={item} src={pathS3 + item.nameImage + "300x300.webp"} />
                             <Card.Content>
                                 <Card.Description
@@ -135,18 +163,19 @@ export default function ListadoVehiculosMobile({
                                         overflow: "hidden",
                                         textOverflow: "ellipsis",
                                         marginBottom: 7,
+                                        color: colorText
                                     }}
                                 >
                                     {item.title}
                                 </Card.Description>
-                                <Card.Header>
+                                <Card.Header style={{ color: colorText }}>
                                     $ {new Intl.NumberFormat("de-DE").format(item.precio)} COP
                                 </Card.Header>
-                                <Card.Description>
+                                <Card.Description style={{ color: colorText }}>
                                     {item.ano} -{" "}
                                     {new Intl.NumberFormat("de-DE").format(item.kilometraje)} KM
                                 </Card.Description>
-                                <Card.Description>
+                                <Card.Description style={{ color: colorText }}>
                                     {item.labelCiudad.toLowerCase().charAt(0).toUpperCase() +
                                         item.labelCiudad.toLowerCase().slice(1)}
                                     {compare === 1 &&
@@ -173,6 +202,17 @@ export default function ListadoVehiculosMobile({
             )}
             {Math.ceil(totalRecords / 20) > 1 && (
                 <Container fluid style={{ textAlign: "center", margin: 25 }}>
+                    {darkMode === dark &&
+                        <style>{`
+                            .ui.secondary.pointing.menu .active.item {
+                                color: ${colorText}
+                            }
+                            .ui.secondary.pointing.menu .item {
+                                border-color: ${colorText};
+                                color: ${colorText}
+                            }
+                        `}</style>
+                    }
                     <Pagination
                         pointing
                         secondary

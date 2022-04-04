@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addFicha } from '../../../store/comparadorSlice';
 import { AUTH_URL, favoritos_add } from '../../../helpers/constants';
 import jwt from 'jsonwebtoken';
+import { dark, light } from '../../../helpers/colors';
 export default function detalle({ data }) {
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
@@ -50,6 +51,10 @@ export default function detalle({ data }) {
             router.push('/usuario/favoritos');
         })
     }
+
+    const darkMode = useSelector(({ darkMode }) => darkMode.status);
+    const colorText = darkMode === light ? dark : light;
+    const colorTextIcon = darkMode === light ? '#5c5c5c' : light;
     return (
         <PublicLayout>
             <NextSeo
@@ -116,12 +121,17 @@ export default function detalle({ data }) {
                 }
             `}
             </style>
-            <div style={{ display: 'inline-block', float: 'right', marginRight: 40, fontSize: 18, color: '#5c5c5c', marginBottom: 10 }}>
+            <div style={{ display: 'inline-block', float: 'right', marginRight: 40, fontSize: 18, color: colorTextIcon, marginBottom: 10, backgroundColor: darkMode }}>
                 <Icon name="eye" style={{ marginRight: 5 }} />
                 <p style={{ display: 'inline' }}>{new Intl.NumberFormat("de-DE").format(data.views)}</p>
             </div>
             {data.imagenes.length > 0 && (
-                <div style={{ marginTop: 20 }}>
+                <div style={{ marginTop: 20, backgroundColor: darkMode }}>
+                    <style>{`
+                        .carousel .slide {
+                            background-color: ${darkMode}
+                        }
+                    `}</style>
                     <Responsive minWidth={100} maxWidth={320}>
                         <style>
                             {`
@@ -184,7 +194,7 @@ export default function detalle({ data }) {
                             />
                         </Container>
                     </Responsive>
-                    <Header as="h1" textAlign="left" style={{ marginTop: 25, marginBottom: 10, marginLeft: 10 }}>
+                    <Header as="h1" textAlign="left" style={{ marginTop: 25, marginBottom: 10, marginLeft: 10, color: colorText }}>
                         {data.vehicle.title}
                     </Header>
                     <TableDescription data={data} />
@@ -208,11 +218,34 @@ export default function detalle({ data }) {
                             <Header as="h4" style={{ marginTop: 20, marginLeft: 15 }}>
                                 PRODUCTOS RELACIONADOS
                             </Header>
-                            <CarruselRelacionados
-                                type='products'
-                                data={data.vehiculosRelacionados}
-                                numberCards={1}
-                            />
+                            <Responsive minWidth={100} maxWidth={320}>
+                                <CarruselRelacionados
+                                    type='products'
+                                    data={data.vehiculosRelacionados}
+                                    numberCards={1}
+                                />
+                            </Responsive>
+                            <Responsive {...Responsive.onlyMobile}>
+                                <CarruselRelacionados
+                                    type='products'
+                                    data={data.vehiculosRelacionados}
+                                    numberCards={1}
+                                />
+                            </Responsive>
+                            <Responsive {...Responsive.onlyTablet}>
+                                <CarruselRelacionados
+                                    type='products'
+                                    data={data.vehiculosRelacionados}
+                                    numberCards={2}
+                                />
+                            </Responsive>
+                            <Responsive {...Responsive.onlyComputer}>
+                                <CarruselRelacionados
+                                    type='products'
+                                    data={data.vehiculosRelacionados}
+                                    numberCards={4}
+                                />
+                            </Responsive>
                         </Container>
                     )}
                 </div>

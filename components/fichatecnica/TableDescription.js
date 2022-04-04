@@ -1,11 +1,17 @@
-import { Fragment } from 'react'
+import { Fragment } from 'react';
+import { useSelector } from 'react-redux';
 import { Grid, Header, Icon } from "semantic-ui-react";
+import { dark, light } from '../../helpers/colors';
 
 export default function TableDescription({ data }) {
+
+    const darkMode = useSelector(({ darkMode }) => darkMode.status);
+    const colorText = darkMode === light ? dark : light;
+    const colorTextData = darkMode === light ? undefined : light;
     return (
         <Grid columns="equal">
-            <Grid.Column width={16} style={{ padding: "30px 10px 15px 30px" }}>
-                <Header as="h2" style={{ marginTop: 20, textAlign: 'left' }}>
+            <Grid.Column width={16} style={{ padding: "30px 10px 15px 30px" }} >
+                <Header as="h2" style={{ marginTop: 20, textAlign: 'left', color: colorText }}>
                     CARACTERÍSTICAS
                 </Header>
                 <Grid divided="vertically">
@@ -19,6 +25,7 @@ export default function TableDescription({ data }) {
                                     display: "inline-block",
                                     fontWeight: 700,
                                     fontSize: 14,
+                                    color: colorTextData
                                 }}
                             >
                                 {data.vehicle.marcaLabel}
@@ -33,6 +40,7 @@ export default function TableDescription({ data }) {
                                     display: "inline-block",
                                     fontWeight: 700,
                                     fontSize: 14,
+                                    color: colorTextData
                                 }}
                             >
                                 {data.vehicle.modeloLabel}
@@ -49,6 +57,7 @@ export default function TableDescription({ data }) {
                                     display: "inline-block",
                                     fontWeight: 700,
                                     fontSize: 14,
+                                    color: colorTextData
                                 }}
                             >
                                 {data.vehicle.type}
@@ -63,6 +72,7 @@ export default function TableDescription({ data }) {
                                     display: "inline-block",
                                     fontWeight: 700,
                                     fontSize: 14,
+                                    color: colorTextData
                                 }}
                             >
                                 {data.vehicle.title}
@@ -79,6 +89,7 @@ export default function TableDescription({ data }) {
                                     display: "inline-block",
                                     fontWeight: 700,
                                     fontSize: 14,
+                                    color: colorTextData
                                 }}
                             >
                                 $ {new Intl.NumberFormat("de-DE").format(data.vehicle.price)} COP
@@ -93,6 +104,7 @@ export default function TableDescription({ data }) {
                                     display: "inline-block",
                                     fontWeight: 700,
                                     fontSize: 14,
+                                    color: colorTextData
                                 }}
                             >
                                 {data.vehicle.year}
@@ -109,6 +121,7 @@ export default function TableDescription({ data }) {
                                     display: "inline-block",
                                     fontWeight: 700,
                                     fontSize: 14,
+                                    color: colorTextData
                                 }}
                             >
                                 {new Intl.NumberFormat("de-DE").format(data.vehicle.engine)} C.C.
@@ -123,6 +136,7 @@ export default function TableDescription({ data }) {
                                     display: "inline-block",
                                     fontWeight: 700,
                                     fontSize: 14,
+                                    color: colorTextData
                                 }}
                             >
                                 {new Intl.NumberFormat("de-DE").format(data.vehicle.power)} HP
@@ -139,6 +153,7 @@ export default function TableDescription({ data }) {
                                     display: "inline-block",
                                     fontWeight: 700,
                                     fontSize: 14,
+                                    color: colorTextData
                                 }}
                             >
                                 {new Intl.NumberFormat("de-DE").format(data.vehicle.torque)} NM
@@ -153,6 +168,7 @@ export default function TableDescription({ data }) {
                                     display: "inline-block",
                                     fontWeight: 700,
                                     fontSize: 14,
+                                    color: colorTextData
                                 }}
                             >
                                 {data.vehicle.traction}
@@ -169,6 +185,7 @@ export default function TableDescription({ data }) {
                                     display: "inline-block",
                                     fontWeight: 700,
                                     fontSize: 14,
+                                    color: colorTextData
                                 }}
                             >
                                 {data.vehicle.combustibleLabel}
@@ -183,6 +200,7 @@ export default function TableDescription({ data }) {
                                     display: "inline-block",
                                     fontWeight: 700,
                                     fontSize: 14,
+                                    color: colorTextData
                                 }}
                             >
                                 {data.vehicle.transmisionLabel}
@@ -199,6 +217,7 @@ export default function TableDescription({ data }) {
                                     display: "inline-block",
                                     fontWeight: 700,
                                     fontSize: 14,
+                                    color: colorTextData
                                 }}
                             >
                                 {new Intl.NumberFormat("de-DE").format(data.vehicle.autonomy)} Km
@@ -213,6 +232,7 @@ export default function TableDescription({ data }) {
                                     display: "inline-block",
                                     fontWeight: 700,
                                     fontSize: 14,
+                                    color: colorTextData
                                 }}
                             >
                                 {data.vehicle.performance} Km por Galón
@@ -229,6 +249,7 @@ export default function TableDescription({ data }) {
                                     display: "inline-block",
                                     fontWeight: 700,
                                     fontSize: 14,
+                                    color: colorTextData
                                 }}
                             >
                                 {data.vehicle.security === 0 &&
@@ -296,6 +317,7 @@ export default function TableDescription({ data }) {
                                     display: "inline-block",
                                     fontWeight: 700,
                                     fontSize: 14,
+                                    color: colorTextData
                                 }}
                             >
                                 {data.vehicle.airbags}
@@ -312,6 +334,7 @@ export default function TableDescription({ data }) {
                                     display: "inline-block",
                                     fontWeight: 700,
                                     fontSize: 14,
+                                    color: colorTextData
                                 }}
                             >
                                 {data.vehicle.wheels}
@@ -326,6 +349,7 @@ export default function TableDescription({ data }) {
                                     display: "inline-block",
                                     fontWeight: 700,
                                     fontSize: 14,
+                                    color: colorTextData
                                 }}
                             >
                                 {data.vehicle.cushions}
@@ -342,6 +366,7 @@ export default function TableDescription({ data }) {
                                     display: "inline-block",
                                     fontWeight: 700,
                                     fontSize: 14,
+                                    color: colorTextData
                                 }}
                             >
                                 {new Intl.NumberFormat("de-DE").format(data.vehicle.trunk)} L
@@ -356,6 +381,7 @@ export default function TableDescription({ data }) {
                                     display: "inline-block",
                                     fontWeight: 700,
                                     fontSize: 14,
+                                    color: colorTextData
                                 }}
                             >
                                 {new Intl.NumberFormat("de-DE").format(data.vehicle.weight)} K
@@ -373,6 +399,7 @@ export default function TableDescription({ data }) {
                                         display: "inline-block",
                                         fontWeight: 700,
                                         fontSize: 14,
+                                        color: colorTextData
                                     }}
                                 >
                                     {data.vehicle.fuel_type}
@@ -381,10 +408,10 @@ export default function TableDescription({ data }) {
                         }
                     </Grid.Row>
                 </Grid>
-                <Header as="h3" icon>
+                <Header as="h3" icon style={{ color: colorTextData }}>
                     DESCRIPCIÓN
                 </Header>
-                <p style={{ fontSize: 14 }}>{data.vehicle.description}</p>
+                <p style={{ fontSize: 14, color: colorTextData }}>{data.vehicle.description}</p>
             </Grid.Column>
         </Grid>
     )
