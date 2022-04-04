@@ -55,6 +55,7 @@ const PickAndPlate = () => {
                 }}>
                     <Typography component='div' sx={{
                         ml: 1,
+                        mr: '2px',
                         whiteSpace: 'nowrap',
                         p: 0.6,
                         letterSpacing: 2,
