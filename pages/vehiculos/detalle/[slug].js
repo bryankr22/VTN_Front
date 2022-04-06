@@ -66,6 +66,17 @@ export default function detalle({ data }) {
   const darkMode = useSelector(({ darkMode }) => darkMode.status);
   const colorText = darkMode === light ? undefined : light;
   const colorMargin = darkMode === light ? dark : light;
+  const path = '/vehiculos';
+  let linkCategory = '';
+  let linkType = '';
+  let linkMark = '';
+  let linkModel = '';
+  if (data.vehicleExists) {
+    linkCategory += `?categoria=${data.vehiculo.tipoLabel.replace('Carros y camionetas', 'carros').replace('Carros de colección', 'carros_coleccion').toLowerCase()}`;
+    linkType += data.vehiculo.tipoMotoLabel ? `&tipo=${data.vehiculo.tipoMotoLabel}` : '';
+    linkMark += `&marca=${data.vehiculo.marcaLabel}`;
+    linkModel += `&modelo=${data.vehiculo.modeloLabel}`;
+  }
   return (
     <>
       {data.vehicleExists &&
@@ -219,24 +230,24 @@ export default function detalle({ data }) {
                   zIndex: 1000,
                 }}
               >
-                <Breadcrumb.Section style={{ color: colorText }} link href={"/vehiculos/"}>
+                <Breadcrumb.Section style={{ color: colorText }} link href={`${path}${linkCategory}`}>
                   {data.vehiculo.tipoLabel}
                 </Breadcrumb.Section>
                 <Breadcrumb.Divider style={{ color: colorText }} icon="right angle" />
 
                 {data.vehiculo.tipoMotoLabel && (
                   <Fragment>
-                    <Breadcrumb.Section style={{ color: colorText }} link href={"/vehiculos/"}>
+                    <Breadcrumb.Section style={{ color: colorText }} link href={`${path}${linkCategory}${linkType}`}>
                       {data.vehiculo.tipoMotoLabel}
                     </Breadcrumb.Section>
                     <Breadcrumb.Divider style={{ color: colorText }} icon="right angle" />
                   </Fragment>
                 )}
-                <Breadcrumb.Section style={{ color: colorText }} link href={"/vehiculos/"}>
+                <Breadcrumb.Section style={{ color: colorText }} link href={`${path}${linkCategory}${linkType}${linkMark}`}>
                   {data.vehiculo.marcaLabel}
                 </Breadcrumb.Section>
                 <Breadcrumb.Divider style={{ color: colorText }} icon="right angle" />
-                <Breadcrumb.Section style={{ color: colorText }} link href={"/vehiculos/"}>
+                <Breadcrumb.Section style={{ color: colorText }} link href={`${path}${linkCategory}${linkType}${linkMark}${linkModel}`}>
                   {data.vehiculo.modeloLabel}
                 </Breadcrumb.Section>
               </Breadcrumb>
