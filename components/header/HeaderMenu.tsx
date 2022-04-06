@@ -1,13 +1,15 @@
-import { Button, Collapse, Fade, List, ListItemButton, ListItemText, Menu, MenuItem, Stack, SxProps } from '@mui/material'
+import { Button, Collapse, Fade, List, ListItemButton, ListItemText, Menu, MenuItem, MenuItemProps, Stack, SxProps } from '@mui/material'
 import ExpandLessIcon from '@mui/icons-material/ExpandLess'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { MouseEvent, useState } from 'react'
+import { forwardRef, MouseEvent, useMemo, useState } from 'react'
 import { VTNMenu } from './common'
+import NextLink, { LinkProps } from 'next/link'
 
 const DesktopMenu = ({ menu }: { menu: VTNMenu }) => {
     const menuItemStyle: SxProps = {
         color: 'white',
         letterSpacing: 2,
+        textTransform: 'uppercase',
         "&:hover": {
             color: 'white'
         },
@@ -62,20 +64,32 @@ const DesktopMenu = ({ menu }: { menu: VTNMenu }) => {
                             {menuItem.submenu.map((menuItem, index) => {
                                 return <MenuItem
                                     key={menuItem.label + index}
-                                    component='a'
-                                    href={menuItem.link}
                                     onClick={handleClose}
                                     sx={{
                                         py: 2,
                                         borderBottom: '1px solid rgb(255 255 255 / 10%)',
                                         color: 'white',
+                                        textTransform: 'uppercase',
                                         '&:hover': {
                                             backgroundColor: 'black',
                                             color: 'white'
                                         }
                                     }}
                                 >
-                                    {menuItem.label}
+                                    <NextLink
+                                        href={{
+                                            pathname: menuItem.link,
+                                            query: menuItem.query
+                                        }}>
+                                        <a
+                                            style={{
+                                                textDecoration: 'none',
+                                                color: 'white'
+                                            }}
+                                        >
+                                            {menuItem.label}
+                                        </a>
+                                    </NextLink>
                                 </MenuItem>
                             })}
                         </Menu>
@@ -102,6 +116,7 @@ const MobileMenu = ({ menu, opened }: { menu: VTNMenu, opened: boolean }) => {
                     if (menuItem.link) {
                         return <ListItemButton
                             sx={{
+                                textTransform: 'uppercase',
                                 '&:hover': {
                                     backgroundColor: 'black',
                                     color: 'white'
@@ -122,7 +137,7 @@ const MobileMenu = ({ menu, opened }: { menu: VTNMenu, opened: boolean }) => {
 
                         return <>
                             <ListItemButton onClick={handleClick}>
-                                <ListItemText primary={menuItem.label} />
+                                <ListItemText sx={{ textTransform: 'uppercase' }} primary={menuItem.label} />
                                 {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
                             </ListItemButton>
                             <Collapse in={open} timeout="auto" unmountOnExit>
@@ -131,6 +146,7 @@ const MobileMenu = ({ menu, opened }: { menu: VTNMenu, opened: boolean }) => {
                                         return <ListItemButton
                                             sx={{
                                                 pl: 4,
+                                                textTransform: 'uppercase',
                                                 borderBottom: '1px solid rgb(255 255 255 / 10%)',
                                                 '&:hover': {
                                                     backgroundColor: 'black',
@@ -138,10 +154,13 @@ const MobileMenu = ({ menu, opened }: { menu: VTNMenu, opened: boolean }) => {
                                                 }
                                             }}
                                             key={menuItem.label + index + '_submenu'}
-                                            component='a'
-                                            href={menuItem.link}
                                         >
-                                            <ListItemText primary={menuItem.label} />
+                                            <NextLink href={{
+                                                pathname: menuItem.link,
+                                                query: menuItem.query
+                                            }}>
+                                                <ListItemText primary={menuItem.label} />
+                                            </NextLink>
                                         </ListItemButton>
                                     })}
                                 </List>
