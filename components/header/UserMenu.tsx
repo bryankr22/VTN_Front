@@ -74,7 +74,7 @@ const UserMenu = ({ menu }: { menu: VTNUserMenu }) => {
 
     return (
         <>
-            {isUserLogged() ? <><IconButton
+            {isUserLogged() ? <>{/* <IconButton
                 onClick={handleOpenMenu}
                 size="small"
                 sx={{ ml: 2 }}
@@ -86,7 +86,14 @@ const UserMenu = ({ menu }: { menu: VTNUserMenu }) => {
                     <PersonIcon />
                 </Avatar>
 
-            </IconButton>
+            </IconButton> */}
+                <Button
+                    key='userButton'
+                    onClick={handleOpenMenu}
+                    sx={menuItemStyle}
+                >
+                    Mi Cuenta
+                </Button>
                 <Menu
                     id="basic-menu"
                     anchorEl={anchorEl}

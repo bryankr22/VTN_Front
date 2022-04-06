@@ -162,7 +162,7 @@ class Footer extends Component<{}, FooterComponentState> {
                         bottom: 0, 
                         right: 0,
                         width: '100vw', 
-                        p: 6
+                        p: 3
                     }} alignItems='end'>
                         <Box sx={{ width: 60, height: 60, borderRadius: '100%', pointerEvents: 'all' }}>
                             <Link component='a' href={whatsappChat} target='_blank'>

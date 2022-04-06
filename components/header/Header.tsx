@@ -270,7 +270,7 @@ class Header extends Component<{ cookies: Cookies }, HeaderComponentState> {
                                                         }
                                                     }}
                                                     onClick={this.handleOpenMobileMenu}>
-                                                    <MenuIcon />
+                                                    <MenuIcon fontSize='large' />
                                                 </IconButton>
                                                 <PageLogo></PageLogo>
                                                 <UserMenu menu={userMenu}></UserMenu>
