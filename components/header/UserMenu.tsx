@@ -10,6 +10,7 @@ import axios from 'axios'
 import { AUTH_URL, perfil_api as profileApi } from '@helpers/constants'
 
 const menuItemStyle: SxProps = {
+    fontSize: '1.2em',
     color: 'white',
     "&:hover": {
         color: 'white'

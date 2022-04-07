@@ -75,10 +75,10 @@ class Footer extends Component<{}, FooterComponentState> {
                             position: 'relative',
                             backgroundColor: 'black',
                             paddingY: '2em',
-                            paddingX: '10em',
+                            paddingX: '5em',
                             marginTop: '50px !important',
                             color: 'white'
-                        }} container direction={{ xs: 'row', sm: 'row', md: 'row' }} justifyContent='center' columnSpacing={{ xs: 35, sm: 35, md: 35 }} rowSpacing={{ xs: 5, sm: 5, md: 3 }}>
+                        }} container direction={{ xs: 'row', sm: 'row', md: 'row' }} justifyContent='center' columnSpacing={{ xs: 40, sm: 40, md: 35 }} rowSpacing={{ xs: 2, sm: 2, md: 3 }}>
                             <Grid item xs={12} sm={6} md={4}>
                                 <Typography sx={{
                                     ...this.titleStyle(isSmOrDown),
@@ -161,7 +161,8 @@ class Footer extends Component<{}, FooterComponentState> {
                         left: 0, 
                         bottom: 0, 
                         right: 0,
-                        width: '100vw', 
+                        width: '100vw',
+                        '-webkit-align-items': 'flex-end', 
                         p: 3
                     }} alignItems='end'>
                         <Box sx={{ width: 60, height: 60, borderRadius: '100%', pointerEvents: 'all' }}>

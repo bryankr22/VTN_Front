@@ -116,6 +116,7 @@ const MobileMenu = ({ menu, opened }: { menu: VTNMenu, opened: boolean }) => {
                     if (menuItem.link) {
                         return <ListItemButton
                             sx={{
+                                letterSpacing: '2px',
                                 textTransform: 'uppercase',
                                 '&:hover': {
                                     backgroundColor: 'black',
@@ -137,7 +138,11 @@ const MobileMenu = ({ menu, opened }: { menu: VTNMenu, opened: boolean }) => {
 
                         return <>
                             <ListItemButton onClick={handleClick}>
-                                <ListItemText sx={{ textTransform: 'uppercase' }} primary={menuItem.label} />
+                                <ListItemText sx={{ 
+                                    textTransform: 'uppercase', 
+                                    letterSpacing: '2px',
+                                    fontSize: '1.3rem'
+                                }} primary={menuItem.label} />
                                 {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
                             </ListItemButton>
                             <Collapse in={open} timeout="auto" unmountOnExit>
@@ -146,7 +151,7 @@ const MobileMenu = ({ menu, opened }: { menu: VTNMenu, opened: boolean }) => {
                                         return <ListItemButton
                                             sx={{
                                                 pl: 4,
-                                                textTransform: 'uppercase',
+                                                letterSpacing: '2px',
                                                 borderBottom: '1px solid rgb(255 255 255 / 10%)',
                                                 '&:hover': {
                                                     backgroundColor: 'black',
@@ -158,8 +163,8 @@ const MobileMenu = ({ menu, opened }: { menu: VTNMenu, opened: boolean }) => {
                                             <NextLink href={{
                                                 pathname: menuItem.link,
                                                 query: menuItem.query
-                                            }}>
-                                                <ListItemText primary={menuItem.label} />
+                                            }} >
+                                                <ListItemText primary={menuItem.label} onClick={() => setOpen(false)} />
                                             </NextLink>
                                         </ListItemButton>
                                     })}

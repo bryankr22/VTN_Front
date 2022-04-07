@@ -19,10 +19,10 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <DefaultSeo
-        title="VendeTuNave - Carros en Venta"
+        title="VendeTuNave - Compra o vende tu carro o moto gratis - Sin comisiones"
         defaultOpenGraphImageHeight={200}
         defaultOpenGraphImageWidth={150}
-        description="Vende tu vehículo completamente gratis en VendeTuNave. Encuentra carros, camionetas, motos, servicios y recomendaciones en un solo sitio."
+        description="Publica tu vehículo en venta. Encuentra Chevrolet, Mazda, Renault, Toyota y mucho más."
         openGraph={{
           type: "website",
           locale: "es_ES",
