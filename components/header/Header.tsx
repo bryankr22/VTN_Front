@@ -21,7 +21,7 @@ type HeaderComponentState = {
 const PageLogo = () => {
     return (
         <Link component='a' href='/'>
-            <Box sx={{ width: 60, height: 40 }}>
+            <Box sx={{ width: 55, height: 35 }}>
                 <div style={{ width: '100%', height: '100%', position: 'relative' }}>
                     <Image
                         alt='image logo'
@@ -251,7 +251,7 @@ class Header extends Component<{ cookies: Cookies }, HeaderComponentState> {
                                         </Stack>
                                     }
                                     {isSmOrDown &&
-                                        <Stack sx={{ width: '100%', py: 2 }} direction='column'>
+                                        <Stack sx={{ width: '100%', py: 0.5 }} direction='column'>
                                             <Stack
                                                 sx={{ width: '100%' }}
                                                 direction="row" alignContent='center'
