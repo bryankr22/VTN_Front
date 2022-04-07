@@ -21,7 +21,7 @@ type HeaderComponentState = {
 const PageLogo = () => {
     return (
         <Link component='a' href='/'>
-            <Box sx={{ width: 70, height: 50 }}>
+            <Box sx={{ width: 60, height: 40 }}>
                 <div style={{ width: '100%', height: '100%', position: 'relative' }}>
                     <Image
                         alt='image logo'

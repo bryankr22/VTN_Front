@@ -161,7 +161,8 @@ class Footer extends Component<{}, FooterComponentState> {
                         left: 0, 
                         bottom: 0, 
                         right: 0,
-                        width: '100vw', 
+                        width: '100vw',
+                        '-webkit-align-items': 'flex-end', 
                         p: 3
                     }} alignItems='end'>
                         <Box sx={{ width: 60, height: 60, borderRadius: '100%', pointerEvents: 'all' }}>
