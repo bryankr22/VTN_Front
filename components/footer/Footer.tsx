@@ -18,6 +18,7 @@ type FooterComponentState = {
 
 class Footer extends Component<{}, FooterComponentState> {
     private linkStyle: SxProps = {
+        mt: 0,
         fontSize: '1rem',
         color: 'white',
         '&:hover': {
@@ -27,8 +28,8 @@ class Footer extends Component<{}, FooterComponentState> {
 
     private titleStyle: (isSmOrDown: boolean) => SxProps = (isSmOrDown) => {
         return {
-            mb: 2,
-            pb: 1,
+            mb: 1,
+            pb: 0,
             width: '100%',
             fontSize: '1.2rem',
             textAlign: isSmOrDown ? 'center' : 'left',
@@ -78,14 +79,14 @@ class Footer extends Component<{}, FooterComponentState> {
                             paddingX: '5em',
                             marginTop: '50px !important',
                             color: 'white'
-                        }} container direction={{ xs: 'row', sm: 'row', md: 'row' }} justifyContent='center' columnSpacing={{ xs: 40, sm: 40, md: 35 }} rowSpacing={{ xs: 2, sm: 2, md: 3 }}>
+                        }} container direction={{ xs: 'row', sm: 'row', md: 'row' }} justifyContent='center' columnSpacing={{ xs: 40, sm: 40, md: 35 }} rowSpacing={{ xs: 1, sm: 1, md: 3 }}>
                             <Grid item xs={12} sm={6} md={4}>
                                 <Typography sx={{
                                     ...this.titleStyle(isSmOrDown),
                                 }} component="h4">
                                     SÍGUENOS
                                 </Typography>
-                                <Stack direction='row' justifyContent={isSmOrDown ? 'center' : 'start'} spacing={3}>
+                                <Stack direction='row' justifyContent={isSmOrDown ? 'center' : 'start'} spacing={1}>
                                     <Link
                                         sx={this.linkStyle}
                                         component="a"
@@ -121,7 +122,7 @@ class Footer extends Component<{}, FooterComponentState> {
                                 }} component="h4">
                                     CONTÁCTANOS
                                 </Typography>
-                                <Stack direction='column' alignItems={isSmOrDown ? 'center' : 'start'} spacing={1}>
+                                <Stack direction='column' alignItems={isSmOrDown ? 'center' : 'start'}>
                                     <Link sx={this.linkStyle} underline='hover' component='a' href={`tel:+57${contactNumber}`}>
                                         (057) {contactNumber}
                                     </Link>
@@ -131,7 +132,7 @@ class Footer extends Component<{}, FooterComponentState> {
                                 </Stack>
                             </Grid>
                             <Grid item xs={12} sm={6} md={4} alignContent='center' justifyItems={{ xs: 'center', sm: 'center', md: 'start' }}>
-                                <Box sx={{ width: isMdOrUp ? 150 : 75, height: isMdOrUp ? 100 : 50, marginX: 'auto' }}>
+                                <Box sx={{ width: isMdOrUp ? 150 : 75, height: isMdOrUp ? 100 : 50, marginX: 'auto', marginTop: isSmOrDown ? 2 : 0 }}>
                                     <div style={{ width: '100%', height: '100%', position: 'relative' }}>
                                         <Image
                                             layout='fill'
@@ -143,7 +144,7 @@ class Footer extends Component<{}, FooterComponentState> {
                                 </Box>
                             </Grid>
                             <Grid sx={{ marginTop: '2em' }} item xs={12} sm={12} md={12}>
-                                <Stack direction='column' alignItems='center' spacing={1}>
+                                <Stack direction='column' alignItems='center'>
                                     <span>© Copyright {copyrightYear} - VendeTuNave</span>
                                     <Link sx={this.linkStyle} component='a' underline='hover' href='/terminos-y-condiciones'>
                                         Términos y Condiciones

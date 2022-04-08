@@ -69,7 +69,6 @@ const DesktopMenu = ({ menu }: { menu: VTNMenu }) => {
                                         py: 2,
                                         borderBottom: '1px solid rgb(255 255 255 / 10%)',
                                         color: 'white',
-                                        textTransform: 'uppercase',
                                         '&:hover': {
                                             backgroundColor: 'black',
                                             color: 'white'
