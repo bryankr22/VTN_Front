@@ -11,7 +11,6 @@ export declare type PickAndPlateData = {
     bogotaPickAndPlate: [string, string]
     caliPickAndPlate: [string, string]
     medellinPickAndPlate: [string, string]
-    barranquillaPickAndPlate: [string, string]
 }
 
 const requestForCity = async (city: string): Promise<string> => {
@@ -36,14 +35,12 @@ const pickAndPlate = async (req, res) => {
         const bogotaPickAndPlate = await requestForCity('bogota')
         const caliPickAndPlate = await requestForCity('cali')
         const medellinPickAndPlate = await requestForCity('medellin')
-        const barranquillaPickAndPlate = await requestForCity('barranquilla')
 
 
         currentPickAndPlateData = {
             bogotaPickAndPlate: ['Bogotá', bogotaPickAndPlate],
             caliPickAndPlate: ['Cali', caliPickAndPlate],
-            medellinPickAndPlate: ['Medellin', medellinPickAndPlate],
-            barranquillaPickAndPlate: ['Barranquilla', barranquillaPickAndPlate]
+            medellinPickAndPlate: ['Medellin', medellinPickAndPlate]
         } as PickAndPlateData
 
         store.set(PICK_AND_PLATE_KEY, currentPickAndPlateData, { expires: DateTime.now().plus({ days: 1 }).set({ hour: 0, minute: 0, second: 0 }).toFormat('yyyy-MM-dd hh:mm:ss') })

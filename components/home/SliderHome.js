@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { Responsive, Input } from 'semantic-ui-react';
 import Image from "next/image";
+import PickAndPlate from '../PickAndPlate'
 
 export default function SliderHome({ slider, sliderMobile }) {
   const router = useRouter();
@@ -30,6 +31,7 @@ export default function SliderHome({ slider, sliderMobile }) {
             />
           }
         </div>
+        <PickAndPlate />
       </Responsive>
       <Responsive className="banner-home" {...Responsive?.onlyMobile}>
         <>
@@ -44,6 +46,7 @@ export default function SliderHome({ slider, sliderMobile }) {
               alt={"banner"}
             />
           </div>
+          <PickAndPlate />
           <div className="bg-black">
             <Input
               action={{
@@ -80,6 +83,7 @@ export default function SliderHome({ slider, sliderMobile }) {
             alt={"banner"}
           />
         </div>
+        <PickAndPlate />
         <Input
           action={{
             icon: "search",

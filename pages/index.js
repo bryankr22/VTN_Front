@@ -56,7 +56,6 @@ const Home = ({
         />
       </Head>
       <SliderHome slider={slider} sliderMobile={sliderMobile} />
-      <PickAndPlate />
       <FiltersHome options={filters} />
       <CategoriasHome categorias={categorias} />
       <MarcasHome marcas={marcas} />
