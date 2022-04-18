@@ -76,10 +76,10 @@ class Footer extends Component<{}, FooterComponentState> {
                             position: 'relative',
                             backgroundColor: 'black',
                             paddingY: '2em',
-                            paddingX: '5em',
+                            paddingX: isSmOrDown ? '5em' : '18%',
                             marginTop: '50px !important',
                             color: 'white'
-                        }} container direction={{ xs: 'row', sm: 'row', md: 'row' }} justifyContent='center' columnSpacing={{ xs: 40, sm: 40, md: 35 }} rowSpacing={{ xs: 1, sm: 1, md: 3 }}>
+                        }} container direction={{ xs: 'row', sm: 'row', md: 'row' }} justifyContent='center' columnSpacing={{ xs: 40, sm: 40, md: 28 }} rowSpacing={{ xs: 1, sm: 1, md: 3 }}>
                             <Grid item xs={12} sm={6} md={4}>
                                 <Typography sx={{
                                     ...this.titleStyle(isSmOrDown),
@@ -131,17 +131,29 @@ class Footer extends Component<{}, FooterComponentState> {
                                     </Link>
                                 </Stack>
                             </Grid>
-                            <Grid item xs={12} sm={6} md={4} alignContent='center' justifyItems={{ xs: 'center', sm: 'center', md: 'start' }}>
-                                <Box sx={{ width: isMdOrUp ? 150 : 75, height: isMdOrUp ? 100 : 50, marginX: 'auto', marginTop: isSmOrDown ? 2 : 0 }}>
-                                    <div style={{ width: '100%', height: '100%', position: 'relative' }}>
-                                        <Image
-                                            layout='fill'
+                            <Grid item xs={12} sm={6} md={4}>
+                                {/* <Box className="test" sx={{ width: isMdOrUp ? 150 : 75, height: isMdOrUp ? 100 : 50, marginX: isSmOrDown ? 'auto' : 0,  marginTop: isSmOrDown ? 2 : 0 }}> */}
+
+                                {/* <Image
                                             alt="VTN_logo_white"
                                             className={'imglogo'}
+                                            width={100}
+                                            height={80}
                                             src="/images/VTN_logo_white.png"
-                                        />
-                                    </div>
-                                </Box>
+                                        /> */}
+                                <Stack direction="row" justifyContent={isSmOrDown ? 'center' : 'flex-end'}>
+                                    <Box className="test" sx={{ width: isMdOrUp ? 150 : 75, height: isMdOrUp ? 100 : 50, marginTop: isSmOrDown ? 2 : 0 }}>
+                                        <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+                                            <Image
+                                                layout='fill'   
+                                                alt="VTN_logo_white"
+                                                className={'imglogo'}
+                                                src="/images/VTN_logo_white.png"
+                                            />
+                                        </div>
+                                    </Box>
+                                </Stack>
+                                {/*  </Box> */}
                             </Grid>
                             <Grid sx={{ marginTop: '2em' }} item xs={12} sm={12} md={12}>
                                 <Stack direction='column' alignItems='center'>
@@ -156,14 +168,14 @@ class Footer extends Component<{}, FooterComponentState> {
                     )}
                 </BreakdownHelper>
                 <Portal>
-                    <Stack sx={{ 
+                    <Stack sx={{
                         pointerEvents: 'none',
-                        position: 'fixed', 
-                        left: 0, 
-                        bottom: 0, 
+                        position: 'fixed',
+                        left: 0,
+                        bottom: 0,
                         right: 0,
                         width: '100vw',
-                        '-webkit-align-items': 'flex-end', 
+                        '-webkit-align-items': 'flex-end',
                         p: 3
                     }} alignItems='end'>
                         <Box sx={{ width: 60, height: 60, borderRadius: '100%', pointerEvents: 'all' }}>
