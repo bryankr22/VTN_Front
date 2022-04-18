@@ -17,10 +17,11 @@ const PickAndPlateEntry = ({ pickAndPlateDataEntry }: { pickAndPlateDataEntry: [
         px: 6,
         color: 'white',
         textTransform: 'uppercase',
-        borderRight: '1px solid white'
+        borderRight: '1px solid white',
+        fontSize: '0.8rem'
     }}>
         {city + ' : '}
-        <Typography component={'span'} sx={{ letterSpacing: 3 }}>{pickAndPlate}</Typography>
+        <Typography component={'span'} sx={{ letterSpacing: 3, fontSize: '0.8rem' }}>{pickAndPlate}</Typography>
     </Typography>)
 }
 
@@ -50,22 +51,23 @@ const PickAndPlate = () => {
 
                 pickAndPlatesData && <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} sx={{
                     width: '100vw',
-                    height: '55px',
+                    height: '35px',
                     backgroundColor: '#383838'
                 }}>
                     <Typography component='div' sx={{
                         ml: 1,
                         mr: '2px',
                         whiteSpace: 'nowrap',
-                        p: 0.6,
+                        p: '3.5px',
                         letterSpacing: 2,
                         fontWeight: 'bold',
+                        fontSize: '0.8rem',
                         textTransform: 'uppercase',
                         backgroundColor: 'rgb(247, 192, 0)',
                         border: '2px solid', borderRadius: 1.5,
                         boxShadow: 'rgb(247, 192, 0) 0px 0px 0px 0.1em'
                     }}>
-                        Pico y placa
+                        Pico y placa hoy
                     </Typography>
                     {isMdOrUp && Object.values(pickAndPlatesData).map(pickAndPlateDataEntry => {
                         return <PickAndPlateEntry key={pickAndPlateDataEntry[0]} pickAndPlateDataEntry={pickAndPlateDataEntry}></PickAndPlateEntry>
