@@ -53,7 +53,7 @@ export default function CompareVehiculoMobile() {
                 </Button>
                 <Image
                   centered
-                  style={{ height: 200, objectFit: "none", width: "100%" }}
+                  style={{ height: 200, objectFit: "cover", width: "100%" }}
                   src={pathS3 + vehicle.nameImage + "300x300.webp"}
                   alt={vehicle.title}
                 />
