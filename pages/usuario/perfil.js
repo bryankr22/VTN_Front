@@ -47,6 +47,9 @@ export default function perfil() {
     fecha_nacimiento: "",
     image: "",
     imagePredeter: DEFAULT,
+    facebook: "",
+    instagram: "",
+    tiktok: "",
     status: true,
   });
   const [password, setPassword] = useState({
@@ -268,6 +271,51 @@ export default function perfil() {
               </Form>
             </Grid.Column>
           </Grid>
+
+          <Grid columns="equal">
+            <Grid.Column>
+              <Form>
+                <Form.Field>
+                  <label style={{ color: colorText }}>Facebook</label>
+                  <Input
+                    name="name"
+                    value={usuario.facebook}
+                    onChange={(e, { value }) =>
+                      setUsuario({ ...usuario, facebook: value })
+                    }
+                  />
+                </Form.Field>
+              </Form>
+            </Grid.Column>
+            <Grid.Column>
+              <Form>
+                <Form.Field>
+                  <label style={{ color: colorText }}>Instagram</label>
+                  <Input
+                    name="name"
+                    value={usuario.instagram}
+                    onChange={(e, { value }) =>
+                      setUsuario({ ...usuario, instagram: value })
+                    }
+                  />
+                </Form.Field>
+              </Form>
+            </Grid.Column>
+            <Grid.Column>
+              <Form>
+                <Form.Field>
+                  <label style={{ color: colorText }}>Tiktok</label>
+                  <Input
+                    name="name"
+                    value={usuario.tiktok}
+                    onChange={(e, { value }) =>
+                      setUsuario({ ...usuario, tiktok: value })
+                    }
+                  />
+                </Form.Field>
+              </Form>
+            </Grid.Column>
+          </Grid>
         </Responsive>
 
         <Responsive {...Responsive?.onlyMobile}>
@@ -349,6 +397,36 @@ export default function perfil() {
                     name="fecha"
                     type="date"
                     placeholder="Fecha de nacimiento"
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <label style={{ color: colorText }}>Facebook</label>
+                  <Input
+                    name="name"
+                    value={usuario.facebook}
+                    onChange={(e, { value }) =>
+                      setUsuario({ ...usuario, facebook: value })
+                    }
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <label style={{ color: colorText }}>Instagram</label>
+                  <Input
+                    name="name"
+                    value={usuario.instagram}
+                    onChange={(e, { value }) =>
+                      setUsuario({ ...usuario, instagram: value })
+                    }
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <label style={{ color: colorText }}>Tiktok</label>
+                  <Input
+                    name="name"
+                    value={usuario.tiktok}
+                    onChange={(e, { value }) =>
+                      setUsuario({ ...usuario, tiktok: value })
+                    }
                   />
                 </Form.Field>
               </Form>
@@ -434,6 +512,36 @@ export default function perfil() {
                     name="fecha"
                     type="date"
                     placeholder="Fecha de nacimiento"
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <label style={{ color: colorText }}>Facebook</label>
+                  <Input
+                    name="name"
+                    value={usuario.facebook}
+                    onChange={(e, { value }) =>
+                      setUsuario({ ...usuario, facebook: value })
+                    }
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <label style={{ color: colorText }}>Instagram</label>
+                  <Input
+                    name="name"
+                    value={usuario.instagram}
+                    onChange={(e, { value }) =>
+                      setUsuario({ ...usuario, instagram: value })
+                    }
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <label style={{ color: colorText }}>Tiktok</label>
+                  <Input
+                    name="name"
+                    value={usuario.tiktok}
+                    onChange={(e, { value }) =>
+                      setUsuario({ ...usuario, tiktok: value })
+                    }
                   />
                 </Form.Field>
               </Form>

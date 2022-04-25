@@ -92,6 +92,7 @@ export default function index({ data }) {
                     colorText={colorText}
                     params={router.query}
                     contadores={{ ...data.contadores, total_records: data.total_records }}
+                    vendedor={data.vendedor}
                     vehiculos={data.vehicles} />
                 <ListadoVehiculosMobile
                     params={router.query}
@@ -103,6 +104,7 @@ export default function index({ data }) {
                 <SidebarMobile
                     params={router.query}
                     contadores={{ ...data.contadores, total_records: data.total_records }}
+                    vendedor={data.vendedor}
                     vehiculos={data.vehicles} />
                 <ListadoVehiculosMobile
                     params={router.query}
@@ -116,6 +118,7 @@ export default function index({ data }) {
                         params={router.query}
                         contadores={{ ...data.contadores, total_records: data.total_records }}
                         vehiculos={data.vehicles}
+                        vendedor={data.vendedor}
                     />
                     <ListadoVehiculos
                         params={router.query}
@@ -131,6 +134,7 @@ export default function index({ data }) {
 export async function getServerSideProps({ query }) {
     const res = await axios.get(`${API_URL}/vehiculos`, {
         params: {
+            vendedor: query.vendedor,
             categoria: query.categoria,
             page: query.page,
             ubicacion: query.ubicacion,

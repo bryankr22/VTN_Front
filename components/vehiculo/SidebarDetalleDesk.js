@@ -9,6 +9,7 @@ import { API_URL, AUTH_URL, favoritos_add_vehiculo } from '../../helpers/constan
 import jwt from 'jsonwebtoken';
 import { useRouter } from 'next/router'
 import { dark, light } from '../../helpers/colors';
+import { normalize } from '../../helpers/dataStructure';
 
 export default function SidebarDetalleDesk({ vehiculo, vehicleFav, diasPublicado, accesorio, id }) {
     const dispatch = useDispatch()
@@ -49,7 +50,7 @@ export default function SidebarDetalleDesk({ vehiculo, vehicleFav, diasPublicado
             idVehicle: vehiculo.id,
             state: true
         };
-        axios.post(AUTH_URL + favoritos_add_vehiculo, dataSend, config).then((res) => {
+        axios.post(AUTH_URL + favoritos_add_vehiculo, dataSend, config).then(() => {
             setLoading(false);
             router.push('/usuario/favoritos');
         })
@@ -96,8 +97,11 @@ export default function SidebarDetalleDesk({ vehiculo, vehicleFav, diasPublicado
             <Dimmer style={{ position: "fixed" }} active={loading}>
                 <Loader>{loadingMessage}</Loader>
             </Dimmer>
-            <Header as="h1" textAlign="left" style={{ color: colorText }}>
+            <Header as="h1" textAlign="left" style={{ color: colorText, marginBottom: 0 }}>
                 {vehiculo.title}
+            </Header>
+            <Header as='h6' color='grey' style={{ marginTop: 0 }}>Publicado por:{" "}
+                <a href={`/vehiculos?vendedor=${normalize(vehiculo.sellerName)}-${vehiculo.sellerId}`}>{vehiculo.sellerName}</a>
             </Header>
             <Header
                 textAlign="left"

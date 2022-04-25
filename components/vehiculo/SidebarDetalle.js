@@ -10,6 +10,7 @@ import { AUTH_URL, favoritos_add_vehiculo } from '../../helpers/constants';
 import jwt from 'jsonwebtoken';
 import { useRouter } from 'next/router'
 import { light } from '../../helpers/colors';
+import { normalize } from '../../helpers/dataStructure';
 
 export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
     const dispatch = useDispatch()
@@ -76,8 +77,11 @@ export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
                     <p style={{ display: 'inline', color: colorText }}>{new Intl.NumberFormat("de-DE").format(vehiculo.views)}</p>
                 </div>
             </Header>
-            <Header as="h1" style={{ marginTop: 8, color: colorText }}>
+            <Header as="h1" style={{ marginTop: 8, color: colorText, marginBottom: 0 }}>
                 {vehiculo.title}
+            </Header>
+            <Header as='h6' color='grey' style={{ marginTop: 0 }}>Publicado por:{" "}
+                <a href={`/vehiculos?vendedor=${normalize(vehiculo.sellerName)}-${vehiculo.sellerId}`}>{vehiculo.sellerName}</a>
             </Header>
             <Header as="h2" style={{ marginTop: 8, color: colorText }}>
                 ${" "}
