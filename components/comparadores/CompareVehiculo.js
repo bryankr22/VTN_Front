@@ -48,7 +48,7 @@ export default function CompareVehiculo() {
                 </Button>
                 <Image
                   centered
-                  style={{ height: 200, objectFit: "none", width: "100%" }}
+                  style={{ height: 300, objectFit: "cover", width: "100%" }}
                   src={pathS3 + vehicle.nameImage + "300x300.webp"}
                   alt={vehicle.title}
                 />
@@ -314,7 +314,7 @@ export default function CompareVehiculo() {
                     location.href = "/vehiculos";
                   }}
                   style={{
-                    height: 200,
+                    height: 300,
                     objectFit: "cover",
                     width: "100%",
                     cursor: "pointer",
