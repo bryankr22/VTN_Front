@@ -275,7 +275,7 @@ class Header extends Component<{ cookies: Cookies }, HeaderComponentState> {
                                                 <PageLogo></PageLogo>
                                                 <UserMenu menu={userMenu}></UserMenu>
                                             </Stack>
-                                            <MobileMenu menu={menu} opened={mobileMenuOpened}></MobileMenu>
+                                            <MobileMenu menu={menu} opened={mobileMenuOpened} closeHeader={() => this.setState({ mobileMenuOpened: false })}></MobileMenu>
                                         </Stack>
                                     }
                                 </Toolbar>

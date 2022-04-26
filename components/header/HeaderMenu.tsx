@@ -99,7 +99,7 @@ const DesktopMenu = ({ menu }: { menu: VTNMenu }) => {
     )
 }
 
-const MobileMenu = ({ menu, opened }: { menu: VTNMenu, opened: boolean }) => {
+const MobileMenu = ({ menu, opened, closeHeader }: { menu: VTNMenu, opened: boolean, closeHeader: () => void }) => {
     return (
         <Collapse in={opened} timeout="auto" unmountOnExit>
             <List
@@ -135,6 +135,11 @@ const MobileMenu = ({ menu, opened }: { menu: VTNMenu, opened: boolean }) => {
                             setOpen(!open)
                         }
 
+                        const handleItemClick = () => {
+                            setOpen(false)
+                            closeHeader()
+                        }
+
                         return <>
                             <ListItemButton onClick={handleClick}>
                                 <ListItemText sx={{ 
@@ -163,7 +168,7 @@ const MobileMenu = ({ menu, opened }: { menu: VTNMenu, opened: boolean }) => {
                                                 pathname: menuItem.link,
                                                 query: menuItem.query
                                             }} >
-                                                <ListItemText primary={menuItem.label} onClick={() => setOpen(false)} />
+                                                <ListItemText primary={menuItem.label} onClick={handleItemClick} />
                                             </NextLink>
                                         </ListItemButton>
                                     })}
