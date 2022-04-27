@@ -125,19 +125,20 @@ export default function SidebarVehiculos({ params, contadores, vehiculos, vended
       if (persist) {
         const url = new URL(location.href);
         const newUrl = new URL("http://test.com");
+        if (vendedor) {
+          newUrl.searchParams.append('vendedor', `${normalize(vendedor.nombre)}-${vendedor.id}`);
+        }
         url.searchParams.forEach((nValue, nKey) => {
           if (persist.includes(nKey)) {
             newUrl.searchParams.append(nKey, nValue);
           }
         });
         newUrl.searchParams.append(key, value);
+        
         params = newUrl.search;
       } else {
-        params = `${key}=${value}`;
+        params = vendedor ? `vendedor=${normalize(vendedor.nombre)}-${vendedor.id}&${key}=${value}` : `${key}=${value}`;
       }
-    }
-    if (vendedor) {
-      params += `&vendedor=${normalize(vendedor.nombre)}-${vendedor.id}`;
     }
 
     document.location.search = params;

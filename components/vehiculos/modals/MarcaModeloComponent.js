@@ -23,6 +23,9 @@ export default function MarcaModeloComponent({ filtros, params, vendedor }) {
         if(persist) {
             const url = new URL(location.href);
             const newUrl = new URL('http://test.com');
+            if (vendedor) {
+              newUrl.searchParams.append('vendedor', `${normalize(vendedor.nombre)}-${vendedor.id}`);
+            }
             url.searchParams.forEach((nValue, nKey) => {
                 if(persist.includes(nKey)) {
                     newUrl.searchParams.append(nKey, nValue)
@@ -31,12 +34,10 @@ export default function MarcaModeloComponent({ filtros, params, vendedor }) {
             newUrl.searchParams.append(key, value);
             params = newUrl.search
         } else {
-            params = `${key}=${value}`;
+          params = vendedor ? `vendedor=${normalize(vendedor.nombre)}-${vendedor.id}&${key}=${value}` : `${key}=${value}`;
         }
     }
-    if (vendedor) {
-      params += `&vendedor=${normalize(vendedor.nombre)}-${vendedor.id}`;
-    }
+
     document.location.search = params;
 }
   const mapping_contador = (contador) => {
