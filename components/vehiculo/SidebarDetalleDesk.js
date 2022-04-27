@@ -131,7 +131,7 @@ export default function SidebarDetalleDesk({ vehiculo, vehicleFav, diasPublicado
             </Header>
             <Container style={{ marginTop: 20 }}>
                 <Grid centered divided="vertically">
-                    <Grid.Row columns={5} style={{ paddingBottom: 0 }}>
+                    <Grid.Row columns={3} style={{ paddingBottom: 0 }}>
                         {vehiculo.permuta == 1 && (
                             <Grid.Column
                                 style={{ textAlign: "center", marginBottom: 0 }}

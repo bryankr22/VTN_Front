@@ -4,6 +4,12 @@
   width: 100%;
 }
 
+@media (width >= 500px) {
+  .imageWrapped {
+    height: 250px !important;
+  }
+}
+
 .compact img {
   height: 100%;
   width: 100%;
