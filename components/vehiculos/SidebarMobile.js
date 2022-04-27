@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
-import { Input, Header, Button, Container, Image } from "semantic-ui-react";
+import { Input, Header, Button, Container, Image, Grid } from "semantic-ui-react";
 import { light } from "../../helpers/colors";
 import ActiveTagsVehiculos from "./ActiveTagsVehiculos";
 import ModalFiltersMobile from "./modals/ModalFiltersMobile";
@@ -39,10 +39,67 @@ export default function SidebarMobile({
 
   return (
     <>
-      {!params.vendedor && 
-        <>
+      {params.vendedor &&
+        <Container style={{ marginTop: 15 }}>
           <style>
             {`
+                .icons {
+                    ${colorText === light && 'filter: invert(1);'}
+                }
+            `}
+          </style>
+          <Grid>
+            <Grid.Row>
+              <Grid.Column width={7}>
+                <Image
+                  src={
+                    vendedor.image == 0
+                      ? IMAGE_DEFAULT
+                      : "https://vendetunave.s3.amazonaws.com/vendetunave/images/usuarios/" +
+                      vendedor.image
+                  }
+                  size="small"
+                  circular
+                  bordered
+                  style={{ height: 130, width: 130, margin: '0 auto', backgroundColor: light, objectFit: 'cover' }}
+                  alt="Imagen de usuario"
+                />
+              </Grid.Column>
+              <Grid.Column width={9}>
+                <Header
+                  as="h5"
+                  style={{ textTransform: "uppercase", color: colorText, marginBottom: 2 }}
+                >
+                  {vendedor.nombre}
+                </Header>
+                <p
+                  style={{ color: colorText, margin: 0 }}
+                >
+                  Vehículos publicados: {contadores.total_records}
+                </p>
+
+                {vendedor.website &&
+                  <a href={vendedor.website} target="_blank" rel="noreferrer" style={{ textDecoration: 'none', color: colorText, cursor: 'pointer', marginBottom: 5, display: 'block' }}>
+                    {vendedor.website}
+                  </a>
+                }
+                {vendedor.telefono &&
+                  <a href={"https://api.whatsapp.com/send?phone=57" + vendedor.telefono + "&text=Hola,%20estoy%20interesado.&source=vendetunave.co&data="} target="_blank" rel="noreferrer">
+                    {vendedor.telefono}
+                  </a>
+                }
+                <Image.Group size='mini'>
+                  {vendedor.facebook && <Image style={{ margin: '5px 7px' }} as='a' href={vendedor.facebook} alt="icono facebook" target='_blank' className="icons" src="/images/facebook-logo.png" />}
+                  {vendedor.instagram && <Image style={{ margin: '5px 7px' }} as='a' href={vendedor.instagram} alt="icono instagram" target='_blank' className="icons" src="/images/instagram-logo.png" />}
+                  {vendedor.tiktok && <Image style={{ margin: '5px 7px' }} as='a' href={vendedor.tiktok} alt="icono tiktok" target='_blank' className="icons" src="/images/tiktok-logo.png" />}
+                </Image.Group>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Container>
+      }
+      <style>
+        {`
               
               #search-responsive {
                   color: ${colorText};
@@ -63,119 +120,87 @@ export default function SidebarMobile({
                   opacity: 1;
               }
             `}
-          </style>
-          <Input
-            action={{
-              icon: "search",
-              style: {
-                background: "transparent",
-                borderBottom: `1px solid ${colorText}`,
-                color: colorText,
-                height: 47,
-                paddingTop: 10,
-              },
-              onClick: () => handleSubmit(),
+      </style>
+      {!params.vendedor &&
+        <Input
+          action={{
+            icon: "search",
+            style: {
+              background: "transparent",
+              borderBottom: `1px solid ${colorText}`,
+              color: colorText,
+              height: 47,
+              paddingTop: 10,
+            },
+            onClick: () => handleSubmit(),
+          }}
+          onChange={(e, { value }) => setQuery(value)}
+          onKeyDown={(e) => handleKeyDown(e)}
+          fluid
+          value={query}
+          id="search-responsive"
+          style={{ margin: "10px 20px 0 20px" }}
+          className="search-input"
+          placeholder="¿Qué estas buscando?"
+        />
+      }
+      <Header style={{ margin: 10 }} as="h3">
+        {!params.vendedor &&
+          <>{contadores.total_records} resultados</>
+        }
+        <Button
+          style={{
+            border: "1px solid #2185d0",
+            padding: ".78571429em 10px",
+            marginBottom: !params.vendedor ? 0: 10
+          }}
+          fluid={!!params.vendedor}
+          floated="right"
+          color="blue"
+          onClick={() => setModalFilter(true)}
+        >
+          FILTRAR
+        </Button>
+        {!isFicha ? (
+          <ModalFiltersMobile
+            params={params}
+            vendedor={vendedor}
+            filtros={contadores}
+            showModal={modalFilter}
+            onClose={() => setModalFilter(!modalFilter)}
+          />
+        ) : (
+          <ModalTechCardFilter
+            params={params}
+            filtros={contadores}
+            showModal={modalFilter}
+            onClose={() => setModalFilter(!modalFilter)}
+          />
+        )}
+        {!params.vendedor &&
+          <Button
+            style={{
+              border: "1px solid",
+              background: "transparent",
+              color: "#2185d0",
+              padding: ".78571429em 5px",
             }}
-            onChange={(e, { value }) => setQuery(value)}
-            onKeyDown={(e) => handleKeyDown(e)}
-            fluid
-            value={query}
-            id="search-responsive"
-            style={{ margin: "10px 20px 0 20px" }}
-            className="search-input"
-            placeholder="¿Qué estas buscando?"
-          />
-          <Header style={{ margin: 10 }} as="h3">
-            {contadores.total_records} resultados
-            <Button
-              style={{
-                border: "1px solid #2185d0",
-                padding: ".78571429em 10px",
-              }}
-              floated="right"
-              color="blue"
-              onClick={() => setModalFilter(true)}
-            >
-              FILTRAR
-            </Button>
-            {!isFicha ? (
-              <ModalFiltersMobile
-                params={params}
-                filtros={contadores}
-                showModal={modalFilter}
-                onClose={() => setModalFilter(!modalFilter)}
-              />
-            ) : (
-              <ModalTechCardFilter
-                params={params}
-                filtros={contadores}
-                showModal={modalFilter}
-                onClose={() => setModalFilter(!modalFilter)}
-              />
-            )}
-            <Button
-              style={{
-                border: "1px solid",
-                background: "transparent",
-                color: "#2185d0",
-                padding: ".78571429em 5px",
-              }}
-              floated="right"
-              color="blue"
-              onClick={() => setModalOrder(true)}
-            >
-              Ordenar
-            </Button>
-            <ModalOrderMobile
-              isFicha={isFicha}
-              showModal={modalOrder}
-              onClose={() => setModalOrder(!modalOrder)}
-            />
-          </Header>
-          <Container style={{ marginBottom: 10 }}>
-            <ActiveTagsVehiculos tags={params} />
-          </Container>
-        </>
-      }
-      {params.vendedor &&
-        <Container textAlign='center'>
-          <style>
-            {`
-                .icons {
-                    ${colorText === light && 'filter: invert(1);'}
-                }
-            `}
-          </style>
-          <Image
-            src={
-              vendedor.image == 0
-                ? IMAGE_DEFAULT
-                : "https://vendetunave.s3.amazonaws.com/vendetunave/images/usuarios/" +
-                vendedor.image
-            }
-            size="small"
-            circular
-            style={{ height: 150, margin: '0 auto', backgroundColor: light, objectFit: 'cover' }}
-            alt="Imagen de usuario"
-          />
-          <Header
-            as="h5"
-            style={{ textTransform: "uppercase", color: colorText }}
+            floated="right"
+            color="blue"
+            onClick={() => setModalOrder(true)}
           >
-            {vendedor.nombre}
-          </Header>
-          <p
-            style={{ color: colorText }}
-          >
-            Vehículos publicados: {contadores.total_records}
-          </p>
-          <Image.Group size='mini'>
-            {vendedor.facebook && <Image as='a' href={vendedor.facebook} alt="icono facebook" target='_blank' className="icons" src="/images/facebook-logo.png" />}
-            {vendedor.instagram && <Image as='a' href={vendedor.instagram} alt="icono instagram" target='_blank' className="icons" src="/images/instagram-logo.png" />}
-            {vendedor.tiktok && <Image as='a' href={vendedor.tiktok} alt="icono tiktok" target='_blank' className="icons" src="/images/tiktok-logo.png" />}
-          </Image.Group>
-        </Container>
-      }
+            Ordenar
+          </Button>
+        }
+        <ModalOrderMobile
+          isFicha={isFicha}
+          showModal={modalOrder}
+          onClose={() => setModalOrder(!modalOrder)}
+        />
+      </Header>
+      <Container style={{ marginBottom: 10 }}>
+        <ActiveTagsVehiculos tags={params} />
+      </Container>
     </>
   );
 }

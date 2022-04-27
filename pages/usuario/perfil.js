@@ -50,6 +50,7 @@ export default function perfil() {
     facebook: "",
     instagram: "",
     tiktok: "",
+    website: "",
     status: true,
   });
   const [password, setPassword] = useState({
@@ -268,6 +269,16 @@ export default function perfil() {
                     }
                   />
                 </Form.Field>
+                <Form.Field>
+                  <label style={{ color: colorText }}>Website</label>
+                  <Input
+                    name="website"
+                    value={usuario.website}
+                    onChange={(e, { value }) =>
+                      setUsuario({ ...usuario, website: value })
+                    }
+                  />
+                </Form.Field>
               </Form>
             </Grid.Column>
           </Grid>
@@ -278,7 +289,7 @@ export default function perfil() {
                 <Form.Field>
                   <label style={{ color: colorText }}>Facebook</label>
                   <Input
-                    name="name"
+                    name="facebook"
                     value={usuario.facebook}
                     onChange={(e, { value }) =>
                       setUsuario({ ...usuario, facebook: value })
@@ -292,7 +303,7 @@ export default function perfil() {
                 <Form.Field>
                   <label style={{ color: colorText }}>Instagram</label>
                   <Input
-                    name="name"
+                    name="instagram"
                     value={usuario.instagram}
                     onChange={(e, { value }) =>
                       setUsuario({ ...usuario, instagram: value })
@@ -306,7 +317,7 @@ export default function perfil() {
                 <Form.Field>
                   <label style={{ color: colorText }}>Tiktok</label>
                   <Input
-                    name="name"
+                    name="tiktok"
                     value={usuario.tiktok}
                     onChange={(e, { value }) =>
                       setUsuario({ ...usuario, tiktok: value })
@@ -400,9 +411,19 @@ export default function perfil() {
                   />
                 </Form.Field>
                 <Form.Field>
+                  <label style={{ color: colorText }}>Website</label>
+                  <Input
+                    name="website"
+                    value={usuario.website}
+                    onChange={(e, { value }) =>
+                      setUsuario({ ...usuario, website: value })
+                    }
+                  />
+                </Form.Field>
+                <Form.Field>
                   <label style={{ color: colorText }}>Facebook</label>
                   <Input
-                    name="name"
+                    name="facebook"
                     value={usuario.facebook}
                     onChange={(e, { value }) =>
                       setUsuario({ ...usuario, facebook: value })
@@ -412,7 +433,7 @@ export default function perfil() {
                 <Form.Field>
                   <label style={{ color: colorText }}>Instagram</label>
                   <Input
-                    name="name"
+                    name="instagram"
                     value={usuario.instagram}
                     onChange={(e, { value }) =>
                       setUsuario({ ...usuario, instagram: value })
@@ -422,7 +443,7 @@ export default function perfil() {
                 <Form.Field>
                   <label style={{ color: colorText }}>Tiktok</label>
                   <Input
-                    name="name"
+                    name="tiktok"
                     value={usuario.tiktok}
                     onChange={(e, { value }) =>
                       setUsuario({ ...usuario, tiktok: value })
@@ -515,9 +536,19 @@ export default function perfil() {
                   />
                 </Form.Field>
                 <Form.Field>
+                  <label style={{ color: colorText }}>Website</label>
+                  <Input
+                    name="website"
+                    value={usuario.website}
+                    onChange={(e, { value }) =>
+                      setUsuario({ ...usuario, website: value })
+                    }
+                  />
+                </Form.Field>
+                <Form.Field>
                   <label style={{ color: colorText }}>Facebook</label>
                   <Input
-                    name="name"
+                    name="facebook"
                     value={usuario.facebook}
                     onChange={(e, { value }) =>
                       setUsuario({ ...usuario, facebook: value })
@@ -527,7 +558,7 @@ export default function perfil() {
                 <Form.Field>
                   <label style={{ color: colorText }}>Instagram</label>
                   <Input
-                    name="name"
+                    name="instagram"
                     value={usuario.instagram}
                     onChange={(e, { value }) =>
                       setUsuario({ ...usuario, instagram: value })
@@ -537,7 +568,7 @@ export default function perfil() {
                 <Form.Field>
                   <label style={{ color: colorText }}>Tiktok</label>
                   <Input
-                    name="name"
+                    name="tiktok"
                     value={usuario.tiktok}
                     onChange={(e, { value }) =>
                       setUsuario({ ...usuario, tiktok: value })

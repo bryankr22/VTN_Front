@@ -157,7 +157,9 @@ export default function ListadoVehiculos({
         </Container>
       }
       <HeaderVehiculo />
-      <ZoneAd slug={params.categoria} />
+      {!params.vendedor &&
+        <ZoneAd slug={params.categoria} />
+      }
       <style>{`
         .label-premium {
           background-color: rgb(198, 168, 29) !important;

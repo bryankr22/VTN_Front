@@ -18,6 +18,7 @@ export default function ActiveTagsVehiculos({ tags }) {
   };
   return (
     <>
+      <br />
       {tags.categoria ? (
         <Label as="a" style={{ marginBottom: 5, textTransform: "capitalize" }}>
           {handleCategoryName(tags.categoria)}

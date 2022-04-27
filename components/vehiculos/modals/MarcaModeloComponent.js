@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Grid, Header, Icon, Accordion, List } from "semantic-ui-react";
-import { groupByAlphabet, groupByDecade } from '../../../helpers/dataStructure';
+import { groupByAlphabet, groupByDecade, normalize } from '../../../helpers/dataStructure';
 import ModalFiltersDesk from "./ModalFiltersDesk";
 
-export default function MarcaModeloComponent({ filtros, params }) {
+export default function MarcaModeloComponent({ filtros, params, vendedor }) {
   const insertParam = (key, value, reset, persist) => {
     var kvp = document.location.search.substr(1).split('&');
     let i=0;
@@ -33,6 +33,9 @@ export default function MarcaModeloComponent({ filtros, params }) {
         } else {
             params = `${key}=${value}`;
         }
+    }
+    if (vendedor) {
+      params += `&vendedor=${normalize(vendedor.nombre)}-${vendedor.id}`;
     }
     document.location.search = params;
 }
