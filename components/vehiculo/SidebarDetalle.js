@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Grid, Header, Icon, Container, Button, Dimmer, Loader } from "semantic-ui-react";
+import { Grid, Header, Icon, Container, Button, Dimmer, Loader, Image } from "semantic-ui-react";
 import { useCookies } from "react-cookie"
 import { useSelector, useDispatch } from 'react-redux';
 import { addVehiculo } from '../../store/comparadorSlice';
@@ -80,8 +80,17 @@ export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
             <Header as="h1" style={{ marginTop: 8, color: colorText, marginBottom: 0 }}>
                 {vehiculo.title}
             </Header>
-            <Header as='h6' color='grey' style={{ marginTop: 0 }}>Publicado por:{" "}
-                <a href={`/vehiculos?vendedor=${normalize(vehiculo.sellerName)}-${vehiculo.sellerId}`}>{vehiculo.sellerName}</a>
+            <Header as='h6' color='grey' style={{ marginTop: 0, display: 'flex', alignItems: 'center' }}>
+                Publicado por:
+                <a style={{ marginLeft: 3 }} href={`/vehiculos?vendedor=${normalize(vehiculo.sellerName)}-${vehiculo.sellerId}`}>{vehiculo.sellerName}</a>
+                {vehiculo.sellerVerified ? (
+                    <Image 
+                    src="/images/verified_icon.png" 
+                    alt="verified icon" 
+                    href={`/vehiculos?vendedor=${normalize(vehiculo.sellerName)}-${vehiculo.sellerId}`} 
+                    style={{ width: 15, height: 15, margin: '0 0 0 2px' }} 
+                    />
+                ): null}
             </Header>
             <Header as="h2" style={{ marginTop: 8, color: colorText }}>
                 ${" "}

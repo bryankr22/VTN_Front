@@ -1,11 +1,13 @@
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import { Input, Header, Button, Container, Image, Grid } from "semantic-ui-react";
+import { Link } from '@mui/material';
 import { light } from "../../helpers/colors";
 import ActiveTagsVehiculos from "./ActiveTagsVehiculos";
 import ModalFiltersMobile from "./modals/ModalFiltersMobile";
 import ModalOrderMobile from "./modals/ModalOrderMobile";
 import ModalTechCardFilter from "./modals/ModalTechCardFilter";
+import { Instagram as InstagramIcon, Facebook as FacebookIcon } from '@mui/icons-material';
 
 export default function SidebarMobile({
   colorText,
@@ -54,7 +56,7 @@ export default function SidebarMobile({
                 <Image
                   src={
                     vendedor.image == 0
-                      ? IMAGE_DEFAULT
+                      ? "/images/logo_user.png"
                       : "https://vendetunave.s3.amazonaws.com/vendetunave/images/usuarios/" +
                       vendedor.image
                   }
@@ -67,7 +69,7 @@ export default function SidebarMobile({
               </Grid.Column>
               <Grid.Column width={9}>
                 <Header
-                  as="h5"
+                  as="h3"
                   style={{ textTransform: "uppercase", color: colorText, marginBottom: 2 }}
                 >
                   {vendedor.nombre}
@@ -79,7 +81,7 @@ export default function SidebarMobile({
                 </p>
 
                 {vendedor.website &&
-                  <a href={vendedor.website} target="_blank" rel="noreferrer" style={{ textDecoration: 'none', color: colorText, cursor: 'pointer', marginBottom: 5, display: 'block' }}>
+                  <a href={'https://' + (vendedor.website).replace('https://', '')} target="_blank" rel="noreferrer" style={{ textDecoration: 'none', color: colorText, cursor: 'pointer', marginBottom: 5, display: 'block' }}>
                     {vendedor.website}
                   </a>
                 }
@@ -88,11 +90,30 @@ export default function SidebarMobile({
                     {vendedor.telefono}
                   </a>
                 }
-                <Image.Group size='mini'>
-                  {vendedor.facebook && <Image style={{ margin: '5px 7px' }} as='a' href={vendedor.facebook} alt="icono facebook" target='_blank' className="icons" src="/images/facebook-logo.png" />}
-                  {vendedor.instagram && <Image style={{ margin: '5px 7px' }} as='a' href={vendedor.instagram} alt="icono instagram" target='_blank' className="icons" src="/images/instagram-logo.png" />}
-                  {vendedor.tiktok && <Image style={{ margin: '5px 7px' }} as='a' href={vendedor.tiktok} alt="icono tiktok" target='_blank' className="icons" src="/images/tiktok-logo.png" />}
-                </Image.Group>
+
+                <div>
+                  {vendedor.facebook &&
+                    <Link
+                      component="a"
+                      underline='none'
+                      target="_blank"
+                      href={vendedor.facebook}
+                    >
+                      <FacebookIcon style={{ color: colorText, margin: '0 2px' }} />
+                    </Link>
+                  }
+                  {vendedor.instagram &&
+                    <Link
+                      component="a"
+                      underline='none'
+                      target="_blank"
+                      href={vendedor.instagram}
+                    >
+                      <InstagramIcon style={{ color: colorText, margin: '0 3px' }} />
+                    </Link>
+                  }
+                  {vendedor.tiktok && <Image style={{ width: 19, height: 19, margin: '0 2px' }} as='a' href={vendedor.tiktok} alt="icono tiktok" target='_blank' className="icons" src="/images/tiktok-logo.png" />}
+                </div>
               </Grid.Column>
             </Grid.Row>
           </Grid>
@@ -152,7 +173,7 @@ export default function SidebarMobile({
           style={{
             border: "1px solid #2185d0",
             padding: ".78571429em 10px",
-            marginBottom: !params.vendedor ? 0: 10
+            marginBottom: !params.vendedor ? 0 : 10
           }}
           fluid={!!params.vendedor}
           floated="right"

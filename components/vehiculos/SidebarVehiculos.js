@@ -9,6 +9,7 @@ import {
   Button,
   Image
 } from "semantic-ui-react";
+import { Link } from '@mui/material';
 import { useSelector } from 'react-redux';
 import ActiveTagsVehiculos from "./ActiveTagsVehiculos";
 import ModalFiltersDesk from "./modals/ModalFiltersDesk";
@@ -16,7 +17,7 @@ import * as R from "ramda";
 import { extractMaxYearRange, extractMinYearRange, groupByAlphabet, groupByDecade, normalize } from "../../helpers/dataStructure";
 import { KM_FILTER, PRICES_FILTER } from "../../helpers/constants";
 import { dark, light } from "../../helpers/colors";
-import { IMAGE_DEFAULT } from "../../helpers/h-constants";
+import { Instagram as InstagramIcon, Facebook as FacebookIcon } from '@mui/icons-material';
 
 export default function SidebarVehiculos({ params, contadores, vehiculos, vendedor }) {
   const [filters, setFilters] = useState({
@@ -134,7 +135,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos, vended
           }
         });
         newUrl.searchParams.append(key, value);
-        
+
         params = newUrl.search;
       } else {
         params = vendedor ? `vendedor=${normalize(vendedor.nombre)}-${vendedor.id}&${key}=${value}` : `${key}=${value}`;
@@ -198,25 +199,25 @@ export default function SidebarVehiculos({ params, contadores, vehiculos, vended
           <style>
             {`
                 .icons {
-                    ${darkMode === dark && 'filter: invert(1);'}
+                    ${colorText === light && 'filter: invert(1);'}
                 }
             `}
           </style>
           <Image
             src={
               vendedor.image == 0
-                ? IMAGE_DEFAULT
+                ? "/images/logo_user.png"
                 : "https://vendetunave.s3.amazonaws.com/vendetunave/images/usuarios/" +
                 vendedor.image
             }
             size="medium"
             circular
             bordered
-            style={{ height: 210, width: 210, backgroundColor: light, objectFit: 'cover', margin: '0 auto' }}
+            style={{ height: 210, width: 210, backgroundColor: light, objectFit: vendedor.image == 0 ? 'conatin' : 'cover', margin: '0 auto' }}
             alt="Imagen de usuario"
           />
           <Header
-            as="h5"
+            as="h3"
             style={{ textTransform: "uppercase", color: colorText, marginBottom: 2 }}
           >
             {vendedor.nombre}
@@ -228,7 +229,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos, vended
           </p>
 
           {vendedor.website &&
-            <a href={vendedor.website} target="_blank" rel="noreferrer" style={{ textDecoration: 'none', color: colorText, cursor: 'pointer', marginBottom: 5, display: 'block' }}>
+            <a href={'https://' + (vendedor.website).replace('https://', '')} target="_blank" rel="noreferrer" style={{ textDecoration: 'none', color: colorText, cursor: 'pointer', marginBottom: 5, display: 'block' }}>
               {vendedor.website}
             </a>
           }
@@ -237,11 +238,30 @@ export default function SidebarVehiculos({ params, contadores, vehiculos, vended
               {vendedor.telefono}
             </a>
           }
-          <Image.Group size='mini'>
-            {vendedor.facebook && <Image style={{ margin: '10px 7px' }} as='a' href={vendedor.facebook} alt="icono facebook" target='_blank' className="icons" src="/images/facebook-logo.png" />}
-            {vendedor.instagram && <Image style={{ margin: '10px 7px' }} as='a' href={vendedor.instagram} alt="icono instagram" target='_blank' className="icons" src="/images/instagram-logo.png" />}
-            {vendedor.tiktok && <Image style={{ margin: '10px 7px' }} as='a' href={vendedor.tiktok} alt="icono tiktok" target='_blank' className="icons" src="/images/tiktok-logo.png" />}
-          </Image.Group>
+
+          <div>
+            {vendedor.facebook &&
+              <Link
+                component="a"
+                underline='none'
+                target="_blank"
+                href={vendedor.facebook}
+              >
+                <FacebookIcon style={{ color: colorText, margin: '0 2px' }} />
+              </Link>
+            }
+            {vendedor.instagram &&
+              <Link
+                component="a"
+                underline='none'
+                target="_blank"
+                href={vendedor.instagram}
+              >
+                <InstagramIcon style={{ color: colorText, margin: '0 3px' }} />
+              </Link>
+            }
+            {vendedor.tiktok && <Image style={{ width: 19, height: 19, margin: '0 2px' }} as='a' href={vendedor.tiktok} alt="icono tiktok" target='_blank' className="icons" src="/images/tiktok-logo.png" />}
+          </div>
         </>
       }
 

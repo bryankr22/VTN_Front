@@ -15,6 +15,12 @@ import { useRouter } from 'next/router';
 
 import { API_URL } from '../../helpers/constants';
 import { dark, light } from '../../helpers/colors';
+
+const CDN = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x200/"
+const REPLACE = "https://vendetunave.s3.amazonaws.com/"
+
+const getMetaUrl = (str = '') => `${CDN}vendetunave/images/usuarios/${str}`;
+
 export default function index({ data }) {
     const router = useRouter();
     const darkMode = useSelector(({ darkMode }) => darkMode.status);
@@ -51,12 +57,23 @@ export default function index({ data }) {
                 description="Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."
                 openGraph={{
                     title: "VendeTuNave - Carros en Venta",
+                    images: data.vendedor.image != 0 && [
+                        {
+                            url: `${getMetaUrl(data.vendedor.image)}`,
+                            alt: data.vendedor.nombre,
+                            width: 300,
+                            height: 200,
+                        },
+                    ],
                     locale: "es_ES",
                     type: "website",
                     description: "Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."
                 }}
             />
             <Head>
+                {data.vendedor.image != 0 && 
+                    <meta property="og:image:secure_url" content={`${getMetaUrl(data.vendedor.image)}`} />
+                }
                 <meta property="keywords" content="carros usados, venta de carros, carros de segunda, compra y venta de motos, venta de carros usados, carros baratos, carros usados bogota, carros usados medellin" />
             </Head>
             <Responsive {...Responsive.onlyMobile}>
