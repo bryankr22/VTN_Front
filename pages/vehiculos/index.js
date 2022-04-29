@@ -57,10 +57,10 @@ export default function index({ data }) {
                 description="Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."
                 openGraph={{
                     title: "VendeTuNave - Carros en Venta",
-                    images: data.vendedor.image != 0 && [
+                    images: data.vendedor && data.vendedor.image != 0 && [
                         {
                             url: `${getMetaUrl(data.vendedor.image)}`,
-                            alt: data.vendedor.nombre,
+                            alt: data?.vendedor?.nombre,
                             width: 300,
                             height: 200,
                         },
@@ -71,7 +71,7 @@ export default function index({ data }) {
                 }}
             />
             <Head>
-                {data.vendedor.image != 0 && 
+                {data.vendedor && data.vendedor.image != 0 && 
                     <meta property="og:image:secure_url" content={`${getMetaUrl(data.vendedor.image)}`} />
                 }
                 <meta property="keywords" content="carros usados, venta de carros, carros de segunda, compra y venta de motos, venta de carros usados, carros baratos, carros usados bogota, carros usados medellin" />
