@@ -20,8 +20,11 @@ const requestForCity = async (city: string): Promise<string> => {
 
     const $ = load(htmlData)
 
+    console.log('contains', htmlData.includes('brIPFA'))
+
     const pickAndPlate = $(
-        "div[class^='Card__StyledCard'] div[class^='LicensePlate__StyledLicensePlate']:lt(1)"
+        // "div[class^='Card__StyledCard'] div[class^='LicensePlate__StyledLicensePlate']:lt(1)"
+        "div.brIPFA:lt(1)"
     ).text()
 
     return pickAndPlate
