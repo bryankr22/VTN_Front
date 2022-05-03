@@ -192,8 +192,6 @@ export default function SidebarVehiculos({ params, contadores, vehiculos, vended
   const colorText = darkMode === light ? dark : light;
   const colorTextFilters = darkMode === light ? undefined : light;
 
-  console.log(vendedor);
-
   return (
     <Grid.Column style={{ paddingLeft: "3%", backgroundColor: darkMode }} width={3}>
       {params.vendedor &&
