@@ -53,10 +53,13 @@ export default function index({ data }) {
                 `}
             </style>
             <NextSeo
-                title="VendeTuNave - Carros en Venta"
-                description="Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."
+                title={data.vendedor ? `Tienda ${data.vendedor.nombre} | VendeTuNave` : "VendeTuNave - Carros en Venta"}
+                description={
+                    data.vendedor ? 
+                    `Carros / motos nuevos y usados en venta disponibles en ${data.vendedor.nombre} / ${data?.vehicles[0]?.title}${data.vehicles[1] ? ', ' + data?.vehicles[1]?.title : ''}${data.vehicles[2] ? ', ' + data?.vehicles[2]?.title : ''}.` : 
+                    "Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."}
                 openGraph={{
-                    title: "VendeTuNave - Carros en Venta",
+                    title: data.vendedor ? `Tienda ${data.vendedor.nombre} | VendeTuNave` : "VendeTuNave - Carros en Venta",
                     images: data.vendedor && data.vendedor.image != 0 && [
                         {
                             url: `${getMetaUrl(data.vendedor.image)}`,
@@ -67,14 +70,23 @@ export default function index({ data }) {
                     ],
                     locale: "es_ES",
                     type: "website",
-                    description: "Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."
+                    description: data.vendedor ?
+                        `Carros / motos nuevos y usados en venta disponibles en ${data.vendedor.nombre} / ${data?.vehicles[0]?.title}${data.vehicles[1] ? ', ' + data?.vehicles[1]?.title : ''}${data.vehicles[2] ? ', ' + data?.vehicles[2]?.title : ''}.` :
+                        "Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."
                 }}
             />
             <Head>
                 {data.vendedor && data.vendedor.image != 0 && 
                     <meta property="og:image:secure_url" content={`${getMetaUrl(data.vendedor.image)}`} />
                 }
-                <meta property="keywords" content="carros usados, venta de carros, carros de segunda, compra y venta de motos, venta de carros usados, carros baratos, carros usados bogota, carros usados medellin" />
+                <meta 
+                    property="keywords" 
+                    content={
+                        data.vendedor ?
+                            `vende tu nave, inventario, catalogo, vendedor ${data.vendedor.nombre}, tienda ${data.vendedor.nombre}` :
+                            "carros usados, venta de carros, carros de segunda, compra y venta de motos, venta de carros usados, carros baratos, carros usados bogota, carros usados medellin"
+                    }
+                />
             </Head>
             <Responsive {...Responsive.onlyMobile}>
                 <style>

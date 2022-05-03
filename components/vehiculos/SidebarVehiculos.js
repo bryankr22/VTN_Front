@@ -217,15 +217,15 @@ export default function SidebarVehiculos({ params, contadores, vehiculos, vended
             alt="Imagen de usuario"
           />
           <Header
-            as="h3"
-            style={{ textTransform: "uppercase", color: colorText, marginBottom: 2, display: 'flex', alignItems: 'center' }}
+            as="h1"
+            style={{ textTransform: "uppercase", color: colorText, marginBottom: 2, fontSize: '1.28571429rem' }}
           >
             {vendedor.nombre}
             {vendedor.confiable ? (
               <Image
                 src="/images/verified_icon.png"
                 alt="verified icon"
-                style={{ width: 16, height: 16, margin: '-3px 0 0 2px' }}
+                style={{ width: 16, height: 16, margin: '-5px 0 0 3px' }}
               />
             ) : null}
           </Header>
