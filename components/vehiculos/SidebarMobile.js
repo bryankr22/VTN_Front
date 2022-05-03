@@ -70,9 +70,16 @@ export default function SidebarMobile({
               <Grid.Column width={9}>
                 <Header
                   as="h3"
-                  style={{ textTransform: "uppercase", color: colorText, marginBottom: 2 }}
+                  style={{ textTransform: "uppercase", color: colorText, marginBottom: 2, display: 'flex', alignItems: 'center' }}
                 >
                   {vendedor.nombre}
+                  {vendedor.confiable ? (
+                    <Image
+                      src="/images/verified_icon.png"
+                      alt="verified icon"
+                      style={{ width: 16, height: 16, margin: '-3px 0 0 2px' }}
+                    />
+                  ) : null}
                 </Header>
                 <p
                   style={{ color: colorText, margin: 0 }}
@@ -198,21 +205,21 @@ export default function SidebarMobile({
             onClose={() => setModalFilter(!modalFilter)}
           />
         )}
-        {!params.vendedor &&
-          <Button
-            style={{
-              border: "1px solid",
-              background: "transparent",
-              color: "#2185d0",
-              padding: ".78571429em 5px",
-            }}
-            floated="right"
-            color="blue"
-            onClick={() => setModalOrder(true)}
-          >
-            Ordenar
-          </Button>
-        }
+        <Button
+          style={{
+            border: "1px solid",
+            background: "transparent",
+            color: "#2185d0",
+            padding: ".78571429em 5px",
+            marginBottom: !params.vendedor ? 0 : 10
+          }}
+          fluid={!!params.vendedor}
+          floated="right"
+          color="blue"
+          onClick={() => setModalOrder(true)}
+        >
+          Ordenar
+        </Button>
         <ModalOrderMobile
           isFicha={isFicha}
           showModal={modalOrder}

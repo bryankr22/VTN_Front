@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import { Grid, Header, Icon, Accordion, List } from "semantic-ui-react";
 import { groupByAlphabet, groupByDecade, normalize } from '../../../helpers/dataStructure';
 import ModalFiltersDesk from "./ModalFiltersDesk";
 
 export default function MarcaModeloComponent({ filtros, params, vendedor }) {
+  const router = useRouter();
+  const newParams = router.query;
+
   const insertParam = (key, value, reset, persist) => {
     var kvp = document.location.search.substr(1).split('&');
     let i=0;
@@ -23,7 +27,7 @@ export default function MarcaModeloComponent({ filtros, params, vendedor }) {
         if(persist) {
             const url = new URL(location.href);
             const newUrl = new URL('http://test.com');
-            if (vendedor) {
+            if (newParams.vendedor) {
               newUrl.searchParams.append('vendedor', `${normalize(vendedor.nombre)}-${vendedor.id}`);
             }
             url.searchParams.forEach((nValue, nKey) => {
@@ -34,7 +38,7 @@ export default function MarcaModeloComponent({ filtros, params, vendedor }) {
             newUrl.searchParams.append(key, value);
             params = newUrl.search
         } else {
-          params = vendedor ? `vendedor=${normalize(vendedor.nombre)}-${vendedor.id}&${key}=${value}` : `${key}=${value}`;
+          params = newParams.vendedor ? `vendedor=${normalize(vendedor.nombre)}-${vendedor.id}&${key}=${value}` : `${key}=${value}`;
         }
     }
 
@@ -136,7 +140,7 @@ export default function MarcaModeloComponent({ filtros, params, vendedor }) {
                         style={{
                           padding: "7px 0px",
                           borderBottom: "1px solid #cccccc",
-                          color: params.marca === itemSecond.slug ? "#2185d0": undefined,
+                          color: newParams.marca === itemSecond.slug ? "#2185d0": undefined,
                         }}
                         onClick={() => {
                           if (itemSecond.slug !== "") {
@@ -169,7 +173,7 @@ export default function MarcaModeloComponent({ filtros, params, vendedor }) {
             </List>
         </Accordion.Content>
       </Accordion>
-      {params.marca && (
+      {newParams.marca && (
         <Accordion style={{ width: "100%", marginBottom: 15 }}>
           <Accordion.Title
             style={{
@@ -200,7 +204,7 @@ export default function MarcaModeloComponent({ filtros, params, vendedor }) {
                           style={{
                             padding: "7px 0px",
                             borderBottom: "1px solid #cccccc",
-                            color: params.modelo === itemSecond.slug ? "#2185d0": undefined,
+                            color: newParams.modelo === itemSecond.slug ? "#2185d0": undefined,
                           }}
                           onClick={() => {
                             if (itemSecond.slug !== "") {

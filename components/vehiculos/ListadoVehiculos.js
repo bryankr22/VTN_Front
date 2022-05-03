@@ -127,10 +127,11 @@ export default function ListadoVehiculos({
           box-shadow: 0 1px 3px 0 ${colorBorder}, 0 0 0 1px ${colorBorder};
         }
       `}</style>
-      {!params.vendedor &&
-        <Container fluid style={{ textAlign: "center", margin: 10 }}>
-          <Grid>
-            <Grid.Column width={12}>
+
+      <Container fluid style={{ textAlign: "center", margin: 10 }}>
+        <Grid>
+          <Grid.Column width={12}>
+            {!params.vendedor &&
               <Input
                 style={{ width: "100%" }}
                 onChange={(e, { value }) => setQuery(value)}
@@ -142,20 +143,20 @@ export default function ListadoVehiculos({
                 }}
                 placeholder="Buscar..."
               />
-            </Grid.Column>
-            <Grid.Column width={4}>
-              <Select
-                onChange={handleChangeFilter}
-                value={parseInt(params.orden)}
-                fluid
-                placeholder="Ordenar por..."
-                search
-                options={filter}
-              />
-            </Grid.Column>
-          </Grid>
-        </Container>
-      }
+            }
+          </Grid.Column>
+          <Grid.Column width={4}>
+            <Select
+              onChange={handleChangeFilter}
+              value={parseInt(params.orden)}
+              fluid
+              placeholder="Ordenar por..."
+              search
+              options={filter}
+            />
+          </Grid.Column>
+        </Grid>
+      </Container>
       <HeaderVehiculo />
       {!params.vendedor &&
         <ZoneAd slug={params.categoria} />

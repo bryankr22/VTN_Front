@@ -192,6 +192,8 @@ export default function SidebarVehiculos({ params, contadores, vehiculos, vended
   const colorText = darkMode === light ? dark : light;
   const colorTextFilters = darkMode === light ? undefined : light;
 
+  console.log(vendedor);
+
   return (
     <Grid.Column style={{ paddingLeft: "3%", backgroundColor: darkMode }} width={3}>
       {params.vendedor &&
@@ -218,9 +220,16 @@ export default function SidebarVehiculos({ params, contadores, vehiculos, vended
           />
           <Header
             as="h3"
-            style={{ textTransform: "uppercase", color: colorText, marginBottom: 2 }}
+            style={{ textTransform: "uppercase", color: colorText, marginBottom: 2, display: 'flex', alignItems: 'center' }}
           >
             {vendedor.nombre}
+            {vendedor.confiable ? (
+              <Image
+                src="/images/verified_icon.png"
+                alt="verified icon"
+                style={{ width: 16, height: 16, margin: '-3px 0 0 2px' }}
+              />
+            ) : null}
           </Header>
           <p
             style={{ color: colorText, margin: 0 }}
