@@ -28,7 +28,7 @@ export default function index({ data }) {
     const darkMode = useSelector(({ darkMode }) => darkMode.status);
     const colorText = darkMode === light ? dark : light;
 
-    if(!data.vendedor) return <Custom404 />;
+    if(router.query.vendedor && !data.vendedor) return <Custom404 />;
 
     return (
         <PublicLayout>
