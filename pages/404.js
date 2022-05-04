@@ -6,7 +6,7 @@ import PublicLayout from '../layouts/PublicLayout';
 export default function Custom404() {
 
     setTimeout(() => {
-        location.href = '/'
+        window.location.href = '/';
     }, 3000);
 
     return (
