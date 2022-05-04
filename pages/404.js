@@ -4,6 +4,11 @@ import { Container, Image } from 'semantic-ui-react';
 import PublicLayout from '../layouts/PublicLayout';
 
 export default function Custom404() {
+
+    setTimeout(() => {
+        location.replace("/");
+    }, 3000);
+
     return (
         <PublicLayout>
             <Container style={{ paddingTop: 66, minHeight: 400 }} text textAlign='center'>

@@ -7,6 +7,8 @@ import PublicLayout from '../../layouts/PublicLayout';
 import SidebarVehiculos from '../../components/vehiculos/SidebarVehiculos';
 import ListadoVehiculos from '../../components/vehiculos/ListadoVehiculos';
 
+import Custom404 from '../../pages/404';
+
 import SidebarMobile from '../../components/vehiculos/SidebarMobile';
 import ListadoVehiculosMobile from '../../components/vehiculos/ListadoVehiculosMobile';
 
@@ -25,6 +27,9 @@ export default function index({ data }) {
     const router = useRouter();
     const darkMode = useSelector(({ darkMode }) => darkMode.status);
     const colorText = darkMode === light ? dark : light;
+
+    if(!data.vendedor) return <Custom404 />;
+
     return (
         <PublicLayout>
             <style>

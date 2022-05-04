@@ -41,7 +41,7 @@ export default function SidebarMobile({
 
   return (
     <>
-      {params.vendedor &&
+      {params.vendedor && vendedor &&
         <Container style={{ marginTop: 15 }}>
           <style>
             {`

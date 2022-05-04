@@ -194,7 +194,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos, vended
 
   return (
     <Grid.Column style={{ paddingLeft: "3%", backgroundColor: darkMode }} width={3}>
-      {params.vendedor &&
+      {params.vendedor && vendedor &&
         <>
           <style>
             {`
