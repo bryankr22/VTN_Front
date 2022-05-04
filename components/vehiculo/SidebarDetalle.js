@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Grid, Header, Icon, Container, Button, Dimmer, Loader } from "semantic-ui-react";
+import { Grid, Header, Icon, Container, Button, Dimmer, Loader, Image } from "semantic-ui-react";
 import { useCookies } from "react-cookie"
 import { useSelector, useDispatch } from 'react-redux';
 import { addVehiculo } from '../../store/comparadorSlice';
@@ -10,6 +10,7 @@ import { AUTH_URL, favoritos_add_vehiculo } from '../../helpers/constants';
 import jwt from 'jsonwebtoken';
 import { useRouter } from 'next/router'
 import { light } from '../../helpers/colors';
+import { normalize } from '../../helpers/dataStructure';
 
 export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
     const dispatch = useDispatch()
@@ -76,8 +77,23 @@ export default function SidebarDetalle({ vehiculo, vehicleFav, id }) {
                     <p style={{ display: 'inline', color: colorText }}>{new Intl.NumberFormat("de-DE").format(vehiculo.views)}</p>
                 </div>
             </Header>
-            <Header as="h1" style={{ marginTop: 8, color: colorText }}>
+            <Header as="h1" style={{ marginTop: 8, color: colorText, marginBottom: 0 }}>
                 {vehiculo.title}
+            </Header>
+            <Header as='h6' color='grey' style={{ marginTop: 0 }}>
+                Publicado por: 
+                {vehiculo.sellerName.length > 27 &&  <br />}
+                <a style={{ marginLeft: 3 }} href={`/vehiculos?vendedor=${normalize(vehiculo.sellerName)}-${vehiculo.sellerId}`}>
+                    {vehiculo.sellerName}
+                    {vehiculo.sellerVerified ? (
+                        <Image
+                            src="/images/verified_icon.png"
+                            alt="verified icon"
+                            href={`/vehiculos?vendedor=${normalize(vehiculo.sellerName)}-${vehiculo.sellerId}`}
+                            style={{ width: 15, height: 15, margin: '-1px 0 0 2px' }}
+                        />
+                    ) : null}
+                </a>
             </Header>
             <Header as="h2" style={{ marginTop: 8, color: colorText }}>
                 ${" "}

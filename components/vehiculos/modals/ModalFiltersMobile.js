@@ -16,7 +16,7 @@ import OpcionesComponent from "./OpcionesComponent";
 import MarcaModeloComponent from "./MarcaModeloComponent";
 import TiposComponent from "./TiposComponent";
 import ModalFiltersDesk from "./ModalFiltersDesk";
-import { groupByAlphabet, groupByDecade } from "../../../helpers/dataStructure";
+import { groupByAlphabet, groupByDecade, normalize } from "../../../helpers/dataStructure";
 import { KM_FILTER, PRICES_FILTER } from '../../../helpers/constants';
 
 const getSlug = (slug) => {
@@ -33,6 +33,7 @@ export default function ModalFiltersMobile({
   onClose,
   filtros,
   params,
+  vendedor
 }) {
   const mapping_contador = (contador, canWatchAll = true, { lower } = {}) => {
     const list = Array.isArray(contador) ? contador : Object.keys(contador);
@@ -83,15 +84,19 @@ export default function ModalFiltersMobile({
     { label: "Otros", slug: "otros" },
   ];
 
-  const objectCities = [
-    {
-      text: "Ubicacion",
-      open: false,
-      values: mapping_contador(filtros.ubicacion, true, { lower: true }),
-      slug: "ubicacion",
-      component: false,
-    }
-  ];
+  const objectCities = [];
+
+  if (!params.vendedor) {
+    objectCities.push(
+      {
+        text: "Ubicacion",
+        open: false,
+        values: mapping_contador(filtros.ubicacion, true, { lower: true }),
+        slug: "ubicacion",
+        component: false,
+      }
+    );
+  }
 
   if (params.ubicacion !== undefined) {
     objectCities.push(
@@ -118,12 +123,12 @@ export default function ModalFiltersMobile({
     {
       text: "Tipos",
       component: true,
-      render: <TiposComponent filtros={filtros} params={params} />,
+      render: <TiposComponent filtros={filtros} params={params} vendedor={vendedor} />,
     },
     {
       text: "Marcas",
       component: true,
-      render: <MarcaModeloComponent filtros={filtros} params={params} />,
+      render: <MarcaModeloComponent filtros={filtros} params={params} vendedor={vendedor} />,
     },
     //Marcas
     {
@@ -218,6 +223,9 @@ export default function ModalFiltersMobile({
       if (persistKey[key]?.length) {
         const url = new URL(location.href);
         const newUrl = new URL("http://test.com");
+        if (vendedor) {
+          newUrl.searchParams.append('vendedor', `${normalize(vendedor.nombre)}-${vendedor.id}`);
+        }
         url.searchParams.forEach((nValue, nKey) => {
           if (persistKey[key].includes(nKey)) {
             newUrl.searchParams.append(nKey, nValue);
@@ -226,9 +234,10 @@ export default function ModalFiltersMobile({
         newUrl.searchParams.append(key, value);
         params = newUrl.search;
       } else {
-        params = `${key}=${value}`;
+        params = vendedor ? `vendedor=${normalize(vendedor.nombre)}-${vendedor.id}&${key}=${value}` : `${key}=${value}`;
       }
     }
+
     document.location.search = params;
   };
   const [modalAll, setModalAll] = useState(false);

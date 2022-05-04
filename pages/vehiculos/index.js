@@ -15,6 +15,12 @@ import { useRouter } from 'next/router';
 
 import { API_URL } from '../../helpers/constants';
 import { dark, light } from '../../helpers/colors';
+
+const CDN = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x200/"
+const REPLACE = "https://vendetunave.s3.amazonaws.com/"
+
+const getMetaUrl = (str = '') => `${CDN}vendetunave/images/usuarios/${str}`;
+
 export default function index({ data }) {
     const router = useRouter();
     const darkMode = useSelector(({ darkMode }) => darkMode.status);
@@ -47,17 +53,40 @@ export default function index({ data }) {
                 `}
             </style>
             <NextSeo
-                title="VendeTuNave - Carros en Venta"
-                description="Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."
+                title={data.vendedor ? `Tienda ${data.vendedor.nombre} | VendeTuNave` : "VendeTuNave - Carros en Venta"}
+                description={
+                    data.vendedor ? 
+                    `Carros / motos nuevos y usados en venta disponibles en ${data.vendedor.nombre} / ${data?.vehicles[0]?.title}${data.vehicles[1] ? ', ' + data?.vehicles[1]?.title : ''}${data.vehicles[2] ? ', ' + data?.vehicles[2]?.title : ''}.` : 
+                    "Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."}
                 openGraph={{
-                    title: "VendeTuNave - Carros en Venta",
+                    title: data.vendedor ? `Tienda ${data.vendedor.nombre} | VendeTuNave` : "VendeTuNave - Carros en Venta",
+                    images: data.vendedor && data.vendedor.image != 0 && [
+                        {
+                            url: `${getMetaUrl(data.vendedor.image)}`,
+                            alt: data?.vendedor?.nombre,
+                            width: 300,
+                            height: 200,
+                        },
+                    ],
                     locale: "es_ES",
                     type: "website",
-                    description: "Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."
+                    description: data.vendedor ?
+                        `Carros / motos nuevos y usados en venta disponibles en ${data.vendedor.nombre} / ${data?.vehicles[0]?.title}${data.vehicles[1] ? ', ' + data?.vehicles[1]?.title : ''}${data.vehicles[2] ? ', ' + data?.vehicles[2]?.title : ''}.` :
+                        "Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."
                 }}
             />
             <Head>
-                <meta property="keywords" content="carros usados, venta de carros, carros de segunda, compra y venta de motos, venta de carros usados, carros baratos, carros usados bogota, carros usados medellin" />
+                {data.vendedor && data.vendedor.image != 0 && 
+                    <meta property="og:image:secure_url" content={`${getMetaUrl(data.vendedor.image)}`} />
+                }
+                <meta 
+                    property="keywords" 
+                    content={
+                        data.vendedor ?
+                            `vende tu nave, inventario, catalogo, vendedor ${data.vendedor.nombre}, tienda ${data.vendedor.nombre}` :
+                            "carros usados, venta de carros, carros de segunda, compra y venta de motos, venta de carros usados, carros baratos, carros usados bogota, carros usados medellin"
+                    }
+                />
             </Head>
             <Responsive {...Responsive.onlyMobile}>
                 <style>
@@ -92,6 +121,7 @@ export default function index({ data }) {
                     colorText={colorText}
                     params={router.query}
                     contadores={{ ...data.contadores, total_records: data.total_records }}
+                    vendedor={data.vendedor}
                     vehiculos={data.vehicles} />
                 <ListadoVehiculosMobile
                     params={router.query}
@@ -103,6 +133,7 @@ export default function index({ data }) {
                 <SidebarMobile
                     params={router.query}
                     contadores={{ ...data.contadores, total_records: data.total_records }}
+                    vendedor={data.vendedor}
                     vehiculos={data.vehicles} />
                 <ListadoVehiculosMobile
                     params={router.query}
@@ -116,6 +147,7 @@ export default function index({ data }) {
                         params={router.query}
                         contadores={{ ...data.contadores, total_records: data.total_records }}
                         vehiculos={data.vehicles}
+                        vendedor={data.vendedor}
                     />
                     <ListadoVehiculos
                         params={router.query}
@@ -131,6 +163,7 @@ export default function index({ data }) {
 export async function getServerSideProps({ query }) {
     const res = await axios.get(`${API_URL}/vehiculos`, {
         params: {
+            vendedor: query.vendedor,
             categoria: query.categoria,
             page: query.page,
             ubicacion: query.ubicacion,

@@ -127,20 +127,23 @@ export default function ListadoVehiculos({
           box-shadow: 0 1px 3px 0 ${colorBorder}, 0 0 0 1px ${colorBorder};
         }
       `}</style>
+
       <Container fluid style={{ textAlign: "center", margin: 10 }}>
         <Grid>
           <Grid.Column width={12}>
-            <Input
-              style={{ width: "100%" }}
-              onChange={(e, { value }) => setQuery(value)}
-              defaultValue={query}
-              onKeyDown={(e) => handleKeyDown(e)}
-              action={{
-                icon: "search",
-                onClick: () => handleSubmit(),
-              }}
-              placeholder="Buscar..."
-            />
+            {!params.vendedor &&
+              <Input
+                style={{ width: "100%" }}
+                onChange={(e, { value }) => setQuery(value)}
+                defaultValue={query}
+                onKeyDown={(e) => handleKeyDown(e)}
+                action={{
+                  icon: "search",
+                  onClick: () => handleSubmit(),
+                }}
+                placeholder="Buscar..."
+              />
+            }
           </Grid.Column>
           <Grid.Column width={4}>
             <Select
@@ -155,7 +158,9 @@ export default function ListadoVehiculos({
         </Grid>
       </Container>
       <HeaderVehiculo />
-      <ZoneAd slug={params.categoria} />
+      {!params.vendedor &&
+        <ZoneAd slug={params.categoria} />
+      }
       <style>{`
         .label-premium {
           background-color: rgb(198, 168, 29) !important;

@@ -89,7 +89,9 @@ export default function ListadoVehiculosMobile({
     return (
         <>
             <HeaderVehiculo />
-            <ZoneAd slug={params.categoria} />
+            {!params.vendedor &&
+                <ZoneAd slug={params.categoria} />
+            }
             <style>{`
                 .ui.card, .ui.cards>.card {
                 -webkit-box-shadow: 0 1px 3px 0 ${colorBorder}, 0 0 0 1px ${colorBorder};

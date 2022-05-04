@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Grid, Header, Container, Icon, Button, Form, Dimmer, Loader, Message } from "semantic-ui-react";
+import { Grid, Header, Container, Icon, Button, Form, Dimmer, Loader, Message, Image } from "semantic-ui-react";
 import { useCookies } from "react-cookie"
 import { useSelector, useDispatch } from 'react-redux';
 import { addVehiculo } from '../../store/comparadorSlice';
@@ -9,6 +9,7 @@ import { API_URL, AUTH_URL, favoritos_add_vehiculo } from '../../helpers/constan
 import jwt from 'jsonwebtoken';
 import { useRouter } from 'next/router'
 import { dark, light } from '../../helpers/colors';
+import { normalize } from '../../helpers/dataStructure';
 
 export default function SidebarDetalleDesk({ vehiculo, vehicleFav, diasPublicado, accesorio, id }) {
     const dispatch = useDispatch()
@@ -49,7 +50,7 @@ export default function SidebarDetalleDesk({ vehiculo, vehicleFav, diasPublicado
             idVehicle: vehiculo.id,
             state: true
         };
-        axios.post(AUTH_URL + favoritos_add_vehiculo, dataSend, config).then((res) => {
+        axios.post(AUTH_URL + favoritos_add_vehiculo, dataSend, config).then(() => {
             setLoading(false);
             router.push('/usuario/favoritos');
         })
@@ -96,8 +97,20 @@ export default function SidebarDetalleDesk({ vehiculo, vehicleFav, diasPublicado
             <Dimmer style={{ position: "fixed" }} active={loading}>
                 <Loader>{loadingMessage}</Loader>
             </Dimmer>
-            <Header as="h1" textAlign="left" style={{ color: colorText }}>
+            <Header as="h1" textAlign="left" style={{ color: colorText, marginBottom: 0 }}>
                 {vehiculo.title}
+            </Header>
+            <Header as='h6' color='grey' style={{ marginTop: 0, display: 'flex', alignItems: 'center' }}>
+                Publicado por:
+                <a style={{ marginLeft: 3 }} href={`/vehiculos?vendedor=${normalize(vehiculo.sellerName)}-${vehiculo.sellerId}`}>{vehiculo.sellerName}</a>
+                {vehiculo.sellerVerified ? (
+                    <Image 
+                    src="/images/verified_icon.png" 
+                    alt="verified icon" 
+                    href={`/vehiculos?vendedor=${normalize(vehiculo.sellerName)}-${vehiculo.sellerId}`} 
+                    style={{ width: 15, height: 15, margin: '0 0 0 2px' }} 
+                    />
+                ): null}
             </Header>
             <Header
                 textAlign="left"
