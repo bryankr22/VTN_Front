@@ -218,7 +218,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos, vended
           />
           <Header
             as="h1"
-            style={{ textTransform: "uppercase", color: colorText, marginBottom: 2, fontSize: '1.28571429rem' }}
+            style={{ textTransform: "uppercase", color: colorText, marginBottom: 2, fontSize: '1.28571429rem', wordWrap: 'break-word' }}
           >
             {vendedor.nombre}
             {vendedor.confiable ? (
@@ -235,19 +235,19 @@ export default function SidebarVehiculos({ params, contadores, vehiculos, vended
             Vehículos publicados: {contadores.total_records}
           </p>
 
-          {vendedor.website &&
+          {vendedor.website && vendedor.website != "null" &&
             <a href={'https://' + (vendedor.website).replace('https://', '')} target="_blank" rel="noreferrer" style={{ textDecoration: 'none', color: colorText, cursor: 'pointer', marginBottom: 5, display: 'block' }}>
               {vendedor.website}
             </a>
           }
-          {vendedor.telefono &&
+          {vendedor.telefono && vendedor.telefono != "null" &&
             <a href={"https://api.whatsapp.com/send?phone=57" + vendedor.telefono + "&text=Hola,%20estoy%20interesado.&source=vendetunave.co&data="} target="_blank" rel="noreferrer">
               {vendedor.telefono}
             </a>
           }
 
           <div>
-            {vendedor.facebook &&
+            {vendedor.facebook && vendedor.facebook != "null" &&
               <Link
                 component="a"
                 underline='none'
@@ -257,7 +257,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos, vended
                 <FacebookIcon style={{ color: colorText, margin: '0 2px' }} />
               </Link>
             }
-            {vendedor.instagram &&
+            {vendedor.instagram && vendedor.instagram != "null" &&
               <Link
                 component="a"
                 underline='none'
@@ -267,7 +267,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos, vended
                 <InstagramIcon style={{ color: colorText, margin: '0 3px' }} />
               </Link>
             }
-            {vendedor.tiktok && <Image style={{ width: 19, height: 19, margin: '0 2px' }} as='a' href={vendedor.tiktok} alt="icono tiktok" target='_blank' className="icons" src="/images/tiktok-logo.png" />}
+            {vendedor.tiktok && vendedor.tiktok != "null" && <Image style={{ width: 19, height: 19, margin: '0 2px' }} as='a' href={vendedor.tiktok} alt="icono tiktok" target='_blank' className="icons" src="/images/tiktok-logo.png" />}
           </div>
         </>
       }
