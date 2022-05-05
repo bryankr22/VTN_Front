@@ -273,7 +273,7 @@ export default function perfil() {
                   <label style={{ color: colorText }}>Website (Url / link de página)</label>
                   <Input
                     name="website"
-                    placeholder="https://www.vendetunave.co/"
+                    placeholder="ej: https://www.vendetunave.co/"
                     value={usuario.website}
                     onChange={(e, { value }) =>
                       setUsuario({ ...usuario, website: value })
@@ -291,7 +291,7 @@ export default function perfil() {
                   <label style={{ color: colorText }}>Facebook (Url / link de página)</label>
                   <Input
                     name="facebook"
-                    placeholder="https://www.facebook.com/vendetunave/"
+                    placeholder="ej: https://www.facebook.com/vendetunave/"
                     value={usuario.facebook}
                     onChange={(e, { value }) =>
                       setUsuario({ ...usuario, facebook: value })
@@ -306,7 +306,7 @@ export default function perfil() {
                   <label style={{ color: colorText }}>Instagram (Url / link de página)</label>
                   <Input
                     name="instagram"
-                    placeholder="https://instagram.com/vendetunave?igshid=YmMyMTA2M2Y="
+                    placeholder="ej: https://instagram.com/vendetunave?igshid=YmMyMTA2M2Y="
                     value={usuario.instagram}
                     onChange={(e, { value }) =>
                       setUsuario({ ...usuario, instagram: value })
@@ -321,7 +321,7 @@ export default function perfil() {
                   <label style={{ color: colorText }}>Tiktok (Url / link de página)</label>
                   <Input
                     name="tiktok"
-                    placeholder="https://vm.tiktok.com/ZMLsVNcd5/"
+                    placeholder="ej: https://vm.tiktok.com/ZMLsVNcd5/"
                     value={usuario.tiktok}
                     onChange={(e, { value }) =>
                       setUsuario({ ...usuario, tiktok: value })
@@ -418,7 +418,7 @@ export default function perfil() {
                   <label style={{ color: colorText }}>Website (Url / link de página)</label>
                   <Input
                     name="website"
-                    placeholder="https://www.vendetunave.co/"
+                    placeholder="ej: https://www.vendetunave.co/"
                     value={usuario.website}
                     onChange={(e, { value }) =>
                       setUsuario({ ...usuario, website: value })
@@ -429,7 +429,7 @@ export default function perfil() {
                   <label style={{ color: colorText }}>Facebook (Url / link de página)</label>
                   <Input
                     name="facebook"
-                    placeholder="https://www.facebook.com/vendetunave/"
+                    placeholder="ej: https://www.facebook.com/vendetunave/"
                     value={usuario.facebook}
                     onChange={(e, { value }) =>
                       setUsuario({ ...usuario, facebook: value })
@@ -440,7 +440,7 @@ export default function perfil() {
                   <label style={{ color: colorText }}>Instagram (Url / link de página)</label>
                   <Input
                     name="instagram"
-                    placeholder="https://instagram.com/vendetunave?igshid=YmMyMTA2M2Y="
+                    placeholder="ej: https://instagram.com/vendetunave?igshid=YmMyMTA2M2Y="
                     value={usuario.instagram}
                     onChange={(e, { value }) =>
                       setUsuario({ ...usuario, instagram: value })
@@ -451,7 +451,7 @@ export default function perfil() {
                   <label style={{ color: colorText }}>Tiktok (Url / link de página)</label>
                   <Input
                     name="tiktok"
-                    placeholder="https://vm.tiktok.com/ZMLsVNcd5/"
+                    placeholder="ej: https://vm.tiktok.com/ZMLsVNcd5/"
                     value={usuario.tiktok}
                     onChange={(e, { value }) =>
                       setUsuario({ ...usuario, tiktok: value })
@@ -547,7 +547,7 @@ export default function perfil() {
                   <label style={{ color: colorText }}>Website (Url / link de página)</label>
                   <Input
                     name="website"
-                    placeholder="https://www.vendetunave.co/"
+                    placeholder="ej: https://www.vendetunave.co/"
                     value={usuario.website}
                     onChange={(e, { value }) =>
                       setUsuario({ ...usuario, website: value })
@@ -558,7 +558,7 @@ export default function perfil() {
                   <label style={{ color: colorText }}>Facebook (Url / link de página)</label>
                   <Input
                     name="facebook"
-                    placeholder="https://www.facebook.com/vendetunave/"
+                    placeholder="ej: https://www.facebook.com/vendetunave/"
                     value={usuario.facebook}
                     onChange={(e, { value }) =>
                       setUsuario({ ...usuario, facebook: value })
@@ -569,7 +569,7 @@ export default function perfil() {
                   <label style={{ color: colorText }}>Instagram (Url / link de página)</label>
                   <Input
                     name="instagram"
-                    placeholder="https://instagram.com/vendetunave?igshid=YmMyMTA2M2Y="
+                    placeholder="ej: https://instagram.com/vendetunave?igshid=YmMyMTA2M2Y="
                     value={usuario.instagram}
                     onChange={(e, { value }) =>
                       setUsuario({ ...usuario, instagram: value })
@@ -580,7 +580,7 @@ export default function perfil() {
                   <label style={{ color: colorText }}>Tiktok (Url / link de página)</label>
                   <Input
                     name="tiktok"
-                    placeholder="https://vm.tiktok.com/ZMLsVNcd5/"
+                    placeholder="ej: https://vm.tiktok.com/ZMLsVNcd5/"
                     value={usuario.tiktok}
                     onChange={(e, { value }) =>
                       setUsuario({ ...usuario, tiktok: value })
