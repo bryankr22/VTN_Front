@@ -50,9 +50,12 @@ export const getServerSideProps = async ({ res }) => {
 
     const dynamicPages = [];
     const response = await axios.get(`${API_URL}/sitemap`);
-    const { vehiculos, ficha_tecnica, preguntas } = await response.data;
+    const { vehiculos, ficha_tecnica, preguntas, users } = await response.data;
     vehiculos.forEach((vehiculo) => {
         dynamicPages.push(`/vehiculos/detalle/${normalize(vehiculo.title)}-${vehiculo.id}`)
+    });
+    users.forEach((user) => {
+        dynamicPages.push(`/vehiculos?vendedor=${normalize(user.nombre)}-${user.id}`)
     });
     ficha_tecnica.forEach((ficha) => {
         dynamicPages.push(`/ficha-tecnica/detalle/${normalize(ficha.title)}-${ficha.id}`)

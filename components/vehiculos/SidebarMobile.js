@@ -41,7 +41,7 @@ export default function SidebarMobile({
 
   return (
     <>
-      {params.vendedor &&
+      {params.vendedor && vendedor &&
         <Container style={{ marginTop: 15 }}>
           <style>
             {`
@@ -104,7 +104,7 @@ export default function SidebarMobile({
                       component="a"
                       underline='none'
                       target="_blank"
-                      href={vendedor.facebook}
+                      href={'https://' + (vendedor.facebook).replace('https://', '')}
                     >
                       <FacebookIcon style={{ color: colorText, margin: '0 2px' }} />
                     </Link>
@@ -114,12 +114,12 @@ export default function SidebarMobile({
                       component="a"
                       underline='none'
                       target="_blank"
-                      href={vendedor.instagram}
+                      href={'https://' + (vendedor.instagram).replace('https://', '')}
                     >
                       <InstagramIcon style={{ color: colorText, margin: '0 3px' }} />
                     </Link>
                   }
-                  {vendedor.tiktok && vendedor.tiktok != "null" && <Image style={{ width: 19, height: 19, margin: '0 2px' }} as='a' href={vendedor.tiktok} alt="icono tiktok" target='_blank' className="icons" src="/images/tiktok-logo.png" />}
+                  {vendedor.tiktok && vendedor.tiktok != "null" && <Image style={{ width: 19, height: 19, margin: '0 2px' }} as='a' href={'https://' + (vendedor.tiktok).replace('https://', '')} alt="icono tiktok" target='_blank' className="icons" src="/images/tiktok-logo.png" />}
                 </div>
               </Grid.Column>
             </Grid.Row>
