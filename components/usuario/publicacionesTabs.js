@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { Fragment, useState } from 'react';
-import { Container, Header, Table, Button, Image, Responsive, Tab, Pagination, Message, Modal } from 'semantic-ui-react';
+import React, { Fragment, useState, useEffect } from 'react';
+import { Container, Header, Table, Button, Image, Responsive, Tab, Pagination, Message, Modal, Grid, Input } from 'semantic-ui-react';
 import { useCookies } from "react-cookie";
 import { useSelector } from 'react-redux';
 import jwt from 'jsonwebtoken';
@@ -13,7 +13,11 @@ const pathS3_acc = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x300/vendetu
 
 
 
-export const panes = (vehicles, resultTotalV, accesorios, resultTotalA) => {
+export const panes = (dataVehicles, resultTotalV, accesorios, resultTotalA) => {
+  const vehicles = dataVehicles.vehiculos;
+  const total_records = dataVehicles.total_records;
+  const page = dataVehicles.filtros?.page;
+  const q = dataVehicles.filtros?.q;
   const [cookies, setCookie] = useCookies(['vtn_token']);
   const [idVehicle, setIdVehicle] = useState();
   const [action, setAction] = useState('');
@@ -24,6 +28,43 @@ export const panes = (vehicles, resultTotalV, accesorios, resultTotalA) => {
     error: false,
     success: false
   });
+
+  const insertParam = (key, value) => {
+    key = encodeURIComponent(key);
+    value = encodeURIComponent(value);
+    var kvp = document.location.search.substr(1).split("&");
+    let i = 0;
+    for (; i < kvp.length; i++) {
+      if (kvp[i].startsWith(key + "=")) {
+        let pair = kvp[i].split("=");
+        pair[1] = value;
+        kvp[i] = pair.join("=");
+        break;
+      }
+    }
+    if (i >= kvp.length) {
+      kvp[kvp.length] = [key, value].join("=");
+    }
+    let params = kvp.join("&");
+    document.location.search = params;
+  };
+
+  const handlePaginationChange = (e, { activePage }) => {
+    insertParam("page", activePage);
+  };
+
+  const [query, setQuery] = useState(dataVehicles.filtros?.q);
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      handleSubmit();
+    }
+  };
+  const handleSubmit = () => {
+    window.location.href = "/usuario/mis_publicaciones?q=" + query;
+  };
+  useEffect(() => {
+    setQuery(q);
+  }, [q]);
 
   const confirmAction = (id, action) => {
     setIdVehicle(id);
@@ -136,6 +177,23 @@ export const panes = (vehicles, resultTotalV, accesorios, resultTotalA) => {
               content={message}
             />
           }
+          <Container fluid style={{ textAlign: "center", margin: 10 }}>
+            <Grid>
+              <Grid.Column width={16}>
+                  <Input
+                    style={{ width: "100%" }}
+                    onChange={(e, { value }) => setQuery(value)}
+                    defaultValue={query}
+                    onKeyDown={(e) => handleKeyDown(e)}
+                    action={{
+                      icon: "search",
+                      onClick: () => handleSubmit(),
+                    }}
+                    placeholder="Buscar..."
+                  />
+              </Grid.Column>
+            </Grid>
+          </Container>
           {vehicles.length > 0 && (
             <Fragment>
               <Table inverted={darkMode === dark} color={colorText}>
@@ -275,7 +333,7 @@ export const panes = (vehicles, resultTotalV, accesorios, resultTotalA) => {
                   ))}
                 </Table.Body>
               </Table>
-              {Math.ceil(resultTotalV / 20) > 1 && (
+              {Math.ceil(total_records / 20) > 1 && (
                 <Container
                   fluid
                   style={{ textAlign: "center", margin: 25 }}
@@ -292,15 +350,17 @@ export const panes = (vehicles, resultTotalV, accesorios, resultTotalA) => {
                       `}</style>
                   }
                   <Pagination
+                    style={{ color: colorText }}
                     pointing
                     secondary
                     boundaryRange={0}
-                    activePage={1}
+                    activePage={parseInt(page)}
                     ellipsisItem={null}
                     firstItem={null}
                     lastItem={null}
                     siblingRange={2}
-                    totalPages={Math.ceil(resultTotalV / 20)}
+                    onPageChange={handlePaginationChange}
+                    totalPages={Math.ceil(total_records / 20)}
                   />
                 </Container>
               )}
