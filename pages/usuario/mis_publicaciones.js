@@ -21,6 +21,7 @@ export default function mis_publicaciones() {
     const [cookies] = useCookies(['vtn_token']);
     const [publicaciones, setPublicaciones] = useState({
         vehiculos: [],
+        filtros: { page: 1, q: '' },
         accesorios: []
     })
     useEffect(() => {
@@ -30,7 +31,10 @@ export default function mis_publicaciones() {
         const config = {
             headers: { Authorization: `Bearer ${decoded.token_server.access_token}` }
         };
-        axios.get(AUTH_URL + publicaciones_api + user_id, config).then((res) => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const page = urlParams.get('page') ?? 1;
+        const q = urlParams.get('q') ?? '';
+        axios.get(AUTH_URL + publicaciones_api + user_id + `?page=${page}&q=${q}`, config).then((res) => {
             setPublicaciones({ ...publicaciones, ...res.data });
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -56,7 +60,7 @@ export default function mis_publicaciones() {
                 <Header as="h1">MIS PUBLICACIONES</Header>
                 <Tab
                     menu={{ inverted: darkMode === dark, color: darkMode }}
-                    panes={panes(publicaciones.vehiculos, 0, publicaciones.accesorios, 0)}
+                    panes={panes(publicaciones, 0, publicaciones.accesorios, 0)}
                     activeIndex={activeIndex}
                     onTabChange={handleTabChange}
                 />

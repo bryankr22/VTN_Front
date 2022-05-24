@@ -54,7 +54,7 @@ export default function ListadoVehiculos({
         if (mapping.hasOwnProperty(str.charAt(i))) ret.push(mapping[c]);
         else ret.push(c);
       }
-      return ret.join("");
+      return ret.join("").split(" ").join("-").split("%").join("").split("?").join("").split("/").join("").split(".").join("").split("-").join("").split('•').join("");
     };
   })();
   const insertParam = (key, value) => {
