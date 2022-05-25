@@ -93,6 +93,56 @@ export const PRICES_FILTER = [{
   },
 ];
 
+export const PLACA_FILTER = [{
+  label: "Par",
+  slug: "Par"
+},
+{
+  label: "Impar",
+  slug: "Impar"
+},
+{
+  label: "0",
+  slug: "0"
+},
+{
+  label: "1",
+  slug: "1"
+},
+{
+  label: "2",
+  slug: "2"
+},
+{
+  label: "3",
+  slug: "3"
+},
+{
+  label: "4",
+  slug: "4"
+},
+{
+  label: "5",
+  slug: "5"
+},
+{
+  label: "6",
+  slug: "6"
+},
+{
+  label: "7",
+  slug: "7"
+},
+{
+  label: "8",
+  slug: "8"
+},
+{
+  label: "9",
+  slug: "9"
+},
+];
+
 export const KM_FILTER = [{
     label: "De 0 a 5.000",
     slug: "0:5000"

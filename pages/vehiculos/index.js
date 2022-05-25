@@ -169,6 +169,7 @@ export async function getServerSideProps({ query }) {
     const res = await axios.get(`${API_URL}/vehiculos`, {
         params: {
             vendedor: query.vendedor,
+            placa: query.placa,
             categoria: query.categoria,
             page: query.page,
             ubicacion: query.ubicacion,
