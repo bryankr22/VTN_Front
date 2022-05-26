@@ -103,7 +103,7 @@ export const PLACA_FILTER = [{
 },
 {
   label: "0",
-  slug: "0"
+  slug: "cero"
 },
 {
   label: "1",

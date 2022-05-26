@@ -8,8 +8,7 @@ import {
   Icon,
   Accordion,
   Input,
-  Button,
-  Checkbox,
+  Button
 } from "semantic-ui-react";
 import * as R from "ramda";
 import OpcionesComponent from "./OpcionesComponent";
