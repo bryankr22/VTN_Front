@@ -15,7 +15,7 @@ import ActiveTagsVehiculos from "./ActiveTagsVehiculos";
 import ModalFiltersDesk from "./modals/ModalFiltersDesk";
 import * as R from "ramda";
 import { extractMaxYearRange, extractMinYearRange, groupByAlphabet, groupByDecade, normalize } from "../../helpers/dataStructure";
-import { KM_FILTER, PRICES_FILTER } from "../../helpers/constants";
+import { KM_FILTER, PLACA_FILTER, PRICES_FILTER } from "../../helpers/constants";
 import { dark, light } from "../../helpers/colors";
 import { Instagram as InstagramIcon, Facebook as FacebookIcon } from '@mui/icons-material';
 
@@ -818,6 +818,40 @@ export default function SidebarVehiculos({ params, contadores, vehiculos, vended
               </Grid.Column>
             </Grid>
           </>
+          <List link style={{ marginBottom: 0, marginTop: 30 }}>
+            <List.Item style={{ marginBottom: 0 }}>
+              <List.Content>
+                <List.Header>
+                  <Header as="h3" style={{ fontSize: '1rem', color: colorText }}>Placa</Header>
+                </List.Header>
+                <List.List>
+                  {mapArray(PLACA_FILTER).map((item, index) => (
+                    <List.Item
+                      key={index}
+                      as="a"
+                      style={{
+                        textTransform: "capitalize",
+                        color:
+                          params.placa == item.slug ? "#2185d0" : colorTextFilters,
+                      }}
+                      onClick={() => insertParam("placa", item.slug)}
+                    >
+                      {item.label}
+                    </List.Item>
+                  ))}
+                  <List.Item
+                    as="a"
+                    style={{ color: colorText }}
+                    onClick={() =>
+                      openModal("Placa", [...PLACA_FILTER].splice(0, PLACA_FILTER.length - 1), "placa", true)
+                    }
+                  >
+                    Ver Todos
+                  </List.Item>
+                </List.List>
+              </List.Content>
+            </List.Item>
+          </List>
         </Container>
         <ModalFiltersDesk
           showModal={modalAll}

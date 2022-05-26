@@ -8,8 +8,7 @@ import {
   Icon,
   Accordion,
   Input,
-  Button,
-  Checkbox,
+  Button
 } from "semantic-ui-react";
 import * as R from "ramda";
 import OpcionesComponent from "./OpcionesComponent";
@@ -17,7 +16,7 @@ import MarcaModeloComponent from "./MarcaModeloComponent";
 import TiposComponent from "./TiposComponent";
 import ModalFiltersDesk from "./ModalFiltersDesk";
 import { groupByAlphabet, groupByDecade, normalize } from "../../../helpers/dataStructure";
-import { KM_FILTER, PRICES_FILTER } from '../../../helpers/constants';
+import { KM_FILTER, PLACA_FILTER, PRICES_FILTER } from '../../../helpers/constants';
 
 const getSlug = (slug) => {
   return slug === "ano" ? "anios" : slug;
@@ -192,6 +191,15 @@ export default function ModalFiltersMobile({
       minimo: 0,
       maximo: 0,
     },
+    {
+      text: "Placa",
+      slug: "placa",
+      open: false,
+      components: false,
+      values: mapping_contador(PLACA_FILTER),
+      minimo: 0,
+      maximo: 0,
+    },
   ]);
   const activeDropDown = (index) => {
     var openDrop = filtrosLocal[index].open;
@@ -253,6 +261,8 @@ export default function ModalFiltersMobile({
       listado = [...PRICES_FILTER].slice(5, PRICES_FILTER.length)
     } else if (param === 'kilometraje') {
       listado = [...KM_FILTER]
+    } else if (param === 'placa') {
+      listado = [...PLACA_FILTER]
     }
 
     const list = Array.isArray(listado) ? listado : Object.keys(listado);

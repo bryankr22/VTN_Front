@@ -121,6 +121,12 @@ export default function ActiveTagsVehiculos({ tags }) {
           <Icon name="delete" onClick={() => removeFilter("kilometraje")} />
         </Label>
       ) : null}
+      {tags.placa ? (
+        <Label as="a" style={{ marginBottom: 5, textTransform: "capitalize" }}>
+          Placa: {tags.placa === "cero" ? 0 : tags.placa }
+          <Icon name="delete" onClick={() => removeFilter("placa")} />
+        </Label>
+      ) : null}
     </>
   );
 }
