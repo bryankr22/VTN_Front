@@ -23,7 +23,7 @@ export default function ThirdSection({ data: { edit, ...data }, isMobile, darkMo
   const dispatch = useDispatch();
   const [cities, setCities] = useState(() => edit?.ciudades || []);
   const [examination, setExamination] = useState(() =>
-    edit ? (edit?.vehiculo?.peritaje ? 1 : 0) : ''
+    edit ? (edit?.vehiculo?.peritaje !== null && edit?.vehiculo?.peritaje !== '' && edit?.vehiculo?.peritaje != 0 ? 1 : 0) : ''
   );
   const [stateVehicle, setStateVehicle] = useState("Nuevo");
 
@@ -293,7 +293,7 @@ export default function ThirdSection({ data: { edit, ...data }, isMobile, darkMo
           name="peritaje_vehiculo"
           options={optionsGeneric}
           placeholder="Selecciona peritaje"
-          defaultValue={edit ? (edit?.vehiculo?.peritaje ? 1 : 0) : ''}
+          defaultValue={edit ? (edit?.vehiculo?.peritaje !== null && edit?.vehiculo?.peritaje !== '' && edit?.vehiculo?.peritaje != 0  ? 1 : 0) : ''}
           onChange={(e, { value }) => {
             setExamination(value);
           }}
@@ -312,7 +312,7 @@ export default function ThirdSection({ data: { edit, ...data }, isMobile, darkMo
             required={!!examination}
             request={`${AUTH_URL}/upload_vehicle_peritaje`}
           />
-          {edit?.vehiculo?.peritaje && (
+          {edit?.vehiculo?.peritaje !== null && edit?.vehiculo?.peritaje !== '' && edit?.vehiculo?.peritaje != 0 && (
             <a
               href={edit?.vehiculo?.peritaje}
               target="_blank"
