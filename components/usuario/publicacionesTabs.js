@@ -277,7 +277,7 @@ export const panes = (dataVehicles, resultTotalV, accesorios, resultTotalA) => {
                               </Header.Subheader>
                             )}
                             <h2 style={{ color: colorText }} className="fnt-size-inherit">
-                              {item.title.substr(0, 15)}
+                              {item.title}
                             </h2>
                             <Header.Subheader style={{ fontSize: 10, color: colorText }} as="h3">
                               SKU: {item.sku}
