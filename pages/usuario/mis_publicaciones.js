@@ -32,10 +32,21 @@ export default function mis_publicaciones() {
             headers: { Authorization: `Bearer ${decoded.token_server.access_token}` }
         };
         const urlParams = new URLSearchParams(window.location.search);
+        const tab = urlParams.get('tab') ?? 0;
         const page = urlParams.get('page') ?? 1;
         const q = urlParams.get('q') ?? '';
-        axios.get(AUTH_URL + publicaciones_api + user_id + `?page=${page}&q=${q}`, config).then((res) => {
+        const page_inactive = urlParams.get('page_inactive') ?? '';
+        const q_inactive = urlParams.get('q_inactive') ?? '';
+        let params = '';
+        if (tab === '0' || tab === null || tab === 0) {
+            params = `tab=0&page=${page}&q=${q}`;
+        }
+        if (tab === '1') {
+            params = `tab=1&page_inactive=${page_inactive}&q_inactive=${q_inactive}`;
+        }
+        axios.get(AUTH_URL + publicaciones_api + user_id + `?${params}`, config).then((res) => {
             setPublicaciones({ ...publicaciones, ...res.data });
+            setActiveIndex(tab);
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])

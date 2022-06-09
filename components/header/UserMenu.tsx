@@ -1,9 +1,9 @@
-import { alpha, AppBar, Box, Button, Container, Fade, IconButton, InputBase, List, ListItemButton, ListItemText, Menu, MenuItem, Stack, SxProps, ThemeProvider, Toolbar, Collapse, Avatar, Portal, Slide, Grow, Backdrop, ClickAwayListener } from '@mui/material'
+import { Button, Fade, Menu, MenuItem,SxProps } from '@mui/material'
 import { MouseEvent, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useCookies } from 'react-cookie'
 import { VTNUserMenu, VTNMenuItem } from './common'
-import PersonIcon from '@mui/icons-material/Person'
+import Circle from '@mui/icons-material/Circle'
 import { updateToken } from '../../store/authSlice'
 import jwt from "jsonwebtoken"
 import axios from 'axios'
@@ -22,6 +22,7 @@ const menuItemStyle: SxProps = {
 
 const UserMenu = ({ menu }: { menu: VTNUserMenu }) => {
     const [userProfileImage, setUserProfileImage] = useState<string>(null)
+    const [notification, setNotification] = useState<number>(0)
     const [anchorEl, setAnchorEl] = useState(null)
     const open = Boolean(anchorEl)
     const dispatch = useDispatch()
@@ -57,8 +58,9 @@ const UserMenu = ({ menu }: { menu: VTNUserMenu }) => {
             const response = await axios.get(AUTH_URL + profileApi + userId, config)
 
             if (response.status == 200) {
-                const { image } = response.data as { image: string }
-                setUserProfileImage(image)
+                const { image, notification } = response.data as { image: string, notification: number }
+                setUserProfileImage(image);
+                setNotification(notification);
             }
         }
     }
@@ -122,7 +124,7 @@ const UserMenu = ({ menu }: { menu: VTNUserMenu }) => {
                                 }
                             }}
                         >
-                            {menuItem.label}
+                            {menuItem.label} {notification === 1 && menuItem.label === 'Mis Publicaciones' && <Circle color="error" fontSize='inherit' style={{ marginLeft: 5 }} />}
                         </MenuItem>
                     })}
                 </Menu>
