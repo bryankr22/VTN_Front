@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { Fragment, useState, useEffect } from 'react';
-import { Container, Header, Table, Button, Image, Responsive, Tab, Pagination, Message, Modal, Grid, Input } from 'semantic-ui-react';
+import { Container, Header, Table, Button, Image, Responsive, Tab, Pagination, Message, Modal, Grid, Input, Menu, Label } from 'semantic-ui-react';
 import { useCookies } from "react-cookie";
 import { useSelector } from 'react-redux';
 import jwt from 'jsonwebtoken';
@@ -9,18 +9,21 @@ import { AUTH_URL } from '../../helpers/constants';
 import { dark, light } from '../../helpers/colors';
 
 const pathS3_vehiculos = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x300/vendetunave/images/vehiculos/";
-const pathS3_acc = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x300/vendetunave/images/accesorios/";
-
-
 
 export const panes = (dataVehicles, resultTotalV, accesorios, resultTotalA) => {
   const vehicles = dataVehicles.vehiculos;
   const total_records = dataVehicles.total_records;
   const page = dataVehicles.filtros?.page;
   const q = dataVehicles.filtros?.q;
+
+  const vehicles_inactive = dataVehicles.vehiculos_inactivos;
+  const total_records_inactive = dataVehicles.total_records_inactive;
+  const page_inactive = dataVehicles.filtros?.page_inactive;
+  const q_inactive = dataVehicles.filtros?.q_inactive;
+
   const [cookies, setCookie] = useCookies(['vtn_token']);
   const [idVehicle, setIdVehicle] = useState();
-  const [action, setAction] = useState('');
+  const [action, setAction] = useState(() => {});
   const [modal, setModal] = useState(false);
   const [modalMessage, setModalMessage] = useState(false);
   const [message, setMessage] = useState('');
@@ -53,7 +56,12 @@ export const panes = (dataVehicles, resultTotalV, accesorios, resultTotalA) => {
     insertParam("page", activePage);
   };
 
+  const handlePaginationInactiveChange = (e, { activePage }) => {
+    insertParam("page_inactive", activePage);
+  };
+
   const [query, setQuery] = useState(dataVehicles.filtros?.q);
+  const [queryInactive, setQueryInactive] = useState(dataVehicles.filtros?.q_inactive);
   const handleKeyDown = (e) => {
     if (e.keyCode === 13) {
       handleSubmit();
@@ -62,14 +70,30 @@ export const panes = (dataVehicles, resultTotalV, accesorios, resultTotalA) => {
   const handleSubmit = () => {
     window.location.href = "/usuario/mis_publicaciones?q=" + query;
   };
+  const handleKeyDownInactive = (e) => {
+    if (e.keyCode === 13) {
+      handleSubmitInactive();
+    }
+  };
+  const handleSubmitInactive = () => {
+    window.location.href = "/usuario/mis_publicaciones?tab=1&q_inactive=" + query;
+  };
   useEffect(() => {
     setQuery(q);
   }, [q]);
+  useEffect(() => {
+    setQueryInactive(q_inactive);
+  }, [q_inactive]);
 
   const confirmAction = (id, action) => {
+    let message = '';
+    let funcAction = () => {};
+    if (action === 'remove') { message = '¿Estas seguro de eliminar este anuncio?'; funcAction = () => removeVehicle(id) }
+    if (action === 'sold') { message = '¿Estas seguro de marcar este anuncio como vendido?'; funcAction = () => soldVehicle(id) }
+    if (action === 'active') { message = '¿Estas seguro de activar este anuncio?'; funcAction = () => activeVehicle(id) }
     setIdVehicle(id);
-    setAction(action);
-    setModalMessage(action === 'remove' ? '¿Estas seguro de eliminar este anuncio?' : '¿Estas seguro de marcar este anuncio como vendido?')
+    setModalMessage(message);
+    setAction(funcAction);
     setModal(true);
   }
 
@@ -144,12 +168,47 @@ export const panes = (dataVehicles, resultTotalV, accesorios, resultTotalA) => {
       });
   }
 
+  const activeVehicle = (id) => {
+    const cookie = cookies.vtn_token;
+    const decoded = jwt.verify(cookie, 'vendetunave2021');
+    const user_id = decoded.user.id;
+    const config = {
+      headers: { Authorization: `Bearer ${decoded.token_server.access_token}` }
+    };
+    const data = { user_id, id };
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    axios.post(`${AUTH_URL}/vehicle_active`, data, config).then((res) => {
+      if (res.data.status) {
+        setMessage("Proceso exitoso.");
+        setStatus({
+          error: false,
+          success: true
+        });
+
+        location.reload();
+      } else {
+        setMessage("Ocurrió un error inesperado. Intente nuevamente más tarde.");
+        setStatus({
+          error: true,
+          success: false
+        });
+      }
+    })
+      .catch((error) => {
+        setMessage("Ocurrió un error inesperado. Intente nuevamente más tarde.");
+        setStatus({
+          error: true,
+          success: false
+        });
+      });
+  }
+
   const darkMode = useSelector(({ darkMode }) => darkMode.status);
   const colorText = darkMode === light ? dark : light;
 
   return [
     {
-      menuItem: "VEHÍCULOS",
+      menuItem: "ACTIVOS",
       render: () => (
         <Tab.Pane inverted={darkMode === dark} color={colorText}>
           <Modal
@@ -165,7 +224,7 @@ export const panes = (dataVehicles, resultTotalV, accesorios, resultTotalA) => {
               <Button onClick={() => setModal(false)}>
                 No
               </Button>
-              <Button secondary onClick={() => action === 'remove' ? removeVehicle(idVehicle) : soldVehicle(idVehicle)}>
+              <Button secondary onClick={() => action}>
                 Si
               </Button>
             </Modal.Actions>
@@ -354,7 +413,7 @@ export const panes = (dataVehicles, resultTotalV, accesorios, resultTotalA) => {
                     pointing
                     secondary
                     boundaryRange={0}
-                    activePage={parseInt(page)}
+                    activePage={parseInt(page_inactive)}
                     ellipsisItem={null}
                     firstItem={null}
                     lastItem={null}
@@ -372,198 +431,208 @@ export const panes = (dataVehicles, resultTotalV, accesorios, resultTotalA) => {
         </Tab.Pane>
       ),
     },
-    // {
-    //   menuItem: "ACCESORIOS",
-    //   render: () => (
-    //     <Tab.Pane>
-    //       {accesorios.length > 0 && (
-    //         <Fragment>
-    //           <Table>
-    //             <Responsive
-    //               {...Responsive.onlyComputer}
-    //               style={{ display: "contents" }}
-    //             >
-    //               <Table.Header>
-    //                 <Table.Row>
-    //                   <Table.HeaderCell></Table.HeaderCell>
-    //                   <Table.HeaderCell>PRODUCTO</Table.HeaderCell>
-    //                   <Table.HeaderCell>PRECIO</Table.HeaderCell>
-    //                   <Table.HeaderCell>FECHA</Table.HeaderCell>
-    //                   <Table.HeaderCell></Table.HeaderCell>
-    //                 </Table.Row>
-    //               </Table.Header>
-    //             </Responsive>
-    //             <Table.Body>
-    //               {accesorios.map((item, index) => (
-    //                 <Table.Row key={index}>
-    //                   <Table.Cell>
-    //                     <Responsive
-    //                       {...Responsive.onlyComputer}
-    //                       {...Responsive.onlyLargeScreen}
-    //                     >
-    //                       <Button
-    //                         onClick={() => this.removeAcc(item.id)}
-    //                         circular
-    //                         size="mini"
-    //                         icon="remove"
-    //                       />
-    //                     </Responsive>
-    //                   </Table.Cell>
-    //                   <Table.Cell>
-    //                     <Header
-    //                       as="h4"
-    //                       image
-    //                       style={{ margin: 0, display: "flex" }}
-    //                     >
-    //                       <Image
-    //                         src={
-    //                           pathS3_acc +
-    //                           item.nameImage +
-    //                           "." +
-    //                           item.extension
-    //                         }
-    //                         style={{
-    //                           height: 60,
-    //                           width: "25%",
-    //                           objectFit: "cover",
-    //                           objectPosition: "center",
-    //                         }}
-    //                         rounded
-    //                         size="massive"
-    //                       />
-    //                       <Header.Content
-    //                         style={{
-    //                           width: "70%",
-    //                           whiteSpace: "nowrap",
-    //                           textOverflow: "ellipsis",
-    //                           overflow: "hidden",
-    //                           width: "75%",
-    //                         }}
-    //                       >
-    //                         {item.activo == 0 && item.vendido == 0 && (
-    //                           <Header.Subheader
-    //                             style={{ fontSize: 13, color: "orange" }}
-    //                           >
-    //                             Pendiente de aprobación
-    //                           </Header.Subheader>
-    //                         )}
-    //                         {item.vendido == 1 && (
-    //                           <Header.Subheader
-    //                             style={{ fontSize: 13, color: "green" }}
-    //                           >
-    //                             Vendido
-    //                           </Header.Subheader>
-    //                         )}
-    //                         {item.activo == 2 && (
-    //                           <Header.Subheader
-    //                             style={{ fontSize: 13, color: "red" }}
-    //                           >
-    //                             Rechazado
-    //                           </Header.Subheader>
-    //                         )}
-    //                         {item.title.substr(0, 15)}
-    //                         <Header.Subheader style={{ fontSize: 10 }}>
-    //                           {item.labelCiudad}
-    //                         </Header.Subheader>
-    //                         <Responsive {...Responsive.onlyMobile}>
-    //                           <Header.Subheader
-    //                             style={{
-    //                               fontSize: 12,
-    //                               color: "black",
-    //                               marginTop: 5,
-    //                             }}
-    //                           >
-    //                             ${" "}
-    //                             {new Intl.NumberFormat("de-DE").format(
-    //                               item.precio
-    //                             )}
-    //                           </Header.Subheader>
-    //                           <Header.Subheader
-    //                             style={{ fontSize: 12, color: "black" }}
-    //                           >
-    //                             {item.fecha_creacion}
-    //                           </Header.Subheader>
-    //                         </Responsive>
-    //                       </Header.Content>
-    //                     </Header>
-    //                   </Table.Cell>
-    //                   <Table.Cell>
-    //                     <Responsive
-    //                       {...Responsive.onlyComputer}
-    //                       {...Responsive.onlyLargeScreen}
-    //                     >
-    //                       ${" "}
-    //                       {new Intl.NumberFormat("de-DE").format(
-    //                         item.precio
-    //                       )}
-    //                     </Responsive>
-    //                   </Table.Cell>
-    //                   <Table.Cell>
-    //                     <Responsive
-    //                       {...Responsive.onlyComputer}
-    //                       {...Responsive.onlyLargeScreen}
-    //                     >
-    //                       {item.fecha_creacion}
-    //                     </Responsive>
-    //                   </Table.Cell>
-    //                   <Table.Cell>
-    //                     {item.activo == 1 && item.vendido == 0 && (
-    //                       <Button
-    //                         onClick={() => this.vendidoAcc(item.id)}
-    //                         fluid
-    //                       >
-    //                         VENDIDO
-    //                       </Button>
-    //                     )}
-    //                     {item.vendido == 0 && (
-    //                       <Button
-    //                         as="a"
-    //                         href={"/editar-accesorio/" + item.id}
-    //                         fluid
-    //                         style={{ marginTop: 7 }}
-    //                       >
-    //                         EDITAR ANUNCIO
-    //                       </Button>
-    //                     )}
-    //                     <Button
-    //                       onClick={() => this.removeAcc(item.id)}
-    //                       color="red"
-    //                       fluid
-    //                       style={{ marginTop: 7 }}
-    //                     >
-    //                       ELIMINAR ANUNCIO
-    //                     </Button>
-    //                   </Table.Cell>
-    //                 </Table.Row>
-    //               ))}
-    //             </Table.Body>
-    //           </Table>
-    //           {Math.ceil(resultTotalA / 20) > 1 && (
-    //             <Container
-    //               fluid
-    //               style={{ textAlign: "center", margin: 25 }}
-    //             >
-    //               <Pagination
-    //                 pointing
-    //                 secondary
-    //                 boundaryRange={0}
-    //                 activePage={1}
-    //                 ellipsisItem={null}
-    //                 firstItem={null}
-    //                 lastItem={null}
-    //                 siblingRange={2}
-    //                 onPageChange={() => console.log(">>>>")}
-    //                 totalPages={Math.ceil(resultTotalA / 20)}
-    //               />
-    //             </Container>
-    //           )}
-    //         </Fragment>
-    //       )}
-    //       {accesorios.length == 0 && (
-    //         <Header as="h4">Aún no cuentas con publicaciones.</Header>
-    //         )}
-    //     </Tab.Pane>
-    //   ),
-    // },
+    {
+      menuItem: (
+        <Menu.Item key='inactivos'>
+          INACTIVOS
+          {total_records_inactive > 0 && <Label color='red'>{total_records_inactive}</Label>}
+        </Menu.Item>
+      ),
+      render: () => (
+        <Tab.Pane inverted={darkMode === dark} color={colorText}>
+          <Modal
+            size="mini"
+            open={modal}
+            onClose={() => setModal(false)}
+          >
+            <Modal.Header>¿Estas seguro?</Modal.Header>
+            <Modal.Content>
+              <p>{modalMessage}</p>
+            </Modal.Content>
+            <Modal.Actions>
+              <Button onClick={() => setModal(false)}>
+                No
+              </Button>
+              <Button secondary onClick={() => action}>
+                Si
+              </Button>
+            </Modal.Actions>
+          </Modal>
+          {(status.error || status.success) &&
+            <Message
+              error={status.error}
+              positive={status.success}
+              content={message}
+            />
+          }
+          <Container fluid style={{ textAlign: "center", margin: 10 }}>
+            <Grid>
+              <Grid.Column width={16}>
+                  <Input
+                    style={{ width: "100%" }}
+                    onChange={(e, { value }) => setQueryInactive(value)}
+                    defaultValue={queryInactive}
+                    onKeyDown={(e) => handleKeyDownInactive(e)}
+                    action={{
+                      icon: "search",
+                      onClick: () => handleSubmitInactive(),
+                    }}
+                    placeholder="Buscar..."
+                  />
+              </Grid.Column>
+            </Grid>
+          </Container>
+          {vehicles_inactive.length > 0 && (
+            <Fragment>
+              <Table inverted={darkMode === dark} color={colorText}>
+                <Responsive
+                  {...Responsive.onlyComputer}
+                  {...Responsive.onlyLargeScreen}
+                  style={{ display: "contents" }}
+                >
+                  <Table.Header>
+                    <Table.Row>
+                      <Table.HeaderCell></Table.HeaderCell>
+                      <Table.HeaderCell>PRODUCTO</Table.HeaderCell>
+                      <Table.HeaderCell>PRECIO</Table.HeaderCell>
+                      <Table.HeaderCell>FECHA</Table.HeaderCell>
+                      <Table.HeaderCell></Table.HeaderCell>
+                    </Table.Row>
+                  </Table.Header>
+                </Responsive>
+                <Table.Body>
+                  {vehicles_inactive.map((item, index) => (
+                    <Table.Row key={index}>
+                      <Table.Cell>
+                        <Responsive
+                          {...Responsive.onlyComputer}
+                          {...Responsive.onlyLargeScreen}
+                        >
+                          <Button
+                            onClick={() => this.removeVehicle(item.id)}
+                            circular
+                            size="mini"
+                            icon="remove"
+                          />
+                        </Responsive>
+                      </Table.Cell>
+                      <Table.Cell>
+                        <Header
+                          as="h4"
+                          image
+                          style={{ margin: 0, display: "flex" }}
+                        >
+                          <Image
+                            src={
+                              pathS3_vehiculos +
+                              item.nameImage +
+                              "." +
+                              item.extension
+                            }
+                            style={{
+                              height: 60,
+                              width: "25%",
+                              objectFit: "cover",
+                              objectPosition: "center",
+                            }}
+                            rounded
+                            size="massive"
+                            alt={item.title}
+                          />
+                          <Header.Content style={{ width: "75%" }}>
+                            <h2 style={{ color: colorText }} className="fnt-size-inherit">
+                              {item.title}
+                            </h2>
+                            <Header.Subheader style={{ fontSize: 10, color: colorText }} as="h3">
+                              SKU: {item.sku}
+                            </Header.Subheader>
+                            <Header.Subheader style={{ fontSize: 10, color: colorText }} as="h3">
+                              {item.labelCiudad}
+                            </Header.Subheader>
+                            <Header.Subheader style={{ fontSize: 10, color: colorText }} as="h3">
+                              {item.ano}
+                            </Header.Subheader>
+                            <Header.Subheader style={{ fontSize: 10, color: colorText }} as="h3">
+                              {item.modeloLabel}
+                            </Header.Subheader>
+                          </Header.Content>
+                        </Header>
+                      </Table.Cell>
+                      <Table.Cell>
+                        <h3 className="fnt-size-inherit">
+                          ${" "}
+                          {new Intl.NumberFormat("de-DE").format(item.precio)}
+                        </h3>
+                      </Table.Cell>
+                      <Table.Cell>{item.fecha_creacion}</Table.Cell>
+                      <Table.Cell>
+                        {item.activo == 3 && (
+                          <Button
+                            onClick={() => confirmAction(item.id, 'active')}
+                            fluid
+                          >
+                            REACTIVAR
+                          </Button>
+                        )}
+                          <Button
+                            as="a"
+                            href={"/editar-vehiculo/" + item.id}
+                            fluid
+                            style={{ marginTop: 7 }}
+                          >
+                            EDITAR ANUNCIO
+                          </Button>
+                        <Button
+                          onClick={() => confirmAction(item.id, 'remove')}
+                          color="red"
+                          fluid
+                          style={{ marginTop: 7 }}
+                        >
+                          ELIMINAR ANUNCIO
+                        </Button>
+                      </Table.Cell>
+                    </Table.Row>
+                  ))}
+                </Table.Body>
+              </Table>
+              {Math.ceil(total_records_inactive / 20) > 1 && (
+                <Container
+                  fluid
+                  style={{ textAlign: "center", margin: 25 }}
+                >
+                  {darkMode === dark &&
+                    <style>{`
+                      .ui.secondary.pointing.menu .active.item {
+                          color: ${colorText}
+                      }
+                      .ui.secondary.pointing.menu .item {
+                          border-color: ${colorText};
+                          color: ${colorText}
+                      }
+                      `}</style>
+                  }
+                  <Pagination
+                    style={{ color: colorText }}
+                    pointing
+                    secondary
+                    boundaryRange={0}
+                    activePage={parseInt(page)}
+                    ellipsisItem={null}
+                    firstItem={null}
+                    lastItem={null}
+                    siblingRange={2}
+                    onPageChange={handlePaginationInactiveChange}
+                    totalPages={Math.ceil(total_records / 20)}
+                  />
+                </Container>
+              )}
+            </Fragment>
+          )}
+          {vehicles_inactive.length == 0 && (
+            <Header as="h4">Aún no cuentas con publicaciones.</Header>
+          )}
+        </Tab.Pane>
+      ),
+    },
   ];
 }
