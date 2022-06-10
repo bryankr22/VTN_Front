@@ -37,7 +37,8 @@ export default function FiltersHome({ options: optsProp }) {
         anioDesde: '',
         anioHasta: '',
         permuta: false,
-        promocion: false
+        promocion: false,
+        blindaje: false,
     })
     const [marca, setMarca] = useState('');
     const changeFilter = (input, value) => {
@@ -74,6 +75,9 @@ export default function FiltersHome({ options: optsProp }) {
         }
         if (filters.promocion) {
             newUrl.searchParams.append('promocion', filters.promocion);
+        }
+        if (filters.blindaje) {
+            newUrl.searchParams.append('blindaje', filters.blindaje);
         }
         window.location.href = newUrl.href;
     }
@@ -219,6 +223,12 @@ export default function FiltersHome({ options: optsProp }) {
                                     onChange={(e) => changeFilter('promocion', !filters.promocion)}
                                 />
                                 <Form.Checkbox
+                                    name="blindaje"
+                                    label="Blindaje"
+                                    value={filters.blindaje}
+                                    onChange={(e) => changeFilter('blindaje', !filters.blindaje)}
+                                />
+                                <Form.Checkbox
                                     name="permuta"
                                     label="Permuta"
                                     value={filters.permuta}
@@ -322,6 +332,12 @@ export default function FiltersHome({ options: optsProp }) {
                                     onChange={(e) => changeFilter('promocion', !filters.promocion)}
                                 />
                                 <Form.Checkbox
+                                    name="blindaje"
+                                    label="Blindaje"
+                                    value={filters.blindaje}
+                                    onChange={(e) => changeFilter('blindaje', !filters.blindaje)}
+                                />
+                                <Form.Checkbox
                                     name="permuta"
                                     label="Permuta"
                                     value={filters.permuta}
@@ -423,6 +439,12 @@ export default function FiltersHome({ options: optsProp }) {
                                     label="Promoción"
                                     value={filters.promocion}
                                     onChange={(e) => changeFilter('promocion', !filters.promocion)}
+                                />
+                                <Form.Checkbox
+                                    name="blindaje"
+                                    label="Blindaje"
+                                    value={filters.blindaje}
+                                    onChange={(e) => changeFilter('blindaje', !filters.blindaje)}
                                 />
                                 <Form.Checkbox
                                     name="permuta"

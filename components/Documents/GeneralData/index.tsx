@@ -408,8 +408,8 @@ export default function GeneralData({ data }: Props) {
               minRows={1}
               {...register("clausulas", {
                 maxLength: {
-                  message: "Max 200",
-                  value: 200,
+                  message: "Max 400",
+                  value: 400,
                 },
               })}
               {...getStatusError(formState.errors.clausulas?.message)}

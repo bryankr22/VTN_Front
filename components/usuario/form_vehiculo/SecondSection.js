@@ -81,7 +81,7 @@ const onWarning = (setMessage) => (type, rules) => {
   }
 };
 
-export default function SecondSection({ data: { edit } = {}, maxFiles = 10, darkMode }) {
+export default function SecondSection({ data: { edit } = {}, maxFiles = 15, darkMode }) {
   const dispatch = useDispatch();
   const [cookies] = useCookies(["vtn_token"]);
   const [imagesLoaded, setImagesLoaded] = useState({});
@@ -114,7 +114,7 @@ export default function SecondSection({ data: { edit } = {}, maxFiles = 10, dark
   useEffect(() => {
     dispatch(setImages(sources));
     document.querySelector(".rug-handle-drop-text").innerHTML =
-      "Arrastra aquí las imágenes que quieres cargar. Máximo 10.";
+      "Arrastra aquí las imágenes que quieres cargar. Máximo 15.";
     document.querySelector(".rug-handle-drop-text+span").innerHTML = "O";
     document.querySelector(".rug-handle-button").innerHTML = "Selecciónalas";
   }, [sources]);

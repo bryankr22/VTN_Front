@@ -440,7 +440,7 @@
     line-height: 0;
   }
   .rug-handle-button::after {
-    content: "Selecciona máximo 10 imágenes";
+    content: "Selecciona máximo 15 imágenes";
     text-indent: 0;
     display: block;
     line-height: initial;
