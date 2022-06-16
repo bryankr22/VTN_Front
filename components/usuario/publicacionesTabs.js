@@ -413,7 +413,7 @@ export const panes = (dataVehicles, resultTotalV, accesorios, resultTotalA) => {
                     pointing
                     secondary
                     boundaryRange={0}
-                    activePage={parseInt(page_inactive)}
+                    activePage={parseInt(page)}
                     ellipsisItem={null}
                     firstItem={null}
                     lastItem={null}
@@ -616,13 +616,13 @@ export const panes = (dataVehicles, resultTotalV, accesorios, resultTotalA) => {
                     pointing
                     secondary
                     boundaryRange={0}
-                    activePage={parseInt(page)}
+                    activePage={parseInt(page_inactive)}
                     ellipsisItem={null}
                     firstItem={null}
                     lastItem={null}
                     siblingRange={2}
                     onPageChange={handlePaginationInactiveChange}
-                    totalPages={Math.ceil(total_records / 20)}
+                    totalPages={Math.ceil(total_records_inactive / 20)}
                   />
                 </Container>
               )}

@@ -217,6 +217,12 @@ export default function FiltersHome({ options: optsProp }) {
                         <Form.Field>
                             <Form.Group id="field-checks">
                                 <Form.Checkbox
+                                    name="permuta"
+                                    label="Permuta"
+                                    value={filters.permuta}
+                                    onChange={(e) => changeFilter('permuta', !filters.permuta)}
+                                />
+                                <Form.Checkbox
                                     name="promocion"
                                     label="Promoción"
                                     value={filters.promocion}
@@ -227,12 +233,6 @@ export default function FiltersHome({ options: optsProp }) {
                                     label="Blindaje"
                                     value={filters.blindaje}
                                     onChange={(e) => changeFilter('blindaje', !filters.blindaje)}
-                                />
-                                <Form.Checkbox
-                                    name="permuta"
-                                    label="Permuta"
-                                    value={filters.permuta}
-                                    onChange={(e) => changeFilter('permuta', !filters.permuta)}
                                 />
                             </Form.Group>
                         </Form.Field>
@@ -326,6 +326,12 @@ export default function FiltersHome({ options: optsProp }) {
                         <Form.Field>
                             <Form.Group id="field-checks">
                                 <Form.Checkbox
+                                    name="permuta"
+                                    label="Permuta"
+                                    value={filters.permuta}
+                                    onChange={(e) => changeFilter('permuta', !filters.permuta)}
+                                />
+                                <Form.Checkbox
                                     name="promocion"
                                     label="Promoción"
                                     value={filters.promocion}
@@ -336,12 +342,6 @@ export default function FiltersHome({ options: optsProp }) {
                                     label="Blindaje"
                                     value={filters.blindaje}
                                     onChange={(e) => changeFilter('blindaje', !filters.blindaje)}
-                                />
-                                <Form.Checkbox
-                                    name="permuta"
-                                    label="Permuta"
-                                    value={filters.permuta}
-                                    onChange={(e) => changeFilter('permuta', !filters.permuta)}
                                 />
                             </Form.Group>
                         </Form.Field>
@@ -435,6 +435,12 @@ export default function FiltersHome({ options: optsProp }) {
                         <Form.Field>
                             <Form.Group id="field-checks">
                                 <Form.Checkbox
+                                    name="permuta"
+                                    label="Permuta"
+                                    value={filters.permuta}
+                                    onChange={(e) => changeFilter('permuta', !filters.permuta)}
+                                />
+                                <Form.Checkbox
                                     name="promocion"
                                     label="Promoción"
                                     value={filters.promocion}
@@ -445,12 +451,6 @@ export default function FiltersHome({ options: optsProp }) {
                                     label="Blindaje"
                                     value={filters.blindaje}
                                     onChange={(e) => changeFilter('blindaje', !filters.blindaje)}
-                                />
-                                <Form.Checkbox
-                                    name="permuta"
-                                    label="Permuta"
-                                    value={filters.permuta}
-                                    onChange={(e) => changeFilter('permuta', !filters.permuta)}
                                 />
                             </Form.Group>
                         </Form.Field>
