@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux';
 import { dark } from '../../helpers/colors';
 
 export default function mis_publicaciones({ data }) {
-    const [activeIndex, setActiveIndex] = useState(data.filtros.tab);
+    const [activeIndex, setActiveIndex] = useState(data.filtros.tab ? data.filtros.tab : 0);
     const handleTabChange = (e, { activeIndex }) => {
         setActiveIndex(activeIndex);
     };
