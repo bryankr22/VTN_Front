@@ -19,8 +19,8 @@ export default function mis_publicaciones({ data }) {
     const [publicaciones, setPublicaciones] = useState({
         vehiculos: data.vehiculos,
         total_records: data.total_records,
-        vehiculos_inactivos: data.vehiculos,
-        total_records_inactive: data.total_records,
+        vehiculos_inactivos: data.vehiculos_inactivos,
+        total_records_inactive: data.total_records_inactive,
         filtros: data.filtros
     });
 
