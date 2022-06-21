@@ -28,9 +28,10 @@ import { dark, light } from "../../../helpers/colors";
 
 const CDN = "https://d3bmp4azzreq60.cloudfront.net/fit-in/300x200/"
 const REPLACE = "https://vendetunave.s3.amazonaws.com/"
+const REPLACE_FIT = "https://d3bmp4azzreq60.cloudfront.net/fit-in/2000x2000/"
 
 const getMetaUrl = (str = '') => {
-  return str.replace(REPLACE, CDN)
+  return str.replace(REPLACE, CDN).replace(REPLACE_FIT, CDN)
 }
 
 const normalize = (function () {
