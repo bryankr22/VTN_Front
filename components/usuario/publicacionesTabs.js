@@ -53,11 +53,11 @@ export const panes = (dataVehicles, resultTotalV, accesorios, resultTotalA) => {
   };
 
   const handlePaginationChange = (e, { activePage }) => {
-    insertParam("page", activePage);
+    window.location.href = "/usuario/mis_publicaciones?tab=0&page=" + activePage;
   };
 
   const handlePaginationInactiveChange = (e, { activePage }) => {
-    insertParam("page_inactive", activePage);
+    window.location.href = "/usuario/mis_publicaciones?tab=1&page_inactive=" + activePage;
   };
 
   const [query, setQuery] = useState(dataVehicles.filtros?.q);
@@ -68,7 +68,7 @@ export const panes = (dataVehicles, resultTotalV, accesorios, resultTotalA) => {
     }
   };
   const handleSubmit = () => {
-    window.location.href = "/usuario/mis_publicaciones?q=" + query;
+    window.location.href = "/usuario/mis_publicaciones?tab=0&q=" + query;
   };
   const handleKeyDownInactive = (e) => {
     if (e.keyCode === 13) {

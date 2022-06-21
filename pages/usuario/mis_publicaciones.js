@@ -1,55 +1,28 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Head from "next/head";
 import { NextSeo } from "next-seo";
 import PublicLayout from '../../layouts/PublicLayout';
 import { Header, Container, Tab } from "semantic-ui-react";
-import { authInitialProps } from '../../helpers/auth';
 import { panes } from '../../components/usuario/publicacionesTabs';
-
+import { validateAuth } from '../../helpers/auth';
 import { AUTH_URL, publicaciones_api } from '../../helpers/constants';
-import { useCookies } from "react-cookie"
 import jwt from 'jsonwebtoken';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { dark } from '../../helpers/colors';
 
-export default function mis_publicaciones() {
-    const [activeIndex, setActiveIndex] = useState(0);
+export default function mis_publicaciones({ data }) {
+    const [activeIndex, setActiveIndex] = useState(data.filtros.tab);
     const handleTabChange = (e, { activeIndex }) => {
         setActiveIndex(activeIndex);
     };
-    const [cookies] = useCookies(['vtn_token']);
     const [publicaciones, setPublicaciones] = useState({
-        vehiculos: [],
-        filtros: { page: 1, q: '' },
-        accesorios: []
-    })
-    useEffect(() => {
-        const cookie = cookies.vtn_token;
-        const decoded = jwt.verify(cookie, 'vendetunave2021');
-        const user_id = decoded.user.id;
-        const config = {
-            headers: { Authorization: `Bearer ${decoded.token_server.access_token}` }
-        };
-        const urlParams = new URLSearchParams(window.location.search);
-        const tab = urlParams.get('tab') ?? 0;
-        const page = urlParams.get('page') ?? 1;
-        const q = urlParams.get('q') ?? '';
-        const page_inactive = urlParams.get('page_inactive') ?? '';
-        const q_inactive = urlParams.get('q_inactive') ?? '';
-        let params = '';
-        if (tab === '0' || tab === null || tab === 0) {
-            params = `tab=0&page=${page}&q=${q}`;
-        }
-        if (tab === '1') {
-            params = `tab=1&page_inactive=${page_inactive}&q_inactive=${q_inactive}`;
-        }
-        axios.get(AUTH_URL + publicaciones_api + user_id + `?${params}`, config).then((res) => {
-            setPublicaciones({ ...publicaciones, ...res.data });
-            setActiveIndex(tab);
-        })
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+        vehiculos: data.vehiculos,
+        total_records: data.total_records,
+        vehiculos_inactivos: data.vehiculos,
+        total_records_inactive: data.total_records,
+        filtros: data.filtros
+    });
 
     const darkMode = useSelector(({ darkMode }) => darkMode.status);
     return (
@@ -79,4 +52,41 @@ export default function mis_publicaciones() {
         </PublicLayout>
     )
 }
-mis_publicaciones.getInitialProps = authInitialProps()
+
+export async function getServerSideProps(context) {
+    const { query } = context;
+    const auth = validateAuth(context);
+
+    if (!auth.vtn_token) {
+        context.res.writeHead(301, {
+            Location: '/401'
+        });
+        context.res.end();
+        return {
+            props: {}
+        }
+    }
+    const cookie = auth.vtn_token;
+    const decoded = jwt.verify(cookie, 'vendetunave2021');
+    const user_id = decoded.user.id;
+    const config = {
+        headers: { Authorization: `Bearer ${decoded.token_server.access_token}` }
+    };
+
+    const res = await axios.get(AUTH_URL + publicaciones_api + user_id, {
+        params: {
+            tab: query.tab,
+            page: query.page,
+            q: query.q,
+            page_inactive: query.page_inactive,
+            q_inactive: query.q_inactive
+        },
+        ...config
+    });
+    const data = await res.data;
+    return {
+        props: {
+            data
+        },
+    }
+}
