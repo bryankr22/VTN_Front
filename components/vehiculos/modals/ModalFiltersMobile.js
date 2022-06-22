@@ -226,7 +226,7 @@ export default function ModalFiltersMobile({
     if (i >= kvp.length) {
       kvp[kvp.length] = [key, value].join("=");
     }
-    let params = kvp.join("&");
+    let params = kvp.join("&").replace(`&${key}=false`, '');
     if (reset) {
       if (persistKey[key]?.length) {
         const url = new URL(location.href);

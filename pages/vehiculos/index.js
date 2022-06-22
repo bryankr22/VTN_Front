@@ -187,6 +187,7 @@ export async function getServerSideProps({ query }) {
             promocion: query.promocion,
             permuta: query.permuta,
             blindaje: query.blindaje,
+            peritaje: query.peritaje,
             transmision: query.transmision,
             q: query.q
         }
