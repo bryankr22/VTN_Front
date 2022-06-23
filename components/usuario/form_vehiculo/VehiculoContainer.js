@@ -19,7 +19,7 @@ import { clearForm } from "../../../store/productoSlice";
 import { AUTH_URL } from "../../../helpers/constants";
 import { light } from "../../../helpers/colors";
 
-const isValidForm = (data) => {
+const isValidForm = (data, estado_vehiculo) => {
   for (let key in data) {
     if (key === 'peritaje' && data['peritaje_vehiculo'] == 1) {
       if (data['peritaje'] && data['peritaje'] != '0') {
@@ -35,6 +35,10 @@ const isValidForm = (data) => {
     }
 
     if (key === 'peritaje_vehiculo' && !!data['peritaje']) {
+      continue
+    }
+
+    if (key === 'placa_vehiculo' && estado_vehiculo === "Nuevo") {
       continue
     }
 
@@ -133,9 +137,10 @@ export default function VehiculoContainer({ data: dataProp, isEdit, darkMode }) 
       cilindraje_vehiculo,
       peritaje_vehiculo,
       peritaje: peritaje_vehiculo == 0 ? undefined : peritaje,
+      placa_vehiculo
     };
 
-    if (isValidForm(dataValid)) {
+    if (isValidForm(dataValid, estado_vehiculo)) {
       setLoading(true);
       const cookie = cookies.vtn_token;
       const decoded = jwt.verify(cookie, "vendetunave2021");

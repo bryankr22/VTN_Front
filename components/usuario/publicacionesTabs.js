@@ -93,7 +93,7 @@ export const panes = (dataVehicles, resultTotalV, accesorios, resultTotalA) => {
     if (action === 'active') { message = '¿Estas seguro de activar este anuncio?'; funcAction = () => activeVehicle(id) }
     setIdVehicle(id);
     setModalMessage(message);
-    setAction(funcAction);
+    setAction(() => funcAction);
     setModal(true);
   }
 
@@ -224,7 +224,7 @@ export const panes = (dataVehicles, resultTotalV, accesorios, resultTotalA) => {
               <Button onClick={() => setModal(false)}>
                 No
               </Button>
-              <Button secondary onClick={() => action}>
+              <Button secondary onClick={action}>
                 Si
               </Button>
             </Modal.Actions>
@@ -280,7 +280,7 @@ export const panes = (dataVehicles, resultTotalV, accesorios, resultTotalA) => {
                           {...Responsive.onlyLargeScreen}
                         >
                           <Button
-                            onClick={() => this.removeVehicle(item.id)}
+                            onClick={() => confirmAction(item.id, 'remove')}
                             circular
                             size="mini"
                             icon="remove"
@@ -509,7 +509,7 @@ export const panes = (dataVehicles, resultTotalV, accesorios, resultTotalA) => {
                           {...Responsive.onlyLargeScreen}
                         >
                           <Button
-                            onClick={() => this.removeVehicle(item.id)}
+                            onClick={() => confirmAction(item.id, 'remove')}
                             circular
                             size="mini"
                             icon="remove"

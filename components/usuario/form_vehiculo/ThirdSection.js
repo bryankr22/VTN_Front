@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Form, Input, Select, Checkbox, Dropdown } from "semantic-ui-react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import InputFile from "../../../components/InputFile";
 import { updateVehiculo } from "../../../store/productoSlice";
@@ -21,11 +21,13 @@ const optionsGeneric = [
 
 export default function ThirdSection({ data: { edit, ...data }, isMobile, darkMode }) {
   const dispatch = useDispatch();
+  const vehiculoRedux = useSelector(({ producto }) => producto.vehiculo);
+  console.log(vehiculoRedux);
   const [cities, setCities] = useState(() => edit?.ciudades || []);
   const [examination, setExamination] = useState(() =>
     edit ? (edit?.vehiculo?.peritaje !== null && edit?.vehiculo?.peritaje !== '' && edit?.vehiculo?.peritaje != 0 ? 1 : 0) : ''
   );
-  const [stateVehicle, setStateVehicle] = useState("Nuevo");
+  const [stateVehicle, setStateVehicle] = useState(edit?.vehiculo.condicion ? edit.vehiculo.condicion : "Nuevo");
 
   const changeDeparment = (value) => {
     axios.get(`${API_URL}/ciudades/${value}`).then((res) => {
@@ -271,20 +273,35 @@ export default function ThirdSection({ data: { edit, ...data }, isMobile, darkMo
       {stateVehicle !== "Nuevo" && (
         <Form.Field>
           <label style={{ color: colorText }}>ÚLTIMO DÍGITO DE LA PLACA *</label>
-          <Input
-            name="placa_vehiculo"
-            max={9}
-            min={0}
-            maxLength="1"
-            placeholder="Placa"
-            id="placa_vehiculo"
-            defaultValue={edit?.vehiculo?.placa}
-            onChange={(e, { value }) => {
-              value = isNaN(value[0]) ? "" : value[0];
-              e.target.value = value;
-              dispatch(updateVehiculo({ input: "placa_vehiculo", value }));
-            }}
-          />
+          {vehiculoRedux.tipo_vehiculo !== 5 &&
+            <Input
+              name="placa_vehiculo"
+              max={9}
+              min={0}
+              maxLength="1"
+              placeholder="Placa"
+              id="placa_vehiculo"
+              defaultValue={edit?.vehiculo?.placa}
+              onChange={(e, { value }) => {
+                value = isNaN(value[0]) ? "" : value[0];
+                e.target.value = value;
+                dispatch(updateVehiculo({ input: "placa_vehiculo", value }));
+              }}
+            />
+          }
+          {vehiculoRedux.tipo_vehiculo === 5 &&
+            <Input
+              name="placa_vehiculo"
+              maxLength="1"
+              placeholder="Placa"
+              id="placa_vehiculo"
+              defaultValue={edit?.vehiculo?.placa}
+              onChange={(e, { value }) => {
+                e.target.value = value;
+                dispatch(updateVehiculo({ input: "placa_vehiculo", value }));
+              }}
+            />
+          }
         </Form.Field>
       )}
       <Form.Field>
