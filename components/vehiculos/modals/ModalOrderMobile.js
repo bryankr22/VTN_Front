@@ -2,11 +2,11 @@ import React, { useMemo } from "react";
 import { List, Modal } from "semantic-ui-react";
 
 const list = [
-  { key: 0, value: 0, text: "Más reciente" },
-  { key: 1, value: 1, text: "Nuevo" },
-  { key: 2, value: 2, text: "Usado" },
-  { key: 3, value: 3, text: "Precio más bajo" },
-  { key: 4, value: 4, text: "Precio más alto" },
+  { key: 0, value: 'MAS_RECIENTE', text: "Más reciente" },
+  { key: 1, value: 'NUEVO', text: "Nuevo" },
+  { key: 2, value: 'USADO', text: "Usado" },
+  { key: 3, value: 'PRECIO_MAS_BAJO', text: "Precio más bajo" },
+  { key: 4, value: 'PRECIO_MAS_ALTO', text: "Precio más alto" },
 ];
 export default function ModalOrderMobile({ showModal, onClose, isFicha }) {
   const filter = useMemo(() => {
