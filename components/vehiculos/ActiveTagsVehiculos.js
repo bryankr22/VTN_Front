@@ -127,6 +127,12 @@ export default function ActiveTagsVehiculos({ tags }) {
           <Icon name="delete" onClick={() => removeFilter("placa")} />
         </Label>
       ) : null}
+      {tags.peritaje ? (
+        <Label as="a" style={{ marginBottom: 5, textTransform: "capitalize" }}>
+          Peritaje
+          <Icon name="delete" onClick={() => removeFilter("peritaje")} />
+        </Label>
+      ) : null}
     </>
   );
 }

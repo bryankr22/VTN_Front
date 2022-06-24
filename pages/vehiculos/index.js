@@ -28,7 +28,9 @@ export default function index({ data }) {
     const darkMode = useSelector(({ darkMode }) => darkMode.status);
     const colorText = darkMode === light ? dark : light;
 
-    if(router.query.vendedor && !data.vendedor) return <Custom404 />;
+    if (router.query.vendedor && !data.vendedor) return <Custom404 />;
+
+    console.log(data.vendedor);
 
     return (
         <PublicLayout>
@@ -57,42 +59,55 @@ export default function index({ data }) {
                     }
                 `}
             </style>
-            <NextSeo
-                title={data.vendedor !== null ? `Tienda ${data.vendedor.nombre} | VendeTuNave` : "VendeTuNave - Carros en Venta"}
-                description={
-                    data.vendedor ? 
-                    `Carros / motos nuevos y usados en venta disponibles en ${data.vendedor.nombre} / ${data?.vehicles[0]?.title}${data.vehicles[1] ? ', ' + data?.vehicles[1]?.title : ''}${data.vehicles[2] ? ', ' + data?.vehicles[2]?.title : ''}.` : 
-                    "Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."}
-                openGraph={{
-                    title: data.vendedor !== null ? `Tienda ${data.vendedor.nombre} | VendeTuNave` : "VendeTuNave - Carros en Venta",
-                    images: data.vendedor !== null && data.vendedor.image != 0 && [
-                        {
-                            url: `${getMetaUrl(data.vendedor.image)}`,
-                            alt: data?.vendedor?.nombre,
-                            width: 300,
-                            height: 200,
-                        },
-                    ],
-                    locale: "es_ES",
-                    type: "website",
-                    description: data.vendedor !== null ?
-                        `Carros / motos nuevos y usados en venta disponibles en ${data.vendedor.nombre} / ${data?.vehicles[0]?.title}${data.vehicles[1] ? ', ' + data?.vehicles[1]?.title : ''}${data.vehicles[2] ? ', ' + data?.vehicles[2]?.title : ''}.` :
-                        "Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."
-                }}
-            />
-            <Head>
-                {data.vendedor && data.vendedor.image != 0 && 
-                    <meta property="og:image:secure_url" content={`${getMetaUrl(data.vendedor.image)}`} />
-                }
-                <meta 
-                    property="keywords" 
-                    content={
-                        data.vendedor ?
-                            `vende tu nave, inventario, catalogo, vendedor ${data.vendedor.nombre}, tienda ${data.vendedor.nombre}` :
-                            "carros usados, venta de carros, carros de segunda, compra y venta de motos, venta de carros usados, carros baratos, carros usados bogota, carros usados medellin"
-                    }
-                />
-            </Head>
+            {data.vendedor != null &&
+                <>
+                    <NextSeo
+                        title={`Tienda ${data.vendedor.nombre} | VendeTuNave`}
+                        description={`Carros / motos nuevos y usados en venta disponibles en ${data.vendedor.nombre} / ${data?.vehicles[0]?.title}${data.vehicles[1] ? ', ' + data?.vehicles[1]?.title : ''}${data.vehicles[2] ? ', ' + data?.vehicles[2]?.title : ''}.`}
+                        openGraph={{
+                            title: `Tienda ${data.vendedor.nombre} | VendeTuNave`,
+                            images: [
+                                {
+                                    url: `${getMetaUrl(data.vendedor.image)}`,
+                                    alt: data?.vendedor?.nombre,
+                                    width: 300,
+                                    height: 200,
+                                },
+                            ],
+                            locale: "es_ES",
+                            type: "website",
+                            description: `Carros / motos nuevos y usados en venta disponibles en ${data.vendedor.nombre} / ${data?.vehicles[0]?.title}${data.vehicles[1] ? ', ' + data?.vehicles[1]?.title : ''}${data.vehicles[2] ? ', ' + data?.vehicles[2]?.title : ''}.`
+                        }}
+                    />
+                    <Head>
+                        <meta property="og:image:secure_url" content={`${getMetaUrl(data.vendedor.image)}`} />
+                        <meta
+                            property="keywords"
+                            content={`vende tu nave, inventario, catalogo, vendedor ${data.vendedor.nombre}, tienda ${data.vendedor.nombre}`}
+                        />
+                    </Head>
+                </>
+            }
+            {data.vendedor == null &&
+                <>
+                    <NextSeo
+                        title={"VendeTuNave - Carros en Venta"}
+                        description={"Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."}
+                        openGraph={{
+                            title: "VendeTuNave - Carros en Venta",
+                            locale: "es_ES",
+                            type: "website",
+                            description: "Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."
+                        }}
+                    />
+                    <Head>
+                        <meta
+                            property="keywords"
+                            content={"carros usados, venta de carros, carros de segunda, compra y venta de motos, venta de carros usados, carros baratos, carros usados bogota, carros usados medellin"}
+                        />
+                    </Head>
+                </>
+            }
             <Responsive {...Responsive.onlyMobile}>
                 <style>
                     {`
