@@ -27,142 +27,145 @@ export default function index({ data }) {
     const router = useRouter();
     const darkMode = useSelector(({ darkMode }) => darkMode.status);
     const colorText = darkMode === light ? dark : light;
+    const metaVendedor = !!data.vendedor;
 
     if(router.query.vendedor && !data.vendedor) return <Custom404 />;
 
     return (
-        <PublicLayout>
-            <style>
-                {`
-                    .image > img {
-                        object-fit: cover;
-                    }
-                    .ui.horizontal.list:not(.celled)>.item:first-child {
-                        margin-left: 1em !important;
-                    }
-                    .ui.link.list .item, .ui.link.list .item a:not(.ui), .ui.link.list a.item {
-                        margin-right: 20px !important;
-                        margin: 0.8em 1em;
-                    }
-                    #grid-range-price > div {
-                        padding: 0px !important;
-                    }
-                    #grid-range-km > div {
-                        padding: 0px !important;
-                    }
-
-                    .image-compare > img {
-                        width: 55px !important;
-                        height: 55px !important;
-                    }
-                `}
-            </style>
+        <>
             <NextSeo
-                title={true ? `Tienda ${data.vendedor?.nombre} | VendeTuNave` : "VendeTuNave - Carros en Venta"}
-                description={
-                    true ? 
-                    `Carros / motos nuevos y usados en venta disponibles en ${data.vendedor?.nombre} / ${data?.vehicles[0]?.title}${data.vehicles[1] ? ', ' + data?.vehicles[1]?.title : ''}${data.vehicles[2] ? ', ' + data?.vehicles[2]?.title : ''}.` : 
-                    "Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."}
-                openGraph={{
-                    title: true ? `Tienda ${data.vendedor?.nombre} | VendeTuNave` : "VendeTuNave - Carros en Venta",
-                    images: true && [
-                        {
-                            url: data.vendedor?.image != 0  ? `${getMetaUrl(data.vendedor?.image)}` : "https://vendetunave.co/images/logo_VTN.png",
-                            alt: true ? data?.vendedor?.nombre : "VendeTuNave",
-                            width: 300,
-                            height: 200,
-                        },
-                    ],
-                    locale: "es_ES",
-                    type: "website",
-                    description: true ?
-                        `Carros / motos nuevos y usados en venta disponibles en ${data.vendedor?.nombre} / ${data?.vehicles[0]?.title}${data.vehicles[1] ? ', ' + data?.vehicles[1]?.title : ''}${data.vehicles[2] ? ', ' + data?.vehicles[2]?.title : ''}.` :
-                        "Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."
-                }}
-            />
-            <Head>
-                {true && 
-                    <meta property="og:image:secure_url" content={data.vendedor?.image != 0  ? `${getMetaUrl(data.vendedor?.image)}` : "https://vendetunave.co/images/logo_VTN.png"} />
-                }
-                <meta 
-                    property="keywords" 
-                    content={
-                        true ?
-                            `vende tu nave, inventario, catalogo, vendedor ${data.vendedor?.nombre}, tienda ${data.vendedor?.nombre}` :
-                            "carros usados, venta de carros, carros de segunda, compra y venta de motos, venta de carros usados, carros baratos, carros usados bogota, carros usados medellin"
-                    }
+                    title={metaVendedor ? `Tienda ${data.vendedor?.nombre} | VendeTuNave` : "VendeTuNave - Carros en Venta"}
+                    description={
+                        metaVendedor ? 
+                        `Carros / motos nuevos y usados en venta disponibles en ${data.vendedor?.nombre} / ${data?.vehicles[0]?.title}${data.vehicles[1] ? ', ' + data?.vehicles[1]?.title : ''}${data.vehicles[2] ? ', ' + data?.vehicles[2]?.title : ''}.` : 
+                        "Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."}
+                    openGraph={{
+                        title: metaVendedor ? `Tienda ${data.vendedor?.nombre} | VendeTuNave` : "VendeTuNave - Carros en Venta",
+                        images: metaVendedor && [
+                            {
+                                url: data.vendedor?.image != 0  ? `${getMetaUrl(data.vendedor?.image)}` : "https://vendetunave.co/images/logo_VTN.png",
+                                alt: metaVendedor ? data?.vendedor?.nombre : "VendeTuNave",
+                                width: 300,
+                                height: 200,
+                            },
+                        ],
+                        locale: "es_ES",
+                        type: "website",
+                        description: metaVendedor ?
+                            `Carros / motos nuevos y usados en venta disponibles en ${data.vendedor?.nombre} / ${data?.vehicles[0]?.title}${data.vehicles[1] ? ', ' + data?.vehicles[1]?.title : ''}${data.vehicles[2] ? ', ' + data?.vehicles[2]?.title : ''}.` :
+                            "Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."
+                    }}
                 />
-            </Head>
-            <Responsive {...Responsive.onlyMobile}>
+                <Head>
+                    {true && 
+                        <meta property="og:image:secure_url" content={data.vendedor?.image != 0  ? `${getMetaUrl(data.vendedor?.image)}` : "https://vendetunave.co/images/logo_VTN.png"} />
+                    }
+                    <meta 
+                        property="keywords" 
+                        content={
+                            true ?
+                                `vende tu nave, inventario, catalogo, vendedor ${data.vendedor?.nombre}, tienda ${data.vendedor?.nombre}` :
+                                "carros usados, venta de carros, carros de segunda, compra y venta de motos, venta de carros usados, carros baratos, carros usados bogota, carros usados medellin"
+                        }
+                    />
+                </Head>
+            <PublicLayout>
                 <style>
                     {`
-                    .ui.grid>.column:not(.row), .ui.grid>.row>.column {
-                        padding-left: 1rem !important;
-                        padding-right: 1rem !important;
-                    }
+                        .image > img {
+                            object-fit: cover;
+                        }
+                        .ui.horizontal.list:not(.celled)>.item:first-child {
+                            margin-left: 1em !important;
+                        }
+                        .ui.link.list .item, .ui.link.list .item a:not(.ui), .ui.link.list a.item {
+                            margin-right: 20px !important;
+                            margin: 0.8em 1em;
+                        }
+                        #grid-range-price > div {
+                            padding: 0px !important;
+                        }
+                        #grid-range-km > div {
+                            padding: 0px !important;
+                        }
 
-                    #search-responsive {
-                        border-top: none;
-                        border-right: none;
-                        border-bottom: 1px solid ${colorText} !important;
-                        border-left: none;
-                        border-radius: 0;
-                        background-color: transparent;
-                    }
-
-                    #search-responsive::placeholder {
-                        color: ${colorText} !important;
-                        text-align: center;
-                        letter-spacing: 3px;
-                    }
-                        
-                    #search-responsive + i {
-                        color: ${colorText};
-                        opacity: 1;
-                    }
-                `}
+                        .image-compare > img {
+                            width: 55px !important;
+                            height: 55px !important;
+                        }
+                    `}
                 </style>
-                <SidebarMobile
-                    colorText={colorText}
-                    params={router.query}
-                    contadores={{ ...data.contadores, total_records: data.total_records }}
-                    vendedor={data.vendedor}
-                    vehiculos={data.vehicles} />
-                <ListadoVehiculosMobile
-                    params={router.query}
-                    vehiculos={data.vehicles}
-                    page={data.page}
-                    totalRecords={data.total_records} />
-            </Responsive>
-            <Responsive {...Responsive.onlyTablet}>
-                <SidebarMobile
-                    params={router.query}
-                    contadores={{ ...data.contadores, total_records: data.total_records }}
-                    vendedor={data.vendedor}
-                    vehiculos={data.vehicles} />
-                <ListadoVehiculosMobile
-                    params={router.query}
-                    vehiculos={data.vehicles}
-                    page={data.page}
-                    totalRecords={data.total_records} />
-            </Responsive>
-            <Responsive {...Responsive.onlyComputer}>
-                <Grid style={{ paddingTop: 15, backgroundColor: darkMode }}>
-                    <SidebarVehiculos
+                <Responsive {...Responsive.onlyMobile}>
+                    <style>
+                        {`
+                        .ui.grid>.column:not(.row), .ui.grid>.row>.column {
+                            padding-left: 1rem !important;
+                            padding-right: 1rem !important;
+                        }
+
+                        #search-responsive {
+                            border-top: none;
+                            border-right: none;
+                            border-bottom: 1px solid ${colorText} !important;
+                            border-left: none;
+                            border-radius: 0;
+                            background-color: transparent;
+                        }
+
+                        #search-responsive::placeholder {
+                            color: ${colorText} !important;
+                            text-align: center;
+                            letter-spacing: 3px;
+                        }
+                            
+                        #search-responsive + i {
+                            color: ${colorText};
+                            opacity: 1;
+                        }
+                    `}
+                    </style>
+                    <SidebarMobile
+                        colorText={colorText}
                         params={router.query}
                         contadores={{ ...data.contadores, total_records: data.total_records }}
-                        vehiculos={data.vehicles}
                         vendedor={data.vendedor}
-                    />
-                    <ListadoVehiculos
+                        vehiculos={data.vehicles} />
+                    <ListadoVehiculosMobile
                         params={router.query}
                         vehiculos={data.vehicles}
                         page={data.page}
-                        totalRecords={data.total_records}
-                    />
-                </Grid>
-            </Responsive>
-        </PublicLayout>
+                        totalRecords={data.total_records} />
+                </Responsive>
+                <Responsive {...Responsive.onlyTablet}>
+                    <SidebarMobile
+                        params={router.query}
+                        contadores={{ ...data.contadores, total_records: data.total_records }}
+                        vendedor={data.vendedor}
+                        vehiculos={data.vehicles} />
+                    <ListadoVehiculosMobile
+                        params={router.query}
+                        vehiculos={data.vehicles}
+                        page={data.page}
+                        totalRecords={data.total_records} />
+                </Responsive>
+                <Responsive {...Responsive.onlyComputer}>
+                    <Grid style={{ paddingTop: 15, backgroundColor: darkMode }}>
+                        <SidebarVehiculos
+                            params={router.query}
+                            contadores={{ ...data.contadores, total_records: data.total_records }}
+                            vehiculos={data.vehicles}
+                            vendedor={data.vendedor}
+                        />
+                        <ListadoVehiculos
+                            params={router.query}
+                            vehiculos={data.vehicles}
+                            page={data.page}
+                            totalRecords={data.total_records}
+                        />
+                    </Grid>
+                </Responsive>
+            </PublicLayout>
+        </>
     )
 }
 export async function getServerSideProps({ query }) {
