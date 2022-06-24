@@ -29,7 +29,7 @@ export default function index({ data }) {
     const colorText = darkMode === light ? dark : light;
     const metaVendedor = !!data.vendedor;
 
-    if (router.query.vendedor && !data.vendedor) return <Custom404 />;
+    if (!metaVendedor) return <Custom404 />;
 
     return (
         <>
