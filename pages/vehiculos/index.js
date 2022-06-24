@@ -44,7 +44,7 @@ export default function index({ data }) {
                             height: 200,
                         },
                     ],
-                    url: `https://www.vendetunave.co${router.asPath}`,
+                    url: `https://vendetunave.co${router.asPath}`,
                     title: metaVendedor === true ? `Tienda ${data.vendedor?.nombre} | VendeTuNave` : "VendeTuNave - Carros en Venta",
                     locale: "es_ES",
                     type: "website",
