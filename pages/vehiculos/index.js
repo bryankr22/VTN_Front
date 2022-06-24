@@ -38,7 +38,6 @@ export default function index({ data }) {
                         `Carros / motos nuevos y usados en venta disponibles en ${data.vendedor?.nombre} / ${data?.vehicles[0]?.title}${data.vehicles[1] ? ', ' + data?.vehicles[1]?.title : ''}${data.vehicles[2] ? ', ' + data?.vehicles[2]?.title : ''}.` :
                         "Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."}
                 openGraph={{
-                    title: metaVendedor === true ? `Tienda ${data.vendedor?.nombre} | VendeTuNave` : "VendeTuNave - Carros en Venta",
                     images: [
                         {
                             url: metaVendedor === true && data.vendedor?.image != 0 ? `${getMetaUrl(data.vendedor?.image)}` : "https://vendetunave.co/images/logo_VTN.png",
@@ -47,11 +46,14 @@ export default function index({ data }) {
                             height: 200,
                         },
                     ],
+                    url: `https://vendetunave.co/vehiculos`,
+                    title: metaVendedor === true ? `Tienda ${data.vendedor?.nombre} | VendeTuNave` : "VendeTuNave - Carros en Venta",
                     locale: "es_ES",
                     type: "website",
                     description: metaVendedor === true ?
                         `Carros / motos nuevos y usados en venta disponibles en ${data.vendedor?.nombre} / ${data?.vehicles[0]?.title}${data.vehicles[1] ? ', ' + data?.vehicles[1]?.title : ''}${data.vehicles[2] ? ', ' + data?.vehicles[2]?.title : ''}.` :
-                        "Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."
+                        "Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más.",
+                    site_name: "VendeTuNave - Vehiculo",
                 }}
             />
             <Head>
