@@ -30,8 +30,6 @@ export default function index({ data }) {
 
     if (router.query.vendedor && !data.vendedor) return <Custom404 />;
 
-    console.log(data.vendedor);
-
     return (
         <PublicLayout>
             <style>
@@ -93,12 +91,6 @@ export default function index({ data }) {
                     <NextSeo
                         title={"VendeTuNave - Carros en Venta"}
                         description={"Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."}
-                        openGraph={{
-                            title: "VendeTuNave - Carros en Venta",
-                            locale: "es_ES",
-                            type: "website",
-                            description: "Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."
-                        }}
                     />
                     <Head>
                         <meta
