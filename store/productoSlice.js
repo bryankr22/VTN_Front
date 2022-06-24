@@ -90,6 +90,7 @@ const productoSlice = createSlice({
         kilometraje_vehiculo: action.payload?.kilometraje,
         combustible_vehiculo: action.payload?.combustible,
         blindado_vehiculo: action.payload?.blindado,
+        placa_vehiculo: action.payload?.placa,
         color_vehiculo: action.payload?.color,
         transmision_vehiculo: action.payload?.transmision,
         departamento_vehiculo: action.payload?.departamento,
