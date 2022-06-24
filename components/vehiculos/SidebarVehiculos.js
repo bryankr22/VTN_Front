@@ -121,7 +121,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos, vended
     if (i >= kvp.length) {
       kvp[kvp.length] = [key, value].join("=");
     }
-    let params = kvp.join("&");
+    let params = kvp.join("&").replace(`&${key}=false`, '');
     if (reset) {
       if (persist) {
         const url = new URL(location.href);
@@ -656,25 +656,36 @@ export default function SidebarVehiculos({ params, contadores, vehiculos, vended
             </List.Item>
           </List>
           <Checkbox
+            style={{ display: 'block' }}
             name="promocion"
             label="Promoción"
-            checked={Boolean(params.promocion)}
-            defaultValue={Boolean(params.promocion)}
-            onChange={({ value }) => insertParam("promocion", !value)}
+            checked={(params.promocion === 'true')}
+            defaultValue={(params.promocion === 'true')}
+            onChange={() => insertParam("promocion", !(params.promocion === 'true'))}
           />
           <Checkbox
+            style={{ display: 'block' }}
             name="permuta"
             label="Permuta"
-            checked={Boolean(params.permuta)}
-            defaultValue={Boolean(params.permuta)}
-            onChange={({ value }) => insertParam("permuta", !value)}
+            checked={(params.permuta === 'true')}
+            defaultValue={(params.permuta === 'true')}
+            onChange={() => insertParam("permuta", !(params.permuta === 'true'))}
           />
           <Checkbox
+            style={{ display: 'block' }}
             name="blindaje"
             label="Blindaje"
-            checked={Boolean(params.blindaje)}
-            defaultValue={Boolean(params.blindaje)}
-            onChange={({ value }) => insertParam("blindaje", !value)}
+            checked={(params.blindaje === 'true')}
+            defaultValue={(params.blindaje === 'true')}
+            onChange={() => insertParam("blindaje", !(params.blindaje === 'true'))}
+          />
+          <Checkbox
+            style={{ display: 'block' }}
+            name="peritaje"
+            label="Peritaje"
+            checked={(params.peritaje === 'true')}
+            defaultValue={(params.peritaje === 'true')}
+            onChange={() => insertParam("peritaje", !(params.peritaje === 'true'))}
           />
           <>
             <List link style={{ marginBottom: 0 }}>
@@ -843,7 +854,7 @@ export default function SidebarVehiculos({ params, contadores, vehiculos, vended
                     as="a"
                     style={{ color: colorText }}
                     onClick={() =>
-                      openModal("Placa", [...PLACA_FILTER].splice(0, PLACA_FILTER.length - 1), "placa", true)
+                      openModal("Placa", [...PLACA_FILTER], "placa", true)
                     }
                   >
                     Ver Todos

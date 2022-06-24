@@ -33,11 +33,11 @@ export default function ListadoVehiculos({
   const pathS3 =
     "https://vendetunave.s3.amazonaws.com/vendetunave/images/thumbnails/";
   const filter = [
-    { key: 0, value: 0, text: "Más reciente" },
-    { key: 1, value: 1, text: "Nuevo" },
-    { key: 2, value: 2, text: "Usado" },
-    { key: 3, value: 3, text: "Precio más bajo" },
-    { key: 4, value: 4, text: "Precio más alto" },
+    { key: 0, value: 'MAS_RECIENTE', text: "Más reciente" },
+    { key: 1, value: 'NUEVO', text: "Nuevo" },
+    { key: 2, value: 'USADO', text: "Usado" },
+    { key: 3, value: 'PRECIO_MAS_BAJO', text: "Precio más bajo" },
+    { key: 4, value: 'PRECIO_MAS_ALTO', text: "Precio más alto" },
   ];
   const normalize = (function () {
     var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
@@ -148,7 +148,7 @@ export default function ListadoVehiculos({
           <Grid.Column width={4}>
             <Select
               onChange={handleChangeFilter}
-              value={parseInt(params.orden)}
+              value={params.orden}
               fluid
               placeholder="Ordenar por..."
               search

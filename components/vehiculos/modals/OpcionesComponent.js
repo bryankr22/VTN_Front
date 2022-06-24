@@ -17,7 +17,7 @@ export default function OpcionesComponent({ params }) {
     if (i >= kvp.length) {
       kvp[kvp.length] = [key, value].join("=");
     }
-    let params = kvp.join("&");
+    let params = kvp.join("&").replace(`&${key}=false`, '');
     document.location.search = params;
   };
   const [opcionesList, setOpcionesList] = useState({
@@ -51,30 +51,36 @@ export default function OpcionesComponent({ params }) {
         <Accordion.Content active={opcionesList.open}>
           <Grid.Column>
             <Checkbox
-              style={{ paddingLeft: 15 }}
+              style={{ paddingLeft: 15, display: 'block' }}
               name="promocion"
               label="Promoción"
-              checked={Boolean(params.promocion)}
-              defaultValue={Boolean(params.promocion)}
-              onChange={(e, { value }) => insertParam("promocion", !value)}
+              checked={(params.promocion === 'true')}
+              defaultValue={(params.promocion === 'true')}
+              onChange={() => insertParam("promocion", !(params.promocion === 'true'))}
             />
-            <br />
             <Checkbox
-              style={{ paddingLeft: 15 }}
+              style={{ paddingLeft: 15, display: 'block' }}
               name="permuta"
               label="Permuta"
-              checked={Boolean(params.permuta)}
-              defaultValue={Boolean(params.permuta)}
-              onChange={(e, { value }) => insertParam("permuta", !value)}
+              checked={(params.permuta === 'true')}
+              defaultValue={(params.permuta === 'true')}
+              onChange={() => insertParam("permuta", !(params.permuta === 'true'))}
             />
-            <br />
             <Checkbox
-              style={{ paddingLeft: 15 }}
+              style={{ paddingLeft: 15, display: 'block' }}
               name="blindaje"
               label="Blindaje"
-              checked={Boolean(params.blindaje)}
-              defaultValue={Boolean(params.blindaje)}
-              onChange={(e, { value }) => insertParam("blindaje", !value)}
+              checked={(params.blindaje === 'true')}
+              defaultValue={(params.blindaje === 'true')}
+              onChange={() => insertParam("blindaje", !(params.blindaje === 'true'))}
+            />
+            <Checkbox
+              style={{ paddingLeft: 15, display: 'block' }}
+              name="peritaje"
+              label="Peritaje"
+              checked={(params.peritaje === 'true')}
+              defaultValue={(params.peritaje === 'true')}
+              onChange={() => insertParam("peritaje", !(params.peritaje === 'true'))}
             />
           </Grid.Column>
         </Accordion.Content>

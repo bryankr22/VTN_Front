@@ -33,7 +33,7 @@ const nextYear = () => {
 const PublicLayout = ({ nextUi, ...props }: Props) => {
   const dispatch = useDispatch();
   const [cookies, setCookie] = useCookies(["accept_cookies"]);
-  const [acceptCookies, setAcceptCookies] = useState(false);
+  const [acceptCookies, setAcceptCookies] = useState(true);
   const [darkModeBody, setDarkMode] = useState(light);
 
   const darkMode = useSelector(({ darkMode }: any) => darkMode.status);
@@ -50,7 +50,7 @@ const PublicLayout = ({ nextUi, ...props }: Props) => {
       setDarkMode(darkModeStorage);
     }
     const cookie = cookies.accept_cookies;
-    if (cookie) setAcceptCookies(true);
+    if (!cookie) setAcceptCookies(false);
 
     const maxDate = dayjs("2021-11-28").unix();
     const minDate = dayjs().unix();

@@ -58,14 +58,14 @@ export default function index({ data }) {
                 `}
             </style>
             <NextSeo
-                title={data.vendedor ? `Tienda ${data.vendedor.nombre} | VendeTuNave` : "VendeTuNave - Carros en Venta"}
+                title={data.vendedor !== null ? `Tienda ${data.vendedor.nombre} | VendeTuNave` : "VendeTuNave - Carros en Venta"}
                 description={
                     data.vendedor ? 
                     `Carros / motos nuevos y usados en venta disponibles en ${data.vendedor.nombre} / ${data?.vehicles[0]?.title}${data.vehicles[1] ? ', ' + data?.vehicles[1]?.title : ''}${data.vehicles[2] ? ', ' + data?.vehicles[2]?.title : ''}.` : 
                     "Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."}
                 openGraph={{
-                    title: data.vendedor ? `Tienda ${data.vendedor.nombre} | VendeTuNave` : "VendeTuNave - Carros en Venta",
-                    images: data.vendedor && data.vendedor.image != 0 && [
+                    title: data.vendedor !== null ? `Tienda ${data.vendedor.nombre} | VendeTuNave` : "VendeTuNave - Carros en Venta",
+                    images: data.vendedor !== null && data.vendedor.image != 0 && [
                         {
                             url: `${getMetaUrl(data.vendedor.image)}`,
                             alt: data?.vendedor?.nombre,
@@ -75,7 +75,7 @@ export default function index({ data }) {
                     ],
                     locale: "es_ES",
                     type: "website",
-                    description: data.vendedor ?
+                    description: data.vendedor !== null ?
                         `Carros / motos nuevos y usados en venta disponibles en ${data.vendedor.nombre} / ${data?.vehicles[0]?.title}${data.vehicles[1] ? ', ' + data?.vehicles[1]?.title : ''}${data.vehicles[2] ? ', ' + data?.vehicles[2]?.title : ''}.` :
                         "Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."
                 }}
@@ -187,6 +187,7 @@ export async function getServerSideProps({ query }) {
             promocion: query.promocion,
             permuta: query.permuta,
             blindaje: query.blindaje,
+            peritaje: query.peritaje,
             transmision: query.transmision,
             q: query.q
         }
