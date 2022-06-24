@@ -29,46 +29,44 @@ export default function index({ data }) {
     const colorText = darkMode === light ? dark : light;
     const metaVendedor = !!data.vendedor;
 
-    if(router.query.vendedor && !data.vendedor) return <Custom404 />;
+    if (router.query.vendedor && !data.vendedor) return <Custom404 />;
 
     return (
         <>
             <NextSeo
-                    title={metaVendedor ? `Tienda ${data.vendedor?.nombre} | VendeTuNave` : "VendeTuNave - Carros en Venta"}
-                    description={
-                        metaVendedor ? 
-                        `Carros / motos nuevos y usados en venta disponibles en ${data.vendedor?.nombre} / ${data?.vehicles[0]?.title}${data.vehicles[1] ? ', ' + data?.vehicles[1]?.title : ''}${data.vehicles[2] ? ', ' + data?.vehicles[2]?.title : ''}.` : 
+                title={metaVendedor === true ? `Tienda ${data.vendedor?.nombre} | VendeTuNave` : "VendeTuNave - Carros en Venta"}
+                description={
+                    metaVendedor === true ?
+                        `Carros / motos nuevos y usados en venta disponibles en ${data.vendedor?.nombre} / ${data?.vehicles[0]?.title}${data.vehicles[1] ? ', ' + data?.vehicles[1]?.title : ''}${data.vehicles[2] ? ', ' + data?.vehicles[2]?.title : ''}.` :
                         "Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."}
-                    openGraph={{
-                        title: metaVendedor ? `Tienda ${data.vendedor?.nombre} | VendeTuNave` : "VendeTuNave - Carros en Venta",
-                        images: metaVendedor && [
-                            {
-                                url: data.vendedor?.image != 0  ? `${getMetaUrl(data.vendedor?.image)}` : "https://vendetunave.co/images/logo_VTN.png",
-                                alt: metaVendedor ? data?.vendedor?.nombre : "VendeTuNave",
-                                width: 300,
-                                height: 200,
-                            },
-                        ],
-                        locale: "es_ES",
-                        type: "website",
-                        description: metaVendedor ?
-                            `Carros / motos nuevos y usados en venta disponibles en ${data.vendedor?.nombre} / ${data?.vehicles[0]?.title}${data.vehicles[1] ? ', ' + data?.vehicles[1]?.title : ''}${data.vehicles[2] ? ', ' + data?.vehicles[2]?.title : ''}.` :
-                            "Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."
-                    }}
-                />
-                <Head>
-                    {true && 
-                        <meta property="og:image:secure_url" content={data.vendedor?.image != 0  ? `${getMetaUrl(data.vendedor?.image)}` : "https://vendetunave.co/images/logo_VTN.png"} />
+                openGraph={{
+                    title: metaVendedor === true ? `Tienda ${data.vendedor?.nombre} | VendeTuNave` : "VendeTuNave - Carros en Venta",
+                    images: [
+                        {
+                            url: metaVendedor === true && data.vendedor?.image != 0 ? `${getMetaUrl(data.vendedor?.image)}` : "https://vendetunave.co/images/logo_VTN.png",
+                            alt: metaVendedor === true ? data?.vendedor?.nombre : "VendeTuNave",
+                            width: 300,
+                            height: 200,
+                        },
+                    ],
+                    locale: "es_ES",
+                    type: "website",
+                    description: metaVendedor === true ?
+                        `Carros / motos nuevos y usados en venta disponibles en ${data.vendedor?.nombre} / ${data?.vehicles[0]?.title}${data.vehicles[1] ? ', ' + data?.vehicles[1]?.title : ''}${data.vehicles[2] ? ', ' + data?.vehicles[2]?.title : ''}.` :
+                        "Encuentra carros, camionetas y motos en venta desde 3 millones en Vende Tu Nave. Compara versiones, busca vehículos que permuten y mucho más."
+                }}
+            />
+            <Head>
+                <meta property="og:image:secure_url" content={metaVendedor === true && data.vendedor?.image != 0 ? `${getMetaUrl(data.vendedor?.image)}` : "https://vendetunave.co/images/logo_VTN.png"} />
+                <meta
+                    property="keywords"
+                    content={
+                        metaVendedor === true ?
+                            `vende tu nave, inventario, catalogo, vendedor ${data.vendedor?.nombre}, tienda ${data.vendedor?.nombre}` :
+                            "carros usados, venta de carros, carros de segunda, compra y venta de motos, venta de carros usados, carros baratos, carros usados bogota, carros usados medellin"
                     }
-                    <meta 
-                        property="keywords" 
-                        content={
-                            true ?
-                                `vende tu nave, inventario, catalogo, vendedor ${data.vendedor?.nombre}, tienda ${data.vendedor?.nombre}` :
-                                "carros usados, venta de carros, carros de segunda, compra y venta de motos, venta de carros usados, carros baratos, carros usados bogota, carros usados medellin"
-                        }
-                    />
-                </Head>
+                />
+            </Head>
             <PublicLayout>
                 <style>
                     {`
