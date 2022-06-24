@@ -7,7 +7,6 @@ import LoaderPage from "../components/head/LoaderPage";
 import lodable from "@loadable/component";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
 import { changeMode, initialMode } from "../store/darkMode";
 import { light, dark } from "../helpers/colors";
 
@@ -24,20 +23,11 @@ interface Props {
   [key: string]: any;
 }
 
-const nextYear = () => {
-  let oneYearFromNow = new Date();
-  oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() + 1);
-  return oneYearFromNow
-}
-
 const PublicLayout = ({ nextUi, ...props }: Props) => {
   const dispatch = useDispatch();
-  const [cookies, setCookie] = useCookies(["accept_cookies"]);
-  const [acceptCookies, setAcceptCookies] = useState(true);
   const [darkModeBody, setDarkMode] = useState(light);
 
   const darkMode = useSelector(({ darkMode }: any) => darkMode.status);
-  const colorText = darkMode === light ? dark : light;
 
   useEffect(() => {
     //TODO: remove this when the date is over
@@ -49,8 +39,6 @@ const PublicLayout = ({ nextUi, ...props }: Props) => {
     } else {
       setDarkMode(darkModeStorage);
     }
-    const cookie = cookies.accept_cookies;
-    if (!cookie) setAcceptCookies(false);
 
     const maxDate = dayjs("2021-11-28").unix();
     const minDate = dayjs().unix();
@@ -60,15 +48,6 @@ const PublicLayout = ({ nextUi, ...props }: Props) => {
       });
     }
   }, []);
-
-  const handleAcceptCookies = () => {
-    setAcceptCookies(true);
-    setCookie('accept_cookies', true, {
-      path: "/",
-      expires: nextYear(),
-      sameSite: true
-    });
-  }
 
   const statusMode = darkMode === dark ? light : dark;
   const buttonText = darkMode === dark ? 'claro' : 'oscuro';
@@ -193,32 +172,6 @@ const PublicLayout = ({ nextUi, ...props }: Props) => {
             {props.children}
           </div>
         </div>
-        {!acceptCookies &&
-          <div
-            className="container-cookie"
-            style={{
-              width: '100%',
-              position: 'fixed',
-              bottom: 0,
-              backgroundColor: colorText,
-              padding: 20,
-              color: darkMode,
-              textAlign: 'center',
-              zIndex: 4
-
-            }}
-          >
-            <p style={{ display: 'contents' }}>Al navegar en este sitio aceptas las cookies que utilizamos para mejorar tu experiencia.</p>
-            <Button
-              primary
-              compact
-              style={{ marginLeft: 10, marginTop: '1em' }}
-              onClick={handleAcceptCookies}
-            >
-              Entendido
-            </Button>
-          </div>
-        }
         <Footer />
       </div>
     </>

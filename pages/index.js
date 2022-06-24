@@ -1,6 +1,9 @@
 import Head from "next/head";
+import { useCookies } from "react-cookie";
 import { useSelector } from 'react-redux';
+import { useState, useEffect } from "react";
 import loadable from '@loadable/component';
+import { Button } from "semantic-ui-react";
 
 import PublicLayout from "../layouts/PublicLayout";
 import NoticiasHome from "../components/home/NoticiasHome";
@@ -31,6 +34,30 @@ const Home = ({
   config,
 }) => {
   const darkMode = useSelector(({ darkMode }) => darkMode.status);
+  const colorText = darkMode === light ? dark : light;
+  const [cookies, setCookie] = useCookies(["accept_cookies"]);
+  const [acceptCookies, setAcceptCookies] = useState(true);
+
+  const nextYear = () => {
+    let oneYearFromNow = new Date();
+    oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() + 1);
+    return oneYearFromNow
+  }
+
+  const handleAcceptCookies = () => {
+    setAcceptCookies(true);
+    setCookie('accept_cookies', true, {
+      path: "/",
+      expires: nextYear(),
+      sameSite: true
+    });
+  }
+
+  useEffect(() => {
+    const cookie = cookies.accept_cookies;
+    if (!cookie) setAcceptCookies(false);
+  }, [cookies.accept_cookies])
+  
 
   return (
     <PublicLayout darkMode={darkMode}>
@@ -62,6 +89,32 @@ const Home = ({
       <DestacadosHome vehiculos={vehiculos} />
       <NoticiasHome noticias={noticias} />
       <ContentHome config={config} />
+      {!acceptCookies &&
+          <div
+            className="container-cookie"
+            style={{
+              width: '100%',
+              position: 'fixed',
+              bottom: 0,
+              backgroundColor: colorText,
+              padding: 20,
+              color: darkMode,
+              textAlign: 'center',
+              zIndex: 4
+
+            }}
+          >
+            <p style={{ display: 'contents' }}>Al navegar en este sitio aceptas las cookies que utilizamos para mejorar tu experiencia.</p>
+            <Button
+              primary
+              compact
+              style={{ marginLeft: 10, marginTop: '1em' }}
+              onClick={handleAcceptCookies}
+            >
+              Entendido
+            </Button>
+          </div>
+        }
     </PublicLayout>
   );
 };
