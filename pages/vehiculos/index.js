@@ -29,8 +29,6 @@ export default function index({ data }) {
     const colorText = darkMode === light ? dark : light;
     const metaVendedor = !!data.vendedor;
 
-    if (!metaVendedor) return <Custom404 />;
-
     return (
         <>
             <NextSeo
