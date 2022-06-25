@@ -26,7 +26,6 @@ const isValidForm = (data, estado_vehiculo) => {
         continue;
       } else {
 
-        console.log(key, data)
         return false;
       }
     }
@@ -48,7 +47,6 @@ const isValidForm = (data, estado_vehiculo) => {
         data[key] === "" ||
         data[key].length === 0
       ) {
-        console.log(key, data)
         return false;
       }
     }
