@@ -453,7 +453,7 @@ export const panes = (dataVehicles, resultTotalV, accesorios, resultTotalA) => {
               <Button onClick={() => setModal(false)}>
                 No
               </Button>
-              <Button secondary onClick={() => action}>
+              <Button secondary onClick={action}>
                 Si
               </Button>
             </Modal.Actions>
