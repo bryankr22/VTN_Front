@@ -17,7 +17,9 @@
 }
 
 .imageWrapped img:not(.compact img) {
-  height: 250px !important;
+  height: auto !important;
+    max-height: fit-content !important;
+    min-height: unset !important;
   width: 100%;
 }
 
