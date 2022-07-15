@@ -47,14 +47,14 @@ class Footer extends Component<{}, FooterComponentState> {
     }
 
     async componentDidMount() {
-        let { correo_contacto: contactEmail, telefono_contacto: contactNumber } = await (await axios.get(API_URL + config)).data.configuraciones
+        let { correo_contacto: contactEmail, telefono_contacto: contactNumber, whatsapp_chat: whatsappChat } = await (await axios.get(API_URL + config)).data.configuraciones
 
         contactNumber = contactNumber.trim()
 
         this.setState({
             contactEmail,
             contactNumber,
-            whatsappChat: `https://api.whatsapp.com/send?phone=57${contactNumber}&text=${encodeURIComponent('Hola necesito ayuda por favor.')}&source=vendetunave.co&data=`
+            whatsappChat
         })
     }
 
