@@ -172,7 +172,7 @@ export default function SidebarMobile({
           placeholder="¿Qué estas buscando?"
         />
       }
-      <Header style={{ margin: 10 }} as="h3">
+      <Header style={{ margin: 10, color: colorText }} as="h3">
         {!params.vendedor &&
           <>{contadores.total_records} resultados</>
         }

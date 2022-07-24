@@ -305,7 +305,7 @@ export default function ThirdSection({ data: { edit, ...data }, isMobile, darkMo
         </Form.Field>
       )}
       <Form.Field>
-        <label style={{ color: colorText }}>PERITAJE</label>
+        <label style={{ color: colorText }}>PERITAJE (Al marcar "Si", debes cargar un documento)</label>
         <Select
           name="peritaje_vehiculo"
           options={optionsGeneric}
