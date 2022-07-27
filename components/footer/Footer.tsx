@@ -2,10 +2,10 @@ import axios from 'axios'
 import { Component, ReactNode } from 'react'
 import { API_URL, config } from '@helpers/constants'
 import { Grid, Link, Stack, Typography, SxProps, Box, Portal } from '@mui/material'
-import { Instagram as InstagramIcon, YouTube as YouTubeIcon, WhatsApp as WhatsAppIcon } from '@mui/icons-material'
+import { Instagram as InstagramIcon, YouTube as YouTubeIcon, WhatsApp as WhatsAppIcon, Facebook as FacebookIcon } from '@mui/icons-material'
 import { borderBottom } from '@mui/system'
 import Image from 'next/image'
-import { BreakdownHelper } from '@helpers/responsive.helper'
+import { BreakdownHelper } from '@helpers/responsive.helper';
 
 type FooterComponentState = {
     copyrightYear: number
@@ -13,6 +13,8 @@ type FooterComponentState = {
     contactEmail: string
     instagramProfile: string
     youtubeProfile: string
+    facebookProfile: string
+    tiktokProfile: string
     whatsappChat: string
 }
 
@@ -43,6 +45,8 @@ class Footer extends Component<{}, FooterComponentState> {
         contactEmail: null,
         instagramProfile: 'https://instagram.com/vendetunave?igshid=112zj0fxgq16g',
         youtubeProfile: 'https://m.youtube.com/channel/UCAFCTbFIi9lr7bP0zXULcOg',
+        facebookProfile: 'https://www.facebook.com/vendetunave/',
+        tiktokProfile: 'https://vm.tiktok.com/ZMLsVNcd5/',
         whatsappChat: null
     }
 
@@ -65,6 +69,8 @@ class Footer extends Component<{}, FooterComponentState> {
             contactEmail,
             instagramProfile,
             youtubeProfile,
+            facebookProfile,
+            tiktokProfile,
             whatsappChat
         } = this.state
 
@@ -76,7 +82,7 @@ class Footer extends Component<{}, FooterComponentState> {
                             position: 'relative',
                             backgroundColor: 'black',
                             paddingY: '2em',
-                            paddingX: isSmOrDown ? '5em' : '18%',
+                            paddingX: isSmOrDown ? '5em' : '10%',
                             marginTop: '50px !important',
                             color: 'white'
                         }} container direction={{ xs: 'row', sm: 'row', md: 'row' }} justifyContent='center' columnSpacing={{ xs: 40, sm: 40, md: 28 }} rowSpacing={{ xs: 1, sm: 1, md: 3 }}>
@@ -113,6 +119,32 @@ class Footer extends Component<{}, FooterComponentState> {
                                         href={youtubeProfile}
                                     >
                                         <YouTubeIcon sx={{ fontSize: '2.5rem' }} />
+                                    </Link>
+                                    <Link
+                                        sx={this.linkStyle}
+                                        component="a"
+                                        underline='none'
+                                        target="_blank"
+                                        href={facebookProfile}
+                                    >
+                                        <FacebookIcon sx={{ fontSize: '2.5rem' }} />
+                                    </Link>
+                                    <Link
+                                        sx={this.linkStyle}
+                                        component="a"
+                                        underline='none'
+                                        target="_blank"
+                                        href={tiktokProfile}
+                                    >
+                                        <svg
+                                            fill="#FFF"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 30 30"
+                                            width={35}
+                                            height={35}
+                                        >
+                                            <path d="M24 4H6a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm-1.311 9.474a4.27 4.27 0 0 1-3.967-1.911v6.577a4.861 4.861 0 1 1-4.861-4.862c.102 0 .201.009.3.015v2.396c-.1-.012-.197-.03-.3-.03a2.481 2.481 0 0 0 0 4.962c1.371 0 2.581-1.08 2.581-2.45l.024-11.17h2.289a4.268 4.268 0 0 0 3.934 3.811v2.662z" />
+                                        </svg>
                                     </Link>
                                 </Stack>
                             </Grid>
