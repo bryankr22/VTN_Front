@@ -15,16 +15,16 @@ const showSection = ({
   );
 };
 
-export default function VehicleThumbnail({ item, src, compact }) {
+export default function VehicleThumbnail({ item, src, compact, listView = false }) {
   return (
-    <div className={styles.imageWrapped}>
+    <div className={listView ? styles.imageListViewWrapped : styles.imageWrapped}>
       <Image
         src={src}
         loading="lazy"
         className={compact && styles.compact}
         alt={item.title}
         layout="fill"
-        objectFit="cover"
+        objectFit={!listView ? "cover" : 'contain'}
         // style={
         //   compact && {
         //     marginBottom: 0,

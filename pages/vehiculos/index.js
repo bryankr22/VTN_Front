@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Head from "next/head";
 import { NextSeo } from "next-seo";
 import axios from 'axios';
@@ -10,7 +10,7 @@ import ListadoVehiculos from '../../components/vehiculos/ListadoVehiculos';
 import SidebarMobile from '../../components/vehiculos/SidebarMobile';
 import ListadoVehiculosMobile from '../../components/vehiculos/ListadoVehiculosMobile';
 
-import { Grid, Responsive } from "semantic-ui-react";
+import { Grid, Responsive, Button } from "semantic-ui-react";
 import { useRouter } from 'next/router';
 
 import { API_URL } from '../../helpers/constants';
@@ -22,10 +22,32 @@ const REPLACE = "https://vendetunave.s3.amazonaws.com/"
 const getMetaUrl = (str = '') => `${CDN}vendetunave/images/usuarios/${str}`;
 
 export default function index({ data }) {
+    console.log();
     const router = useRouter();
     const darkMode = useSelector(({ darkMode }) => darkMode.status);
+    const [listView, setListView] = useState(data.filtros.view === "listView");
     const colorText = darkMode === light ? dark : light;
     const metaVendedor = !!data.vendedor;
+    const buttonColor = darkMode === dark ? light : '#484848';
+    const insertParam = (key, value) => {
+        key = encodeURIComponent(key);
+        value = encodeURIComponent(value);
+        var kvp = document.location.search.substr(1).split("&");
+        let i = 0;
+        for (; i < kvp.length; i++) {
+          if (kvp[i].startsWith(key + "=")) {
+            let pair = kvp[i].split("=");
+            pair[1] = value;
+            kvp[i] = pair.join("=");
+            break;
+          }
+        }
+        if (i >= kvp.length) {
+          kvp[kvp.length] = [key, value].join("=");
+        }
+        let params = kvp.join("&");
+        document.location.search = params;
+      };
 
     return (
         <>
@@ -91,6 +113,20 @@ export default function index({ data }) {
                         }
                     `}
                 </style>
+                <Button
+                    onClick={() => insertParam('view', !listView ? 'listView' : 'gridView')}
+                    style={{
+                        position: 'fixed',
+                        right: -6,
+                        zIndex: 10,
+                        cursor: 'pointer',
+                        top: '38%',
+                        backgroundColor: buttonColor, 
+                        color: darkMode
+                      }}
+                    size='small'
+                    icon={!listView ? 'list' : 'grid layout'}
+                />
                 <Responsive {...Responsive.onlyMobile}>
                     <style>
                         {`
@@ -128,6 +164,7 @@ export default function index({ data }) {
                         vehiculos={data.vehicles} />
                     <ListadoVehiculosMobile
                         params={router.query}
+                        listView={listView}
                         vehiculos={data.vehicles}
                         page={data.page}
                         totalRecords={data.total_records} />
@@ -140,6 +177,7 @@ export default function index({ data }) {
                         vehiculos={data.vehicles} />
                     <ListadoVehiculosMobile
                         params={router.query}
+                        listView={listView}
                         vehiculos={data.vehicles}
                         page={data.page}
                         totalRecords={data.total_records} />
@@ -154,6 +192,7 @@ export default function index({ data }) {
                         />
                         <ListadoVehiculos
                             params={router.query}
+                            listView={listView}
                             vehiculos={data.vehicles}
                             page={data.page}
                             totalRecords={data.total_records}
@@ -188,6 +227,7 @@ export async function getServerSideProps({ query }) {
             blindaje: query.blindaje,
             peritaje: query.peritaje,
             transmision: query.transmision,
+            view: query.view,
             q: query.q
         }
     });

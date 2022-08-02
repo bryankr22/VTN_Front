@@ -8,6 +8,8 @@ import {
   Grid,
   Pagination,
   Button,
+  Header,
+  Item
 } from "semantic-ui-react";
 import { useLocalStorage } from "../../helpers/hooks/useLocalStorage";
 import HeaderVehiculo from "../../components/comparadores/HeaderVehiculo";
@@ -25,6 +27,7 @@ export default function ListadoVehiculos({
   vehiculos,
   page,
   totalRecords,
+  listView
 }) {
   const compareList = useSelector(({ comparador }) => comparador.vehiculos);
   const dispatch = useDispatch();
@@ -179,89 +182,225 @@ export default function ListadoVehiculos({
         </p>
       )}
       {vehiculos.length > 0 && (
-        <Card.Group itemsPerRow={4}>
-          {vehiculos.map((item, index) => (
-            <Card
-              key={index}
-              as="a"
-              style={{ textDecoration: "none", backgroundColor: darkMode }}
-              href={
-                "/vehiculos/detalle/" +
-                normalize(item.title)
-                  .split(" ")
-                  .join("-")
-                  .split("%")
-                  .join("")
-                  .split("?")
-                  .join("")
-                  .split("/")
-                  .join("") +
-                "-" +
-                item.id
-              }
-            >
-              {item.premium === 1 &&
-                <Label as='a' size="small" className="label-premium" ribbon style={{
-                  position: 'absolute',
-                  zIndex: 10,
-                  marginLeft: darkMode === dark ? 13 : 14,
-                  marginTop: 5,
-                  color: light
-                }}>
-                  Premium
-                </Label>
-              }
-              <VehicleThumbnail
-                src={pathS3 + item.nameImage + "300x300.webp"}
-                item={item}
-              />
-              <Card.Content>
-                <Card.Description
-                  style={{
-                    whiteSpace: "nowrap",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    marginBottom: 7,
-                    color: colorText
-                  }}
+        <>
+          {!listView &&
+            <Card.Group itemsPerRow={4}>
+              {vehiculos.map((item, index) => (
+                <Card
+                  key={index}
+                  as="a"
+                  style={{ textDecoration: "none", backgroundColor: darkMode }}
+                  href={
+                    "/vehiculos/detalle/" +
+                    normalize(item.title)
+                      .split(" ")
+                      .join("-")
+                      .split("%")
+                      .join("")
+                      .split("?")
+                      .join("")
+                      .split("/")
+                      .join("") +
+                    "-" +
+                    item.id
+                  }
                 >
-                  <h2 className="fnt-size-inherit">{item.title}</h2>
-                </Card.Description>
-                <Card.Header style={{ color: colorText }}>
-                  <h3 className="fnt-size-inherit">
-                    $ {new Intl.NumberFormat("de-DE").format(item.precio)} COP
-                  </h3>
-                </Card.Header>
-                <Card.Description style={{ color: colorText }}>
-                  <h4 className="fnt-size-inherit">
-                    {item.ano} -{" "}
-                    {new Intl.NumberFormat("de-DE").format(item.kilometraje)} KM
-                  </h4>
-                </Card.Description>
-                <Card.Description as="h4" style={{ fontSize: "12px", color: colorText }}>
-                  {item.labelCiudad.toLowerCase().charAt(0).toUpperCase() +
-                    item.labelCiudad.toLowerCase().slice(1)}
-                  {compare === 1 &&
-                    compareList.length < 3 &&
-                    !isOnStorage(item) && (
-                      <Button
-                        onClick={(e) => {
-                          e.preventDefault();
-                          addComparar(item);
-                        }}
-                        primary
-                        floated="right"
-                        compact
-                        style={{ fontSize: 13 }}
-                      >
-                        Comparar
-                      </Button>
-                    )}
-                </Card.Description>
-              </Card.Content>
-            </Card>
-          ))}
-        </Card.Group>
+                  {item.premium === 1 &&
+                    <Label as='a' size="small" className="label-premium" ribbon style={{
+                      position: 'absolute',
+                      zIndex: 10,
+                      marginLeft: darkMode === dark ? 13 : 14,
+                      marginTop: 5,
+                      color: light
+                    }}>
+                      Premium
+                    </Label>
+                  }
+                  <VehicleThumbnail
+                    src={pathS3 + item.nameImage + "300x300.webp"}
+                    item={item}
+                  />
+                  <Card.Content>
+                    <Card.Description
+                      style={{
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        marginBottom: 7,
+                        color: colorText
+                      }}
+                    >
+                      <h2 className="fnt-size-inherit">{item.title}</h2>
+                    </Card.Description>
+                    <Card.Header style={{ color: colorText }}>
+                      <h3 className="fnt-size-inherit">
+                        $ {new Intl.NumberFormat("de-DE").format(item.precio)} COP
+                      </h3>
+                    </Card.Header>
+                    <Card.Description style={{ color: colorText }}>
+                      <h4 className="fnt-size-inherit">
+                        {item.ano} -{" "}
+                        {new Intl.NumberFormat("de-DE").format(item.kilometraje)} KM
+                      </h4>
+                    </Card.Description>
+                    <Card.Description as="h4" style={{ fontSize: "12px", color: colorText }}>
+                      {item.labelCiudad.toLowerCase().charAt(0).toUpperCase() +
+                        item.labelCiudad.toLowerCase().slice(1)}
+                      {compare === 1 &&
+                        compareList.length < 3 &&
+                        !isOnStorage(item) && (
+                          <Button
+                            onClick={(e) => {
+                              e.preventDefault();
+                              addComparar(item);
+                            }}
+                            primary
+                            floated="right"
+                            compact
+                            style={{ fontSize: 13 }}
+                          >
+                            Comparar
+                          </Button>
+                        )}
+                    </Card.Description>
+                  </Card.Content>
+                </Card>
+              ))}
+            </Card.Group>
+          }
+          {!!listView &&
+            <Item.Group>
+              <style>
+                {`
+                    a:hover {
+                      color: #111 !important;
+                      text-decoration: none !important;
+                    }
+                `}
+              </style>
+              {vehiculos.map((item) => (
+                <Item
+                  onClick={() => {
+                    location.href = "/vehiculos/detalle/" +
+                      normalize(item.title)
+                        .split(" ")
+                        .join("-")
+                        .split("%")
+                        .join("")
+                        .split("?")
+                        .join("")
+                        .split("/")
+                        .join("") +
+                      "-" +
+                      item.id
+                  }}
+                  style={{ marginBottom: 20, cursor: 'pointer' }}
+                  key={item.id}
+                >
+                  {item.premium === 1 &&
+                    <Label as='a' size="small" className="label-premium" ribbon style={{
+                      position: 'absolute',
+                      zIndex: 10,
+                      marginLeft: darkMode === dark ? 13 : 14,
+                      marginTop: 5,
+                      color: light
+                    }}>
+                      Premium
+                    </Label>
+                  }
+                  <VehicleThumbnail
+                    src={pathS3 + item.nameImage + "300x300.webp"}
+                    listView={listView}
+                    item={item}
+                  />
+                  <Item.Content style={{ marginLeft: 20 }}>
+                    <Item.Header
+                      as="h2"
+                      style={{ marginBottom: 20, marginTop: 20, fontSize: 20, fontWeight: "bold", color: colorText }}
+                    >
+                      {item.title}
+                    </Item.Header>
+                    <p
+                      style={{
+                        fontWeight: 700,
+                        fontSize: 16,
+                        marginBottom: 20,
+                        textDecoration: "none",
+                        color: darkMode === light ? 'rgba(0,0,0,.68)' : colorText,
+                      }}
+                    >
+                      $ {new Intl.NumberFormat("de-DE").format(item.precio)}{" "}
+                      COP
+                    </p>
+                    <Grid columns={3}>
+                      <Grid.Row>
+                        <Grid.Column>
+                          <Header
+                            as="h3"
+                            style={{ fontSize: '1rem', color: "gray", marginBottom: 0 }}
+                          >
+                            Año:
+                          </Header>
+                          <p
+                            style={{
+                              display: "inline-block",
+                              fontWeight: 700,
+                              fontSize: 16,
+                              textDecoration: "none",
+                              color: colorText,
+                            }}
+                          >
+                            {item.ano}
+                          </p>
+                        </Grid.Column>
+                        <Grid.Column>
+                          <Header
+                            as="h3"
+                            style={{ fontSize: '1rem', color: "gray", marginBottom: 0 }}
+                          >
+                            Kilometraje:
+                          </Header>
+                          <p
+                            style={{
+                              display: "inline-block",
+                              fontWeight: 700,
+                              fontSize: 16,
+                              textDecoration: "none",
+                              color: colorText,
+                            }}
+                          >
+                            {new Intl.NumberFormat("de-DE").format(item.kilometraje)}{" "}
+                            Km
+                          </p>
+                        </Grid.Column>
+                        <Grid.Column>
+                          <Header
+                            as="h3"
+                            style={{ fontSize: '1rem', color: "gray", marginBottom: 0 }}
+                          >
+                            Ubicación:
+                          </Header>
+                          <p
+                            style={{
+                              display: "inline-block",
+                              fontWeight: 700,
+                              fontSize: 16,
+                              textDecoration: "none",
+                              color: colorText,
+                            }}
+                          >
+                            {item.labelCiudad.toLowerCase().charAt(0).toUpperCase() +
+                              item.labelCiudad.toLowerCase().slice(1)}
+                          </p>
+                        </Grid.Column>
+                      </Grid.Row>
+                    </Grid>
+                  </Item.Content>
+                </Item>
+              ))}
+            </Item.Group>
+          }
+        </>
       )}
       {Math.ceil(totalRecords / 20) > 1 && (
         <Container fluid style={{ textAlign: "center", margin: 25, color: colorText }}>
