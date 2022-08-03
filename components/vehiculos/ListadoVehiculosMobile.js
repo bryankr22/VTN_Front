@@ -97,7 +97,10 @@ export default function ListadoVehiculosMobile({
                 -webkit-box-shadow: 0 1px 3px 0 ${colorBorder}, 0 0 0 1px ${colorBorder};
                 box-shadow: 0 1px 3px 0 ${colorBorder}, 0 0 0 1px ${colorBorder};
                 }
-                
+                .ui.grid>.column:not(.row), .ui.grid>.row>.column {
+                  padding-left: 0px !important;
+                  padding-right: 0px !important;
+                }
                 .label-premium {
                 background-color: rgb(198, 168, 29) !important;
                 border-color: #78621c !important;
@@ -110,12 +113,12 @@ export default function ListadoVehiculosMobile({
                 }
 
                 .image-ficha > img {
-                    width: 120px !important;
-                    height: 120px !important;
+                    width: 170px !important;
+                    height: 170px !important;
                 }
-                .ui.grid>.column:not(.row), .ui.grid>.row>.column {
-                    padding-left: 1rem !important;
-                    padding-right: 1rem !important;
+                
+                .column-info {
+                  padding: 0 0 !important;
                 }
               `}
       </style>
@@ -266,7 +269,7 @@ export default function ListadoVehiculosMobile({
                       style={{ marginRight: 10 }}
                       className="image-ficha"
                       floated="left"
-                      size="small"
+                      size="large"
                       src={pathS3 + item.nameImage + "300x300.webp"}
                       wrapped
                       ui={false}
@@ -277,7 +280,7 @@ export default function ListadoVehiculosMobile({
                       display: 'flex',
                       justifyContent: 'space-around',
                       bottom: 15,
-                      width: 120,
+                      width: 170,
                       height: 30,
                       backgroundColor: '#111112c2',
                       fontSize: 'large',
@@ -297,8 +300,8 @@ export default function ListadoVehiculosMobile({
                       <Card.Header
                         as="h2"
                         style={{
-                          marginBottom: 10,
-                          marginTop: 10,
+                          marginBottom: 25,
+                          marginTop: 35,
                           fontSize: 14,
                           color: colorText,
                           fontWeight: "bold",
@@ -311,7 +314,7 @@ export default function ListadoVehiculosMobile({
                         style={{
                           fontWeight: 700,
                           fontSize: 16,
-                          marginBottom: 20,
+                          marginBottom: 40,
                           textDecoration: "none",
                           color: darkMode === light ? 'rgba(0,0,0,.68)' : colorText,
                         }}
@@ -321,54 +324,53 @@ export default function ListadoVehiculosMobile({
                       </p>
 
                       <Grid.Row>
-                        <Grid.Column>
+                        <Grid.Column style={{ width: '100%' }}>
                           <Grid>
                             <Grid.Row
-                              columns={2}
+                              columns={3}
+                              divided
                               style={{ paddingTop: 0, paddingBottom: 0 }}
                             >
-                              <Grid.Column>
+                              <Grid.Column className="column-info">
                                 <Header
                                   as="h3"
                                   style={{
-                                    fontSize: '1rem',
-                                    color: "gray",
+                                    color: darkMode === light ? 'gray' : light,
                                     marginBottom: 0,
-                                    fontSize: 12,
+                                    fontSize: 9,
+                                    textAlign: 'center'
                                   }}
                                 >
-                                  Año:
+                                  Año
                                 </Header>
                                 <p
                                   style={{
-                                    display: "inline-block",
+                                    textAlign: 'center',
                                     fontWeight: 700,
-                                    fontSize: 12,
-                                    textDecoration: "none",
+                                    fontSize: 11,
                                     color: colorText,
                                   }}
                                 >
                                   {item.ano}
                                 </p>
                               </Grid.Column>
-                              <Grid.Column>
+                              <Grid.Column className="column-info">
                                 <Header
                                   as="h3"
                                   style={{
-                                    fontSize: '1rem',
-                                    color: "gray",
+                                    color: darkMode === light ? 'gray' : light,
                                     marginBottom: 0,
-                                    fontSize: 12,
+                                    fontSize: 9,
+                                    textAlign: 'center'
                                   }}
                                 >
-                                  Kilometraje:
+                                  Kilometraje
                                 </Header>
                                 <p
                                   style={{
-                                    display: "inline-block",
+                                    textAlign: 'center',
                                     fontWeight: 700,
-                                    fontSize: 12,
-                                    textDecoration: "none",
+                                    fontSize: 11,
                                     color: colorText,
                                   }}
                                 >
@@ -378,24 +380,23 @@ export default function ListadoVehiculosMobile({
                                   Km
                                 </p>
                               </Grid.Column>
-                              <Grid.Column>
+                              <Grid.Column className="column-info">
                                 <Header
                                   as="h3"
                                   style={{
-                                    fontSize: '1rem',
-                                    color: "gray",
+                                    color: darkMode === light ? 'gray' : light,
                                     marginBottom: 0,
-                                    fontSize: 12,
+                                    fontSize: 9,
+                                    textAlign: 'center'
                                   }}
                                 >
-                                  Ubicación:
+                                  Ubicación
                                 </Header>
                                 <p
                                   style={{
-                                    display: "inline-block",
+                                    textAlign: 'center',
                                     fontWeight: 700,
-                                    fontSize: 12,
-                                    textDecoration: "none",
+                                    fontSize: 11,
                                     color: colorText,
                                   }}
                                 >
