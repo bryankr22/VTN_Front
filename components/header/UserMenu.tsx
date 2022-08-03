@@ -45,8 +45,6 @@ const UserMenu = ({ menu }: { menu: VTNUserMenu }) => {
     }
 
     const loadUserProfileImage = async () => {
-        console.log('handle')
-
         const cookie = cookies.vtn_token
         if (cookie) {
             const decoded = jwt.verify(cookie, "vendetunave2021") as { token_server: { access_token: string }, user: { id: string } }

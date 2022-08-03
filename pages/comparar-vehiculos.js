@@ -65,7 +65,6 @@ export default function comparar_vehiculos() {
         link.click();
       })
       .catch((error) => {
-        console.log(error);
       });
   };
   return (

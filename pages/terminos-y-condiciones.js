@@ -12,7 +12,6 @@ export default function terminosycondiciones() {
         axios.get(API_URL + config).then(res => {
             setTyc(res.data.configuraciones.tyc)
         }).catch(error => {
-            console.log(error)
         })
     }, [])
 

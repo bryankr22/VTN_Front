@@ -22,7 +22,6 @@ const REPLACE = "https://vendetunave.s3.amazonaws.com/"
 const getMetaUrl = (str = '') => `${CDN}vendetunave/images/usuarios/${str}`;
 
 export default function index({ data }) {
-    console.log();
     const router = useRouter();
     const darkMode = useSelector(({ darkMode }) => darkMode.status);
     const [listView, setListView] = useState(data.filtros.view === "listView");
@@ -35,19 +34,19 @@ export default function index({ data }) {
         var kvp = document.location.search.substr(1).split("&");
         let i = 0;
         for (; i < kvp.length; i++) {
-          if (kvp[i].startsWith(key + "=")) {
-            let pair = kvp[i].split("=");
-            pair[1] = value;
-            kvp[i] = pair.join("=");
-            break;
-          }
+            if (kvp[i].startsWith(key + "=")) {
+                let pair = kvp[i].split("=");
+                pair[1] = value;
+                kvp[i] = pair.join("=");
+                break;
+            }
         }
         if (i >= kvp.length) {
-          kvp[kvp.length] = [key, value].join("=");
+            kvp[kvp.length] = [key, value].join("=");
         }
         let params = kvp.join("&");
         document.location.search = params;
-      };
+    };
 
     return (
         <>
@@ -113,20 +112,6 @@ export default function index({ data }) {
                         }
                     `}
                 </style>
-                <Button
-                    onClick={() => insertParam('view', !listView ? 'listView' : 'gridView')}
-                    style={{
-                        position: 'fixed',
-                        right: -6,
-                        zIndex: 10,
-                        cursor: 'pointer',
-                        top: '38%',
-                        backgroundColor: buttonColor, 
-                        color: darkMode
-                      }}
-                    size='small'
-                    icon={!listView ? 'list' : 'grid layout'}
-                />
                 <Responsive {...Responsive.onlyMobile}>
                     <style>
                         {`
@@ -156,6 +141,20 @@ export default function index({ data }) {
                         }
                     `}
                     </style>
+                    <Button
+                        onClick={() => insertParam('view', !listView ? 'listView' : 'gridView')}
+                        style={{
+                            position: 'fixed',
+                            right: -6,
+                            zIndex: 10,
+                            cursor: 'pointer',
+                            top: '38%',
+                            backgroundColor: buttonColor,
+                            color: darkMode
+                        }}
+                        size='small'
+                        icon={!listView ? 'list' : 'grid layout'}
+                    />
                     <SidebarMobile
                         colorText={colorText}
                         params={router.query}
@@ -170,6 +169,20 @@ export default function index({ data }) {
                         totalRecords={data.total_records} />
                 </Responsive>
                 <Responsive {...Responsive.onlyTablet}>
+                    <Button
+                        onClick={() => insertParam('view', !listView ? 'listView' : 'gridView')}
+                        style={{
+                            position: 'fixed',
+                            right: -6,
+                            zIndex: 10,
+                            cursor: 'pointer',
+                            top: '38%',
+                            backgroundColor: buttonColor,
+                            color: darkMode
+                        }}
+                        size='small'
+                        icon={!listView ? 'list' : 'grid layout'}
+                    />
                     <SidebarMobile
                         params={router.query}
                         contadores={{ ...data.contadores, total_records: data.total_records }}

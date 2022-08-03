@@ -151,7 +151,6 @@ export default function SidebarVehiculos({ params, contadores, vehiculos, vended
     });
   };
   const setKilometraje = () => {
-    //console.log(">>>>>", filters);
     insertParam("kilometraje", filters.min_km + ":" + filters.max_km);
   };
   const setPrice = () => {

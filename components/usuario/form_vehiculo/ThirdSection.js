@@ -22,7 +22,6 @@ const optionsGeneric = [
 export default function ThirdSection({ data: { edit, ...data }, isMobile, darkMode }) {
   const dispatch = useDispatch();
   const vehiculoRedux = useSelector(({ producto }) => producto.vehiculo);
-  console.log(vehiculoRedux);
   const [cities, setCities] = useState(() => edit?.ciudades || []);
   const [examination, setExamination] = useState(() =>
     edit ? (edit?.vehiculo?.peritaje !== null && edit?.vehiculo?.peritaje !== '' && edit?.vehiculo?.peritaje != 0 ? 1 : 0) : ''
