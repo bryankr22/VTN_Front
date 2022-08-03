@@ -399,10 +399,8 @@ export default function ListadoVehiculosMobile({
                                     color: colorText,
                                   }}
                                 >
-                                  {new Intl.NumberFormat("de-DE").format(
-                                    item.kilometraje
-                                  )}{" "}
-                                  Km
+                                  {item.labelCiudad.toLowerCase().charAt(0).toUpperCase() +
+                                    item.labelCiudad.toLowerCase().slice(1)}
                                 </p>
                               </Grid.Column>
                             </Grid.Row>
