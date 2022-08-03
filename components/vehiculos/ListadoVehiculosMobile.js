@@ -86,6 +86,19 @@ export default function ListadoVehiculosMobile({
   const colorText = darkMode === light ? undefined : light;
   const colorBorder = darkMode === light ? "#d4d4d5" : "#414141";
 
+  const showSection = ({
+    permuta,
+    financiacion,
+    confiable,
+    blindado,
+    peritaje,
+  }) => {
+    return (
+      [permuta, financiacion, confiable, blindado].some(Boolean) ||
+      (peritaje && peritaje != "0")
+    );
+  };
+
   return (
     <>
       <HeaderVehiculo />
@@ -275,27 +288,29 @@ export default function ListadoVehiculosMobile({
                       ui={false}
                       alt={item.title}
                     />
-                    <div style={{
-                      position: 'absolute',
-                      display: 'flex',
-                      justifyContent: 'space-around',
-                      bottom: 15,
-                      width: 170,
-                      height: 30,
-                      backgroundColor: '#111112c2',
-                      fontSize: 'large',
-                      color: 'white',
-                    }}>
-                      {item.permuta == 1 && <Icon name="exchange" title="permuta" />}
-                      {item.financiacion == 1 && (
-                        <Icon name="wpforms" title="financiación" />
-                      )}
-                      {item.confiable == 1 && <Icon name="check" title="confiable" />}
-                      {item.blindado == 1 && <Icon name="shield" title="blindado" />}
-                      {item.peritaje && item.peritaje != "0" && (
-                        <Icon name="clipboard check" title="peritaje" />
-                      )}
-                    </div>
+                    {showSection(item) &&
+                      <div style={{
+                        position: 'absolute',
+                        display: 'flex',
+                        justifyContent: 'space-around',
+                        bottom: 15,
+                        width: 170,
+                        height: 30,
+                        backgroundColor: '#111112c2',
+                        fontSize: 'large',
+                        color: 'white',
+                      }}>
+                        {item.permuta == 1 && <Icon name="exchange" title="permuta" />}
+                        {item.financiacion == 1 && (
+                          <Icon name="wpforms" title="financiación" />
+                        )}
+                        {item.confiable == 1 && <Icon name="check" title="confiable" />}
+                        {item.blindado == 1 && <Icon name="shield" title="blindado" />}
+                        {item.peritaje && item.peritaje != "0" && (
+                          <Icon name="clipboard check" title="peritaje" />
+                        )}
+                      </div>
+                    }
                     <Card.Content>
                       <Card.Header
                         as="h2"
