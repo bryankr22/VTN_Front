@@ -47,7 +47,6 @@ export default function favoritos() {
             location.reload();
         })
             .catch(() => {
-                //console.log(error);
             });
     }
     const eliminarFicha = (ficha_id) => {
@@ -62,7 +61,6 @@ export default function favoritos() {
             location.reload();
         })
             .catch(() => {
-                //console.log(error);
             });
     }
 

@@ -67,8 +67,6 @@ export default function FirstSection({ tipo_vehiculo, data: { edit, ...data }, i
   }, []);
 
   const colorText = darkMode === light ? undefined : light;
-  console.log(darkMode)
-
   return isMobile ? (
     <>
       <Form.Field>

@@ -4,9 +4,20 @@
   width: 100%;
 }
 
+.imageListViewWrapped {
+  position: relative;
+  height: 200px;
+  width: 250px;
+}
+
 @media (width >= 500px) {
   .imageWrapped {
     height: 250px !important;
+  }
+
+  .imageListViewWrapped {
+    height: 120x;
+    width: 120px;
   }
 }
 

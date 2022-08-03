@@ -20,7 +20,6 @@ export default function SidebarDetalleDesk({ vehiculo, vehicleFav, diasPublicado
         return compareList.some((element) => element.id === item.id);
     }
     const addComparar = (item) => {
-        //console.log(">>>>>", item);
         if (compareList.length < 3) {
             dispatch(addVehiculo(item))
         } else {

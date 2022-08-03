@@ -32,7 +32,6 @@ export default function InputFile({
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
-    debugger;
     if (files && files.length > 0) {
       const file = files[0];
       if (request) {

@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import { Container, Input, List, Modal, Grid, Checkbox, Header, Button, Label, Icon } from "semantic-ui-react";
 import ActiveTagsVehiculos from './ActiveTagsVehiculos';
 export default function SidebarAccesorios({ params, contadores, vehiculos }) {
-    //console.log(">>>>", contadores);
     const mapping_contador = (contador) => {
         var mapItems = Object.keys(contador).map((item, index) => {
             return {

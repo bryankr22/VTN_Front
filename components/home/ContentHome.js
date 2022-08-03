@@ -58,7 +58,6 @@ const ContentHome = ({ config }) => {
         }
       })
       .catch((error) => {
-        console.log(error);
       });
   };
 

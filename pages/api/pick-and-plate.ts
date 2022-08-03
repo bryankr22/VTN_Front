@@ -20,8 +20,6 @@ const requestForCity = async (city: string): Promise<string> => {
 
     const $ = load(htmlData)
 
-    console.log('contains', htmlData.includes('brIPFA'))
-
     const pickAndPlate = $(
         // "div[class^='Card__StyledCard'] div[class^='LicensePlate__StyledLicensePlate']:lt(1)"
         "div.brIPFA:lt(1)"
@@ -34,7 +32,6 @@ const pickAndPlate = async (req, res) => {
     let currentPickAndPlateData = store.get(PICK_AND_PLATE_KEY)
 
     if (!currentPickAndPlateData) {
-        console.log('request')
         const bogotaPickAndPlate = await requestForCity('bogota')
         const caliPickAndPlate = await requestForCity('cali')
         const medellinPickAndPlate = await requestForCity('medellin')
@@ -48,8 +45,6 @@ const pickAndPlate = async (req, res) => {
 
         store.set(PICK_AND_PLATE_KEY, currentPickAndPlateData, { expires: DateTime.now().plus({ days: 1 }).set({ hour: 0, minute: 0, second: 0 }).toFormat('yyyy-MM-dd hh:mm:ss') })
     }
-
-    console.log('local')
 
     return res.status(200).json(currentPickAndPlateData)
 }

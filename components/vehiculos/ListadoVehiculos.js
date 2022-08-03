@@ -8,6 +8,8 @@ import {
   Grid,
   Pagination,
   Button,
+  Header,
+  Item
 } from "semantic-ui-react";
 import { useLocalStorage } from "../../helpers/hooks/useLocalStorage";
 import HeaderVehiculo from "../../components/comparadores/HeaderVehiculo";
@@ -25,6 +27,7 @@ export default function ListadoVehiculos({
   vehiculos,
   page,
   totalRecords,
+  listView
 }) {
   const compareList = useSelector(({ comparador }) => comparador.vehiculos);
   const dispatch = useDispatch();
@@ -86,7 +89,6 @@ export default function ListadoVehiculos({
     return compareList.some((element) => element.id === item.id);
   };
   const addComparar = (item) => {
-    //console.log(">>>>", item);
     if (compareList.length < 3) {
       dispatch(addVehiculo(item));
       setIsComparing("0");

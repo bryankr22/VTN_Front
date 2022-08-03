@@ -67,7 +67,6 @@ export default function mis_busquedas() {
             location.reload();
         })
             .catch(() => {
-                //console.log(error);
             });
     }
 

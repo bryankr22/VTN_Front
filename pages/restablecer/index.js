@@ -40,7 +40,6 @@ export default function restablecer() {
                     }
 
                 }).catch(error => {
-                    console.log(error)
                 })
         } else {
             setMessage('Ingrese un email valido.');

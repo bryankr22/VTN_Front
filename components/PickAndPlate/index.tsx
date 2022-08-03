@@ -37,8 +37,6 @@ const PickAndPlate = () => {
 
             const data = await response.data as PickAndPlateData
 
-            console.log(data)
-
             setPickAndPlatesData(data)
         }
 

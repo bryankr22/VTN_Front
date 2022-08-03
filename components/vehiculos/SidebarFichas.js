@@ -27,7 +27,6 @@ const mapArray = (contador = []) => {
 };
 
 export default function SidebarFichas({ params, contadores, vehiculos }) {
-  //console.log(">>>>", contadores);
   const title_page = (slug) => {
     switch (slug) {
       case "motos":

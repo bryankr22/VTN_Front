@@ -43,7 +43,6 @@ export default function comparar_fichas() {
             document.body.appendChild(link);
             link.click();
         }).catch(error => {
-            console.log(error)
         })
     }
 
